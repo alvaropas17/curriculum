@@ -1,0 +1,14 @@
+:root {
+    --color-principal: #00ffff;
+    --nav-color: #ee6a6a;
+    --font-color: #20486d;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#nombre {
+  color: blue;
+}
+
+.intro {
+  color: red;
+}
