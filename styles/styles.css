@@ -1,14 +1,195 @@
+/* Importar una fuente moderna y legible de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Estilos globales y reseteo básico */
 :root {
-    --color-principal: #00ffff;
-    --nav-color: #ee6a6a;
-    --font-color: #20486d;
-    font-family: Arial, Helvetica, sans-serif;
+  --primary-color: #2c3e50;
+  /* Gris oscuro para el texto principal */
+  --secondary-color: #3498db;
+  /* Azul vibrante para los acentos */
+  --background-color: #f4f7f6;
+  /* Gris claro para el fondo */
+  --card-background: #ffffff;
+  /* Blanco para las tarjetas de sección */
+  --text-color: #333;
+  /* Color de texto general */
+  --light-text-color: #7f8c8d;
+  /* Gris para texto secundario */
 }
 
-#nombre {
-  color: blue;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.intro {
-  color: red;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+/* Estilos del Contenedor Principal */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Estilos de la Barra de Navegación */
+.main-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--card-background);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px 20px;
+  text-align: center;
+  border-bottom: 2px solid var(--secondary-color);
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: var(--primary-color);
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.main-nav a:hover {
+  color: var(--secondary-color);
+}
+
+/* Estilos del Encabezado */
+header {
+  text-align: center;
+  padding: 80px 0 40px;
+}
+
+header h1 {
+  font-size: 3em;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+header h2 {
+  font-size: 1.2em;
+  color: var(--light-text-color);
+  font-weight: 300;
+}
+
+/* Estilos de las Secciones */
+.section {
+  background-color: var(--card-background);
+  padding: 40px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.section h3 {
+  color: var(--primary-color);
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.section h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--secondary-color);
+}
+
+.section h4 {
+  font-size: 1.2em;
+  color: var(--primary-color);
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.section p,
+.section ul {
+  font-size: 1em;
+  color: var(--text-color);
+  margin-bottom: 15px;
+}
+
+.section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.section li {
+  margin-bottom: 8px;
+}
+
+.section li strong {
+  color: var(--primary-color);
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary-color);
+}
+
+/* Estilos del iframe y el contenedor del proyecto */
+.project-section .iframe-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  /* Relación de aspecto 16:9 */
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.project-section iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Diseño Responsivo (para pantallas más pequeñas) */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .main-nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  header h1 {
+    font-size: 2.5em;
+  }
+
+  header {
+    padding: 60px 0 30px;
+  }
 }
