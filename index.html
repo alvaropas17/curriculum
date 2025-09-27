@@ -98,25 +98,79 @@
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <nav class="hidden sm:block sticky top-0 z-10 bg-white shadow-lg border-b border-gray-200 py-3">
+    <nav class="sticky top-0 z-20 bg-white shadow-lg border-b border-gray-200">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-center items-center h-12">
-                <div class="flex space-x-8">
-                    <a href="#"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Inicio</a>
-                    <a href="#contacto"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Contacto</a>
-                    <a href="#profesional"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Objetivo</a>
-                    <a href="#formacion"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Formación</a>
-                    <a href="#experiencia"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Experiencia</a>
-                    <a href="#competencias"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Competencias</a>
-                    <a href="#proyecto"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Proyecto</a>
+            <div class="flex justify-between items-center h-16">
+                <!-- Mobile Menu Button (left) -->
+                <button id="mobile-menu-btn" class="sm:hidden p-2 rounded-md text-primary-dark hover:text-accent hover:bg-gray-100 transition duration-150" aria-label="Abrir menú">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                <!-- Logo/Name (center on mobile, left on desktop) -->
+                <div class="flex-1 sm:flex-none flex justify-center sm:justify-start">
+                    <a href="#" class="text-xl sm:text-2xl font-bold text-primary-dark hover:text-accent transition duration-150">
+                        Álvaro Pastor
+                    </a>
                 </div>
+
+                <!-- Desktop Navigation (hidden on mobile) -->
+                <div class="hidden sm:flex space-x-8">
+                    <a href="#" class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Inicio</a>
+                    <a href="#contacto" class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Contacto</a>
+                    <a href="#profesional" class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Objetivo</a>
+                    <a href="#formacion" class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Formación</a>
+                    <a href="#experiencia" class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Experiencia</a>
+                    <a href="#competencias" class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Competencias</a>
+                    <a href="#proyecto" class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Proyecto</a>
+                </div>
+
+                <!-- Placeholder for mobile (right side balance) -->
+                <div class="w-10 sm:hidden"></div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 z-50 hidden">
+            <!-- Backdrop -->
+            <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
+            
+            <!-- Menu Panel -->
+            <div class="fixed inset-y-0 left-0 max-w-sm w-full bg-white shadow-xl transform transition-transform">
+                <div class="flex items-center justify-between h-16 px-4 border-b border-gray-200">
+                    <span class="text-lg font-semibold text-primary-dark">Navegación</span>
+                    <button id="close-menu-btn" class="p-2 rounded-md text-primary-dark hover:text-accent hover:bg-gray-100 transition duration-150" aria-label="Cerrar menú">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <nav class="mt-8 px-4">
+                    <div class="space-y-1">
+                        <a href="#" class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-home w-5 mr-3 text-accent"></i>Inicio
+                        </a>
+                        <a href="#contacto" class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-address-card w-5 mr-3 text-accent"></i>Contacto
+                        </a>
+                        <a href="#profesional" class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-bullseye w-5 mr-3 text-accent"></i>Objetivo
+                        </a>
+                        <a href="#formacion" class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-graduation-cap w-5 mr-3 text-accent"></i>Formación
+                        </a>
+                        <a href="#experiencia" class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-briefcase w-5 mr-3 text-accent"></i>Experiencia
+                        </a>
+                        <a href="#competencias" class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-tools w-5 mr-3 text-accent"></i>Competencias
+                        </a>
+                        <a href="#proyecto" class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-laptop-code w-5 mr-3 text-accent"></i>Proyecto
+                        </a>
+                    </div>
+                </nav>
             </div>
         </div>
     </nav>
@@ -386,6 +440,49 @@
     <!-- <footer class="bg-primary-dark text-white text-center py-6 mt-16">
         <p class="text-sm">&copy; 2025 Álvaro Pastor. Diseño Premium con Tailwind CSS.</p>
     </footer> -->
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+
+        // Open mobile menu
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scroll when menu is open
+        });
+
+        // Close mobile menu
+        function closeMobileMenu() {
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scroll
+        }
+
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+
+        // Close menu when clicking backdrop
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu || e.target.classList.contains('bg-black')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Close menu when clicking on menu links
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
+
+        // Close menu with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                closeMobileMenu();
+            }
+        });
+    </script>
 </body>
 
 </html>
