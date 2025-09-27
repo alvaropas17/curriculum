@@ -108,15 +108,15 @@
                     </svg>
                 </button>
 
-                <!-- Logo/Name (center on mobile, left on desktop) -->
-                <div class="flex-1 sm:flex-none flex justify-center sm:justify-start">
-                    <a href="#" class="text-xl sm:text-2xl font-bold text-primary-dark hover:text-accent transition duration-150">
+                <!-- Logo/Name (center on mobile, hidden on desktop) -->
+                <div class="flex-1 sm:hidden flex justify-center">
+                    <a href="#" class="text-xl font-bold text-primary-dark hover:text-accent transition duration-150">
                         Álvaro Pastor
                     </a>
                 </div>
 
-                <!-- Desktop Navigation (hidden on mobile) -->
-                <div class="hidden sm:flex space-x-8">
+                <!-- Desktop Navigation (hidden on mobile, centered) -->
+                <div class="hidden sm:flex space-x-8 justify-center flex-1">
                     <a href="#" class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Inicio</a>
                     <a href="#contacto" class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Contacto</a>
                     <a href="#profesional" class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Objetivo</a>
