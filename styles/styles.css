@@ -33,3 +33,7 @@
 html {
   scroll-behavior: smooth;
 }
+
+.font-medium-text-accent{
+  color: yellow
+}
