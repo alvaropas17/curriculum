@@ -1,0 +1,41 @@
+# Node modules
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependency directories
+jspm_packages/
+
+# Build outputs
+dist/
+build/
+.cache/
+.next/
+out/
+
+# Optional runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage reports
+coverage/
+*.lcov
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VSCode settings (opcionales, si no quieres subir tu configuración local)
+.vscode/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
