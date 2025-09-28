@@ -2,10 +2,6 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Álvaro Pastor - Portfolio y CV</title>
-
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EZ9VY5E3EE"></script>
     <script>
@@ -16,20 +12,20 @@
         gtag('config', 'G-EZ9VY5E3EE');
     </script>
 
-    <!-- Carga de Tailwind CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Álvaro Pastor - CV Profesional</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Configuración personalizada de Tailwind con la paleta de colores solicitada -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        // Azul solicitado como color principal/acento
-                        'primary-blue': '#2563eb', // Un azul vibrante (blue-600)
-                        // Negro/Gris oscuro solicitado como color secundario/fondo de texto
-                        'secondary-dark': '#0f172a', // Un negro muy oscuro (slate-900)
-                        'soft-bg': '#f1f5f9', // Fondo gris muy claro (slate-100)
+                        'primary-dark': '#1e293b', // Gris oscuro/casi negro
+                        'accent': '#4f46e5',      // Morado corporativo
+                        'soft-gray': '#f8fafc',   // Gris muy claro
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -39,526 +35,429 @@
         }
     </script>
 
-    <!-- Carga de la fuente Inter y Font Awesome para íconos -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./styles/styles.css">
 
-    <style>
-        /* Estilo para el botón flotante de WhatsApp */
-        .float-wa {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            right: 40px;
-            background-color: #25d366;
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease-in-out;
-        }
+    <!-- <style>
+       
+    </style> -->
 
-        .float-wa:hover {
-            transform: scale(1.1);
-        }
-
-        /* Estilos base para la navegación móvil */
-        #mobile-menu {
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(-100%);
-        }
-
-        #mobile-menu.active {
-            transform: translateX(0);
-        }
-
-        /* Asegurando que el scroll sea suave al navegar entre secciones */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
 </head>
 
-<body class="bg-soft-bg font-sans min-h-screen">
+<body class="bg-soft-gray font-sans" style="scroll-behavior: smooth;">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQH2FSTM" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Navegación Fija con el Esquema de Color -->
-    <nav class="sticky top-0 z-20 bg-secondary-dark shadow-xl border-b border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav class="sticky top-0 z-20 bg-white shadow-lg border-b border-gray-200">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
-
-                <!-- Logo/Nombre en Navbar -->
-                <a href="#inicio"
-                    class="text-xl font-extrabold text-white hover:text-primary-blue transition duration-150 tracking-wider">
-                    ÁLVARO PASTOR
-                </a>
-
-                <!-- Desktop Navigation Links -->
-                <div class="hidden md:flex space-x-6 lg:space-x-8">
-                    <a href="#inicio"
-                        class="nav-link text-sm font-medium text-white hover:text-primary-blue transition duration-150 pb-1 border-b-2 border-transparent hover:border-primary-blue">Inicio</a>
-                    <a href="#contacto"
-                        class="nav-link text-sm font-medium text-white hover:text-primary-blue transition duration-150 pb-1 border-b-2 border-transparent hover:border-primary-blue">Contacto</a>
-                    <a href="#formacion"
-                        class="nav-link text-sm font-medium text-white hover:text-primary-blue transition duration-150 pb-1 border-b-2 border-transparent hover:border-primary-blue">Formación</a>
-                    <a href="#experiencia"
-                        class="nav-link text-sm font-medium text-white hover:text-primary-blue transition duration-150 pb-1 border-b-2 border-transparent hover:border-primary-blue">Experiencia</a>
-                    <a href="#competencias"
-                        class="nav-link text-sm font-medium text-white hover:text-primary-blue transition duration-150 pb-1 border-b-2 border-transparent hover:border-primary-blue">Competencias</a>
-                    <a href="#proyectos"
-                        class="nav-link text-sm font-medium text-white hover:text-primary-blue transition duration-150 pb-1 border-b-2 border-transparent hover:border-primary-blue">Proyectos</a>
-                    <a href="#"
-                        class="text-sm font-bold text-primary-blue hover:text-white transition duration-150">Portfolio
-                        <i class="fas fa-external-link-alt ml-1 text-xs"></i></a>
-                </div>
-
-                <!-- Mobile Menu Button -->
+                <!-- Mobile Menu Button (left) -->
                 <button id="mobile-menu-btn"
-                    class="md:hidden p-2 rounded-md text-white hover:text-primary-blue hover:bg-gray-800 transition duration-150"
+                    class="sm:hidden p-2 rounded-md text-primary-dark hover:text-accent hover:bg-gray-100 transition duration-150"
                     aria-label="Abrir menú">
                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
+
+                <!-- Logo/Name (center on mobile, hidden on desktop) -->
+                <div class="flex-1 sm:hidden flex justify-center">
+                    <a href="#" class="text-xl font-bold text-primary-dark hover:text-accent transition duration-150">
+                        Álvaro Pastor
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation (hidden on mobile, centered) -->
+                <div class="hidden sm:flex space-x-8 justify-center flex-1">
+                    <a href="#"
+                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Inicio</a>
+                    <a href="#contacto"
+                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Contacto</a>
+                    <a href="#profesional"
+                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Objetivo</a>
+                    <a href="#formacion"
+                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Formación</a>
+                    <a href="#experiencia"
+                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Experiencia</a>
+                    <a href="#competencias"
+                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Competencias</a>
+                    <a href="./portfolio.html"
+                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Portfolio</a>
+                </div>
+
+                <!-- Placeholder for mobile (right side balance) -->
+                <div class="w-10 sm:hidden"></div>
             </div>
         </div>
 
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu"
-            class="fixed inset-0 z-50 bg-secondary-dark/95 backdrop-blur-sm transform -translate-x-full md:hidden">
-            <div class="flex items-center justify-between h-16 px-6 border-b border-gray-700">
-                <span class="text-lg font-semibold text-white">Navegación</span>
-                <button id="close-menu-btn"
-                    class="p-2 rounded-md text-white hover:text-primary-blue hover:bg-gray-800 transition duration-150"
-                    aria-label="Cerrar menú">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-            <nav class="mt-4 px-4">
-                <div class="space-y-1">
-                    <a href="#inicio"
-                        class="mobile-menu-link block px-4 py-3 text-base font-medium text-white hover:text-primary-blue hover:bg-gray-800 rounded-lg transition duration-150">
-                        <i class="fas fa-home w-5 mr-3 text-primary-blue"></i>Inicio
-                    </a>
-                    <a href="#contacto"
-                        class="mobile-menu-link block px-4 py-3 text-base font-medium text-white hover:text-primary-blue hover:bg-gray-800 rounded-lg transition duration-150">
-                        <i class="fas fa-address-card w-5 mr-3 text-primary-blue"></i>Contacto
-                    </a>
-                    <a href="#formacion"
-                        class="mobile-menu-link block px-4 py-3 text-base font-medium text-white hover:text-primary-blue hover:bg-gray-800 rounded-lg transition duration-150">
-                        <i class="fas fa-graduation-cap w-5 mr-3 text-primary-blue"></i>Formación
-                    </a>
-                    <a href="#experiencia"
-                        class="mobile-menu-link block px-4 py-3 text-base font-medium text-white hover:text-primary-blue hover:bg-gray-800 rounded-lg transition duration-150">
-                        <i class="fas fa-briefcase w-5 mr-3 text-primary-blue"></i>Experiencia
-                    </a>
-                    <a href="#competencias"
-                        class="mobile-menu-link block px-4 py-3 text-base font-medium text-white hover:text-primary-blue hover:bg-gray-800 rounded-lg transition duration-150">
-                        <i class="fas fa-tools w-5 mr-3 text-primary-blue"></i>Competencias
-                    </a>
-                    <a href="#proyectos"
-                        class="mobile-menu-link block px-4 py-3 text-base font-medium text-white hover:text-primary-blue hover:bg-gray-800 rounded-lg transition duration-150">
-                        <i class="fas fa-laptop-code w-5 mr-3 text-primary-blue"></i>Proyectos
-                    </a>
+        <div id="mobile-menu" class="fixed inset-0 z-50 hidden">
+            <!-- Backdrop -->
+            <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
+
+            <!-- Menu Panel -->
+            <div class="fixed inset-y-0 left-0 max-w-sm w-full bg-white shadow-xl transform transition-transform">
+                <div class="flex items-center justify-between h-16 px-4 border-b border-gray-200">
+                    <span class="text-lg font-semibold text-primary-dark">Navegación</span>
+                    <button id="close-menu-btn"
+                        class="p-2 rounded-md text-primary-dark hover:text-accent hover:bg-gray-100 transition duration-150"
+                        aria-label="Cerrar menú">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
-            </nav>
+                <nav class="mt-8 px-4">
+                    <div class="space-y-1">
+                        <a href="#"
+                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-home w-5 mr-3 text-accent"></i>Inicio
+                        </a>
+                        <a href="#contacto"
+                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-address-card w-5 mr-3 text-accent"></i>Contacto
+                        </a>
+                        <a href="#profesional"
+                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-bullseye w-5 mr-3 text-accent"></i>Objetivo
+                        </a>
+                        <a href="#formacion"
+                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-graduation-cap w-5 mr-3 text-accent"></i>Formación
+                        </a>
+                        <a href="#experiencia"
+                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-briefcase w-5 mr-3 text-accent"></i>Experiencia
+                        </a>
+                        <a href="#competencias"
+                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-tools w-5 mr-3 text-accent"></i>Competencias
+                        </a>
+                        <a href="#proyecto"
+                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
+                            <i class="fas fa-laptop-code w-5 mr-3 text-accent"></i>Proyecto
+                        </a>
+                    </div>
+                </nav>
+            </div>
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 my-8 md:my-12">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 my-12 md:my-20">
 
-        <!-- SECCIÓN 1: CABECERA / HERO (Nombre, Descripción, Foto) -->
-        <section id="inicio"
-            class="bg-white p-8 md:p-12 lg:p-16 rounded-3xl shadow-2xl border-t-8 border-primary-blue mb-12 lg:mb-20">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <header class="text-center mb-16 p-6 sm:p-8 bg-white rounded-xl shadow-2xl border-t-4 border-accent">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-primary-dark tracking-tight">Álvaro Pastor
+            </h1>
+            <h2 class="text-lg sm:text-xl md:text-2xl text-gray-500 font-light mt-2 tracking-wide">Desarrollo Web y
+                Marketing
+                Digital</h2>
+        </header>
 
-                <!-- Columna de Texto Principal -->
-                <div class="lg:col-span-2 order-2 lg:order-1">
-                    <span
-                        class="text-sm font-semibold uppercase text-primary-blue mb-2 block tracking-widest">Desarrollo
-                        & Marketing Digital</span>
-                    <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-secondary-dark leading-tight mb-4">
-                        Hola, soy <span class="text-primary-blue">Álvaro Pastor</span>
-                    </h1>
-                    <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                        Desarrollar soluciones innovadoras en el ámbito del <b class="font-semibold">desarrollo web</b>
-                        y el <b class="font-semibold">marketing digital</b>,
-                        aplicando mis conocimientos y experiencia para optimizar procesos y mejorar la experiencia de
-                        usuario. Busco un entorno de trabajo dinámico donde pueda crecer profesionalmente y contribuir
-                        al éxito
-                        del equipo.
-                    </p>
-                    <!-- Botones de Contacto Rápido -->
-                    <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-                        <a href="#contacto"
-                            class="bg-primary-blue text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105 text-center">
-                            <i class="fas fa-envelope mr-2"></i> Contactar Ahora
-                        </a>
-                        <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor-periago-89912820a" target="_blank"
-                            class="bg-secondary-dark text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:bg-gray-700 transition duration-300 transform hover:scale-105 text-center">
-                            <i class="fab fa-linkedin mr-2"></i> Ver LinkedIn
-                        </a>
-                    </div>
-                </div>
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 md:p-8 rounded-xl shadow-lg mb-12"
+            id="contacto">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-primary-dark md:col-span-2 border-b pb-3 mb-4"><i
+                    class="fas fa-address-card mr-3 text-accent"></i>Datos de Contacto</h2>
 
-                <!-- Columna de Foto Placeholder -->
-                <div class="lg:col-span-1 flex justify-center order-1 lg:order-2">
-                    <div
-                        class="w-56 h-56 md:w-64 md:h-64 bg-gray-200 rounded-full flex items-center justify-center border-4 border-primary-blue shadow-xl overflow-hidden">
-                        <!-- Placeholder para la foto. Reemplaza este div con una etiqueta <img> si tienes la URL de tu foto. -->
-                        <i class="fas fa-camera text-primary-blue text-6xl opacity-75"></i>
-                    </div>
-                </div>
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-envelope text-accent text-xl flex-shrink-0"></i>
+                <a href="mailto:alvpastor17@gmail.com"
+                    class="text-gray-600 hover:text-accent transition break-all">alvpastor17@gmail.com</a>
+            </div>
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-phone-alt text-accent text-xl flex-shrink-0"></i>
+                <a href="tel:+34633962600" class="text-gray-600 hover:text-accent transition">+34 633 96 26 00</a>
+            </div>
+            <div class="flex items-center space-x-3">
+                <i class="fab fa-linkedin text-accent text-xl flex-shrink-0"></i>
+                <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor-periago-89912820a" target="_blank"
+                    class="text-gray-600 hover:text-accent transition">LinkedIn Perfil</a>
+            </div>
+            <div class="flex items-center space-x-3">
+                <i class="fab fa-github text-accent text-xl flex-shrink-0"></i>
+                <a href="https://github.com/alvaropas17?tab=repositories" target="_blank"
+                    class="text-gray-600 hover:text-accent transition">Github Repositorios</a>
             </div>
         </section>
 
-
-        <!-- SECCIÓN 2: CONTACTO Y REDES SOCIALES -->
-        <section class="bg-secondary-dark text-white p-8 md:p-10 rounded-2xl shadow-xl mb-12 lg:mb-20" id="contacto">
-            <h2 class="text-3xl font-bold mb-6 border-b border-gray-700 pb-3"><i
-                    class="fas fa-address-card mr-3 text-primary-blue"></i>Datos de Contacto</h2>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-                <!-- Email -->
-                <div class="flex items-center space-x-3 bg-gray-800 p-4 rounded-xl hover:bg-gray-700 transition">
-                    <i class="fas fa-envelope text-primary-blue text-2xl flex-shrink-0"></i>
-                    <div>
-                        <p class="text-sm font-light text-gray-400">Email</p>
-                        <a href="mailto:alvpastor17@gmail.com"
-                            class="font-medium hover:text-primary-blue break-all text-sm">alvpastor17@gmail.com</a>
-                    </div>
-                </div>
-
-                <!-- Teléfono -->
-                <div class="flex items-center space-x-3 bg-gray-800 p-4 rounded-xl hover:bg-gray-700 transition">
-                    <i class="fas fa-phone-alt text-primary-blue text-2xl flex-shrink-0"></i>
-                    <div>
-                        <p class="text-sm font-light text-gray-400">Teléfono</p>
-                        <a href="tel:+34633962600" class="font-medium hover:text-primary-blue">+34 633 96 26 00</a>
-                    </div>
-                </div>
-
-                <!-- LinkedIn -->
-                <div class="flex items-center space-x-3 bg-gray-800 p-4 rounded-xl hover:bg-gray-700 transition">
-                    <i class="fab fa-linkedin text-primary-blue text-2xl flex-shrink-0"></i>
-                    <div>
-                        <p class="text-sm font-light text-gray-400">Redes</p>
-                        <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor-periago-89912820a" target="_blank"
-                            class="font-medium hover:text-primary-blue" id="linkedin" >LinkedIn Perfil</a>
-                    </div>
-                </div>
-
-                <!-- Github -->
-                <div class="flex items-center space-x-3 bg-gray-800 p-4 rounded-xl hover:bg-gray-700 transition">
-                    <i class="fab fa-github text-primary-blue text-2xl flex-shrink-0"></i>
-                    <div>
-                        <p class="text-sm font-light text-gray-400">Código</p>
-                        <a href="https://github.com/alvaropas17?tab=repositories" target="_blank"
-                            class="font-medium hover:text-primary-blue">Github Repositorios</a>
-                    </div>
-                </div>
-            </div>
+        <section class="bg-primary-dark text-white p-6 md:p-12 rounded-xl shadow-2xl mb-12" id="profesional">
+            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 border-b border-gray-600 pb-3"><i
+                    class="fas fa-bullseye mr-3 text-accent"></i>Objetivo Profesional</h2>
+            <p class="text-base sm:text-xl font-light leading-relaxed">
+                Desarrollar soluciones innovadoras en el ámbito del <b class="font-medium-text-accent">desarrollo
+                    web</b> y el <b class="font-medium-text-accent">marketing digital</b>,
+                aplicando mis conocimientos y experiencia para optimizar procesos y mejorar la experiencia de
+                usuario. Busco un entorno de trabajo dinámico donde pueda crecer profesionalmente y contribuir al éxito
+                del equipo.
+            </p>
         </section>
 
+        <div class="space-y-10 mb-12">
 
-        <!-- SECCIONES DE CONTENIDO PRINCIPAL -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            <section class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border-l-4 border-accent" id="formacion">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-primary-dark mb-6">
+                    <i class="fas fa-graduation-cap mr-3 text-accent"></i>Formación y Títulos
+                </h2>
 
-            <!-- Columna Principal (Formación y Experiencia) -->
-            <div class="lg:col-span-2 space-y-12">
+                <div class="space-y-6">
+                    <h3 class="text-xl font-semibold text-primary-dark border-b pb-2 mb-4">Académica</h3>
 
-                <!-- Formación -->
-                <section class="bg-white p-8 rounded-2xl shadow-xl" id="formacion">
-                    <h2 class="text-3xl font-bold text-secondary-dark mb-6 border-b border-gray-200 pb-3">
-                        <i class="fas fa-graduation-cap mr-3 text-primary-blue"></i>Formación y Títulos
-                    </h2>
-
-                    <div class="space-y-8">
-                        <!-- Formación Académica -->
-                        <div>
-                            <h3 class="text-xl font-semibold text-primary-blue mb-4">Académica</h3>
-                            <div class="space-y-5">
-                                <div
-                                    class="relative pl-6 border-l-2 border-gray-300 hover:border-primary-blue transition duration-300 group">
-                                    <div
-                                        class="absolute -left-2 top-0 w-4 h-4 bg-primary-blue rounded-full group-hover:scale-110 transition duration-300">
-                                    </div>
-                                    <p class="text-sm text-gray-500 mb-1">2024 - Actualmente</p>
-                                    <h4 class="text-lg font-semibold text-secondary-dark">Grado Superior en Desarrollo
-                                        de Aplicaciones Web</h4>
-                                    <p class="text-md text-gray-600">FP San Antonio</p>
-                                </div>
-                                <div
-                                    class="relative pl-6 border-l-2 border-gray-300 hover:border-primary-blue transition duration-300 group">
-                                    <div
-                                        class="absolute -left-2 top-0 w-4 h-4 bg-primary-blue rounded-full group-hover:scale-110 transition duration-300">
-                                    </div>
-                                    <p class="text-sm text-gray-500 mb-1">2020 - 2025</p>
-                                    <h4 class="text-lg font-semibold text-secondary-dark">Grado en Marketing y Dirección
-                                        Comercial con mención en marketing digital</h4>
-                                    <p class="text-md text-gray-600">UCAM</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Formación Complementaria -->
-                        <div>
-                            <h3 class="text-xl font-semibold text-primary-blue mb-4">Complementaria</h3>
-                            <div class="space-y-5">
-                                <div
-                                    class="relative pl-6 border-l-2 border-gray-300 hover:border-primary-blue transition duration-300 group">
-                                    <div
-                                        class="absolute -left-2 top-0 w-4 h-4 bg-primary-blue rounded-full group-hover:scale-110 transition duration-300">
-                                    </div>
-                                    <p class="text-sm text-gray-500 mb-1">2023</p>
-                                    <h4 class="text-lg font-semibold text-secondary-dark">Curso de creación de empresas
-                                    </h4>
-                                    <p class="text-md text-gray-600">Cámara de comercio</p>
-                                </div>
-                                <div
-                                    class="relative pl-6 border-l-2 border-gray-300 hover:border-primary-blue transition duration-300 group">
-                                    <div
-                                        class="absolute -left-2 top-0 w-4 h-4 bg-primary-blue rounded-full group-hover:scale-110 transition duration-300">
-                                    </div>
-                                    <p class="text-sm text-gray-500 mb-1">2016 - 2018</p>
-                                    <h4 class="text-lg font-semibold text-secondary-dark">Experiencia en el Extranjero
-                                    </h4>
-                                    <p class="text-md text-gray-600">Inmersión lingüística en Inglaterra e Irlanda.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Experiencia Profesional -->
-                <section class="bg-white p-8 rounded-2xl shadow-xl" id="experiencia">
-                    <h2 class="text-3xl font-bold text-secondary-dark mb-6 border-b border-gray-200 pb-3">
-                        <i class="fas fa-briefcase mr-3 text-primary-blue"></i>Experiencia Profesional
-                    </h2>
-
-                    <div class="space-y-8">
-                        <div
-                            class="relative pl-6 border-l-2 border-gray-300 hover:border-primary-blue transition duration-300 group">
-                            <div
-                                class="absolute -left-2 top-0 w-4 h-4 bg-primary-blue rounded-full group-hover:scale-110 transition duration-300">
-                            </div>
-                            <p class="text-sm text-gray-500 mb-1">Septiembre 2025 - Actualmente</p>
-                            <h4 class="text-xl font-semibold text-secondary-dark">Especialista en Marketing Digital y
-                                Desarrollo Web</h4>
-                            <p class="text-md text-primary-blue mb-3">Inversus</p>
-                            <p class="text-base text-gray-700 italic mb-4">Establecer las bases de la estrategia digital
-                                desde cero.</p>
-                            <ul class="list-none space-y-2 text-sm text-gray-700">
-                                <li class="flex items-start"><i
-                                        class="fas fa-check-circle text-primary-blue mt-1 mr-2 flex-shrink-0"></i>Implementación
-                                    de Google Analytics y GSC.</li>
-                                <li class="flex items-start"><i
-                                        class="fas fa-check-circle text-primary-blue mt-1 mr-2 flex-shrink-0"></i>Análisis
-                                    exhaustivo del contenido.</li>
-                                <li class="flex items-start"><i
-                                        class="fas fa-check-circle text-primary-blue mt-1 mr-2 flex-shrink-0"></i>Mejora
-                                    significativa en la visibilidad online.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Proyectos -->
-                <section class="bg-white p-8 rounded-2xl shadow-xl" id="proyectos">
-                    <h2 class="text-3xl font-bold text-secondary-dark mb-6 border-b border-gray-200 pb-3">
-                        <i class="fas fa-rocket mr-3 text-primary-blue"></i>Proyectos Académicos y Personales
-                    </h2>
-
-                    <div class="space-y-8">
-                        <!-- Proyecto 1 -->
-                        <div
-                            class="relative pl-6 border-l-2 border-gray-300 hover:border-primary-blue transition duration-300 group">
-                            <div
-                                class="absolute -left-2 top-0 w-4 h-4 bg-primary-blue rounded-full group-hover:scale-110 transition duration-300">
-                            </div>
-                            <p class="text-sm text-gray-500 mb-1">2023 - Actualmente</p>
-                            <h4 class="text-xl font-semibold text-secondary-dark">Proyectos Universitarios en Marketing
-                                Digital</h4>
-                            <p class="text-md text-primary-blue mb-3">Ámbito Académico</p>
-                            <ul class="list-none space-y-2 text-sm text-gray-700">
-                                <li class="flex items-start"><i
-                                        class="fas fa-code-branch text-primary-blue mt-1 mr-2 flex-shrink-0"></i>Elaboración
-                                    de planes de marketing, email marketing y estrategias de redes sociales aplicadas a
-                                    proyectos académicos.</li>
-                            </ul>
-                        </div>
-
-                        <!-- Proyecto 2 -->
-                        <div
-                            class="relative pl-6 border-l-2 border-gray-300 hover:border-primary-blue transition duration-300 group">
-                            <div
-                                class="absolute -left-2 top-0 w-4 h-4 bg-primary-blue rounded-full group-hover:scale-110 transition duration-300">
-                            </div>
-                            <p class="text-sm text-gray-500 mb-1">2018 - 2019</p>
-                            <h4 class="text-xl font-semibold text-secondary-dark">Crecimiento Orgánico de Cuenta de
-                                Instagram</h4>
-                            <p class="text-md text-primary-blue mb-3">Proyecto Personal</p>
-                            <ul class="list-none space-y-2 text-sm text-gray-700">
-                                <li class="flex items-start"><i
-                                        class="fas fa-chart-line text-primary-blue mt-1 mr-2 flex-shrink-0"></i>Crecimiento
-                                    orgánico de una cuenta de Instagram de entretenimiento de 0 a 13.000 seguidores.
-                                </li>
-                                <li class="flex items-start"><i
-                                        class="fas fa-users text-primary-blue mt-1 mr-2 flex-shrink-0"></i>Gestión de
-                                    contenido, interacción con la comunidad y aplicación de estrategias de engagement.
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Próximo Proyecto Destacado -->
-                        <div class="text-center p-6 bg-soft-bg rounded-xl border border-dashed border-gray-400">
-                            <h4 class="text-xl font-bold text-gray-700 mb-2">Proyecto Destacado Próximamente</h4>
-                            <p class="text-sm text-gray-500">Fecha estimada: 30/09/2025</p>
-                        </div>
-                    </div>
-                </section>
-
-            </div>
-
-            <!-- Columna Lateral (Competencias, Idiomas, Otros) -->
-            <div class="lg:col-span-1 space-y-12">
-
-                <!-- Competencias -->
-                <section class="bg-white p-6 rounded-2xl shadow-xl border-l-4 border-primary-blue" id="competencias">
-                    <h2 class="text-2xl font-bold text-secondary-dark mb-4 border-b pb-3"><i
-                            class="fas fa-tools mr-2 text-primary-blue"></i>Habilidades</h2>
-
-                    <div>
-                        <h3 class="text-lg font-semibold text-secondary-dark mb-2">Técnicas</h3>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span
-                                class="bg-primary-blue text-white text-xs font-medium px-3 py-1 rounded-full shadow-md">Desarrollo
-                                Web (HTML, CSS, JS)</span>
-                            <span
-                                class="bg-primary-blue text-white text-xs font-medium px-3 py-1 rounded-full shadow-md">Marketing
-                                Digital (SEO)</span>
-                            <span
-                                class="bg-primary-blue text-white text-xs font-medium px-3 py-1 rounded-full shadow-md">Análisis
-                                de Datos (GA4)</span>
-                            <span
-                                class="bg-primary-blue text-white text-xs font-medium px-3 py-1 rounded-full shadow-md">WordPress
-                                / CMS</span>
-                            <span
-                                class="bg-primary-blue text-white text-xs font-medium px-3 py-1 rounded-full shadow-md">IA
-                                Generativa</span>
-                        </div>
+                    <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
+                        <p class="text-xs text-gray-500 mb-1">2024 - Actualmente</p>
+                        <h4 class="text-lg font-semibold text-primary-dark">Grado Superior en Desarrollo de Aplicaciones
+                            Web</h4>
+                        <p class="text-sm text-gray-600">FP San Antonio</p>
                     </div>
 
-                    <div>
-                        <h3 class="text-lg font-semibold text-secondary-dark mb-2">Personales</h3>
-                        <div class="flex flex-wrap gap-2">
-                            <span
-                                class="bg-gray-200 text-secondary-dark text-xs font-medium px-3 py-1 rounded-full">Trabajo
-                                en equipo</span>
-                            <span
-                                class="bg-gray-200 text-secondary-dark text-xs font-medium px-3 py-1 rounded-full">Resolución
-                                de problemas</span>
-                            <span
-                                class="bg-gray-200 text-secondary-dark text-xs font-medium px-3 py-1 rounded-full">Aprendizaje
-                                continuo</span>
-                        </div>
+                    <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
+                        <p class="text-xs text-gray-500 mb-1">2020 - 2025</p>
+                        <h4 class="text-lg font-semibold text-primary-dark">Grado en Marketing y Dirección Comercial con
+                            mención en marketing digital
+                        </h4>
+                        <p class="text-sm text-gray-600">UCAM</p>
                     </div>
-                </section>
 
-                <!-- Idiomas -->
-                <section class="bg-white p-6 rounded-2xl shadow-xl border-l-4 border-primary-blue" id="idiomas">
-                    <h2 class="text-2xl font-bold text-secondary-dark mb-4 border-b pb-3"><i
-                            class="fas fa-globe mr-2 text-primary-blue"></i>Idiomas</h2>
-                    <ul class="space-y-4">
-                        <li class="flex justify-between items-center text-gray-700 border-b border-gray-100 pb-2">
-                            <span class="font-semibold">Español:</span>
-                            <span
-                                class="bg-green-600 text-white text-xs font-medium px-3 py-1 rounded-full">Nativo</span>
-                        </li>
-                        <li class="flex justify-between items-center text-gray-700">
-                            <span class="font-semibold">Inglés:</span>
-                            <span class="bg-primary-blue text-white text-xs font-medium px-3 py-1 rounded-full">B1
-                                Cambridge PET</span>
-                        </li>
-                    </ul>
-                </section>
+                    <hr class="border-gray-200 my-8">
 
-                <!-- Otros Datos -->
-                <section class="bg-white p-6 rounded-2xl shadow-xl border-l-4 border-primary-blue" id="otros">
-                    <h2 class="text-2xl font-bold text-secondary-dark mb-4 border-b pb-3"><i
-                            class="fas fa-info-circle mr-2 text-primary-blue"></i>Información Adicional</h2>
-                    <p class="text-sm text-gray-600 mb-4">
-                        Participación activa en el desarrollo web y la planificación estratégica de marketing para
-                        pymes.
-                    </p>
-                    <ul class="list-none space-y-2 text-sm text-gray-700">
-                        <li class="flex items-center"><i class="fas fa-bus text-primary-blue mr-2"></i> Transporte
-                            público</li>
-                        <li class="flex items-center"><i class="fas fa-map-marker-alt text-primary-blue mr-2"></i>
-                            Presencial en Murcia y teletrabajo</li>
-                    </ul>
-                </section>
+                    <h3 class="text-xl font-semibold text-primary-dark border-b pb-2 mb-4">Complementaria</h3>
 
-            </div>
+                    <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
+                        <p class="text-xs text-gray-500 mb-1">2023</p>
+                        <h4 class="text-lg font-semibold text-primary-dark">Curso de creación de empresas</h4>
+                        <p class="text-sm text-gray-600">Cámara de comercio</p>
+                    </div>
+
+
+                    <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
+                        <p class="text-xs text-gray-500 mb-1">2016 - 2018</p>
+                        <h4 class="text-lg font-semibold text-primary-dark">Experiencia en el Extranjero</h4>
+                        <p class="text-sm text-gray-600">Inmersión lingüística en Inglaterra e Irlanda.</p>
+                    </div>
+
+                    <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
+                        <p class="text-xs text-gray-500 mb-1">2010 - 2015</p>
+                        <h4 class="text-lg font-semibold text-primary-dark">Campamentos de inglés a nivel nacional
+                        </h4>
+                        <!-- <p class="text-sm text-gray-600">Google Academy</p> -->
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border-l-4 border-accent" id="experiencia">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-primary-dark mb-6">
+                    <i class="fas fa-briefcase mr-3 text-accent"></i>Experiencia Profesional
+                </h2>
+
+                <div class="space-y-6">
+                    <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
+                        <p class="text-xs text-gray-500 mb-1">Septiembre 2025 - Actualmente</p>
+                        <h4 class="text-lg font-semibold text-primary-dark">Especialista en Marketing Digital y
+                            Desarrollo Web</h4>
+                        <p class="text-sm text-accent mb-3">Inversus</p>
+                        <p class="text-sm text-gray-600 mb-3 italic">Establecer las bases de la estrategia digital desde
+                            cero.</p>
+                        <ul class="list-none space-y-1 text-sm text-gray-700">
+                            <li class="flex items-start"><i
+                                    class="fas fa-check-circle text-accent mt-1 mr-2 flex-shrink-0"></i>Implementación
+                                de Google Analytics y GSC.</li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-check-circle text-accent mt-1 mr-2 flex-shrink-0"></i>Análisis
+                                exhaustivo del contenido.</li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-check-circle text-accent mt-1 mr-2 flex-shrink-0"></i>Mejora
+                                significativa en la visibilidad online.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border-l-4 border-accent mt-8" id="proyectos">
+                <h2 class="text-2xl sm:text-3xl font-semibold text-primary-dark mb-6">
+                    <i class="fas fa-rocket mr-3 text-accent"></i>Proyectos Académicos y Personales
+                </h2>
+
+                <div class="space-y-6">
+                    <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
+                        <p class="text-xs text-gray-500 mb-1">2023 - Actualmente</p>
+                        <h4 class="text-lg font-semibold text-primary-dark">Proyectos Universitarios en Marketing
+                            Digital</h4>
+                        <p class="text-sm text-accent mb-3">Ámbito Académico</p>
+                        <ul class="list-none space-y-1 text-sm text-gray-700">
+                            <li class="flex items-start"><i
+                                    class="fas fa-code-branch text-accent mt-1 mr-2 flex-shrink-0"></i>Elaboración de
+                                planes de
+                                marketing, email marketing y estrategias de redes sociales aplicadas a proyectos
+                                académicos.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
+                        <p class="text-xs text-gray-500 mb-1">2018 - 2019</p>
+                        <h4 class="text-lg font-semibold text-primary-dark">Crecimiento Orgánico de Cuenta de Instagram
+                        </h4>
+                        <p class="text-sm text-accent mb-3">Proyecto Personal</p>
+                        <ul class="list-none space-y-1 text-sm text-gray-700">
+                            <li class="flex items-start"><i
+                                    class="fas fa-chart-line text-accent mt-1 mr-2 flex-shrink-0"></i>Crecimiento
+                                orgánico de una
+                                cuenta de Instagram de entretenimiento de 0 a 13.000 seguidores.
+                            </li>
+                            <li class="flex items-start"><i
+                                    class="fas fa-users text-accent mt-1 mr-2 flex-shrink-0"></i>Gestión de contenido,
+                                interacción
+                                con la comunidad y aplicación de estrategias de engagement.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
         </div>
 
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12">
 
-        <!-- Botón flotante de WhatsApp -->
+            <section class="bg-white p-6 rounded-xl shadow-lg h-full" id="competencias">
+                <h2 class="text-xl font-semibold text-primary-dark mb-4 border-b pb-2"><i
+                        class="fas fa-tools mr-2 text-accent"></i>Competencias Técnicas</h2>
+                <div class="flex flex-wrap gap-2">
+                    <span
+                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Desarrollo
+                        Web (HTML, CSS, JS)</span>
+                    <span
+                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Marketing
+                        Digital (SEO)</span>
+                    <span
+                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Análisis
+                        de Datos (GA4)</span>
+                    <span
+                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">WordPress
+                        / CMS</span>
+                    <span
+                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Inteligencia
+                        artificial generativa</span>
+                </div>
+
+                <h2 class="text-xl font-semibold text-primary-dark mt-6 mb-4 border-b pb-2"><i
+                        class="fas fa-users mr-2 text-accent"></i>Competencias Personales</h2>
+                <div class="flex flex-wrap gap-2">
+                    <span class="bg-gray-200 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Trabajo en
+                        equipo</span>
+                    <span class="bg-gray-200 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Resolución de
+                        problemas</span>
+                    <span class="bg-gray-200 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Aprendizaje
+                        continuo</span>
+                </div>
+            </section>
+
+            <section class="bg-white p-6 rounded-xl shadow-lg h-full" id="idiomas">
+                <h2 class="text-xl font-semibold text-primary-dark mb-4 border-b pb-2"><i
+                        class="fas fa-globe mr-2 text-accent"></i>Idiomas</h2>
+                <ul class="space-y-3">
+                    <li class="flex justify-between items-center text-gray-700">
+                        <span class="font-medium">Español:</span>
+                        <span class="bg-green-500 text-white text-xs font-medium px-3 py-1 rounded-full">Nativo</span>
+                    </li>
+                    <li class="flex justify-between items-center text-gray-700">
+                        <span class="font-medium">Inglés:</span>
+                        <span class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full">B1 Cambridge
+                            PET</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="bg-white p-6 rounded-xl shadow-lg h-full" id="interes">
+                <h2 class="text-xl font-semibold text-primary-dark mb-4 border-b pb-2"><i
+                        class="fas fa-info-circle mr-2 text-accent"></i>Otros Datos</h2>
+                <p class="text-sm text-gray-600 mb-4">
+                    Participación activa en el desarrollo web y la planificación estratégica de marketing para pymes.
+                </p>
+                <ul class="list-none space-y-2 text-sm text-gray-700">
+                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Transporte público
+                    </li>
+                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Presencial en Murcia
+                        y posibilidad de teletrabajo</li>
+                </ul>
+            </section>
+        </div>
+
+        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl" id="proyecto">
+            <h2 class="text-2xl sm:text-3xl font-semibold text-primary-dark mb-6 border-b pb-3">
+                <i class="fas fa-laptop-code mr-3 text-accent"></i>Proyecto Destacado
+            </h2>
+
+            <p class="text-xl sm:text-2xl font-bold text-gray-700">
+                Proyectos propios próximamente... 30/09/2025
+            </p>
+            <!-- <p class="text-sm text-gray-500 mt-2">
+                Próximamente en algo genial. ¡Vuelve pronto!
+            </p> -->
+            <!-- <div
+                class="flex flex-col items-center justify-center h-40 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 p-4">
+
+
+            </div> -->
+        </section>
+
         <a href="https://wa.me/633962600?text=Hola estamos interesados en tu perfil, ¿cuándo podemos hablar?"
-            class="float-wa" target="_blank" aria-label="Contactar por WhatsApp">
+            class="float-wa" target="_blank">
             <i class="fa fa-whatsapp"></i>
         </a>
 
     </main>
 
-    <footer class="bg-secondary-dark text-white text-center py-6 mt-16">
-        <p class="text-sm">&copy; 2025 Álvaro Pastor. Rediseño con Azul y Negro.</p>
-    </footer>
+    <!-- <footer class="bg-primary-dark text-white text-center py-6 mt-16">
+        <p class="text-sm">&copy; 2025 Álvaro Pastor. Diseño Premium con Tailwind CSS.</p>
+    </footer> -->
 
     <script>
-        // Funcionalidad del menú móvil
+        // Mobile menu functionality
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const closeMenuBtn = document.getElementById('close-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
 
-        // Abrir menú móvil
+        // Open mobile menu
         mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Evita el scroll
+            mobileMenu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scroll when menu is open
         });
 
-        // Cerrar menú móvil
+        // Close mobile menu
         function closeMobileMenu() {
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = ''; // Restaura el scroll
+            mobileMenu.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scroll
         }
 
         closeMenuBtn.addEventListener('click', closeMobileMenu);
 
-        // Cerrar menú al hacer click en los enlaces del menú (navegación)
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-
-        // Cerrar menú con la tecla Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+        // Close menu when clicking backdrop
+        mobileMenu.addEventListener('click', (e) => {
+            if (e.target === mobileMenu || e.target.classList.contains('bg-black')) {
                 closeMobileMenu();
             }
         });
 
+        // Close menu when clicking on menu links
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                closeMobileMenu();
+            });
+        });
+
+        // Close menu with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                closeMobileMenu();
+            }
+        });
     </script>
 </body>
 
