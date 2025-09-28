@@ -1,2 +1,13 @@
 User-agent: *
 Allow: /
+
+# Sitemaps para ambas versiones de idioma
+Sitemap: https://alvaropas17.github.io/curriculum/es/sitemap.xml
+Sitemap: https://alvaropas17.github.io/curriculum/en/sitemap.xml
+
+# Permitir acceso a ambas versiones de idioma
+Allow: /es/
+Allow: /en/
+
+# Desalentar indexación de la página de detección automática
+Disallow: /index.html
