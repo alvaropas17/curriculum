@@ -53,3 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(section);
   });
 });
+
+document.getElementById("linkedin").addEventListener("click", () => {
+  "click en botón de linkedin";
+});
