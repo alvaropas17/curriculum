@@ -1,8 +1,20 @@
 html {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
 }
 
-.secciones > ul > li {
-    list-style: none;
+h1 {
+    background: red;
+    padding: 0 1px 0 1px;
 }
+
+.article {
+    max-width: 900px;
+    background: var(--color-light);
+    margin: 3em auto;
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
 
