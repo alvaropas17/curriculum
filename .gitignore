@@ -1,0 +1,24 @@
+# Ignorar dependencias y archivos temporales
+node_modules/
+# Ignorar archivos de configuración de VS Code
+.vscode/
+# Ignorar archivos de sistema
+.DS_Store
+Thumbs.db
+# Ignorar lockfile si usas npm
+package-lock.json
+# Ignorar carpeta de Git
+.git/
+# Ignorar archivos temporales
+*.log
+# Ignorar archivos de entorno
+.env
+.env.local
+.env.*
+# Ignorar archivos de compilación
+/dist/
+/build/
+# Ignorar archivos de caché
+.cache/
+# Ignorar archivos de pruebas
+coverage/
