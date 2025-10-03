@@ -369,7 +369,7 @@
                         class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Java,
                         MySQL</span>
                     <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Git,
+                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Git, GitHub,
                         Trello</span>
                     <span
                         class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Marketing
@@ -383,6 +383,8 @@
                     <span
                         class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Inteligencia
                         artificial generativa</span>
+                    <span
+                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Cloudflare</span>
                 </div>
 
                 <h2 class="text-xl font-semibold text-primary-dark mt-6 mb-4 border-b pb-2"><i
@@ -494,48 +496,7 @@
 
     </main>
 
-    <script>
-        // Mobile menu functionality
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const closeMenuBtn = document.getElementById('close-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-
-        // Open mobile menu
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Prevent scroll when menu is open
-        });
-
-        // Close mobile menu
-        function closeMobileMenu() {
-            mobileMenu.classList.add('hidden');
-            document.body.style.overflow = ''; // Restore scroll
-        }
-
-        closeMenuBtn.addEventListener('click', closeMobileMenu);
-
-        // Close menu when clicking backdrop
-        mobileMenu.addEventListener('click', (e) => {
-            if (e.target === mobileMenu || e.target.classList.contains('bg-black')) {
-                closeMobileMenu();
-            }
-        });
-
-        // Close menu when clicking on menu links
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                closeMobileMenu();
-            });
-        });
-
-        // Close menu with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
-                closeMobileMenu();
-            }
-        });
-    </script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
