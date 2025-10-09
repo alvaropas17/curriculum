@@ -1,505 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EZ9VY5E3EE"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+    <title>
+      Álvaro Pastor | Desarrollador Web Full Stack y Especialista en Marketing
+      Digital | Portafolio y Contacto
+    </title>
 
-        gtag('config', 'G-EZ9VY5E3EE');
-    </script>
+    <meta
+      name="description"
+      content="Desarrollador Web Full Stack con foco en productos agradables para el usuario y generadores de beneficios. Revisa mi CV, portafolio de proyectos y contacta conmigo."
+    />
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="CV Álvaro Pastor - Desarrollo Web y Marketing Digital">
-    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="./styles/styles.css">
-    <meta property="og:description"
-        content="Conoce mi experiencia en desarrollo web, marketing digital y proyectos destacados.">
-    <meta name="robots" content="index,follow">
-    <title>Álvaro Pastor CV - Desarrollador web y marketing digital</title>
+    <meta
+      property="og:title"
+      content="Álvaro Pastor | Desarrollador Web y Especialista en Marketing"
+    />
+    <meta
+      property="og:description"
+      content="Revisa mi CV, proyectos de Desarrollo Web Full Stack y contacta para oportunidades de Marketing Digital."
+    />
+    <meta property="og:type" content="profile" />
+    <meta
+      property="og:url"
+      content="https://alvaropas17.github.io/curriculum"
+    />
+    <meta property="og:locale" content="es_ES" />
+
+    <meta name="robots" content="index,follow" />
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
+
+    <link rel="canonical" href="https://alvaropas17.github.io/curriculum" />
 
     <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-dark': '#1e293b', // Gris oscuro/casi negro
-                        'accent': '#4f46e5',      // Morado corporativo
-                        'soft-gray': '#f8fafc',   // Gris muy claro
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8fafc;
+        color: #1e293b;
+        line-height: 1.6;
+      }
+      .link-card {
+        transition: all 0.3s ease;
+      }
+      .link-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.15),
+          0 5px 8px -4px rgba(0, 0, 0, 0.08); /* Sombra ligeramente reducida */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col items-center justify-center p-6">
+      <div class="w-full max-w-sm">
+        <div class="text-center mb-8">
+          <div
+            class="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full mx-auto mb-3 flex items-center justify-center shadow-lg"
+            role="img"
+            aria-label="Icono de perfil de Álvaro Pastor"
+          >
+            <i class="fas fa-user text-white text-2xl"></i>
+          </div>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="./styles/styles.css">
-    <script src="https://t.contentsquare.net/uxa/70095ab3329d7.js"></script>
-    <!-- <style>
-       
-    </style> -->
-
-</head>
-
-<body class="bg-soft-gray font-sans" style="scroll-behavior: smooth;">
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQH2FSTM" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <nav class="sticky top-0 z-20 bg-white shadow-lg border-b border-gray-200">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Mobile Menu Button (left) -->
-                <button id="mobile-menu-btn"
-                    class="sm:hidden p-2 rounded-md text-primary-dark hover:text-accent hover:bg-gray-100 transition duration-150"
-                    aria-label="Abrir menú">
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-
-                <!-- Logo/Name (center on mobile, hidden on desktop) -->
-                <div class="flex-1 sm:hidden flex justify-center">
-                    <a href="#" class="text-xl font-bold text-primary-dark hover:text-accent transition duration-150">
-                        Álvaro Pastor
-                    </a>
-                </div>
-
-                <!-- Desktop Navigation (hidden on mobile, centered) -->
-                <div class="hidden sm:flex space-x-8 justify-center flex-1">
-                    <a href="#"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Inicio</a>
-                    <a href="#contacto"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Contacto</a>
-                    <a href="#profesional"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Objetivo</a>
-                    <a href="#formacion"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Formación</a>
-                    <a href="#experiencia"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Experiencia</a>
-                    <a href="#competencias"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Competencias</a>
-                    <a href="#proyectos"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Portfolio</a>
-                </div>
-            </div>
+          <h1 class="text-2xl font-bold mb-1">Álvaro Pastor</h1>
+          <h2 class="text-lg font-medium text-indigo-600 mb-3">
+            Desarrollador Web Full Stack | Estratega de Marketing Digital
+          </h2>
+          <p class="text-gray-600 text-sm mb-4">
+            Desarrollador <strong>Web Full Stack</strong> con enfoque proactivo
+            en <strong>UX</strong> y experiencia combinada en
+            <strong>Marketing Digital</strong>.
+          </p>
         </div>
 
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 z-50 hidden">
-            <!-- Backdrop -->
-            <div class="fixed inset-0 bg-black bg-opacity-50 transition-opacity"></div>
-
-            <!-- Menu Panel -->
-            <div class="fixed inset-y-0 left-0 max-w-sm w-full bg-white shadow-xl transform transition-transform">
-                <div class="flex items-center justify-between h-16 px-4 border-b border-gray-200">
-                    <span class="text-lg font-semibold text-primary-dark">Navegación</span>
-                    <button id="close-menu-btn"
-                        class="p-2 rounded-md text-primary-dark hover:text-accent hover:bg-gray-100 transition duration-150"
-                        aria-label="Cerrar menú">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <nav class="mt-8 px-4">
-                    <div class="space-y-1">
-                        <a href="#"
-                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
-                            <i class="fas fa-home w-5 mr-3 text-accent"></i>Inicio
-                        </a>
-                        <a href="#contacto"
-                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
-                            <i class="fas fa-address-card w-5 mr-3 text-accent"></i>Contacto
-                        </a>
-                        <a href="#profesional"
-                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
-                            <i class="fas fa-bullseye w-5 mr-3 text-accent"></i>Objetivo
-                        </a>
-                        <a href="#formacion"
-                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
-                            <i class="fas fa-graduation-cap w-5 mr-3 text-accent"></i>Formación
-                        </a>
-                        <a href="#experiencia"
-                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
-                            <i class="fas fa-briefcase w-5 mr-3 text-accent"></i>Experiencia
-                        </a>
-                        <a href="#competencias"
-                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
-                            <i class="fas fa-tools w-5 mr-3 text-accent"></i>Competencias
-                        </a>
-                        <a href="#proyecto"
-                            class="mobile-menu-link block px-4 py-3 text-base font-medium text-primary-dark hover:text-accent hover:bg-gray-50 rounded-lg transition duration-150">
-                            <i class="fas fa-laptop-code w-5 mr-3 text-accent"></i>Proyecto
-                        </a>
-                        <hr class="my-4 border-gray-200">
-
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </nav>
-
-    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 my-12 md:my-20">
-
-        <header class="text-center mb-16 p-6 sm:p-8 bg-white rounded-xl shadow-2xl border-t-4 border-accent">
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-primary-dark tracking-tight">Álvaro Pastor
-            </h1>
-            <h2 class="text-lg sm:text-xl md:text-2xl text-gray-500 font-light mt-2 tracking-wide">Desarrollo Web y
-                Marketing
-                Digital</h2>
-        </header>
-
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 md:p-8 rounded-xl shadow-lg mb-12"
-            id="contacto">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-primary-dark md:col-span-2 border-b pb-3 mb-4"><i
-                    class="fas fa-address-card mr-3 text-accent"></i>Datos de Contacto</h2>
-
-            <div class="flex items-center space-x-3">
-                <i class="fas fa-envelope text-accent text-xl flex-shrink-0"></i>
-                <a href="mailto:alvpastor17@gmail.com"
-                    class="text-gray-600 hover:text-accent transition break-all">alvpastor17@gmail.com</a>
-            </div>
-            <!-- <div class="flex items-center space-x-3">
-                <i class="fas fa-phone-alt text-accent text-xl flex-shrink-0"></i>
-                <a href="tel:+34633962600" class="text-gray-600 hover:text-accent transition">+34 633 96 26 00</a>
-            </div> -->
-            <div class="flex items-center space-x-3">
-                <i class="fab fa-linkedin text-accent text-xl flex-shrink-0"></i>
-                <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor-periago-89912820a" target="_blank"
-                    class="text-gray-600 hover:text-accent transition">LinkedIn Perfil</a>
-            </div>
-            <div class="flex items-center space-x-3">
-                <i class="fab fa-github text-accent text-xl flex-shrink-0"></i>
-                <a href="https://github.com/alvaropas17" target="_blank"
-                    class="text-gray-600 hover:text-accent transition">Perfil Github</a>
-            </div>
-            <div class="flex items-center space-x-3">
-                <i class="fab fa-whatsapp text-accent text-xl flex-shrink-0"></i>
-                <a href="https://wa.me/633962600?text=Hola estamos interesados en tu perfil, ¿cuándo podemos hablar?"
-                    target="_blank" class="text-gray-600 hover:text-accent transition">WhatsApp</a>
-            </div>
-        </section>
-
-        <section class="bg-primary-dark text-white p-6 md:p-12 rounded-xl shadow-2xl mb-12" id="profesional">
-            <h2 class="text-2xl sm:text-3xl font-semibold mb-4 border-b border-gray-600 pb-3"><i
-                    class="fas fa-bullseye mr-3 text-accent"></i>Objetivo Profesional</h2>
-            <p class="text-base sm:text-xl font-light leading-relaxed">
-                Desarrollar soluciones innovadoras en el ámbito del <b class="font-medium-text-accent">desarrollo
-                    web</b> y el <b class="font-medium-text-accent">marketing digital</b>,
-                aplicando mis conocimientos y experiencia para <b class="font-medium-text-accent">optimizar procesos y
-                    mejorar la experiencia de
-                    usuario</b>. Busco un entorno de trabajo dinámico donde pueda crecer profesionalmente y contribuir
-                al éxito
-                del equipo.
+        <div class="space-y-3">
+          <a
+            href="curriculum.html"
+            class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-indigo-500 text-center"
+          >
+            <i class="fas fa-id-card text-indigo-600 mb-1 text-xl"></i>
+            <h3 class="font-semibold text-base">
+              Currículum Vitae (CV) - Álvaro Pastor
+            </h3>
+            <p class="text-gray-600 text-sm">Ver experiencia y formación</p>
+          </a>
+          <a
+            href="proyectos.html"
+            class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-indigo-500 text-center"
+          >
+            <i class="fas fa-laptop-code text-indigo-600 mb-1 text-xl"></i>
+            <h3 class="font-semibold text-base">
+              Portafolio de Proyectos Web y Marketing
+            </h3>
+            <p class="text-gray-600 text-sm">
+              Conoce los proyectos de desarrollo que he completado
             </p>
-        </section>
+          </a>
 
-        <div class="space-y-10 mb-12">
-
-            <section class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border-l-4 border-accent" id="experiencia">
-                <h2 class="text-2xl sm:text-3xl font-semibold text-primary-dark mb-6">
-                    <i class="fas fa-briefcase mr-3 text-accent"></i>Experiencia Profesional
-                </h2>
-
-                <div class="space-y-6">
-
-                </div>
-                <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
-                    <p class="text-xs text-gray-500 mb-1">Mayo 2025 - Octubre 2025</p>
-                    <h4 class="text-lg font-semibold text-primary-dark">Especialista en marketing digital</h4>
-                    <p class="text-sm text-accent mb-3">Inversus Group</p>
-                    <p class="text-sm text-gray-600 mb-3 italic">Apoyé la estrategia digital de la empresa a través
-                        de una auditoría SEO y de rendimiento web. <br>Establecí las bases de la estrategia digital
-                        desde
-                        cero.</p>
-                    <p class="text-sm text-gray-600 mb-3 italic"></p>
-                    <ul class="list-none space-y-1 text-sm text-gray-700">
-                        <li class="flex items-start"><i
-                                class="fas fa-check-circle text-accent mt-1 mr-2 flex-shrink-0"></i>Mejora en un
-                            300% de la visibilidad online en 3 meses al desbloquear las oportunidades de
-                            posicionamiento.</li>
-                    </ul>
-                    <ul class="list-none space-y-1 text-sm text-gray-700">
-                        <li class="flex items-start"><i
-                                class="fas fa-check-circle text-accent mt-1 mr-2 flex-shrink-0"></i>
-                            Asistí en la correcta indexación de la página triplicando las
-                            páginas indexadas en Google (de 70 a más de 300) y mejoré la puntuación SEO de
-                            Lighthouse de 54 a 85 en 3 meses al solucionar los problemas de indexación de la página.
-                        </li>
-                        <li class="flex items-start"><i
-                                class="fas fa-check-circle text-accent mt-1 mr-2 flex-shrink-0"></i>Detecté
-                            problemas de rendimiento y propuse un plan de optimización con un impacto estimado de
-                            +12% en mejora de carga de la página.</li>
-                        <li class="flex items-start"><i
-                                class="fas fa-check-circle text-accent mt-1 mr-2 flex-shrink-0"></i>Implementación
-                            de Google Analytics y GSC.</li>
-                        <li class="flex items-start"><i
-                                class="fas fa-check-circle text-accent mt-1 mr-2 flex-shrink-0"></i>Análisis
-                            exhaustivo del estado de la página web.</li>
-                        <li class="flex items-start"><i
-                                class="fas fa-check-circle text-accent mt-1 mr-2 flex-shrink-0"></i>Gestión de bases
-                            de datos de CRM, análisis de datos y creación de contenido para redes sociales.</li>
-                    </ul>
-                </div>
-        </div>
-        </section>
-
-        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border-l-4 border-accent" id="formacion">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-primary-dark mb-6">
-                <i class="fas fa-graduation-cap mr-3 text-accent"></i>Formación y Títulos
-            </h2>
-
-            <div class="space-y-6">
-                <h3 class="text-xl font-semibold text-primary-dark border-b pb-2 mb-4">Académica</h3>
-
-                <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
-                    <p class="text-xs text-gray-500 mb-1">2024 - Actualmente</p>
-                    <h4 class="text-lg font-semibold text-primary-dark">Grado Superior en Desarrollo de Aplicaciones
-                        Web</h4>
-                    <p class="text-sm text-gray-600">FP San Antonio</p>
-                </div>
-
-                <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
-                    <p class="text-xs text-gray-500 mb-1">2020 - 2025</p>
-                    <h4 class="text-lg font-semibold text-primary-dark">Grado en Marketing y Dirección Comercial con
-                        mención en marketing digital
-                    </h4>
-                    <p class="text-sm text-gray-600">UCAM</p>
-                </div>
-
-                <hr class="border-gray-200 my-8">
-
-                <h3 class="text-xl font-semibold text-primary-dark border-b pb-2 mb-4">Complementaria</h3>
-
-                <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
-                    <p class="text-xs text-gray-500 mb-1">2023</p>
-                    <h4 class="text-lg font-semibold text-primary-dark">Curso de creación de empresas</h4>
-                    <p class="text-sm text-gray-600">Cámara de comercio</p>
-                </div>
-
-
-                <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
-                    <p class="text-xs text-gray-500 mb-1">2016 - 2018</p>
-                    <h4 class="text-lg font-semibold text-primary-dark">Experiencia en el Extranjero</h4>
-                    <p class="text-sm text-gray-600">Inmersión lingüística en Inglaterra e Irlanda.</p>
-                </div>
-
-                <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
-                    <p class="text-xs text-gray-500 mb-1">2010 - 2015</p>
-                    <h4 class="text-lg font-semibold text-primary-dark">Campamentos de inglés a nivel nacional
-                    </h4>
-                    <!-- <p class="text-sm text-gray-600">Google Academy</p> -->
-                </div>
-
-            </div>
-        </section>
-
-
-
-        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-lg border-l-4 border-accent mt-8" id="proyectos">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-primary-dark mb-6">
-                <i class="fas fa-rocket mr-3 text-accent"></i>Proyectos Académicos y Personales
-            </h2>
-
-            <div class="space-y-6">
-                <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
-                    <p class="text-xs text-gray-500 mb-1">2023 - Actualmente</p>
-                    <h4 class="text-lg font-semibold text-primary-dark">Proyectos Universitarios en Marketing
-                        Digital</h4>
-                    <p class="text-sm text-accent mb-3">Ámbito Académico</p>
-                    <ul class="list-none space-y-1 text-sm text-gray-700">
-                        <li class="flex items-start"><i
-                                class="fas fa-code-branch text-accent mt-1 mr-2 flex-shrink-0"></i>Elaboración de
-                            planes de
-                            marketing, email marketing y estrategias de redes sociales aplicadas a proyectos
-                            académicos.
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="border-l-4 pl-4 border-gray-300 hover:border-accent transition duration-300">
-                    <p class="text-xs text-gray-500 mb-1">2018 - 2019</p>
-                    <h4 class="text-lg font-semibold text-primary-dark">Crecimiento Orgánico de Cuenta de Instagram
-                    </h4>
-                    <p class="text-sm text-accent mb-3">Proyecto Personal</p>
-                    <ul class="list-none space-y-1 text-sm text-gray-700">
-                        <li class="flex items-start"><i
-                                class="fas fa-chart-line text-accent mt-1 mr-2 flex-shrink-0"></i>Crecimiento
-                            orgánico de una
-                            cuenta de Instagram de entretenimiento de 0 a 13.000 seguidores.
-                        </li>
-                        <li class="flex items-start"><i
-                                class="fas fa-users text-accent mt-1 mr-2 flex-shrink-0"></i>Gestión de contenido,
-                            interacción
-                            con la comunidad y aplicación de estrategias de engagement.
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
+          <div class="grid grid-cols-2 gap-3">
+            <a
+              href="mailto:alvpastor17@gmail.com"
+              class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-indigo-500 text-center"
+            >
+              <i class="fas fa-envelope text-indigo-600 mb-1 text-xl"></i>
+              <h3 class="font-semibold text-base">Email</h3>
+              <p class="text-gray-600 text-sm">Contacta conmigo por correo</p>
+            </a>
+            <a
+              href="https://wa.me/633962600?text=Hola%20estamos%20interesados%20en%20tu%20perfil,%20¿cuándo%20podemos%20hablar?"
+              target="_blank"
+              class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-green-500 text-center"
+            >
+              <i class="fab fa-whatsapp text-green-600 mb-1 text-xl"></i>
+              <h3 class="font-semibold text-base">WhatsApp</h3>
+              <p class="text-gray-600 text-sm">Contáctame por whatsapp.</p>
+            </a>
+          </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-12 mt-10">
-
-            <section class="bg-white p-6 rounded-xl shadow-lg h-full" id="competencias">
-                <h2 class="text-xl font-semibold text-primary-dark mb-4 border-b pb-2"><i
-                        class="fas fa-tools mr-2 text-accent"></i>Competencias Técnicas</h2>
-                <div class="flex flex-wrap gap-2">
-                    <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Desarrollo
-                        Web (HTML, CSS, JS)</span>
-                    <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Java,
-                        MySQL</span>
-                    <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Git, GitHub,
-                        Trello</span>
-                    <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">VirtualBox</span>
-                    <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Marketing
-                        Digital (SEO)</span>
-                    <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Análisis
-                        de Datos (GA4)</span>
-                    <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">WordPress
-                        / CMS</span>
-                    <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Inteligencia
-                        artificial generativa</span>
-                    <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Cloudflare</span>
-                </div>
-
-                <h2 class="text-xl font-semibold text-primary-dark mt-6 mb-4 border-b pb-2"><i
-                        class="fas fa-users mr-2 text-accent"></i>Competencias Personales</h2>
-                <div class="flex flex-wrap gap-2">
-                    <span class="bg-gray-200 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Trabajo en
-                        equipo</span>
-                    <span class="bg-gray-200 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Resolución de
-                        problemas</span>
-                    <span class="bg-gray-200 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Aprendizaje
-                        continuo</span>
-                </div>
-            </section>
-
-            <section class="bg-white p-6 rounded-xl shadow-lg h-full" id="idiomas">
-                <h2 class="text-xl font-semibold text-primary-dark mb-4 border-b pb-2"><i
-                        class="fas fa-globe mr-2 text-accent"></i>Idiomas</h2>
-                <ul class="space-y-3">
-                    <li class="flex justify-between items-center text-gray-700">
-                        <span class="font-medium">Español:</span>
-                        <span class="bg-green-500 text-white text-xs font-medium px-3 py-1 rounded-full">Nativo</span>
-                    </li>
-                    <li class="flex justify-between items-center text-gray-700">
-                        <span class="font-medium">Inglés:</span>
-                        <span class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full">B1 Cambridge
-                            PET</span>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="bg-white p-6 rounded-xl shadow-lg h-full" id="interes">
-                <h2 class="text-xl font-semibold text-primary-dark mb-4 border-b pb-2"><i
-                        class="fas fa-info-circle mr-2 text-accent"></i>Otros Datos</h2>
-                <p class="text-sm text-gray-600 mb-4">
-                    Participación activa en el desarrollo web y la planificación estratégica de marketing para pymes.
-                </p>
-                <ul class="list-none space-y-2 text-sm text-gray-700">
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Transporte público
-                    </li>
-                    <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Presencial en Murcia
-                        y posibilidad de teletrabajo</li>
-                </ul>
-            </section>
+        <div class="mt-8 flex justify-center space-x-4">
+          <a
+            href="https://es.linkedin.com/in/%C3%A1lvaro-pastor-periago-89912820a"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-indigo-600 transition-colors"
+            aria-label="Perfil de LinkedIn de Álvaro Pastor"
+          >
+            <i class="fab fa-linkedin text-xl"></i>
+          </a>
+          <a
+            href="https://github.com/alvaropas17"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-indigo-600 transition-colors"
+            aria-label="Perfil de GitHub de Álvaro Pastor"
+          >
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a
+            href="https://wa.me/633962600?text=Hola%20estamos%20interesados%20en%20tu%20perfil,%20¿cuándo%20podemos%20hablar?"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-gray-400 hover:text-green-600 transition-colors"
+            aria-label="Contacto directo por WhatsApp"
+          >
+            <i class="fab fa-whatsapp text-xl"></i>
+          </a>
         </div>
 
-        <section class="bg-white p-6 sm:p-8 rounded-xl shadow-2xl" id="proyecto">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-primary-dark mb-6 border-b pb-3">
-                <i class="fas fa-laptop-code mr-3 text-accent"></i>Proyecto Destacado
-            </h2>
-
-            <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-                    <!-- Imagen del proyecto -->
-                    <div class="md:col-span-1">
-                        <a href="https://web-gala-imparables.pages.dev/" target="_blank" class="block group">
-                            <div
-                                class="bg-gradient-to-br from-accent to-purple-600 h-32 w-full rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                                <i
-                                    class="fas fa-globe text-white text-4xl group-hover:text-5xl transition-all duration-300"></i>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Contenido del proyecto -->
-                    <div class="md:col-span-2">
-                        <h3 class="text-xl font-semibold text-primary-dark mb-3">
-                            <a href="https://web-gala-imparables.pages.dev/" target="_blank"
-                                class="hover:text-accent transition duration-150 flex items-center group">
-                                Gala imparables - Proyecto Web Personal en Desarrollo
-                                <i class="fas fa-external-link-alt text-sm ml-2 opacity-60 group-hover:opacity-100"></i>
-                            </a>
-                        </h3>
-                        <p class="text-gray-600 mb-4 leading-relaxed">
-                            Aplicación web moderna en desarrollo que combina diseño responsive con funcionalidades
-                            dinámicas.
-                            Construida con tecnologías actuales y enfocada en la experiencia de usuario.
-                        </p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full">HTML5</span>
-                            <span class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full">CSS3</span>
-                            <span
-                                class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full">JavaScript</span>
-                            <span
-                                class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full">Responsive</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Botón de contacto flotante -->
-        <div class="text-center mt-12 mb-8">
-            <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                <h3 class="text-xl font-semibold text-primary-dark mb-4">¿Interesado en mi perfil?</h3>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="mailto:alvpastor17@gmail.com"
-                        class="bg-accent hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                        <i class="fas fa-envelope"></i>
-                        <span>Contacta por Email</span>
-                    </a>
-                    <a href="https://wa.me/633962600?text=Hola%20estamos%20interesados%20en%20tu%20perfil,%20¿cuándo%20podemos%20hablar?"
-                        target="_blank"
-                        class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center space-x-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                        <i class="fab fa-whatsapp"></i>
-                        <span>WhatsApp</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <script src="./script.js"></script>
-</body>
-
+        <footer class="mt-6 text-center text-xs text-gray-500">
+          &copy; 2025 Álvaro Pastor. Todos los derechos reservados.
+        </footer>
+      </div>
+    </div>
+  </body>
 </html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyectos - Álvaro Pastor</title>
+    <meta property="og:title" content="Proyectos - Álvaro Pastor" />
+    <meta property="og:description" content="Portfolio de proyectos desarrollados por Álvaro Pastor" />
+    <meta name="robots" content="index,follow" />
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#1e293b',
+                        'accent': '#4f46e5',
+                        'soft-gray': '#f8fafc',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-soft-gray font-sans">
+    <nav class="bg-white shadow-md">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="index.html" class="text-primary-dark font-bold text-lg hover:text-accent transition">
+                    Álvaro Pastor
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="text-sm font-medium text-primary-dark hover:text-accent transition">Inicio</a>
+                    <a href="curriculum.html" class="text-sm font-medium text-primary-dark hover:text-accent transition">Currículum</a>
+                    <a href="proyectos.html" class="text-sm font-medium text-accent border-b-2 border-accent transition">Proyectos</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 my-12 md:my-20">
+        <header class="text-center mb-16">
+            <h1 class="text-4xl sm:text-5xl font-bold text-primary-dark">Mis Proyectos</h1>
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">Aquí puedes encontrar una muestra de los proyectos en los que he trabajado, tanto personales como profesionales.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
+            <!-- Proyecto 1 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+                <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-48 flex items-center justify-center">
+                    <i class="fas fa-globe text-white text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-primary-dark mb-2">Gala Imparables</h3>
+                    <p class="text-gray-600 mb-4">Aplicación web moderna en desarrollo que combina diseño responsive con funcionalidades dinámicas.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">HTML5</span>
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">CSS3</span>
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">JavaScript</span>
+                    </div>
+                    <a href="https://web-gala-imparables.pages.dev/" target="_blank" class="inline-flex items-center text-accent hover:text-indigo-800 transition">
+                        Ver proyecto <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Proyecto 2 -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+                <div class="bg-gradient-to-r from-green-500 to-teal-500 h-48 flex items-center justify-center">
+                    <i class="fab fa-instagram text-white text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-primary-dark mb-2">Crecimiento en Instagram</h3>
+                    <p class="text-gray-600 mb-4">Proyecto personal de crecimiento orgánico de una cuenta de Instagram de 0 a más de 13.000 seguidores.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">Redes Sociales</span>
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">Marketing</span>
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">Contenido</span>
+                    </div>
+                    <span class="inline-flex items-center text-gray-500">
+                        Proyecto completado <i class="fas fa-check-circle ml-2 text-green-500"></i>
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Proyecto 3 - Inversus Group -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-800 h-48 flex items-center justify-center">
+                    <i class="fas fa-chart-line text-white text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-primary-dark mb-2">Estrategia Digital para Inversus Group</h3>
+                    <p class="text-gray-600 mb-4">Mejora en un 300% de la visibilidad online en 3 meses al desbloquear las oportunidades de posicionamiento.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">SEO</span>
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">Analytics</span>
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">Optimización</span>
+                    </div>
+                    <span class="inline-flex items-center text-gray-500">
+                        Proyecto completado <i class="fas fa-check-circle ml-2 text-green-500"></i>
+                    </span>
+                </div>
+            </div>
+            
+            <!-- Proyecto 4 - Este CV Web -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+                <div class="bg-gradient-to-r from-red-500 to-orange-500 h-48 flex items-center justify-center">
+                    <i class="fas fa-file-alt text-white text-5xl"></i>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-primary-dark mb-2">CV Web Interactivo</h3>
+                    <p class="text-gray-600 mb-4">Desarrollo de un currículum web interactivo utilizando HTML, CSS y JavaScript con Tailwind CSS.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">HTML</span>
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">Tailwind</span>
+                        <span class="bg-accent bg-opacity-10 text-accent text-xs font-medium px-3 py-1 rounded-full">Responsive</span>
+                    </div>
+                    <a href="curriculum.html" class="inline-flex items-center text-accent hover:text-indigo-800 transition">
+                        Ver proyecto <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center">
+            <a href="index.html" class="inline-block bg-white text-accent border border-accent font-medium py-2 px-6 rounded-lg hover:bg-accent hover:text-white transition duration-300">
+                <i class="fas fa-arrow-left mr-2"></i> Volver al inicio
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 py-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-500 text-sm">&copy; 2025 Álvaro Pastor. Todos los derechos reservados.</p>
+            <div class="flex justify-center space-x-6 mt-4">
+                <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor-periago-89912820a" target="_blank" class="text-gray-400 hover:text-accent">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/alvaropas17" target="_blank" class="text-gray-400 hover:text-accent">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:alvpastor17@gmail.com" class="text-gray-400 hover:text-accent">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
