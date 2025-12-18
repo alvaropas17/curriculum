@@ -21,25 +21,9 @@
         content="Conoce mi experiencia en desarrollo web, marketing digital y proyectos destacados.">
     <meta name="robots" content="index,follow">
     <title>Álvaro Pastor CV - Desarrollador web y marketing digital</title>
-
+    <!-- Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary-dark': '#1e293b', // Gris oscuro/casi negro
-                        'accent': '#4f46e5',      // Morado corporativo
-                        'soft-gray': '#f8fafc',   // Gris muy claro
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
+    <script src="./tailwind.js" defer></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -54,10 +38,8 @@
 </head>
 
 <body class="bg-soft-gray font-sans" style="scroll-behavior: smooth;">
-    <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQH2FSTM" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
 
     <nav class="sticky top-0 z-20 bg-white shadow-lg border-b border-gray-200">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,7 +56,8 @@
 
                 <!-- Logo/Name (center on mobile, hidden on desktop) -->
                 <div class="flex-1 sm:hidden flex justify-center">
-                    <a href="index.html" class="text-xl font-bold text-primary-dark hover:text-accent transition duration-150">
+                    <a href="index.html"
+                        class="text-xl font-bold text-primary-dark hover:text-accent transition duration-150">
                         Álvaro Pastor
                     </a>
                 </div>
@@ -82,9 +65,11 @@
                 <!-- Desktop Navigation (hidden on mobile, centered) -->
                 <div class="hidden sm:flex space-x-8 justify-center flex-1">
                     <a href="index.html"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Volver al inicio</a>
+                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Volver
+                        al inicio</a>
                     <a href="proyectos.html"
-                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Ver proyectos</a>
+                        class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Ver
+                        proyectos</a>
                     <a href="#contacto"
                         class="text-sm font-medium text-primary-dark hover:text-accent transition duration-150">Contacto</a>
                     <a href="#profesional"
@@ -369,13 +354,13 @@
                         class="fas fa-tools mr-2 text-accent"></i>Competencias Técnicas</h2>
                 <div class="flex flex-wrap gap-2">
                     <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Desarrollo
-                        Web (HTML, CSS, JS)</span>
+                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">HTML5, CSS3, JavaScript, PHP</span>
                     <span
                         class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Java,
                         MySQL</span>
                     <span
-                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Git, GitHub,
+                        class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">Git,
+                        GitHub,
                         Trello</span>
                     <span
                         class="bg-accent text-white text-xs font-medium px-3 py-1 rounded-full hover:bg-opacity-80 transition">VirtualBox</span>
