@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RemoteOps — Sistema operativo para equipos distribuidos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, .82);
+            backdrop-filter: blur(18px);
+        }
+
+        .soft-grid {
+            background-image:
+                linear-gradient(to right, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+
+        .node-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(59, 130, 246, .25), rgba(14, 165, 233, .7));
+            transform-origin: left center;
+        }
+
+        .pulse-dot {
+            animation: pulse 1.7s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: .7
+            }
+
+            50% {
+                transform: scale(1.45);
+                opacity: 1
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen bg-slate-100 text-slate-900" x-data="remoteOps()">
+    <div class="min-h-screen grid grid-cols-[88px_1fr]">
+        <!-- Sidebar -->
+        <aside class="bg-slate-950 text-white flex flex-col items-center py-5 gap-6">
+            <div
+                class="w-11 h-11 rounded-2xl bg-cyan-400 text-slate-950 flex items-center justify-center font-black text-lg">
+                R</div>
+            <nav class="flex flex-col gap-3 text-slate-400">
+                <button class="w-12 h-12 rounded-2xl bg-white/10 text-white flex items-center justify-center"><i
+                        data-lucide="radar"></i></button>
+                <button class="w-12 h-12 rounded-2xl hover:bg-white/10 flex items-center justify-center"><i
+                        data-lucide="list-checks"></i></button>
+                <button class="w-12 h-12 rounded-2xl hover:bg-white/10 flex items-center justify-center"><i
+                        data-lucide="message-square-warning"></i></button>
+                <button class="w-12 h-12 rounded-2xl hover:bg-white/10 flex items-center justify-center"><i
+                        data-lucide="brain"></i></button>
+                <button class="w-12 h-12 rounded-2xl hover:bg-white/10 flex items-center justify-center"><i
+                        data-lucide="settings"></i></button>
+            </nav>
+            <div class="mt-auto w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-sm font-bold">
+                AG</div>
+        </aside>
+
+        <!-- Main -->
+        <main class="p-6 lg:p-8 space-y-6">
+            <!-- Header -->
+            <header class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4">
+                <div>
+                    <p class="text-sm font-semibold text-cyan-700 uppercase tracking-wide">RemoteOps / Workspace
+                        Intelligence</p>
+                    <h1 class="text-3xl lg:text-4xl font-extrabold tracking-tight mt-1">Centro operativo del equipo
+                        distribuido</h1>
+                    <p class="text-slate-500 mt-2 max-w-2xl">Una vista para entender contexto, dependencias, bloqueos y
+                        decisiones sin tener que perseguir mensajes en cinco herramientas distintas.</p>
+                </div>
+                <div class="glass rounded-3xl border border-white shadow-sm p-2 flex items-center gap-2">
+                    <button @click="mode='focus'" :class="mode==='focus' ? 'bg-slate-950 text-white' : 'text-slate-500'"
+                        class="px-4 py-2 rounded-2xl text-sm font-semibold">Foco</button>
+                    <button @click="mode='coordination'"
+                        :class="mode==='coordination' ? 'bg-slate-950 text-white' : 'text-slate-500'"
+                        class="px-4 py-2 rounded-2xl text-sm font-semibold">Coordinación</button>
+                    <button @click="mode='review'"
+                        :class="mode==='review' ? 'bg-slate-950 text-white' : 'text-slate-500'"
+                        class="px-4 py-2 rounded-2xl text-sm font-semibold">Revisión</button>
+                </div>
+            </header>
+
+            <!-- Top metrics -->
+            <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+                <template x-for="metric in metrics" :key="metric.label">
+                    <div class="glass rounded-3xl p-5 border border-white shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <p class="text-sm font-semibold text-slate-500" x-text="metric.label"></p>
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-full" :class="metric.badgeClass"
+                                x-text="metric.badge"></span>
+                        </div>
+                        <p class="text-3xl font-extrabold mt-3" x-text="metric.value"></p>
+                        <p class="text-sm text-slate-500 mt-2" x-text="metric.note"></p>
+                    </div>
+                </template>
+            </section>
+
+            <section class="grid grid-cols-1 2xl:grid-cols-[1.45fr_.9fr] gap-6">
+                <!-- Operational map -->
+                <div class="glass rounded-[2rem] border border-white shadow-sm overflow-hidden">
+                    <div class="p-6 border-b border-slate-200/70 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-bold">Mapa operativo vivo</h2>
+                            <p class="text-sm text-slate-500 mt-1">No muestra actividad. Muestra dónde está el sistema y
+                                qué necesita atención.</p>
+                        </div>
+                        <span
+                            class="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-dot"></span> Sincronizado
+                        </span>
+                    </div>
+
+                    <div class="relative h-[540px] soft-grid bg-slate-50 overflow-hidden">
+                        <!-- Lines -->
+                        <div class="node-line" style="width:210px; left:250px; top:150px; transform:rotate(22deg);">
+                        </div>
+                        <div class="node-line" style="width:245px; left:470px; top:235px; transform:rotate(-18deg);">
+                        </div>
+                        <div class="node-line" style="width:230px; left:275px; top:350px; transform:rotate(-28deg);">
+                        </div>
+                        <div class="node-line" style="width:190px; left:625px; top:330px; transform:rotate(31deg);">
+                        </div>
+
+                        <template x-for="node in nodes" :key="node.title">
+                            <button @click="selectedNode=node"
+                                class="absolute text-left rounded-3xl p-5 w-64 shadow-sm border transition hover:-translate-y-1 hover:shadow-xl"
+                                :class="node.class" :style="`left:${node.x}px; top:${node.y}px`">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-xs font-bold uppercase tracking-wide" x-text="node.type"></span>
+                                    <span class="text-xs font-bold px-2 py-1 rounded-full bg-white/70"
+                                        x-text="node.status"></span>
+                                </div>
+                                <h3 class="font-bold text-lg mt-3" x-text="node.title"></h3>
+                                <p class="text-sm mt-2 opacity-75" x-text="node.desc"></p>
+                                <div class="mt-4 flex items-center gap-2">
+                                    <template x-for="person in node.people" :key="person">
+                                        <span
+                                            class="w-8 h-8 rounded-full bg-white/70 border border-white flex items-center justify-center text-xs font-bold"
+                                            x-text="person"></span>
+                                    </template>
+                                </div>
+                            </button>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Personal cockpit -->
+                <div class="space-y-6">
+                    <div class="glass rounded-[2rem] border border-white shadow-sm p-6">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <h2 class="text-xl font-bold">Mi cockpit</h2>
+                                <p class="text-sm text-slate-500 mt-1">Lo que necesito saber para avanzar hoy.</p>
+                            </div>
+                            <span class="px-3 py-1.5 rounded-full bg-slate-950 text-white text-xs font-bold"
+                                x-text="modeLabel()"></span>
+                        </div>
+
+                        <div class="mt-5 space-y-3">
+                            <template x-for="item in cockpit" :key="item.title">
+                                <div class="rounded-2xl bg-white border border-slate-200 p-4 flex gap-3">
+                                    <div class="w-10 h-10 rounded-2xl flex items-center justify-center"
+                                        :class="item.iconClass"><i :data-lucide="item.icon" class="w-5 h-5"></i></div>
+                                    <div>
+                                        <p class="font-bold" x-text="item.title"></p>
+                                        <p class="text-sm text-slate-500 mt-1" x-text="item.text"></p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="glass rounded-[2rem] border border-white shadow-sm p-6">
+                        <h2 class="text-xl font-bold">Nodo seleccionado</h2>
+                        <div class="mt-4 rounded-3xl bg-slate-950 text-white p-5">
+                            <p class="text-xs font-bold uppercase text-cyan-300" x-text="selectedNode.type"></p>
+                            <h3 class="text-2xl font-extrabold mt-2" x-text="selectedNode.title"></h3>
+                            <p class="text-slate-300 mt-3" x-text="selectedNode.detail"></p>
+                            <div class="mt-5 grid grid-cols-2 gap-3 text-sm">
+                                <div class="bg-white/10 rounded-2xl p-3">
+                                    <p class="text-slate-400">Riesgo</p>
+                                    <p class="font-bold mt-1" x-text="selectedNode.risk"></p>
+                                </div>
+                                <div class="bg-white/10 rounded-2xl p-3">
+                                    <p class="text-slate-400">Siguiente acción</p>
+                                    <p class="font-bold mt-1" x-text="selectedNode.next"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Decisions + structured comms -->
+            <section class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                <div class="glass rounded-[2rem] border border-white shadow-sm p-6 xl:col-span-2">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-xl font-bold">Centro de decisiones</h2>
+                            <p class="text-sm text-slate-500 mt-1">Cada decisión conserva contexto, motivo e impacto.
+                            </p>
+                        </div>
+                        <button class="px-4 py-2 rounded-2xl bg-slate-950 text-white text-sm font-bold">Nueva
+                            decisión</button>
+                    </div>
+
+                    <div class="mt-5 overflow-hidden rounded-3xl border border-slate-200 bg-white">
+                        <table class="w-full text-sm">
+                            <thead class="bg-slate-50 text-slate-500">
+                                <tr>
+                                    <th class="text-left p-4 font-bold">Decisión</th>
+                                    <th class="text-left p-4 font-bold">Estado</th>
+                                    <th class="text-left p-4 font-bold">Impacto</th>
+                                    <th class="text-left p-4 font-bold">Responsable</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <template x-for="decision in decisions" :key="decision.title">
+                                    <tr class="hover:bg-slate-50">
+                                        <td class="p-4 font-semibold" x-text="decision.title"></td>
+                                        <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold"
+                                                :class="decision.class" x-text="decision.status"></span></td>
+                                        <td class="p-4 text-slate-600" x-text="decision.impact"></td>
+                                        <td class="p-4 text-slate-600" x-text="decision.owner"></td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="glass rounded-[2rem] border border-white shadow-sm p-6">
+                    <h2 class="text-xl font-bold">Comunicación estructurada</h2>
+                    <p class="text-sm text-slate-500 mt-1">El sistema clasifica el mensaje antes de convertirlo en
+                        ruido.</p>
+
+                    <div class="mt-5 space-y-3">
+                        <template x-for="msg in messages" :key="msg.title">
+                            <div class="rounded-2xl bg-white border border-slate-200 p-4">
+                                <div class="flex items-center justify-between gap-3">
+                                    <span class="text-xs font-black uppercase tracking-wide" :class="msg.textClass"
+                                        x-text="msg.type"></span>
+                                    <span class="text-xs text-slate-400" x-text="msg.time"></span>
+                                </div>
+                                <p class="font-bold mt-2" x-text="msg.title"></p>
+                                <p class="text-sm text-slate-500 mt-1" x-text="msg.text"></p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function remoteOps() {
+            return {
+                mode: 'coordination',
+                metrics: [
+                    { label: 'Bloqueos críticos', value: '3', badge: 'Atención', badgeClass: 'bg-rose-50 text-rose-700', note: '2 dependen de validación externa' },
+                    { label: 'Decisiones pendientes', value: '7', badge: 'Reducible', badgeClass: 'bg-amber-50 text-amber-700', note: '4 pueden resolverse async' },
+                    { label: 'Foco protegido', value: '68%', badge: 'Bien', badgeClass: 'bg-emerald-50 text-emerald-700', note: 'Interrupciones agrupadas' },
+                    { label: 'Riesgo operativo', value: 'Medio', badge: 'Vivo', badgeClass: 'bg-sky-50 text-sky-700', note: 'Sube por dependencia legal' }
+                ],
+                nodes: [
+                    { type: 'Proyecto', title: 'Portal de clientes', status: 'En curso', desc: 'Sprint activo con dependencia de diseño y backend.', detail: 'El flujo principal avanza, pero hay incertidumbre en el modelo de permisos y en la entrega de pantallas finales.', risk: 'Medio', next: 'Cerrar permisos', people: ['AG', 'LM', 'SR'], x: 70, y: 95, class: 'bg-white border-slate-200' },
+                    { type: 'Bloqueo', title: 'API de facturación', status: 'Crítico', desc: 'Falta decisión sobre proveedor y límites legales.', detail: 'El equipo técnico no puede cerrar la integración hasta que negocio decida proveedor y compliance valide tratamiento de datos.', risk: 'Alto', next: 'Decisión hoy', people: ['NC', 'IV'], x: 455, y: 70, class: 'bg-rose-50 border-rose-200' },
+                    { type: 'Decisión', title: 'Arquitectura modular', status: 'Pendiente', desc: 'Hay 2 alternativas abiertas con impacto futuro.', detail: 'Se está comparando velocidad inicial frente a mantenibilidad. El sistema recomienda cerrar esta decisión antes de abrir nuevas features.', risk: 'Medio', next: 'Revisión async', people: ['AG', 'DR'], x: 210, y: 315, class: 'bg-amber-50 border-amber-200' },
+                    { type: 'Flujo', title: 'Onboarding remoto', status: 'Sano', desc: 'Proceso documentado, 1 mejora detectada por IA.', detail: 'La documentación está completa, pero el sistema detectó preguntas repetidas sobre permisos iniciales.', risk: 'Bajo', next: 'Actualizar guía', people: ['ML'], x: 690, y: 205, class: 'bg-emerald-50 border-emerald-200' },
+                    { type: 'Riesgo', title: 'Sobrecarga de QA', status: 'Subiendo', desc: 'La cola crece y puede bloquear la entrega semanal.', detail: 'QA acumula revisiones de tres proyectos. El sistema sugiere reasignar revisión funcional antes del jueves.', risk: 'Alto', next: 'Redistribuir', people: ['QA', 'SR'], x: 545, y: 405, class: 'bg-sky-50 border-sky-200' }
+                ],
+                selectedNode: null,
+                cockpit: [
+                    { icon: 'target', iconClass: 'bg-cyan-50 text-cyan-700', title: 'Prioridad real', text: 'Cerrar la decisión sobre API antes de avanzar en facturación.' },
+                    { icon: 'shield-check', iconClass: 'bg-emerald-50 text-emerald-700', title: 'Puedes ignorar', text: '17 mensajes no requieren acción directa por tu parte.' },
+                    { icon: 'link', iconClass: 'bg-amber-50 text-amber-700', title: 'Dependencia', text: 'Diseño necesita tu validación para desbloquear el flujo de onboarding.' },
+                    { icon: 'moon', iconClass: 'bg-slate-100 text-slate-700', title: 'Modo foco sugerido', text: 'Bloque de 90 min recomendado: baja probabilidad de interrupción crítica.' }
+                ],
+                decisions: [
+                    { title: 'Proveedor para facturación', status: 'Pendiente', impact: 'Bloquea integración', owner: 'Negocio', class: 'bg-rose-50 text-rose-700' },
+                    { title: 'Sistema de permisos por rol', status: 'En debate', impact: 'Afecta arquitectura', owner: 'Producto', class: 'bg-amber-50 text-amber-700' },
+                    { title: 'Eliminar reunión diaria de 30 min', status: 'Aprobada', impact: 'Reduce interrupciones', owner: 'Ops', class: 'bg-emerald-50 text-emerald-700' },
+                    { title: 'Documentar handoff de QA', status: 'Sugerida por IA', impact: 'Reduce dependencia personal', owner: 'QA', class: 'bg-sky-50 text-sky-700' }
+                ],
+                messages: [
+                    { type: 'Bloqueo', title: 'No puedo cerrar integración', text: 'Falta confirmar proveedor de facturación.', time: '09:42', textClass: 'text-rose-700' },
+                    { type: 'Decisión', title: 'Se elimina daily los viernes', text: 'Se sustituye por briefing async.', time: '10:15', textClass: 'text-emerald-700' },
+                    { type: 'Pregunta', title: '¿Quién valida permisos?', text: 'El sistema sugiere responsable por historial.', time: '11:03', textClass: 'text-cyan-700' },
+                    { type: 'Riesgo', title: 'QA puede saturarse', text: 'Capacidad proyectada insuficiente para jueves.', time: '12:20', textClass: 'text-amber-700' }
+                ],
+                modeLabel() {
+                    if (this.mode === 'focus') return 'Protegiendo foco';
+                    if (this.mode === 'review') return 'Resumen ejecutivo';
+                    return 'Coordinación activa';
+                },
+                init() { this.selectedNode = this.nodes[1]; }
+            }
+        }
+        document.addEventListener('alpine:init', () => { });
+        window.addEventListener('DOMContentLoaded', () => { lucide.createIcons(); });
+    </script>
+</body>
+
+</html>

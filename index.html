@@ -1,185 +1,395 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-EZ9VY5E3EE"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Álvaro Pastor · Portfolio de producto</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            ink: '#0f172a',
+            muted: '#64748b',
+            line: '#e2e8f0',
+            soft: '#f8fafc',
+            accent: '#4f46e5',
+            cyan: '#06b6d4'
+          },
+          boxShadow: {
+            soft: '0 24px 80px rgba(15, 23, 42, 0.10)',
+            card: '0 14px 45px rgba(15, 23, 42, 0.08)'
+          }
+        }
       }
-      gtag("js", new Date());
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-      gtag("config", "G-EZ9VY5E3EE");
-    </script>
-    <script src="https://t.contentsquare.net/uxa/70095ab3329d7.js"></script>
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(79, 70, 229, .12), transparent 34rem),
+        radial-gradient(circle at 85% 20%, rgba(6, 182, 212, .12), transparent 32rem),
+        #f6f8fb;
+    }
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    .noise::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image: linear-gradient(rgba(15, 23, 42, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(15, 23, 42, .03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, .7), transparent 70%);
+    }
 
-    <title>
-      Álvaro Pastor | Desarrollador Web Full Stack y Especialista en Marketing
-      Digital | Portafolio y Contacto
-    </title>
+    .chip-active {
+      background: #0f172a;
+      color: white;
+    }
 
-    <meta
-      name="description"
-      content="Desarrollador Web Full Stack con foco en productos agradables para el usuario y generadores de beneficios. Revisa mi CV, portafolio de proyectos y contacta conmigo."
-    />
+    .project-card {
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
 
-    <meta
-      property="og:title"
-      content="Álvaro Pastor | Desarrollador Web y Especialista en Marketing"
-    />
-    <meta
-      property="og:description"
-      content="Revisa mi CV, proyectos de Desarrollo Web Full Stack y contacta para oportunidades de Marketing Digital."
-    />
-    <meta property="og:type" content="profile" />
-    <meta
-      property="og:url"
-      content="https://alvaropas17.github.io/curriculum"
-    />
-    <meta property="og:locale" content="es_ES" />
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 50px rgba(15, 23, 42, .12);
+      border-color: rgba(79, 70, 229, .35);
+    }
+  </style>
+</head>
 
-    <meta name="robots" content="index,follow" />
-    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
-
-    <link rel="canonical" href="https://alvaropas17.github.io/curriculum" />
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #f8fafc;
-        color: #1e293b;
-        line-height: 1.6;
-      }
-      .link-card {
-        transition: all 0.3s ease;
-      }
-      .link-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.15),
-          0 5px 8px -4px rgba(0, 0, 0, 0.08); /* Sombra ligeramente reducida */
-      }
-    </style>
-  </head>
-  <body>
-    <div class="min-h-screen flex flex-col items-center justify-center p-6">
-      <div class="w-full max-w-sm">
-        <div class="text-center mb-8">
-          <div
-            class="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full mx-auto mb-3 flex items-center justify-center shadow-lg"
-            role="img"
-            aria-label="Icono de perfil de Álvaro Pastor"
-          >
-            <i class="fas fa-user text-white text-2xl"></i>
-          </div>
-
-          <h1 class="text-2xl font-bold mb-1">Álvaro Pastor</h1>
-          <h2 class="text-lg font-medium text-indigo-600 mb-3">
-            Desarrollador Web Full Stack | Estratega de Marketing Digital
-          </h2>
-          <p class="text-gray-600 text-sm mb-4">
-            Desarrollador <strong>Web Full Stack</strong> con enfoque proactivo
-            en <strong>UX</strong> y experiencia combinada en
-            <strong>Marketing Digital</strong>.
-          </p>
-        </div>
-
-        <div class="space-y-3">
-          <a
-            href="curriculum.html"
-            class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-indigo-500 text-center"
-          >
-            <i class="fas fa-id-card text-indigo-600 mb-1 text-xl"></i>
-            <h3 class="font-semibold text-base">
-              Currículum Vitae (CV) - Álvaro Pastor
-            </h3>
-            <p class="text-gray-600 text-sm">Ver experiencia y formación</p>
-          </a>
-          <a
-            href="proyectos.html"
-            class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-indigo-500 text-center"
-          >
-            <i class="fas fa-laptop-code text-indigo-600 mb-1 text-xl"></i>
-            <h3 class="font-semibold text-base">
-              Portafolio de Proyectos Web y Marketing
-            </h3>
-            <p class="text-gray-600 text-sm">
-              Conoce los proyectos de desarrollo que he completado
-            </p>
-          </a>
-
-          <div class="grid grid-cols-1">
-            <a
-              href="mailto:alvpastor17@gmail.com"
-              class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-indigo-500 text-center"
-            >
-              <i class="fas fa-envelope text-indigo-600 mb-1 text-xl"></i>
-              <h3 class="font-semibold text-base">Email</h3>
-              <p class="text-gray-600 text-sm">Contacta conmigo por correo</p>
-            </a>
-            <!-- <a
-              href="https://wa.me/633962600?text=Hola%20estamos%20interesados%20en%20tu%20perfil,%20¿cuándo%20podemos%20hablar?"
-              target="_blank"
-              class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-green-500 text-center"
-            >
-              <i class="fab fa-whatsapp text-green-600 mb-1 text-xl"></i>
-              <h3 class="font-semibold text-base">WhatsApp</h3>
-              <p class="text-gray-600 text-sm">Contáctame por whatsapp.</p>
-            </a> -->
-          </div>
-        </div>
-
-        <div class="mt-8 flex justify-center space-x-4">
-          <a
-            href="https://es.linkedin.com/in/%C3%A1lvaro-pastor-periago-89912820a"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-gray-400 hover:text-indigo-600 transition-colors"
-            aria-label="Perfil de LinkedIn de Álvaro Pastor"
-          >
-            <i class="fab fa-linkedin text-xl"></i>
-          </a>
-          <a
-            href="https://github.com/alvaropas17"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-gray-400 hover:text-indigo-600 transition-colors"
-            aria-label="Perfil de GitHub de Álvaro Pastor"
-          >
-            <i class="fab fa-github text-xl"></i>
-          </a>
-          <a
-            href="https://wa.me/633962600?text=Hola%20estamos%20interesados%20en%20tu%20perfil,%20¿cuándo%20podemos%20hablar?"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-gray-400 hover:text-green-600 transition-colors"
-            aria-label="Contacto directo por WhatsApp"
-          >
-            <i class="fab fa-whatsapp text-xl"></i>
-          </a>
-        </div>
-
-        <footer class="mt-6 text-center text-xs text-gray-500">
-          &copy; 2025 Álvaro Pastor. Todos los derechos reservados.
-        </footer>
-      </div>
+<body class="noise font-sans text-ink antialiased">
+  <header class="sticky top-0 z-50 border-b border-white/70 bg-white/75 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <a href="#inicio" class="flex items-center gap-3 font-bold tracking-tight">
+        <span class="grid h-9 w-9 place-items-center rounded-2xl bg-ink text-sm text-white">AP</span>
+        <span>Álvaro Pastor</span>
+      </a>
+      <nav class="hidden items-center gap-7 text-sm font-semibold text-slate-600 md:flex">
+        <a href="#proyectos" class="hover:text-ink">Proyectos</a>
+        <a href="#forma" class="hover:text-ink">Cómo trabajo</a>
+        <a href="#contacto" class="hover:text-ink">Contacto</a>
+      </nav>
     </div>
-  </body>
+  </header>
+
+  <main id="inicio" class="mx-auto max-w-6xl px-5">
+    <section class="grid min-h-[78vh] items-center gap-14 py-16 lg:grid-cols-[1.05fr_.95fr] lg:py-24">
+      <div>
+        <div
+          class="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white/80 px-3 py-1 text-sm font-semibold text-indigo-700 shadow-sm">
+          <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+          Disponible para prácticas y proyectos junior
+        </div>
+
+        <h1 class="max-w-4xl text-5xl font-black leading-[.92] tracking-[-0.055em] text-ink md:text-7xl">
+          Diseño y desarrollo productos digitales que se entienden rápido.
+        </h1>
+
+        <p class="mt-7 max-w-2xl text-xl leading-8 text-slate-600">
+          Combino frontend, UX de producto y lógica de negocio para crear herramientas web claras, rápidas y útiles:
+          menos fricción, mejor estructura y decisiones más fáciles para el usuario.
+        </p>
+
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a href="#proyectos"
+            class="inline-flex h-12 items-center justify-center rounded-2xl bg-ink px-6 text-sm font-bold text-white shadow-card transition hover:-translate-y-0.5 hover:bg-slate-800">
+            Ver proyectos con contexto →
+          </a>
+          <a href="#contacto"
+            class="inline-flex h-12 items-center justify-center rounded-2xl border border-line bg-white px-6 text-sm font-bold text-ink shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300">
+            Hablemos
+          </a>
+        </div>
+
+        <div class="mt-10 grid gap-3 sm:grid-cols-3">
+          <div class="rounded-3xl border border-line bg-white/80 p-4 shadow-sm">
+            <p class="text-sm font-black">Frontend útil</p>
+            <p class="mt-1 text-sm leading-5 text-slate-600">Interfaces limpias, responsivas y pensadas para uso real.
+            </p>
+          </div>
+          <div class="rounded-3xl border border-line bg-white/80 p-4 shadow-sm">
+            <p class="text-sm font-black">UX de producto</p>
+            <p class="mt-1 text-sm leading-5 text-slate-600">Estructura, jerarquía y reducción de carga cognitiva.</p>
+          </div>
+          <div class="rounded-3xl border border-line bg-white/80 p-4 shadow-sm">
+            <p class="text-sm font-black">Sistemas internos</p>
+            <p class="mt-1 text-sm leading-5 text-slate-600">Dashboards, automatización e IA aplicada cuando aporta
+              valor.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside class="relative">
+        <div
+          class="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-indigo-200/60 via-cyan-100/50 to-white blur-2xl">
+        </div>
+        <div class="overflow-hidden rounded-[2rem] border border-white bg-white shadow-soft">
+          <div class="flex items-center justify-between border-b border-line px-6 py-4">
+            <div>
+              <p class="text-sm font-black">Panel de decisión</p>
+              <p class="text-xs font-medium text-slate-500">Preview de producto, no tarjeta de CV</p>
+            </div>
+            <span class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-bold text-emerald-700">Operativo</span>
+          </div>
+
+          <div class="p-6">
+            <div class="mb-5 grid grid-cols-3 gap-3">
+              <div class="rounded-2xl bg-slate-50 p-4">
+                <p class="text-xs font-bold text-slate-500">Claridad</p>
+                <p class="mt-2 text-2xl font-black">92%</p>
+              </div>
+              <div class="rounded-2xl bg-slate-50 p-4">
+                <p class="text-xs font-bold text-slate-500">Fricción</p>
+                <p class="mt-2 text-2xl font-black">-34%</p>
+              </div>
+              <div class="rounded-2xl bg-slate-50 p-4">
+                <p class="text-xs font-bold text-slate-500">Uso</p>
+                <p class="mt-2 text-2xl font-black">Rápido</p>
+              </div>
+            </div>
+
+            <div class="rounded-3xl border border-line bg-slate-50 p-4">
+              <div class="mb-4 flex items-center justify-between">
+                <p class="text-sm font-black">Flujo de experiencia</p>
+                <button id="toggleFlow"
+                  class="rounded-full bg-white px-3 py-1 text-xs font-bold text-slate-700 shadow-sm">Ver
+                  detalle</button>
+              </div>
+              <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                  <span
+                    class="grid h-8 w-8 place-items-center rounded-xl bg-indigo-600 text-xs font-black text-white">1</span>
+                  <div class="h-3 flex-1 rounded-full bg-indigo-200">
+                    <div class="h-3 w-[88%] rounded-full bg-indigo-600"></div>
+                  </div>
+                  <span class="text-xs font-bold text-slate-500">Entender</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span
+                    class="grid h-8 w-8 place-items-center rounded-xl bg-cyan-600 text-xs font-black text-white">2</span>
+                  <div class="h-3 flex-1 rounded-full bg-cyan-100">
+                    <div class="h-3 w-[72%] rounded-full bg-cyan-600"></div>
+                  </div>
+                  <span class="text-xs font-bold text-slate-500">Decidir</span>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span
+                    class="grid h-8 w-8 place-items-center rounded-xl bg-slate-900 text-xs font-black text-white">3</span>
+                  <div class="h-3 flex-1 rounded-full bg-slate-200">
+                    <div class="h-3 w-[80%] rounded-full bg-slate-900"></div>
+                  </div>
+                  <span class="text-xs font-bold text-slate-500">Actuar</span>
+                </div>
+              </div>
+
+              <div id="flowDetail"
+                class="mt-4 hidden rounded-2xl border border-line bg-white p-4 text-sm leading-6 text-slate-600">
+                La propuesta visual cambia el foco: en vez de presentarte como “persona con skills”, enseña una forma de
+                pensar producto: diagnóstico, estructura, decisión y resultado.
+              </div>
+            </div>
+
+            <div class="mt-5 rounded-3xl bg-ink p-5 text-white">
+              <p class="text-sm font-black text-indigo-200">Idea fuerza</p>
+              <p class="mt-2 text-lg font-bold leading-6">No diseño pantallas sueltas: construyo experiencias digitales
+                que reducen incertidumbre y hacen más fácil usar el producto.</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="proyectos" class="py-10 md:py-16">
+      <div class="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+        <div>
+          <p class="text-sm font-black uppercase tracking-[.18em] text-indigo-600">Proyectos seleccionados</p>
+          <h2 class="mt-3 text-4xl font-black tracking-[-.04em] md:text-5xl">Menos galería. Más criterio.</h2>
+          <p class="mt-4 max-w-2xl text-lg leading-7 text-slate-600">Cada proyecto debe explicar qué problema había, qué
+            decisión tomé y qué mejoró. Las tecnologías importan, pero no son el mensaje principal.</p>
+        </div>
+        <div class="flex gap-2 overflow-x-auto pb-1">
+          <button class="filter chip-active rounded-full border border-line px-4 py-2 text-sm font-bold"
+            data-filter="all">Todos</button>
+          <button class="filter rounded-full border border-line bg-white px-4 py-2 text-sm font-bold text-slate-600"
+            data-filter="producto">Producto</button>
+          <button class="filter rounded-full border border-line bg-white px-4 py-2 text-sm font-bold text-slate-600"
+            data-filter="ux">UX</button>
+          <button class="filter rounded-full border border-line bg-white px-4 py-2 text-sm font-bold text-slate-600"
+            data-filter="sistema">Sistemas</button>
+        </div>
+      </div>
+
+      <div class="grid gap-5 lg:grid-cols-3">
+        <article class="project-card rounded-[2rem] border border-line bg-white p-6 shadow-card"
+          data-type="producto ux">
+          <div
+            class="mb-6 h-44 rounded-[1.5rem] bg-gradient-to-br from-slate-900 via-indigo-700 to-cyan-500 p-5 text-white">
+            <div class="grid h-full grid-cols-3 gap-3">
+              <div class="col-span-2 rounded-2xl bg-white/15 p-3 backdrop-blur">
+                <div class="h-3 w-20 rounded-full bg-white/70"></div>
+                <div class="mt-4 h-16 rounded-xl bg-white/20"></div>
+              </div>
+              <div class="space-y-3">
+                <div class="h-16 rounded-2xl bg-white/20"></div>
+                <div class="h-16 rounded-2xl bg-white/20"></div>
+              </div>
+            </div>
+          </div>
+          <p class="text-xs font-black uppercase tracking-[.14em] text-indigo-600">Producto web</p>
+          <h3 class="mt-2 text-2xl font-black tracking-[-.03em]">Gala Imparables</h3>
+          <p class="mt-3 text-slate-600">Reestructuración de una web de servicios para mejorar comprensión, navegación
+            móvil y percepción profesional.</p>
+          <div class="mt-5 space-y-3 text-sm">
+            <p><strong>Problema:</strong> la propuesta no se entendía rápido.</p>
+            <p><strong>Decisión:</strong> jerarquía más clara, bloques por intención y CTA visible.</p>
+            <p><strong>Resultado:</strong> experiencia más directa y menos carga mental.</p>
+          </div>
+        </article>
+
+        <article class="project-card rounded-[2rem] border border-line bg-white p-6 shadow-card lg:mt-10"
+          data-type="sistema producto">
+          <div
+            class="mb-6 h-44 rounded-[1.5rem] bg-gradient-to-br from-indigo-600 via-blue-600 to-slate-900 p-5 text-white">
+            <div class="flex h-full flex-col justify-between">
+              <div class="flex justify-between"><span
+                  class="rounded-full bg-white/20 px-3 py-1 text-xs font-bold">Dashboard</span><span
+                  class="text-xs font-bold">81%</span></div>
+              <div class="space-y-2">
+                <div class="h-3 rounded-full bg-white/20">
+                  <div class="h-3 w-4/5 rounded-full bg-white"></div>
+                </div>
+                <div class="h-3 w-2/3 rounded-full bg-white/30"></div>
+                <div class="h-3 w-1/2 rounded-full bg-white/30"></div>
+              </div>
+            </div>
+          </div>
+          <p class="text-xs font-black uppercase tracking-[.14em] text-indigo-600">Herramienta interna</p>
+          <h3 class="mt-2 text-2xl font-black tracking-[-.03em]">Dashboard operativo</h3>
+          <p class="mt-3 text-slate-600">Diseño de panel para resumir estado, riesgo y próximas acciones sin obligar a
+            interpretar datos dispersos.</p>
+          <div class="mt-5 space-y-3 text-sm">
+            <p><strong>Problema:</strong> demasiada información sin prioridad.</p>
+            <p><strong>Decisión:</strong> KPIs, estados visuales y lectura por capas.</p>
+            <p><strong>Resultado:</strong> decisiones más rápidas para perfiles técnicos y directivos.</p>
+          </div>
+        </article>
+
+        <article class="project-card rounded-[2rem] border border-line bg-white p-6 shadow-card" data-type="ux sistema">
+          <div
+            class="mb-6 h-44 rounded-[1.5rem] bg-gradient-to-br from-cyan-500 via-emerald-500 to-slate-900 p-5 text-white">
+            <div class="grid h-full grid-rows-3 gap-3">
+              <div class="rounded-2xl bg-white/20"></div>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-2xl bg-white/20"></div>
+                <div class="rounded-2xl bg-white/20"></div>
+              </div>
+              <div class="rounded-2xl bg-white/20"></div>
+            </div>
+          </div>
+          <p class="text-xs font-black uppercase tracking-[.14em] text-indigo-600">UX + IA aplicada</p>
+          <h3 class="mt-2 text-2xl font-black tracking-[-.03em]">Ludoscript</h3>
+          <p class="mt-3 text-slate-600">Plataforma de aprendizaje donde la interfaz debe guiar al alumno, reducir dudas
+            y convertir progreso en acción.</p>
+          <div class="mt-5 space-y-3 text-sm">
+            <p><strong>Problema:</strong> el alumno no siempre sabe qué practicar.</p>
+            <p><strong>Decisión:</strong> práctica adaptativa y feedback accionable.</p>
+            <p><strong>Resultado:</strong> experiencia más guiada y orientada a mejora real.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="forma" class="py-12 md:py-20">
+      <div class="rounded-[2rem] border border-line bg-white p-6 shadow-card md:p-9">
+        <div class="grid gap-8 md:grid-cols-[.8fr_1.2fr] md:items-start">
+          <div>
+            <p class="text-sm font-black uppercase tracking-[.18em] text-indigo-600">Cómo trabajo</p>
+            <h2 class="mt-3 text-4xl font-black tracking-[-.04em]">De problema a interfaz útil.</h2>
+            <p class="mt-4 text-lg leading-7 text-slate-600">No empiezo por decorar. Empiezo por entender qué debe
+              quedar claro, qué decisión debe tomar el usuario y qué fricción sobra.</p>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div class="rounded-3xl bg-slate-50 p-5">
+              <p class="font-black">1. Diagnóstico</p>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Detectar ruido, ambigüedad, pasos innecesarios y puntos
+                de confusión.</p>
+            </div>
+            <div class="rounded-3xl bg-slate-50 p-5">
+              <p class="font-black">2. Estructura</p>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Ordenar información por prioridad, intención y velocidad
+                de lectura.</p>
+            </div>
+            <div class="rounded-3xl bg-slate-50 p-5">
+              <p class="font-black">3. Interfaz</p>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Diseñar componentes claros, consistentes y fáciles de
+                usar.</p>
+            </div>
+            <div class="rounded-3xl bg-slate-50 p-5">
+              <p class="font-black">4. Sistema</p>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Preparar la solución para crecer: datos, estados,
+                automatización y mantenimiento.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacto" class="pb-16">
+      <div class="rounded-[2rem] bg-ink p-7 text-white shadow-soft md:flex md:items-center md:justify-between md:p-9">
+        <div>
+          <h2 class="text-3xl font-black tracking-[-.04em]">¿Tiene sentido que hablemos?</h2>
+          <p class="mt-2 max-w-2xl text-slate-300">Estoy abierto a prácticas, oportunidades junior y proyectos donde
+            pueda aportar construyendo producto, UX y frontend con criterio.</p>
+        </div>
+        <a href="mailto:alvaropastor17@gmail.com"
+          class="mt-6 inline-flex h-12 items-center justify-center rounded-2xl bg-white px-6 text-sm font-black text-ink md:mt-0">Contactar
+          por email</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const toggleFlow = document.querySelector('#toggleFlow');
+    const flowDetail = document.querySelector('#flowDetail');
+
+    toggleFlow.addEventListener('click', () => {
+      flowDetail.classList.toggle('hidden');
+      toggleFlow.textContent = flowDetail.classList.contains('hidden') ? 'Ver detalle' : 'Ocultar detalle';
+    });
+
+    const filters = document.querySelectorAll('.filter');
+    const cards = document.querySelectorAll('.project-card');
+
+    filters.forEach(button => {
+      button.addEventListener('click', () => {
+        filters.forEach(btn => {
+          btn.classList.remove('chip-active');
+          btn.classList.add('bg-white', 'text-slate-600');
+        });
+
+        button.classList.add('chip-active');
+        button.classList.remove('bg-white', 'text-slate-600');
+
+        const selected = button.dataset.filter;
+
+        cards.forEach(card => {
+          const match = selected === 'all' || card.dataset.type.includes(selected);
+          card.style.display = match ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+
 </html>

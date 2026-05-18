@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radar de Prioridades Operacionales</title>
+    <style>
+        :root {
+            --bg: #eef6f8;
+            --panel: rgba(255, 255, 255, .84);
+            --ink: #071426;
+            --muted: #60718a;
+            --line: rgba(15, 23, 42, .09);
+            --dark: #050b1c;
+            --cyan: #15d8e8;
+            --red: #ff3b5f;
+            --orange: #ff9b32;
+            --yellow: #f4c542;
+            --green: #26c485;
+            --blue: #3483ff;
+            --shadow: 0 24px 70px rgba(9, 31, 52, .12);
+            --radius: 28px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top left, rgba(21, 216, 232, .18), transparent 36%),
+                radial-gradient(circle at top right, rgba(255, 198, 66, .18), transparent 34%),
+                linear-gradient(135deg, #eaf7fc 0%, #f6f6ed 100%);
+            padding: 42px;
+        }
+
+        .shell {
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        .eyebrow {
+            color: #006b83;
+            font-weight: 900;
+            font-size: 12px;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            align-items: end;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(34px, 4vw, 58px);
+            line-height: .94;
+            letter-spacing: -.06em;
+            max-width: 800px;
+        }
+
+        .subtitle {
+            margin: 14px 0 0;
+            color: var(--muted);
+            max-width: 720px;
+            font-size: 16px;
+            line-height: 1.55;
+        }
+
+        .mode-switch {
+            background: rgba(255, 255, 255, .78);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 6px;
+            display: flex;
+            gap: 4px;
+            box-shadow: 0 14px 34px rgba(9, 31, 52, .08);
+            flex-shrink: 0;
+        }
+
+        .mode-switch button {
+            border: 0;
+            background: transparent;
+            color: #50627a;
+            font-weight: 800;
+            padding: 12px 18px;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .mode-switch button.active {
+            background: var(--dark);
+            color: white;
+            box-shadow: 0 8px 22px rgba(5, 11, 28, .2);
+        }
+
+        .radar {
+            display: grid;
+            grid-template-columns: 1.35fr .75fr;
+            gap: 22px;
+        }
+
+        .priority-panel,
+        .safe-panel {
+            border-radius: var(--radius);
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, .7);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(18px);
+            overflow: hidden;
+        }
+
+        .panel-top {
+            padding: 24px 28px 18px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: start;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .panel-title {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: -.035em;
+        }
+
+        .panel-subtitle {
+            margin: 5px 0 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .system-state {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            background: #fff4f5;
+            color: #be1637;
+            border: 1px solid rgba(255, 59, 95, .16);
+            padding: 9px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .pulse {
+            width: 9px;
+            height: 9px;
+            background: var(--red);
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(255, 59, 95, .6);
+            animation: pulse 1.7s infinite;
+        }
+
+        @keyframes pulse {
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 59, 95, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 59, 95, 0);
+            }
+        }
+
+        .priority-list {
+            padding: 18px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .priority {
+            position: relative;
+            display: grid;
+            grid-template-columns: 9px 1fr auto;
+            gap: 18px;
+            align-items: stretch;
+            padding: 20px;
+            border-radius: 22px;
+            background: white;
+            border: 1px solid var(--line);
+            cursor: pointer;
+            transition: transform .2s ease, box-shadow .2s ease, border .2s ease;
+        }
+
+        .priority:hover,
+        .priority.selected {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 45px rgba(9, 31, 52, .12);
+            border-color: rgba(7, 20, 38, .16);
+        }
+
+        .bar {
+            border-radius: 999px;
+        }
+
+        .bar.red {
+            background: linear-gradient(var(--red), #ff9aad);
+        }
+
+        .bar.orange {
+            background: linear-gradient(var(--orange), #ffd09a);
+        }
+
+        .bar.yellow {
+            background: linear-gradient(var(--yellow), #ffeaa0);
+        }
+
+        .priority-main h3 {
+            margin: 0;
+            font-size: 22px;
+            letter-spacing: -.04em;
+        }
+
+        .tagline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .tag {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: .04em;
+            text-transform: uppercase;
+            padding: 6px 9px;
+            border-radius: 999px;
+        }
+
+        .tag.red {
+            background: #fff1f3;
+            color: #be1637;
+        }
+
+        .tag.orange {
+            background: #fff6e8;
+            color: #b65d00;
+        }
+
+        .tag.yellow {
+            background: #fffbea;
+            color: #8a6700;
+        }
+
+        .tag.gray {
+            background: #f3f6f9;
+            color: #617083;
+        }
+
+        .priority-main p {
+            margin: 9px 0 0;
+            color: var(--muted);
+            line-height: 1.45;
+            font-size: 14px;
+            max-width: 720px;
+        }
+
+        .action {
+            align-self: center;
+            border: 0;
+            border-radius: 999px;
+            padding: 12px 16px;
+            font-weight: 900;
+            color: white;
+            background: var(--dark);
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .action.secondary {
+            background: #edf3f7;
+            color: #25364c;
+        }
+
+        .priority-meta {
+            margin-top: 14px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .meta {
+            background: #f7f9fb;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 9px 11px;
+            font-size: 12px;
+            color: #455873;
+            font-weight: 750;
+        }
+
+        .safe-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .safe-panel .panel-top {
+            background: #061023;
+            color: white;
+            border-bottom: 0;
+        }
+
+        .safe-panel .panel-subtitle {
+            color: #aebbd0;
+        }
+
+        .safe-list {
+            padding: 18px;
+            display: grid;
+            gap: 12px;
+        }
+
+        .safe-item {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 16px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 12px;
+        }
+
+        .safe-icon {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: #eafff5;
+            color: #008f58;
+            font-weight: 1000;
+        }
+
+        .safe-item strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .safe-item span {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.35;
+        }
+
+        .decision-drawer {
+            margin-top: 22px;
+            background: #050b1c;
+            color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .decision-drawer small {
+            color: var(--cyan);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: .09em;
+        }
+
+        .decision-drawer h2 {
+            margin: 8px 0 6px;
+            font-size: 28px;
+            letter-spacing: -.04em;
+        }
+
+        .decision-drawer p {
+            margin: 0;
+            color: #bcc7d9;
+            line-height: 1.45;
+        }
+
+        .drawer-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: end;
+        }
+
+        .drawer-actions button {
+            border: 1px solid rgba(255, 255, 255, .14);
+            background: rgba(255, 255, 255, .08);
+            color: white;
+            border-radius: 999px;
+            padding: 13px 16px;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .drawer-actions button.primary {
+            background: white;
+            color: #050b1c;
+        }
+
+        @media (max-width: 980px) {
+            body {
+                padding: 22px;
+            }
+
+            .header,
+            .radar,
+            .decision-drawer {
+                grid-template-columns: 1fr;
+                display: grid;
+            }
+
+            .mode-switch,
+            .drawer-actions {
+                justify-content: start;
+            }
+
+            .priority {
+                grid-template-columns: 7px 1fr;
+            }
+
+            .priority .action {
+                grid-column: 2;
+                justify-self: start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="shell">
+        <div class="header">
+            <div>
+                <div class="eyebrow">RemoteOS / Workspace Intelligence</div>
+                <h1>Radar de prioridades operacionales</h1>
+                <p class="subtitle">Lo primero no es ver más información. Es saber qué merece atención humana ahora, qué
+                    puede esperar y qué puede ignorarse sin generar ansiedad.</p>
+            </div>
+
+            <div class="mode-switch" aria-label="Modo de vista">
+                <button class="active">Ahora</button>
+                <button>Hoy</button>
+                <button>Semana</button>
+            </div>
+        </div>
+
+        <section class="radar">
+            <article class="priority-panel">
+                <div class="panel-top">
+                    <div>
+                        <h2 class="panel-title">Prioridades activas</h2>
+                        <p class="panel-subtitle">Ordenadas por impacto, urgencia y coste de no decidir.</p>
+                    </div>
+                    <div class="system-state"><span class="pulse"></span> 3 requieren criterio</div>
+                </div>
+
+                <div class="priority-list" id="priorityList"></div>
+            </article>
+
+            <aside class="safe-panel">
+                <div class="panel-top">
+                    <div>
+                        <h2 class="panel-title">Puedes ignorar</h2>
+                        <p class="panel-subtitle">El sistema protege foco separando ruido de tensión real.</p>
+                    </div>
+                </div>
+
+                <div class="safe-list">
+                    <div class="safe-item">
+                        <div class="safe-icon">✓</div>
+                        <div><strong>17 mensajes sin acción directa</strong><span>Ya están clasificados como contexto
+                                pasivo.</span></div>
+                    </div>
+                    <div class="safe-item">
+                        <div class="safe-icon">✓</div>
+                        <div><strong>Daily sync eliminada</strong><span>Fue sustituida por briefing async
+                                suficiente.</span></div>
+                    </div>
+                    <div class="safe-item">
+                        <div class="safe-icon">✓</div>
+                        <div><strong>Onboarding remoto estable</strong><span>Una mejora detectada por IA, sin
+                                intervención necesaria.</span></div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section class="decision-drawer" id="detailPanel">
+            <div>
+                <small>Nodo seleccionado</small>
+                <h2>API de facturación</h2>
+                <p>No es una tarea: es una tensión operacional. Bloquea integración, onboarding y validación legal.</p>
+            </div>
+            <div class="drawer-actions">
+                <button>Ver dependencias</button>
+                <button>Delegar criterio</button>
+                <button class="primary">Resolver hoy</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const priorities = [
+            {
+                level: 'Crítica',
+                color: 'red',
+                title: 'API de facturación bloquea onboarding y validación legal',
+                description: 'Esperando decisión de negocio. Si no se resuelve hoy, deforma QA, entrega y comunicación con cliente.',
+                action: 'Resolver hoy',
+                actionStyle: '',
+                meta: ['Impacta 4 flujos', 'Latencia 18h', 'Responsable: negocio']
+            },
+            {
+                level: 'Coordinación',
+                color: 'orange',
+                title: 'Diseño espera validación desde hace 14h',
+                description: 'No requiere reunión completa. Una respuesta async desbloquea el siguiente tramo de trabajo.',
+                action: 'Responder async',
+                actionStyle: 'secondary',
+                meta: ['1 equipo parado', 'Baja complejidad', 'Decisión reversible']
+            },
+            {
+                level: 'Riesgo emergente',
+                color: 'yellow',
+                title: 'QA empieza a acumular dependencias invisibles',
+                description: 'Todavía no es bloqueo, pero la cola crece y puede impactar entrega semanal si no se revisa.',
+                action: 'Revisar mañana',
+                actionStyle: 'secondary',
+                meta: ['Tendencia subiendo', 'Riesgo medio', 'Sin reunión necesaria']
+            }
+        ];
+
+        const list = document.getElementById('priorityList');
+        const detail = document.getElementById('detailPanel');
+
+        function renderPriorities() {
+            list.innerHTML = priorities.map((p, index) => `
+        <div class="priority ${index === 0 ? 'selected' : ''}" data-index="${index}">
+          <div class="bar ${p.color}"></div>
+          <div class="priority-main">
+            <div class="tagline">
+              <span class="tag ${p.color}">${p.level}</span>
+              <span class="tag gray">Atención humana</span>
+            </div>
+            <h3>${p.title}</h3>
+            <p>${p.description}</p>
+            <div class="priority-meta">
+              ${p.meta.map(m => `<span class="meta">${m}</span>`).join('')}
+            </div>
+          </div>
+          <button class="action ${p.actionStyle}">${p.action}</button>
+        </div>
+      `).join('');
+
+            document.querySelectorAll('.priority').forEach(card => {
+                card.addEventListener('click', () => selectPriority(Number(card.dataset.index)));
+            });
+        }
+
+        function selectPriority(index) {
+            const p = priorities[index];
+            document.querySelectorAll('.priority').forEach(card => card.classList.remove('selected'));
+            document.querySelector(`[data-index="${index}"]`).classList.add('selected');
+
+            detail.innerHTML = `
+        <div>
+          <small>Nodo seleccionado</small>
+          <h2>${p.title.split(' bloquea ')[0]}</h2>
+          <p>${p.description}</p>
+        </div>
+        <div class="drawer-actions">
+          <button>Ver dependencias</button>
+          <button>Asignar responsable</button>
+          <button class="primary">${p.action}</button>
+        </div>
+      `;
+        }
+
+        renderPriorities();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RemoteOps — Operational Pressure Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --ink: #0f172a;
+            --muted: #64748b;
+            --line: rgba(148, 163, 184, .35);
+            --surface: rgba(255, 255, 255, .86);
+        }
+
+        body {
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at 18% 20%, rgba(14, 165, 233, .12), transparent 32%),
+                radial-gradient(circle at 82% 15%, rgba(251, 191, 36, .16), transparent 28%),
+                radial-gradient(circle at 50% 90%, rgba(16, 185, 129, .12), transparent 30%),
+                #eef3f8;
+            color: var(--ink);
+        }
+
+        .sidebar {
+            background: #020617;
+        }
+
+        .glass {
+            background: var(--surface);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(226, 232, 240, .9);
+            box-shadow: 0 20px 50px rgba(15, 23, 42, .06);
+        }
+
+        .grid-bg {
+            background-image:
+                linear-gradient(rgba(148, 163, 184, .14) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(148, 163, 184, .14) 1px, transparent 1px);
+            background-size: 34px 34px;
+        }
+
+        .pressure-map {
+            position: relative;
+            overflow: hidden;
+            min-height: 560px;
+        }
+
+        .heat {
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(18px);
+            opacity: .78;
+            animation: breathe 5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .heat-red {
+            background: radial-gradient(circle, rgba(244, 63, 94, .42), rgba(244, 63, 94, .08), transparent 68%);
+        }
+
+        .heat-amber {
+            background: radial-gradient(circle, rgba(245, 158, 11, .36), rgba(245, 158, 11, .08), transparent 70%);
+        }
+
+        .heat-blue {
+            background: radial-gradient(circle, rgba(14, 165, 233, .28), rgba(14, 165, 233, .06), transparent 70%);
+        }
+
+        .heat-green {
+            background: radial-gradient(circle, rgba(16, 185, 129, .26), rgba(16, 185, 129, .04), transparent 70%);
+        }
+
+        @keyframes breathe {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: .68;
+            }
+
+            50% {
+                transform: scale(1.07);
+                opacity: .95;
+            }
+        }
+
+        .lane {
+            position: absolute;
+            height: 78%;
+            top: 90px;
+            border-left: 1px dashed rgba(100, 116, 139, .18);
+            pointer-events: none;
+        }
+
+        .node {
+            position: absolute;
+            width: 210px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, .92);
+            border: 1px solid rgba(226, 232, 240, .95);
+            box-shadow: 0 18px 42px rgba(15, 23, 42, .08);
+            padding: 18px;
+            cursor: pointer;
+            transition: .25s ease;
+            z-index: 4;
+        }
+
+        .node:hover {
+            transform: translateY(-4px) scale(1.015);
+            box-shadow: 0 24px 60px rgba(15, 23, 42, .12);
+        }
+
+        .node.active {
+            outline: 3px solid rgba(15, 23, 42, .92);
+            outline-offset: 4px;
+        }
+
+        .node.critical {
+            border-color: rgba(244, 63, 94, .32);
+            background: rgba(255, 241, 242, .96);
+        }
+
+        .node.warning {
+            border-color: rgba(245, 158, 11, .35);
+            background: rgba(255, 251, 235, .96);
+        }
+
+        .node.flow {
+            border-color: rgba(16, 185, 129, .28);
+            background: rgba(236, 253, 245, .96);
+        }
+
+        .node.risk {
+            border-color: rgba(14, 165, 233, .26);
+            background: rgba(240, 249, 255, .96);
+        }
+
+        .pulse {
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            display: inline-block;
+            margin-right: 7px;
+            box-shadow: 0 0 0 rgba(244, 63, 94, .45);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, .45);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(244, 63, 94, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(244, 63, 94, 0);
+            }
+        }
+
+        .connection {
+            position: absolute;
+            height: 3px;
+            background: linear-gradient(90deg, rgba(59, 130, 246, .16), rgba(244, 63, 94, .72), rgba(245, 158, 11, .2));
+            transform-origin: left center;
+            border-radius: 999px;
+            z-index: 2;
+            opacity: .78;
+        }
+
+        .connection::after {
+            content: "";
+            position: absolute;
+            right: -4px;
+            top: -4px;
+            width: 11px;
+            height: 11px;
+            border-radius: 999px;
+            background: rgba(244, 63, 94, .8);
+            box-shadow: 0 0 18px rgba(244, 63, 94, .7);
+        }
+
+        .flow-line {
+            background: linear-gradient(90deg, rgba(14, 165, 233, .12), rgba(16, 185, 129, .58));
+        }
+
+        .mini-pill {
+            border-radius: 999px;
+            padding: 4px 9px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: -.01em;
+        }
+
+        .signal-card {
+            transition: .2s ease;
+        }
+
+        .signal-card:hover {
+            transform: translateX(3px);
+        }
+
+        .timeline-dot::before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            position: absolute;
+            left: -5px;
+            top: 7px;
+            background: #0f172a;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="min-h-screen flex">
+        <aside class="sidebar w-[72px] min-h-screen flex flex-col items-center py-5 gap-7 text-slate-400">
+            <div class="w-11 h-11 rounded-2xl bg-cyan-400 text-slate-950 font-black grid place-items-center">R</div>
+            <div class="w-10 h-10 rounded-2xl bg-white/10 grid place-items-center text-white">◎</div>
+            <div class="space-y-6 text-lg">
+                <div>⌁</div>
+                <div>◫</div>
+                <div>⌬</div>
+                <div>⚙</div>
+            </div>
+            <div
+                class="mt-auto w-10 h-10 rounded-full bg-slate-800 grid place-items-center text-xs font-bold text-white">
+                AG</div>
+        </aside>
+
+        <main class="flex-1 p-8 xl:p-10">
+            <header class="flex flex-col xl:flex-row xl:items-center justify-between gap-6 mb-8">
+                <div>
+                    <p class="text-xs font-black tracking-[.16em] text-cyan-700 uppercase">RemoteOps / Workspace
+                        Intelligence</p>
+                    <h1 class="text-4xl font-black tracking-[-.045em] mt-1">Centro operativo del equipo distribuido</h1>
+                    <p class="text-slate-500 max-w-3xl mt-2 text-base">Visualiza presión, latencia, dependencias y
+                        decisiones humanas necesarias. No muestra actividad: muestra tensión operacional.</p>
+                </div>
+
+                <div class="glass rounded-full p-1 flex items-center text-sm font-bold text-slate-500">
+                    <button class="px-5 py-3 rounded-full bg-slate-950 text-white">Foco</button>
+                    <button class="px-5 py-3 rounded-full hover:bg-white">Coordinación</button>
+                    <button class="px-5 py-3 rounded-full hover:bg-white">Revisión</button>
+                </div>
+            </header>
+
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                <article class="glass rounded-3xl p-6">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-bold text-slate-500">Presión crítica</p><span
+                            class="mini-pill bg-rose-100 text-rose-700">Subiendo</span>
+                    </div>
+                    <p class="text-4xl font-black mt-4">82</p>
+                    <p class="text-sm text-slate-500 mt-1">Legal + facturación concentran riesgo.</p>
+                </article>
+                <article class="glass rounded-3xl p-6">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-bold text-slate-500">Decisiones humanas</p><span
+                            class="mini-pill bg-amber-100 text-amber-700">3 hoy</span>
+                    </div>
+                    <p class="text-4xl font-black mt-4">7</p>
+                    <p class="text-sm text-slate-500 mt-1">4 pueden resolverse async.</p>
+                </article>
+                <article class="glass rounded-3xl p-6">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-bold text-slate-500">Latencia de coordinación</p><span
+                            class="mini-pill bg-sky-100 text-sky-700">+18%</span>
+                    </div>
+                    <p class="text-4xl font-black mt-4">14h</p>
+                    <p class="text-sm text-slate-500 mt-1">Tiempo medio hasta desbloqueo.</p>
+                </article>
+                <article class="glass rounded-3xl p-6">
+                    <div class="flex justify-between items-start">
+                        <p class="text-sm font-bold text-slate-500">Foco protegido</p><span
+                            class="mini-pill bg-emerald-100 text-emerald-700">Bien</span>
+                    </div>
+                    <p class="text-4xl font-black mt-4">71%</p>
+                    <p class="text-sm text-slate-500 mt-1">Interrupciones agrupadas.</p>
+                </article>
+            </section>
+
+            <section class="grid grid-cols-1 xl:grid-cols-[1.5fr_.9fr] gap-6">
+                <article class="glass rounded-[32px] overflow-hidden">
+                    <div class="px-6 py-5 flex justify-between items-center border-b border-slate-200/80">
+                        <div>
+                            <h2 class="text-xl font-black tracking-[-.03em]">Mapa de presión operacional</h2>
+                            <p class="text-sm text-slate-500">No organiza tarjetas. Muestra dónde se está deformando el
+                                sistema.</p>
+                        </div>
+                        <div class="flex gap-2">
+                            <span class="mini-pill bg-rose-100 text-rose-700">Calor: riesgo</span>
+                            <span class="mini-pill bg-emerald-100 text-emerald-700">Flujo sano</span>
+                        </div>
+                    </div>
+
+                    <div id="map" class="pressure-map grid-bg">
+                        <div class="lane" style="left: 22%"></div>
+                        <div class="lane" style="left: 48%"></div>
+                        <div class="lane" style="left: 74%"></div>
+
+                        <div
+                            class="absolute top-6 left-[10%] text-xs font-black text-slate-400 uppercase tracking-[.16em]">
+                            Entrada</div>
+                        <div
+                            class="absolute top-6 left-[37%] text-xs font-black text-slate-400 uppercase tracking-[.16em]">
+                            Decisión</div>
+                        <div
+                            class="absolute top-6 left-[62%] text-xs font-black text-slate-400 uppercase tracking-[.16em]">
+                            Ejecución</div>
+                        <div
+                            class="absolute top-6 left-[84%] text-xs font-black text-slate-400 uppercase tracking-[.16em]">
+                            Entrega</div>
+
+                        <div class="heat heat-red" style="width:330px;height:330px;left:34%;top:18%;"></div>
+                        <div class="heat heat-amber"
+                            style="width:260px;height:260px;left:22%;top:45%;animation-delay:.4s"></div>
+                        <div class="heat heat-blue"
+                            style="width:240px;height:240px;left:55%;top:48%;animation-delay:.8s"></div>
+                        <div class="heat heat-green"
+                            style="width:260px;height:260px;left:70%;top:22%;animation-delay:1.2s"></div>
+
+                        <div class="connection" style="width:220px; left:245px; top:180px; transform:rotate(24deg);">
+                        </div>
+                        <div class="connection" style="width:180px; left:378px; top:330px; transform:rotate(-38deg);">
+                        </div>
+                        <div class="connection flow-line"
+                            style="width:210px; left:560px; top:250px; transform:rotate(20deg);"></div>
+                        <div class="connection" style="width:180px; left:590px; top:330px; transform:rotate(34deg);">
+                        </div>
+
+                        <div class="node" data-node="portal" style="left:7%;top:145px;">
+                            <div class="flex justify-between"><span
+                                    class="text-[11px] font-black text-slate-500 uppercase">Proyecto</span><span
+                                    class="mini-pill bg-slate-100 text-slate-700">Estable</span></div>
+                            <h3 class="font-black text-lg mt-3">Portal de clientes</h3>
+                            <p class="text-sm text-slate-500 mt-1">Sprint activo con dependencia de facturación.</p>
+                            <div class="flex gap-2 mt-4 text-xs font-black">
+                                <span>AG</span><span>LM</span><span>SR</span></div>
+                        </div>
+
+                        <div class="node critical active" data-node="api" style="left:36%;top:120px;">
+                            <div class="flex justify-between"><span
+                                    class="text-[11px] font-black text-rose-700 uppercase"><span
+                                        class="pulse bg-rose-500"></span>Bloqueo</span><span
+                                    class="mini-pill bg-white text-slate-800">Crítico</span></div>
+                            <h3 class="font-black text-xl mt-3">API de facturación</h3>
+                            <p class="text-sm text-slate-600 mt-1">Decisión sobre proveedor y compliance. Deforma
+                                onboarding, QA y entrega.</p>
+                            <div class="flex gap-2 mt-4"><span class="mini-pill bg-white text-slate-700">NC</span><span
+                                    class="mini-pill bg-white text-slate-700">IV</span></div>
+                        </div>
+
+                        <div class="node warning" data-node="architecture" style="left:21%;top:315px;">
+                            <div class="flex justify-between"><span
+                                    class="text-[11px] font-black text-amber-700 uppercase">Decisión</span><span
+                                    class="mini-pill bg-white text-slate-800">Pendiente</span></div>
+                            <h3 class="font-black text-lg mt-3">Arquitectura modular</h3>
+                            <p class="text-sm text-slate-600 mt-1">Dos alternativas abiertas con impacto futuro.</p>
+                        </div>
+
+                        <div class="node flow" data-node="onboarding" style="left:64%;top:205px;">
+                            <div class="flex justify-between"><span
+                                    class="text-[11px] font-black text-emerald-700 uppercase">Flujo</span><span
+                                    class="mini-pill bg-white text-slate-800">Sano</span></div>
+                            <h3 class="font-black text-lg mt-3">Onboarding remoto</h3>
+                            <p class="text-sm text-slate-600 mt-1">Proceso documentado. 1 mejora detectada por IA.</p>
+                        </div>
+
+                        <div class="node risk" data-node="qa" style="left:52%;top:380px;">
+                            <div class="flex justify-between"><span
+                                    class="text-[11px] font-black text-sky-700 uppercase">Riesgo</span><span
+                                    class="mini-pill bg-white text-slate-800">Subiendo</span></div>
+                            <h3 class="font-black text-lg mt-3">Sobrecarga de QA</h3>
+                            <p class="text-sm text-slate-600 mt-1">La cola crece y puede bloquear la entrega semanal.
+                            </p>
+                        </div>
+
+                        <div class="node warning" data-node="legal" style="left:78%;top:365px;">
+                            <div class="flex justify-between"><span
+                                    class="text-[11px] font-black text-amber-700 uppercase">Latencia</span><span
+                                    class="mini-pill bg-white text-slate-800">22h</span></div>
+                            <h3 class="font-black text-lg mt-3">Validación legal</h3>
+                            <p class="text-sm text-slate-600 mt-1">Esperando criterio. Alto impacto sistémico.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <aside class="space-y-6">
+                    <article class="glass rounded-[32px] p-6">
+                        <div class="flex justify-between items-start mb-5">
+                            <div>
+                                <h2 class="text-xl font-black tracking-[-.03em]">Cockpit cognitivo</h2>
+                                <p class="text-sm text-slate-500">Lo que necesitas saber sin perseguir mensajes.</p>
+                            </div>
+                            <span class="mini-pill bg-slate-950 text-white">Foco protegido</span>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="signal-card rounded-2xl border border-slate-200 bg-white p-4">
+                                <p class="text-xs font-black text-rose-600 uppercase">Decisión real</p>
+                                <h3 class="font-black mt-1">Cerrar proveedor de facturación</h3>
+                                <p class="text-sm text-slate-500 mt-1">Desbloquea 4 elementos. Responsable: negocio.</p>
+                            </div>
+                            <div class="signal-card rounded-2xl border border-slate-200 bg-white p-4">
+                                <p class="text-xs font-black text-emerald-600 uppercase">Puedes ignorar</p>
+                                <h3 class="font-black mt-1">17 mensajes sin acción directa</h3>
+                                <p class="text-sm text-slate-500 mt-1">Clasificados como contexto pasivo.</p>
+                            </div>
+                            <div class="signal-card rounded-2xl border border-slate-200 bg-white p-4">
+                                <p class="text-xs font-black text-amber-600 uppercase">Dependencia</p>
+                                <h3 class="font-black mt-1">Diseño espera validación</h3>
+                                <p class="text-sm text-slate-500 mt-1">Probable desbloqueo con respuesta async.</p>
+                            </div>
+                            <div class="signal-card rounded-2xl border border-slate-200 bg-white p-4">
+                                <p class="text-xs font-black text-sky-600 uppercase">Sugerencia IA</p>
+                                <h3 class="font-black mt-1">Agrupar interrupciones 90 min</h3>
+                                <p class="text-sm text-slate-500 mt-1">Baja probabilidad de incidencia crítica.</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article id="detail" class="rounded-[32px] p-6 bg-slate-950 text-white shadow-2xl">
+                        <p class="text-xs font-black text-cyan-300 uppercase">Nodo seleccionado</p>
+                        <h2 class="text-2xl font-black mt-3">API de facturación</h2>
+                        <p class="text-slate-300 mt-3">No es una tarea: es una tensión. Bloquea integración, onboarding
+                            y validación legal.</p>
+                        <div class="grid grid-cols-2 gap-3 mt-6">
+                            <div class="rounded-2xl bg-white/10 p-4">
+                                <p class="text-xs text-slate-400">Riesgo</p>
+                                <p class="font-black">Alto</p>
+                            </div>
+                            <div class="rounded-2xl bg-white/10 p-4">
+                                <p class="text-xs text-slate-400">Acción</p>
+                                <p class="font-black">Decisión hoy</p>
+                            </div>
+                            <div class="rounded-2xl bg-white/10 p-4">
+                                <p class="text-xs text-slate-400">Latencia</p>
+                                <p class="font-black">18h</p>
+                            </div>
+                            <div class="rounded-2xl bg-white/10 p-4">
+                                <p class="text-xs text-slate-400">Impacto</p>
+                                <p class="font-black">4 flujos</p>
+                            </div>
+                        </div>
+                    </article>
+                </aside>
+            </section>
+
+            <section class="grid grid-cols-1 xl:grid-cols-[1.2fr_.8fr] gap-6 mt-6">
+                <article class="glass rounded-[32px] p-6">
+                    <div class="flex justify-between items-center mb-5">
+                        <div>
+                            <h2 class="text-xl font-black tracking-[-.03em]">Línea temporal de degradación</h2>
+                            <p class="text-sm text-slate-500">El sistema no solo muestra estado; muestra evolución.</p>
+                        </div>
+                        <button class="bg-slate-950 text-white rounded-full px-5 py-3 text-sm font-black">Crear
+                            decisión</button>
+                    </div>
+
+                    <div class="pl-5 border-l border-slate-200 space-y-5">
+                        <div class="relative timeline-dot">
+                            <p class="text-xs font-black text-slate-400">08:20</p>
+                            <h3 class="font-black">Aparece dependencia de proveedor</h3>
+                            <p class="text-sm text-slate-500">El sistema detecta que varios hilos convergen en la misma
+                                decisión.</p>
+                        </div>
+                        <div class="relative timeline-dot">
+                            <p class="text-xs font-black text-slate-400">10:15</p>
+                            <h3 class="font-black">Sube latencia de coordinación</h3>
+                            <p class="text-sm text-slate-500">QA y onboarding empiezan a acumular espera indirecta.</p>
+                        </div>
+                        <div class="relative timeline-dot">
+                            <p class="text-xs font-black text-slate-400">12:40</p>
+                            <h3 class="font-black">Recomendación: decisión async de 15 min</h3>
+                            <p class="text-sm text-slate-500">No requiere reunión completa. Requiere criterio de negocio
+                                y legal.</p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="glass rounded-[32px] p-6">
+                    <h2 class="text-xl font-black tracking-[-.03em]">Comunicación estructurada</h2>
+                    <p class="text-sm text-slate-500 mb-5">El mensaje entra clasificado antes de convertirse en ruido.
+                    </p>
+                    <div class="space-y-3">
+                        <div class="rounded-2xl border border-rose-100 bg-white p-4">
+                            <p class="text-xs font-black text-rose-600">BLOQUEO · 09:42</p>
+                            <h3 class="font-black">No puedo cerrar integración</h3>
+                            <p class="text-sm text-slate-500">Falta confirmar proveedor.</p>
+                        </div>
+                        <div class="rounded-2xl border border-emerald-100 bg-white p-4">
+                            <p class="text-xs font-black text-emerald-600">DECISIÓN · 10:15</p>
+                            <h3 class="font-black">Se elimina daily sync</h3>
+                            <p class="text-sm text-slate-500">Se sustituye por briefing async.</p>
+                        </div>
+                        <div class="rounded-2xl border border-sky-100 bg-white p-4">
+                            <p class="text-xs font-black text-sky-600">PREGUNTA · 11:03</p>
+                            <h3 class="font-black">¿Quién valida permisos?</h3>
+                            <p class="text-sm text-slate-500">Sugerido: responsable histórico.</p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const data = {
+            portal: {
+                type: 'Proyecto', title: 'Portal de clientes', desc: 'Zona relativamente estable, pero dependiente de la decisión de facturación.', risk: 'Medio', action: 'Esperar', latency: '4h', impact: '2 flujos'
+            },
+            api: {
+                type: 'Bloqueo', title: 'API de facturación', desc: 'No es una tarea: es una tensión. Bloquea integración, onboarding y validación legal.', risk: 'Alto', action: 'Decisión hoy', latency: '18h', impact: '4 flujos'
+            },
+            architecture: {
+                type: 'Decisión', title: 'Arquitectura modular', desc: 'Decisión reversible parcialmente, pero con coste futuro si se retrasa.', risk: 'Medio', action: 'Resolver async', latency: '9h', impact: '3 flujos'
+            },
+            onboarding: {
+                type: 'Flujo sano', title: 'Onboarding remoto', desc: 'Proceso estable. El sistema recomienda una mejora menor, no requiere interrupción.', risk: 'Bajo', action: 'Ignorar hoy', latency: '1h', impact: '1 flujo'
+            },
+            qa: {
+                type: 'Riesgo', title: 'Sobrecarga de QA', desc: 'La cola crece por dependencias previas. Puede convertirse en bloqueo si no se reduce.', risk: 'Subiendo', action: 'Revisar capacidad', latency: '12h', impact: 'Entrega'
+            },
+            legal: {
+                type: 'Latencia', title: 'Validación legal', desc: 'Criterio externo con alta capacidad de bloqueo. Conviene convertirlo en decisión explícita.', risk: 'Alto', action: 'Solicitar criterio', latency: '22h', impact: 'Facturación'
+            }
+        };
+
+        const detail = document.getElementById('detail');
+        document.querySelectorAll('.node').forEach(node => {
+            node.addEventListener('click', () => {
+                document.querySelectorAll('.node').forEach(n => n.classList.remove('active'));
+                node.classList.add('active');
+                const item = data[node.dataset.node];
+                detail.innerHTML = `
+          <p class="text-xs font-black text-cyan-300 uppercase">${item.type}</p>
+          <h2 class="text-2xl font-black mt-3">${item.title}</h2>
+          <p class="text-slate-300 mt-3">${item.desc}</p>
+          <div class="grid grid-cols-2 gap-3 mt-6">
+            <div class="rounded-2xl bg-white/10 p-4"><p class="text-xs text-slate-400">Riesgo</p><p class="font-black">${item.risk}</p></div>
+            <div class="rounded-2xl bg-white/10 p-4"><p class="text-xs text-slate-400">Acción</p><p class="font-black">${item.action}</p></div>
+            <div class="rounded-2xl bg-white/10 p-4"><p class="text-xs text-slate-400">Latencia</p><p class="font-black">${item.latency}</p></div>
+            <div class="rounded-2xl bg-white/10 p-4"><p class="text-xs text-slate-400">Impacto</p><p class="font-black">${item.impact}</p></div>
+          </div>`;
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Álvaro Pastor — Product Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Lexend', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --ink: #0f172a;
+            --muted: #64748b;
+            --line: #e2e8f0;
+            --soft: #f8fafc;
+            --blue: #4f46e5;
+            --dark: #111827;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Lexend', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(79, 70, 229, .08), transparent 32rem),
+                linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+            color: var(--ink);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, .82);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(226, 232, 240, .9);
+            box-shadow: 0 24px 70px rgba(15, 23, 42, .08);
+        }
+
+        .dark-card {
+            background: linear-gradient(135deg, #111827, #1e293b);
+            color: white;
+            box-shadow: 0 28px 90px rgba(15, 23, 42, .28);
+        }
+
+        .tag {
+            border: 1px solid #dbe3ef;
+            background: #fff;
+            color: #334155;
+        }
+
+        .project-card:hover .project-visual {
+            transform: translateY(-4px) scale(1.015);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(18px);
+            transition: .7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/75 backdrop-blur-xl">
+        <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 text-sm">
+            <a href="#top" class="font-semibold tracking-tight text-slate-900">Álvaro Pastor</a>
+            <div class="hidden gap-6 text-slate-600 md:flex">
+                <a href="#enfoque" class="hover:text-slate-950">Enfoque</a>
+                <a href="#proyectos" class="hover:text-slate-950">Proyectos</a>
+                <a href="#criterio" class="hover:text-slate-950">Criterio</a>
+                <a href="#contacto" class="hover:text-slate-950">Contacto</a>
+            </div>
+            <a href="#contacto"
+                class="rounded-full bg-slate-950 px-4 py-2 text-white shadow-sm hover:bg-slate-800">Hablemos</a>
+        </nav>
+    </header>
+
+    <main id="top" class="mx-auto max-w-6xl px-6 pb-24 pt-6">
+        <section class="grid items-center gap-10 pt-4 pb-12 lg:grid-cols-[1.1fr_.9fr] lg:pt-6 lg:pb-20">
+            <div class="reveal">
+                <div
+                    class="mb-5 inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-white px-3 py-1 text-sm text-slate-600 shadow-sm">
+                    <span class="h-2 w-2 rounded-full bg-indigo-500"></span>
+                    Frontend · UX de producto · Automatización · IA aplicada
+                </div>
+                <h1
+                    class="max-w-4xl text-2xl font-bold leading-[1.02] tracking-[-.045em] text-slate-950 md:text-[3.5rem]">
+                    Construyo interfaces y herramientas digitales orientadas a decisiones reales.
+                </h1>
+                <p class="mt-7 max-w-2xl text-lg leading-8 text-slate-600">
+                    Combino desarrollo frontend, pensamiento de producto, automatización e IA aplicada para convertir
+                    procesos confusos en sistemas claros, útiles y accionables.
+                </p>
+                <div class="mt-9 flex flex-wrap gap-3">
+                    <a href="#proyectos"
+                        class="rounded-full bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 hover:bg-indigo-500">Ver
+                        proyectos</a>
+                    <a href="#enfoque"
+                        class="rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:border-slate-500">Cómo
+                        trabajo</a>
+                </div>
+            </div>
+
+            <aside class="glass reveal rounded-[2rem] p-6">
+                <p class="mb-5 text-sm font-semibold uppercase tracking-[.18em] text-slate-400">Lo que aporto</p>
+                <div class="space-y-4">
+                    <div class="rounded-2xl bg-slate-950 p-5 text-white">
+                        <p class="text-sm text-slate-300">Posicionamiento</p>
+                        <p class="mt-2 text-2xl font-bold tracking-tight">No diseño pantallas: diseño claridad
+                            operativa.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                            <p class="text-3xl font-black text-indigo-600">UX</p>
+                            <p class="mt-1 text-sm text-slate-500">menos fricción</p>
+                        </div>
+                        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                            <p class="text-3xl font-black text-indigo-600">IA</p>
+                            <p class="mt-1 text-sm text-slate-500">más eficiencia</p>
+                        </div>
+                        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                            <p class="text-3xl font-black text-indigo-600">Data</p>
+                            <p class="mt-1 text-sm text-slate-500">mejores decisiones</p>
+                        </div>
+                        <div class="rounded-2xl border border-slate-200 bg-white p-4">
+                            <p class="text-3xl font-black text-indigo-600">Code</p>
+                            <p class="mt-1 text-sm text-slate-500">producto usable</p>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section id="enfoque" class="reveal py-14">
+            <div class="mb-9 max-w-2xl">
+                <p class="mb-3 text-sm font-bold uppercase tracking-[.18em] text-indigo-600">Enfoque</p>
+                <h2 class="text-3xl font-black tracking-tight md:text-5xl">Menos lista de tecnologías. Más problemas
+                    resueltos.</h2>
+            </div>
+            <div class="grid gap-5 md:grid-cols-3">
+                <article class="glass rounded-[1.75rem] p-7">
+                    <i data-lucide="scan-line" class="mb-5 h-7 w-7 text-indigo-600"></i>
+                    <h3 class="text-xl font-bold">Reducir fricción</h3>
+                    <p class="mt-3 leading-7 text-slate-600">Diseño flujos, interfaces y dashboards que reducen carga
+                        mental y hacen evidente la siguiente acción.</p>
+                </article>
+                <article class="glass rounded-[1.75rem] p-7">
+                    <i data-lucide="workflow" class="mb-5 h-7 w-7 text-indigo-600"></i>
+                    <h3 class="text-xl font-bold">Estructurar sistemas</h3>
+                    <p class="mt-3 leading-7 text-slate-600">Convierto procesos dispersos en herramientas internas,
+                        automatizaciones y arquitecturas UI mantenibles.</p>
+                </article>
+                <article class="glass rounded-[1.75rem] p-7">
+                    <i data-lucide="brain-circuit" class="mb-5 h-7 w-7 text-indigo-600"></i>
+                    <h3 class="text-xl font-bold">Pensar producto</h3>
+                    <p class="mt-3 leading-7 text-slate-600">No parto de “qué queda bonito”, sino de qué debe entender,
+                        decidir o conseguir el usuario.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="proyectos" class="py-16">
+            <div class="reveal mb-9 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+                <div>
+                    <p class="mb-3 text-sm font-bold uppercase tracking-[.18em] text-indigo-600">Casos de producto</p>
+                    <h2 class="text-3xl font-black tracking-tight md:text-5xl">Proyectos explicados como decisiones, no
+                        como tarjetas.</h2>
+                </div>
+                <p class="max-w-sm text-slate-600">Cada caso muestra problema, criterio, solución e impacto. Eso
+                    comunica mucho más que un stack.</p>
+            </div>
+
+            <div class="space-y-6">
+                <article
+                    class="project-card reveal grid overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-900/5 md:grid-cols-[.9fr_1.1fr]">
+                    <div
+                        class="project-visual min-h-[300px] bg-gradient-to-br from-indigo-600 via-violet-600 to-slate-950 p-8 text-white transition duration-500">
+                        <div class="rounded-3xl bg-white/12 p-5 backdrop-blur">
+                            <div class="mb-5 flex items-center justify-between">
+                                <span class="rounded-full bg-white/15 px-3 py-1 text-xs">Dashboard UX</span>
+                                <i data-lucide="bar-chart-3" class="h-5 w-5"></i>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="h-4 w-3/4 rounded-full bg-white/80"></div>
+                                <div class="h-24 rounded-2xl bg-white/15"></div>
+                                <div class="grid grid-cols-3 gap-3">
+                                    <div class="h-16 rounded-2xl bg-white/15"></div>
+                                    <div class="h-16 rounded-2xl bg-white/15"></div>
+                                    <div class="h-16 rounded-2xl bg-white/15"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-10">
+                        <p class="mb-3 text-sm font-bold text-indigo-600">Auditoría digital, rendimiento web y analítica
+                        </p>
+                        <h3 class="text-2xl font-black tracking-tight">De datos dispersos a prioridades accionables.
+                        </h3>
+                        <div class="mt-6 grid gap-4 text-sm leading-6 text-slate-600 md:grid-cols-2">
+                            <div><strong class="text-slate-950">Problema:</strong> información técnica y analítica
+                                difícil de traducir en decisiones.</div>
+                            <div><strong class="text-slate-950">Decisión:</strong> priorizar visibilidad, velocidad y
+                                oportunidades por impacto.</div>
+                            <div><strong class="text-slate-950">Solución:</strong> auditoría, métricas, propuesta de
+                                optimización y lectura ejecutiva.</div>
+                            <div><strong class="text-slate-950">Impacto:</strong> mejor criterio para decidir qué
+                                arreglar antes.</div>
+                        </div>
+                        <div class="mt-7 flex flex-wrap gap-2">
+                            <span class="tag rounded-full px-3 py-1 text-xs">Analítica</span>
+                            <span class="tag rounded-full px-3 py-1 text-xs">UX</span>
+                            <span class="tag rounded-full px-3 py-1 text-xs">Performance</span>
+                            <span class="tag rounded-full px-3 py-1 text-xs">Prioridad producto</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article
+                    class="project-card reveal grid overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-900/5 md:grid-cols-[.9fr_1.1fr]">
+                    <div
+                        class="project-visual min-h-[300px] bg-gradient-to-br from-slate-950 via-slate-800 to-indigo-700 p-8 text-white transition duration-500">
+                        <div class="rounded-3xl bg-white/12 p-5 backdrop-blur">
+                            <div class="mb-5 flex items-center justify-between">
+                                <span class="rounded-full bg-white/15 px-3 py-1 text-xs">Herramienta interna</span>
+                                <i data-lucide="panel-top" class="h-5 w-5"></i>
+                            </div>
+                            <div class="grid grid-cols-[.7fr_1.3fr] gap-4">
+                                <div class="space-y-3">
+                                    <div class="h-10 rounded-xl bg-white/15"></div>
+                                    <div class="h-10 rounded-xl bg-white/15"></div>
+                                    <div class="h-10 rounded-xl bg-white/15"></div>
+                                </div>
+                                <div class="h-40 rounded-2xl bg-white/15"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 md:p-10">
+                        <p class="mb-3 text-sm font-bold text-indigo-600">Sistema de contenido y aprendizaje</p>
+                        <h3 class="text-2xl font-black tracking-tight">Una interfaz para sostener atención y
+                            aprendizaje.</h3>
+                        <div class="mt-6 grid gap-4 text-sm leading-6 text-slate-600 md:grid-cols-2">
+                            <div><strong class="text-slate-950">Problema:</strong> exceso de información, poca
+                                continuidad y dificultad para saber qué practicar.</div>
+                            <div><strong class="text-slate-950">Decisión:</strong> hacer que el sistema guíe al usuario
+                                sin saturarlo.</div>
+                            <div><strong class="text-slate-950">Solución:</strong> modos de práctica, feedback,
+                                estructura y progresión.</div>
+                            <div><strong class="text-slate-950">Impacto:</strong> experiencia más clara, orientada a
+                                progreso y acción.</div>
+                        </div>
+                        <div class="mt-7 flex flex-wrap gap-2">
+                            <span class="tag rounded-full px-3 py-1 text-xs">EdTech</span>
+                            <span class="tag rounded-full px-3 py-1 text-xs">IA aplicada</span>
+                            <span class="tag rounded-full px-3 py-1 text-xs">Arquitectura UI</span>
+                            <span class="tag rounded-full px-3 py-1 text-xs">Producto</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="criterio" class="reveal py-16">
+            <div class="dark-card rounded-[2rem] p-8 md:p-12">
+                <div class="grid gap-10 md:grid-cols-[.9fr_1.1fr] md:items-start">
+                    <div>
+                        <p class="mb-3 text-sm font-bold uppercase tracking-[.18em] text-indigo-300">Criterio</p>
+                        <h2 class="text-3xl font-black tracking-tight md:text-5xl">Diseñar no es decorar. Es decidir qué
+                            debe entenderse primero.</h2>
+                    </div>
+                    <div class="grid gap-4">
+                        <div class="rounded-2xl bg-white/8 p-5">
+                            <h3 class="font-bold">Escaneabilidad antes que densidad</h3>
+                            <p class="mt-2 text-slate-300">Un usuario debe entender qué importa sin leerlo todo.</p>
+                        </div>
+                        <div class="rounded-2xl bg-white/8 p-5">
+                            <h3 class="font-bold">Impacto antes que stack</h3>
+                            <p class="mt-2 text-slate-300">La tecnología es medio. Lo valioso es la decisión que permite
+                                tomar.</p>
+                        </div>
+                        <div class="rounded-2xl bg-white/8 p-5">
+                            <h3 class="font-bold">Sistemas antes que pantallas sueltas</h3>
+                            <p class="mt-2 text-slate-300">La interfaz debe soportar procesos reales, no solo verse bien
+                                en una captura.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="reveal pt-10">
+            <div class="glass rounded-[2rem] p-8 text-center md:p-12">
+                <p class="mb-3 text-sm font-bold uppercase tracking-[.18em] text-indigo-600">Contacto</p>
+                <h2 class="text-3xl font-black tracking-tight md:text-5xl">¿Tienes un producto, proceso o interfaz que
+                    necesita claridad?</h2>
+                <p class="mx-auto mt-5 max-w-2xl leading-7 text-slate-600">Puedo ayudarte a convertir una idea, proceso
+                    o sistema confuso en una experiencia digital más clara, usable y orientada a resultados.</p>
+                <div class="mt-8 flex flex-wrap justify-center gap-3">
+                    <a href="mailto:alvpastor17@gmail.com"
+                        class="rounded-full bg-slate-950 px-6 py-3 text-sm font-semibold text-white hover:bg-slate-800">Contactar
+                        por email</a>
+                    <a href="#"
+                        class="rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:border-slate-500">LinkedIn</a>
+                    <a href="#"
+                        class="rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 hover:border-slate-500">GitHub</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        lucide.createIcons();
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+
+</html>

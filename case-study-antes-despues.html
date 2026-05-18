@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Plantilla de case studies antes/después para proyectos de producto, IA, automatización y sistemas digitales." />
+  <title>Case Studies Antes/Despues | Producto, IA y Automatizacion</title>
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: #ffffff;
+      --surface-soft: #fbfaf7;
+      --ink: #171717;
+      --muted: #68645d;
+      --muted-2: #8a857c;
+      --line: #ded9cf;
+      --line-strong: #c9c1b4;
+      --accent: #1f6f63;
+      --accent-dark: #164d45;
+      --accent-soft: #e5f1ed;
+      --danger: #9a4f35;
+      --danger-soft: #f2e5df;
+      --warning: #82611d;
+      --warning-soft: #f3ead5;
+      --shadow: 0 18px 50px rgba(32, 28, 20, 0.08);
+      --radius-xl: 20px;
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(246, 244, 239, 0.4) 420px),
+        var(--bg);
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    .page-shell {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(222, 217, 207, 0.78);
+      background: rgba(246, 244, 239, 0.88);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 72px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 1px;
+      min-width: 0;
+    }
+
+    .brand strong {
+      font-size: 0.98rem;
+      letter-spacing: -0.01em;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .nav-links {
+      display: none;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.86rem;
+      padding: 8px 11px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      background: var(--surface);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .hero {
+      padding: 56px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 28px;
+    }
+
+    .eyebrow {
+      align-items: center;
+      color: var(--accent-dark);
+      display: inline-flex;
+      font-size: 0.78rem;
+      font-weight: 700;
+      gap: 8px;
+      letter-spacing: 0.08em;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      background: var(--accent);
+      border-radius: 999px;
+      content: "";
+      display: inline-block;
+      height: 8px;
+      width: 8px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 8vw, 5.6rem);
+      letter-spacing: -0.055em;
+      line-height: 0.94;
+      max-width: 980px;
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+      max-width: 700px;
+    }
+
+    .hero-panel {
+      align-self: end;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 18px;
+      padding: 20px;
+    }
+
+    .signal-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .signal-list li {
+      align-items: start;
+      color: var(--muted);
+      display: grid;
+      font-size: 0.94rem;
+      gap: 9px;
+      grid-template-columns: 18px 1fr;
+      list-style: none;
+    }
+
+    .check {
+      align-items: center;
+      background: var(--accent-soft);
+      border-radius: 999px;
+      color: var(--accent-dark);
+      display: inline-flex;
+      font-size: 0.72rem;
+      height: 18px;
+      justify-content: center;
+      margin-top: 2px;
+      width: 18px;
+    }
+
+    .summary-strip {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+      padding: 18px 0 42px;
+    }
+
+    .summary-card {
+      background: rgba(255, 255, 255, 0.64);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+    }
+
+    .summary-card strong {
+      display: block;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .summary-card span {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    main {
+      display: grid;
+      gap: 56px;
+      padding-bottom: 70px;
+    }
+
+    .case-study {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: clip;
+    }
+
+    .case-hero {
+      display: grid;
+      gap: 28px;
+      padding: 24px;
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .pill {
+      align-items: center;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      display: inline-flex;
+      font-size: 0.78rem;
+      font-weight: 650;
+      gap: 8px;
+      padding: 7px 10px;
+      white-space: nowrap;
+    }
+
+    .pill.status {
+      background: var(--accent-soft);
+      border-color: rgba(31, 111, 99, 0.16);
+      color: var(--accent-dark);
+    }
+
+    .case-title {
+      font-size: clamp(1.9rem, 5vw, 3.8rem);
+      letter-spacing: -0.05em;
+      line-height: 1;
+      max-width: 860px;
+    }
+
+    .positioning {
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.16rem);
+      margin-top: 16px;
+      max-width: 760px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      align-items: center;
+      border-radius: 999px;
+      display: inline-flex;
+      font-size: 0.92rem;
+      font-weight: 720;
+      gap: 9px;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+    }
+
+    .mockup {
+      background:
+        linear-gradient(135deg, rgba(31, 111, 99, 0.12), rgba(130, 97, 29, 0.08)),
+        var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      min-height: 260px;
+      overflow: hidden;
+      padding: 16px;
+      position: relative;
+    }
+
+    .mockup::before {
+      background: linear-gradient(90deg, #e06d48, #dfb34f, #4c9b80);
+      border-radius: 999px;
+      content: "";
+      display: block;
+      height: 8px;
+      margin-bottom: 18px;
+      width: 54px;
+    }
+
+    .mockup-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    .mock-panel {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(222, 217, 207, 0.86);
+      border-radius: var(--radius-md);
+      min-height: 68px;
+      padding: 12px;
+    }
+
+    .mock-line {
+      background: #d8d1c4;
+      border-radius: 999px;
+      height: 8px;
+      margin-bottom: 10px;
+      width: 78%;
+    }
+
+    .mock-line.short {
+      width: 44%;
+    }
+
+    .mock-line.accent {
+      background: rgba(31, 111, 99, 0.4);
+    }
+
+    .mock-kpis {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 12px;
+    }
+
+    .mock-kpi {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(222, 217, 207, 0.9);
+      border-radius: var(--radius-sm);
+      height: 46px;
+    }
+
+    .mockup.after {
+      background:
+        linear-gradient(135deg, rgba(31, 111, 99, 0.16), rgba(31, 111, 99, 0.04)),
+        var(--surface-soft);
+    }
+
+    .case-body {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 0;
+    }
+
+    .section {
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 22px;
+      padding: 24px;
+    }
+
+    .section:first-child {
+      border-top: 0;
+    }
+
+    .section-heading {
+      display: grid;
+      gap: 8px;
+      max-width: 780px;
+    }
+
+    .section-kicker {
+      color: var(--accent-dark);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section h3 {
+      font-size: clamp(1.35rem, 3vw, 2.15rem);
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+
+    .section-text {
+      color: var(--muted);
+      max-width: 780px;
+    }
+
+    .context-grid,
+    .before-after-grid,
+    .impact-grid,
+    .role-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .info-block {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+    }
+
+    .info-block h4 {
+      font-size: 0.92rem;
+      letter-spacing: -0.01em;
+      margin: 0 0 10px;
+    }
+
+    .info-block p,
+    .info-block li {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .clean-list {
+      display: grid;
+      gap: 11px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .clean-list li {
+      list-style: none;
+      padding-left: 22px;
+      position: relative;
+    }
+
+    .clean-list li::before {
+      background: var(--line-strong);
+      border-radius: 999px;
+      content: "";
+      height: 7px;
+      left: 0;
+      position: absolute;
+      top: 0.55em;
+      width: 7px;
+    }
+
+    .problem-list li::before {
+      background: var(--danger);
+    }
+
+    .decision-list li::before {
+      background: var(--accent);
+    }
+
+    .diagnosis-table {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .diagnosis-row {
+      background: var(--surface);
+      display: grid;
+      gap: 0;
+    }
+
+    .diagnosis-row + .diagnosis-row {
+      border-top: 1px solid var(--line);
+    }
+
+    .diagnosis-cell {
+      display: grid;
+      gap: 6px;
+      padding: 16px;
+    }
+
+    .diagnosis-cell + .diagnosis-cell {
+      border-top: 1px solid var(--line);
+    }
+
+    .diagnosis-label {
+      color: var(--muted-2);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .diagnosis-cell strong {
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .diagnosis-cell p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .impact-card {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+    }
+
+    .impact-card strong {
+      display: block;
+      font-size: 1.06rem;
+      letter-spacing: -0.025em;
+      margin-bottom: 6px;
+    }
+
+    .impact-card span {
+      color: var(--muted);
+      display: block;
+      font-size: 0.9rem;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 650;
+      padding: 8px 10px;
+    }
+
+    .chip.strong {
+      background: var(--accent-soft);
+      border-color: rgba(31, 111, 99, 0.16);
+      color: var(--accent-dark);
+    }
+
+    .tech-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .tech-stack h4 {
+      margin: 0;
+      font-size: 0.86rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .final-cta {
+      background: #151515;
+      border-radius: 28px;
+      color: #fff;
+      display: grid;
+      gap: 22px;
+      margin-bottom: 34px;
+      padding: 28px;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(1.8rem, 5vw, 4rem);
+      letter-spacing: -0.055em;
+      line-height: 1;
+      max-width: 760px;
+    }
+
+    .final-cta p {
+      color: rgba(255, 255, 255, 0.68);
+      max-width: 640px;
+    }
+
+    .final-cta .btn-primary {
+      background: #fff;
+      color: #111;
+    }
+
+    .final-cta .btn-secondary {
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.22);
+      color: #fff;
+    }
+
+    .back-to-top {
+      align-items: center;
+      background: var(--ink);
+      border: 0;
+      border-radius: 999px;
+      bottom: 18px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+      color: #fff;
+      cursor: pointer;
+      display: none;
+      height: 42px;
+      justify-content: center;
+      position: fixed;
+      right: 18px;
+      width: 42px;
+      z-index: 20;
+    }
+
+    .back-to-top.is-visible {
+      display: inline-flex;
+    }
+
+    @media (min-width: 640px) {
+      .page-shell {
+        width: min(100% - 48px, var(--max));
+      }
+
+      .summary-strip {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .context-grid,
+      .impact-grid,
+      .role-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .mockup-grid {
+        grid-template-columns: 1.25fr 0.75fr;
+      }
+    }
+
+    @media (min-width: 860px) {
+      .nav-links {
+        display: flex;
+      }
+
+      .hero {
+        padding-top: 78px;
+      }
+
+      .hero-grid {
+        align-items: end;
+        grid-template-columns: minmax(0, 1fr) 340px;
+      }
+
+      .case-hero {
+        align-items: center;
+        grid-template-columns: minmax(0, 1fr) 420px;
+        padding: 38px;
+      }
+
+      .section {
+        grid-template-columns: 280px minmax(0, 1fr);
+        padding: 38px;
+      }
+
+      .section-heading {
+        align-content: start;
+      }
+
+      .before-after-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .diagnosis-row {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .diagnosis-cell + .diagnosis-cell {
+        border-left: 1px solid var(--line);
+        border-top: 0;
+      }
+
+      .impact-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .final-cta {
+        align-items: end;
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding: 42px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="page-shell nav">
+      <a class="brand" href="#top" aria-label="Volver al inicio">
+        <!-- EDITAR: nombre/marca del portfolio -->
+        <strong>Case studies de producto</strong>
+        <span>Antes/despues con criterio operativo</span>
+      </a>
+      <nav class="nav-links" aria-label="Navegacion principal">
+        <a href="#proyecto-1">Proyecto 1</a>
+        <a href="#proyecto-2">Proyecto 2</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="top" class="page-shell">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">Producto, IA y sistemas digitales</span>
+          <!-- EDITAR: titular general de la pagina -->
+          <h1 id="page-title">Proyectos explicados por problema, decision, solucion e impacto.</h1>
+          <p class="hero-copy">
+            Plantilla para presentar trabajo real con enfoque antes/despues: diagnostico, arquitectura de informacion,
+            automatizacion, UX, IA aplicada y claridad para tomar mejores decisiones.
+          </p>
+        </div>
+
+        <aside class="hero-panel" aria-label="Criterios que comunica la plantilla">
+          <ul class="signal-list">
+            <li><span class="check">✓</span><span>El valor del proyecto se entiende en menos de 10 segundos.</span></li>
+            <li><span class="check">✓</span><span>Cada bloque conecta problema, criterio, decision e impacto.</span></li>
+            <li><span class="check">✓</span><span>El foco no esta en decorar pantallas, sino en ordenar sistemas.</span></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="summary-strip" aria-label="Resumen de capacidades">
+      <div class="summary-card">
+        <strong>Diagnostico</strong>
+        <span>Detectar friccion, ambiguedad, ruido y dependencias manuales.</span>
+      </div>
+      <div class="summary-card">
+        <strong>Decision</strong>
+        <span>Convertir informacion dispersa en jerarquias y acciones claras.</span>
+      </div>
+      <div class="summary-card">
+        <strong>Sistema</strong>
+        <span>Diseñar flujos, interfaces y automatizaciones que reducen carga operativa.</span>
+      </div>
+    </section>
+  </div>
+
+  <main class="page-shell">
+    <!--
+      DUPLICAR PROYECTO:
+      Copia todo el bloque <article class="case-study">...</article>,
+      cambia el id, los textos, problemas, diagnostico, impacto, tecnologias y enlaces.
+    -->
+    <article id="proyecto-1" class="case-study">
+      <header class="case-hero">
+        <div>
+          <div class="project-meta">
+            <!-- EDITAR: tipo de proyecto -->
+            <span class="pill">Dashboard operativo</span>
+            <span class="pill">IA aplicada</span>
+            <!-- EDITAR: estado del proyecto -->
+            <span class="pill status">Prototipo funcional</span>
+          </div>
+
+          <!-- EDITAR: titulo del proyecto -->
+          <h2 class="case-title">Dashboard operativo con IA para priorizar trabajo disperso</h2>
+          <!-- EDITAR: frase de posicionamiento -->
+          <p class="positioning">
+            Convertir datos, tareas y señales dispersas en prioridades accionables para decidir que atender primero.
+          </p>
+
+          <div class="actions">
+            <!-- EDITAR: enlaces del proyecto -->
+            <a class="btn btn-primary" href="#proyecto-1-diagnostico">Ver decisiones</a>
+            <a class="btn btn-secondary" href="#proyecto-1-impacto">Ver impacto</a>
+          </div>
+        </div>
+
+        <!-- EDITAR: sustituir este mockup por imagen/captura real si existe -->
+        <div class="mockup after" aria-label="Placeholder visual del proyecto">
+          <div class="mockup-grid">
+            <div class="mock-panel">
+              <div class="mock-line accent"></div>
+              <div class="mock-line"></div>
+              <div class="mock-line short"></div>
+              <div class="mock-kpis">
+                <div class="mock-kpi"></div>
+                <div class="mock-kpi"></div>
+                <div class="mock-kpi"></div>
+              </div>
+            </div>
+            <div class="mock-panel">
+              <div class="mock-line"></div>
+              <div class="mock-line short"></div>
+              <div class="mock-line accent"></div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="case-body">
+        <section class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Contexto</span>
+            <h3>Antes habia informacion suficiente, pero no habia una forma clara de decidir.</h3>
+          </div>
+          <div class="context-grid">
+            <div class="info-block">
+              <h4>Situacion inicial</h4>
+              <!-- EDITAR: contexto -->
+              <p>
+                Las tareas llegaban desde conversaciones, documentos, hojas de calculo y notas sueltas. El problema no era
+                falta de datos, sino exceso de señales sin una jerarquia operativa.
+              </p>
+            </div>
+            <div class="info-block">
+              <h4>Quien lo sufria</h4>
+              <!-- EDITAR: usuario/rol afectado -->
+              <p>
+                Personas responsables de coordinar trabajo semanal, detectar bloqueos y justificar prioridades sin tener que
+                reconstruir el estado del proyecto desde cero.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Antes</span>
+            <h3>El sistema obligaba a interpretar demasiado antes de poder actuar.</h3>
+          </div>
+          <div class="before-after-grid">
+            <div class="mockup" aria-label="Placeholder del estado anterior">
+              <div class="mockup-grid">
+                <div class="mock-panel">
+                  <div class="mock-line"></div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line short"></div>
+                </div>
+                <div class="mock-panel">
+                  <div class="mock-line"></div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <h4>Problemas detectados</h4>
+              <!-- EDITAR: problemas del antes -->
+              <ul class="clean-list problem-list">
+                <li>Prioridades repartidas entre canales sin una fuente de verdad clara.</li>
+                <li>Demasiadas metricas compitiendo por atencion al mismo nivel.</li>
+                <li>Bloqueos importantes escondidos dentro de notas o conversaciones largas.</li>
+                <li>Decisiones dependientes de memoria, contexto personal y seguimiento manual.</li>
+                <li>Tiempo perdido interpretando antes de poder ejecutar.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="proyecto-1-diagnostico" class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Diagnostico</span>
+            <h3>Cada friccion se tradujo en una decision de producto concreta.</h3>
+          </div>
+          <div class="diagnosis-table">
+            <!-- EDITAR: diagnostico y decisiones -->
+            <div class="diagnosis-row">
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Diagnostico</span>
+                <strong>Informacion dispersa</strong>
+                <p>El usuario tenia que saltar entre fuentes para construir una imagen completa.</p>
+              </div>
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Decision</span>
+                <strong>Centralizar prioridades</strong>
+                <p>Crear una vista unica con tareas, riesgos, responsables y estado de avance.</p>
+              </div>
+            </div>
+            <div class="diagnosis-row">
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Diagnostico</span>
+                <strong>Demasiadas metricas compitiendo</strong>
+                <p>La interfaz trataba todo como urgente, generando ruido y fatiga de lectura.</p>
+              </div>
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Decision</span>
+                <strong>Jerarquia basada en impacto</strong>
+                <p>Ordenar por urgencia, bloqueo, fecha, coste operativo y dependencia.</p>
+              </div>
+            </div>
+            <div class="diagnosis-row">
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Diagnostico</span>
+                <strong>Lectura densa</strong>
+                <p>Habia que leer demasiado para entender que necesitaba atencion.</p>
+              </div>
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Decision</span>
+                <strong>Lectura por capas</strong>
+                <p>Resumen ejecutivo, detalle contextual y acciones sugeridas por IA.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Despues</span>
+            <h3>La solucion convierte señales sueltas en una cola de decisiones accionables.</h3>
+          </div>
+          <div class="before-after-grid">
+            <div class="mockup after" aria-label="Placeholder del estado posterior">
+              <div class="mockup-grid">
+                <div class="mock-panel">
+                  <div class="mock-line accent"></div>
+                  <div class="mock-line short"></div>
+                  <div class="mock-kpis">
+                    <div class="mock-kpi"></div>
+                    <div class="mock-kpi"></div>
+                    <div class="mock-kpi"></div>
+                  </div>
+                </div>
+                <div class="mock-panel">
+                  <div class="mock-line accent"></div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line short"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <h4>Que cambio exactamente</h4>
+              <!-- EDITAR: decisiones y mejoras del despues -->
+              <ul class="clean-list decision-list">
+                <li>Una vista principal muestra prioridad, impacto, estado y siguiente accion.</li>
+                <li>La IA resume señales dispersas y sugiere motivos de prioridad.</li>
+                <li>Los bloqueos aparecen como alertas contextuales, no como texto enterrado.</li>
+                <li>La informacion secundaria queda disponible por capas, sin saturar la vista inicial.</li>
+                <li>Las acciones relevantes quedan junto al contexto que las justifica.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="proyecto-1-impacto" class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Impacto</span>
+            <h3>Indicadores editables para comunicar mejora sin inventar metricas duras.</h3>
+          </div>
+          <div class="impact-grid">
+            <!-- EDITAR: impacto -->
+            <div class="impact-card"><strong>Tiempo de interpretacion reducido</strong><span>Menos esfuerzo para entender el estado operativo.</span></div>
+            <div class="impact-card"><strong>Prioridades visibles al primer vistazo</strong><span>La vista inicial responde que requiere atencion.</span></div>
+            <div class="impact-card"><strong>Menos dependencia de memoria</strong><span>El sistema conserva contexto, responsables y trazabilidad.</span></div>
+            <div class="impact-card"><strong>Decisiones mas justificables</strong><span>Cada prioridad muestra señales y criterio asociado.</span></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Mi papel</span>
+            <h3>Trabajo realizado desde diagnostico hasta prototipo funcional.</h3>
+          </div>
+          <div class="role-grid">
+            <div class="info-block">
+              <h4>Responsabilidades</h4>
+              <!-- EDITAR: mi papel -->
+              <ul class="clean-list decision-list">
+                <li>Diagnostico UX y deteccion de fricciones operativas.</li>
+                <li>Arquitectura de informacion y jerarquia de prioridades.</li>
+                <li>Diseño de interfaz orientada a decisiones.</li>
+                <li>Definicion de flujo, estados y acciones contextuales.</li>
+                <li>Testing de comprension y refinamiento del prototipo.</li>
+              </ul>
+            </div>
+            <div class="info-block tech-stack">
+              <h4>Tecnologias / capacidades</h4>
+              <!-- EDITAR: tecnologias -->
+              <div class="chips">
+                <span class="chip">HTML</span>
+                <span class="chip">CSS</span>
+                <span class="chip">JavaScript</span>
+                <span class="chip">IA generativa</span>
+                <span class="chip">Automatizacion</span>
+                <span class="chip">Dashboards</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Principios aplicados</span>
+            <h3>La interfaz se diseño para decidir, no para impresionar.</h3>
+          </div>
+          <div class="chips">
+            <!-- EDITAR: principios -->
+            <span class="chip strong">Nielsen</span>
+            <span class="chip">reduccion de carga cognitiva</span>
+            <span class="chip">Ley de Hick</span>
+            <span class="chip">jerarquia visual</span>
+            <span class="chip">progressive disclosure</span>
+            <span class="chip">escaneabilidad</span>
+            <span class="chip">IA aplicada</span>
+            <span class="chip">claridad operativa</span>
+            <span class="chip">diseño orientado a decisiones</span>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <article id="proyecto-2" class="case-study">
+      <header class="case-hero">
+        <div>
+          <div class="project-meta">
+            <!-- EDITAR: tipo de proyecto -->
+            <span class="pill">Sistema operativo interno</span>
+            <span class="pill">Automatizacion</span>
+            <!-- EDITAR: estado del proyecto -->
+            <span class="pill status">En desarrollo</span>
+          </div>
+
+          <!-- EDITAR: titulo del proyecto -->
+          <h2 class="case-title">Sistema interno para estructurar procesos y reducir trabajo manual</h2>
+          <!-- EDITAR: frase de posicionamiento -->
+          <p class="positioning">
+            Transformar un proceso repetitivo y poco trazable en un flujo claro, documentado y asistido por automatizacion.
+          </p>
+
+          <div class="actions">
+            <!-- EDITAR: enlaces del proyecto -->
+            <a class="btn btn-primary" href="#proyecto-2-diagnostico">Ver decisiones</a>
+            <a class="btn btn-secondary" href="#proyecto-2-impacto">Ver impacto</a>
+          </div>
+        </div>
+
+        <!-- EDITAR: sustituir este mockup por imagen/captura real si existe -->
+        <div class="mockup after" aria-label="Placeholder visual del proyecto">
+          <div class="mockup-grid">
+            <div class="mock-panel">
+              <div class="mock-line accent"></div>
+              <div class="mock-line"></div>
+              <div class="mock-line short"></div>
+            </div>
+            <div class="mock-panel">
+              <div class="mock-line"></div>
+              <div class="mock-line accent"></div>
+              <div class="mock-line short"></div>
+            </div>
+          </div>
+          <div class="mock-kpis">
+            <div class="mock-kpi"></div>
+            <div class="mock-kpi"></div>
+            <div class="mock-kpi"></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="case-body">
+        <section class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Contexto</span>
+            <h3>El proceso existia, pero dependia demasiado de pasos manuales y conocimiento implicito.</h3>
+          </div>
+          <div class="context-grid">
+            <div class="info-block">
+              <h4>Situacion inicial</h4>
+              <!-- EDITAR: contexto -->
+              <p>
+                Varias tareas recurrentes se resolvian con copiar, pegar, revisar mensajes, actualizar documentos y recordar
+                criterios no siempre escritos. El flujo funcionaba, pero era fragil.
+              </p>
+            </div>
+            <div class="info-block">
+              <h4>Por que importaba</h4>
+              <!-- EDITAR: importancia del problema -->
+              <p>
+                Cuando un proceso depende de memoria y pasos invisibles, aumenta el riesgo de errores, retrasos y decisiones
+                inconsistentes entre personas o semanas distintas.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Antes</span>
+            <h3>La dificultad no estaba en una pantalla fea, sino en ejecutar sin perder contexto.</h3>
+          </div>
+          <div class="before-after-grid">
+            <div class="mockup" aria-label="Placeholder del estado anterior">
+              <div class="mockup-grid">
+                <div class="mock-panel">
+                  <div class="mock-line"></div>
+                  <div class="mock-line short"></div>
+                  <div class="mock-line"></div>
+                </div>
+                <div class="mock-panel">
+                  <div class="mock-line"></div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line short"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <h4>Problemas detectados</h4>
+              <!-- EDITAR: problemas del antes -->
+              <ul class="clean-list problem-list">
+                <li>Pasos manuales repetidos sin una secuencia visible.</li>
+                <li>Criterios de decision repartidos entre mensajes, notas y experiencia personal.</li>
+                <li>Dificultad para saber que estaba hecho, pendiente o bloqueado.</li>
+                <li>Revisiones duplicadas por falta de trazabilidad.</li>
+                <li>Friccion cognitiva al retomar el proceso despues de una interrupcion.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="proyecto-2-diagnostico" class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Diagnostico</span>
+            <h3>El objetivo fue convertir conocimiento implicito en flujo visible.</h3>
+          </div>
+          <div class="diagnosis-table">
+            <!-- EDITAR: diagnostico y decisiones -->
+            <div class="diagnosis-row">
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Diagnostico</span>
+                <strong>Proceso manual repetitivo</strong>
+                <p>Habia tareas que se ejecutaban igual cada vez, pero sin apoyo del sistema.</p>
+              </div>
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Decision</span>
+                <strong>Automatizacion asistida</strong>
+                <p>Separar tareas automatizables de decisiones que requieren criterio humano.</p>
+              </div>
+            </div>
+            <div class="diagnosis-row">
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Diagnostico</span>
+                <strong>Estado poco visible</strong>
+                <p>El usuario no podia saber rapidamente donde estaba el proceso.</p>
+              </div>
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Decision</span>
+                <strong>Estados claros y trazables</strong>
+                <p>Definir fases, responsables, bloqueos, validaciones y siguiente paso.</p>
+              </div>
+            </div>
+            <div class="diagnosis-row">
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Diagnostico</span>
+                <strong>Criterios escondidos</strong>
+                <p>Las decisiones dependian de experiencia acumulada, no de reglas visibles.</p>
+              </div>
+              <div class="diagnosis-cell">
+                <span class="diagnosis-label">Decision</span>
+                <strong>Reglas operativas documentadas</strong>
+                <p>Convertir criterios en checklist, validaciones y recomendaciones contextuales.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Despues</span>
+            <h3>El sistema guia la ejecucion, reduce pasos manuales y mantiene trazabilidad.</h3>
+          </div>
+          <div class="before-after-grid">
+            <div class="mockup after" aria-label="Placeholder del estado posterior">
+              <div class="mockup-grid">
+                <div class="mock-panel">
+                  <div class="mock-line accent"></div>
+                  <div class="mock-line short"></div>
+                  <div class="mock-line"></div>
+                </div>
+                <div class="mock-panel">
+                  <div class="mock-line accent"></div>
+                  <div class="mock-line"></div>
+                  <div class="mock-line short"></div>
+                </div>
+              </div>
+              <div class="mock-kpis">
+                <div class="mock-kpi"></div>
+                <div class="mock-kpi"></div>
+                <div class="mock-kpi"></div>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <h4>Que cambio exactamente</h4>
+              <!-- EDITAR: decisiones y mejoras del despues -->
+              <ul class="clean-list decision-list">
+                <li>El proceso queda dividido en fases con estado, responsable y siguiente accion.</li>
+                <li>Las tareas repetitivas se agrupan como automatizaciones o acciones guiadas.</li>
+                <li>La IA ayuda a resumir entradas, detectar inconsistencias y preparar borradores.</li>
+                <li>Los criterios se convierten en validaciones visibles antes de avanzar.</li>
+                <li>La documentacion se genera como parte del flujo, no como tarea posterior.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="proyecto-2-impacto" class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Impacto</span>
+            <h3>La mejora se comunica como claridad, orden y menor esfuerzo operativo.</h3>
+          </div>
+          <div class="impact-grid">
+            <!-- EDITAR: impacto -->
+            <div class="impact-card"><strong>Menos pasos manuales</strong><span>El sistema agrupa acciones repetitivas y evita trabajo duplicado.</span></div>
+            <div class="impact-card"><strong>Mejor trazabilidad del proceso</strong><span>Cada fase deja estado, responsable y evidencia.</span></div>
+            <div class="impact-card"><strong>Proceso mas ordenado</strong><span>La secuencia de trabajo queda visible y facil de retomar.</span></div>
+            <div class="impact-card"><strong>Mayor percepcion profesional</strong><span>El flujo se presenta como sistema, no como improvisacion.</span></div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Mi papel</span>
+            <h3>Definicion del sistema, automatizacion y diseño del flujo operativo.</h3>
+          </div>
+          <div class="role-grid">
+            <div class="info-block">
+              <h4>Responsabilidades</h4>
+              <!-- EDITAR: mi papel -->
+              <ul class="clean-list decision-list">
+                <li>Mapeo del proceso actual y deteccion de pasos redundantes.</li>
+                <li>Definicion de fases, estados, reglas y puntos de decision.</li>
+                <li>Diseño de interfaz y arquitectura de informacion.</li>
+                <li>Automatizacion de tareas repetitivas y apoyo con IA.</li>
+                <li>Documentacion del flujo para mantenimiento y escalabilidad.</li>
+              </ul>
+            </div>
+            <div class="info-block tech-stack">
+              <h4>Tecnologias / capacidades</h4>
+              <!-- EDITAR: tecnologias -->
+              <div class="chips">
+                <span class="chip">Frontend</span>
+                <span class="chip">Backend</span>
+                <span class="chip">APIs</span>
+                <span class="chip">Automatizacion</span>
+                <span class="chip">IA aplicada</span>
+                <span class="chip">Documentacion</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-heading">
+            <span class="section-kicker">Principios aplicados</span>
+            <h3>El sistema reduce ambiguedad y convierte ejecucion en flujo visible.</h3>
+          </div>
+          <div class="chips">
+            <!-- EDITAR: principios -->
+            <span class="chip strong">automatizacion</span>
+            <span class="chip">claridad operativa</span>
+            <span class="chip">reduccion de carga cognitiva</span>
+            <span class="chip">progressive disclosure</span>
+            <span class="chip">escaneabilidad</span>
+            <span class="chip">jerarquia visual</span>
+            <span class="chip">IA aplicada</span>
+            <span class="chip">diseño orientado a decisiones</span>
+            <span class="chip">trazabilidad</span>
+          </div>
+        </section>
+      </div>
+    </article>
+
+    <section id="contacto" class="final-cta" aria-labelledby="final-title">
+      <div>
+        <!-- EDITAR: CTA final -->
+        <h2 id="final-title">¿Tienes un proceso confuso que necesita claridad?</h2>
+        <p>
+          Puedo ayudarte a convertir friccion operativa, informacion dispersa o trabajo manual en sistemas mas claros,
+          automatizables y orientados a decisiones.
+        </p>
+      </div>
+
+      <div class="actions">
+        <!-- EDITAR: enlaces de contacto -->
+        <a class="btn btn-primary" href="mailto:tuemail@ejemplo.com">Contactar</a>
+        <a class="btn btn-secondary" href="#top">Ver mas proyectos</a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a class="btn btn-secondary" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <button class="back-to-top" type="button" aria-label="Volver arriba">↑</button>
+
+  <script>
+    const backToTop = document.querySelector(".back-to-top");
+
+    window.addEventListener("scroll", () => {
+      backToTop.classList.toggle("is-visible", window.scrollY > 640);
+    });
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
