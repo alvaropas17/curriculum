@@ -22,7 +22,6 @@ package-lock.json
 # Compilación / Salida generada
 /dist/
 /build/
-styles/output.css
 styles/styles.css
 
 # Fuente local no referenciada (se carga desde Google Fonts)
