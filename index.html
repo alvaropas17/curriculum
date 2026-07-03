@@ -329,28 +329,19 @@
             <h3 class="font-headline-md text-2xl md:text-headline-md text-on-surface">Desarrollo web, automatización e
               IA</h3>
             <ul class="list-disc pl-5 space-y-2 text-body-md text-text-muted">
-              <li class="mb-4"><strong class="text-on-surface">Optimización de procesos e IA:</strong> Configuración y
-                despliegue de flujos de trabajo automatizados con IA local y arquitectura de agentes, reduciendo la
-                latencia y garantizando la privacidad de los datos.</li>
-              <li class="mb-4"><strong class="text-on-surface">Evaluación de modelos:</strong> Análisis, pruebas y
-                benchmarking de modelos LLM para optimizar el consumo de tokens y mejorar la precisión de las
-                respuestas.</li>
-              <li class="mb-4"><strong class="text-on-surface">Orquestación de agentes IA:</strong> Definición de flujos
-                de trabajo con fases de explicación, reflexión y uso de skills especializadas, mejorando la orientación
-                del LLM, la claridad de ejecución y reduciendo la aparición de incidencias.</li>
-              <li class="mb-4"><strong class="text-on-surface">Desarrollo Frontend y UX:</strong> Garantía del <span
-                  class="text-on-surface font-semibold">100% de consistencia visual</span> en las comunicaciones
-                externas mediante el diseño y desarrollo de plantillas de Outlook optimizadas, unificando la imagen
-                corporativa bajo estrictos criterios de usabilidad.</li>
-              <li class="mb-4"><strong class="text-on-surface">Automatización de infraestructura:</strong> Ahorro de
-                <span class="text-on-surface font-semibold">2 horas semanales</span> de gestión operativa mediante el
-                desarrollo de scripts en Bash para tareas del sistema, eliminando errores manuales y optimizando los
-                tiempos de ejecución.
-              </li>
-              <li class="mb-4"><strong class="text-on-surface">Optimización de entornos de desarrollo:</strong>
-                Aceleración de un <span class="text-on-surface font-semibold">85% en los tiempos de respuesta de
-                  Docker</span> mediante la automatización de builds condicionales, evitando la reconstrucción total del
-                proyecto y procesando únicamente los módulos modificados.</li>
+              <li class="mb-4"><strong class="text-on-surface">Optimización de entornos Docker:</strong> El entorno
+                Docker reconstruía los contenedores completos en cada cambio, ralentizando el desarrollo. Reorganicé la
+                configuración para aprovechar la caché de Docker y reducir el tiempo de arranque de aproximadamente un
+                minuto a unos cuatro segundos.</li>
+              <li class="mb-4"><strong class="text-on-surface">Plantillas corporativas de email:</strong> Diseñé una
+                plantilla reutilizable de emails corporativos que unificó el diseño de todas las comunicaciones y
+                facilitó mantener una imagen visual coherente entre proyectos.</li>
+              <li class="mb-4"><strong class="text-on-surface">Prompting y gestión de contexto:</strong> Detecté que
+                muchas respuestas eran inconsistentes debido al contexto enviado al modelo. Rediseñé la estrategia de
+                prompting y gestión del contexto para obtener respuestas más fiables durante las pruebas.</li>
+              <li class="mb-4"><strong class="text-on-surface">Automatización con Bash:</strong> Desarrollé scripts en
+                Bash para automatizar tareas repetitivas del equipo, reduciendo trabajo manual y haciendo más rápidos
+                los procesos de desarrollo y despliegue.</li>
             </ul>
             <div class="flex flex-wrap gap-2 pt-2">
               <span
