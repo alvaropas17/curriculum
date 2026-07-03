@@ -1,185 +1,493 @@
 <!DOCTYPE html>
-<html lang="es">
-  <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-EZ9VY5E3EE"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
+<html class="dark" lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Álvaro Pastor · Desarrollo Web e IA Aplicada</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap"
+    rel="stylesheet">
+  <link href="./styles/output.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      background:
+        radial-gradient(circle at 0% 0%, rgba(216, 181, 109, 0.08), transparent 40%),
+        radial-gradient(circle at 100% 0%, rgba(145, 183, 255, 0.05), transparent 40%),
+        #2f3033;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .glass-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .timeline-dot::before {
+      content: '';
+      position: absolute;
+      left: -25px;
+      top: 8px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #f6d186;
+      box-shadow: 0 0 12px rgba(246, 209, 134, 0.4);
+    }
+
+    .timeline-line::after {
+      content: '';
+      position: absolute;
+      left: -20px;
+      top: 24px;
+      bottom: -24px;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .browser-frame {
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.6);
+    }
+
+    .site-header {
+      right: 0;
+      width: auto;
+      max-width: 100%;
+    }
+
+    .site-header-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .site-brand {
+      display: block;
+      font-size: 1.5rem;
+      line-height: 1.15;
+    }
+
+    .site-cv-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 5rem;
+      min-height: 2.5rem;
+      padding: 0.625rem 1rem;
+      border-radius: 999px;
+      background: #f6d186;
+      color: #402d00;
+      font-family: "Lexend", sans-serif;
+      font-size: 0.875rem;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+      z-index: 60;
+    }
+
+    @media (min-width: 768px) {
+      .site-header {
+        right: 0;
+        width: auto;
       }
-      gtag("js", new Date());
 
-      gtag("config", "G-EZ9VY5E3EE");
-    </script>
-    <script src="https://t.contentsquare.net/uxa/70095ab3329d7.js"></script>
-
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>
-      Álvaro Pastor | Desarrollador Web Full Stack y Especialista en Marketing
-      Digital | Portafolio y Contacto
-    </title>
-
-    <meta
-      name="description"
-      content="Desarrollador Web Full Stack con foco en productos agradables para el usuario y generadores de beneficios. Revisa mi CV, portafolio de proyectos y contacta conmigo."
-    />
-
-    <meta
-      property="og:title"
-      content="Álvaro Pastor | Desarrollador Web y Especialista en Marketing"
-    />
-    <meta
-      property="og:description"
-      content="Revisa mi CV, proyectos de Desarrollo Web Full Stack y contacta para oportunidades de Marketing Digital."
-    />
-    <meta property="og:type" content="profile" />
-    <meta
-      property="og:url"
-      content="https://alvaropas17.github.io/curriculum"
-    />
-    <meta property="og:locale" content="es_ES" />
-
-    <meta name="robots" content="index,follow" />
-    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon" />
-
-    <link rel="canonical" href="https://alvaropas17.github.io/curriculum" />
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    />
-
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #f8fafc;
-        color: #1e293b;
-        line-height: 1.6;
+      .site-header-inner {
+        display: flex;
+        padding-right: var(--spacing-gutter);
       }
-      .link-card {
-        transition: all 0.3s ease;
+
+      .site-brand {
+        font-size: var(--text-headline-md);
+        line-height: var(--text-headline-md--line-height);
       }
-      .link-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.15),
-          0 5px 8px -4px rgba(0, 0, 0, 0.08); /* Sombra ligeramente reducida */
+
+      .site-cv-link {
+        min-width: 0;
+        padding: 0.5rem 1.5rem;
+        font-size: var(--text-button);
+        font-weight: var(--text-button--font-weight);
       }
-    </style>
-  </head>
-  <body>
-    <div class="min-h-screen flex flex-col items-center justify-center p-6">
-      <div class="w-full max-w-sm">
-        <div class="text-center mb-8">
-          <div
-            class="w-20 h-20 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full mx-auto mb-3 flex items-center justify-center shadow-lg"
-            role="img"
-            aria-label="Icono de perfil de Álvaro Pastor"
-          >
-            <i class="fas fa-user text-white text-2xl"></i>
+    }
+  </style>
+</head>
+
+<body class="font-body-md text-on-surface selection:bg-primary/30">
+  <!-- TopNavBar from COMPONENTS_4 -->
+  <header class="site-header fixed top-0 left-0 right-0 z-50 bg-glass-surface backdrop-blur-[18px] border-b border-glass-border">
+    <div class="site-header-inner justify-between px-4 md:px-gutter py-4 max-w-container-max mx-auto">
+      <a class="site-brand font-headline-md md:text-headline-md font-semibold text-primary min-w-0 truncate"
+        href="#top">Álvaro Pastor</a>
+      <nav class="hidden md:flex gap-8 font-label-md text-label-md">
+        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#valor">Valor</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300"
+          href="#proyecto">Proyectos</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300"
+          href="#experiencia">Experiencia</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#stack">Stack</a>
+        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300"
+          href="#contacto">Contacto</a>
+      </nav>
+      <a class="site-cv-link shrink-0 px-4 sm:px-6 py-2 bg-primary text-on-primary rounded-full font-button text-sm md:text-button hover:opacity-90 transition-opacity"
+        href="#experiencia">Ver CV</a>
+    </div>
+  </header>
+  <main
+    class="pt-24 md:pt-32 pb-section-gap-lg px-4 md:px-gutter max-w-container-max mx-auto space-y-section-gap-lg md:space-y-24"
+    id="top">
+    <!-- Hero Section -->
+    <section class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-8 md:gap-component-gap items-center">
+      <div class="space-y-6">
+
+        <h1 class="font-display-lg text-3xl md:text-4xl lg:text-headline-lg text-primary-fixed leading-tight">
+          Construyo aplicaciones web con criterio de producto e IA práctica.
+        </h1>
+        <p class="text-body-lg text-text-muted max-w-2xl">
+          Técnico Superior en Desarrollo de Aplicaciones Web con formación previa en marketing. Me centro en crear
+          soluciones útiles: aplicaciones, automatizaciones e interfaces que resuelven problemas reales.
+        </p>
+        <div class="flex flex-wrap gap-4 pt-4">
+          <a class="px-8 py-3 bg-primary text-on-primary rounded-full font-button text-button hover:translate-y-[-1px] transition-transform w-full sm:w-auto text-center"
+            href="#proyecto">
+            Ver proyecto principal
+          </a>
+          <a class="px-8 py-3 bg-surface-container-high border border-glass-border text-on-surface rounded-full font-button text-button hover:bg-surface-variant transition-colors w-full sm:w-auto text-center"
+            href="#contacto">
+            Contactar
+          </a>
+        </div>
+        <div class="flex flex-wrap gap-2 pt-4 justify-center sm:justify-start">
+          <span
+            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">JavaScript</span>
+          <span
+            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">Vue</span>
+          <span
+            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">Node
+            / Express</span>
+          <span
+            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">PostgreSQL</span>
+          <span
+            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">LLMs</span>
+          <span
+            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">Automatización</span>
+        </div>
+      </div>
+      <aside class="glass-card p-6 md:p-8 rounded-xl space-y-6">
+        <h3 class="font-headline-md text-headline-md text-primary">¿Quién soy?</h3>
+        <p class="text-body-md text-text-muted">
+          Perfil junior orientado a desarrollo web, integración de IA y automatización de procesos. Especialmente útil
+          para equipos que necesitan construir producto, no solo ejecutar tareas.
+        </p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 bg-[#34363a] border border-outline/30 rounded-lg">
+            <span class="block text-primary font-bold text-xl">DAW</span>
+            <span class="text-xs text-on-surface uppercase tracking-wider">Formación técnica</span>
           </div>
-
-          <h1 class="text-2xl font-bold mb-1">Álvaro Pastor</h1>
-          <h2 class="text-lg font-medium text-indigo-600 mb-3">
-            Desarrollador Web Full Stack | Estratega de Marketing Digital
-          </h2>
-          <p class="text-gray-600 text-sm mb-4">
-            Desarrollador <strong>Web Full Stack</strong> con enfoque proactivo
-            en <strong>UX</strong> y experiencia combinada en
-            <strong>Marketing Digital</strong>.
+          <div class="p-4 bg-[#34363a] border border-outline/30 rounded-lg">
+            <span class="block text-secondary font-bold text-xl">IA</span>
+            <span class="text-xs text-on-surface uppercase tracking-wider">APIs &amp; Agentes</span>
+          </div>
+          <div class="p-4 bg-[#34363a] border border-outline/30 rounded-lg">
+            <span class="block text-tertiary font-bold text-xl">Producto</span>
+            <span class="text-xs text-on-surface uppercase tracking-wider">Marketing + UX</span>
+          </div>
+          <div class="p-4 bg-[#34363a] border border-outline/30 rounded-lg">
+            <span class="block text-primary font-bold text-xl">TFG</span>
+            <span class="text-xs text-on-surface uppercase tracking-wider">Plataforma Edu</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+    <!-- Value Proposition -->
+    <section class="space-y-8 md:space-y-12" id="valor">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-4">
+          <h2 class="font-headline-lg text-3xl md:text-headline-lg text-primary-fixed">Por qué puedo aportar valor</h2>
+          <p class="text-body-lg text-text-muted max-w-xl">Uso la tecnología para desarrollar soluciones enfocadas en el
+            usuario.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <article class="glass-card p-6 md:p-8 rounded-xl border-b-2 border-b-primary/20">
+          <div class="w-12 h-12 bg-gold-glow rounded-lg flex items-center justify-center mb-6 text-primary">
+            <span class="material-symbols-outlined">psychology_alt</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md mb-4 text-on-surface">Perfil híbrido</h3>
+          <p class="text-text-muted">Combino desarrollo web con mentalidad de marketing y producto. Eso me ayuda a
+            pensar en usuarios, conversión, claridad y utilidad real.</p>
+        </article>
+        <article class="glass-card p-6 md:p-8 rounded-xl border-b-2 border-b-secondary/20">
+          <div
+            class="w-12 h-12 bg-secondary-container/20 rounded-lg flex items-center justify-center mb-6 text-secondary">
+            <span class="material-symbols-outlined">smart_toy</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md mb-4 text-on-surface">IA aplicada</h3>
+          <p class="text-text-muted">He trabajado con modelos, agentes, IA local, APIs y automatización. No como
+            concepto abstracto, sino como herramienta para mejorar procesos.</p>
+        </article>
+        <article class="glass-card p-6 md:p-8 rounded-xl border-b-2 border-b-primary/20">
+          <div class="w-12 h-12 bg-gold-glow rounded-lg flex items-center justify-center mb-6 text-primary">
+            <span class="material-symbols-outlined">architecture</span>
+          </div>
+          <h3 class="font-headline-md text-headline-md mb-4 text-on-surface">Construcción real</h3>
+          <p class="text-text-muted">Mi proyecto principal no es un CRUD aislado: incluye usuarios, progreso, IA,
+            generación desde PDFs, clases, duelos y panel de administración.</p>
+        </article>
+      </div>
+    </section>
+    <!-- Main Project: LudoScript -->
+    <section class="space-y-8 md:space-y-12" id="proyecto">
+      <div
+        class="bg-surface-container-low rounded-3xl overflow-hidden border border-glass-border shadow-lg shadow-primary/5 border-primary/20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 items-stretch">
+          <div class="p-6 sm:p-8 lg:p-12 space-y-8 flex flex-col justify-center">
+            <div class="space-y-4">
+              <span class="text-secondary font-label-md tracking-widest uppercase">Proyecto principal</span>
+              <h2 class="font-headline-lg text-3xl md:text-headline-lg text-primary leading-tight">LudoScript:
+                plataforma educativa
+                con IA</h2>
+              <p class="text-body-lg text-text-muted">
+                Plataforma diseñada para ayudar a alumnos a practicar mejor, detectar puntos débiles y personalizar el
+                estudio mediante quizzes, flashcards e IA generativa desde documentos.
+              </p>
+            </div>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3 text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                <span class="">Frontend con Vue 3 y Vite.</span>
+              </li>
+              <li class="flex items-start gap-3 text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                <span class="">Backend con Express, JWT, Socket.IO y PostgreSQL.</span>
+              </li>
+              <li class="flex items-start gap-3 text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                <span class="">Integración con Gemini API para generar preguntas y flashcards desde PDFs.</span>
+              </li>
+              <li class="flex items-start gap-3 text-on-surface-variant">
+                <span class="material-symbols-outlined text-primary mt-1">check_circle</span>
+                <span class="">Funciones de clases, ranking, perfil, tienda, duelos y panel admin.</span>
+              </li>
+            </ul>
+            <div class="flex flex-wrap gap-4 pt-4">
+              <a class="px-8 py-3 bg-primary text-on-primary rounded-full font-button text-button w-full sm:w-auto text-center"
+                href="./proyecto/ludoscript.html">Ver caso
+                completo</a>
+              <a class="px-8 py-3 bg-transparent border border-glass-border text-on-surface rounded-full font-button text-button hover:bg-surface-variant transition-colors w-full sm:w-auto text-center"
+                href="https://github.com/alvaropas17/alvaropas17">GitHub</a>
+            </div>
+          </div>
+          <div class="relative bg-surface-container p-6 sm:p-8 lg:p-12 flex items-center justify-center">
+            <div class="browser-frame w-full rounded-xl overflow-hidden bg-bg-deep border border-white/10">
+              <div class="flex gap-1.5 p-3 bg-white/5 border-b border-white/10">
+                <div class="w-3 h-3 rounded-full bg-red-500/30"></div>
+                <div class="w-3 h-3 rounded-full bg-yellow-500/30"></div>
+                <div class="w-3 h-3 rounded-full bg-green-500/30"></div>
+              </div>
+              <div class="aspect-video relative overflow-hidden">
+                <img alt="Vista previa de LudoScript" class="w-full h-full object-cover"
+                  src="./img/ludoscript-pantalla-inicio.png">
+                <div
+                  class="absolute bottom-2 left-2 right-2 md:bottom-4 md:left-4 md:right-4 p-2 md:p-3 bg-black/60 backdrop-blur-md rounded-lg border border-white/10 text-[10px] md:text-xs text-on-surface flex items-center justify-between">
+                  <span class="">Landing, acceso y experiencia inicial</span>
+                  <span class="text-primary-fixed opacity-60">LudoScript v1.0</span>
+                </div>
+              </div>
+            </div>
+            <!-- Decorative Glow -->
+            <div class="absolute inset-0 bg-primary/5 blur-[120px] pointer-events-none"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Experience Timeline -->
+    <section class="space-y-8 md:space-y-12" id="experiencia">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-4">
+          <h2 class="font-headline-lg text-3xl md:text-headline-lg text-primary-fixed">Experiencia</h2>
+          <p class="text-body-lg text-text-muted max-w-xl">Evidencia de problemas resueltos y formación técnica sólida.
           </p>
         </div>
-
-        <div class="space-y-3">
-          <a
-            href="curriculum.html"
-            class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-indigo-500 text-center"
-          >
-            <i class="fas fa-id-card text-indigo-600 mb-1 text-xl"></i>
-            <h3 class="font-semibold text-base">
-              Currículum Vitae (CV) - Álvaro Pastor
-            </h3>
-            <p class="text-gray-600 text-sm">Ver experiencia y formación</p>
-          </a>
-          <a
-            href="proyectos.html"
-            class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-indigo-500 text-center"
-          >
-            <i class="fas fa-laptop-code text-indigo-600 mb-1 text-xl"></i>
-            <h3 class="font-semibold text-base">
-              Portafolio de Proyectos Web y Marketing
-            </h3>
-            <p class="text-gray-600 text-sm">
-              Conoce los proyectos de desarrollo que he completado
-            </p>
-          </a>
-
-          <div class="grid grid-cols-1">
-            <a
-              href="mailto:alvpastor17@gmail.com"
-              class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-indigo-500 text-center"
-            >
-              <i class="fas fa-envelope text-indigo-600 mb-1 text-xl"></i>
-              <h3 class="font-semibold text-base">Email</h3>
-              <p class="text-gray-600 text-sm">Contacta conmigo por correo</p>
-            </a>
-            <!-- <a
-              href="https://wa.me/633962600?text=Hola%20estamos%20interesados%20en%20tu%20perfil,%20¿cuándo%20podemos%20hablar?"
-              target="_blank"
-              class="link-card block bg-white p-3 rounded-xl border border-gray-200 shadow-md hover:border-green-500 text-center"
-            >
-              <i class="fab fa-whatsapp text-green-600 mb-1 text-xl"></i>
-              <h3 class="font-semibold text-base">WhatsApp</h3>
-              <p class="text-gray-600 text-sm">Contáctame por whatsapp.</p>
-            </a> -->
+      </div>
+      <div class="pl-6 md:pl-8 space-y-12 max-w-4xl relative">
+        <div class="relative timeline-line timeline-dot">
+          <div class="space-y-2">
+            <div class="text-primary font-label-md font-bold uppercase tracking-widest">Febrero 2026 - Junio 2026 · FCT
+              DAW</div>
+            <h3 class="font-headline-md text-2xl md:text-headline-md text-on-surface">Desarrollo web, automatización e
+              IA</h3>
+            <ul class="list-disc pl-5 space-y-2 text-body-md text-text-muted">
+              <li class="mb-4"><strong class="text-on-surface">Optimización de procesos e IA:</strong> Configuración y
+                despliegue de flujos de trabajo automatizados con IA local y arquitectura de agentes, reduciendo la
+                latencia y garantizando la privacidad de los datos.</li>
+              <li class="mb-4"><strong class="text-on-surface">Evaluación de modelos:</strong> Análisis, pruebas y
+                benchmarking de modelos LLM para optimizar el consumo de tokens y mejorar la precisión de las
+                respuestas.</li>
+              <li class="mb-4"><strong class="text-on-surface">Orquestación de agentes IA:</strong> Definición de flujos
+                de trabajo con fases de explicación, reflexión y uso de skills especializadas, mejorando la orientación
+                del LLM, la claridad de ejecución y reduciendo la aparición de incidencias.</li>
+              <li class="mb-4"><strong class="text-on-surface">Desarrollo Frontend y UX:</strong> Garantía del <span
+                  class="text-on-surface font-semibold">100% de consistencia visual</span> en las comunicaciones
+                externas mediante el diseño y desarrollo de plantillas de Outlook optimizadas, unificando la imagen
+                corporativa bajo estrictos criterios de usabilidad.</li>
+              <li class="mb-4"><strong class="text-on-surface">Automatización de infraestructura:</strong> Ahorro de
+                <span class="text-on-surface font-semibold">2 horas semanales</span> de gestión operativa mediante el
+                desarrollo de scripts en Bash para tareas del sistema, eliminando errores manuales y optimizando los
+                tiempos de ejecución.
+              </li>
+              <li class="mb-4"><strong class="text-on-surface">Optimización de entornos de desarrollo:</strong>
+                Aceleración de un <span class="text-on-surface font-semibold">85% en los tiempos de respuesta de
+                  Docker</span> mediante la automatización de builds condicionales, evitando la reconstrucción total del
+                proyecto y procesando únicamente los módulos modificados.</li>
+            </ul>
+            <div class="flex flex-wrap gap-2 pt-2">
+              <span
+                class="text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant">Bash</span>
+              <span
+                class="text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant">Docker</span>
+              <span
+                class="text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant">LM
+                Studio</span>
+              <span
+                class="text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant">Qwen</span>
+              <span
+                class="text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant">DeepSeek</span>
+            </div>
           </div>
         </div>
-
-        <div class="mt-8 flex justify-center space-x-4">
-          <a
-            href="https://es.linkedin.com/in/%C3%A1lvaro-pastor-periago-89912820a"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-gray-400 hover:text-indigo-600 transition-colors"
-            aria-label="Perfil de LinkedIn de Álvaro Pastor"
-          >
-            <i class="fab fa-linkedin text-xl"></i>
-          </a>
-          <a
-            href="https://github.com/alvaropas17"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-gray-400 hover:text-indigo-600 transition-colors"
-            aria-label="Perfil de GitHub de Álvaro Pastor"
-          >
-            <i class="fab fa-github text-xl"></i>
-          </a>
-          <a
-            href="https://wa.me/633962600?text=Hola%20estamos%20interesados%20en%20tu%20perfil,%20¿cuándo%20podemos%20hablar?"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-gray-400 hover:text-green-600 transition-colors"
-            aria-label="Contacto directo por WhatsApp"
-          >
-            <i class="fab fa-whatsapp text-xl"></i>
-          </a>
+        <div class="relative timeline-line timeline-dot">
+          <div class="space-y-2">
+            <div class="text-secondary font-label-md font-bold uppercase tracking-widest">Marzo 2025 – Octubre 2025
+            </div>
+            <h3 class="font-headline-md text-2xl md:text-headline-md text-on-surface">Marketing digital y desarrollo web
+            </h3>
+            <p class="text-body-md text-text-muted">Colaboré en la creación de páginas web de Inversus, implementando
+              estrategias de producto al desarrollo de la web</p>
+          </div>
         </div>
-
-        <footer class="mt-6 text-center text-xs text-gray-500">
-          &copy; 2025 Álvaro Pastor. Todos los derechos reservados.
-        </footer>
+      </div>
+    </section>
+    <!-- Education Section -->
+    <section class="space-y-8 md:space-y-12" id="formacion">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-4">
+          <h2 class="font-headline-lg text-3xl md:text-headline-lg text-primary-fixed">Formación</h2>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <article class="glass-card p-6 md:p-8 rounded-xl space-y-3">
+          <div class="text-primary font-label-md font-bold uppercase tracking-widest">2024 - 2026 · Instituto FP San
+            Antonio</div>
+          <h3 class="font-headline-md text-xl md:text-headline-md text-on-surface">Técnico Superior en Desarrollo de
+            Aplicaciones
+            Web</h3>
+          <!-- <p class="text-body-md text-text-muted"></p> -->
+        </article>
+        <article class="glass-card p-6 md:p-8 rounded-xl">
+          <div class="text-secondary font-label-md font-bold uppercase tracking-widest">2020 - 2025 · UCAM</div>
+          <h3 class="font-headline-md text-xl md:text-headline-md text-on-surface">Grado en marketing y dirección
+            comercial</h3>
+          <!-- <p class="text-body-md text-text-muted"></p> -->
+        </article>
+      </div>
+    </section>
+    <!-- Stack Section -->
+    <section class="space-y-8 md:space-y-12" id="stack">
+      <div class="text-center space-y-4 max-w-2xl mx-auto">
+        <h2 class="font-headline-lg text-3xl md:text-headline-lg text-primary-fixed">Stack organizado por utilidad</h2>
+        <p class="text-body-lg text-text-muted">Herramientas que domino para construir, desplegar y optimizar.</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card p-6 rounded-xl space-y-4 hover:scale-[1.02] hover:shadow-primary/10">
+          <div class="p-3 bg-primary/10 rounded-lg w-fit text-primary">
+            <span class="material-symbols-outlined">web</span>
+          </div>
+          <h4 class="font-bold text-on-surface">Construir aplicaciones</h4>
+          <p class="text-sm text-text-muted">HTML, CSS, JS, Vue, Vite, Java, Node.js, Express.</p>
+        </div>
+        <div class="glass-card p-6 rounded-xl space-y-4 hover:scale-[1.02] hover:shadow-primary/10">
+          <div class="p-3 bg-secondary/10 rounded-lg w-fit text-secondary">
+            <span class="material-symbols-outlined">database</span>
+          </div>
+          <h4 class="font-bold text-on-surface">Datos y backend</h4>
+          <p class="text-sm text-text-muted">PostgreSQL, MySQL, MariaDB, Sequelize, JWT, APIs REST.</p>
+        </div>
+        <div class="glass-card p-6 rounded-xl space-y-4 hover:scale-[1.02] hover:shadow-primary/10">
+          <div class="p-3 bg-tertiary-container/20 rounded-lg w-fit text-tertiary">
+            <span class="material-symbols-outlined">auto_awesome</span>
+          </div>
+          <h4 class="font-bold text-on-surface">IA y automatización</h4>
+          <p class="text-sm text-text-muted">Gemini API, DeepSeek, Qwen, LM Studio, Agentes, Bash.</p>
+        </div>
+        <div class="glass-card p-6 rounded-xl space-y-4 hover:scale-[1.02] hover:shadow-primary/10">
+          <div class="p-3 bg-on-surface-variant/10 rounded-lg w-fit text-on-surface-variant">
+            <span class="material-symbols-outlined">construction</span>
+          </div>
+          <h4 class="font-bold text-on-surface">Herramientas</h4>
+          <p class="text-sm text-text-muted">Git, Linux, Render, Vercel, Supabase, Docker básico.</p>
+        </div>
+      </div>
+    </section>
+    <!-- Contact CTA -->
+    <section class="px-4 sm:px-0" id="contacto">
+      <div
+        class="relative bg-primary/5 border border-primary/20 rounded-[40px] p-8 md:p-12 lg:p-24 text-center space-y-8 overflow-hidden">
+        <div class="absolute -top-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px]"></div>
+        <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-secondary/10 rounded-full blur-[80px]"></div>
+        <div class="relative space-y-6 max-w-3xl mx-auto">
+          <span class="text-primary font-bold tracking-[0.2em] uppercase text-xs">Disponible para oportunidades
+            junior</span>
+          <h2 class="font-display-lg text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-primary-fixed">¿Buscas un perfil
+            junior que
+            conecte desarrollo, producto e IA?</h2>
+          <p class="text-body-lg text-text-muted">Estoy orientado a puestos de desarrollo web, automatización e
+            integración práctica de IA en productos o procesos internos.</p>
+          <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 pt-6"><a
+              class="px-8 sm:px-10 py-4 bg-primary text-on-primary rounded-full font-button text-button hover:shadow-lg hover:shadow-primary/20 transition-all w-full sm:w-auto flex items-center justify-center gap-2"
+              href="mailto:alvpastor17@gmail.com"><span class="material-symbols-outlined">mail</span> Enviar email</a><a
+              class="px-8 sm:px-10 py-4 bg-surface-container-high border border-glass-border text-on-surface rounded-full font-button text-button hover:bg-surface-variant w-full sm:w-auto flex items-center justify-center gap-2"
+              href="https://es.linkedin.com/in/%C3%A1lvaro-pastor"><span class="material-symbols-outlined">person</span>
+              LinkedIn</a><a
+              class="px-8 sm:px-10 py-4 bg-surface-container-high border border-glass-border text-on-surface rounded-full font-button text-button hover:bg-surface-variant w-full sm:w-auto flex items-center justify-center gap-2"
+              href="https://github.com/alvaropas17/alvaropas17"><span class="material-symbols-outlined">code</span>
+              GitHub</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Footer from COMPONENTS_4 -->
+  <footer
+    class="w-full py-8 md:py-section-gap-md border-t border-glass-border bg-surface-container-lowest mt-12 md:mt-24">
+    <div
+      class="flex flex-col md:flex-row justify-between items-center px-4 md:px-gutter max-w-container-max mx-auto gap-6 md:gap-8">
+      <div class="space-y-2 md:space-y-4 text-center md:text-left">
+        <a class="font-headline-md text-2xl md:text-headline-md text-primary" href="#top">Álvaro Pastor</a>
+        <p class="font-body-md text-body-md text-text-muted">© 2026 Junior Dev &amp; AI specialist.</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-6 md:gap-8">
+        <a class="text-text-muted hover:text-primary hover:glow-gold transition-all duration-300"
+          href="https://es.linkedin.com/in/%C3%A1lvaro-pastor">LinkedIn</a>
+        <a class="text-text-muted hover:text-primary hover:glow-gold transition-all duration-300"
+          href="https://github.com/alvaropas17/alvaropas17">GitHub</a>
+        <a class="text-text-muted hover:text-primary hover:glow-gold transition-all duration-300"
+          href="mailto:alvpastor17@gmail.com">Email</a>
       </div>
     </div>
-  </body>
+  </footer>
+
+
+</body>
+
 </html>

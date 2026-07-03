@@ -1,24 +1,45 @@
-# Ignorar dependencias y archivos temporales
+# Dependencias
 node_modules/
-# Ignorar archivos de configuración de VS Code
-.vscode/
-# Ignorar archivos de sistema
+
+# Archivos de sistema
 .DS_Store
 Thumbs.db
-# Ignorar lockfile si usas npm
+
+# Lockfile
 package-lock.json
-# Ignorar carpeta de Git
+
+# Git
 .git/
-# Ignorar archivos temporales
+
+# Archivos temporales
 *.log
-# Ignorar archivos de entorno
+
+# Entorno
 .env
 .env.local
 .env.*
-# Ignorar archivos de compilación
+
+# Compilación / Salida generada
 /dist/
 /build/
-# Ignorar archivos de caché
+styles/output.css
+styles/styles.css
+
+# Fuente local no referenciada (se carga desde Google Fonts)
+fonts/
+
+# Caché
 .cache/
-# Ignorar archivos de pruebas
 coverage/
+
+# Configuración de agente (OpenCode)
+.agents/
+
+# Artefactos de Playwright MCP
+.playwright-mcp/
+
+# Capturas y snapshots de pruebas
+chrome-header-check.png
+iphone-check-after.png
+mobile-snapshot.yml
+page-snapshot.yml

@@ -1,5 +1,11 @@
 {
   "dependencies": {
-    "sitemap": "^8.0.0"
+    "@tailwindcss/cli": "^4.3.2",
+    "sitemap": "^8.0.0",
+    "tailwindcss": "^4.3.2"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -i ./styles/input.css -o ./styles/output.css --minify",
+    "watch:css": "tailwindcss -i ./styles/input.css -o ./styles/output.css --watch"
   }
 }
