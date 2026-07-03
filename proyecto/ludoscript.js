@@ -12,19 +12,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("opacity-100", "translate-y-0");
-        entry.target.classList.remove("opacity-0", "translate-y-10");
-      }
-    });
-  }, { threshold: 0.1 });
+  const revealSection = (section) => {
+    section.classList.add("opacity-100", "translate-y-0");
+    section.classList.remove("opacity-0", "translate-y-10");
+  };
 
-  document.querySelectorAll("section").forEach((section) => {
-    section.classList.add("transition-all", "duration-700", "opacity-0", "translate-y-10");
-    observer.observe(section);
-  });
+  const sections = document.querySelectorAll("section");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if ("IntersectionObserver" in window && !prefersReducedMotion) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          revealSection(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.02 });
+
+    sections.forEach((section) => {
+      section.classList.add("transition-all", "duration-700", "opacity-0", "translate-y-10");
+      observer.observe(section);
+    });
+  } else {
+    sections.forEach(revealSection);
+  }
 
   const featureImage = document.querySelector("#ludoscript-feature-image");
   const featureCards = Array.from(document.querySelectorAll(".feature-card"));

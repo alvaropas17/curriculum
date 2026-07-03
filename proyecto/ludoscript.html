@@ -17,6 +17,10 @@
   <link href="../styles/output.css" rel="stylesheet" />
   <script src="./ludoscript.js"></script>
   <style>
+    :root {
+      --ludo-mobile-section-gap: 4rem;
+    }
+
     .material-symbols-outlined {
       font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
     }
@@ -61,6 +65,132 @@
       background: #f6d186;
       width: 1.6rem;
     }
+
+    .ludo-carousel-mark {
+      position: relative;
+      display: inline-flex;
+      width: 1.5rem;
+      height: 1.25rem;
+      flex: 0 0 auto;
+      border: 2px solid rgba(246, 209, 134, 0.82);
+      border-radius: 0.35rem;
+    }
+
+    .ludo-carousel-mark::before,
+    .ludo-carousel-mark::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 0.32rem;
+      height: 0.32rem;
+      border-radius: 999px;
+      background: rgba(246, 209, 134, 0.82);
+      transform: translateY(-50%);
+    }
+
+    .ludo-carousel-mark::before {
+      left: 0.28rem;
+    }
+
+    .ludo-carousel-mark::after {
+      right: 0.28rem;
+    }
+
+    @media (max-width: 767px) {
+      main {
+        padding-top: 6.5rem;
+      }
+
+      section {
+        padding-top: var(--ludo-mobile-section-gap);
+        padding-bottom: var(--ludo-mobile-section-gap);
+      }
+
+      h1.text-headline-lg,
+      h2.text-headline-lg {
+        font-size: 2.25rem;
+        line-height: 1.12;
+        letter-spacing: 0;
+      }
+
+      h3.text-headline-md {
+        font-size: 1.5rem;
+        line-height: 1.25;
+      }
+
+      .ludo-nav-inner {
+        gap: 0.75rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .ludo-brand {
+        font-size: 1.375rem;
+        line-height: 1.15;
+      }
+
+      .ludo-nav-cta {
+        flex-shrink: 0;
+        max-width: 44%;
+        padding: 0.6rem 0.9rem;
+        font-size: 0.875rem;
+        line-height: 1.15;
+        text-align: center;
+        white-space: normal;
+      }
+
+      .ludo-kicker {
+        font-size: 0.75rem;
+        line-height: 1.25;
+        letter-spacing: 0.12em;
+      }
+
+      .ludo-browser-url {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .ludo-feature-card {
+        border-radius: 1rem;
+        padding: 1rem;
+      }
+
+      .ludo-feature-card h4 {
+        font-size: 1rem;
+        line-height: 1.25;
+      }
+
+      .ludo-feature-card p {
+        font-size: 0.875rem;
+        line-height: 1.45;
+      }
+
+      .ludo-cta-panel {
+        border-radius: 1.25rem;
+        padding: 2rem 1rem;
+      }
+
+      .ludo-button-row {
+        width: 100%;
+      }
+
+      .ludo-button-row > a {
+        width: 100%;
+        justify-content: center;
+        padding: 0.95rem 1.25rem;
+        text-align: center;
+        line-height: 1.2;
+      }
+
+      .ludo-footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 0.75rem;
+        text-align: center;
+      }
+    }
   </style>
 </head>
 
@@ -72,8 +202,8 @@
   </div>
   <!-- Header / Navigation -->
   <nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-lg border-b border-glass-border">
-    <div class="flex justify-between items-center max-w-container-max mx-auto px-gutter py-4">
-      <a class="font-headline-md text-headline-md font-bold text-primary dark:text-primary" href="../index.html">Álvaro
+    <div class="ludo-nav-inner flex justify-between items-center max-w-container-max mx-auto px-gutter py-4">
+      <a class="ludo-brand font-headline-md text-headline-md font-bold text-primary dark:text-primary" href="../index.html">Álvaro
         Pastor</a>
       <div class="hidden md:flex items-center gap-8">
         <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors"
@@ -85,7 +215,7 @@
         <a class="font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors"
           href="#demo">Insights</a>
       </div>
-      <a class="px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-button text-button hover:opacity-90 transition-all active:scale-95"
+      <a class="ludo-nav-cta px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-button text-button hover:opacity-90 transition-all active:scale-95"
         href="../index.html">
         Volver al Portfolio
       </a>
@@ -96,7 +226,7 @@
     <section class="max-w-container-max mx-auto px-gutter mb-section-gap-lg">
       <div class="flex flex-col items-center text-center mb-16">
         <span
-          class="px-4 py-1.5 rounded-full glass-effect text-primary font-label-md text-label-md uppercase tracking-widest mb-6">Caso
+          class="ludo-kicker px-4 py-1.5 rounded-full glass-effect text-primary font-label-md text-label-md uppercase tracking-widest mb-6">Caso
           de Proyecto · IA Educativa</span>
         <h1 class="font-headline-lg text-headline-lg md:text-display-lg text-text-primary mb-8 max-w-4xl">
           Aprender no debería depender de repetir preguntas al azar.
@@ -120,7 +250,7 @@
           <div class="browser-dot bg-red-500/40"></div>
           <div class="browser-dot bg-yellow-500/40"></div>
           <div class="browser-dot bg-green-500/40"></div>
-          <div class="ml-4 px-4 py-1 rounded-md bg-white/5 text-[10px] text-text-muted font-mono">
+          <div class="ludo-browser-url ml-4 px-4 py-1 rounded-md bg-white/5 text-[10px] text-text-muted font-mono">
             ludoscript.vercel.app</div>
         </div>
         <div class="glass-effect rounded-b-xl overflow-hidden shadow-2xl">
@@ -279,7 +409,7 @@
               <div class="browser-dot bg-red-500/40"></div>
               <div class="browser-dot bg-yellow-500/40"></div>
               <div class="browser-dot bg-green-500/40"></div>
-              <div class="ml-4 px-4 py-1 rounded-md bg-white/5 text-[10px] text-text-muted font-mono">
+              <div class="ludo-browser-url ml-4 px-4 py-1 rounded-md bg-white/5 text-[10px] text-text-muted font-mono">
                 ludoscript.vercel.app</div>
             </div>
             <div class="glass-effect rounded-b-xl overflow-hidden shadow-2xl border border-glass-border">
@@ -294,20 +424,20 @@
         <!-- Sidebar Navigation -->
         <div class="lg:col-span-4 space-y-4" id="ludoscript-feature-cards">
           <button type="button"
-            class="feature-card is-active w-full text-left p-6 rounded-2xl glass-effect border border-glass-border hover:border-primary/30 transition-all cursor-pointer"
+            class="ludo-feature-card feature-card is-active w-full text-left p-6 rounded-2xl glass-effect border border-glass-border hover:border-primary/30 transition-all cursor-pointer"
             data-feature-index="0">
             <h4 class="font-bold text-primary mb-1">Home</h4>
             <p class="text-sm text-text-muted">La puerta de entrada a la plataforma.</p>
           </button>
           <button type="button"
-            class="feature-card w-full text-left p-6 rounded-2xl glass-effect border border-glass-border hover:border-primary/30 transition-all cursor-pointer"
+            class="ludo-feature-card feature-card w-full text-left p-6 rounded-2xl glass-effect border border-glass-border hover:border-primary/30 transition-all cursor-pointer"
             data-feature-index="1">
             <div class="flex items-start justify-between gap-4">
               <div>
                 <h4 class="font-bold text-text-primary mb-1">Quiz</h4>
                 <p class="text-sm text-text-muted">Preparación, práctica y resultados.</p>
               </div>
-              <span class="material-symbols-outlined text-primary/80 text-xl">view_carousel</span>
+              <span class="ludo-carousel-mark" aria-hidden="true"></span>
             </div>
             <div class="flex gap-2 mt-4" aria-label="Capturas del quiz">
               <span class="feature-dot quiz-dot is-active h-2 w-2 rounded-full bg-white/25 transition-all" data-quiz-dot="0"></span>
@@ -316,14 +446,14 @@
             </div>
           </button>
           <button type="button"
-            class="feature-card w-full text-left p-6 rounded-2xl glass-effect border border-glass-border hover:border-primary/30 transition-all cursor-pointer"
+            class="ludo-feature-card feature-card w-full text-left p-6 rounded-2xl glass-effect border border-glass-border hover:border-primary/30 transition-all cursor-pointer"
             data-feature-index="2">
             <div class="flex items-start justify-between gap-4">
               <div>
                 <h4 class="font-bold text-text-primary mb-1">Progreso</h4>
                 <p class="text-sm text-text-muted">Seguimiento de puntos débiles y evolución.</p>
               </div>
-              <span class="material-symbols-outlined text-primary/80 text-xl">view_carousel</span>
+              <span class="ludo-carousel-mark" aria-hidden="true"></span>
             </div>
             <div class="flex gap-2 mt-4" aria-label="Capturas de progreso">
               <span class="feature-dot progress-dot h-2 w-2 rounded-full bg-white/25 transition-all"
@@ -335,7 +465,7 @@
             </div>
           </button>
           <button type="button"
-            class="feature-card w-full text-left p-6 rounded-2xl glass-effect border border-glass-border hover:border-primary/30 transition-all cursor-pointer"
+            class="ludo-feature-card feature-card w-full text-left p-6 rounded-2xl glass-effect border border-glass-border hover:border-primary/30 transition-all cursor-pointer"
             data-feature-index="3">
             <h4 class="font-bold text-text-primary mb-1">Aprendizaje</h4>
             <p class="text-sm text-text-muted">Refuerzo visual del recorrido de estudio.</p>
@@ -472,12 +602,12 @@
     </section>
     <!-- Footer CTA -->
     <section class="max-w-container-max mx-auto px-gutter py-section-gap-lg text-center" id="demo">
-      <div class="glass-effect rounded-3xl p-16 relative overflow-hidden border-2 border-primary/20">
+      <div class="ludo-cta-panel glass-effect rounded-3xl p-16 relative overflow-hidden border-2 border-primary/20">
         <h2 class="font-headline-lg text-headline-lg text-text-primary mb-6">¿Quieres ver el código?</h2>
         <p class="text-text-muted mb-6 max-w-xl mx-auto">Prueba el proyecto.</p>
         <p class="text-text-muted mb-10 max-w-xl mx-auto text-sm">La demo está optimizada para mostrar el flujo de
           aprendizaje con contenido controlado. La carga de documentos propios puede estar limitada o no disponible.</p>
-        <div class="flex flex-wrap justify-center gap-4">
+        <div class="ludo-button-row flex flex-wrap justify-center gap-4">
           <a class="px-10 py-4 rounded-full bg-primary text-on-primary font-button hover:shadow-lg hover:shadow-primary/20 transition-all"
             href="https://ludoscript.vercel.app/">Pruébalo</a>
           <a class="px-10 py-4 rounded-full glass-effect border border-glass-border font-button hover:bg-white/5 transition-all flex items-center gap-2"
@@ -497,7 +627,7 @@
         <span class="text-text-muted">|</span>
         <p class="text-text-muted font-body-md text-body-md">© 2026</p>
       </div>
-      <div class="flex items-center gap-6">
+      <div class="ludo-footer-links flex items-center gap-6">
         <a class="text-text-muted hover:text-on-surface transition-opacity font-body-md text-body-md"
           href="#">LinkedIn</a>
         <a class="text-text-muted hover:text-on-surface transition-opacity font-body-md text-body-md"
