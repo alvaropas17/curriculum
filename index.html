@@ -149,13 +149,13 @@
       <a class="site-brand font-headline-md md:text-headline-md font-semibold text-primary min-w-0 truncate"
         href="#top">Álvaro Pastor</a>
       <nav class="hidden md:flex gap-8 font-label-md text-label-md">
-        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#valor">Valor</a>
-        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300"
+        <a class="nav-link" href="#valor">Valor</a>
+        <a class="nav-link"
           href="#proyecto">Proyectos</a>
-        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300"
+        <a class="nav-link"
           href="#experiencia">Experiencia</a>
-        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#stack">Stack</a>
-        <a class="text-on-surface-variant hover:text-primary transition-colors duration-300"
+        <a class="nav-link" href="#stack">Stack</a>
+        <a class="nav-link"
           href="#contacto">Contacto</a>
       </nav>
       <a class="site-cv-link shrink-0 px-4 sm:px-6 py-2 bg-primary text-on-primary rounded-full font-button text-sm md:text-button hover:opacity-90 transition-opacity"
@@ -177,32 +177,32 @@
           soluciones útiles: aplicaciones, automatizaciones e interfaces que resuelven problemas reales.
         </p>
         <div class="flex flex-wrap gap-4 pt-4">
-          <a class="px-8 py-3 bg-primary text-on-primary rounded-full font-button text-button hover:translate-y-[-1px] transition-transform w-full sm:w-auto text-center"
+          <a class="btn-primary hover:translate-y-[-1px] transition-transform"
             href="#proyecto">
             Ver proyecto principal
           </a>
-          <a class="px-8 py-3 bg-surface-container-high border border-glass-border text-on-surface rounded-full font-button text-button hover:bg-surface-variant transition-colors w-full sm:w-auto text-center"
+          <a class="btn-secondary"
             href="#contacto">
             Contactar
           </a>
         </div>
         <div class="flex flex-wrap gap-2 pt-4 justify-center sm:justify-start">
           <span
-            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">JavaScript</span>
+            class="tag-skill">JavaScript</span>
           <span
-            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">Vue</span>
+            class="tag-skill">Vue</span>
           <span
-            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">Node
+            class="tag-skill">Node
             / Express</span>
           <span
-            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">PostgreSQL</span>
+            class="tag-skill">PostgreSQL</span>
           <span
-            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">LLMs</span>
+            class="tag-skill">LLMs</span>
           <span
-            class="px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border">Automatización</span>
+            class="tag-skill">Automatización</span>
         </div>
       </div>
-      <aside class="glass-card p-6 md:p-8 rounded-xl space-y-6">
+      <aside class="glass-card card-pad space-y-6">
         <h3 class="font-headline-md text-headline-md text-primary">¿Quién soy?</h3>
         <p class="text-body-md text-text-muted">
           Perfil junior orientado a desarrollo web, integración de IA y automatización de procesos. Especialmente útil
@@ -229,16 +229,16 @@
       </aside>
     </section>
     <!-- Value Proposition -->
-    <section class="space-y-8 md:space-y-12" id="valor">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <section class="section-container" id="valor">
+      <div class="section-header">
         <div class="space-y-4">
-          <h2 class="font-headline-lg text-3xl md:text-headline-lg text-primary-fixed">Por qué puedo aportar valor</h2>
+          <h2 class="section-heading">Por qué puedo aportar valor</h2>
           <p class="text-body-lg text-text-muted max-w-xl">Uso la tecnología para desarrollar soluciones enfocadas en el
             usuario.</p>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <article class="glass-card p-6 md:p-8 rounded-xl border-b-2 border-b-primary/20">
+        <article class="glass-card card-pad border-b-2 border-b-primary/20">
           <div class="w-12 h-12 bg-gold-glow rounded-lg flex items-center justify-center mb-6 text-primary">
             <span class="material-symbols-outlined">psychology_alt</span>
           </div>
@@ -246,7 +246,7 @@
           <p class="text-text-muted">Combino desarrollo web con mentalidad de marketing y producto. Eso me ayuda a
             pensar en usuarios, conversión, claridad y utilidad real.</p>
         </article>
-        <article class="glass-card p-6 md:p-8 rounded-xl border-b-2 border-b-secondary/20">
+        <article class="glass-card card-pad border-b-2 border-b-secondary/20">
           <div
             class="w-12 h-12 bg-secondary-container/20 rounded-lg flex items-center justify-center mb-6 text-secondary">
             <span class="material-symbols-outlined">smart_toy</span>
@@ -255,7 +255,7 @@
           <p class="text-text-muted">He trabajado con modelos, agentes, IA local, APIs y automatización. No como
             concepto abstracto, sino como herramienta para mejorar procesos.</p>
         </article>
-        <article class="glass-card p-6 md:p-8 rounded-xl border-b-2 border-b-primary/20">
+        <article class="glass-card card-pad border-b-2 border-b-primary/20">
           <div class="w-12 h-12 bg-gold-glow rounded-lg flex items-center justify-center mb-6 text-primary">
             <span class="material-symbols-outlined">architecture</span>
           </div>
@@ -266,7 +266,7 @@
       </div>
     </section>
     <!-- Main Project: LudoScript -->
-    <section class="space-y-8 md:space-y-12" id="proyecto">
+    <section class="section-container" id="proyecto">
       <div
         class="bg-surface-container-low rounded-3xl overflow-hidden border border-glass-border shadow-lg shadow-primary/5 border-primary/20">
         <div class="grid grid-cols-1 lg:grid-cols-2 items-stretch">
@@ -300,10 +300,10 @@
               </li>
             </ul>
             <div class="flex flex-wrap gap-4 pt-4">
-              <a class="px-8 py-3 bg-primary text-on-primary rounded-full font-button text-button w-full sm:w-auto text-center"
+              <a class="btn-primary"
                 href="./proyecto/ludoscript.html">Ver caso
                 completo</a>
-              <a class="px-8 py-3 bg-transparent border border-glass-border text-on-surface rounded-full font-button text-button hover:bg-surface-variant transition-colors w-full sm:w-auto text-center"
+              <a class="btn-secondary bg-transparent"
                 href="https://github.com/alvaropas17/alvaropas17">GitHub</a>
             </div>
           </div>
@@ -331,10 +331,10 @@
       </div>
     </section>
     <!-- Experience Timeline -->
-    <section class="space-y-8 md:space-y-12" id="experiencia">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <section class="section-container" id="experiencia">
+      <div class="section-header">
         <div class="space-y-4">
-          <h2 class="font-headline-lg text-3xl md:text-headline-lg text-primary-fixed">Experiencia</h2>
+          <h2 class="section-heading">Experiencia</h2>
           <p class="text-body-lg text-text-muted max-w-xl">Evidencia de problemas resueltos y formación técnica sólida.
           </p>
         </div>
@@ -363,16 +363,16 @@
             </ul>
             <div class="flex flex-wrap gap-2 pt-2">
               <span
-                class="text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant">Bash</span>
+                class="tag-skill-sm">Bash</span>
               <span
-                class="text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant">Docker</span>
+                class="tag-skill-sm">Docker</span>
               <span
-                class="text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant">LM
+                class="tag-skill-sm">LM
                 Studio</span>
               <span
-                class="text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant">Qwen</span>
+                class="tag-skill-sm">Qwen</span>
               <span
-                class="text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant">DeepSeek</span>
+                class="tag-skill-sm">DeepSeek</span>
             </div>
           </div>
         </div>
@@ -389,14 +389,14 @@
       </div>
     </section>
     <!-- Education Section -->
-    <section class="space-y-8 md:space-y-12" id="formacion">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+    <section class="section-container" id="formacion">
+      <div class="section-header">
         <div class="space-y-4">
-          <h2 class="font-headline-lg text-3xl md:text-headline-lg text-primary-fixed">Formación</h2>
+          <h2 class="section-heading">Formación</h2>
         </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <article class="glass-card p-6 md:p-8 rounded-xl space-y-3">
+        <article class="glass-card card-pad space-y-3">
           <div class="text-primary font-label-md font-bold uppercase tracking-widest">2024 - 2026 · Instituto FP San
             Antonio</div>
           <h3 class="font-headline-md text-xl md:text-headline-md text-on-surface">Técnico Superior en Desarrollo de
@@ -404,7 +404,7 @@
             Web</h3>
           <!-- <p class="text-body-md text-text-muted"></p> -->
         </article>
-        <article class="glass-card p-6 md:p-8 rounded-xl">
+        <article class="glass-card card-pad">
           <div class="text-secondary font-label-md font-bold uppercase tracking-widest">2020 - 2025 · UCAM</div>
           <h3 class="font-headline-md text-xl md:text-headline-md text-on-surface">Grado en marketing y dirección
             comercial</h3>
@@ -413,9 +413,9 @@
       </div>
     </section>
     <!-- Stack Section -->
-    <section class="space-y-8 md:space-y-12" id="stack">
+    <section class="section-container" id="stack">
       <div class="text-center space-y-4 max-w-2xl mx-auto">
-        <h2 class="font-headline-lg text-3xl md:text-headline-lg text-primary-fixed">Stack organizado por utilidad</h2>
+        <h2 class="section-heading">Stack organizado por utilidad</h2>
         <p class="text-body-lg text-text-muted">Herramientas que domino para construir, desplegar y optimizar.</p>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -464,12 +464,12 @@
           <p class="text-body-lg text-text-muted">Estoy orientado a puestos de desarrollo web, automatización e
             integración práctica de IA en productos o procesos internos.</p>
           <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 pt-6"><a
-              class="px-8 sm:px-10 py-4 bg-primary text-on-primary rounded-full font-button text-button hover:shadow-lg hover:shadow-primary/20 transition-all w-full sm:w-auto flex items-center justify-center gap-2"
-              href="mailto:alvpastor17@gmail.com"><span class="material-symbols-outlined">mail</span> Enviar email</a><a
-              class="px-8 sm:px-10 py-4 bg-surface-container-high border border-glass-border text-on-surface rounded-full font-button text-button hover:bg-surface-variant w-full sm:w-auto flex items-center justify-center gap-2"
+              class="btn-primary py-4 sm:px-10 flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-primary/20 transition-all"
+              href="mailto:alvpastor17@gmail.com" data-clarity-mask="true"><span class="material-symbols-outlined">mail</span> Enviar email</a><a
+              class="btn-secondary py-4 sm:px-10 flex items-center justify-center gap-2"
               href="https://es.linkedin.com/in/%C3%A1lvaro-pastor"><span class="material-symbols-outlined">person</span>
               LinkedIn</a><a
-              class="px-8 sm:px-10 py-4 bg-surface-container-high border border-glass-border text-on-surface rounded-full font-button text-button hover:bg-surface-variant w-full sm:w-auto flex items-center justify-center gap-2"
+              class="btn-secondary py-4 sm:px-10 flex items-center justify-center gap-2"
               href="https://github.com/alvaropas17/alvaropas17"><span class="material-symbols-outlined">code</span>
               GitHub</a></div>
         </div>
@@ -491,7 +491,7 @@
         <a class="text-text-muted hover:text-primary hover:glow-gold transition-all duration-300"
           href="https://github.com/alvaropas17/alvaropas17">GitHub</a>
         <a class="text-text-muted hover:text-primary hover:glow-gold transition-all duration-300"
-          href="mailto:alvpastor17@gmail.com">Email</a>
+          href="mailto:alvpastor17@gmail.com" data-clarity-mask="true">Email</a>
       </div>
     </div>
   </footer>

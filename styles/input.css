@@ -185,6 +185,72 @@ header[id] {
   box-shadow: 0 0 40px rgba(216, 181, 109, 0.15);
 }
 
+/* === Component classes (extraídas de Tailwind repetido) === */
+
+.nav-link {
+  @apply text-on-surface-variant hover:text-primary transition-colors duration-300;
+}
+
+.section-container {
+  @apply space-y-8 md:space-y-12;
+}
+
+.section-header {
+  @apply flex flex-col md:flex-row md:items-end justify-between gap-6;
+}
+
+.section-heading {
+  @apply font-headline-lg text-3xl md:text-headline-lg text-primary-fixed;
+}
+
+.tag-skill {
+  @apply px-3 py-1 bg-surface-container rounded-lg text-label-md text-on-surface-variant border border-glass-border;
+}
+
+.tag-skill-sm {
+  @apply text-xs px-2 py-1 bg-surface-container rounded border border-glass-border text-on-surface-variant;
+}
+
+.card-pad {
+  @apply p-6 md:p-8 rounded-xl;
+}
+
+.btn-primary {
+  @apply px-8 py-3 bg-primary text-on-primary rounded-full font-button text-button w-full sm:w-auto text-center;
+}
+
+.btn-secondary {
+  @apply px-8 py-3 bg-surface-container-high border border-glass-border text-on-surface rounded-full font-button text-button hover:bg-surface-variant transition-colors w-full sm:w-auto text-center;
+}
+
+.nav-link-ludo {
+  @apply font-label-md text-label-md uppercase tracking-wider text-on-surface-variant hover:text-primary transition-colors;
+}
+
+.tag-hero {
+  @apply px-3 py-1 rounded-full bg-gold-glow text-primary text-xs font-semibold;
+}
+
+.icon-box {
+  @apply w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-6;
+}
+
+.step-circle {
+  @apply w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center text-primary font-bold text-xl transition-all duration-500;
+}
+
+.feature-card-base {
+  @apply w-full text-left p-6 rounded-2xl border border-glass-border hover:border-primary/30 transition-all cursor-pointer;
+}
+
+.link-footer {
+  @apply text-text-muted hover:text-on-surface transition-opacity font-body-md text-body-md;
+}
+
+.card-glass-pad {
+  @apply p-8 rounded-xl;
+}
+
 .browser-dot {
   width: 10px;
   height: 10px;
