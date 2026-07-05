@@ -151,8 +151,7 @@
         box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
       }
 
-      .analytics-consent-banner[hidden],
-      .analytics-consent-control[hidden] {
+      .analytics-consent-banner[hidden] {
         display: none;
       }
 
@@ -196,25 +195,9 @@
         color: #f7f1e4;
       }
 
-      .analytics-consent-button:focus-visible,
-      .analytics-consent-control:focus-visible {
+      .analytics-consent-button:focus-visible {
         outline: 3px solid #91b7ff;
         outline-offset: 3px;
-      }
-
-      .analytics-consent-control {
-        position: fixed;
-        right: 1rem;
-        bottom: 1rem;
-        z-index: 9998;
-        min-height: 42px;
-        padding: 0 1rem;
-        border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.16);
-        background: rgba(34, 35, 38, 0.92);
-        color: #f6d186;
-        cursor: pointer;
-        font: 700 0.82rem/1 Lexend, system-ui, sans-serif;
       }
 
       @media (max-width: 520px) {
@@ -229,11 +212,6 @@
 
   function removeBanner() {
     document.getElementById("analytics-consent-banner")?.remove();
-  }
-
-  function showControl() {
-    const control = document.getElementById("analytics-consent-control");
-    if (control) control.hidden = false;
   }
 
   function showBanner() {
@@ -267,29 +245,9 @@
     document.body.appendChild(banner);
   }
 
-  function buildControl() {
-    buildStyles();
-
-    if (document.getElementById("analytics-consent-control")) return;
-
-    const control = document.createElement("button");
-    control.id = "analytics-consent-control";
-    control.className = "analytics-consent-control";
-    control.type = "button";
-    control.textContent = "Privacidad";
-    control.hidden = true;
-    control.addEventListener("click", () => {
-      showBanner();
-      control.hidden = true;
-    });
-
-    document.body.appendChild(control);
-  }
-
   function acceptAnalytics() {
     setConsent(ACCEPTED);
     removeBanner();
-    showControl();
     loadAnalytics();
   }
 
@@ -300,7 +258,6 @@
     }
     clearAnalyticsCookies();
     removeBanner();
-    showControl();
   }
 
   document.addEventListener("click", (event) => {
@@ -317,18 +274,14 @@
   });
 
   function initConsent() {
-    buildControl();
-
     const consent = getConsent();
 
     if (consent === ACCEPTED) {
-      showControl();
       loadAnalytics();
       return;
     }
 
     if (consent === REJECTED) {
-      showControl();
       return;
     }
 
