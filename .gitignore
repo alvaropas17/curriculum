@@ -24,9 +24,6 @@ package-lock.json
 /build/
 styles/styles.css
 
-# Fuente local no referenciada (se carga desde Google Fonts)
-fonts/
-
 # Caché
 .cache/
 coverage/

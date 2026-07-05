@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Lexend";
+  src: url("../fonts/Lexend-VariableFont_wght.ttf") format("truetype");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @source "../index.html";
 @source "../script.js";
 @source "../proyecto/ludoscript.html";
@@ -73,13 +81,13 @@
 
   --container-container-max: 1160px;
 
-  --font-headline-lg-mobile: "Playfair Display", serif;
+  --font-headline-lg-mobile: "Lexend", sans-serif;
   --font-button: "Lexend", sans-serif;
   --font-label-md: "Lexend", sans-serif;
   --font-body-md: "Lexend", sans-serif;
-  --font-headline-md: "Playfair Display", serif;
-  --font-display-lg: "Playfair Display", serif;
-  --font-headline-lg: "Playfair Display", serif;
+  --font-headline-md: "Lexend", sans-serif;
+  --font-display-lg: "Lexend", sans-serif;
+  --font-headline-lg: "Lexend", sans-serif;
   --font-body-lg: "Lexend", sans-serif;
 
   --text-headline-lg-mobile: 32px;

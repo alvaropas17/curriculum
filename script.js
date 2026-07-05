@@ -39,9 +39,3 @@ document.addEventListener('keydown', (e) => {
         closeMobileMenu();
     }
 });
-
-window.dataLayer = window.dataLayer || [];
-function gtag() { dataLayer.push(arguments); }
-gtag('js', new Date());
-
-gtag('config', 'G-EZ9VY5E3EE');
