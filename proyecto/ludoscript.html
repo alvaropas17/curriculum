@@ -1,626 +1,817 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="es">
+<html class="scroll-smooth" lang="es">
 
 <head>
   <script src="../scripts/analytics-consent.js" defer></script>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>LudoScript — Caso de Estudio</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-    rel="stylesheet" />
-  <link href="../styles/output.css" rel="stylesheet" />
-  <script src="./ludoscript.js"></script>
+  <title>LudoScript - Caso de Estudio</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "secondary-fixed-dim": "#9ee6dc",
+            "surface-tint": "#e8f3f5",
+            "on-primary-fixed": "#102f45",
+            "secondary-container": "#194a53",
+            "on-surface": "#f8fbfc",
+            "outline-variant": "#77a7b6",
+            "secondary-fixed": "#d5fff8",
+            "surface-variant": "#628fa3",
+            "secondary": "#9ee6dc",
+            "accent": "#ffbe76",
+            "accent-strong": "#ff8f70",
+            "primary-fixed-dim": "#d8eef4",
+            "surface-container-highest": "#315e74",
+            "surface-container": "#386b82",
+            "outline": "#d7edf0",
+            "on-surface-variant": "#dbe9ed",
+            "surface-container-high": "#2c566d",
+            "on-primary": "#17334a",
+            "inverse-surface": "#f8fbfc",
+            "surface-bright": "#477f94",
+            "primary-container": "#17334a",
+            "background": "#274f66",
+            "surface": "#274f66",
+            "primary": "#ffffff",
+            "surface-container-lowest": "#5d91a7",
+            "surface-container-low": "#315f78",
+            "primary-fixed": "#f7fbff"
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            lg: "0.25rem",
+            xl: "0.5rem",
+            full: "0.75rem"
+          },
+          spacing: {
+            "stack-md": "1.5rem",
+            "section-gap": "8rem",
+            "gutter": "2rem",
+            "stack-sm": "0.5rem",
+            "container-max": "1120px",
+            "stack-lg": "3rem"
+          },
+          fontFamily: {
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-md": ["Lexend"],
+            "display-lg-mobile": ["Lexend"],
+            "display-lg": ["Lexend"],
+            "headline-sm": ["Lexend"],
+            "label-md": ["Inter"]
+          },
+          fontSize: {
+            "body-lg": ["18px", { lineHeight: "1.7", fontWeight: "400" }],
+            "label-sm": ["12px", { lineHeight: "1", fontWeight: "500" }],
+            "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
+            "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "700" }],
+            "display-lg-mobile": ["40px", { lineHeight: "1.2", fontWeight: "700" }],
+            "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "0", fontWeight: "700" }],
+            "headline-sm": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
+            "label-md": ["14px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" }]
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root {
-      --ludo-mobile-section-gap: 4rem;
-    }
-
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-    }
-
-    .glass-effect {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .gold-gradient-text {
-      background: linear-gradient(135deg, #f6d186 0%, #d8b56d 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    @font-face {
+      font-family: "Lexend";
+      src: url("../fonts/Lexend-VariableFont_wght.ttf") format("truetype");
+      font-weight: 300 700;
+      font-style: normal;
+      font-display: swap;
     }
 
     body {
-      background-color: #2f3033;
       overflow-x: hidden;
     }
 
-    .glow-gold {
-      box-shadow: 0 0 40px rgba(216, 181, 109, 0.15);
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .hero-gradient {
+      background: linear-gradient(180deg, #274f66 0%, #315f78 46%, #274f66 100%);
+    }
+
+    .glass-card {
+      background: rgba(23, 51, 74, 0.42);
+      border: 1px solid rgba(215, 237, 240, 0.2);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 18px 50px -30px rgba(6, 24, 34, 0.7);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 60px -32px rgba(6, 24, 34, 0.86);
+      border-color: rgba(158, 230, 220, 0.58);
+    }
+
+    .hero-title {
+      font-size: clamp(2.15rem, 3.7vw, 3.25rem);
+      line-height: 1.12;
+    }
+
+    .case-hero-wrap {
+      max-width: 1480px;
+    }
+
+    .case-hero-copy {
+      max-width: 42rem;
+    }
+
+    .case-hero-media {
+      min-width: 0;
+    }
+
+    .case-hero-shot {
+      background: #0b1726;
+      object-fit: contain;
     }
 
     .browser-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 999px;
     }
 
-    .feature-card.is-active {
-      background: rgba(246, 209, 134, 0.10);
-      border-color: rgba(246, 209, 134, 0.42);
+    .feature-button.is-active {
+      border-color: rgba(158, 230, 220, 0.72);
+      background: rgba(158, 230, 220, 0.14);
     }
 
-    .feature-card.is-active h4 {
-      color: #f6d186;
+    .feature-button.is-active h3 {
+      color: #9ee6dc;
+    }
+
+    .feature-dot {
+      appearance: none;
+      border: 0;
+      flex: 0 0 auto;
+      min-height: 0 !important;
+      padding: 0;
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 999px;
+      background: rgba(248, 251, 252, 0.34);
+      transition: width 0.2s ease, background 0.2s ease, transform 0.2s ease;
     }
 
     .feature-dot.is-active {
-      background: #f6d186;
-      width: 1.6rem;
+      width: 1.85rem;
+      background: #ffbe76;
     }
 
-    .ludo-carousel-mark {
+    .feature-dot:hover,
+    .feature-dot:focus-visible {
+      background: rgba(248, 251, 252, 0.62);
+      outline: none;
+      transform: scale(1.08);
+    }
+
+    .feature-dot.is-active:hover,
+    .feature-dot.is-active:focus-visible {
+      background: #ffbe76;
+    }
+    #feature-controls {
+      display: none;
+    }
+
+    .feature-image {
+      aspect-ratio: 16 / 9;
+      cursor: zoom-in;
+      background: #0b1726;
+      object-fit: contain;
+    }
+
+    .feature-frame {
       position: relative;
-      display: inline-flex;
-      width: 1.5rem;
-      height: 1.25rem;
-      flex: 0 0 auto;
-      border: 2px solid rgba(246, 209, 134, 0.82);
-      border-radius: 0.35rem;
     }
 
-    .ludo-carousel-mark::before,
-    .ludo-carousel-mark::after {
-      content: "";
+    .gallery-arrow {
+      align-items: center;
+      background: rgba(23, 51, 74, 0.78);
+      border: 1px solid rgba(248, 251, 252, 0.28);
+      border-radius: 999px;
+      color: #ffffff;
+      display: inline-flex;
+      height: 2.75rem;
+      justify-content: center;
       position: absolute;
       top: 50%;
-      width: 0.32rem;
-      height: 0.32rem;
-      border-radius: 999px;
-      background: rgba(246, 209, 134, 0.82);
       transform: translateY(-50%);
+      transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+      width: 2.75rem;
+      z-index: 2;
     }
 
-    .ludo-carousel-mark::before {
-      left: 0.28rem;
+    .gallery-arrow:hover,
+    .gallery-arrow:focus-visible {
+      background: #ffbe76;
+      color: #17334a;
+      outline: none;
+      transform: translateY(-50%) scale(1.04);
     }
 
-    .ludo-carousel-mark::after {
-      right: 0.28rem;
+    .gallery-arrow.prev {
+      left: 0.85rem;
+    }
+
+    .gallery-arrow.next {
+      right: 0.85rem;
+    }
+
+    .lightbox-arrow {
+      height: 3rem;
+      position: fixed;
+      width: 3rem;
+    }
+
+    .lightbox-arrow.prev {
+      left: 1rem;
+    }
+
+    .lightbox-arrow.next {
+      right: 1rem;
+    }
+
+    .image-lightbox {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .image-lightbox.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .decision-step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem;
+    }
+
+    .decision-marker {
+      align-items: center;
+      background: #ffbe76;
+      border-radius: 999px;
+      color: #17334a;
+      display: inline-flex;
+      font-weight: 700;
+      height: 2.4rem;
+      justify-content: center;
+      width: 2.4rem;
     }
 
     @media (max-width: 767px) {
-      main {
-        padding-top: 6.5rem;
+      .section-pad {
+        padding-top: 3.75rem !important;
+        padding-bottom: 3.75rem !important;
       }
 
-      section {
-        padding-top: var(--ludo-mobile-section-gap);
-        padding-bottom: var(--ludo-mobile-section-gap);
+      .hero-title {
+        font-size: clamp(2rem, 10vw, 2.65rem);
       }
 
-      h1.text-headline-lg,
-      h2.text-headline-lg {
-        font-size: 2.25rem;
-        line-height: 1.12;
-        letter-spacing: 0;
+      .case-hero-copy {
+        max-width: none;
       }
 
-      h3.text-headline-md {
-        font-size: 1.5rem;
-        line-height: 1.25;
+      .case-hero-media {
+        margin-right: 0;
       }
 
-      .ludo-nav-inner {
-        gap: 0.75rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
+      .gallery-arrow {
+        height: 2.4rem;
+        width: 2.4rem;
       }
 
-      .ludo-brand {
-        font-size: 1.375rem;
-        line-height: 1.15;
+      .gallery-arrow.prev {
+        left: 0.65rem;
       }
 
-      .ludo-nav-cta {
-        flex-shrink: 0;
-        max-width: 44%;
-        padding: 0.6rem 0.9rem;
-        font-size: 0.875rem;
-        line-height: 1.15;
-        text-align: center;
-        white-space: normal;
+      .gallery-arrow.next {
+        right: 0.65rem;
       }
 
-      .ludo-kicker {
-        font-size: 0.75rem;
-        line-height: 1.25;
-        letter-spacing: 0.12em;
+      .feature-frame {
+        margin-left: -0.35rem;
+        margin-right: -0.35rem;
+        border-radius: 0;
       }
 
-      .ludo-browser-url {
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+      .feature-image {
+        aspect-ratio: 16 / 10;
+        background: #0b1726;
+        object-fit: contain !important;
+      }
+
+      #feature-dots {
+        margin-top: 0.9rem;
       }
 
-      .ludo-feature-card {
-        border-radius: 1rem;
-        padding: 1rem;
+      .decision-step {
+        grid-template-columns: 1fr;
       }
 
-      .ludo-feature-card h4 {
-        font-size: 1rem;
-        line-height: 1.25;
+      .lightbox-arrow {
+        bottom: 1rem;
+        top: auto;
+        transform: none;
       }
 
-      .ludo-feature-card p {
-        font-size: 0.875rem;
-        line-height: 1.45;
+      .lightbox-arrow:hover,
+      .lightbox-arrow:focus-visible {
+        transform: scale(1.04);
       }
 
-      .ludo-cta-panel {
-        border-radius: 1.25rem;
-        padding: 2rem 1rem;
+      .lightbox-arrow.prev {
+        left: calc(50% - 3.4rem);
       }
 
-      .ludo-button-row {
-        width: 100%;
+      .lightbox-arrow.next {
+        right: calc(50% - 3.4rem);
       }
+    }
 
-      .ludo-button-row>a {
-        width: 100%;
-        justify-content: center;
-        padding: 0.95rem 1.25rem;
-        text-align: center;
-        line-height: 1.2;
-      }
-
-      .ludo-footer-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        row-gap: 0.75rem;
-        text-align: center;
+    @media (pointer: coarse) {
+      .feature-button,
+      .gallery-arrow,
+      a,
+      button {
+        min-height: 2.75rem;
       }
     }
   </style>
 </head>
 
-<body class="font-body-md text-on-surface bg-background">
-  <!-- Background Atmospheric Effects -->
-  <div class="fixed inset-0 pointer-events-none z-0">
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 blur-[120px] rounded-full"></div>
-    <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 blur-[120px] rounded-full"></div>
-  </div>
-  <!-- Header / Navigation -->
-  <nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-lg border-b border-glass-border">
-    <div class="ludo-nav-inner flex justify-between items-center max-w-container-max mx-auto px-gutter py-4">
-      <a class="ludo-brand font-headline-md text-headline-md font-bold text-primary dark:text-primary"
-        href="../index.html">Álvaro
-        Pastor</a>
+<body class="bg-surface font-body-md text-on-surface">
+  <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm transition-all duration-300 ease-in-out">
+    <div class="max-w-container-max mx-auto px-4 md:px-gutter h-20 pt-2 flex items-center justify-between gap-4">
+      <a class="font-headline-sm text-headline-sm font-bold tracking-tighter text-primary truncate" href="../index.html">Álvaro Pastor</a>
       <div class="hidden md:flex items-center gap-8">
-        <a class="nav-link-ludo" href="#problema">Portfolio</a>
-        <a class="nav-link-ludo" href="#funciona">¿Cómo funciona?</a>
-        <a class="nav-link-ludo" href="#tecnica">Arquitectura</a>
-        <a class="nav-link-ludo" href="#demo">Insights</a>
+        <a class="font-label-sm text-label-sm transition-colors text-primary border-b-2 border-secondary" href="#top">Caso</a>
+        <a class="font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary" href="#flujo">Flujo</a>
+        <a class="font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary" href="#arquitectura">Arquitectura</a>
+        <a class="font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary" href="#decisiones">Decisiones</a>
       </div>
-      <a class="ludo-nav-cta px-6 py-2 rounded-full bg-primary-container text-on-primary-container font-button text-button hover:opacity-90 transition-all active:scale-95"
-        href="../index.html">
-        Volver al Portfolio
-      </a>
+      <a class="px-4 md:px-6 py-2 bg-white text-primary-container font-label-md text-label-md rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap" href="../index.html">Portfolio</a>
     </div>
   </nav>
-  <main class="relative z-10 pt-32">
-    <!-- Hero Section -->
-    <section class="max-w-container-max mx-auto px-gutter mb-section-gap-lg">
-      <div class="flex flex-col items-center text-center mb-16">
-        <span
-          class="ludo-kicker px-4 py-1.5 rounded-full glass-effect text-primary font-label-md text-label-md uppercase tracking-widest mb-6">Caso
-          de Proyecto · IA Educativa</span>
-        <h1 class="font-headline-lg text-headline-lg md:text-display-lg text-text-primary mb-8 max-w-4xl">
-          Aprender no debería depender de repetir preguntas al azar.
+
+  <main class="hero-gradient pt-20" id="top">
+    <section class="case-hero-wrap mx-auto px-4 md:px-gutter pt-20 md:pt-24 pb-20 md:pb-section-gap grid grid-cols-1 lg:grid-cols-[minmax(28rem,0.92fr)_minmax(0,1.08fr)] xl:grid-cols-[minmax(31rem,0.88fr)_minmax(0,1.12fr)] gap-10 xl:gap-14 items-center">
+      <div class="case-hero-copy space-y-stack-md">
+        <span class="inline-flex items-center gap-2 px-3 py-2 bg-secondary-fixed-dim/20 text-secondary font-label-sm text-label-sm tracking-widest uppercase rounded-lg">
+          <span class="material-symbols-outlined text-[16px]">school</span>
+          Caso de proyecto - IA educativa
+        </span>
+        <h1 class="hero-title font-display-lg max-w-3xl">
+          LudoScript: aprender con <span class="text-secondary">práctica guiada</span>, no con preguntas al azar.
         </h1>
-        <p class="font-body-lg text-body-lg text-text-muted max-w-2xl mx-auto mb-10">
-          LudoScript es una plataforma educativa que utiliza IA y temario estructurado para crear experiencias de
-          práctica con quizzes, flashcards, seguimiento de progreso y revisión de errores. La demo pública utiliza
-          contenido precargado para garantizar una experiencia estable.
+        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+          Plataforma educativa full-stack para practicar con quizzes, flashcards, seguimiento de progreso y revisión de errores. Mi trabajo se centró especialmente en el backend, la integración con IA para generar preguntas y el modo multijugador en tiempo real con Socket.IO.
         </p>
-        <div class="flex flex-wrap justify-center gap-4">
-          <span class="tag-hero">Vue 3</span>
-          <span class="tag-hero">Express</span>
-          <span class="tag-hero">PostgreSQL</span>
-          <span class="tag-hero">Supabase</span>
-          <span class="tag-hero">Gemini API</span>
+        <div class="flex flex-wrap gap-3 pt-2">
+          <span class="px-4 py-2 bg-primary-container/35 rounded-full border border-white/25 text-on-surface font-label-sm text-label-sm">Vue 3</span>
+          <span class="px-4 py-2 bg-primary-container/35 rounded-full border border-white/25 text-on-surface font-label-sm text-label-sm">Express</span>
+          <span class="px-4 py-2 bg-primary-container/35 rounded-full border border-white/25 text-on-surface font-label-sm text-label-sm">PostgreSQL</span>
+          <span class="px-4 py-2 bg-primary-container/35 rounded-full border border-secondary text-secondary font-label-sm text-label-sm">Gemini API</span>
+          <span class="px-4 py-2 bg-primary-container/35 rounded-full border border-accent text-accent font-label-sm text-label-sm">Socket.IO</span>
+        </div>
+        <div class="flex flex-wrap gap-4 pt-4">
+          <a href="https://ludoscript.vercel.app/" class="px-stack-lg py-4 bg-accent text-on-primary font-label-md text-label-md rounded-lg shadow-sm hover:opacity-90 transition-all flex items-center gap-2">Probar demo <span class="material-symbols-outlined">arrow_forward</span></a>
+          <a href="#decisiones" class="px-stack-lg py-4 border border-white/50 text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container transition-all">Ver decisiones</a>
         </div>
       </div>
-      <!-- Browser Preview Container -->
-      <div class="relative max-w-5xl mx-auto">
-        <div class="glass-effect rounded-t-xl p-4 flex items-center gap-2 border-b-0">
-          <div class="browser-dot bg-red-500/40"></div>
-          <div class="browser-dot bg-yellow-500/40"></div>
-          <div class="browser-dot bg-green-500/40"></div>
-          <div class="ludo-browser-url ml-4 px-4 py-1 rounded-md bg-white/5 text-[10px] text-text-muted font-mono">
-            ludoscript.vercel.app</div>
-        </div>
-        <div class="glass-effect rounded-b-xl overflow-hidden shadow-2xl">
-          <a href="https://ludoscript.vercel.app/">
-            <img alt="Vista principal de LudoScript" class="w-full aspect-video object-cover"
-              src="../img/ludoscript-home.png" />
+      <div class="case-hero-media relative">
+        <div class="absolute -inset-4 bg-secondary-fixed-dim opacity-10 rounded-xl blur-2xl"></div>
+        <div class="relative overflow-hidden rounded-lg border border-outline-variant/40 bg-primary-container/20 shadow-lg">
+          <div class="flex items-center gap-2 px-4 py-3 bg-surface-container-low border-b border-outline-variant/50">
+            <span class="browser-dot bg-red-400/60"></span>
+            <span class="browser-dot bg-yellow-400/70"></span>
+            <span class="browser-dot bg-green-400/70"></span>
+            <span class="ml-3 text-label-sm font-label-sm text-on-surface-variant truncate">ludoscript.vercel.app</span>
+          </div>
+          <a href="https://ludoscript.vercel.app/" target="_blank" rel="noopener noreferrer">
+            <img class="case-hero-shot w-full aspect-video" src="../img/ludoscript-home.png" alt="Vista principal de LudoScript" />
           </a>
         </div>
       </div>
     </section>
-    <!-- Problem & Solution (Bento Grid) -->
-    <section class="max-w-container-max mx-auto px-gutter py-section-gap-lg" id="problema">
-      <div class="flex flex-col md:flex-row justify-between items-end gap-8 mb-12">
-        <div class="max-w-xl">
-          <h2 class="font-headline-lg text-headline-lg text-text-primary mb-4">El Problema</h2>
-          <p class="font-body-lg text-body-lg text-text-muted">Muchas plataformas miden el acierto, pero no la
-            comprensión real ni el porqué de los errores.</p>
+
+    <section class="section-pad py-section-gap bg-surface-container-low" id="problema">
+      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+          <div class="md:col-span-4">
+            <h2 class="font-headline-md text-headline-md text-primary sticky top-24">El problema</h2>
+          </div>
+          <div class="md:col-span-8 space-y-stack-md">
+            <p class="font-body-lg text-body-lg text-on-surface-variant">
+              Muchas plataformas educativas miden aciertos, pero no ayudan a entender por qué se falla ni qué debería repasarse después. LudoScript nace para convertir la práctica en una herramienta de diagnóstico.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
+              <article class="glass-card p-6 rounded-lg">
+                <span class="material-symbols-outlined text-secondary text-[30px] mb-4 block">visibility_off</span>
+                <h3 class="font-headline-sm text-headline-sm mb-3">Falsa seguridad</h3>
+                <p class="text-on-surface-variant">Acertar preguntas no siempre significa comprender la base del tema.</p>
+              </article>
+              <article class="glass-card p-6 rounded-lg">
+                <span class="material-symbols-outlined text-secondary text-[30px] mb-4 block">route</span>
+                <h3 class="font-headline-sm text-headline-sm mb-3">Sin dirección</h3>
+                <p class="text-on-surface-variant">Tras practicar, el usuario necesita saber qué repasar y por qué.</p>
+              </article>
+              <article class="glass-card p-6 rounded-lg">
+                <span class="material-symbols-outlined text-secondary text-[30px] mb-4 block">person_search</span>
+                <h3 class="font-headline-sm text-headline-sm mb-3">Poca adaptación</h3>
+                <p class="text-on-surface-variant">Cada estudiante tropieza en conceptos distintos y a ritmos distintos.</p>
+              </article>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div
-          class="card-glass-pad glass-effect flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
+    </section>
+
+    <section class="section-pad py-section-gap bg-surface" id="flujo">
+      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
+        <div class="text-center mb-16">
+          <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Flujo de aprendizaje</span>
+          <h2 class="font-headline-md text-headline-md mt-3 mb-4">Del temario al diagnóstico</h2>
+          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">El flujo está preparado para que la IA genere preguntas que refuercen los puntos débiles del usuario y le hagan avanzar con práctica guiada, no con ejercicios aleatorios.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <article class="glass-card p-stack-lg rounded-lg">
+            <span class="font-label-sm text-label-sm text-accent tracking-widest uppercase">01</span>
+            <h3 class="font-headline-sm text-headline-sm my-4">Temario</h3>
+            <p class="text-on-surface-variant">El contenido funciona como base estructurada para generar práctica coherente y alineada con cada tema.</p>
+          </article>
+          <article class="glass-card p-stack-lg rounded-lg">
+            <span class="font-label-sm text-label-sm text-accent tracking-widest uppercase">02</span>
+            <h3 class="font-headline-sm text-headline-sm my-4">Diagnóstico</h3>
+            <p class="text-on-surface-variant">El sistema registra aciertos, errores y patrones para detectar qué conceptos necesitan refuerzo.</p>
+          </article>
+          <article class="glass-card p-stack-lg rounded-lg">
+            <span class="font-label-sm text-label-sm text-accent tracking-widest uppercase">03</span>
+            <h3 class="font-headline-sm text-headline-sm my-4">Generación IA</h3>
+            <p class="text-on-surface-variant">La integración con IA prepara preguntas nuevas enfocadas en los puntos débiles del usuario.</p>
+          </article>
+          <article class="glass-card p-stack-lg rounded-lg">
+            <span class="font-label-sm text-label-sm text-accent tracking-widest uppercase">04</span>
+            <h3 class="font-headline-sm text-headline-sm my-4">Avance</h3>
+            <p class="text-on-surface-variant">El alumno practica, recibe feedback y vuelve al recorrido con objetivos de repaso más claros.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad py-section-gap bg-surface-bright overflow-hidden" id="capturas">
+      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
+          <div class="max-w-xl">
+            <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Producto en uso</span>
+            <h2 class="font-headline-md text-headline-md mt-3 mb-4">Capturas del recorrido</h2>
+            <p class="text-on-surface-variant font-body-lg">Una galería interactiva con las pantallas principales: inicio, quiz, resultados, progreso y aprendizaje.</p>
+          </div>
+        </div>
+        <div class="max-w-5xl mx-auto">
           <div>
-            <div class="icon-box">
-              <span class="material-symbols-outlined text-primary">visibility_off</span>
+            <div class="feature-frame overflow-hidden rounded-lg border border-outline-variant/50 bg-primary-container/20 shadow-lg">
+              <div class="flex items-center gap-2 px-4 py-3 bg-surface-container-low border-b border-outline-variant/50">
+                <span class="browser-dot bg-red-400/60"></span>
+                <span class="browser-dot bg-yellow-400/70"></span>
+                <span class="browser-dot bg-green-400/70"></span>
+                <span id="feature-label" class="ml-3 text-label-sm font-label-sm text-on-surface-variant truncate">Home</span>
+              </div>
+              <button class="gallery-arrow prev" id="feature-prev" type="button" aria-label="Ver captura anterior"><span class="material-symbols-outlined">chevron_left</span></button>
+              <img id="feature-image" class="feature-image w-full transition-opacity duration-300" src="../img/ludoscript-home.png" alt="LudoScript Home" title="Ampliar captura" />
+              <button class="gallery-arrow next" id="feature-next" type="button" aria-label="Ver captura siguiente"><span class="material-symbols-outlined">chevron_right</span></button>
             </div>
-            <h3 class="font-headline-md text-headline-md text-text-primary mb-3">Ilusión de aprendizaje</h3>
-            <p class="text-text-muted">Acertar preguntas puede dar una falsa sensación de dominio mientras persisten
-              lagunas críticas en la base del conocimiento.</p>
+            <div id="feature-dots" class="mt-5 flex justify-center gap-2" aria-label="Selector de capturas"></div>
           </div>
-        </div>
-        <div
-          class="card-glass-pad glass-effect flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
-          <div>
-            <div class="icon-box">
-              <span class="material-symbols-outlined text-primary">person_search</span>
-            </div>
-            <h3 class="font-headline-md text-headline-md text-text-primary mb-3">Falta de personalización</h3>
-            <p class="text-text-muted">El enfoque de "talla única" ignora que cada estudiante tropieza en diferentes
-              conceptos y requiere ritmos distintos.</p>
+          <div id="feature-controls" aria-hidden="true">
+            <button class="feature-button is-active w-full text-left glass-card p-5 rounded-lg" type="button" data-image="../img/ludoscript-home.png" data-label="Home" data-alt="LudoScript Home">
+              <h3 class="font-headline-sm text-headline-sm mb-2">Home</h3>
+              <p class="text-on-surface-variant">La puerta de entrada a la plataforma.</p>
+            </button>
+            <button class="feature-button w-full text-left glass-card p-5 rounded-lg" type="button" data-image="../img/ludoscript-quiz.png" data-label="Quiz" data-alt="LudoScript Quiz">
+              <h3 class="font-headline-sm text-headline-sm mb-2">Quiz</h3>
+              <p class="text-on-surface-variant">Preparación y práctica con preguntas.</p>
+            </button>
+            <button class="feature-button w-full text-left glass-card p-5 rounded-lg" type="button" data-image="../img/ludoscript-resultado-final.png" data-label="Resultados" data-alt="Resultado final de LudoScript">
+              <h3 class="font-headline-sm text-headline-sm mb-2">Resultados</h3>
+              <p class="text-on-surface-variant">Feedback tras completar la sesión.</p>
+            </button>
+            <button class="feature-button w-full text-left glass-card p-5 rounded-lg" type="button" data-image="../img/progreso.png" data-label="Progreso" data-alt="Panel de progreso de LudoScript">
+              <h3 class="font-headline-sm text-headline-sm mb-2">Progreso</h3>
+              <p class="text-on-surface-variant">Seguimiento de evolución y puntos débiles.</p>
+            </button>
+            <button class="feature-button w-full text-left glass-card p-5 rounded-lg" type="button" data-image="../img/aprendizaje.png" data-label="Aprendizaje" data-alt="Pantalla de aprendizaje de LudoScript">
+              <h3 class="font-headline-sm text-headline-sm mb-2">Aprendizaje</h3>
+              <p class="text-on-surface-variant">Repaso de conceptos dentro del flujo.</p>
+            </button>
           </div>
-        </div>
-        <div
-          class="card-glass-pad glass-effect flex flex-col justify-between group hover:border-primary/30 transition-all duration-300">
-          <div>
-            <div class="icon-box">
-              <span class="material-symbols-outlined text-primary">navigation</span>
-            </div>
-            <h3 class="font-headline-md text-headline-md text-text-primary mb-3">Sin dirección clara</h3>
-            <p class="text-text-muted">Tras una sesión de práctica, el estudiante a menudo no sabe qué repasar
-              específicamente o cuál es el siguiente paso lógico.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Hypothesis Block -->
-    <section class="max-w-container-max mx-auto px-gutter py-12">
-      <div class="bg-surface-container rounded-3xl p-12 relative overflow-hidden border border-glass-border">
-        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] -mr-32 -mt-32"></div>
-        <div class="relative z-10 max-w-3xl">
-          <span class="text-primary font-bold text-sm tracking-widest uppercase mb-4 block">La Hipótesis</span>
-          <h2 class="font-headline-lg text-headline-lg text-text-primary italic">
-            "El valor no está en generar preguntas con IA, sino en usar esas preguntas para diagnosticar el estado del
-            alumno y guiarle con intención."
-          </h2>
         </div>
       </div>
     </section>
-    <!-- How it Works (Editorial Steps) -->
-    <section class="max-w-container-max mx-auto px-gutter py-section-gap-lg" id="funciona">
-      <div class="text-center mb-16">
-        <h2 class="font-headline-lg text-headline-lg text-text-primary mb-4">Cómo Funciona</h2>
-        <p class="text-text-muted max-w-2xl mx-auto">Un flujo de aprendizaje guiado a partir de temario preparado para
-          practicar, medir progreso y revisar errores con claridad.</p>
-      </div>
-      <div class="space-y-8 max-w-4xl mx-auto">
-        <!-- Step 1 -->
-        <div class="flex gap-8 group">
-          <div class="flex flex-col items-center">
-            <div class="step-circle group-hover:bg-primary group-hover:text-on-primary">
-              01
-            </div>
-            <div class="w-px h-full bg-glass-border my-2"></div>
+
+    <section class="section-pad py-section-gap bg-surface" id="arquitectura">
+      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+          <div class="md:col-span-5 space-y-stack-md">
+            <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Arquitectura</span>
+            <h2 class="font-headline-md text-headline-md text-primary">Full-stack pensado para crecer</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant">Mi aportación principal estuvo en el backend: API, persistencia, integración con IA para generar preguntas y modo multijugador en tiempo real con Socket.IO.</p>
           </div>
-          <div class="pb-12">
-            <h3 class="font-headline-md text-headline-md text-text-primary mb-3">Selección de Temario</h3>
-            <p class="text-text-muted body-lg">El alumno elige un temario precargado o un módulo de ejemplo para
-              empezar a practicar sobre contenido ya estructurado.</p>
-          </div>
-        </div>
-        <!-- Step 2 -->
-        <div class="flex gap-8 group">
-          <div class="flex flex-col items-center">
-            <div class="step-circle group-hover:bg-primary group-hover:text-on-primary">
-              02
-            </div>
-            <div class="w-px h-full bg-glass-border my-2"></div>
-          </div>
-          <div class="pb-12">
-            <h3 class="font-headline-md text-headline-md text-text-primary mb-3">Actividades Asociadas</h3>
-            <p class="text-text-muted body-lg">La plataforma muestra preguntas, flashcards y conceptos asociados al
-              contenido para que el aprendizaje tenga un recorrido claro.</p>
+          <div class="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <article class="glass-card p-6 rounded-lg">
+              <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Frontend</span>
+              <h3 class="font-headline-sm text-headline-sm mt-3">Vue 3 / Tailwind</h3>
+              <p class="text-on-surface-variant mt-3">Interfaz centrada en práctica, lectura clara y feedback visual.</p>
+            </article>
+            <article class="glass-card p-6 rounded-lg">
+              <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Backend</span>
+              <h3 class="font-headline-sm text-headline-sm mt-3">Node / Express</h3>
+              <p class="text-on-surface-variant mt-3">API para usuarios, actividades, contenido y resultados.</p>
+            </article>
+            <article class="glass-card p-6 rounded-lg">
+              <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Datos</span>
+              <h3 class="font-headline-sm text-headline-sm mt-3">PostgreSQL / Supabase</h3>
+              <p class="text-on-surface-variant mt-3">Persistencia de preguntas, flashcards, perfiles y progreso.</p>
+            </article>
+            <article class="glass-card p-6 rounded-lg">
+              <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">IA y tiempo real</span>
+              <h3 class="font-headline-sm text-headline-sm mt-3">Gemini API / Socket.IO</h3>
+              <p class="text-on-surface-variant mt-3">Generación de preguntas con Gemini API y partidas multijugador sincronizadas mediante Socket.IO.</p>
+            </article>
           </div>
         </div>
-        <!-- Step 3 -->
-        <div class="flex gap-8 group">
-          <div class="flex flex-col items-center">
-            <div class="step-circle group-hover:bg-primary group-hover:text-on-primary">
-              03
-            </div>
-            <div class="w-px h-full bg-glass-border my-2"></div>
-          </div>
-          <div class="pb-12">
-            <h3 class="font-headline-md text-headline-md text-text-primary mb-3">Práctica y Seguimiento</h3>
-            <p class="text-text-muted body-lg">El alumno interactúa con las actividades y el sistema registra aciertos,
-              errores y progreso para hacer visible su evolución.</p>
-          </div>
-        </div>
-        <!-- Step 4 -->
-        <div class="flex gap-8 group">
-          <div class="flex flex-col items-center">
-            <div class="step-circle group-hover:bg-primary group-hover:text-on-primary">
-              04
-            </div>
-          </div>
-          <div class="pb-4">
-            <h3 class="font-headline-md text-headline-md text-text-primary mb-3">Revisión de Puntos Débiles</h3>
-            <p class="text-text-muted body-lg">La plataforma ayuda a identificar qué partes conviene repasar a partir
-              del historial de práctica y los errores cometidos.</p>
-          </div>
-        </div>
-        <div class="glass-effect rounded-xl p-6 border border-primary/20">
-          <h3 class="font-headline-md text-headline-md text-text-primary mb-3">Funcionalidad experimental</h3>
-          <p class="text-text-muted body-lg">La subida de documentos propios está planteada para permitir que el usuario
-            genere actividades a partir de sus materiales. Actualmente se mantiene como función experimental mientras se
-            mejora la estabilidad del procesamiento.</p>
+        <div class="mt-8 glass-card p-stack-lg rounded-lg border-l-4 border-accent">
+          <span class="font-label-sm text-label-sm text-accent tracking-widest uppercase">Mi contribución</span>
+          <p class="font-body-lg text-body-lg text-on-surface-variant mt-3">Me encargué sobre todo del backend y de conectar la inteligencia artificial con el flujo de aprendizaje: generación de preguntas, refuerzo de puntos débiles y coordinación del modo multijugador con Socket.IO.</p>
         </div>
       </div>
     </section>
-    <section class="max-w-container-max mx-auto px-gutter py-section-gap-lg" id="experiencia">
-      <div class="text-center mb-16">
-        <h2 class="font-headline-lg text-headline-lg text-text-primary mb-4">Experiencia completa</h2>
-        <p class="text-text-muted max-w-2xl mx-auto">Un recorrido visual por el flujo de aprendizaje de
-          LudoScript.</p>
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <!-- Main Feature Area (Browser Frame) -->
-        <div class="lg:col-span-8">
-          <div class="relative">
-            <div class="glass-effect rounded-t-xl p-4 flex items-center gap-2 border-b-0">
-              <div class="browser-dot bg-red-500/40"></div>
-              <div class="browser-dot bg-yellow-500/40"></div>
-              <div class="browser-dot bg-green-500/40"></div>
-              <div class="ludo-browser-url ml-4 px-4 py-1 rounded-md bg-white/5 text-[10px] text-text-muted font-mono">
-                ludoscript.vercel.app</div>
-            </div>
-            <div class="glass-effect rounded-b-xl overflow-hidden shadow-2xl border border-glass-border">
-              <a href="https://ludoscript.vercel.app/" target="_blank" rel="noopener noreferrer">
-                <img id="ludoscript-feature-image" alt="LudoScript Home"
-                  class="w-full aspect-video object-cover transition-opacity duration-300"
-                  src="../img/ludoscript-home.png" />
-              </a>
-            </div>
-          </div>
+
+    <section class="section-pad py-section-gap bg-surface-container-low" id="decisiones">
+      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
+        <div class="mb-12 max-w-3xl">
+          <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Decisiones técnicas y trade-offs</span>
+          <h2 class="font-headline-md text-headline-md mt-3 mb-4">Decisiones explicadas como una lista de criterio</h2>
+          <p class="text-on-surface-variant font-body-lg">Organicé las decisiones por impacto técnico: qué problema resolvían, qué opción elegí y qué coste asumía cada una.</p>
         </div>
-        <!-- Sidebar Navigation -->
-        <div class="lg:col-span-4 space-y-4" id="ludoscript-feature-cards">
-          <button type="button" class="ludo-feature-card feature-card is-active feature-card-base glass-effect"
-            data-feature-index="0">
-            <h4 class="font-bold text-primary mb-1">Home</h4>
-            <p class="text-sm text-text-muted">La puerta de entrada a la plataforma.</p>
-          </button>
-          <button type="button" class="ludo-feature-card feature-card feature-card-base glass-effect"
-            data-feature-index="1">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <h4 class="font-bold text-text-primary mb-1">Quiz</h4>
-                <p class="text-sm text-text-muted">Preparación, práctica y resultados.</p>
-              </div>
-              <span class="ludo-carousel-mark" aria-hidden="true"></span>
+
+        <ol class="space-y-6">
+          <li class="decision-step glass-card p-stack-lg rounded-lg">
+            <span class="decision-marker">1</span>
+            <div>
+              <h3 class="font-headline-sm text-headline-sm mb-3">Separar frontend, backend y datos</h3>
+              <p class="text-on-surface-variant mb-3"><strong class="text-primary">Decisión:</strong> usar Vue 3 para la interfaz, Express para la API y PostgreSQL/Supabase para persistencia.</p>
+              <p class="text-on-surface-variant"><strong class="text-primary">Trade-off:</strong> la arquitectura exige más coordinación inicial, pero permite evolucionar usuarios, progreso, clases y funcionalidades en tiempo real sin mezclar responsabilidades.</p>
             </div>
-            <div class="flex gap-2 mt-4" aria-label="Capturas del quiz">
-              <span class="feature-dot quiz-dot is-active h-2 w-2 rounded-full bg-white/25 transition-all"
-                data-quiz-dot="0"></span>
-              <span class="feature-dot quiz-dot h-2 w-2 rounded-full bg-white/25 transition-all"
-                data-quiz-dot="1"></span>
-              <span class="feature-dot quiz-dot h-2 w-2 rounded-full bg-white/25 transition-all"
-                data-quiz-dot="2"></span>
+          </li>
+          <li class="decision-step glass-card p-stack-lg rounded-lg">
+            <span class="decision-marker">2</span>
+            <div>
+              <h3 class="font-headline-sm text-headline-sm mb-3">Usar IA para generar práctica útil</h3>
+              <p class="text-on-surface-variant mb-3"><strong class="text-primary">Decisión:</strong> integrar Gemini API para crear preguntas orientadas al temario y al diagnóstico del usuario.</p>
+              <p class="text-on-surface-variant"><strong class="text-primary">Trade-off:</strong> aporta personalización, pero obliga a controlar prompts, validación, coste por llamada y calidad de las respuestas generadas.</p>
             </div>
-          </button>
-          <button type="button" class="ludo-feature-card feature-card feature-card-base glass-effect"
-            data-feature-index="2">
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <h4 class="font-bold text-text-primary mb-1">Progreso</h4>
-                <p class="text-sm text-text-muted">Seguimiento de puntos débiles y evolución.</p>
-              </div>
-              <span class="ludo-carousel-mark" aria-hidden="true"></span>
+          </li>
+          <li class="decision-step glass-card p-stack-lg rounded-lg">
+            <span class="decision-marker">3</span>
+            <div>
+              <h3 class="font-headline-sm text-headline-sm mb-3">Convertir errores en datos de aprendizaje</h3>
+              <p class="text-on-surface-variant mb-3"><strong class="text-primary">Decisión:</strong> registrar resultados, fallos y evolución para alimentar el diagnóstico de puntos débiles.</p>
+              <p class="text-on-surface-variant"><strong class="text-primary">Trade-off:</strong> requiere más modelado y pantallas, pero transforma el quiz en una herramienta de avance y no solo en una nota final.</p>
             </div>
-            <div class="flex gap-2 mt-4" aria-label="Capturas de progreso">
-              <span class="feature-dot progress-dot h-2 w-2 rounded-full bg-white/25 transition-all"
-                data-progress-dot="0"></span>
-              <span class="feature-dot progress-dot h-2 w-2 rounded-full bg-white/25 transition-all"
-                data-progress-dot="1"></span>
-              <span class="feature-dot progress-dot h-2 w-2 rounded-full bg-white/25 transition-all"
-                data-progress-dot="2"></span>
+          </li>
+          <li class="decision-step glass-card p-stack-lg rounded-lg">
+            <span class="decision-marker">4</span>
+            <div>
+              <h3 class="font-headline-sm text-headline-sm mb-3">Multijugador con Socket.IO</h3>
+              <p class="text-on-surface-variant mb-3"><strong class="text-primary">Decisión:</strong> incorporar comunicación en tiempo real para coordinar sesiones multijugador.</p>
+              <p class="text-on-surface-variant"><strong class="text-primary">Trade-off:</strong> añade complejidad de sincronización y estados compartidos, pero hace posible una experiencia más social y dinámica.</p>
             </div>
-          </button>
-          <button type="button" class="ludo-feature-card feature-card feature-card-base glass-effect"
-            data-feature-index="3">
-            <h4 class="font-bold text-text-primary mb-1">Aprendizaje</h4>
-            <p class="text-sm text-text-muted">Aprende los conceptos.</p>
-          </button>
-        </div>
+          </li>
+          <li class="decision-step glass-card p-stack-lg rounded-lg">
+            <span class="decision-marker">5</span>
+            <div>
+              <h3 class="font-headline-sm text-headline-sm mb-3">Demo estable antes que libertad total</h3>
+              <p class="text-on-surface-variant mb-3"><strong class="text-primary">Decisión:</strong> priorizar un recorrido de demo claro y controlado para enseñar bien el producto.</p>
+              <p class="text-on-surface-variant"><strong class="text-primary">Trade-off:</strong> reduce libertad en la versión pública, pero evita que una función experimental opaque el valor principal del proyecto.</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
-    <!-- Architecture Section -->
-    <section class="py-section-gap-lg" id="tecnica">
-      <div class="max-w-container-max mx-auto px-gutter">
-        <div class="flex flex-col md:flex-row gap-16 items-center">
-          <div class="w-full md:w-1/2">
-            <h2 class="font-headline-lg text-headline-lg text-text-primary mb-6">Arquitectura Técnica</h2>
-            <p class="text-text-muted mb-8">Una arquitectura pensada para gestionar contenido educativo, progreso de
-              usuario e integraciones de IA con una base técnica extensible.</p>
-            <div class="grid grid-cols-2 gap-4">
-              <div class="p-4 rounded-xl glass-effect">
-                <span class="text-primary text-xs uppercase tracking-widest font-bold block mb-2">Frontend</span>
-                <p class="text-text-primary font-semibold">Vue 3 / Tailwind</p>
-              </div>
-              <div class="p-4 rounded-xl glass-effect">
-                <span class="text-primary text-xs uppercase tracking-widest font-bold block mb-2">Backend</span>
-                <p class="text-text-primary font-semibold">Node / Express</p>
-              </div>
-              <div class="p-4 rounded-xl glass-effect">
-                <span class="text-primary text-xs uppercase tracking-widest font-bold block mb-2">Database</span>
-                <p class="text-text-primary font-semibold">PostgreSQL</p>
-              </div>
-              <div class="p-4 rounded-xl glass-effect">
-                <span class="text-primary text-xs uppercase tracking-widest font-bold block mb-2">Realtime</span>
-                <p class="text-text-primary font-semibold">Socket.IO</p>
-              </div>
-            </div>
+    <section class="section-pad py-section-gap bg-surface" id="aprendizajes">
+      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+          <div class="md:col-span-4">
+            <h2 class="font-headline-md text-headline-md text-primary sticky top-24">Aprendizajes</h2>
           </div>
-          <div class="w-full md:w-1/2 glass-effect rounded-2xl p-8 border-dashed border-glass-border">
-            <div class="font-mono text-sm text-text-muted space-y-4">
-              <div class="flex items-start gap-3">
-                <span class="text-primary">01</span>
-                <p>Temario y actividades disponibles desde contenido precargado</p>
-              </div>
-              <div class="flex items-start gap-3">
-                <span class="text-secondary">02</span>
-                <p>API Express gestiona usuarios, actividades, progreso y contenido</p>
-              </div>
-              <div class="flex items-start gap-3">
-                <span class="text-primary">03</span>
-                <p>PostgreSQL almacena preguntas, flashcards, perfiles y resultados</p>
-              </div>
-              <div class="flex items-start gap-3">
-                <span class="text-secondary">04</span>
-                <p>Gemini API se integra para generación y asistencia de contenido en flujos experimentales</p>
-              </div>
-              <div class="flex items-start gap-3">
-                <span class="text-primary">05</span>
-                <p>Socket.IO se reserva para funcionalidades en tiempo real como duelos, salas o modo espectador</p>
-              </div>
+          <div class="md:col-span-8 space-y-8">
+            <div class="border-l-2 border-secondary pl-6">
+              <h3 class="font-headline-sm text-headline-sm mb-2">Coste y fiabilidad de IA</h3>
+              <p class="text-on-surface-variant">Optimizar prompts, validar respuestas y evitar llamadas redundantes fue tan importante como integrar la API.</p>
+            </div>
+            <div class="border-l-2 border-secondary pl-6">
+              <h3 class="font-headline-sm text-headline-sm mb-2">Producto antes que tecnología</h3>
+              <p class="text-on-surface-variant">La IA no debía ser el titular vacío: el foco real era que el estudiante entendiera qué hacer después de practicar.</p>
+            </div>
+            <div class="border-l-2 border-secondary pl-6">
+              <h3 class="font-headline-sm text-headline-sm mb-2">Contenido estructurado</h3>
+              <p class="text-on-surface-variant">Preparar temario y actividades coherentes hizo que la demo fuera más clara, estable y fácil de explicar.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- Challenges & Learnings Grid -->
-    <section class="max-w-container-max mx-auto px-gutter py-section-gap-lg">
-      <div class="mb-12">
-        <h2 class="font-headline-lg text-headline-lg text-text-primary mb-4">Retos y Aprendizajes</h2>
-        <p class="text-text-muted max-w-2xl">Algunas decisiones técnicas del proyecto surgieron al equilibrar coste,
-          fiabilidad y una experiencia de aprendizaje clara.</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="card-glass-pad glass-effect">
-          <span class="text-primary/70 text-xs uppercase tracking-widest font-semibold block mb-4">01</span>
-          <h3 class="font-headline-md text-headline-md text-text-primary mb-4">Optimización de Tokens</h3>
-          <p class="text-text-muted">Controlar el coste de la IA fue crucial. Implementé flujos que maximizan el valor
-            de cada prompt, evitando llamadas redundantes y procesando datos en lotes eficientes.</p>
-        </div>
-        <div class="card-glass-pad glass-effect">
-          <span class="text-primary/70 text-xs uppercase tracking-widest font-semibold block mb-4">02</span>
-          <h3 class="font-headline-md text-headline-md text-text-primary mb-4">Contenido Estructurado</h3>
-          <p class="text-text-muted">Preparar temario y actividades coherentes fue clave para que la demo mostrara el
-            flujo principal sin depender de procesamiento experimental de documentos.</p>
-        </div>
-        <div class="card-glass-pad glass-effect">
-          <span class="text-primary/70 text-xs uppercase tracking-widest font-semibold block mb-4">03</span>
-          <h3 class="font-headline-md text-headline-md text-text-primary mb-4">Enfoque a Producto</h3>
-          <p class="text-text-muted">Aprendí que una funcionalidad técnica no sirve de nada sin una UX que la respalde.
-            Diseñé una experiencia orientada al usuario y no solo a la tecnología.</p>
-        </div>
-        <div class="card-glass-pad glass-effect">
-          <span class="text-primary/70 text-xs uppercase tracking-widest font-semibold block mb-4">04</span>
-          <h3 class="font-headline-md text-headline-md text-text-primary mb-4">IA Aplicada</h3>
-          <p class="text-text-muted">La integración de modelos generativos requiere un manejo de errores robusto.
-            Aprendí a validar salidas de IA para reducir errores, estructurar mejor las respuestas y mejorar la
-            fiabilidad del contenido generado.</p>
-        </div>
-      </div>
-    </section>
-    <!-- Timeline / Evolution -->
-    <section class="max-w-container-max mx-auto px-gutter py-section-gap-lg border-t border-glass-border">
-      <h2 class="font-headline-lg text-headline-lg text-text-primary mb-12 text-center">Evolución de la Idea</h2>
-      <div class="relative">
-        <div class="absolute left-1/2 -translate-x-1/2 w-px h-full bg-glass-border hidden md:block"></div>
-        <div class="space-y-16">
-          <div class="flex flex-col md:flex-row items-center gap-8 md:gap-0">
-            <div class="md:w-1/2 md:pr-12 md:text-right">
-              <span class="text-primary font-bold text-sm">v1.0</span>
-              <h4 class="text-xl font-bold text-text-primary">Plataforma de Tests</h4>
-              <p class="text-text-muted">Idea inicial: repositorio simple para practicar preguntas manuales.</p>
-            </div>
-            <div class="w-4 h-4 rounded-full bg-primary z-10 hidden md:block"></div>
-            <div class="md:w-1/2 md:pl-12"></div>
+
+    <section class="section-pad py-section-gap bg-primary-container" id="demo">
+      <div class="max-w-container-max mx-auto px-4 md:px-gutter text-center">
+        <div class="relative z-10 space-y-stack-md max-w-3xl mx-auto">
+          <h2 class="font-display-lg-mobile md:font-display-lg text-white leading-tight">Una demo pensada para enseñar el producto, no solo la tecnología.</h2>
+          <p class="text-primary-fixed-dim font-body-lg">La versión pública muestra el flujo principal con contenido controlado: práctica, resultados, progreso y revisión.</p>
+          <div class="pt-8 flex flex-wrap justify-center gap-4">
+            <a href="https://ludoscript.vercel.app/" class="inline-flex items-center gap-2 bg-secondary text-primary-container px-stack-lg py-4 rounded-lg font-label-md text-label-md hover:scale-105 transition-transform shadow-lg">Probar LudoScript <span class="material-symbols-outlined">open_in_new</span></a>
+            <a href="../index.html" class="inline-flex items-center gap-2 border border-primary-fixed-dim text-primary-fixed-dim px-stack-lg py-4 rounded-lg font-label-md text-label-md hover:bg-white/10 transition-colors">Volver al portfolio</a>
           </div>
-          <div class="flex flex-col md:flex-row-reverse items-center gap-8 md:gap-0">
-            <div class="md:w-1/2 md:pl-12">
-              <span class="text-secondary font-bold text-sm">v2.0</span>
-              <h4 class="text-xl font-bold text-text-primary">Integración de IA</h4>
-              <p class="text-text-muted">Exploración de generación asistida de actividades y procesamiento de
-                materiales propios como línea experimental.</p>
-            </div>
-            <div class="w-4 h-4 rounded-full bg-secondary z-10 hidden md:block"></div>
-            <div class="md:w-1/2 md:pr-12"></div>
-          </div>
-          <div class="flex flex-col md:flex-row items-center gap-8 md:gap-0">
-            <div class="md:w-1/2 md:pr-12 md:text-right">
-              <span class="text-primary font-bold text-sm">v3.0</span>
-              <h4 class="text-xl font-bold text-text-primary">Diagnóstico Inteligente</h4>
-              <p class="text-text-muted">El foco cambia de "crear contenido" a "entender al alumno" mediante analítica.
-              </p>
-            </div>
-            <div class="w-4 h-4 rounded-full bg-primary z-10 hidden md:block"></div>
-            <div class="md:w-1/2 md:pl-12"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Footer CTA -->
-    <section class="max-w-container-max mx-auto px-gutter py-section-gap-lg text-center" id="demo">
-      <div class="ludo-cta-panel glass-effect rounded-3xl p-16 relative overflow-hidden border-2 border-primary/20">
-        <h2 class="font-headline-lg text-headline-lg text-text-primary mb-6">¿Quieres probarlo?</h2>
-        <p class="text-text-muted mb-10 max-w-xl mx-auto text-sm">La demo está optimizada para mostrar el flujo de
-          aprendizaje con contenido controlado. La carga de documentos propios puede estar limitada o no disponible.</p>
-        <div class="ludo-button-row flex flex-wrap justify-center gap-4">
-          <a class="btn-primary px-10 py-4 hover:shadow-lg hover:shadow-primary/20 transition-all"
-            href="https://ludoscript.vercel.app/">Pruébalo</a>
-          <a class="px-10 py-4 rounded-full glass-effect border border-glass-border font-button hover:bg-white/5 transition-all flex items-center gap-2"
-            href="https://github.com/alvaropas17/alvaropas17">
-            <span class="material-symbols-outlined">code</span>
-            GitHub
-          </a>
         </div>
       </div>
     </section>
   </main>
-  <footer class="bg-surface-container py-section-gap-md mt-section-gap-lg border-t border-glass-border">
-    <div
-      class="max-w-container-max mx-auto px-gutter flex flex-col md:flex-row justify-between items-center gap-stack-sm">
-      <div class="flex items-center gap-4">
-        <span class="font-headline-md text-headline-md text-primary">LudoScript</span>
-        <span class="text-text-muted">|</span>
-        <p class="text-text-muted font-body-md text-body-md">© 2026</p>
+
+  <div id="image-lightbox" class="image-lightbox fixed inset-0 z-[80] bg-primary-container/90 backdrop-blur-sm p-4 md:p-8 flex items-center justify-center" role="dialog" aria-modal="true" aria-label="Captura ampliada">
+    <button id="lightbox-close" class="absolute right-4 top-4 md:right-8 md:top-8 h-11 w-11 rounded-lg bg-white text-primary-container shadow-lg flex items-center justify-center hover:opacity-90" type="button" aria-label="Cerrar imagen ampliada">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+    <button class="gallery-arrow lightbox-arrow prev" id="lightbox-prev" type="button" aria-label="Ver captura anterior"><span class="material-symbols-outlined">chevron_left</span></button>
+    <img id="lightbox-image" class="max-h-[86vh] max-w-[94vw] rounded-lg border border-outline/40 bg-primary shadow-2xl object-contain" src="../img/ludoscript-home.png" alt="LudoScript Home ampliado" />
+    <button class="gallery-arrow lightbox-arrow next" id="lightbox-next" type="button" aria-label="Ver captura siguiente"><span class="material-symbols-outlined">chevron_right</span></button>
+  </div>
+
+  <footer class="bg-surface-container-low border-t border-outline-variant/50 w-full py-stack-lg">
+    <div class="max-w-container-max mx-auto px-4 md:px-gutter flex flex-col md:flex-row justify-between items-center gap-stack-md">
+      <div class="flex flex-col items-center md:items-start gap-3">
+        <span class="font-headline-sm text-headline-sm text-primary">LudoScript</span>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-xs text-center md:text-left">Caso de estudio - Proyecto educativo full-stack con IA.</p>
       </div>
-      <div class="ludo-footer-links flex items-center gap-6">
-        <a class="link-footer" href="#">LinkedIn</a>
-        <a class="link-footer" href="https://github.com/alvaropas17/alvaropas17">GitHub</a>
-        <a class="link-footer" href="mailto:alvpastor17@gmail.com">Contacta conmigo</a>
-        <a class="text-primary font-bold font-body-md text-body-md" href="#top">Volver arriba</a>
+      <div class="flex flex-wrap justify-center gap-6">
+        <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md" href="https://es.linkedin.com/in/%C3%A1lvaro-pastor">LinkedIn</a>
+        <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md" href="https://github.com/alvaropas17/alvaropas17">GitHub</a>
+        <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md" href="mailto:alvpastor17@gmail.com">Email</a>
+        <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md" href="#top">Arriba</a>
       </div>
     </div>
   </footer>
+
+  <script>
+    let lastScroll = 0;
+    const nav = document.querySelector("nav");
+
+    window.addEventListener("scroll", () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll <= 0) {
+        nav.classList.remove("shadow-sm");
+        return;
+      }
+
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        nav.style.transform = "translateY(-100%)";
+      } else {
+        nav.style.transform = "translateY(0)";
+        nav.classList.add("shadow-sm");
+      }
+      lastScroll = currentScroll;
+    });
+
+    const featureImage = document.querySelector("#feature-image");
+    const featureLabel = document.querySelector("#feature-label");
+    const featureButtons = Array.from(document.querySelectorAll(".feature-button"));
+    const featureDots = document.querySelector("#feature-dots");
+    const featurePrev = document.querySelector("#feature-prev");
+    const featureNext = document.querySelector("#feature-next");
+    const lightbox = document.querySelector("#image-lightbox");
+    const lightboxImage = document.querySelector("#lightbox-image");
+    const lightboxClose = document.querySelector("#lightbox-close");
+    const lightboxPrev = document.querySelector("#lightbox-prev");
+    const lightboxNext = document.querySelector("#lightbox-next");
+    let activeFeatureIndex = 0;
+
+    const updateLightboxImage = (button) => {
+      lightboxImage.src = button.dataset.image;
+      lightboxImage.alt = `${button.dataset.alt} ampliado`;
+    };
+
+    const setActiveFeature = (index) => {
+      const nextIndex = (index + featureButtons.length) % featureButtons.length;
+      const button = featureButtons[nextIndex];
+      const dots = Array.from(featureDots.querySelectorAll(".feature-dot"));
+      activeFeatureIndex = nextIndex;
+
+      featureButtons.forEach((item) => item.classList.remove("is-active"));
+      dots.forEach((dot) => dot.classList.remove("is-active"));
+      button.classList.add("is-active");
+      dots[nextIndex].classList.add("is-active");
+      button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      featureImage.classList.add("opacity-0");
+
+      window.setTimeout(() => {
+        featureImage.src = button.dataset.image;
+        featureImage.alt = button.dataset.alt;
+        featureLabel.textContent = button.dataset.label;
+        updateLightboxImage(button);
+        featureImage.classList.remove("opacity-0");
+      }, 120);
+    };
+
+    const moveFeature = (direction) => {
+      setActiveFeature(activeFeatureIndex + direction);
+    };
+
+    featureButtons.forEach((button, index) => {
+      const dot = document.createElement("button");
+      dot.className = `feature-dot${index === 0 ? " is-active" : ""}`;
+      dot.type = "button";
+      dot.setAttribute("aria-label", `Ver captura ${button.dataset.label}`);
+      dot.addEventListener("click", () => setActiveFeature(index));
+      featureDots.appendChild(dot);
+      button.addEventListener("click", () => setActiveFeature(index));
+    });
+
+    featurePrev.addEventListener("click", () => moveFeature(-1));
+    featureNext.addEventListener("click", () => moveFeature(1));
+    lightboxPrev.addEventListener("click", (event) => {
+      event.stopPropagation();
+      moveFeature(-1);
+    });
+    lightboxNext.addEventListener("click", (event) => {
+      event.stopPropagation();
+      moveFeature(1);
+    });
+
+    const closeLightbox = () => {
+      lightbox.classList.remove("is-open");
+      document.body.classList.remove("overflow-hidden");
+    };
+
+    featureImage.addEventListener("click", () => {
+      updateLightboxImage(featureButtons[activeFeatureIndex]);
+      lightbox.classList.add("is-open");
+      document.body.classList.add("overflow-hidden");
+    });
+
+    lightbox.addEventListener("click", closeLightbox);
+    lightboxImage.addEventListener("click", (event) => event.stopPropagation());
+    lightboxClose.addEventListener("click", closeLightbox);
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") moveFeature(-1);
+      if (event.key === "ArrowRight") moveFeature(1);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("opacity-100", "translate-y-0");
+          entry.target.classList.remove("opacity-0", "translate-y-8");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll("section > div").forEach((element) => {
+      element.classList.add("transition-all", "duration-700", "opacity-0", "translate-y-8");
+      observer.observe(element);
+    });
+  </script>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
