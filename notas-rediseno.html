@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Notas del rediseño — julio 2026</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/portfolio.css" />
+    <style>
+        .cambio {
+            border: 1.5px solid var(--linea);
+            border-radius: var(--radio);
+            background: var(--papel);
+            padding: 1.7rem 1.6rem;
+        }
+
+        .cambio h3 {
+            font-size: 1.25rem;
+            font-weight: 640;
+            margin-bottom: 0.8rem;
+        }
+
+        .cambio .antes-despues {
+            display: grid;
+            gap: 0.75rem;
+            margin-block: 0.9rem;
+            font-family: var(--fuente-mono);
+            font-size: 0.82rem;
+        }
+
+        @media (min-width: 52rem) {
+            .cambio .antes-despues {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .cambio .antes,
+        .cambio .despues {
+            border: 1px solid var(--linea);
+            border-radius: var(--radio);
+            padding: 0.9rem 1rem;
+            color: var(--tinta-70);
+        }
+
+        .cambio .antes::before,
+        .cambio .despues::before {
+            display: block;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .cambio .antes::before {
+            content: "antes";
+            color: #b0432c;
+        }
+
+        .cambio .despues::before {
+            content: "después";
+            color: var(--verde);
+        }
+
+        .cambio .despues {
+            background: rgba(30, 122, 74, 0.06);
+        }
+
+        .cambio .razon {
+            color: var(--tinta-70);
+            font-size: 0.98rem;
+        }
+
+        .cambio .razon strong {
+            font-family: var(--fuente-mono);
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: var(--azul);
+        }
+
+        .lista-cambios {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            gap: 1.1rem;
+        }
+
+        code {
+            font-family: var(--fuente-mono);
+            font-size: 0.85em;
+            background: rgba(25, 23, 19, 0.06);
+            border-radius: 3px;
+            padding: 0.1em 0.35em;
+        }
+    </style>
+</head>
+
+<body id="top">
+    <main>
+        <header class="contenedor hero" style="padding-bottom: 2rem;">
+            <p class="etiqueta">documento interno · no enlazado desde el portfolio</p>
+            <h1 style="font-size: clamp(2rem, 4.5vw, 3.2rem); font-weight: 800; max-width: 22ch; margin-block: 1rem 1.2rem;">
+                Notas del rediseño del portfolio</h1>
+            <p class="hero-intro">
+                Registro técnico de los cambios aplicados en julio de 2026 y las razones de cada decisión.
+                El objetivo del rediseño: dejar de parecer una plantilla y aumentar las probabilidades de
+                contratación demostrando criterio de producto, no solo afirmándolo.
+            </p>
+            <aside class="nota" style="margin-top: 1.6rem;">Este archivo no está enlazado desde index.html ni desde
+                el caso de estudio. Lleva <code>noindex</code> para que los buscadores lo ignoren.</aside>
+        </header>
+
+        <section class="seccion seccion-alt">
+            <div class="contenedor">
+                <p class="etiqueta">concepto</p>
+                <h2 class="titulo-seccion" style="margin-bottom: 1rem;">La idea que ordena todo lo demás</h2>
+                <div class="parrafos" style="margin-bottom: 2.4rem;">
+                    <p>
+                        El diseño anterior era el patrón más repetido en portfolios generados con IA: fondo azul
+                        petróleo, tarjetas con <em>glassmorphism</em>, iconos de Material Symbols y tipografías
+                        neutras (Inter/Lexend). No comunicaba nada específico de Álvaro.
+                    </p>
+                    <p>
+                        El nuevo concepto es <strong>"el documento de trabajo anotado"</strong>: el portfolio se
+                        presenta como un documento de producto sobre papel claro, marcado con subrayador amarillo
+                        (el gesto de quien viene del marketing) y con notas al margen en monoespaciada que explican
+                        la intención de cada sección (el gesto de un desarrollador). El diferencial del candidato
+                        —pensar el producto antes de construirlo— queda demostrado por el propio diseño.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="seccion">
+            <div class="contenedor">
+                <p class="etiqueta">cambios técnicos</p>
+                <h2 class="titulo-seccion" style="margin-bottom: 2.4rem;">Qué se cambió y por qué</h2>
+                <ol class="lista-cambios">
+                    <li class="cambio">
+                        <h3>1 · Eliminado Tailwind por CDN; CSS propio compartido</h3>
+                        <div class="antes-despues">
+                            <div class="antes">Cada página cargaba <code>cdn.tailwindcss.com</code> (~300 KB de JS
+                                que genera el CSS en el navegador) más un bloque de configuración duplicado en cada
+                                HTML.</div>
+                            <div class="despues">Una sola hoja <code>styles/portfolio.css</code> (~19 KB) escrita a
+                                mano, compartida por index.html y proyecto/ludoscript.html.</div>
+                        </div>
+                        <p class="razon"><strong>razón</strong> — El CDN de Tailwind está desaconsejado por el
+                            propio Tailwind para producción: penaliza el rendimiento (genera estilos en tiempo de
+                            ejecución) y es lo primero que un revisor técnico con DevTools abierto señala como mala
+                            práctica. En un portfolio para conseguir empleo, el código de la propia página es parte
+                            de la candidatura. Además elimina la duplicación: antes el tema estaba copiado en las
+                            dos páginas y podían divergir.</p>
+                    </li>
+
+                    <li class="cambio">
+                        <h3>2 · Paleta: de azul petróleo oscuro a papel y tinta</h3>
+                        <div class="antes-despues">
+                            <div class="antes">Fondo <code>#274f66</code>, ~25 colores de sistema Material
+                                (surface-container-high, secondary-fixed-dim…), acentos turquesa y naranja.</div>
+                            <div class="despues">6 tokens con nombre propio: papel <code>#f6f4ee</code>, tinta
+                                <code>#191713</code>, azul <code>#2440ce</code>, subrayador <code>#ffd84d</code>,
+                                verde <code>#1e7a4a</code> y navy <code>#101637</code> para marcos de capturas.</div>
+                        </div>
+                        <p class="razon"><strong>razón</strong> — El tema oscuro azulado es el default nº 1 de los
+                            portfolios genéricos. Sobre fondo claro, las capturas de LudoScript (que son oscuras)
+                            ganan contraste y protagonismo. Reducir 25 colores heredados de Material a 6 tokens con
+                            intención facilita el mantenimiento y hace el sistema coherente: cada color tiene un
+                            único trabajo.</p>
+                    </li>
+
+                    <li class="cambio">
+                        <h3>3 · Tipografía: tres familias con roles distintos</h3>
+                        <div class="antes-despues">
+                            <div class="antes">Inter para todo el texto y Lexend para titulares (además de una
+                                fuente local TTF que se cargaba entera).</div>
+                            <div class="despues">Bricolage Grotesque (titulares, con carácter), Instrument Sans
+                                (cuerpo, legible) e IBM Plex Mono (notas, etiquetas, tags, navegación).</div>
+                        </div>
+                        <p class="razon"><strong>razón</strong> — Inter/Lexend es la pareja neutra que usa cualquier
+                            plantilla: no aporta personalidad. La monoespaciada en etiquetas y notas conecta con el
+                            mundo del desarrollo (comentarios de código, terminal) y es parte del concepto del
+                            documento anotado. Se cargan solo los pesos necesarios vía Google Fonts con
+                            <code>display=swap</code> y <code>preconnect</code>.</p>
+                    </li>
+
+                    <li class="cambio">
+                        <h3>4 · Fuera Material Symbols; SVG inline</h3>
+                        <div class="antes-despues">
+                            <div class="antes">Fuente de iconos Material Symbols cargada por CDN (enlazada dos veces
+                                por error en el head) para flechas, menú y decoración.</div>
+                            <div class="despues">SVG inline de trazo simple solo donde el icono aporta: flechas de
+                                acción, menú móvil, cerrar lightbox.</div>
+                        </div>
+                        <p class="razon"><strong>razón</strong> — Una fuente de iconos completa para usar 6 glifos
+                            es peso innecesario y produce FOUT (el texto del icono aparece antes que el glifo).
+                            Los SVG inline pesan bytes, no parpadean y se colorean con <code>currentColor</code>.
+                            Los iconos decorativos (estrella, insights, architecture…) se eliminaron directamente:
+                            no comunicaban nada.</p>
+                    </li>
+
+                    <li class="cambio">
+                        <h3>5 · Componentes: de glass-cards a tarjetas planas y ventanas de navegador</h3>
+                        <div class="antes-despues">
+                            <div class="antes">Tarjetas translúcidas con <code>backdrop-filter: blur(16px)</code>,
+                                sombras grandes y bordes suaves; capturas sueltas con esquinas redondeadas.</div>
+                            <div class="despues">Tarjetas planas con borde de 1.5px y hover sobrio; capturas dentro
+                                de "ventanas de navegador" con barra, puntos y URL visible.</div>
+                        </div>
+                        <p class="razon"><strong>razón</strong> — El glassmorphism es el efecto más asociado a
+                            plantillas de 2023-2024 y el blur tiene coste de render. La ventana de navegador con la
+                            URL real (<code>ludoscript.vercel.app</code>) añade una señal de credibilidad: el
+                            proyecto está desplegado y se puede visitar, no es un mockup.</p>
+                    </li>
+
+                    <li class="cambio">
+                        <h3>6 · Firma visual: subrayador y notas al margen</h3>
+                        <div class="antes-despues">
+                            <div class="antes">Sin elemento distintivo: gradientes y blur genéricos como única
+                                decoración.</div>
+                            <div class="despues">Clase <code>.marca</code> (subrayado amarillo con
+                                <code>box-decoration-break: clone</code> para que sobreviva a saltos de línea,
+                                animado al cargar con <code>.marca-anim</code>) y clase <code>.nota</code>
+                                (marginalia en mono itálica con prefijo <code>// nota</code>).</div>
+                        </div>
+                        <p class="razon"><strong>razón</strong> — Es el elemento por el que se recuerda la página y
+                            está justificado por la historia del candidato: marketing (subrayar lo importante de un
+                            documento) + desarrollo (comentar el código). La decoración ahora explica decisiones en
+                            lugar de rellenar espacio.</p>
+                    </li>
+
+                    <li class="cambio">
+                        <h3>7 · JavaScript reescrito y reducido</h3>
+                        <div class="antes-despues">
+                            <div class="antes">Navbar que se ocultaba al hacer scroll; galería basada en botones
+                                ocultos en el DOM (<code>#feature-controls</code> con <code>display:none</code>)
+                                leídos con <code>data-*</code>; observer que re-observaba elementos ya revelados.</div>
+                            <div class="despues">Nav sticky siempre visible; galería alimentada por un array de
+                                datos en JS; observer con <code>unobserve()</code> tras revelar; navegación por
+                                teclado del lightbox solo cuando está abierto.</div>
+                        </div>
+                        <p class="razon"><strong>razón</strong> — Ocultar la navegación al bajar dificulta llegar al
+                            CTA de contacto, que es la conversión del sitio. Los botones ocultos como almacén de
+                            datos eran HTML fantasma: un array es más honesto y más corto. Las flechas del teclado
+                            antes cambiaban la galería aunque el lightbox estuviera cerrado, lo que interfería con
+                            el scroll por teclado.</p>
+                    </li>
+
+                    <li class="cambio">
+                        <h3>8 · Accesibilidad y rendimiento como suelo, no como extra</h3>
+                        <div class="antes-despues">
+                            <div class="antes">Focus por defecto del navegador, animaciones sin alternativa
+                                completa, imágenes sin carga diferida, sin meta description.</div>
+                            <div class="despues"><code>:focus-visible</code> visible en azul,
+                                <code>prefers-reduced-motion</code> respetado en CSS y JS, objetivos táctiles de
+                                44px con <code>pointer: coarse</code>, <code>loading="lazy"</code> en imágenes bajo
+                                el pliegue, meta description en ambas páginas y <code>aria-label</code> /
+                                <code>aria-expanded</code> en los controles.</div>
+                        </div>
+                        <p class="razon"><strong>razón</strong> — Quien evalúa a un candidato frontend mira estas
+                            cosas. Además, un recruiter navegando con teclado o con animaciones reducidas debe poder
+                            llegar igualmente al correo y al CV.</p>
+                    </li>
+
+                    <li class="cambio">
+                        <h3>9 · Verificación con capturas reales</h3>
+                        <div class="antes-despues">
+                            <div class="antes">Sin proceso de verificación visual documentado.</div>
+                            <div class="despues">Renderizado con Chrome headless a 1440px (escritorio), 780px
+                                (tablet) y ancho mínimo, comprobando desbordamientos con un script temporal que
+                                medía <code>getBoundingClientRect()</code> de todos los elementos.</div>
+                        </div>
+                        <p class="razon"><strong>razón</strong> — La maquetación fluida (grids con
+                            <code>auto-fit/minmax</code>, <code>clamp()</code> en titulares, flex con
+                            <code>wrap</code>) se validó midiendo, no suponiendo. Nota del proceso: Chrome headless
+                            impone un ancho mínimo de ventana (~500px), así que una captura "a 390px" en realidad
+                            renderiza a 482px; conviene saberlo antes de diagnosticar falsos desbordamientos.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <section class="seccion seccion-alt">
+            <div class="contenedor">
+                <p class="etiqueta">pendiente</p>
+                <h2 class="titulo-seccion" style="margin-bottom: 1rem;">Archivos que quedaron huérfanos</h2>
+                <div class="parrafos">
+                    <p>
+                        Tras el rediseño, ninguna página usa ya <code>tailwind.js</code>,
+                        <code>styles/input.css</code>, <code>styles/output.css</code>, <code>script.js</code> ni
+                        <code>fonts/Lexend-VariableFont_wght.ttf</code>. Se conservan por si se quiere recuperar
+                        algo, pero pueden borrarse sin afectar al sitio.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <div class="contenedor pie-fila">
+            <p>Notas del rediseño — julio 2026 · documento de trabajo, no forma parte del portfolio público.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

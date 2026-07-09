@@ -1,682 +1,290 @@
 <!DOCTYPE html>
-
-<html class="scroll-smooth" lang="es">
+<html lang="es">
 
 <head>
     <script src="./scripts/analytics-consent.js" defer></script>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Álvaro Pastor - Desarrollo Web e IA Aplicada</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
+    <title>Álvaro Pastor — Desarrollo web con enfoque de producto e IA</title>
+    <meta name="description"
+        content="Portfolio de Álvaro Pastor, desarrollador web full-stack con base de marketing: producto, Vue, Node y IA aplicada." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <!-- Tailwind Config -->
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "secondary-fixed-dim": "#9ee6dc",
-                        "surface-tint": "#e8f3f5",
-                        "on-primary-fixed": "#102f45",
-                        "secondary-container": "#194a53",
-                        "on-surface": "#f8fbfc",
-                        "outline-variant": "#77a7b6",
-                        "secondary-fixed": "#d5fff8",
-                        "surface-variant": "#628fa3",
-                        "secondary": "#9ee6dc",
-                        "accent": "#ffbe76",
-                        "accent-strong": "#ff8f70",
-                        "primary-fixed-dim": "#d8eef4",
-                        "surface-container-highest": "#315e74",
-                        "surface-container": "#386b82",
-                        "outline": "#d7edf0",
-                        "on-surface-variant": "#dbe9ed",
-                        "surface-container-high": "#2c566d",
-                        "on-primary": "#17334a",
-                        "inverse-surface": "#f8fbfc",
-                        "surface-bright": "#477f94",
-                        "primary-container": "#17334a",
-                        "background": "#274f66",
-                        "surface": "#274f66",
-                        "primary": "#ffffff",
-                        "surface-container-lowest": "#5d91a7",
-                        "surface-container-low": "#315f78",
-                        "primary-fixed": "#f7fbff",
-                        "tertiary": "#274f66",
-                        "on-background": "#f8fbfc"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.125rem",
-                        "lg": "0.25rem",
-                        "xl": "0.5rem",
-                        "full": "0.75rem"
-                    },
-                    "spacing": {
-                        "stack-md": "1.5rem",
-                        "section-gap": "7rem",
-                        "gutter": "2rem",
-                        "stack-sm": "0.5rem",
-                        "container-max": "1120px",
-                        "stack-lg": "3rem"
-                    },
-                    "fontFamily": {
-                        "body-lg": ["Inter"],
-                        "label-sm": ["Inter"],
-                        "body-md": ["Inter"],
-                        "headline-md": ["Lexend"],
-                        "display-lg-mobile": ["Lexend"],
-                        "display-lg": ["Lexend"],
-                        "headline-sm": ["Lexend"],
-                        "label-md": ["Inter"]
-                    },
-                    "fontSize": {
-                        "body-lg": ["18px", { "lineHeight": "1.7", "fontWeight": "400" }],
-                        "label-sm": ["12px", { "lineHeight": "1", "fontWeight": "500" }],
-                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
-                        "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "700" }],
-                        "display-lg-mobile": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }],
-                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "0", "fontWeight": "700" }],
-                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
-                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600" }]
-                    }
-                },
-            },
-        }
-    </script>
-    <style>
-        @font-face {
-            font-family: "Lexend";
-            src: url("./fonts/Lexend-VariableFont_wght.ttf") format("truetype");
-            font-weight: 300 700;
-            font-style: normal;
-            font-display: swap;
-        }
-
-        .glass-card {
-            background: rgba(23, 51, 74, 0.42);
-            border: 1px solid rgba(215, 237, 240, 0.2);
-            backdrop-filter: blur(16px);
-            box-shadow: 0 18px 50px -30px rgba(6, 24, 34, 0.7);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 24px 60px -32px rgba(6, 24, 34, 0.86);
-        }
-
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-
-        body {
-            overflow-x: hidden;
-        }
-
-        .hero-gradient {
-            background: #274f66;
-        }
-
-        .section-pad {
-            padding-top: 7rem;
-            padding-bottom: 7rem;
-        }
-
-        .hero-title {
-            font-size: clamp(2.35rem, 7vw, 4rem);
-            line-height: 1.08;
-        }
-
-        .touch-target {
-            min-height: 2.75rem;
-        }
-
-        .accent-button {
-            background: #ffbe76;
-            color: #17334a;
-        }
-
-        .accent-button:hover,
-        .accent-button:focus-visible {
-            background: #ff8f70;
-            outline: none;
-        }
-
-        .mobile-panel {
-            background: #274f66;
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(-0.5rem);
-            transition: opacity 0.2s ease, transform 0.2s ease;
-        }
-
-        .mobile-panel.is-open {
-            opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0);
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-        }
-
-        .project-tag {
-            border: 1px solid rgba(158, 230, 220, 0.44);
-            border-radius: 0.25rem;
-            color: #d5fff8;
-            font-family: Inter, sans-serif;
-            font-size: 0.875rem;
-            font-weight: 600;
-            line-height: 1;
-            padding: 0.55rem 0.75rem;
-        }
-
-        .ludoscript-feature {
-            background: #315f78;
-            border: 1px solid rgba(158, 230, 220, 0.28);
-            box-shadow: 0 28px 70px -42px rgba(23, 51, 74, 0.8);
-            margin-left: -1.5rem;
-            margin-right: -1.5rem;
-            padding: 1.5rem;
-        }
-
-        .ludoscript-media {
-            background: rgba(23, 51, 74, 0.52);
-            border: 1px solid rgba(215, 237, 240, 0.26);
-            box-shadow: 0 20px 55px -36px rgba(6, 24, 34, 0.92);
-        }
-
-        .ludoscript-shot {
-            border: 1px solid rgba(215, 237, 240, 0.22);
-            box-shadow: 0 18px 44px -34px rgba(6, 24, 34, 0.95);
-        }
-
-        .ludoscript-link {
-            color: #ffffff;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.45rem;
-            text-decoration: none;
-            text-underline-offset: 0.22em;
-        }
-
-        .ludoscript-link:hover,
-        .ludoscript-link:focus-visible {
-            color: #9ee6dc;
-            outline: none;
-            text-decoration: underline;
-        }
-
-        .ludoscript-link .material-symbols-outlined {
-            background: #ffbe76;
-            border-radius: 999px;
-            color: #17334a;
-            font-size: 1.25rem;
-            height: 2rem;
-            width: 2rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-
-        .ludoscript-link:hover .material-symbols-outlined,
-        .ludoscript-link:focus-visible .material-symbols-outlined {
-            background: #ff8f70;
-            transform: translateX(0.2rem);
-        }
-
-        .ludoscript-tag {
-            border-color: rgba(158, 230, 220, 0.44);
-            color: #d5fff8;
-            background: rgba(158, 230, 220, 0.08);
-        }
-
-        .responsive-card-grid {
-            display: grid;
-            gap: 1.5rem;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
-        }
-
-        @media (max-width: 767px) {
-            .section-pad {
-                padding-top: 4.5rem;
-                padding-bottom: 4.5rem;
-            }
-
-            .hero-title {
-                font-size: clamp(2.2rem, 11vw, 3rem);
-            }
-
-            .mobile-stack-tight {
-                gap: 2rem;
-            }
-
-            .hero-portrait {
-                aspect-ratio: 4 / 3;
-                max-height: 22rem;
-            }
-
-            .project-media {
-                margin-left: -1rem;
-                margin-right: -1rem;
-                border-radius: 0;
-            }
-
-            .project-tags {
-                gap: 0.5rem;
-            }
-
-            .project-tag {
-                font-size: 0.78rem;
-                padding: 0.5rem 0.65rem;
-            }
-
-            .ludoscript-feature {
-                border-left: 0;
-                border-right: 0;
-                border-radius: 0;
-                margin-left: -1rem;
-                margin-right: -1rem;
-                padding: 1rem;
-            }
-
-            .ludoscript-link {
-                gap: 0.35rem;
-            }
-        }
-
-        @media (pointer: coarse) {
-
-            .touch-target,
-            button,
-            a {
-                min-height: 2.75rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./styles/portfolio.css" />
 </head>
 
-<body class="bg-surface font-body-md text-on-surface">
-    <!-- TopNavBar -->
-    <nav
-        class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm transition-all duration-300 ease-in-out">
-        <div
-            class="max-w-container-max mx-auto px-4 md:px-gutter h-16 flex items-center justify-between gap-4 relative">
-            <a class="font-headline-sm text-headline-sm font-bold tracking-tighter text-primary translate-y-[2px] md:translate-y-0"
-                href="#top">Álvaro
-                Pastor</a>
-            <!-- Desktop Links -->
-            <div class="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-                <a class="font-label-sm text-label-sm transition-colors text-primary border-b-2 border-secondary"
-                    href="#top">Inicio</a>
-                <a class="font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary"
-                    href="#projects">Proyectos</a>
-                <a class="font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary"
-                    href="#about">Perfil</a>
-                <a class="font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary"
-                    href="#contact">Contacto</a>
+<body id="top">
+    <!-- Navegación -->
+    <nav class="nav">
+        <div class="contenedor nav-fila">
+            <a class="nav-marca" href="#top">Álvaro Pastor<span>— dev</span></a>
+            <div class="nav-enlaces">
+                <a href="#proyectos">proyectos</a>
+                <a href="#perfil">perfil</a>
+                <a href="#aporto">qué aporto</a>
+                <a href="#contacto">contacto</a>
             </div>
-            <div class="hidden md:flex items-center">
-                <a href="#contact"
-                    class="touch-target px-6 py-2 accent-button font-label-md text-label-md rounded-lg transition-colors inline-flex items-center">Hablemos</a>
-            </div>
-            <!-- Mobile Menu Trigger -->
-            <button id="mobile-menu-button"
-                class="touch-target md:hidden text-primary h-11 w-11 rounded-lg border border-outline-variant/70 bg-primary-container/60 flex items-center justify-center"
-                type="button" aria-label="Abrir menú" aria-expanded="false">
-                <span class="material-symbols-outlined">menu</span>
+            <a href="#contacto" class="btn btn-primario nav-cta">Hablemos</a>
+            <button id="boton-menu" class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
             </button>
         </div>
-        <div id="mobile-menu"
-            class="mobile-panel md:hidden absolute left-0 right-0 top-16 border-b border-outline-variant/50 shadow-lg">
-            <div class="px-4 py-4 grid gap-2">
-                <a class="touch-target px-4 py-3 rounded-lg text-primary font-label-md text-label-md bg-surface-container"
-                    href="#top">Inicio</a>
-                <a class="touch-target px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md"
-                    href="#projects">Proyectos</a>
-                <a class="touch-target px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md"
-                    href="#about">Perfil</a>
-                <a class="touch-target px-4 py-3 rounded-lg text-on-surface-variant font-label-md text-label-md"
-                    href="#contact">Contacto</a>
-            </div>
+        <div id="menu-movil" class="menu-movil">
+            <a href="#proyectos">proyectos</a>
+            <a href="#perfil">perfil</a>
+            <a href="#aporto">qué aporto</a>
+            <a href="#contacto">contacto</a>
         </div>
     </nav>
-    <main class="hero-gradient pt-16" id="top">
-        <!-- Hero Section -->
-        <section
-            class="max-w-container-max mx-auto px-4 md:px-gutter pt-16 md:pt-24 pb-16 md:pb-section-gap flex flex-col items-center mobile-stack-tight gap-12">
-            <div class="w-full md:max-w-4xl mx-auto space-y-stack-md md:text-center">
-                <!-- <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed-dim/20 text-secondary font-label-sm text-label-sm">
-                    <span class="material-symbols-outlined text-[14px]"
-                        style="font-variation-settings: 'FILL' 1;">star</span>
-                    DISPONIBLE PARA NUEVOS RETOS
-                </div> -->
-                <h1 class="hero-title font-display-lg">
-                    Desarrollo web con <span class="text-secondary">enfoque de producto e IA práctica</span>
-                </h1>
-                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl md:mx-auto">
-                    Uno marketing, desarrollo e inteligencia artificial para crear interfaces claras, automatizaciones
-                    útiles y productos que tengan sentido para quien los usa.
+
+    <main>
+        <!-- Hero -->
+        <header class="hero">
+            <div class="contenedor hero-grid">
+                <p class="hero-meta">
+                    <span class="disponible">disponible para nuevos retos</span>
+                    <span>portfolio — 2026</span>
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 pt-4 md:justify-center">
-                    <a href="#projects"
-                        class="touch-target w-full sm:w-auto px-stack-lg py-4 accent-button font-label-md text-label-md rounded-lg shadow-sm transition-colors flex items-center justify-center gap-2">Ver
-                        proyectos <span class="material-symbols-outlined">arrow_forward</span></a>
-                    <a href="#about"
-                        class="touch-target w-full sm:w-auto px-stack-lg py-4 border border-outline text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container transition-all inline-flex items-center justify-center">Mi
-                        historia</a>
+                <h1>Desarrollo web con <span class="marca marca-anim">enfoque de producto</span> e IA práctica.</h1>
+                <p class="hero-intro">
+                    Uno marketing, desarrollo e inteligencia artificial para crear interfaces claras,
+                    automatizaciones útiles y productos que tengan sentido para quien los usa.
+                </p>
+                <div class="hero-acciones">
+                    <a href="#proyectos" class="btn btn-primario">Ver proyectos
+                        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg></a>
                     <a href="./Alvaro_Pastor_CV.pdf" download="Alvaro_Pastor_CV.pdf"
-                        class="touch-target w-full sm:w-auto px-stack-lg py-4 border border-secondary text-secondary font-label-md text-label-md rounded-lg hover:bg-secondary-fixed-dim/15 transition-all inline-flex items-center justify-center gap-2">Descargar
-                        CV <span class="material-symbols-outlined">download</span></a>
+                        class="btn btn-secundario">Descargar CV</a>
                 </div>
             </div>
-            <div class="hidden">
-                <div class="relative group">
-                    <div
-                        class="absolute -inset-4 bg-secondary-fixed-dim opacity-10 rounded-xl blur-2xl group-hover:opacity-20 transition-opacity">
-                    </div>
-                    <!-- <img class="hero-portrait relative w-full aspect-square object-cover rounded-lg shadow-lg"
-                        data-alt="Retrato profesional de Álvaro Pastor con estética limpia, tecnológica y cercana, usando luz natural y acentos azules."
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ6o2jvLUqqCBBjknIG_KTGe7-r3bMPHdz_zUUdZfe15nDcgZitBHTWu8fGv675KqNaDef66tcAMMmzWZIf29oNob3Oc7HMMbw7sku9qG2LE4JWew7ybw_oJwAPGRROd5V9VMBtpQ9Yf1kvaxM1yOt5RT-CMx5jWF5rhoU-qkxpk9e4n5WvcaUtuYAfFghrGY58iDGTA7wM-l8orkhOAyhWYCkARpaVRMi0hPS5Mkk_t3FGzCrCjBc" /> -->
+        </header>
+
+        <!-- Perfil -->
+        <section class="seccion seccion-alt" id="perfil">
+            <div class="contenedor dos-columnas revelar">
+                <div class="col-titulo">
+                    <p class="etiqueta">perfil</p>
+                    <h2 class="titulo-seccion">Quién soy</h2>
                 </div>
-            </div>
-        </section>
-        <!-- Quién soy Section -->
-        <section class="section-pad bg-surface-container-low" id="about">
-            <div class="max-w-container-max mx-auto px-4 md:px-gutter">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-                    <div class="md:col-span-4">
-                        <h2 class="font-headline-md text-headline-md text-primary sticky top-24">Quién soy</h2>
-                    </div>
-                    <div class="md:col-span-8 space-y-stack-md">
-                        <p class="font-body-lg text-body-lg text-on-surface-variant">
-                            Vengo del marketing y antes de desarrollar pienso en el usuario final, no me quedo solo en
-                            que algo funcione, busco que se entienda, que aporte valor y que tenga una intención clara.
+                <div>
+                    <div class="parrafos">
+                        <p>
+                            Vengo del marketing y <strong>antes de desarrollar pienso en el usuario final</strong>:
+                            no me quedo en que algo funcione, busco que se entienda, que aporte valor y que tenga
+                            una intención clara.
                         </p>
-                        <p class="font-body-lg text-body-lg text-on-surface-variant">
-                            Soy desarrollador de aplicaciones web y me gusta trabajar con backend y frontend para hacer
-                            una buena experiencia de usuario, usando las herramientas de IA como OpenCode, Codex y
-                            automatizando procesos. Me interesa construir soluciones reales, convirtiendo una idea en
-                            una solución enfocada al usuario.
+                        <p>
+                            Soy desarrollador de aplicaciones web y trabajo backend y frontend para construir una
+                            buena experiencia de usuario, apoyándome en herramientas de IA como OpenCode o Codex y
+                            automatizando procesos. Me interesa <strong>convertir ideas en soluciones reales</strong>
+                            enfocadas al usuario.
                         </p>
-                        <div class="pt-stack-md flex gap-4 overflow-x-auto pb-4">
-                            <span
-                                class="px-4 py-2 bg-primary-container/35 rounded-full border border-outline-variant/60 text-on-surface-variant font-label-sm text-label-sm whitespace-nowrap">UX
-                                claro</span>
-                            <span
-                                class="px-4 py-2 bg-secondary-fixed-dim/15 rounded-full border border-secondary text-secondary font-label-sm text-label-sm whitespace-nowrap">Full-stack
-                                junior</span>
-                            <span
-                                class="px-4 py-2 bg-primary-container/35 rounded-full border border-outline-variant/60 text-on-surface-variant font-label-sm text-label-sm whitespace-nowrap">Producto</span>
-                            <span
-                                class="px-4 py-2 bg-primary-container/35 rounded-full border border-outline-variant/60 text-on-surface-variant font-label-sm text-label-sm whitespace-nowrap">IA
-                                aplicada</span>
-                        </div>
+                    </div>
+                    <div class="tags" style="margin-top: 1.8rem;">
+                        <span class="tag tag-acento">full-stack junior</span>
+                        <span class="tag">ux claro</span>
+                        <span class="tag">producto</span>
+                        <span class="tag">ia aplicada</span>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- What I Do Section -->
-        <section class="section-pad bg-surface">
-            <div class="max-w-container-max mx-auto px-4 md:px-gutter">
-                <div class="text-center mb-16">
-                    <h2 class="font-headline-md text-headline-md mb-4">Qué aporto</h2>
-                    <div class="w-16 h-1 bg-secondary mx-auto"></div>
-                </div>
-                <div class="responsive-card-grid">
-                    <!-- Interfaz con intención Card -->
-                    <div class="glass-card p-stack-lg rounded-lg border border-outline-variant/30">
-                        <div
-                            class="w-12 h-12 bg-primary-container text-secondary-fixed-dim flex items-center justify-center rounded-lg mb-6">
-                            <span class="material-symbols-outlined text-[28px]">architecture</span>
-                        </div>
-                        <h3 class="font-headline-sm text-headline-sm mb-4">Interfaz con intención</h3>
-                        <p class="text-on-surface-variant mb-6">Diseño pantallas pensando en jerarquía, legibilidad y
-                            flujo. Menos adorno gratuito, más claridad para que el usuario avance.</p>
-                        <ul class="space-y-2 text-label-md font-label-md text-on-surface-variant">
-                            <li class="flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 bg-secondary rounded-full"></span> Prototipado rápido</li>
-                            <li class="flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 bg-secondary rounded-full"></span> Criterio UX</li>
+
+        <!-- Qué aporto -->
+        <section class="seccion" id="aporto">
+            <div class="contenedor revelar">
+                <p class="etiqueta">qué aporto</p>
+                <h2 class="titulo-seccion" style="margin-bottom: 2.6rem;">Tres frentes, un mismo criterio</h2>
+                <div class="rejilla-tarjetas">
+                    <article class="tarjeta">
+                        <span class="campo">interfaz</span>
+                        <h3>Interfaz con intención</h3>
+                        <p>Diseño pantallas pensando en jerarquía, legibilidad y flujo. Menos adorno gratuito, más
+                            claridad para que el usuario avance.</p>
+                        <ul>
+                            <li>prototipado rápido</li>
+                            <li>criterio ux</li>
                         </ul>
-                    </div>
-                    <!-- Desarrollo web Card -->
-                    <div class="glass-card p-stack-lg rounded-lg border border-outline-variant/30">
-                        <div
-                            class="w-12 h-12 bg-secondary text-primary-container flex items-center justify-center rounded-lg mb-6">
-                            <span class="material-symbols-outlined text-[28px]">code</span>
-                        </div>
-                        <h3 class="font-headline-sm text-headline-sm mb-4">Desarrollo web</h3>
-                        <p class="text-on-surface-variant mb-6">Construyo aplicaciones con JavaScript, Vue, Node,
-                            Express y bases de datos usando la IA como apoyo para programar. Me gusta dejar el producto
-                            ordenado, mantenible
-                            y listo para
-                            crecer.</p>
-                        <ul class="space-y-2 text-label-md font-label-md text-on-surface-variant">
-                            <li class="flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 bg-secondary rounded-full"></span> Vue 3</li>
-                            <li class="flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 bg-secondary rounded-full"></span> Node / Express</li>
-                            <li class="flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 bg-secondary rounded-full"></span> PostgreSQL / APIs</li>
+                    </article>
+                    <article class="tarjeta">
+                        <span class="campo">desarrollo</span>
+                        <h3>Desarrollo web</h3>
+                        <p>Construyo aplicaciones con JavaScript, Vue, Node, Express y bases de datos, usando la IA
+                            como apoyo para programar. Producto ordenado, mantenible y listo para crecer.</p>
+                        <ul>
+                            <li>vue 3</li>
+                            <li>node / express</li>
+                            <li>postgresql / apis</li>
                         </ul>
-                    </div>
-                    <!-- IA y automatización Card -->
-                    <div class="glass-card p-stack-lg rounded-lg border border-outline-variant/30">
-                        <div
-                            class="w-12 h-12 bg-primary-container text-primary-fixed-dim flex items-center justify-center rounded-lg mb-6">
-                            <span class="material-symbols-outlined text-[28px]">insights</span>
-                        </div>
-                        <h3 class="font-headline-sm text-headline-sm mb-4">IA y automatización</h3>
-                        <p class="text-on-surface-variant mb-6">Uso modelos de inteligencia artificial, APIs y scripts
-                            para reducir tareas
-                            repetitivas, generar contenido útil y mejorar procesos sin perder el control técnico.</p>
-                        <ul class="space-y-2 text-label-md font-label-md text-on-surface-variant">
-                            <li class="flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 bg-secondary rounded-full"></span> Prompting y contexto</li>
-                            <li class="flex items-center gap-2"><span
-                                    class="w-1.5 h-1.5 bg-secondary rounded-full"></span> Bash / agentes</li>
+                    </article>
+                    <article class="tarjeta">
+                        <span class="campo">ia</span>
+                        <h3>IA y automatización</h3>
+                        <p>Uso modelos de IA, APIs y scripts para reducir tareas repetitivas, generar contenido útil
+                            y mejorar procesos sin perder el control técnico.</p>
+                        <ul>
+                            <li>prompting y contexto</li>
+                            <li>bash / agentes</li>
                         </ul>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
-        <!-- Featured Proyectos Section -->
-        <section class="section-pad bg-surface-bright overflow-hidden" id="projects">
-            <div class="max-w-container-max mx-auto px-4 md:px-gutter">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                    <div class="max-w-xl">
-                        <h2 class="font-headline-md text-headline-md mb-4">Proyectos</h2>
-                        <p class="text-on-surface-variant font-body-lg">Proyectos donde combino desarrollo, producto y
-                            aprendizaje aplicado.</p>
-                    </div>
+
+        <!-- Proyectos -->
+        <section class="seccion seccion-alt" id="proyectos">
+            <div class="contenedor">
+                <div class="revelar">
+                    <p class="etiqueta">proyectos</p>
+                    <h2 class="titulo-seccion">Proyectos con contexto, no solo capturas</h2>
+                    <p class="texto-suave" style="max-width: 36rem; margin-top: 1rem;">
+                        Cada proyecto explica el problema, las decisiones técnicas y lo que aprendí por el camino.
+                    </p>
                 </div>
-                <div class="space-y-24">
-                    <!-- Project 1 -->
-                    <div
-                        class="group ludoscript-feature grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center rounded-lg">
-                        <div
-                            class="project-media ludoscript-media md:col-span-7 order-2 md:order-1 overflow-hidden rounded-lg">
-                            <a class="block p-3 md:p-4" href="./proyecto/ludoscript.html"
-                                aria-label="Ver caso de estudio de LudoScript">
-                                <div class="grid grid-cols-2 gap-3 md:gap-4">
-                                    <img class="ludoscript-shot col-span-2 w-full aspect-video object-cover rounded-lg transform group-hover:scale-[1.015] transition-transform duration-700"
-                                        alt="Pantalla principal de LudoScript" src="./img/ludoscript-home.png" />
-                                    <img class="ludoscript-shot w-full aspect-[4/3] object-cover rounded-lg"
-                                        alt="Quiz de LudoScript" src="./img/ludoscript-quiz.png" />
-                                    <img class="ludoscript-shot w-full aspect-[4/3] object-cover rounded-lg"
-                                        alt="Panel de progreso de LudoScript" src="./img/progreso.png" />
-                                </div>
+
+                <!-- LudoScript -->
+                <article class="proyecto revelar">
+                    <div class="proyecto-media">
+                        <div class="ventana">
+                            <div class="ventana-barra">
+                                <span class="ventana-punto"></span>
+                                <span class="ventana-punto"></span>
+                                <span class="ventana-punto lleno"></span>
+                                <span class="ventana-url">ludoscript.vercel.app</span>
+                            </div>
+                            <a href="./proyecto/ludoscript.html" aria-label="Ver el caso de estudio de LudoScript">
+                                <img src="./img/ludoscript-home.png" alt="Pantalla principal de LudoScript"
+                                    loading="lazy" />
                             </a>
                         </div>
-                        <div class="md:col-span-5 order-1 md:order-2 space-y-stack-md">
-                            <span
-                                class="font-label-sm text-label-sm text-secondary-fixed-dim tracking-widest uppercase">Educación
-                                &amp; IA</span>
-                            <h3 class="font-headline-md text-headline-md"><a class="ludoscript-link"
-                                    href="./proyecto/ludoscript.html"
-                                    aria-label="Abrir el caso de estudio de LudoScript">LudoScript <span
-                                        class="material-symbols-outlined" aria-hidden="true">arrow_forward</span></a>
-                            </h3>
-                            <p class="text-primary-fixed-dim font-body-md">Plataforma educativa con quizzes,
-                                flashcards, progreso, zona de aprendizaje y generación de preguntas usando IA para
-                                reforzar las áreas débiles del usuario.</p>
-                            <div class="project-tags pt-2">
-                                <span class="project-tag ludoscript-tag">Vue
-                                    3</span>
-                                <span class="project-tag ludoscript-tag">Express</span>
-                                <span class="project-tag ludoscript-tag">Inteligencia
-                                    artificial</span>
-                            </div>
+                        <div class="miniaturas">
+                            <img src="./img/ludoscript-quiz.png" alt="Quiz de LudoScript" loading="lazy" />
+                            <img src="./img/progreso.png" alt="Panel de progreso de LudoScript" loading="lazy" />
                         </div>
                     </div>
-                    <!-- Project 2 -->
-                    <div
-                        class="group ludoscript-feature grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center rounded-lg">
-                        <div class="md:col-span-5 space-y-stack-md">
-                            <span
-                                class="font-label-sm text-label-sm text-secondary-fixed-dim tracking-widest uppercase">Automatización
-                                &amp; producto</span>
-                            <h3 class="font-headline-md text-headline-md">Procesos con IA</h3>
-                            <p class="text-primary-fixed-dim font-body-md">Trabajo práctico con skills, agentes y
-                                gestión del contexto de los LLMs para agilizar el rendimiento del agente en tareas de
-                                desarrollo.</p>
-                            <div class="project-tags pt-2">
-                                <span class="project-tag ludoscript-tag">Skills</span>
-                                <span class="project-tag ludoscript-tag">Agentes</span>
-                                <span class="project-tag ludoscript-tag">LLMs</span>
+                    <div class="proyecto-info">
+                        <p class="etiqueta">educación · ia</p>
+                        <h3><a class="proyecto-titulo-enlace" href="./proyecto/ludoscript.html">LudoScript</a></h3>
+                        <p class="descripcion">Plataforma educativa full-stack con quizzes, flashcards, seguimiento
+                            de progreso y generación de preguntas con IA para reforzar las áreas débiles de cada
+                            usuario. Mi foco: backend, integración con IA y multijugador en tiempo real.</p>
+                        <div class="tags">
+                            <span class="tag">vue 3</span>
+                            <span class="tag">express</span>
+                            <span class="tag">postgresql</span>
+                            <span class="tag tag-acento">gemini api</span>
+                            <span class="tag">socket.io</span>
+                        </div>
+                        <a class="proyecto-enlace" href="./proyecto/ludoscript.html">Leer el caso de estudio
+                            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                                <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg></a>
+                    </div>
+                </article>
+
+                <!-- Procesos con IA -->
+                <article class="proyecto invertido revelar">
+                    <div class="proyecto-media">
+                        <div class="fichas">
+                            <div class="ficha">
+                                <span class="campo">contexto</span>
+                                <p>He trabajado la gestión del contexto de los LLMs y he creado un mapa del proyecto
+                                    para que la IA se oriente mejor en el código.</p>
+                            </div>
+                            <div class="ficha">
+                                <span class="campo">harness</span>
+                                <p>Las instrucciones deben ser claras y precisas. No siempre gana el modelo más
+                                    caro: también influye el harness que lo acompaña.</p>
                             </div>
                         </div>
-                        <div class="md:col-span-7 ludoscript-media rounded-lg p-5 md:p-6">
-                            <div class="grid gap-4 md:grid-cols-2">
-                                <div class="space-y-2 border-l border-outline-variant/35 pl-4">
-                                    <span
-                                        class="font-label-sm text-label-sm text-secondary-fixed-dim tracking-widest uppercase">Contexto</span>
-                                    <p class="text-on-surface-variant font-body-md">He trabajado con el contexto de los
-                                        LLMs y he creado un mapa del proyecto para que la IA se oriente mejor.</p>
-                                </div>
-                                <div class="space-y-2 border-l border-outline-variant/35 pl-4">
-                                    <span
-                                        class="font-label-sm text-label-sm text-secondary-fixed-dim tracking-widest uppercase">Harness</span>
-                                    <p class="text-on-surface-variant font-body-md">Las instrucciones deben ser claras y
-                                        precisas. No siempre gana el modelo más caro, también influye el harness que
-                                        lo acompaña.</p>
-                                </div>
-                            </div>
+                        <aside class="nota" style="margin-top: 1.4rem;">Esto no es un proyecto con demo: es la forma
+                            de trabajar que aplico en todos los demás.</aside>
+                    </div>
+                    <div class="proyecto-info">
+                        <p class="etiqueta">automatización · producto</p>
+                        <h3>Procesos con IA</h3>
+                        <p class="descripcion">Trabajo práctico con skills, agentes y gestión del contexto de los
+                            LLMs para agilizar el rendimiento del agente en tareas de desarrollo.</p>
+                        <div class="tags">
+                            <span class="tag">skills</span>
+                            <span class="tag">agentes</span>
+                            <span class="tag">llms</span>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
         </section>
-        <!-- CTA Section -->
-        <section class="section-pad" id="contact">
-            <div class="max-w-container-max mx-auto px-4 md:px-gutter text-center">
-                <div class="bg-primary-container p-6 md:p-20 rounded-lg relative overflow-hidden">
-                    <div class="relative z-10 space-y-stack-md max-w-2xl mx-auto">
-                        <h2 class="font-display-lg-mobile md:font-display-lg text-white leading-tight">¿Construimos algo
-                            útil?</h2>
-                        <p class="text-primary-fixed-dim font-body-lg">Estoy abierto a oportunidades en
-                            desarrollo web, automatización e integración práctica de IA.</p>
-                        <div class="pt-8">
-                            <a href="mailto:alvpastor17@gmail.com"
-                                class="touch-target inline-flex accent-button px-stack-lg py-4 rounded-lg font-label-md text-label-md transition-colors shadow-lg items-center">Contactar</a>
-                        </div>
-                    </div>
+
+        <!-- Contacto -->
+        <section class="contacto" id="contacto">
+            <div class="contenedor revelar">
+                <p class="etiqueta">contacto</p>
+                <h2>¿Construimos algo <span class="marca">útil</span>?</h2>
+                <p>Estoy abierto a oportunidades en desarrollo web, automatización e integración práctica de IA.</p>
+                <div class="acciones">
+                    <a href="mailto:alvpastor17@gmail.com" class="btn btn-claro">Escríbeme</a>
+                    <a href="./Alvaro_Pastor_CV.pdf" download="Alvaro_Pastor_CV.pdf"
+                        class="btn btn-contorno-claro">Descargar CV</a>
                 </div>
+                <p class="correo">o directamente: <a class="enlace"
+                        href="mailto:alvpastor17@gmail.com">alvpastor17@gmail.com</a></p>
             </div>
         </section>
     </main>
-    <!-- Footer -->
-    <footer class="bg-surface-container-low border-t border-outline-variant/50 w-full py-stack-lg">
-        <div
-            class="max-w-container-max mx-auto px-4 md:px-gutter flex flex-col md:flex-row justify-between items-center gap-stack-md">
-            <div class="flex flex-col items-center md:items-start gap-4">
-                <span class="font-headline-sm text-headline-sm text-primary">Álvaro Pastor</span>
-                <p class="font-body-md text-body-md text-on-surface-variant max-w-xs text-center md:text-left">
-                    © 2026 Álvaro Pastor. Desarrollo web, producto e IA aplicada.
-                </p>
-            </div>
-            <div class="flex flex-wrap justify-center gap-4 md:gap-8">
-                <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md"
-                    href="https://es.linkedin.com/in/%C3%A1lvaro-pastor">LinkedIn</a>
-                <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md"
-                    href="https://github.com/alvaropas17/alvaropas17">GitHub</a>
-                <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md"
-                    href="mailto:alvpastor17@gmail.com">Email</a>
-                <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md"
-                    href="#projects">Portfolio</a>
+
+    <!-- Pie -->
+    <footer class="pie">
+        <div class="contenedor pie-fila">
+            <p>© 2026 Álvaro Pastor — desarrollo web, producto e IA aplicada.</p>
+            <div class="pie-enlaces">
+                <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" rel="noopener">LinkedIn</a>
+                <a href="https://github.com/alvaropas17/alvaropas17" rel="noopener">GitHub</a>
+                <a href="mailto:alvpastor17@gmail.com">Email</a>
+                <a href="#proyectos">Proyectos</a>
             </div>
         </div>
     </footer>
+
     <script>
-        // Micro-interaction for smooth scrolling and header fade
-        let lastScroll = 0;
-        const nav = document.querySelector('nav');
+        // Menú móvil
+        const botonMenu = document.querySelector('#boton-menu');
+        const menuMovil = document.querySelector('#menu-movil');
 
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll <= 0) {
-                nav.classList.remove('shadow-sm');
-                return;
-            }
-
-            if (currentScroll > lastScroll && currentScroll > 100) {
-                nav.style.transform = 'translateY(-100%)';
-            } else {
-                nav.style.transform = 'translateY(0)';
-                nav.classList.add('shadow-sm');
-            }
-            lastScroll = currentScroll;
+        botonMenu.addEventListener('click', () => {
+            const abierto = menuMovil.classList.toggle('abierto');
+            botonMenu.setAttribute('aria-expanded', String(abierto));
         });
 
-        const mobileMenuButton = document.querySelector('#mobile-menu-button');
-        const mobileMenu = document.querySelector('#mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            const isOpen = mobileMenu.classList.toggle('is-open');
-            mobileMenuButton.setAttribute('aria-expanded', String(isOpen));
-            mobileMenuButton.querySelector('.material-symbols-outlined').textContent = isOpen ? 'close' : 'menu';
-        });
-
-        mobileMenu.querySelectorAll('a').forEach((link) => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('is-open');
-                mobileMenuButton.setAttribute('aria-expanded', 'false');
-                mobileMenuButton.querySelector('.material-symbols-outlined').textContent = 'menu';
+        menuMovil.querySelectorAll('a').forEach((enlace) => {
+            enlace.addEventListener('click', () => {
+                menuMovil.classList.remove('abierto');
+                botonMenu.setAttribute('aria-expanded', 'false');
             });
         });
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1
-        };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-8');
-                }
-            });
-        }, observerOptions);
-
+        // Revelado al hacer scroll
         if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('section > div').forEach(el => {
-                el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-8');
-                observer.observe(el);
-            });
+            const observador = new IntersectionObserver((entradas) => {
+                entradas.forEach((entrada) => {
+                    if (entrada.isIntersecting) {
+                        entrada.target.classList.add('visible');
+                        observador.unobserve(entrada.target);
+                    }
+                });
+            }, { threshold: 0.12 });
+
+            document.querySelectorAll('.revelar').forEach((el) => observador.observe(el));
+        } else {
+            document.querySelectorAll('.revelar').forEach((el) => el.classList.add('visible'));
         }
     </script>
 </body>

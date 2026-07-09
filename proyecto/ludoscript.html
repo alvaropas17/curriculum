@@ -1,894 +1,487 @@
 <!DOCTYPE html>
-<html class="scroll-smooth" lang="es">
+<html lang="es">
 
 <head>
   <script src="../scripts/analytics-consent.js" defer></script>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>LudoScript - Caso de Estudio</title>
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" />
+  <title>LudoScript — Caso de estudio · Álvaro Pastor</title>
+  <meta name="description"
+    content="Caso de estudio de LudoScript: plataforma educativa full-stack con IA, quizzes, progreso y multijugador en tiempo real." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
     rel="stylesheet" />
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "secondary-fixed-dim": "#9ee6dc",
-            "surface-tint": "#e8f3f5",
-            "on-primary-fixed": "#102f45",
-            "secondary-container": "#194a53",
-            "on-surface": "#f8fbfc",
-            "outline-variant": "#77a7b6",
-            "secondary-fixed": "#d5fff8",
-            "surface-variant": "#628fa3",
-            "secondary": "#9ee6dc",
-            "accent": "#ffbe76",
-            "accent-strong": "#ff8f70",
-            "primary-fixed-dim": "#d8eef4",
-            "surface-container-highest": "#315e74",
-            "surface-container": "#386b82",
-            "outline": "#d7edf0",
-            "on-surface-variant": "#dbe9ed",
-            "surface-container-high": "#2c566d",
-            "on-primary": "#17334a",
-            "inverse-surface": "#f8fbfc",
-            "surface-bright": "#477f94",
-            "primary-container": "#17334a",
-            "background": "#274f66",
-            "surface": "#274f66",
-            "primary": "#ffffff",
-            "surface-container-lowest": "#5d91a7",
-            "surface-container-low": "#315f78",
-            "primary-fixed": "#f7fbff"
-          },
-          borderRadius: {
-            DEFAULT: "0.125rem",
-            lg: "0.25rem",
-            xl: "0.5rem",
-            full: "0.75rem"
-          },
-          spacing: {
-            "stack-md": "1.5rem",
-            "section-gap": "8rem",
-            "gutter": "2rem",
-            "stack-sm": "0.5rem",
-            "container-max": "1120px",
-            "stack-lg": "3rem"
-          },
-          fontFamily: {
-            "body-lg": ["Inter"],
-            "label-sm": ["Inter"],
-            "body-md": ["Inter"],
-            "headline-md": ["Lexend"],
-            "display-lg-mobile": ["Lexend"],
-            "display-lg": ["Lexend"],
-            "headline-sm": ["Lexend"],
-            "label-md": ["Inter"]
-          },
-          fontSize: {
-            "body-lg": ["18px", { lineHeight: "1.7", fontWeight: "400" }],
-            "label-sm": ["12px", { lineHeight: "1", fontWeight: "500" }],
-            "body-md": ["16px", { lineHeight: "1.6", fontWeight: "400" }],
-            "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "700" }],
-            "display-lg-mobile": ["40px", { lineHeight: "1.2", fontWeight: "700" }],
-            "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "0", fontWeight: "700" }],
-            "headline-sm": ["24px", { lineHeight: "1.4", fontWeight: "600" }],
-            "label-md": ["14px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "600" }]
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    @font-face {
-      font-family: "Lexend";
-      src: url("../fonts/Lexend-VariableFont_wght.ttf") format("truetype");
-      font-weight: 300 700;
-      font-style: normal;
-      font-display: swap;
-    }
-
-    body {
-      overflow-x: hidden;
-    }
-
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-    }
-
-    .hero-gradient {
-      background: linear-gradient(180deg, #274f66 0%, #315f78 46%, #274f66 100%);
-    }
-
-    .glass-card {
-      background: rgba(23, 51, 74, 0.42);
-      border: 1px solid rgba(215, 237, 240, 0.2);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 18px 50px -30px rgba(6, 24, 34, 0.7);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
-    }
-
-    .glass-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 24px 60px -32px rgba(6, 24, 34, 0.86);
-      border-color: rgba(158, 230, 220, 0.58);
-    }
-
-    .hero-title {
-      font-size: clamp(2.15rem, 3.7vw, 3.25rem);
-      line-height: 1.12;
-    }
-
-    .case-hero-wrap {
-      max-width: 1480px;
-    }
-
-    .case-hero-copy {
-      max-width: 42rem;
-    }
-
-    .case-hero-media {
-      min-width: 0;
-    }
-
-    .case-hero-shot {
-      background: #0b1726;
-      object-fit: contain;
-    }
-
-    .browser-dot {
-      width: 0.75rem;
-      height: 0.75rem;
-      border-radius: 999px;
-    }
-
-    .feature-button.is-active {
-      border-color: rgba(158, 230, 220, 0.72);
-      background: rgba(158, 230, 220, 0.14);
-    }
-
-    .feature-button.is-active h3 {
-      color: #9ee6dc;
-    }
-
-    .feature-dot {
-      appearance: none;
-      border: 0;
-      flex: 0 0 auto;
-      min-height: 0 !important;
-      padding: 0;
-      width: 0.65rem;
-      height: 0.65rem;
-      border-radius: 999px;
-      background: rgba(248, 251, 252, 0.34);
-      transition: width 0.2s ease, background 0.2s ease, transform 0.2s ease;
-    }
-
-    .feature-dot.is-active {
-      width: 1.85rem;
-      background: #ffbe76;
-    }
-
-    .feature-dot:hover,
-    .feature-dot:focus-visible {
-      background: rgba(248, 251, 252, 0.62);
-      outline: none;
-      transform: scale(1.08);
-    }
-
-    .feature-dot.is-active:hover,
-    .feature-dot.is-active:focus-visible {
-      background: #ffbe76;
-    }
-
-    #feature-controls {
-      display: none;
-    }
-
-    .feature-image {
-      aspect-ratio: 16 / 9;
-      cursor: zoom-in;
-      background: #0b1726;
-      object-fit: contain;
-    }
-
-    .feature-frame {
-      position: relative;
-    }
-
-    .gallery-arrow {
-      align-items: center;
-      background: rgba(23, 51, 74, 0.78);
-      border: 1px solid rgba(248, 251, 252, 0.28);
-      border-radius: 999px;
-      color: #ffffff;
-      display: inline-flex;
-      height: 2.75rem;
-      justify-content: center;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
-      width: 2.75rem;
-      z-index: 2;
-    }
-
-    .gallery-arrow:hover,
-    .gallery-arrow:focus-visible {
-      background: #ffbe76;
-      color: #17334a;
-      outline: none;
-      transform: translateY(-50%) scale(1.04);
-    }
-
-    .gallery-arrow.prev {
-      left: 0.85rem;
-    }
-
-    .gallery-arrow.next {
-      right: 0.85rem;
-    }
-
-    .lightbox-arrow {
-      height: 3rem;
-      position: fixed;
-      width: 3rem;
-    }
-
-    .lightbox-arrow.prev {
-      left: 1rem;
-    }
-
-    .lightbox-arrow.next {
-      right: 1rem;
-    }
-
-    .image-lightbox {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-    }
-
-    .image-lightbox.is-open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .decision-step {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 1rem;
-    }
-
-    .decision-marker {
-      align-items: center;
-      background: #ffbe76;
-      border-radius: 999px;
-      color: #17334a;
-      display: inline-flex;
-      font-weight: 700;
-      height: 2.4rem;
-      justify-content: center;
-      width: 2.4rem;
-    }
-
-    @media (max-width: 767px) {
-      .section-pad {
-        padding-top: 3.75rem !important;
-        padding-bottom: 3.75rem !important;
-      }
-
-      .hero-title {
-        font-size: clamp(2rem, 10vw, 2.65rem);
-      }
-
-      .case-hero-copy {
-        max-width: none;
-      }
-
-      .case-hero-media {
-        margin-right: 0;
-      }
-
-      .gallery-arrow {
-        height: 2.4rem;
-        width: 2.4rem;
-      }
-
-      .gallery-arrow.prev {
-        left: 0.65rem;
-      }
-
-      .gallery-arrow.next {
-        right: 0.65rem;
-      }
-
-      .feature-frame {
-        margin-left: -0.35rem;
-        margin-right: -0.35rem;
-        border-radius: 0;
-      }
-
-      .feature-image {
-        aspect-ratio: 16 / 10;
-        background: #0b1726;
-        object-fit: contain !important;
-      }
-
-
-      #feature-dots {
-        margin-top: 0.9rem;
-      }
-
-      .decision-step {
-        grid-template-columns: 1fr;
-      }
-
-      .lightbox-arrow {
-        bottom: 1rem;
-        top: auto;
-        transform: none;
-      }
-
-      .lightbox-arrow:hover,
-      .lightbox-arrow:focus-visible {
-        transform: scale(1.04);
-      }
-
-      .lightbox-arrow.prev {
-        left: calc(50% - 3.4rem);
-      }
-
-      .lightbox-arrow.next {
-        right: calc(50% - 3.4rem);
-      }
-    }
-
-    @media (pointer: coarse) {
-
-      .feature-button,
-      .gallery-arrow,
-      a,
-      button {
-        min-height: 2.75rem;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="../styles/portfolio.css" />
 </head>
 
-<body class="bg-surface font-body-md text-on-surface">
-  <nav
-    class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm transition-all duration-300 ease-in-out">
-    <div class="max-w-container-max mx-auto px-4 md:px-gutter h-20 pt-2 flex items-center justify-between gap-4">
-      <a class="font-headline-sm text-headline-sm font-bold tracking-tighter text-primary truncate"
-        href="../index.html">Álvaro Pastor</a>
-      <div class="hidden md:flex items-center gap-8">
-        <a class="font-label-sm text-label-sm transition-colors text-primary border-b-2 border-secondary"
-          href="#top">Caso</a>
-        <a class="font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary"
-          href="#flujo">Flujo</a>
-        <a class="font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary"
-          href="#arquitectura">Arquitectura</a>
-        <a class="font-label-sm text-label-sm transition-colors text-on-surface-variant hover:text-primary"
-          href="#decisiones">Decisiones</a>
+<body id="top">
+  <!-- Navegación -->
+  <nav class="nav">
+    <div class="contenedor nav-fila">
+      <a class="nav-marca" href="../index.html">Álvaro Pastor<span>— caso: LudoScript</span></a>
+      <div class="nav-enlaces">
+        <a href="#flujo">flujo</a>
+        <a href="#capturas">capturas</a>
+        <a href="#arquitectura">arquitectura</a>
+        <a href="#decisiones">decisiones</a>
       </div>
-      <!-- <a class="px-4 md:px-6 py-2 bg-white text-primary-container font-label-md text-label-md rounded-lg hover:opacity-90 transition-opacity whitespace-nowrap" href="../index.html">Portfolio</a> -->
+      <a href="https://ludoscript.vercel.app/" class="btn btn-primario nav-cta" target="_blank"
+        rel="noopener noreferrer">Probar demo</a>
+      <button id="boton-menu" class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <div id="menu-movil" class="menu-movil">
+      <a href="#flujo">flujo</a>
+      <a href="#capturas">capturas</a>
+      <a href="#arquitectura">arquitectura</a>
+      <a href="#decisiones">decisiones</a>
+      <a href="../index.html">← volver al portfolio</a>
     </div>
   </nav>
 
-  <main class="hero-gradient pt-20" id="top">
-    <section
-      class="case-hero-wrap mx-auto px-4 md:px-gutter pt-20 md:pt-24 pb-20 md:pb-section-gap grid grid-cols-1 lg:grid-cols-[minmax(28rem,0.92fr)_minmax(0,1.08fr)] xl:grid-cols-[minmax(31rem,0.88fr)_minmax(0,1.12fr)] gap-10 xl:gap-14 items-center">
-      <div class="case-hero-copy space-y-stack-md">
-        <span
-          class="inline-flex items-center gap-2 px-3 py-2 bg-secondary-fixed-dim/20 text-secondary font-label-sm text-label-sm tracking-widest uppercase rounded-lg">
-          <span class="material-symbols-outlined text-[16px]">school</span>
-          Caso de proyecto - IA educativa
-        </span>
-        <h1 class="hero-title font-display-lg max-w-3xl">
-          LudoScript: aprender con <span class="text-secondary">práctica guiada</span>, no con preguntas al azar.
-        </h1>
-        <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
-          Plataforma educativa full-stack para practicar con quizzes, flashcards, seguimiento de progreso y revisión de
-          errores. Mi trabajo se centró especialmente en el backend, la integración con IA para generar preguntas y el
-          modo multijugador en tiempo real con Socket.IO.
+  <main>
+    <!-- Hero del caso -->
+    <header class="contenedor caso-hero">
+      <div>
+        <p class="etiqueta">caso de estudio · ia educativa</p>
+        <h1>LudoScript: aprender con <span class="marca marca-anim">práctica guiada</span>, no con preguntas al
+          azar.</h1>
+        <p class="hero-intro">
+          Plataforma educativa full-stack para practicar con quizzes, flashcards, seguimiento de progreso y revisión
+          de errores. Mi trabajo se centró en el backend, la integración con IA para generar preguntas y el modo
+          multijugador en tiempo real.
         </p>
-        <div class="flex flex-wrap gap-3 pt-2">
-          <span
-            class="px-4 py-2 bg-primary-container/35 rounded-full border border-white/25 text-on-surface font-label-sm text-label-sm">Vue
-            3</span>
-          <span
-            class="px-4 py-2 bg-primary-container/35 rounded-full border border-white/25 text-on-surface font-label-sm text-label-sm">Express</span>
-          <span
-            class="px-4 py-2 bg-primary-container/35 rounded-full border border-white/25 text-on-surface font-label-sm text-label-sm">PostgreSQL</span>
-          <span
-            class="px-4 py-2 bg-primary-container/35 rounded-full border border-secondary text-secondary font-label-sm text-label-sm">Gemini
-            API</span>
-          <span
-            class="px-4 py-2 bg-primary-container/35 rounded-full border border-accent text-accent font-label-sm text-label-sm">Socket.IO</span>
+        <div class="tags" style="margin-top: 1.6rem;">
+          <span class="tag">vue 3</span>
+          <span class="tag">express</span>
+          <span class="tag">postgresql</span>
+          <span class="tag tag-acento">gemini api</span>
+          <span class="tag tag-acento">socket.io</span>
         </div>
-        <div class="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
-          <a href="https://ludoscript.vercel.app/"
-            class="w-full sm:w-auto px-stack-lg py-4 bg-accent text-on-primary font-label-md text-label-md rounded-lg shadow-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">Probar
-            demo <span class="material-symbols-outlined">arrow_forward</span></a>
-          <a href="#decisiones"
-            class="w-full sm:w-auto px-stack-lg py-4 border border-white/50 text-primary font-label-md text-label-md rounded-lg hover:bg-surface-container transition-all inline-flex items-center justify-center">Ver
-            decisiones</a>
+        <div class="hero-acciones">
+          <a href="https://ludoscript.vercel.app/" class="btn btn-primario" target="_blank"
+            rel="noopener noreferrer">Probar demo
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></a>
+          <a href="#decisiones" class="btn btn-secundario">Ver decisiones</a>
         </div>
       </div>
-      <div class="case-hero-media relative">
-        <div class="absolute -inset-4 bg-secondary-fixed-dim opacity-10 rounded-xl blur-2xl"></div>
-        <div
-          class="relative overflow-hidden rounded-lg border border-outline-variant/40 bg-primary-container/20 shadow-lg">
-          <div class="flex items-center gap-2 px-4 py-3 bg-surface-container-low border-b border-outline-variant/50">
-            <span class="browser-dot bg-red-400/60"></span>
-            <span class="browser-dot bg-yellow-400/70"></span>
-            <span class="browser-dot bg-green-400/70"></span>
-            <span class="ml-3 text-label-sm font-label-sm text-on-surface-variant truncate">ludoscript.vercel.app</span>
+      <div>
+        <div class="ventana">
+          <div class="ventana-barra">
+            <span class="ventana-punto"></span>
+            <span class="ventana-punto"></span>
+            <span class="ventana-punto lleno"></span>
+            <span class="ventana-url">ludoscript.vercel.app</span>
           </div>
           <a href="https://ludoscript.vercel.app/" target="_blank" rel="noopener noreferrer">
-            <img class="case-hero-shot w-full aspect-video" src="../img/ludoscript-home.png"
-              alt="Vista principal de LudoScript" />
+            <img src="../img/ludoscript-home.png" alt="Vista principal de LudoScript" />
           </a>
         </div>
+        <aside class="nota" style="margin-top: 1.4rem;">Demo pública con contenido controlado: enseña el flujo
+          completo sin depender de datos reales.</aside>
       </div>
-    </section>
+    </header>
 
-    <section class="section-pad py-section-gap bg-surface-container-low" id="problema">
-      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          <div class="md:col-span-4">
-            <h2 class="font-headline-md text-headline-md text-primary sticky top-24">El problema</h2>
-          </div>
-          <div class="md:col-span-8 space-y-stack-md">
-            <p class="font-body-lg text-body-lg text-on-surface-variant">
-              Muchas plataformas educativas miden aciertos, pero no ayudan a entender por qué se falla ni qué debería
-              repasarse después. LudoScript nace para convertir la práctica en una herramienta de diagnóstico.
+    <!-- El problema -->
+    <section class="seccion seccion-alt" id="problema">
+      <div class="contenedor dos-columnas revelar">
+        <div class="col-titulo">
+          <p class="etiqueta">punto de partida</p>
+          <h2 class="titulo-seccion">El problema</h2>
+        </div>
+        <div>
+          <div class="parrafos">
+            <p>
+              Muchas plataformas educativas miden aciertos, pero <strong>no ayudan a entender por qué se
+                falla</strong> ni qué debería repasarse después. LudoScript nace para convertir la práctica en una
+              herramienta de diagnóstico.
             </p>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4">
-              <article class="glass-card p-6 rounded-lg">
-                <span class="material-symbols-outlined text-secondary text-[30px] mb-4 block">visibility_off</span>
-                <h3 class="font-headline-sm text-headline-sm mb-3">Falsa seguridad</h3>
-                <p class="text-on-surface-variant">Acertar preguntas no siempre significa comprender la base del tema.
-                </p>
-              </article>
-              <article class="glass-card p-6 rounded-lg">
-                <span class="material-symbols-outlined text-secondary text-[30px] mb-4 block">route</span>
-                <h3 class="font-headline-sm text-headline-sm mb-3">Sin dirección</h3>
-                <p class="text-on-surface-variant">Tras practicar, el usuario necesita saber qué repasar y por qué.</p>
-              </article>
-              <article class="glass-card p-6 rounded-lg">
-                <span class="material-symbols-outlined text-secondary text-[30px] mb-4 block">person_search</span>
-                <h3 class="font-headline-sm text-headline-sm mb-3">Poca adaptación</h3>
-                <p class="text-on-surface-variant">Cada estudiante tropieza en conceptos distintos y a ritmos distintos.
-                </p>
-              </article>
-            </div>
+          </div>
+          <div class="rejilla-tarjetas" style="margin-top: 2rem;">
+            <article class="tarjeta">
+              <span class="campo">síntoma 1</span>
+              <h3>Falsa seguridad</h3>
+              <p>Acertar preguntas no siempre significa comprender la base del tema.</p>
+            </article>
+            <article class="tarjeta">
+              <span class="campo">síntoma 2</span>
+              <h3>Sin dirección</h3>
+              <p>Tras practicar, el usuario necesita saber qué repasar y por qué.</p>
+            </article>
+            <article class="tarjeta">
+              <span class="campo">síntoma 3</span>
+              <h3>Poca adaptación</h3>
+              <p>Cada estudiante tropieza en conceptos distintos y a ritmos distintos.</p>
+            </article>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-pad py-section-gap bg-surface" id="flujo">
-      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
-        <div class="text-center mb-16">
-          <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Flujo de aprendizaje</span>
-          <h2 class="font-headline-md text-headline-md mt-3 mb-4">Del temario al diagnóstico</h2>
-          <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">El flujo está preparado para
-            que la IA genere preguntas que refuercen los puntos débiles del usuario y le hagan avanzar con práctica
-            guiada, no con ejercicios aleatorios.</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <article class="glass-card p-stack-lg rounded-lg">
-            <span class="font-label-sm text-label-sm text-accent tracking-widest uppercase">01</span>
-            <h3 class="font-headline-sm text-headline-sm my-4">Temario</h3>
-            <p class="text-on-surface-variant">El contenido funciona como base estructurada para generar práctica
-              coherente y alineada con cada tema.</p>
+    <!-- Flujo -->
+    <section class="seccion" id="flujo">
+      <div class="contenedor revelar">
+        <p class="etiqueta">flujo de aprendizaje</p>
+        <h2 class="titulo-seccion">Del temario al diagnóstico</h2>
+        <p class="texto-suave" style="max-width: 38rem; margin-block: 1rem 2.6rem;">
+          El flujo está preparado para que la IA genere preguntas que refuercen los puntos débiles del usuario y le
+          hagan avanzar con <span class="marca">práctica guiada</span>, no con ejercicios aleatorios.
+        </p>
+        <div class="pasos">
+          <article class="paso">
+            <h3>Temario</h3>
+            <p>El contenido funciona como base estructurada para generar práctica coherente y alineada con cada
+              tema.</p>
           </article>
-          <article class="glass-card p-stack-lg rounded-lg">
-            <span class="font-label-sm text-label-sm text-accent tracking-widest uppercase">02</span>
-            <h3 class="font-headline-sm text-headline-sm my-4">Diagnóstico</h3>
-            <p class="text-on-surface-variant">El sistema registra aciertos, errores y patrones para detectar qué
-              conceptos necesitan refuerzo.</p>
+          <article class="paso">
+            <h3>Diagnóstico</h3>
+            <p>El sistema registra aciertos, errores y patrones para detectar qué conceptos necesitan refuerzo.</p>
           </article>
-          <article class="glass-card p-stack-lg rounded-lg">
-            <span class="font-label-sm text-label-sm text-accent tracking-widest uppercase">03</span>
-            <h3 class="font-headline-sm text-headline-sm my-4">Generación IA</h3>
-            <p class="text-on-surface-variant">La integración con IA prepara preguntas nuevas enfocadas en los puntos
-              débiles del usuario.</p>
+          <article class="paso">
+            <h3>Generación IA</h3>
+            <p>La integración con IA prepara preguntas nuevas enfocadas en los puntos débiles del usuario.</p>
           </article>
-          <article class="glass-card p-stack-lg rounded-lg">
-            <span class="font-label-sm text-label-sm text-accent tracking-widest uppercase">04</span>
-            <h3 class="font-headline-sm text-headline-sm my-4">Avance</h3>
-            <p class="text-on-surface-variant">El alumno practica, recibe feedback y vuelve al recorrido con objetivos
-              de repaso más claros.</p>
+          <article class="paso">
+            <h3>Avance</h3>
+            <p>El alumno practica, recibe feedback y vuelve al recorrido con objetivos de repaso más claros.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section-pad py-section-gap bg-surface-bright overflow-hidden" id="capturas">
-      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
-          <div class="max-w-xl">
-            <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Producto en uso</span>
-            <h2 class="font-headline-md text-headline-md mt-3 mb-4">Capturas del recorrido</h2>
-            <p class="text-on-surface-variant font-body-lg">Una galería interactiva con las pantallas principales:
-              inicio, quiz, resultados, progreso y aprendizaje.</p>
-          </div>
-        </div>
-        <div class="max-w-5xl mx-auto">
-          <div>
-            <div
-              class="feature-frame overflow-hidden rounded-lg border border-outline-variant/50 bg-primary-container/20 shadow-lg">
-              <div
-                class="flex items-center gap-2 px-4 py-3 bg-surface-container-low border-b border-outline-variant/50">
-                <span class="browser-dot bg-red-400/60"></span>
-                <span class="browser-dot bg-yellow-400/70"></span>
-                <span class="browser-dot bg-green-400/70"></span>
-                <span id="feature-label"
-                  class="ml-3 text-label-sm font-label-sm text-on-surface-variant truncate">Home</span>
-              </div>
-              <button class="gallery-arrow prev" id="feature-prev" type="button" aria-label="Ver captura anterior"><span
-                  class="material-symbols-outlined">chevron_left</span></button>
-              <img id="feature-image" class="feature-image w-full transition-opacity duration-300"
-                src="../img/ludoscript-home.png" alt="LudoScript Home" title="Ampliar captura" />
-              <button class="gallery-arrow next" id="feature-next" type="button"
-                aria-label="Ver captura siguiente"><span class="material-symbols-outlined">chevron_right</span></button>
+    <!-- Capturas -->
+    <section class="seccion seccion-alt" id="capturas">
+      <div class="contenedor revelar">
+        <p class="etiqueta">producto en uso</p>
+        <h2 class="titulo-seccion">Capturas del recorrido</h2>
+        <p class="texto-suave" style="max-width: 36rem; margin-block: 1rem 2.4rem;">
+          Las pantallas principales: inicio, quiz, resultados, progreso y aprendizaje. Pulsa una captura para
+          ampliarla.
+        </p>
+        <div style="max-width: 60rem; margin-inline: auto;">
+          <div class="ventana galeria-marco">
+            <div class="ventana-barra">
+              <span class="ventana-punto"></span>
+              <span class="ventana-punto"></span>
+              <span class="ventana-punto lleno"></span>
+              <span id="galeria-etiqueta" class="ventana-url">Home</span>
             </div>
-            <div id="feature-dots" class="mt-5 flex justify-center gap-2" aria-label="Selector de capturas"></div>
+            <button class="flecha anterior" id="galeria-anterior" type="button" aria-label="Ver captura anterior">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            <img id="galeria-imagen" class="galeria-img" src="../img/ludoscript-home.png" alt="LudoScript Home"
+              title="Ampliar captura" />
+            <button class="flecha siguiente" id="galeria-siguiente" type="button" aria-label="Ver captura siguiente">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
           </div>
-          <div id="feature-controls" aria-hidden="true">
-            <button class="feature-button is-active w-full text-left glass-card p-5 rounded-lg" type="button"
-              data-image="../img/ludoscript-home.png" data-label="Home" data-alt="LudoScript Home">
-              <h3 class="font-headline-sm text-headline-sm mb-2">Home</h3>
-              <p class="text-on-surface-variant">La puerta de entrada a la plataforma.</p>
-            </button>
-            <button class="feature-button w-full text-left glass-card p-5 rounded-lg" type="button"
-              data-image="../img/ludoscript-quiz.png" data-label="Quiz" data-alt="LudoScript Quiz">
-              <h3 class="font-headline-sm text-headline-sm mb-2">Quiz</h3>
-              <p class="text-on-surface-variant">Preparación y práctica con preguntas.</p>
-            </button>
-            <button class="feature-button w-full text-left glass-card p-5 rounded-lg" type="button"
-              data-image="../img/ludoscript-resultado-final.png" data-label="Resultados"
-              data-alt="Resultado final de LudoScript">
-              <h3 class="font-headline-sm text-headline-sm mb-2">Resultados</h3>
-              <p class="text-on-surface-variant">Feedback tras completar la sesión.</p>
-            </button>
-            <button class="feature-button w-full text-left glass-card p-5 rounded-lg" type="button"
-              data-image="../img/progreso.png" data-label="Progreso" data-alt="Panel de progreso de LudoScript">
-              <h3 class="font-headline-sm text-headline-sm mb-2">Progreso</h3>
-              <p class="text-on-surface-variant">Seguimiento de evolución y puntos débiles.</p>
-            </button>
-            <button class="feature-button w-full text-left glass-card p-5 rounded-lg" type="button"
-              data-image="../img/aprendizaje.png" data-label="Aprendizaje"
-              data-alt="Pantalla de aprendizaje de LudoScript">
-              <h3 class="font-headline-sm text-headline-sm mb-2">Aprendizaje</h3>
-              <p class="text-on-surface-variant">Repaso de conceptos dentro del flujo.</p>
-            </button>
+          <div id="galeria-puntos" class="galeria-puntos" aria-label="Selector de capturas"></div>
+          <p id="galeria-titulo" class="galeria-titulo">Home — la puerta de entrada a la plataforma.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arquitectura -->
+    <section class="seccion" id="arquitectura">
+      <div class="contenedor dos-columnas revelar">
+        <div class="col-titulo">
+          <p class="etiqueta">arquitectura</p>
+          <h2 class="titulo-seccion">Full-stack pensado para crecer</h2>
+          <p class="texto-suave" style="margin-top: 1rem;">Mi aportación principal estuvo en el backend: API,
+            persistencia, integración con IA y tiempo real.</p>
+        </div>
+        <div>
+          <div class="rejilla-tarjetas">
+            <article class="tarjeta">
+              <span class="campo">frontend</span>
+              <h3>Vue 3 / Tailwind</h3>
+              <p>Interfaz centrada en práctica, lectura clara y feedback visual.</p>
+            </article>
+            <article class="tarjeta">
+              <span class="campo">backend</span>
+              <h3>Node / Express</h3>
+              <p>API para usuarios, actividades, contenido y resultados.</p>
+            </article>
+            <article class="tarjeta">
+              <span class="campo">datos</span>
+              <h3>PostgreSQL / Supabase</h3>
+              <p>Persistencia de preguntas, flashcards, perfiles y progreso.</p>
+            </article>
+            <article class="tarjeta">
+              <span class="campo">ia y tiempo real</span>
+              <h3>Gemini API / Socket.IO</h3>
+              <p>Generación de preguntas con Gemini y partidas multijugador sincronizadas con Socket.IO.</p>
+            </article>
+          </div>
+          <div class="contribucion">
+            <span class="campo">mi contribución</span>
+            <p>Me encargué sobre todo del backend y de conectar la IA con el flujo de aprendizaje: generación de
+              preguntas, refuerzo de puntos débiles y coordinación del modo multijugador con Socket.IO.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-pad py-section-gap bg-surface" id="arquitectura">
-      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          <div class="md:col-span-5 space-y-stack-md">
-            <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Arquitectura</span>
-            <h2 class="font-headline-md text-headline-md text-primary">Full-stack pensado para crecer</h2>
-            <p class="font-body-lg text-body-lg text-on-surface-variant">Mi aportación principal estuvo en el backend:
-              API, persistencia, integración con IA para generar preguntas y modo multijugador en tiempo real con
-              Socket.IO.</p>
-          </div>
-          <div class="md:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <article class="glass-card p-6 rounded-lg">
-              <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Frontend</span>
-              <h3 class="font-headline-sm text-headline-sm mt-3">Vue 3 / Tailwind</h3>
-              <p class="text-on-surface-variant mt-3">Interfaz centrada en práctica, lectura clara y feedback visual.
-              </p>
-            </article>
-            <article class="glass-card p-6 rounded-lg">
-              <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Backend</span>
-              <h3 class="font-headline-sm text-headline-sm mt-3">Node / Express</h3>
-              <p class="text-on-surface-variant mt-3">API para usuarios, actividades, contenido y resultados.</p>
-            </article>
-            <article class="glass-card p-6 rounded-lg">
-              <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Datos</span>
-              <h3 class="font-headline-sm text-headline-sm mt-3">PostgreSQL / Supabase</h3>
-              <p class="text-on-surface-variant mt-3">Persistencia de preguntas, flashcards, perfiles y progreso.</p>
-            </article>
-            <article class="glass-card p-6 rounded-lg">
-              <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">IA y tiempo real</span>
-              <h3 class="font-headline-sm text-headline-sm mt-3">Gemini API / Socket.IO</h3>
-              <p class="text-on-surface-variant mt-3">Generación de preguntas con Gemini API y partidas multijugador
-                sincronizadas mediante Socket.IO.</p>
-            </article>
-          </div>
-        </div>
-        <div class="mt-8 glass-card p-stack-lg rounded-lg border-l-4 border-accent">
-          <span class="font-label-sm text-label-sm text-accent tracking-widest uppercase">Mi contribución</span>
-          <p class="font-body-lg text-body-lg text-on-surface-variant mt-3">Me encargué sobre todo del backend y de
-            conectar la inteligencia artificial con el flujo de aprendizaje: generación de preguntas, refuerzo de puntos
-            débiles y coordinación del modo multijugador con Socket.IO.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-pad py-section-gap bg-surface-container-low" id="decisiones">
-      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
-        <div class="mb-12 max-w-3xl">
-          <span class="font-label-sm text-label-sm text-secondary tracking-widest uppercase">Decisiones técnicas y
-            trade-offs</span>
-          <h2 class="font-headline-md text-headline-md mt-3 mb-4">Decisiones explicadas como una lista de criterio</h2>
-          <p class="text-on-surface-variant font-body-lg">Organicé las decisiones por impacto técnico: qué problema
-            resolvían, qué opción elegí y qué coste asumía cada una.</p>
-        </div>
-
-        <ol class="space-y-6">
-          <li class="decision-step glass-card p-stack-lg rounded-lg">
-            <span class="decision-marker">1</span>
+    <!-- Decisiones -->
+    <section class="seccion seccion-alt" id="decisiones">
+      <div class="contenedor revelar">
+        <p class="etiqueta">decisiones técnicas · trade-offs</p>
+        <h2 class="titulo-seccion">Qué elegí y qué costaba</h2>
+        <p class="texto-suave" style="max-width: 38rem; margin-block: 1rem 2.4rem;">
+          Organizadas por impacto: qué problema resolvía cada decisión, qué opción elegí y qué coste asumía.
+        </p>
+        <ol class="decisiones">
+          <li class="decision">
             <div>
-              <h3 class="font-headline-sm text-headline-sm mb-3">Separar frontend, backend y datos</h3>
-              <p class="text-on-surface-variant mb-3"><strong class="text-primary">Decisión:</strong> usar Vue 3 para la
-                interfaz, Express para la API y PostgreSQL/Supabase para persistencia.</p>
-              <p class="text-on-surface-variant"><strong class="text-primary">Trade-off:</strong> la arquitectura exige
-                más coordinación inicial, pero permite evolucionar usuarios, progreso, clases y funcionalidades en
-                tiempo real sin mezclar responsabilidades.</p>
+              <h3>Separar frontend, backend y datos</h3>
+              <p><strong>decisión</strong> — Vue 3 para la interfaz, Express para la API y PostgreSQL/Supabase para
+                persistencia.</p>
+              <p><strong>trade-off</strong> — Exige más coordinación inicial, pero permite evolucionar usuarios,
+                progreso y funcionalidades en tiempo real sin mezclar responsabilidades.</p>
             </div>
           </li>
-          <li class="decision-step glass-card p-stack-lg rounded-lg">
-            <span class="decision-marker">2</span>
+          <li class="decision">
             <div>
-              <h3 class="font-headline-sm text-headline-sm mb-3">Usar IA para generar práctica útil</h3>
-              <p class="text-on-surface-variant mb-3"><strong class="text-primary">Decisión:</strong> integrar Gemini
-                API para crear preguntas orientadas al temario y al diagnóstico del usuario.</p>
-              <p class="text-on-surface-variant"><strong class="text-primary">Trade-off:</strong> aporta
-                personalización, pero obliga a controlar prompts, validación, coste por llamada y calidad de las
-                respuestas generadas.</p>
+              <h3>Usar IA para generar práctica útil</h3>
+              <p><strong>decisión</strong> — Integrar Gemini API para crear preguntas orientadas al temario y al
+                diagnóstico del usuario.</p>
+              <p><strong>trade-off</strong> — Aporta personalización, pero obliga a controlar prompts, validación,
+                coste por llamada y calidad de las respuestas generadas.</p>
             </div>
           </li>
-          <li class="decision-step glass-card p-stack-lg rounded-lg">
-            <span class="decision-marker">3</span>
+          <li class="decision">
             <div>
-              <h3 class="font-headline-sm text-headline-sm mb-3">Convertir errores en datos de aprendizaje</h3>
-              <p class="text-on-surface-variant mb-3"><strong class="text-primary">Decisión:</strong> registrar
-                resultados, fallos y evolución para alimentar el diagnóstico de puntos débiles.</p>
-              <p class="text-on-surface-variant"><strong class="text-primary">Trade-off:</strong> requiere más modelado
-                y pantallas, pero transforma el quiz en una herramienta de avance y no solo en una nota final.</p>
+              <h3>Convertir errores en datos de aprendizaje</h3>
+              <p><strong>decisión</strong> — Registrar resultados, fallos y evolución para alimentar el diagnóstico
+                de puntos débiles.</p>
+              <p><strong>trade-off</strong> — Requiere más modelado y pantallas, pero transforma el quiz en una
+                herramienta de avance y no solo en una nota final.</p>
             </div>
           </li>
-          <li class="decision-step glass-card p-stack-lg rounded-lg">
-            <span class="decision-marker">4</span>
+          <li class="decision">
             <div>
-              <h3 class="font-headline-sm text-headline-sm mb-3">Multijugador con Socket.IO</h3>
-              <p class="text-on-surface-variant mb-3"><strong class="text-primary">Decisión:</strong> incorporar
-                comunicación en tiempo real para coordinar sesiones multijugador.</p>
-              <p class="text-on-surface-variant"><strong class="text-primary">Trade-off:</strong> añade complejidad de
-                sincronización y estados compartidos, pero hace posible una experiencia más social y dinámica.</p>
+              <h3>Multijugador con Socket.IO</h3>
+              <p><strong>decisión</strong> — Incorporar comunicación en tiempo real para coordinar sesiones
+                multijugador.</p>
+              <p><strong>trade-off</strong> — Añade complejidad de sincronización y estados compartidos, pero hace
+                posible una experiencia más social y dinámica.</p>
             </div>
           </li>
-          <li class="decision-step glass-card p-stack-lg rounded-lg">
-            <span class="decision-marker">5</span>
+          <li class="decision">
             <div>
-              <h3 class="font-headline-sm text-headline-sm mb-3">Demo estable antes que libertad total</h3>
-              <p class="text-on-surface-variant mb-3"><strong class="text-primary">Decisión:</strong> priorizar un
-                recorrido de demo claro y controlado para enseñar bien el producto.</p>
-              <p class="text-on-surface-variant"><strong class="text-primary">Trade-off:</strong> reduce libertad en la
-                versión pública, pero evita que una función experimental opaque el valor principal del proyecto.</p>
+              <h3>Demo estable antes que libertad total</h3>
+              <p><strong>decisión</strong> — Priorizar un recorrido de demo claro y controlado para enseñar bien el
+                producto.</p>
+              <p><strong>trade-off</strong> — Reduce libertad en la versión pública, pero evita que una función
+                experimental opaque el valor principal del proyecto.</p>
             </div>
           </li>
         </ol>
       </div>
     </section>
-    <section class="section-pad py-section-gap bg-surface" id="aprendizajes">
-      <div class="max-w-container-max mx-auto px-4 md:px-gutter">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          <div class="md:col-span-4">
-            <h2 class="font-headline-md text-headline-md text-primary sticky top-24">Aprendizajes</h2>
+
+    <!-- Aprendizajes -->
+    <section class="seccion" id="aprendizajes">
+      <div class="contenedor dos-columnas revelar">
+        <div class="col-titulo">
+          <p class="etiqueta">aprendizajes</p>
+          <h2 class="titulo-seccion">Lo que me llevo</h2>
+        </div>
+        <div class="aprendizajes">
+          <div class="aprendizaje">
+            <h3>Coste y fiabilidad de IA</h3>
+            <p>Optimizar prompts, validar respuestas y evitar llamadas redundantes fue tan importante como integrar
+              la API.</p>
           </div>
-          <div class="md:col-span-8 space-y-8">
-            <div class="border-l-2 border-secondary pl-6">
-              <h3 class="font-headline-sm text-headline-sm mb-2">Coste y fiabilidad de IA</h3>
-              <p class="text-on-surface-variant">Optimizar prompts, validar respuestas y evitar llamadas redundantes fue
-                tan importante como integrar la API.</p>
-            </div>
-            <div class="border-l-2 border-secondary pl-6">
-              <h3 class="font-headline-sm text-headline-sm mb-2">Producto antes que tecnología</h3>
-              <p class="text-on-surface-variant">La IA no debía ser el titular vacío: el foco real era que el estudiante
-                entendiera qué hacer después de practicar.</p>
-            </div>
-            <div class="border-l-2 border-secondary pl-6">
-              <h3 class="font-headline-sm text-headline-sm mb-2">Contenido estructurado</h3>
-              <p class="text-on-surface-variant">Preparar temario y actividades coherentes hizo que la demo fuera más
-                clara, estable y fácil de explicar.</p>
-            </div>
+          <div class="aprendizaje">
+            <h3>Producto antes que tecnología</h3>
+            <p>La IA no debía ser el titular vacío: el foco real era que el estudiante entendiera qué hacer después
+              de practicar.</p>
+          </div>
+          <div class="aprendizaje">
+            <h3>Contenido estructurado</h3>
+            <p>Preparar temario y actividades coherentes hizo que la demo fuera más clara, estable y fácil de
+              explicar.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="section-pad py-section-gap bg-primary-container" id="demo">
-      <div class="max-w-container-max mx-auto px-4 md:px-gutter text-center">
-        <div class="relative z-10 space-y-stack-md max-w-3xl mx-auto">
-          <h2 class="font-display-lg-mobile md:font-display-lg text-white leading-tight">Una demo pensada para enseñar
-            el producto, no solo la tecnología.</h2>
-          <p class="text-primary-fixed-dim font-body-lg">La versión pública muestra el flujo principal con contenido
-            controlado: práctica, resultados, progreso y revisión.</p>
-          <div class="pt-8 flex flex-wrap justify-center gap-4">
-            <a href="https://ludoscript.vercel.app/"
-              class="inline-flex items-center gap-2 bg-secondary text-primary-container px-stack-lg py-4 rounded-lg font-label-md text-label-md hover:scale-105 transition-transform shadow-lg">Probar
-              LudoScript <span class="material-symbols-outlined">open_in_new</span></a>
-            <a href="../index.html"
-              class="inline-flex items-center gap-2 border border-primary-fixed-dim text-primary-fixed-dim px-stack-lg py-4 rounded-lg font-label-md text-label-md hover:bg-white/10 transition-colors">Volver
-              al portfolio</a>
-          </div>
+    <!-- CTA demo -->
+    <section class="contacto" id="demo">
+      <div class="contenedor revelar">
+        <p class="etiqueta">demo</p>
+        <h2>Una demo pensada para enseñar <span class="marca">el producto</span>, no solo la tecnología.</h2>
+        <p>La versión pública muestra el flujo principal con contenido controlado: práctica, resultados, progreso y
+          revisión.</p>
+        <div class="acciones">
+          <a href="https://ludoscript.vercel.app/" class="btn btn-claro" target="_blank"
+            rel="noopener noreferrer">Probar LudoScript</a>
+          <a href="../index.html" class="btn btn-contorno-claro">Volver al portfolio</a>
         </div>
       </div>
     </section>
   </main>
 
-  <div id="image-lightbox"
-    class="image-lightbox fixed inset-0 z-[80] bg-primary-container/90 backdrop-blur-sm p-4 md:p-8 flex items-center justify-center"
-    role="dialog" aria-modal="true" aria-label="Captura ampliada">
-    <button id="lightbox-close"
-      class="absolute right-4 top-4 md:right-8 md:top-8 h-11 w-11 rounded-lg bg-white text-primary-container shadow-lg flex items-center justify-center hover:opacity-90"
-      type="button" aria-label="Cerrar imagen ampliada">
-      <span class="material-symbols-outlined">close</span>
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Captura ampliada">
+    <button id="lightbox-cerrar" class="lightbox-cerrar" type="button" aria-label="Cerrar imagen ampliada">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="m3 3 10 10M13 3 3 13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+      </svg>
     </button>
-    <button class="gallery-arrow lightbox-arrow prev" id="lightbox-prev" type="button"
-      aria-label="Ver captura anterior"><span class="material-symbols-outlined">chevron_left</span></button>
-    <img id="lightbox-image"
-      class="max-h-[86vh] max-w-[94vw] rounded-lg border border-outline/40 bg-primary shadow-2xl object-contain"
-      src="../img/ludoscript-home.png" alt="LudoScript Home ampliado" />
-    <button class="gallery-arrow lightbox-arrow next" id="lightbox-next" type="button"
-      aria-label="Ver captura siguiente"><span class="material-symbols-outlined">chevron_right</span></button>
+    <button class="flecha anterior" id="lightbox-anterior" type="button" aria-label="Ver captura anterior">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
+    <img id="lightbox-imagen" src="../img/ludoscript-home.png" alt="LudoScript Home ampliado" />
+    <button class="flecha siguiente" id="lightbox-siguiente" type="button" aria-label="Ver captura siguiente">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </button>
   </div>
 
-  <footer class="bg-surface-container-low border-t border-outline-variant/50 w-full py-stack-lg">
-    <div
-      class="max-w-container-max mx-auto px-4 md:px-gutter flex flex-col md:flex-row justify-between items-center gap-stack-md">
-      <div class="flex flex-col items-center md:items-start gap-3">
-        <span class="font-headline-sm text-headline-sm text-primary">LudoScript</span>
-        <p class="font-body-md text-body-md text-on-surface-variant max-w-xs text-center md:text-left">Caso de estudio -
-          Proyecto educativo full-stack con IA.</p>
-      </div>
-      <div class="flex flex-wrap justify-center gap-6">
-        <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md"
-          href="https://es.linkedin.com/in/%C3%A1lvaro-pastor">LinkedIn</a>
-        <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md"
-          href="https://github.com/alvaropas17/alvaropas17">GitHub</a>
-        <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md"
-          href="mailto:alvpastor17@gmail.com">Email</a>
-        <a class="text-on-surface-variant hover:text-secondary transition-colors font-label-md text-label-md"
-          href="#top">Arriba</a>
+  <!-- Pie -->
+  <footer class="pie">
+    <div class="contenedor pie-fila">
+      <p>LudoScript — caso de estudio · proyecto educativo full-stack con IA.</p>
+      <div class="pie-enlaces">
+        <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/alvaropas17/alvaropas17" rel="noopener">GitHub</a>
+        <a href="mailto:alvpastor17@gmail.com">Email</a>
+        <a href="#top">Arriba</a>
       </div>
     </div>
   </footer>
 
   <script>
-    let lastScroll = 0;
-    const nav = document.querySelector("nav");
+    // Menú móvil
+    const botonMenu = document.querySelector('#boton-menu');
+    const menuMovil = document.querySelector('#menu-movil');
 
-    window.addEventListener("scroll", () => {
-      const currentScroll = window.pageYOffset;
-
-      if (currentScroll <= 0) {
-        nav.classList.remove("shadow-sm");
-        return;
-      }
-
-      if (currentScroll > lastScroll && currentScroll > 100) {
-        nav.style.transform = "translateY(-100%)";
-      } else {
-        nav.style.transform = "translateY(0)";
-        nav.classList.add("shadow-sm");
-      }
-      lastScroll = currentScroll;
+    botonMenu.addEventListener('click', () => {
+      const abierto = menuMovil.classList.toggle('abierto');
+      botonMenu.setAttribute('aria-expanded', String(abierto));
     });
 
-    const featureImage = document.querySelector("#feature-image");
-    const featureLabel = document.querySelector("#feature-label");
-    const featureButtons = Array.from(document.querySelectorAll(".feature-button"));
-    const featureDots = document.querySelector("#feature-dots");
-    const featurePrev = document.querySelector("#feature-prev");
-    const featureNext = document.querySelector("#feature-next");
-    const lightbox = document.querySelector("#image-lightbox");
-    const lightboxImage = document.querySelector("#lightbox-image");
-    const lightboxClose = document.querySelector("#lightbox-close");
-    const lightboxPrev = document.querySelector("#lightbox-prev");
-    const lightboxNext = document.querySelector("#lightbox-next");
-    let activeFeatureIndex = 0;
+    menuMovil.querySelectorAll('a').forEach((enlace) => {
+      enlace.addEventListener('click', () => {
+        menuMovil.classList.remove('abierto');
+        botonMenu.setAttribute('aria-expanded', 'false');
+      });
+    });
 
-    const updateLightboxImage = (button) => {
-      lightboxImage.src = button.dataset.image;
-      lightboxImage.alt = `${button.dataset.alt} ampliado`;
-    };
+    // Galería de capturas
+    const capturas = [
+      { src: '../img/ludoscript-home.png', etiqueta: 'Home', alt: 'LudoScript Home', texto: 'Home — la puerta de entrada a la plataforma.' },
+      { src: '../img/ludoscript-quiz.png', etiqueta: 'Quiz', alt: 'Quiz de LudoScript', texto: 'Quiz — preparación y práctica con preguntas.' },
+      { src: '../img/ludoscript-resultado-final.png', etiqueta: 'Resultados', alt: 'Resultado final de LudoScript', texto: 'Resultados — feedback tras completar la sesión.' },
+      { src: '../img/progreso.png', etiqueta: 'Progreso', alt: 'Panel de progreso de LudoScript', texto: 'Progreso — seguimiento de evolución y puntos débiles.' },
+      { src: '../img/aprendizaje.png', etiqueta: 'Aprendizaje', alt: 'Pantalla de aprendizaje de LudoScript', texto: 'Aprendizaje — repaso de conceptos dentro del flujo.' }
+    ];
 
-    const setActiveFeature = (index) => {
-      const nextIndex = (index + featureButtons.length) % featureButtons.length;
-      const button = featureButtons[nextIndex];
-      const dots = Array.from(featureDots.querySelectorAll(".feature-dot"));
-      activeFeatureIndex = nextIndex;
+    const galeriaImagen = document.querySelector('#galeria-imagen');
+    const galeriaEtiqueta = document.querySelector('#galeria-etiqueta');
+    const galeriaTitulo = document.querySelector('#galeria-titulo');
+    const galeriaPuntos = document.querySelector('#galeria-puntos');
+    const lightbox = document.querySelector('#lightbox');
+    const lightboxImagen = document.querySelector('#lightbox-imagen');
+    let indiceActivo = 0;
 
-      featureButtons.forEach((item) => item.classList.remove("is-active"));
-      dots.forEach((dot) => dot.classList.remove("is-active"));
-      button.classList.add("is-active");
-      dots[nextIndex].classList.add("is-active");
-      button.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
-      featureImage.classList.add("opacity-0");
+    capturas.forEach((captura, indice) => {
+      const punto = document.createElement('button');
+      punto.className = 'galeria-punto' + (indice === 0 ? ' activo' : '');
+      punto.type = 'button';
+      punto.setAttribute('aria-label', 'Ver captura ' + captura.etiqueta);
+      punto.addEventListener('click', () => mostrarCaptura(indice));
+      galeriaPuntos.appendChild(punto);
+    });
+
+    const mostrarCaptura = (indice) => {
+      indiceActivo = (indice + capturas.length) % capturas.length;
+      const captura = capturas[indiceActivo];
+      const puntos = galeriaPuntos.querySelectorAll('.galeria-punto');
+
+      puntos.forEach((p, i) => p.classList.toggle('activo', i === indiceActivo));
+      galeriaImagen.style.opacity = '0';
 
       window.setTimeout(() => {
-        featureImage.src = button.dataset.image;
-        featureImage.alt = button.dataset.alt;
-        featureLabel.textContent = button.dataset.label;
-        updateLightboxImage(button);
-        featureImage.classList.remove("opacity-0");
+        galeriaImagen.src = captura.src;
+        galeriaImagen.alt = captura.alt;
+        galeriaEtiqueta.textContent = captura.etiqueta;
+        galeriaTitulo.textContent = captura.texto;
+        lightboxImagen.src = captura.src;
+        lightboxImagen.alt = captura.alt + ' ampliado';
+        galeriaImagen.style.opacity = '1';
       }, 120);
     };
 
-    const moveFeature = (direction) => {
-      setActiveFeature(activeFeatureIndex + direction);
+    document.querySelector('#galeria-anterior').addEventListener('click', () => mostrarCaptura(indiceActivo - 1));
+    document.querySelector('#galeria-siguiente').addEventListener('click', () => mostrarCaptura(indiceActivo + 1));
+
+    // Lightbox
+    const cerrarLightbox = () => {
+      lightbox.classList.remove('abierto');
+      document.body.style.overflow = '';
     };
 
-    featureButtons.forEach((button, index) => {
-      const dot = document.createElement("button");
-      dot.className = `feature-dot${index === 0 ? " is-active" : ""}`;
-      dot.type = "button";
-      dot.setAttribute("aria-label", `Ver captura ${button.dataset.label}`);
-      dot.addEventListener("click", () => setActiveFeature(index));
-      featureDots.appendChild(dot);
-      button.addEventListener("click", () => setActiveFeature(index));
+    galeriaImagen.addEventListener('click', () => {
+      lightbox.classList.add('abierto');
+      document.body.style.overflow = 'hidden';
     });
 
-    featurePrev.addEventListener("click", () => moveFeature(-1));
-    featureNext.addEventListener("click", () => moveFeature(1));
-    lightboxPrev.addEventListener("click", (event) => {
-      event.stopPropagation();
-      moveFeature(-1);
+    lightbox.addEventListener('click', cerrarLightbox);
+    lightboxImagen.addEventListener('click', (evento) => evento.stopPropagation());
+    document.querySelector('#lightbox-cerrar').addEventListener('click', cerrarLightbox);
+    document.querySelector('#lightbox-anterior').addEventListener('click', (evento) => {
+      evento.stopPropagation();
+      mostrarCaptura(indiceActivo - 1);
     });
-    lightboxNext.addEventListener("click", (event) => {
-      event.stopPropagation();
-      moveFeature(1);
-    });
-
-    const closeLightbox = () => {
-      lightbox.classList.remove("is-open");
-      document.body.classList.remove("overflow-hidden");
-    };
-
-    featureImage.addEventListener("click", () => {
-      updateLightboxImage(featureButtons[activeFeatureIndex]);
-      lightbox.classList.add("is-open");
-      document.body.classList.add("overflow-hidden");
+    document.querySelector('#lightbox-siguiente').addEventListener('click', (evento) => {
+      evento.stopPropagation();
+      mostrarCaptura(indiceActivo + 1);
     });
 
-    lightbox.addEventListener("click", closeLightbox);
-    lightboxImage.addEventListener("click", (event) => event.stopPropagation());
-    lightboxClose.addEventListener("click", closeLightbox);
-    window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeLightbox();
-      if (event.key === "ArrowLeft") moveFeature(-1);
-      if (event.key === "ArrowRight") moveFeature(1);
+    window.addEventListener('keydown', (evento) => {
+      if (evento.key === 'Escape') cerrarLightbox();
+      if (!lightbox.classList.contains('abierto')) return;
+      if (evento.key === 'ArrowLeft') mostrarCaptura(indiceActivo - 1);
+      if (evento.key === 'ArrowRight') mostrarCaptura(indiceActivo + 1);
     });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("opacity-100", "translate-y-0");
-          entry.target.classList.remove("opacity-0", "translate-y-8");
-        }
-      });
-    }, { threshold: 0.1 });
+    // Revelado al hacer scroll
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add('visible');
+            observador.unobserve(entrada.target);
+          }
+        });
+      }, { threshold: 0.12 });
 
-    document.querySelectorAll("section > div").forEach((element) => {
-      element.classList.add("transition-all", "duration-700", "opacity-0", "translate-y-8");
-      observer.observe(element);
-    });
+      document.querySelectorAll('.revelar').forEach((el) => observador.observe(el));
+    } else {
+      document.querySelectorAll('.revelar').forEach((el) => el.classList.add('visible'));
+    }
   </script>
 </body>
 
