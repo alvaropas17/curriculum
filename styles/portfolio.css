@@ -779,6 +779,66 @@ a {
   color: var(--tinta-70);
 }
 
+.cv-acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.cv-pagina {
+  min-height: 100vh;
+  background: var(--papel-alt);
+}
+
+.cv-pantalla {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.cv-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem clamp(1rem, 3vw, 2rem);
+  background: rgba(246, 244, 238, 0.92);
+  border-bottom: 1px solid var(--linea-suave);
+}
+
+.cv-documento {
+  min-height: 0;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+}
+
+.cv-documento object {
+  display: block;
+  width: 100%;
+  height: calc(100vh - 6.75rem);
+  min-height: 32rem;
+  border: 1.5px solid var(--tinta);
+  border-radius: 8px;
+  background: var(--papel);
+  box-shadow: 10px 10px 0 0 rgba(25, 23, 19, 0.08);
+}
+
+@media (max-width: 40rem) {
+  .cv-topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cv-topbar .cv-acciones,
+  .cv-topbar .btn {
+    width: 100%;
+  }
+
+  .cv-documento object {
+    height: calc(100vh - 12rem);
+    min-height: 28rem;
+  }
+}
+
 /* ---------- contacto (bloque tinta) ---------- */
 
 .contacto {

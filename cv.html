@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CV de Álvaro Pastor</title>
+    <meta name="description" content="Visor del currículum de Álvaro Pastor en PDF." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/portfolio.css" />
+</head>
+
+<body class="cv-pagina">
+    <main class="cv-pantalla">
+        <header class="cv-topbar">
+            <a class="nav-marca" href="./index.html">Álvaro Pastor<span>— cv</span></a>
+            <div class="cv-acciones">
+                <a href="./index.html" class="btn btn-secundario">Volver</a>
+                <a href="./Alvaro_Pastor_CV.pdf" download="Alvaro_Pastor_CV.pdf" class="btn btn-primario">Descargar CV</a>
+            </div>
+        </header>
+
+        <section class="cv-documento" aria-label="Vista previa del currículum en PDF">
+            <object data="./Alvaro_Pastor_CV.pdf#view=FitH" type="application/pdf">
+                <div class="cv-fallback">
+                    <p>Tu navegador no puede mostrar el PDF integrado.</p>
+                    <a href="./Alvaro_Pastor_CV.pdf" class="btn btn-primario" target="_blank" rel="noopener">Abrir PDF</a>
+                </div>
+            </object>
+        </section>
+    </main>
+</body>
+
+</html>
