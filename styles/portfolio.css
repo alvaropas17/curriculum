@@ -2049,3 +2049,104 @@ a {
     background-position: center top;
   }
 }
+/* ---------- ajuste responsive Honor 200 Pro y móviles estrechos ---------- */
+.seccion-pensamiento .contenedor {
+  max-width: var(--ancho);
+}
+
+.seccion-pensamiento .mapa-criterio {
+  width: 100%;
+}
+
+@media (max-width: 40rem) {
+  .hero {
+    padding-block: 2.35rem 4rem;
+  }
+
+  .hero .contenedor {
+    padding-inline: 1rem;
+  }
+
+  .hero-grid {
+    align-content: start;
+  }
+
+  .hero-meta {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: clamp(0.68rem, 2.95vw, 0.76rem);
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  .hero-meta span {
+    min-width: 0;
+    white-space: nowrap;
+  }
+
+  .disponible {
+    display: inline;
+    font-size: inherit;
+  }
+
+  .hero h1 {
+    margin-block: 1.2rem 1.35rem;
+    font-size: clamp(3rem, 13vw, 4rem);
+  }
+
+  .hero-intro {
+    font-size: clamp(1.02rem, 4.9vw, 1.12rem);
+    line-height: 1.58;
+  }
+
+  .hero-acciones {
+    margin-top: 2rem;
+  }
+
+  .seccion-pensamiento .contenedor {
+    padding-inline: 1.25rem;
+  }
+}
+
+@media (max-width: 23.5rem) {
+  .hero-meta {
+    grid-template-columns: 1fr;
+    gap: 0.28rem;
+  }
+}
+
+/* Cuadrícula de fondo también en móvil, con menos contraste para lectura. */
+body {
+  background-color: var(--papel);
+  background-image:
+    linear-gradient(90deg, rgba(36, 64, 206, 0.065) 1px, transparent 1px),
+    linear-gradient(rgba(25, 23, 19, 0.045) 1px, transparent 1px);
+  background-size: 6.5rem 100%, 100% 5.25rem;
+  background-position: center top;
+}
+
+@media (min-width: 75rem) {
+  body {
+    background-image:
+      linear-gradient(90deg, rgba(36, 64, 206, 0.12) 1px, transparent 1px),
+      linear-gradient(rgba(25, 23, 19, 0.08) 1px, transparent 1px);
+    background-size: 11.25rem 100%, 100% 8rem;
+  }
+}
+
+/* Ajuste visual móvil: centra la marca con el botón hamburguesa. */
+@media (max-width: 40rem) {
+  .nav-marca {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    transform: translateY(2px);
+  }
+
+  .nav-burger {
+    flex: 0 0 auto;
+  }
+}
