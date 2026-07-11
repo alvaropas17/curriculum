@@ -106,3 +106,173 @@
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.75rem;
 }
+
+/* Ajustes responsive propios de la pagina Procesos con IA. */
+.idea-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.86fr);
+  gap: clamp(1.5rem, 4vw, 2.4rem);
+  align-items: start;
+  margin-top: 1.6rem;
+}
+
+.idea-tarjetas {
+  display: grid;
+  gap: 1.4rem;
+}
+
+.idea-tarjetas .tarjeta {
+  margin: 0;
+}
+
+@media (max-width: 64rem) {
+  .caso-hero {
+    padding-block: 4rem 5rem;
+  }
+
+  .caso-hero .ventana {
+    width: min(100%, 42rem);
+    margin-inline: auto;
+  }
+
+  .idea-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .idea-tarjetas {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 52rem) {
+  .nav-marca span {
+    display: none;
+  }
+
+  .idea-tarjetas {
+    grid-template-columns: 1fr;
+  }
+
+  .pasos {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 40rem) {
+  .caso-hero {
+    padding-block: 2.6rem 4rem;
+  }
+
+  .caso-hero h1 {
+    font-size: clamp(2.35rem, 11.5vw, 3.25rem);
+    margin-block: 1rem 1.15rem;
+  }
+
+  .caso-hero .hero-intro {
+    max-width: none;
+    font-size: clamp(1rem, 4.6vw, 1.08rem);
+    line-height: 1.58;
+  }
+
+  .caso-hero .hero-acciones {
+    grid-template-columns: 1fr;
+    width: 100%;
+    margin-top: 1.8rem;
+  }
+
+  .caso-hero .hero-acciones .btn,
+  .contacto .acciones .btn {
+    width: 100%;
+  }
+
+  .ventana {
+    box-shadow: 6px 6px 0 0 rgba(25, 23, 19, 0.08);
+  }
+
+  .ventana-barra {
+    gap: 0.34rem;
+    padding: 0.55rem 0.65rem;
+  }
+
+  .ventana-url {
+    min-width: 0;
+    margin-left: 0.25rem;
+    font-size: 0.66rem;
+  }
+
+  .btn-copiar {
+    flex: 0 0 auto;
+    padding-inline: 0.48rem;
+  }
+
+  .btn-copiar span {
+    display: none;
+  }
+
+  .karpathy-preview {
+    padding: 1.15rem 1rem;
+    font-size: 0.78rem;
+  }
+
+  .kp-sub {
+    max-width: none;
+  }
+
+  .kp-principio {
+    gap: 0.65rem;
+  }
+
+  .decision {
+    gap: 1rem;
+  }
+
+  .aprendizajes {
+    max-width: none;
+  }
+}
+
+@media (max-width: 23.5rem) {
+  .tags {
+    gap: 0.42rem;
+  }
+
+  .tag {
+    white-space: normal;
+  }
+
+  .kp-principio {
+    display: grid;
+  }
+}
+
+/* Esta página combina explicación y artefacto: las columnas se equilibran
+   para que el archivo de ejemplo tenga el mismo peso visual que el texto. */
+@media (min-width: 64rem) {
+  .caso-hero {
+    grid-template-columns: minmax(0, 0.92fr) minmax(25rem, 1.08fr);
+    gap: clamp(3rem, 6vw, 5.5rem);
+  }
+
+  .caso-hero > :last-child {
+    justify-self: end;
+    width: 100%;
+  }
+
+  .idea-grid {
+    grid-template-columns: minmax(0, 1.08fr) minmax(22rem, 0.92fr);
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+  }
+}
+
+/* Hay tres acciones reales, así que la secuencia ocupa tres columnas iguales. */
+@media (min-width: 48rem) {
+  #archivo .pasos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 52rem) {
+  #archivo .pasos {
+    grid-template-columns: 1fr;
+  }
+}

@@ -329,56 +329,8 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Menú móvil
-        const botonMenu = document.querySelector('#boton-menu');
-        const menuMovil = document.querySelector('#menu-movil');
-
-        botonMenu.addEventListener('click', () => {
-            const abierto = menuMovil.classList.toggle('abierto');
-            botonMenu.setAttribute('aria-expanded', String(abierto));
-        });
-
-        menuMovil.querySelectorAll('a').forEach((enlace) => {
-            enlace.addEventListener('click', () => {
-                menuMovil.classList.remove('abierto');
-                botonMenu.setAttribute('aria-expanded', 'false');
-            });
-        });
-
-        // Revelado al hacer scroll
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            const observador = new IntersectionObserver((entradas) => {
-                entradas.forEach((entrada) => {
-                    if (entrada.isIntersecting) {
-                        entrada.target.classList.add('visible');
-                        observador.unobserve(entrada.target);
-                    }
-                });
-            }, { threshold: 0.12 });
-
-            document.querySelectorAll('.revelar').forEach((el) => observador.observe(el));
-        } else {
-            document.querySelectorAll('.revelar').forEach((el) => el.classList.add('visible'));
-        }
-        // Índice lateral: resalta la sección visible en pantallas panorámicas.
-        const indicePanoramico = document.querySelector('.indice-4k');
-        if (indicePanoramico) {
-            const seccionesIndice = [...indicePanoramico.querySelectorAll('a')]
-                .map((enlace) => ({ enlace, seccion: document.querySelector(enlace.getAttribute('href')) }))
-                .filter(({ seccion }) => seccion);
-            const actualizarIndice = () => {
-                let activa = seccionesIndice[0];
-                seccionesIndice.forEach((item) => {
-                    if (item.seccion.getBoundingClientRect().top <= window.innerHeight * 0.42) activa = item;
-                });
-                seccionesIndice.forEach((item) => item.enlace.classList.toggle('activo', item === activa));
-            };
-            window.addEventListener('scroll', actualizarIndice, { passive: true });
-            actualizarIndice();
-        }
-    </script>
+    <script src="./scripts/ui-comun.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 
 </html>

@@ -77,8 +77,9 @@
             <span class="ventana-url">~/.config/opencode/karpathy.md</span>
             <button id="btn-copiar" class="btn-copiar" type="button" aria-label="Copiar karpathy.md">
               <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <rect x="5" y="5" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/>
+                <rect x="5" y="5" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5" />
+                <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"
+                  stroke="currentColor" stroke-width="1.5" />
               </svg>
               <span>copiar</span>
             </button>
@@ -89,13 +90,14 @@
               <span class="kp-sub">Guías de comportamiento para reducir errores comunes al programar con IA.</span>
             </div>
             <div class="kp-alerta">
-              <strong>Trade-off:</strong> Estas guías priorizan la precaución sobre la velocidad. Para tareas triviales, usa el criterio.
+              <strong>Trade-off:</strong> Estas guías priorizan la precaución sobre la velocidad. Para tareas triviales,
+              usa el criterio.
             </div>
             <div class="kp-principios">
               <div class="kp-principio">
                 <span class="kp-num">01</span>
                 <div>
-                  <strong>Pensar antes de codificar</strong>
+                  <strong>Pensar antes de programar</strong>
                   <p>No asumas. Expón los trade-offs antes de implementar.</p>
                 </div>
               </div>
@@ -130,7 +132,7 @@
       <div class="contenedor revelar">
         <p class="etiqueta">origen</p>
         <h2 class="titulo-seccion">La idea</h2>
-        <div style="margin-top: 1.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem; align-items: start;">
+        <div class="idea-grid">
           <div class="parrafos">
             <p>
               Andrej Karpathy lleva tiempo insistiendo en que <strong>el prompt lo es todo</strong>. No importa
@@ -144,20 +146,20 @@
               instrucciones cada vez que empiezo algo nuevo: la IA ya sabe cómo quiero que trabaje.
             </p>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 1.4rem;">
-            <article class="tarjeta" style="margin: 0;">
+          <div class="idea-tarjetas">
+            <article class="tarjeta">
               <span class="campo">problema</span>
               <h3>Instrucciones invisibles</h3>
               <p>Cada nuevo proyecto empieza sin contexto. Hay que recordarle a la IA cómo quieres que piense y escriba.
               </p>
             </article>
-            <article class="tarjeta" style="margin: 0;">
+            <article class="tarjeta">
               <span class="campo">solución</span>
               <h3>Archivo global</h3>
               <p>Un solo fichero en <code>~/.config/opencode/</code> que opencode carga siempre. Las reglas están ahí
                 desde el primer mensaje.</p>
             </article>
-            <article class="tarjeta" style="margin: 0;">
+            <article class="tarjeta">
               <span class="campo">efecto</span>
               <h3>Consistencia</h3>
               <p>El agente no empieza de cero: conoce mis principios de código, mi estilo y cómo manejar los trade-offs.
@@ -302,129 +304,8 @@
       </div>
     </div>
   </footer>
-
-  <script>
-    const contenidoMD = `# CLAUDE.md
-
-Guías de comportamiento para reducir errores comunes al programar con IA. Combínalas con instrucciones específicas de cada proyecto.
-
-**Trade-off:** Estas guías priorizan la precaución sobre la velocidad. Para tareas triviales, usa el criterio.
-
-## 1. Pensar antes de codificar
-
-**No asumas. No escondas la confusión. Expón los trade-offs.**
-
-Antes de implementar:
-
-- Expón tus suposiciones explícitamente. Si no estás seguro, pregunta.
-- Si existen múltiples interpretaciones, preséntalas — no elijas en silencio.
-- Si existe un enfoque más simple, dilo. Rechaza cuando sea necesario.
-- Si algo no está claro, para. Nombra lo que confunde. Pregunta.
-
-## 2. Simplicidad primero
-
-**Mínimo código que resuelve el problema. Nada especulativo.**
-
-- Sin funciones más allá de lo pedido.
-- Sin abstracciones para código de un solo uso.
-- Sin "flexibilidad" o "configurabilidad" que no se haya solicitado.
-- Sin manejo de errores para escenarios imposibles.
-- Si escribes 200 líneas y podrían ser 50, reescríbelo.
-
-Pregúntate: "¿Un ingeniero senior diría que esto es demasiado complicado?" Si sí, simplifica.
-
-## 3. Cambios quirúrgicos
-
-**Toca solo lo que debas. Limpia solo tu propio desorden.**
-
-Al editar código existente:
-
-- No "mejores" código, comentarios o formato adyacente.
-- No refactorices cosas que no están rotas.
-- Respeta el estilo existente, aunque tú lo harías diferente.
-- Si notas código muerto no relacionado, menciónalo — no lo borres.
-
-Cuando tus cambios creen huérfanos:
-
-- Elimina imports/variables/funciones que TUS cambios dejaron sin usar.
-- No borres código muerto preexistente a menos que te lo pidan.
-
-La prueba: cada línea modificada debe poder trazarse directamente a la petición del usuario.
-
-## 4. Ejecución guiada por objetivos
-
-**Define criterios de éxito. Itera hasta verificarlos.**
-
-Transforma tareas en metas verificables:
-
-- "Añadir validación" → "Escribir tests para entradas inválidas, luego hacer que pasen"
-- "Corregir el bug" → "Escribir un test que lo reproduzca, luego hacer que pase"
-- "Refactorizar X" → "Asegurar que los tests pasen antes y después"
-
-Para tareas de varios pasos, indica un plan breve:
-
-\`\`\`
-1. [Paso] → verificar: [comprobación]
-2. [Paso] → verificar: [comprobación]
-3. [Paso] → verificar: [comprobación]
-\`\`\`
-
-Unos criterios de éxito sólidos te permiten iterar de forma independiente. Unos criterios débiles ("haz que funcione") requieren aclaraciones constantes.
-
----
-
-**Estas guías funcionan si:** hay menos cambios innecesarios en los diffs, menos reescrituras por sobrecomplicación, y las preguntas de aclaración llegan antes de implementar en lugar de después de los errores.`;
-
-    const btnCopiar = document.querySelector('#btn-copiar');
-    if (btnCopiar) {
-      btnCopiar.addEventListener('click', async () => {
-        try {
-          await navigator.clipboard.writeText(contenidoMD);
-          const span = btnCopiar.querySelector('span');
-          const original = span.textContent;
-          span.textContent = 'copiado';
-          btnCopiar.classList.add('copiado');
-          setTimeout(() => {
-            span.textContent = original;
-            btnCopiar.classList.remove('copiado');
-          }, 1800);
-        } catch {
-          const span = btnCopiar.querySelector('span');
-          span.textContent = 'error';
-          setTimeout(() => { span.textContent = 'copiar'; }, 1800);
-        }
-      });
-    }
-
-    const botonMenu = document.querySelector('#boton-menu');
-    const menuMovil = document.querySelector('#menu-movil');
-
-    botonMenu.addEventListener('click', () => {
-      const abierto = menuMovil.classList.toggle('abierto');
-      botonMenu.setAttribute('aria-expanded', String(abierto));
-    });
-
-    menuMovil.querySelectorAll('a').forEach((enlace) => {
-      enlace.addEventListener('click', () => {
-        menuMovil.classList.remove('abierto');
-        botonMenu.setAttribute('aria-expanded', 'false');
-      });
-    });
-
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const observador = new IntersectionObserver((entradas) => {
-        entradas.forEach((entrada) => {
-          if (entrada.isIntersecting) {
-            entrada.target.classList.add('visible');
-            observador.unobserve(entrada.target);
-          }
-        });
-      }, { threshold: 0.12 });
-      document.querySelectorAll('.revelar').forEach((el) => observador.observe(el));
-    } else {
-      document.querySelectorAll('.revelar').forEach((el) => el.classList.add('visible'));
-    }
-  </script>
+  <script src="../scripts/ui-comun.js"></script>
+  <script src="../scripts/procesos-ia.js"></script>
 </body>
 
 </html>
