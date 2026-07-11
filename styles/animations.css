@@ -1,0 +1,25 @@
+@media (prefers-reduced-motion: no-preference) {
+  .revelar {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .revelar.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .marca-anim {
+    background-size: 0% 100%;
+    background-repeat: no-repeat;
+    background-position: left center;
+    animation: marcar 0.8s ease 0.4s forwards;
+  }
+
+  @keyframes marcar {
+    to {
+      background-size: 100% 100%;
+    }
+  }
+}

@@ -1522,7 +1522,6 @@ a {
     border-top-color: var(--azul);
     transform: translateX(0.35rem);
   }
-
   .hero {
     position: relative;
     min-height: calc(100vh - 4.25rem);
@@ -1921,7 +1920,7 @@ a {
 
 /* El cierre conserva presencia, sin competir con el contenido. */
 @media (min-width: 120rem) {
-  .indice-4k { left: max(1rem, calc((100vw - 112rem) / 2)); }
+  .indice-4k { left: 34px; }
   .contacto { min-height: 0; display: block; }
   .contacto h2 { font-size: clamp(2.4rem, 3.4vw, 4rem); }
   .mapa-criterio { min-height: 0; grid-template-rows: none; }
@@ -1941,6 +1940,13 @@ a {
 @media (min-width: 120.0625rem) {
   .nav-enlaces { display: none; }
   .nav-fila { justify-content: space-between; }
+}
+
+@media (min-width: 160rem) {
+  .nav .contenedor { max-width: none; }
+  .nav-enlaces { display: flex; }
+  .nav-fila { justify-content: flex-start; }
+  .nav-cta { margin-inline-start: auto; }
 }
 
 @media (min-width: 60rem) and (max-width: 119.9375rem) {

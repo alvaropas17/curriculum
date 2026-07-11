@@ -1,0 +1,67 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 2.9rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radio);
+  font-family: var(--fuente-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border: 1.5px solid var(--tinta);
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.btn svg {
+  flex: none;
+}
+
+.btn-primario {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.btn-primario:hover,
+.btn-primario:focus-visible {
+  background: var(--azul);
+  border-color: var(--azul);
+}
+
+.btn-secundario {
+  background: transparent;
+  color: var(--tinta);
+}
+
+.btn-secundario:hover,
+.btn-secundario:focus-visible {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.btn-claro {
+  background: var(--papel);
+  color: var(--tinta);
+  border-color: var(--papel);
+}
+
+.btn-claro:hover,
+.btn-claro:focus-visible {
+  background: var(--marca);
+  border-color: var(--marca);
+}
+
+.btn-contorno-claro {
+  background: transparent;
+  color: var(--papel);
+  border-color: rgba(246, 244, 238, 0.55);
+}
+
+.btn-contorno-claro:hover,
+.btn-contorno-claro:focus-visible {
+  border-color: var(--papel);
+  background: rgba(246, 244, 238, 0.1);
+}

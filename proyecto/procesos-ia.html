@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <script src="../scripts/analytics-consent.js" defer></script>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Procesos con IA — Archivo global de opencode · Álvaro Pastor</title>
+  <meta name="description"
+    content="Cómo configuro karpathy.md como archivo global de opencode para guiar el comportamiento de la IA en cualquier proyecto." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/portfolio.css" />
+  <link rel="stylesheet" href="../styles/procesos-ia.css" />
+</head>
+
+<body id="top">
+  <nav class="nav">
+    <div class="contenedor nav-fila">
+      <a class="nav-marca" href="../index.html">Álvaro Pastor<span>— procesos con IA</span></a>
+      <div class="nav-enlaces">
+        <a href="#idea">idea</a>
+        <a href="#archivo">archivo</a>
+        <a href="#contenido">contenido</a>
+        <a href="#resultado">resultado</a>
+      </div>
+      <a href="../karpathy.md" class="btn btn-primario nav-cta" rel="noopener noreferrer">Ver karpathy.md</a>
+      <button id="boton-menu" class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <div id="menu-movil" class="menu-movil">
+      <a href="#idea">idea</a>
+      <a href="#archivo">archivo</a>
+      <a href="#contenido">contenido</a>
+      <a href="#resultado">resultado</a>
+      <a href="../index.html">← volver al portfolio</a>
+    </div>
+  </nav>
+
+  <main>
+    <header class="contenedor caso-hero">
+      <div>
+        <p class="etiqueta">procesos con ia · harness</p>
+        <h1>Un archivo <span class="marca marca-anim">que enseña a la IA</span> a trabajar mejor.</h1>
+        <p class="hero-intro">
+          Basado en el enfoque de Andrej Karpathy, he creado un archivo de instrucciones global que opencode
+          carga en cualquier proyecto. Así la IA parte con unas guías claras sobre cómo escribir, pensar y
+          estructurar código.
+        </p>
+        <div class="tags" style="margin-top: 1.6rem;">
+          <span class="tag">opencode</span>
+          <span class="tag tag-acento">claude.md</span>
+          <span class="tag">karpathy</span>
+          <span class="tag">agentes</span>
+        </div>
+        <div class="hero-acciones">
+          <a href="../karpathy.md" class="btn btn-primario" rel="noopener noreferrer">Ver el archivo
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg></a>
+          <a href="#contenido" class="btn btn-secundario">Ver contenido</a>
+        </div>
+      </div>
+      <div>
+        <div class="ventana">
+          <div class="ventana-barra">
+            <span class="ventana-punto"></span>
+            <span class="ventana-punto"></span>
+            <span class="ventana-punto lleno"></span>
+            <span class="ventana-url">~/.config/opencode/karpathy.md</span>
+            <button id="btn-copiar" class="btn-copiar" type="button" aria-label="Copiar karpathy.md">
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="5" y="5" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+              <span>copiar</span>
+            </button>
+          </div>
+          <div class="karpathy-preview">
+            <div class="kp-header">
+              <span class="kp-titulo">CLAUDE.md</span>
+              <span class="kp-sub">Guías de comportamiento para reducir errores comunes al programar con IA.</span>
+            </div>
+            <div class="kp-alerta">
+              <strong>Trade-off:</strong> Estas guías priorizan la precaución sobre la velocidad. Para tareas triviales, usa el criterio.
+            </div>
+            <div class="kp-principios">
+              <div class="kp-principio">
+                <span class="kp-num">01</span>
+                <div>
+                  <strong>Pensar antes de codificar</strong>
+                  <p>No asumas. Expón los trade-offs antes de implementar.</p>
+                </div>
+              </div>
+              <div class="kp-principio">
+                <span class="kp-num">02</span>
+                <div>
+                  <strong>Simplicidad primero</strong>
+                  <p>Mínimo código que resuelve el problema. Nada especulativo.</p>
+                </div>
+              </div>
+              <div class="kp-principio">
+                <span class="kp-num">03</span>
+                <div>
+                  <strong>Cambios quirúrgicos</strong>
+                  <p>Toca solo lo que debas. No refactorices lo que no está roto.</p>
+                </div>
+              </div>
+              <div class="kp-principio">
+                <span class="kp-num">04</span>
+                <div>
+                  <strong>Ejecución guiada por objetivos</strong>
+                  <p>Define criterios de éxito. Itera hasta verificarlos.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="seccion seccion-alt" id="idea">
+      <div class="contenedor revelar">
+        <p class="etiqueta">origen</p>
+        <h2 class="titulo-seccion">La idea</h2>
+        <div style="margin-top: 1.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem; align-items: start;">
+          <div class="parrafos">
+            <p>
+              Andrej Karpathy lleva tiempo insistiendo en que <strong>el prompt lo es todo</strong>. No importa
+              lo bueno que sea el modelo si las instrucciones son vagas o contradictorias. Un buen harness —
+              las guías que acompañan al código— puede marcar la diferencia entre una IA que alucina y una que
+              produce resultados sólidos.
+            </p>
+            <p>
+              opencode permite definir un archivo global (<code>karpathy.md</code>) que se inyecta como
+              contexto en <strong>todos los proyectos</strong>. Así no tengo que repetir las mismas
+              instrucciones cada vez que empiezo algo nuevo: la IA ya sabe cómo quiero que trabaje.
+            </p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 1.4rem;">
+            <article class="tarjeta" style="margin: 0;">
+              <span class="campo">problema</span>
+              <h3>Instrucciones invisibles</h3>
+              <p>Cada nuevo proyecto empieza sin contexto. Hay que recordarle a la IA cómo quieres que piense y escriba.
+              </p>
+            </article>
+            <article class="tarjeta" style="margin: 0;">
+              <span class="campo">solución</span>
+              <h3>Archivo global</h3>
+              <p>Un solo fichero en <code>~/.config/opencode/</code> que opencode carga siempre. Las reglas están ahí
+                desde el primer mensaje.</p>
+            </article>
+            <article class="tarjeta" style="margin: 0;">
+              <span class="campo">efecto</span>
+              <h3>Consistencia</h3>
+              <p>El agente no empieza de cero: conoce mis principios de código, mi estilo y cómo manejar los trade-offs.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion" id="archivo">
+      <div class="contenedor revelar">
+        <p class="etiqueta">configuración</p>
+        <h2 class="titulo-seccion">Dónde vive el archivo</h2>
+        <p class="texto-suave" style="max-width: 38rem; margin-block: 1rem 2.6rem;">
+          opencode busca instrucciones globales en una ruta específica del sistema. Basta con colocar el archivo
+          ahí y todos los proyectos lo heredan.
+        </p>
+        <div class="pasos">
+          <article class="paso">
+            <h3>1. Crear el archivo</h3>
+            <p>Escribes <code>karpathy.md</code> con las guías de comportamiento que quieras: cómo abordar problemas,
+              qué priorizar, cómo documentar.</p>
+          </article>
+          <article class="paso">
+            <h3>2. Colocarlo en la ruta global</h3>
+            <p>Lo guardas en <code>~/.config/opencode/</code> y opencode lo carga automáticamente al iniciar
+              cualquier proyecto.</p>
+          </article>
+          <article class="paso">
+            <h3>3. Listo</h3>
+            <p>Cada vez que hablas con el agente, las instrucciones están presentes. Sin setup adicional, sin
+              copiar archivos entre proyectos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion seccion-alt" id="contenido">
+      <div class="contenedor dos-columnas revelar">
+        <div class="col-titulo">
+          <p class="etiqueta">contenido</p>
+          <h2 class="titulo-seccion">Qué contiene karpathy.md</h2>
+          <p class="texto-suave" style="margin-top: 1rem;">Cuatro principios que reducen errores y mejoran la calidad
+            del código generado por IA.</p>
+        </div>
+        <div>
+          <ol class="decisiones">
+            <li class="decision">
+              <div>
+                <h3>Think Before Coding</h3>
+                <p><strong>qué dice</strong> — No asumas. No escondas la confusión. Explica los trade-offs
+                  antes de implementar.</p>
+                <p><strong>para qué sirve</strong> — Evita que la IA se lance a escribir código sin entender
+                  el contexto o sin preguntar cuando algo es ambiguo.</p>
+              </div>
+            </li>
+            <li class="decision">
+              <div>
+                <h3>Simplicity First</h3>
+                <p><strong>qué dice</strong> — El mínimo código que resuelve el problema. Nada
+                  especulativo, nada abstracto para un solo uso.</p>
+                <p><strong>para qué sirve</strong> — La IA tiende a sobreingenierizar. Este principio la frena
+                  y la obliga a preguntarse si está añadiendo complejidad innecesaria.</p>
+              </div>
+            </li>
+            <li class="decision">
+              <div>
+                <h3>Surgical Changes</h3>
+                <p><strong>qué dice</strong> — Toca solo lo que debas. No "mejores" código adyacente ni
+                  refactorices lo que no está roto.</p>
+                <p><strong>para qué sirve</strong>— Las IAs suelen reescribir más de lo necesario. Con esto
+                  limito los cambios a lo estrictamente pedido.</p>
+              </div>
+            </li>
+            <li class="decision">
+              <div>
+                <h3>Goal-Driven Execution</h3>
+                <p><strong>qué dice</strong> — Define criterios de éxito. Itera hasta verificarlos.</p>
+                <p><strong>para qué sirve</strong> — Transforma instrucciones vagas en un bucle de trabajo
+                  comprobable. La IA sabe cuándo ha terminado.</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="seccion" id="resultado">
+      <div class="contenedor dos-columnas revelar">
+        <div class="col-titulo">
+          <p class="etiqueta">resultado</p>
+          <h2 class="titulo-seccion">Menos vueltas, más acierto</h2>
+        </div>
+        <div class="aprendizajes">
+          <div class="aprendizaje">
+            <h3>La IA pregunta antes de escribir</h3>
+            <p>Cuando algo no está claro, el agente lo dice en lugar de asumir. Eso evita iteraciones
+              desperdiciadas y código que no pedí.</p>
+          </div>
+          <div class="aprendizaje">
+            <h3>Menos sobreingeniería</h3>
+            <p>El archivo frena las abstracciones innecesarias. El resultado es código más legible y fácil de
+              mantener.</p>
+          </div>
+          <div class="aprendizaje">
+            <h3>Consistencia entre proyectos</h3>
+            <p>Da igual si empiezo un script pequeño o una app completa: el agente parte con la misma base de
+              criterios.</p>
+          </div>
+          <div class="aprendizaje">
+            <h3>Iteraciones más cortas</h3>
+            <p>Al tener objetivos claros desde el principio, cada ciclo de feedback produce cambios concretos y
+              medibles.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contacto" id="CTA">
+      <div class="contenedor revelar">
+        <p class="etiqueta">el archivo</p>
+        <h2>Un <span class="marca">harness</span> que no tocas, pero siempre está.</h2>
+        <p>El archivo global de opencode es una de esas configuraciones que hacen que todo funcione mejor sin
+          que tengas que acordarte. Lo pones una vez y la IA lo usa siempre.</p>
+        <div class="acciones">
+          <a href="../karpathy.md" class="btn btn-claro" target="_blank" rel="noopener noreferrer">Ver karpathy.md</a>
+          <a href="../index.html" class="btn btn-contorno-claro">Volver al portfolio</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie-fila">
+      <p>Procesos con IA — archivo global karpathy.md para opencode.</p>
+      <div class="pie-enlaces">
+        <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/alvaropas17/alvaropas17" rel="noopener">GitHub</a>
+        <a href="mailto:alvpastor17@gmail.com">Email</a>
+        <a href="#top">Arriba</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const contenidoMD = `# CLAUDE.md
+
+Guías de comportamiento para reducir errores comunes al programar con IA. Combínalas con instrucciones específicas de cada proyecto.
+
+**Trade-off:** Estas guías priorizan la precaución sobre la velocidad. Para tareas triviales, usa el criterio.
+
+## 1. Pensar antes de codificar
+
+**No asumas. No escondas la confusión. Expón los trade-offs.**
+
+Antes de implementar:
+
+- Expón tus suposiciones explícitamente. Si no estás seguro, pregunta.
+- Si existen múltiples interpretaciones, preséntalas — no elijas en silencio.
+- Si existe un enfoque más simple, dilo. Rechaza cuando sea necesario.
+- Si algo no está claro, para. Nombra lo que confunde. Pregunta.
+
+## 2. Simplicidad primero
+
+**Mínimo código que resuelve el problema. Nada especulativo.**
+
+- Sin funciones más allá de lo pedido.
+- Sin abstracciones para código de un solo uso.
+- Sin "flexibilidad" o "configurabilidad" que no se haya solicitado.
+- Sin manejo de errores para escenarios imposibles.
+- Si escribes 200 líneas y podrían ser 50, reescríbelo.
+
+Pregúntate: "¿Un ingeniero senior diría que esto es demasiado complicado?" Si sí, simplifica.
+
+## 3. Cambios quirúrgicos
+
+**Toca solo lo que debas. Limpia solo tu propio desorden.**
+
+Al editar código existente:
+
+- No "mejores" código, comentarios o formato adyacente.
+- No refactorices cosas que no están rotas.
+- Respeta el estilo existente, aunque tú lo harías diferente.
+- Si notas código muerto no relacionado, menciónalo — no lo borres.
+
+Cuando tus cambios creen huérfanos:
+
+- Elimina imports/variables/funciones que TUS cambios dejaron sin usar.
+- No borres código muerto preexistente a menos que te lo pidan.
+
+La prueba: cada línea modificada debe poder trazarse directamente a la petición del usuario.
+
+## 4. Ejecución guiada por objetivos
+
+**Define criterios de éxito. Itera hasta verificarlos.**
+
+Transforma tareas en metas verificables:
+
+- "Añadir validación" → "Escribir tests para entradas inválidas, luego hacer que pasen"
+- "Corregir el bug" → "Escribir un test que lo reproduzca, luego hacer que pase"
+- "Refactorizar X" → "Asegurar que los tests pasen antes y después"
+
+Para tareas de varios pasos, indica un plan breve:
+
+\`\`\`
+1. [Paso] → verificar: [comprobación]
+2. [Paso] → verificar: [comprobación]
+3. [Paso] → verificar: [comprobación]
+\`\`\`
+
+Unos criterios de éxito sólidos te permiten iterar de forma independiente. Unos criterios débiles ("haz que funcione") requieren aclaraciones constantes.
+
+---
+
+**Estas guías funcionan si:** hay menos cambios innecesarios en los diffs, menos reescrituras por sobrecomplicación, y las preguntas de aclaración llegan antes de implementar en lugar de después de los errores.`;
+
+    const btnCopiar = document.querySelector('#btn-copiar');
+    if (btnCopiar) {
+      btnCopiar.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(contenidoMD);
+          const span = btnCopiar.querySelector('span');
+          const original = span.textContent;
+          span.textContent = 'copiado';
+          btnCopiar.classList.add('copiado');
+          setTimeout(() => {
+            span.textContent = original;
+            btnCopiar.classList.remove('copiado');
+          }, 1800);
+        } catch {
+          const span = btnCopiar.querySelector('span');
+          span.textContent = 'error';
+          setTimeout(() => { span.textContent = 'copiar'; }, 1800);
+        }
+      });
+    }
+
+    const botonMenu = document.querySelector('#boton-menu');
+    const menuMovil = document.querySelector('#menu-movil');
+
+    botonMenu.addEventListener('click', () => {
+      const abierto = menuMovil.classList.toggle('abierto');
+      botonMenu.setAttribute('aria-expanded', String(abierto));
+    });
+
+    menuMovil.querySelectorAll('a').forEach((enlace) => {
+      enlace.addEventListener('click', () => {
+        menuMovil.classList.remove('abierto');
+        botonMenu.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+          if (entrada.isIntersecting) {
+            entrada.target.classList.add('visible');
+            observador.unobserve(entrada.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      document.querySelectorAll('.revelar').forEach((el) => observador.observe(el));
+    } else {
+      document.querySelectorAll('.revelar').forEach((el) => el.classList.add('visible'));
+    }
+  </script>
+</body>
+
+</html>

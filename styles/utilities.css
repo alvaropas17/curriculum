@@ -1,0 +1,130 @@
+.contenedor {
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.seccion {
+  padding-block: 6.5rem;
+  border-top: 1px solid var(--linea-suave);
+}
+
+.seccion-alt {
+  background: var(--papel-alt);
+}
+
+.etiqueta {
+  font-family: var(--fuente-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tinta-50);
+  margin-bottom: 1.1rem;
+}
+
+.etiqueta::before {
+  content: "§ ";
+  color: var(--azul);
+  letter-spacing: 0;
+}
+
+.titulo-seccion {
+  font-size: clamp(1.9rem, 3.4vw, 2.5rem);
+  font-weight: 700;
+}
+
+.texto-suave {
+  color: var(--tinta-70);
+}
+
+.marca {
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 216, 77, 0.95) 3%,
+    rgba(255, 216, 77, 0.8) 97%,
+    transparent 100%
+  );
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0.04em 0.14em;
+  margin-inline: -0.06em;
+}
+
+.nota {
+  font-family: var(--fuente-mono);
+  font-size: 0.8rem;
+  line-height: 1.65;
+  font-style: italic;
+  color: var(--tinta-50);
+  max-width: 15rem;
+  border-left: 2px solid var(--marca);
+  padding-left: 0.85rem;
+}
+
+.nota::before {
+  content: "// nota";
+  display: block;
+  font-style: normal;
+  color: var(--azul);
+  margin-bottom: 0.25rem;
+}
+
+.enlace {
+  color: var(--tinta);
+  text-decoration: underline;
+  text-decoration-color: var(--linea);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.28em;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.enlace:hover,
+.enlace:focus-visible {
+  color: var(--azul);
+  text-decoration-color: var(--azul);
+}
+
+.disponible {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--fuente-mono);
+  font-size: 0.8rem;
+  color: var(--verde);
+}
+
+.disponible::before {
+  content: none;
+}
+
+.dos-columnas {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 52rem) {
+  .dos-columnas {
+    grid-template-columns: 17rem minmax(0, 1fr);
+    gap: 4rem;
+  }
+
+  .dos-columnas > .col-titulo {
+    position: sticky;
+    top: 6rem;
+    align-self: start;
+  }
+}
+
+.parrafos {
+  display: grid;
+  gap: 1.25rem;
+  font-size: 1.1rem;
+  color: var(--tinta-70);
+  max-width: 40rem;
+}
+
+.parrafos strong {
+  color: var(--tinta);
+  font-weight: 600;
+}

@@ -1,0 +1,101 @@
+.hero {
+  padding-block: 5.5rem 6.5rem;
+}
+
+.hero .contenedor {
+  max-width: 84rem;
+}
+
+.hero-grid {
+  display: grid;
+  justify-items: center;
+  gap: 0;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 6.4vw, 5rem);
+  font-weight: 800;
+  max-width: 22ch;
+  margin-block: 1.4rem 1.6rem;
+}
+
+.hero-intro {
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  max-width: 52rem;
+  color: var(--tinta-70);
+}
+
+.hero-acciones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.85rem;
+  width: min(100%, 42rem);
+  margin-top: 2.3rem;
+  margin-inline: auto;
+}
+
+.hero-meta {
+  font-family: var(--fuente-mono);
+  font-size: 0.8rem;
+  color: var(--tinta-50);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.4rem;
+}
+
+@media (max-width: 40rem) {
+  .hero {
+    padding-block: 3.5rem 4.5rem;
+  }
+
+  .hero .contenedor {
+    padding-inline: 0.75rem;
+  }
+
+  .hero h1,
+  .hero-intro {
+    justify-self: stretch;
+    text-align: left;
+  }
+
+  .hero h1 {
+    width: 100%;
+    max-width: none;
+    font-size: clamp(3.25rem, 14.5vw, 4.5rem);
+  }
+
+  .hero-acciones {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-acciones .btn {
+    width: 100%;
+  }
+}
+
+.caso-hero {
+  padding-block: 5rem 6rem;
+  display: grid;
+  gap: 3rem;
+}
+
+@media (min-width: 64rem) {
+  .caso-hero {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    align-items: center;
+    gap: 4rem;
+  }
+}
+
+.caso-hero h1 {
+  font-size: clamp(2.2rem, 4.6vw, 3.4rem);
+  font-weight: 800;
+  margin-block: 1.3rem 1.4rem;
+}
+
+.caso-hero .hero-intro {
+  max-width: 32rem;
+}

@@ -1,0 +1,50 @@
+.pie {
+  border-top: 1px solid var(--linea-suave);
+  padding-block: 2.4rem;
+}
+
+.pie-fila {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  text-align: center;
+}
+
+.pie-fila p {
+  font-family: var(--fuente-mono);
+  font-size: 0.78rem;
+  color: var(--tinta-50);
+}
+
+.pie-enlaces {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.6rem;
+}
+
+.pie-enlaces a {
+  font-family: var(--fuente-mono);
+  font-size: 0.82rem;
+  color: var(--tinta-70);
+  text-decoration: none;
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.pie-enlaces a:hover,
+.pie-enlaces a:focus-visible {
+  color: var(--azul);
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+@media (min-width: 52rem) {
+  .pie-fila {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}

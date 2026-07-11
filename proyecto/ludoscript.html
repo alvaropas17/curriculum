@@ -403,13 +403,19 @@
     const lightbox = document.querySelector('#lightbox');
     const lightboxImagen = document.querySelector('#lightbox-imagen');
     let indiceActivo = 0;
+    let temporizadorGaleria;
+    const intervaloGaleria = 3600;
+    const movimientoReducido = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     capturas.forEach((captura, indice) => {
       const punto = document.createElement('button');
       punto.className = 'galeria-punto' + (indice === 0 ? ' activo' : '');
       punto.type = 'button';
       punto.setAttribute('aria-label', 'Ver captura ' + captura.etiqueta);
-      punto.addEventListener('click', () => mostrarCaptura(indice));
+      punto.addEventListener('click', () => {
+        mostrarCaptura(indice);
+        reiniciarAutoplayGaleria();
+      });
       galeriaPuntos.appendChild(punto);
     });
 
@@ -432,16 +438,48 @@
       }, 120);
     };
 
-    document.querySelector('#galeria-anterior').addEventListener('click', () => mostrarCaptura(indiceActivo - 1));
-    document.querySelector('#galeria-siguiente').addEventListener('click', () => mostrarCaptura(indiceActivo + 1));
+    const detenerAutoplayGaleria = () => {
+      window.clearInterval(temporizadorGaleria);
+    };
+
+    const iniciarAutoplayGaleria = () => {
+      if (movimientoReducido || lightbox.classList.contains('abierto')) return;
+      detenerAutoplayGaleria();
+      temporizadorGaleria = window.setInterval(() => {
+        mostrarCaptura(indiceActivo + 1);
+      }, intervaloGaleria);
+    };
+
+    const reiniciarAutoplayGaleria = () => {
+      detenerAutoplayGaleria();
+      iniciarAutoplayGaleria();
+    };
+
+    const galeriaMarco = document.querySelector('.galeria-marco');
+    const mostrarCapturaManual = (indice) => {
+      mostrarCaptura(indice);
+      reiniciarAutoplayGaleria();
+    };
+
+    document.querySelector('#galeria-anterior').addEventListener('click', () => mostrarCapturaManual(indiceActivo - 1));
+    document.querySelector('#galeria-siguiente').addEventListener('click', () => mostrarCapturaManual(indiceActivo + 1));
+    galeriaMarco.addEventListener('mouseenter', detenerAutoplayGaleria);
+    galeriaMarco.addEventListener('mouseleave', iniciarAutoplayGaleria);
+    galeriaMarco.addEventListener('focusin', detenerAutoplayGaleria);
+    galeriaMarco.addEventListener('focusout', iniciarAutoplayGaleria);
+    galeriaPuntos.addEventListener('mouseenter', detenerAutoplayGaleria);
+    galeriaPuntos.addEventListener('mouseleave', iniciarAutoplayGaleria);
+    iniciarAutoplayGaleria();
 
     // Lightbox
     const cerrarLightbox = () => {
       lightbox.classList.remove('abierto');
       document.body.style.overflow = '';
+      iniciarAutoplayGaleria();
     };
 
     galeriaImagen.addEventListener('click', () => {
+      detenerAutoplayGaleria();
       lightbox.classList.add('abierto');
       document.body.style.overflow = 'hidden';
     });
@@ -466,7 +504,7 @@
     });
 
     // Revelado al hacer scroll
-    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!movimientoReducido) {
       const observador = new IntersectionObserver((entradas) => {
         entradas.forEach((entrada) => {
           if (entrada.isIntersecting) {

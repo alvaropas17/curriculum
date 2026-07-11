@@ -1,0 +1,52 @@
+.contacto {
+  background: var(--tinta);
+  color: var(--papel);
+  padding-block: 6.5rem;
+}
+
+.contacto .etiqueta {
+  color: rgba(246, 244, 238, 0.55);
+}
+
+.contacto .etiqueta::before {
+  color: var(--marca);
+}
+
+.contacto h2 {
+  font-size: clamp(2.1rem, 4.6vw, 3.4rem);
+  font-weight: 800;
+  max-width: 20ch;
+}
+
+.contacto .marca {
+  color: var(--tinta);
+}
+
+.contacto p {
+  color: rgba(246, 244, 238, 0.75);
+  max-width: 34rem;
+  margin-top: 1.4rem;
+}
+
+.contacto .acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  margin-top: 2.4rem;
+}
+
+.contacto .correo {
+  font-family: var(--fuente-mono);
+  font-size: 0.85rem;
+  color: rgba(246, 244, 238, 0.6);
+  margin-top: 2rem;
+}
+
+.contacto .correo a {
+  color: var(--papel);
+  text-underline-offset: 0.3em;
+}
+
+.contacto .correo a:hover {
+  color: var(--marca);
+}

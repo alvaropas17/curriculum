@@ -1,0 +1,236 @@
+.rejilla-tarjetas {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+
+.tarjeta {
+  background: var(--papel);
+  border: 1.5px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 1.9rem 1.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tarjeta:hover {
+  border-color: var(--tinta);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px -24px rgba(25, 23, 19, 0.45);
+}
+
+.tarjeta h3 {
+  font-size: 1.3rem;
+  font-weight: 640;
+}
+
+.tarjeta p {
+  color: var(--tinta-70);
+  font-size: 0.98rem;
+}
+
+.tarjeta .campo {
+  font-family: var(--fuente-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--azul);
+}
+
+.tarjeta ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+  font-family: var(--fuente-mono);
+  font-size: 0.82rem;
+  color: var(--tinta-70);
+  margin-top: auto;
+}
+
+.tarjeta li::before {
+  content: "+ ";
+  color: var(--azul);
+}
+
+.fichas {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 40rem) {
+  .fichas {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ficha {
+  border: 1.5px solid var(--linea);
+  border-radius: var(--radio);
+  background: rgba(255, 255, 255, 0.5);
+  padding: 1.4rem 1.3rem;
+}
+
+.ficha .campo {
+  font-family: var(--fuente-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--azul);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.ficha p {
+  font-size: 0.95rem;
+  color: var(--tinta-70);
+}
+
+.pasos {
+  display: grid;
+  gap: 1.25rem;
+  counter-reset: paso;
+}
+
+@media (min-width: 52rem) {
+  .pasos {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.paso {
+  counter-increment: paso;
+  border: 1.5px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--papel);
+  padding: 1.6rem 1.4rem;
+}
+
+.paso::before {
+  content: "paso " counter(paso, decimal-leading-zero);
+  font-family: var(--fuente-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--azul);
+}
+
+.paso h3 {
+  font-size: 1.2rem;
+  font-weight: 640;
+  margin-block: 0.7rem 0.6rem;
+}
+
+.paso p {
+  font-size: 0.95rem;
+  color: var(--tinta-70);
+}
+
+.decisiones {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.1rem;
+  counter-reset: decision;
+}
+
+.decision {
+  counter-increment: decision;
+  border: 1.5px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--papel);
+  padding: 1.7rem 1.6rem;
+  display: grid;
+  gap: 0.7rem;
+}
+
+@media (min-width: 52rem) {
+  .decision {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 1.6rem;
+  }
+}
+
+.decision::before {
+  content: counter(decision, decimal-leading-zero);
+  font-family: var(--fuente-display);
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1.3px var(--tinta);
+  line-height: 1;
+}
+
+.decision h3 {
+  font-size: 1.25rem;
+  font-weight: 640;
+  margin-bottom: 0.6rem;
+}
+
+.decision p {
+  font-size: 0.98rem;
+  color: var(--tinta-70);
+}
+
+.decision p + p {
+  margin-top: 0.55rem;
+}
+
+.decision strong {
+  font-family: var(--fuente-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--azul);
+}
+
+.aprendizajes {
+  display: grid;
+  gap: 1.9rem;
+  max-width: 40rem;
+}
+
+.aprendizaje {
+  border-left: 3px solid var(--marca);
+  padding-left: 1.3rem;
+}
+
+.aprendizaje h3 {
+  font-size: 1.2rem;
+  font-weight: 640;
+  margin-bottom: 0.45rem;
+}
+
+.aprendizaje p {
+  color: var(--tinta-70);
+  font-size: 0.98rem;
+}
+
+.contribucion {
+  margin-top: 2.5rem;
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--radio);
+  background: rgba(255, 216, 77, 0.16);
+  padding: 1.8rem 1.7rem;
+}
+
+.contribucion .campo {
+  font-family: var(--fuente-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--tinta);
+  display: block;
+  margin-bottom: 0.7rem;
+}
+
+.contribucion p {
+  color: var(--tinta-70);
+  font-size: 1.05rem;
+  max-width: 46rem;
+}

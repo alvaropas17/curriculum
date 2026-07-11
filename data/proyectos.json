@@ -1,0 +1,315 @@
+[
+  {
+    "slug": "ludoscript",
+    "titulo": "LudoScript",
+    "tipo": "proyecto",
+    "etiqueta": "educación · ia",
+    "descripcion_corta": "Plataforma educativa full-stack que utiliza IA para detectar y reforzar las áreas débiles de aprendizaje de cada usuario y potenciar sus fortalezas mediante contenido dinámico. Diseñé la arquitectura del backend, la integración con la API de Gemini y la comunicación en tiempo real con Socket.io.",
+    "tags": ["vue 3", "express", "postgresql", "gemini api", "socket.io"],
+    "tags_acento": ["gemini api", "socket.io"],
+    "demo_url": "https://ludoscript.vercel.app/",
+    "nav_suffix": "caso: LudoScript",
+    "secciones": [
+      {
+        "tipo": "hero",
+        "etiqueta": "caso de estudio · ia educativa",
+        "titulo_html": "LudoScript: aprender con <span class=\"marca marca-anim\">práctica guiada</span>, no con preguntas al azar.",
+        "intro": "Plataforma educativa full-stack para practicar con quizzes, flashcards, seguimiento de progreso y revisión de errores. Mi trabajo se centró en el backend, la integración con IA para generar preguntas y el modo multijugador en tiempo real.",
+        "tags": ["vue 3", "express", "postgresql", "gemini api", "socket.io"],
+        "tags_acento": ["gemini api", "socket.io"],
+        "cta_primario": { "texto": "Probar demo", "url": "https://ludoscript.vercel.app/", "externo": true },
+        "cta_secundario": { "texto": "Ver decisiones", "url": "#decisiones" },
+        "media": {
+          "tipo": "ventana-img",
+          "url_texto": "ludoscript.vercel.app",
+          "img_src": "img/ludoscript-home.png",
+          "img_alt": "Vista principal de LudoScript",
+          "url": "https://ludoscript.vercel.app/",
+          "externo": true
+        }
+      },
+      {
+        "tipo": "dos-columnas",
+        "id": "problema",
+        "clase_fondo": "alt",
+        "etiqueta": "punto de partida",
+        "titulo": "El problema",
+        "col_izq": "titulo",
+        "col_der": {
+          "tipo": "mixto",
+          "parrafos": "<p>Muchas plataformas educativas miden aciertos, pero <strong>no ayudan a entender por qué se falla</strong> ni qué debería repasarse después. LudoScript nace para convertir la práctica en una herramienta de diagnóstico.</p>",
+          "tarjetas": [
+            { "campo": "síntoma 1", "titulo": "Falsa seguridad", "texto": "Acertar preguntas no siempre significa comprender la base del tema." },
+            { "campo": "síntoma 2", "titulo": "Sin dirección", "texto": "Tras practicar, el usuario necesita saber qué repasar y por qué." },
+            { "campo": "síntoma 3", "titulo": "Poca adaptación", "texto": "Cada estudiante tropieza en conceptos distintos y a ritmos distintos." }
+          ]
+        }
+      },
+      {
+        "tipo": "centrada",
+        "id": "flujo",
+        "clase_fondo": "",
+        "etiqueta": "flujo de aprendizaje",
+        "titulo": "Del temario al diagnóstico",
+        "texto_suave": "El flujo está preparado para que la IA genere preguntas que refuercen los puntos débiles del usuario y le hagan avanzar con <span class=\"marca\">práctica guiada</span>, no con ejercicios aleatorios.",
+        "contenido": {
+          "tipo": "pasos",
+          "items": [
+            { "titulo": "Temario", "texto": "El contenido funciona como base estructurada para generar práctica coherente y alineada con cada tema." },
+            { "titulo": "Diagnóstico", "texto": "El sistema registra aciertos, errores y patrones para detectar qué conceptos necesitan refuerzo." },
+            { "titulo": "Generación IA", "texto": "La integración con IA prepara preguntas nuevas enfocadas en los puntos débiles del usuario." },
+            { "titulo": "Avance", "texto": "El alumno practica, recibe feedback y vuelve al recorrido con objetivos de repaso más claros." }
+          ]
+        }
+      },
+      {
+        "tipo": "galeria",
+        "id": "capturas",
+        "clase_fondo": "alt",
+        "etiqueta": "producto en uso",
+        "titulo": "Capturas del recorrido",
+        "texto_suave": "Las pantallas principales: inicio, quiz, resultados, progreso y aprendizaje. Pulsa una captura para ampliarla.",
+        "capturas": [
+          { "src": "img/ludoscript-home.png", "etiqueta": "Home", "alt": "LudoScript Home", "texto": "Home — la puerta de entrada a la plataforma." },
+          { "src": "img/ludoscript-quiz.png", "etiqueta": "Quiz", "alt": "Quiz de LudoScript", "texto": "Quiz — preparación y práctica con preguntas." },
+          { "src": "img/ludoscript-resultado-final.png", "etiqueta": "Resultados", "alt": "Resultado final de LudoScript", "texto": "Resultados — feedback tras completar la sesión." },
+          { "src": "img/progreso.png", "etiqueta": "Progreso", "alt": "Panel de progreso de LudoScript", "texto": "Progreso — seguimiento de evolución y puntos débiles." },
+          { "src": "img/aprendizaje.png", "etiqueta": "Aprendizaje", "alt": "Pantalla de aprendizaje de LudoScript", "texto": "Aprendizaje — repaso de conceptos dentro del flujo." }
+        ]
+      },
+      {
+        "tipo": "dos-columnas",
+        "id": "arquitectura",
+        "clase_fondo": "",
+        "etiqueta": "arquitectura",
+        "titulo": "Full-stack pensado para crecer",
+        "texto_suave": "Mi aportación principal estuvo en el backend: API, persistencia, integración con IA y tiempo real.",
+        "col_izq": "titulo",
+        "col_der": {
+          "tipo": "mixto",
+          "tarjetas": [
+            { "campo": "frontend", "titulo": "Vue 3 / Tailwind", "texto": "Interfaz centrada en práctica, lectura clara y feedback visual." },
+            { "campo": "backend", "titulo": "Node / Express", "texto": "API para usuarios, actividades, contenido y resultados." },
+            { "campo": "datos", "titulo": "PostgreSQL / Supabase", "texto": "Persistencia de preguntas, flashcards, perfiles y progreso." },
+            { "campo": "ia y tiempo real", "titulo": "Gemini API / Socket.IO", "texto": "Generación de preguntas con Gemini y partidas multijugador sincronizadas con Socket.IO." }
+          ],
+          "contribucion": { "campo": "mi contribución", "texto": "Me encargué sobre todo del backend y de conectar la IA con el flujo de aprendizaje: generación de preguntas, refuerzo de puntos débiles y coordinación del modo multijugador con Socket.IO." }
+        }
+      },
+      {
+        "tipo": "centrada",
+        "id": "decisiones",
+        "clase_fondo": "alt",
+        "etiqueta": "decisiones técnicas · trade-offs",
+        "titulo": "Qué elegí y qué costaba",
+        "texto_suave": "Organizadas por impacto: qué problema resolvía cada decisión, qué opción elegí y qué coste asumía.",
+        "contenido": {
+          "tipo": "decisiones",
+          "items": [
+            { "titulo": "Separar frontend, backend y datos", "lineas": ["<strong>decisión</strong> — Vue 3 para la interfaz, Express para la API y PostgreSQL/Supabase para persistencia.", "<strong>trade-off</strong> — Exige más coordinación inicial, pero permite evolucionar usuarios, progreso y funcionalidades en tiempo real sin mezclar responsabilidades."] },
+            { "titulo": "Usar IA para generar práctica útil", "lineas": ["<strong>decisión</strong> — Integrar Gemini API para crear preguntas orientadas al temario y al diagnóstico del usuario.", "<strong>trade-off</strong> — Aporta personalización, pero obliga a controlar prompts, validación, coste por llamada y calidad de las respuestas generadas."] },
+            { "titulo": "Convertir errores en datos de aprendizaje", "lineas": ["<strong>decisión</strong> — Registrar resultados, fallos y evolución para alimentar el diagnóstico de puntos débiles.", "<strong>trade-off</strong> — Requiere más modelado y pantallas, pero transforma el quiz en una herramienta de avance y no solo en una nota final."] },
+            { "titulo": "Multijugador con Socket.IO", "lineas": ["<strong>decisión</strong> — Incorporar comunicación en tiempo real para coordinar sesiones multijugador.", "<strong>trade-off</strong> — Añade complejidad de sincronización y estados compartidos, pero hace posible una experiencia más social y dinámica."] },
+            { "titulo": "Demo estable antes que libertad total", "lineas": ["<strong>decisión</strong> — Priorizar un recorrido de demo claro y controlado para enseñar bien el producto.", "<strong>trade-off</strong> — Reduce libertad en la versión pública, pero evita que una función experimental opaque el valor principal del proyecto."] }
+          ]
+        }
+      },
+      {
+        "tipo": "dos-columnas",
+        "id": "aprendizajes",
+        "clase_fondo": "",
+        "etiqueta": "aprendizajes",
+        "titulo": "Lo que me llevo",
+        "col_izq": "titulo",
+        "col_der": {
+          "tipo": "aprendizajes",
+          "items": [
+            { "titulo": "Coste y fiabilidad de IA", "texto": "Optimizar prompts, validar respuestas y evitar llamadas redundantes fue tan importante como integrar la API." },
+            { "titulo": "Producto antes que tecnología", "texto": "La IA no debía ser el titular vacío: el foco real era que el estudiante entendiera qué hacer después de practicar." },
+            { "titulo": "Contenido estructurado", "texto": "Preparar temario y actividades coherentes hizo que la demo fuera más clara, estable y fácil de explicar." }
+          ]
+        }
+      },
+      {
+        "tipo": "contacto",
+        "id": "demo",
+        "etiqueta": "demo",
+        "titulo_html": "Una demo pensada para enseñar <span class=\"marca\">el producto</span>, no solo la tecnología.",
+        "intro": "La versión pública muestra el flujo principal con contenido controlado: práctica, resultados, progreso y revisión.",
+        "cta_primario": { "texto": "Probar LudoScript", "url": "https://ludoscript.vercel.app/", "externo": true },
+        "cta_secundario": { "texto": "Volver al portfolio", "url": "index.html" }
+      }
+    ]
+  },
+  {
+    "slug": "procesos-ia",
+    "titulo": "Procesos con IA",
+    "tipo": "proyecto",
+    "etiqueta": "automatización · producto",
+    "descripcion_corta": "Trabajo práctico con skills, agentes y gestión del contexto de los LLMs para agilizar el rendimiento del agente en tareas de desarrollo.",
+    "tags": ["skills", "agentes", "llms"],
+    "tags_acento": [],
+    "nav_suffix": "procesos con IA",
+    "karpathy_md": "# CLAUDE.md\n\nGuías de comportamiento para reducir errores comunes al programar con IA. Combínalas con instrucciones específicas de cada proyecto.\n\n**Trade-off:** Estas guías priorizan la precaución sobre la velocidad. Para tareas triviales, usa el criterio.\n\n## 1. Pensar antes de codificar\n\n**No asumas. No escondas la confusión. Expón los trade-offs.**\n\nAntes de implementar:\n\n- Expón tus suposiciones explícitamente. Si no estás seguro, pregunta.\n- Si existen múltiples interpretaciones, preséntalas — no elijas en silencio.\n- Si existe un enfoque más simple, dilo. Rechaza cuando sea necesario.\n- Si algo no está claro, para. Nombra lo que confunde. Pregunta.\n\n## 2. Simplicidad primero\n\n**Mínimo código que resuelve el problema. Nada especulativo.**\n\n- Sin funciones más allá de lo pedido.\n- Sin abstracciones para código de un solo uso.\n- Sin \"flexibilidad\" o \"configurabilidad\" que no se haya solicitado.\n- Sin manejo de errores para escenarios imposibles.\n- Si escribes 200 líneas y podrían ser 50, reescríbelo.\n\nPregúntate: \"¿Un ingeniero senior diría que esto es demasiado complicado?\" Si sí, simplifica.\n\n## 3. Cambios quirúrgicos\n\n**Toca solo lo que debas. Limpia solo tu propio desorden.**\n\nAl editar código existente:\n\n- No \"mejores\" código, comentarios o formato adyacente.\n- No refactorices cosas que no están rotas.\n- Respeta el estilo existente, aunque tú lo harías diferente.\n- Si notas código muerto no relacionado, menciónalo — no lo borres.\n\nCuando tus cambios creen huérfanos:\n\n- Elimina imports/variables/funciones que TUS cambios dejaron sin usar.\n- No borres código muerto preexistente a menos que te lo pidan.\n\nLa prueba: cada línea modificada debe poder trazarse directamente a la petición del usuario.\n\n## 4. Ejecución guiada por objetivos\n\n**Define criterios de éxito. Itera hasta verificarlos.**\n\nTransforma tareas en metas verificables:\n\n- \"Añadir validación\" → \"Escribir tests para entradas inválidas, luego hacer que pasen\"\n- \"Corregir el bug\" → \"Escribir un test que lo reproduzca, luego hacer que pase\"\n- \"Refactorizar X\" → \"Asegurar que los tests pasen antes y después\"\n\nPara tareas de varios pasos, indica un plan breve:\n\n```\n1. [Paso] → verificar: [comprobación]\n2. [Paso] → verificar: [comprobación]\n3. [Paso] → verificar: [comprobación]\n```\n\nUnos criterios de éxito sólidos te permiten iterar de forma independiente. Unos criterios débiles (\"haz que funcione\") requieren aclaraciones constantes.\n\n---\n\n**Estas guías funcionan si:** hay menos cambios innecesarios en los diffs, menos reescrituras por sobrecomplicación, y las preguntas de aclaración llegan antes de implementar en lugar de después de los errores.",
+    "secciones": [
+      {
+        "tipo": "hero",
+        "etiqueta": "procesos con ia · harness",
+        "titulo_html": "Un archivo <span class=\"marca marca-anim\">que enseña a la IA</span> a trabajar mejor.",
+        "intro": "Basado en el enfoque de Andrej Karpathy, he creado un archivo de instrucciones global que opencode carga en cualquier proyecto. Así la IA parte con unas guías claras sobre cómo escribir, pensar y estructurar código.",
+        "tags": ["opencode", "claude.md", "karpathy", "agentes"],
+        "tags_acento": ["claude.md"],
+        "cta_primario": { "texto": "Ver el archivo", "url": "karpathy.md", "externo": false },
+        "cta_secundario": { "texto": "Ver contenido", "url": "#contenido" },
+        "media": {
+          "tipo": "ventana-codigo-karpathy",
+          "url_texto": "~/.config/opencode/karpathy.md",
+          "principios": [
+            { "num": "01", "titulo": "Pensar antes de codificar", "texto": "No asumas. Expón los trade-offs antes de implementar." },
+            { "num": "02", "titulo": "Simplicidad primero", "texto": "Mínimo código que resuelve el problema. Nada especulativo." },
+            { "num": "03", "titulo": "Cambios quirúrgicos", "texto": "Toca solo lo que debas. No refactorices lo que no está roto." },
+            { "num": "04", "titulo": "Ejecución guiada por objetivos", "texto": "Define criterios de éxito. Itera hasta verificarlos." }
+          ]
+        }
+      },
+      {
+        "tipo": "centrada",
+        "id": "idea",
+        "clase_fondo": "alt",
+        "etiqueta": "origen",
+        "titulo": "La idea",
+        "contenido": {
+          "tipo": "parrafos-grid",
+          "parrafos": "<p>Andrej Karpathy lleva tiempo insistiendo en que <strong>el prompt lo es todo</strong>. No importa lo bueno que sea el modelo si las instrucciones son vagas o contradictorias. Un buen harness — las guías que acompañan al código— puede marcar la diferencia entre una IA que alucina y una que produce resultados sólidos.</p><p>opencode permite definir un archivo global (<code>karpathy.md</code>) que se inyecta como contexto en <strong>todos los proyectos</strong>. Así no tengo que repetir las mismas instrucciones cada vez que empiezo algo nuevo: la IA ya sabe cómo quiero que trabaje.</p>",
+          "tarjetas": [
+            { "campo": "problema", "titulo": "Instrucciones invisibles", "texto": "Cada nuevo proyecto empieza sin contexto. Hay que recordarle a la IA cómo quieres que piense y escriba." },
+            { "campo": "solución", "titulo": "Archivo global", "texto": "Un solo fichero en <code>~/.config/opencode/</code> que opencode carga siempre. Las reglas están ahí desde el primer mensaje." },
+            { "campo": "efecto", "titulo": "Consistencia", "texto": "El agente no empieza de cero: conoce mis principios de código, mi estilo y cómo manejar los trade-offs." }
+          ]
+        }
+      },
+      {
+        "tipo": "centrada",
+        "id": "archivo",
+        "clase_fondo": "",
+        "etiqueta": "configuración",
+        "titulo": "Dónde vive el archivo",
+        "texto_suave": "opencode busca instrucciones globales en una ruta específica del sistema. Basta con colocar el archivo ahí y todos los proyectos lo heredan.",
+        "contenido": {
+          "tipo": "pasos",
+          "items": [
+            { "titulo": "1. Crear el archivo", "texto": "Escribes <code>karpathy.md</code> con las guías de comportamiento que quieras: cómo abordar problemas, qué priorizar, cómo documentar." },
+            { "titulo": "2. Colocarlo en la ruta global", "texto": "Lo guardas en <code>~/.config/opencode/</code> y opencode lo carga automáticamente al iniciar cualquier proyecto." },
+            { "titulo": "3. Listo", "texto": "Cada vez que hablas con el agente, las instrucciones están presentes. Sin setup adicional, sin copiar archivos entre proyectos." }
+          ]
+        }
+      },
+      {
+        "tipo": "dos-columnas",
+        "id": "contenido",
+        "clase_fondo": "alt",
+        "etiqueta": "contenido",
+        "titulo": "Qué contiene karpathy.md",
+        "texto_suave": "Cuatro principios que reducen errores y mejoran la calidad del código generado por IA.",
+        "col_izq": "titulo",
+        "col_der": {
+          "tipo": "decisiones",
+          "items": [
+            { "titulo": "Think Before Coding", "lineas": ["<strong>qué dice</strong> — No asumas. No escondas la confusión. Explica los trade-offs antes de implementar.", "<strong>para qué sirve</strong> — Evita que la IA se lance a escribir código sin entender el contexto o sin preguntar cuando algo es ambiguo."] },
+            { "titulo": "Simplicity First", "lineas": ["<strong>qué dice</strong> — El mínimo código que resuelve el problema. Nada especulativo, nada abstracto para un solo uso.", "<strong>para qué sirve</strong> — La IA tiende a sobreingenierizar. Este principio la frena y la obliga a preguntarse si está añadiendo complejidad innecesaria."] },
+            { "titulo": "Surgical Changes", "lineas": ["<strong>qué dice</strong> — Toca solo lo que debas. No \"mejores\" código adyacente ni refactorices lo que no está roto.", "<strong>para qué sirve</strong> — Las IAs suelen reescribir más de lo necesario. Con esto limito los cambios a lo estrictamente pedido."] },
+            { "titulo": "Goal-Driven Execution", "lineas": ["<strong>qué dice</strong> — Define criterios de éxito. Itera hasta verificarlos.", "<strong>para qué sirve</strong> — Transforma instrucciones vagas en un bucle de trabajo comprobable. La IA sabe cuándo ha terminado."] }
+          ]
+        }
+      },
+      {
+        "tipo": "dos-columnas",
+        "id": "resultado",
+        "clase_fondo": "",
+        "etiqueta": "resultado",
+        "titulo": "Menos vueltas, más acierto",
+        "col_izq": "titulo",
+        "col_der": {
+          "tipo": "aprendizajes",
+          "items": [
+            { "titulo": "La IA pregunta antes de escribir", "texto": "Cuando algo no está claro, el agente lo dice en lugar de asumir. Eso evita iteraciones desperdiciadas y código que no pedí." },
+            { "titulo": "Menos sobreingeniería", "texto": "El archivo frena las abstracciones innecesarias. El resultado es código más legible y fácil de mantener." },
+            { "titulo": "Consistencia entre proyectos", "texto": "Da igual si empiezo un script pequeño o una app completa: el agente parte con la misma base de criterios." },
+            { "titulo": "Iteraciones más cortas", "texto": "Al tener objetivos claros desde el principio, cada ciclo de feedback produce cambios concretos y medibles." }
+          ]
+        }
+      },
+      {
+        "tipo": "contacto",
+        "id": "CTA",
+        "etiqueta": "el archivo",
+        "titulo_html": "Un <span class=\"marca\">harness</span> que no tocas, pero siempre está.",
+        "intro": "El archivo global de opencode es una de esas configuraciones que hacen que todo funcione mejor sin que tengas que acordarte. Lo pones una vez y la IA lo usa siempre.",
+        "cta_primario": { "texto": "Ver karpathy.md", "url": "karpathy.md", "externo": false },
+        "cta_secundario": { "texto": "Volver al portfolio", "url": "index.html" }
+      }
+    ]
+  },
+  {
+    "slug": "plantillas-itop",
+    "titulo": "Rediseño de plantillas corporativas en iTop",
+    "tipo": "experiencia",
+    "etiqueta": "experiencia profesional · diseño",
+    "descripcion_corta": "Rediseño y optimización de plantillas en iTop, orientados a reforzar la identidad visual corporativa, mejorar la coherencia de marca y elevar la calidad de la comunicación con el usuario.",
+    "tags": ["diseño", "identidad corporativa", "comunicación"],
+    "tags_acento": [],
+    "nav_suffix": "caso: plantillas iTop",
+    "secciones": [
+      {
+        "tipo": "hero",
+        "etiqueta": "experiencia profesional · diseño",
+        "titulo_html": "Rediseño de <span class=\"marca marca-anim\">plantillas corporativas</span> en iTop.",
+        "intro": "Revisión y rediseño de plantillas internas para reforzar la identidad visual corporativa, mejorar la coherencia de marca y elevar la calidad de la comunicación con el usuario.",
+        "tags": ["diseño", "identidad corporativa", "comunicación"],
+        "tags_acento": [],
+        "cta_primario": null,
+        "cta_secundario": null,
+        "media": null
+      },
+      {
+        "tipo": "dos-columnas",
+        "id": "contexto",
+        "clase_fondo": "alt",
+        "etiqueta": "punto de partida",
+        "titulo": "El problema",
+        "col_izq": "titulo",
+        "col_der": {
+          "tipo": "parrafos",
+          "parrafos": "<p>Las plantillas existentes en iTop carecían de una jerarquía visual clara. La información importante se perdía entre bloques de texto sin estructura, los encabezados no guiaban la lectura y la identidad de marca se diluía al no aplicarse de forma consistente entre comunicaciones.</p><p>El resultado era una comunicación que no transmitía profesionalidad ni ayudaba al usuario a encontrar lo que necesitaba con rapidez.</p>"
+        }
+      },
+      {
+        "tipo": "centrada",
+        "id": "proceso",
+        "clase_fondo": "",
+        "etiqueta": "enfoque",
+        "titulo": "Qué hice",
+        "contenido": {
+          "tipo": "tarjetas",
+          "items": [
+            { "campo": "1", "titulo": "Análisis", "texto": "Revisión de las plantillas existentes para identificar problemas de jerarquía, legibilidad y coherencia con la identidad visual de la empresa." },
+            { "campo": "2", "titulo": "Reorganización", "texto": "Reestructuración de la información para que lo más importante fuera lo primero, con bloques de contenido claros y llamadas a la acción reconocibles." },
+            { "campo": "3", "titulo": "Adaptación visual", "texto": "Ajuste de tipografías, espacios, encabezados y elementos gráficos para alinear cada plantilla con la imagen corporativa y mejorar la experiencia de lectura." }
+          ]
+        }
+      },
+      {
+        "tipo": "dos-columnas",
+        "id": "criterios",
+        "clase_fondo": "alt",
+        "etiqueta": "criterio",
+        "titulo": "Cómo lo abordé",
+        "col_izq": "titulo",
+        "col_der": {
+          "tipo": "parrafos",
+          "parrafos": "<p>Más allá del componente visual, trabajé con tres principios: <strong>legibilidad</strong> — que el texto se pudiera escanear en segundos; <strong>consistencia</strong> — que todas las comunicaciones se sintieran parte de la misma marca; y <strong>prioridad</strong> — que el usuario identificara al instante la información más importante de cada plantilla.</p><p>Cada cambio respondía a un problema de comunicación concreto: un encabezado que no orientaba, un bloque de texto que mezclaba instrucciones con contexto, una llamada a la acción que pasaba desapercibida.</p><p>Por motivos de confidencialidad no puedo mostrar capturas de las plantillas finales, pero el proceso, los criterios aplicados y los problemas que se buscaban resolver reflejan una forma de trabajo que aplico en cualquier proyecto: <strong>entender primero qué falla, diseñar la solución y validar que comunica mejor.</strong></p>"
+        }
+      }
+    ]
+  }
+]

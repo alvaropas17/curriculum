@@ -1,0 +1,22 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  font-family: var(--fuente-mono);
+  font-size: 0.78rem;
+  line-height: 1;
+  color: var(--tinta-70);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  padding: 0.5rem 0.65rem;
+  background: rgba(255, 255, 255, 0.45);
+  white-space: nowrap;
+}
+
+.tag-acento {
+  border-color: var(--azul);
+  color: var(--azul);
+}

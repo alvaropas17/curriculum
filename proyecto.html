@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script src="scripts/analytics-consent.js" defer></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Proyecto — Álvaro Pastor</title>
+    <meta name="description" content="Caso de estudio del portfolio de Álvaro Pastor." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="styles/portfolio.css" />
+    <style>
+        .btn-copiar {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin-left: auto;
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.7rem;
+            font-family: inherit;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .btn-copiar:hover {
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .btn-copiar.copiado {
+            color: #3fb950;
+            border-color: #3fb950;
+        }
+
+        .karpathy-preview {
+            background: #0f1117;
+            color: #e6edf3;
+            padding: 1.6rem 1.8rem;
+            font-size: 0.82rem;
+            line-height: 1.6;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .kp-header {
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.9rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .kp-titulo {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #58a6ff;
+            margin-bottom: 0.25rem;
+        }
+
+        .kp-sub {
+            display: block;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.78rem;
+            max-width: 90%;
+        }
+
+        .kp-alerta {
+            background: rgba(187, 128, 9, 0.12);
+            border-left: 3px solid #d29922;
+            padding: 0.65rem 1rem;
+            border-radius: 4px;
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.2rem;
+        }
+
+        .kp-alerta strong {
+            color: #d29922;
+        }
+
+        .kp-principios {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .kp-principio {
+            display: flex;
+            gap: 0.8rem;
+            align-items: flex-start;
+        }
+
+        .kp-num {
+            flex-shrink: 0;
+            width: 1.6rem;
+            height: 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(88, 166, 255, 0.1);
+            color: #58a6ff;
+            border-radius: 4px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .kp-principio strong {
+            display: block;
+            color: #fff;
+            font-size: 0.82rem;
+            margin-bottom: 0.05rem;
+        }
+
+        .kp-principio p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.75rem;
+        }
+
+        .estado-carga {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            font-family: var(--fuente-mono);
+            color: var(--tinta-50);
+        }
+
+        .estado-error {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .estado-error h2 {
+            font-size: 1.4rem;
+        }
+
+        .estado-error p {
+            color: var(--tinta-50);
+        }
+    </style>
+</head>
+
+<body id="top">
+    <nav class="nav">
+        <div class="contenedor nav-fila">
+            <a class="nav-marca" href="index.html">Álvaro Pastor<span id="nav-suffix"></span></a>
+            <div class="nav-enlaces" id="nav-enlaces"></div>
+            <a id="nav-cta" class="btn btn-primario nav-cta" href="#" target="_blank" rel="noopener noreferrer"></a>
+            <button id="boton-menu" class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <div id="menu-movil" class="menu-movil"></div>
+    </nav>
+
+    <main id="contenido-principal">
+        <div class="estado-carga">Cargando caso de estudio...</div>
+    </main>
+
+    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Captura ampliada">
+        <button id="lightbox-cerrar" class="lightbox-cerrar" type="button" aria-label="Cerrar imagen ampliada">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="m3 3 10 10M13 3 3 13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+            </svg>
+        </button>
+        <button class="flecha anterior" id="lightbox-anterior" type="button" aria-label="Ver captura anterior">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+        <img id="lightbox-imagen" src="" alt="" />
+        <button class="flecha siguiente" id="lightbox-siguiente" type="button" aria-label="Ver captura siguiente">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
+    </div>
+
+    <footer class="pie" id="pie-pagina" style="display:none;">
+        <div class="contenedor pie-fila">
+            <p id="pie-texto"></p>
+            <div class="pie-enlaces">
+                <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" rel="noopener">LinkedIn</a>
+                <a href="https://github.com/alvaropas17/alvaropas17" rel="noopener">GitHub</a>
+                <a href="mailto:alvpastor17@gmail.com">Email</a>
+                <a href="#top">Arriba</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            try {
+            var href = window.location.href;
+            var search = window.location.search;
+            if (!search && window.location.hash && window.location.hash.indexOf('?') !== -1) {
+                search = window.location.hash.substring(window.location.hash.indexOf('?'));
+            }
+            var params = new URLSearchParams(search);
+            var slug = params.get('slug');
+
+            if (!slug) {
+                document.getElementById('contenido-principal').innerHTML =
+                    '<div class="estado-error"><h2>Proyecto no encontrado</h2><p>Falta el parametro <code>?slug=</code> en la URL.</p><p>URL actual: <code>' + href + '</code></p><a href="index.html" class="btn btn-primario">Volver al portfolio</a></div>';
+                return;
+            }
+
+            fetch('data/proyectos.json')
+                .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+                .then(function (proyectos) {
+                    var proyecto = null;
+                    for (var i = 0; i < proyectos.length; i++) {
+                        if (proyectos[i].slug === slug) { proyecto = proyectos[i]; break; }
+                    }
+                    if (!proyecto) {
+                        document.getElementById('contenido-principal').innerHTML =
+                            '<div class="estado-error"><h2>Proyecto no encontrado</h2><p>No existe un proyecto con slug <code>' + slug + '</code>.</p><a href="index.html" class="btn btn-primario">Volver al portfolio</a></div>';
+                        return;
+                    }
+                    renderizar(proyecto);
+                })
+                .catch(function (err) {
+                    document.getElementById('contenido-principal').innerHTML =
+                        '<div class="estado-error"><h2>Error al cargar</h2><p>' + err.message + '</p><a href="index.html" class="btn btn-primario">Volver al portfolio</a></div>';
+                });
+
+            function renderizar(proyecto) {
+                document.title = proyecto.titulo + ' — Caso de estudio · Álvaro Pastor';
+                var metaDesc = document.querySelector('meta[name="description"]');
+                if (metaDesc) metaDesc.setAttribute('content', proyecto.descripcion_corta);
+
+                document.getElementById('nav-suffix').textContent = '— ' + proyecto.nav_suffix;
+
+                var idsSecciones = [];
+                proyecto.secciones.forEach(function (sec) {
+                    if (sec.id) idsSecciones.push(sec.id);
+                });
+
+                var navEnlacesHTML = idsSecciones.map(function (id) {
+                    return '<a href="#' + id + '">' + id + '</a>';
+                }).join('');
+                document.getElementById('nav-enlaces').innerHTML = navEnlacesHTML;
+
+                var navCta = document.getElementById('nav-cta');
+                var heroSec = proyecto.secciones[0];
+                if (heroSec && heroSec.tipo === 'hero' && heroSec.cta_primario) {
+                    navCta.textContent = heroSec.cta_primario.texto;
+                    navCta.href = heroSec.cta_primario.url;
+                    if (heroSec.cta_primario.externo) {
+                        navCta.setAttribute('target', '_blank');
+                        navCta.setAttribute('rel', 'noopener noreferrer');
+                    } else {
+                        navCta.removeAttribute('target');
+                        navCta.removeAttribute('rel');
+                    }
+                    navCta.style.display = '';
+                } else {
+                    navCta.style.display = 'none';
+                }
+
+                var menuMovilHTML = idsSecciones.map(function (id) {
+                    return '<a href="#' + id + '">' + id + '</a>';
+                }).join('') + '<a href="index.html">← volver al portfolio</a>';
+                document.getElementById('menu-movil').innerHTML = menuMovilHTML;
+
+                var seccionesHTML = proyecto.secciones.map(function (sec) { return renderizarSeccion(sec, proyecto); }).join('');
+                document.getElementById('contenido-principal').innerHTML = seccionesHTML;
+
+                document.getElementById('pie-texto').textContent = proyecto.titulo + ' — caso de estudio · proyecto del portfolio de Álvaro Pastor.';
+                document.getElementById('pie-pagina').style.display = '';
+
+                iniciarScripts(proyecto, idsSecciones);
+            }
+
+            function renderizarSeccion(sec, proyecto) {
+                switch (sec.tipo) {
+                    case 'hero': return renderizarHero(sec);
+                    case 'dos-columnas': return renderizarDosColumnas(sec);
+                    case 'centrada': return renderizarCentrada(sec);
+                    case 'galeria': return renderizarGaleria(sec);
+                    case 'contacto': return renderizarContacto(sec, proyecto);
+                    default: return '';
+                }
+            }
+
+            function claseSeccion(sec) {
+                var clases = 'seccion';
+                if (sec.clase_fondo === 'alt') clases += ' seccion-alt';
+                return clases;
+            }
+
+            function renderizarHero(sec) {
+                var tagsHTML = renderizarTags(sec.tags, sec.tags_acento);
+                var accionesHTML = '';
+                if (sec.cta_primario) {
+                    var ext = sec.cta_primario.externo ? ' target="_blank" rel="noopener noreferrer"' : '';
+                    accionesHTML += '<a href="' + sec.cta_primario.url + '" class="btn btn-primario"' + ext + '>' + sec.cta_primario.texto +
+                        '<svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg></a>';
+                }
+                if (sec.cta_secundario) {
+                    accionesHTML += '<a href="' + sec.cta_secundario.url + '" class="btn btn-secundario">' + sec.cta_secundario.texto + '</a>';
+                }
+
+                var mediaHTML = '';
+                if (sec.media) {
+                    mediaHTML = '<div>' + renderizarMediaHero(sec.media) + '</div>';
+                }
+
+                return '<header class="contenedor caso-hero"><div>' +
+                    '<p class="etiqueta">' + sec.etiqueta + '</p>' +
+                    '<h1>' + sec.titulo_html + '</h1>' +
+                    '<p class="hero-intro">' + sec.intro + '</p>' +
+                    tagsHTML +
+                    (accionesHTML ? '<div class="hero-acciones">' + accionesHTML + '</div>' : '') +
+                    '</div>' + mediaHTML + '</header>';
+            }
+
+            function renderizarMediaHero(media) {
+                if (!media) return '';
+                switch (media.tipo) {
+                    case 'ventana-img':
+                        var ext = media.externo ? ' target="_blank" rel="noopener noreferrer"' : '';
+                        return '<div class="ventana"><div class="ventana-barra"><span class="ventana-punto"></span><span class="ventana-punto"></span><span class="ventana-punto lleno"></span><span class="ventana-url">' + media.url_texto + '</span></div>' +
+                            '<a href="' + media.url + '"' + ext + '><img src="' + media.img_src + '" alt="' + media.img_alt + '" /></a></div>';
+                    case 'ventana-codigo-karpathy':
+                        var principiosHTML = media.principios.map(function (p) {
+                            return '<div class="kp-principio"><span class="kp-num">' + p.num + '</span><div><strong>' + p.titulo + '</strong><p>' + p.texto + '</p></div></div>';
+                        }).join('');
+                        return '<div class="ventana"><div class="ventana-barra"><span class="ventana-punto"></span><span class="ventana-punto"></span><span class="ventana-punto lleno"></span><span class="ventana-url">' + media.url_texto + '</span>' +
+                            '<button id="btn-copiar" class="btn-copiar" type="button" aria-label="Copiar karpathy.md"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5" y="5" width="10" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5" stroke="currentColor" stroke-width="1.5"/></svg><span>copiar</span></button></div>' +
+                            '<div class="karpathy-preview"><div class="kp-header"><span class="kp-titulo">CLAUDE.md</span><span class="kp-sub">Guías de comportamiento para reducir errores comunes al programar con IA.</span></div>' +
+                            '<div class="kp-alerta"><strong>Trade-off:</strong> Estas guías priorizan la precaución sobre la velocidad. Para tareas triviales, usa el criterio.</div>' +
+                            '<div class="kp-principios">' + principiosHTML + '</div></div></div>';
+                    default:
+                        return '';
+                }
+            }
+
+            function renderizarTags(tags, tagsAcento) {
+                if (!tags || tags.length === 0) return '';
+                var acento = tagsAcento || [];
+                return '<div class="tags" style="margin-top: 1.6rem;">' + tags.map(function (t) {
+                    var clase = acento.indexOf(t) !== -1 ? 'tag tag-acento' : 'tag';
+                    return '<span class="' + clase + '">' + t + '</span>';
+                }).join('') + '</div>';
+            }
+
+            function renderizarDosColumnas(sec) {
+                var html = '<section class="' + claseSeccion(sec) + '"' + (sec.id ? ' id="' + sec.id + '"' : '') + '>';
+                html += '<div class="contenedor dos-columnas revelar">';
+                html += '<div class="col-titulo"><p class="etiqueta">' + sec.etiqueta + '</p><h2 class="titulo-seccion">' + sec.titulo + '</h2>';
+                if (sec.texto_suave) html += '<p class="texto-suave" style="margin-top: 1rem;">' + sec.texto_suave + '</p>';
+                html += '</div><div>';
+
+                var der = sec.col_der;
+                switch (der.tipo) {
+                    case 'parrafos':
+                        html += '<div class="parrafos">' + der.parrafos + '</div>';
+                        break;
+                    case 'aprendizajes':
+                        html += '<div class="aprendizajes">' + der.items.map(function (item) {
+                            return '<div class="aprendizaje"><h3>' + item.titulo + '</h3><p>' + item.texto + '</p></div>';
+                        }).join('') + '</div>';
+                        break;
+                    case 'decisiones':
+                        html += '<ol class="decisiones">' + der.items.map(function (item) {
+                            return '<li class="decision"><div><h3>' + item.titulo + '</h3>' + item.lineas.map(function (l) { return '<p>' + l + '</p>'; }).join('') + '</div></li>';
+                        }).join('') + '</ol>';
+                        break;
+                    case 'mixto':
+                        if (der.parrafos) html += '<div class="parrafos">' + der.parrafos + '</div>';
+                        if (der.tarjetas) {
+                            html += '<div class="rejilla-tarjetas" style="margin-top: 2rem;">' + der.tarjetas.map(function (t) {
+                                return '<article class="tarjeta"><span class="campo">' + t.campo + '</span><h3>' + t.titulo + '</h3><p>' + t.texto + '</p></article>';
+                            }).join('') + '</div>';
+                        }
+                        if (der.contribucion) {
+                            html += '<div class="contribucion"><span class="campo">' + der.contribucion.campo + '</span><p>' + der.contribucion.texto + '</p></div>';
+                        }
+                        break;
+                }
+
+                html += '</div></div></section>';
+                return html;
+            }
+
+            function renderizarCentrada(sec) {
+                var html = '<section class="' + claseSeccion(sec) + '"' + (sec.id ? ' id="' + sec.id + '"' : '') + '>';
+                html += '<div class="contenedor revelar">';
+                html += '<p class="etiqueta">' + sec.etiqueta + '</p>';
+                html += '<h2 class="titulo-seccion">' + sec.titulo + '</h2>';
+                if (sec.texto_suave) html += '<p class="texto-suave" style="max-width: 38rem; margin-block: 1rem 2.6rem;">' + sec.texto_suave + '</p>';
+
+                var cont = sec.contenido;
+                if (cont) {
+                    switch (cont.tipo) {
+                        case 'pasos':
+                            html += '<div class="pasos">' + cont.items.map(function (item) {
+                                return '<article class="paso"><h3>' + item.titulo + '</h3><p>' + item.texto + '</p></article>';
+                            }).join('') + '</div>';
+                            break;
+                        case 'tarjetas':
+                            html += '<div class="rejilla-tarjetas" style="margin-top: 2rem;">' + cont.items.map(function (item) {
+                                return '<article class="tarjeta"><span class="campo">' + item.campo + '</span><h3>' + item.titulo + '</h3><p>' + item.texto + '</p></article>';
+                            }).join('') + '</div>';
+                            break;
+                        case 'decisiones':
+                            html += '<ol class="decisiones">' + cont.items.map(function (item) {
+                                return '<li class="decision"><div><h3>' + item.titulo + '</h3>' + item.lineas.map(function (l) { return '<p>' + l + '</p>'; }).join('') + '</div></li>';
+                            }).join('') + '</ol>';
+                            break;
+                        case 'parrafos-grid':
+                            html += '<div style="margin-top: 1.6rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2.4rem; align-items: start;">' +
+                                '<div class="parrafos">' + cont.parrafos + '</div>' +
+                                '<div style="display: flex; flex-direction: column; gap: 1.4rem;">' +
+                                cont.tarjetas.map(function (t) {
+                                    return '<article class="tarjeta" style="margin: 0;"><span class="campo">' + t.campo + '</span><h3>' + t.titulo + '</h3><p>' + t.texto + '</p></article>';
+                                }).join('') + '</div></div>';
+                            break;
+                    }
+                }
+
+                html += '</div></section>';
+                return html;
+            }
+
+            function renderizarGaleria(sec) {
+                var html = '<section class="' + claseSeccion(sec) + '"' + (sec.id ? ' id="' + sec.id + '"' : '') + '>';
+                html += '<div class="contenedor revelar">';
+                html += '<p class="etiqueta">' + sec.etiqueta + '</p>';
+                html += '<h2 class="titulo-seccion">' + sec.titulo + '</h2>';
+                if (sec.texto_suave) html += '<p class="texto-suave" style="max-width: 36rem; margin-block: 1rem 2.4rem;">' + sec.texto_suave + '</p>';
+                html += '<div style="max-width: 60rem; margin-inline: auto;">';
+                html += '<div class="ventana galeria-marco">';
+                html += '<div class="ventana-barra"><span class="ventana-punto"></span><span class="ventana-punto"></span><span class="ventana-punto lleno"></span><span id="galeria-etiqueta" class="ventana-url">' + sec.capturas[0].etiqueta + '</span></div>';
+                html += '<button class="flecha anterior" id="galeria-anterior" type="button" aria-label="Ver captura anterior"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg></button>';
+                html += '<img id="galeria-imagen" class="galeria-img" src="' + sec.capturas[0].src + '" alt="' + sec.capturas[0].alt + '" title="Ampliar captura" />';
+                html += '<button class="flecha siguiente" id="galeria-siguiente" type="button" aria-label="Ver captura siguiente"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg></button>';
+                html += '</div>';
+                html += '<div id="galeria-puntos" class="galeria-puntos" aria-label="Selector de capturas"></div>';
+                html += '<p id="galeria-titulo" class="galeria-titulo">' + sec.capturas[0].texto + '</p>';
+                html += '</div></div></section>';
+                return html;
+            }
+
+            function renderizarContacto(sec, proyecto) {
+                var logoHTML = '';
+                if (proyecto.slug === 'ludoscript') {
+                    logoHTML = '<a href="https://ludoscript.vercel.app/" class="btn btn-claro" target="_blank" rel="noopener noreferrer">' + (sec.cta_primario ? sec.cta_primario.texto : '') + '</a>' +
+                        '<a href="index.html" class="btn btn-contorno-claro">' + (sec.cta_secundario ? sec.cta_secundario.texto : 'Volver al portfolio') + '</a>';
+                } else {
+                    var acciones = '';
+                    if (sec.cta_primario) {
+                        var ext = sec.cta_primario.externo ? ' target="_blank" rel="noopener noreferrer"' : '';
+                        acciones += '<a href="' + sec.cta_primario.url + '" class="btn btn-claro"' + ext + '>' + sec.cta_primario.texto + '</a>';
+                    }
+                    if (sec.cta_secundario) {
+                        acciones += '<a href="' + sec.cta_secundario.url + '" class="btn btn-contorno-claro">' + sec.cta_secundario.texto + '</a>';
+                    }
+                    logoHTML = acciones;
+                }
+
+                return '<section class="contacto"' + (sec.id ? ' id="' + sec.id + '"' : '') + '>' +
+                    '<div class="contenedor revelar">' +
+                    '<p class="etiqueta">' + sec.etiqueta + '</p>' +
+                    '<h2>' + sec.titulo_html + '</h2>' +
+                    '<p>' + sec.intro + '</p>' +
+                    '<div class="acciones">' + logoHTML + '</div>' +
+                    '</div></section>';
+            }
+
+            var datosGaleria = null;
+            var indiceGaleria = 0;
+            var datosKarpathy = null;
+
+            function iniciarScripts(proyecto, idsSecciones) {
+                var botonMenu = document.getElementById('boton-menu');
+                var menuMovil = document.getElementById('menu-movil');
+
+                if (botonMenu && menuMovil) {
+                    botonMenu.addEventListener('click', function () {
+                        var abierto = menuMovil.classList.toggle('abierto');
+                        botonMenu.setAttribute('aria-expanded', String(abierto));
+                    });
+                    menuMovil.querySelectorAll('a').forEach(function (enlace) {
+                        enlace.addEventListener('click', function () {
+                            menuMovil.classList.remove('abierto');
+                            botonMenu.setAttribute('aria-expanded', 'false');
+                        });
+                    });
+                }
+
+                if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    var observador = new IntersectionObserver(function (entradas) {
+                        entradas.forEach(function (entrada) {
+                            if (entrada.isIntersecting) {
+                                entrada.target.classList.add('visible');
+                                observador.unobserve(entrada.target);
+                            }
+                        });
+                    }, { threshold: 0.12 });
+                    document.querySelectorAll('.revelar').forEach(function (el) { observador.observe(el); });
+                } else {
+                    document.querySelectorAll('.revelar').forEach(function (el) { el.classList.add('visible'); });
+                }
+
+                var secGaleria = null;
+                proyecto.secciones.forEach(function (sec) { if (sec.tipo === 'galeria') secGaleria = sec; });
+                if (secGaleria) iniciarGaleria(secGaleria.capturas);
+
+                if (proyecto.karpathy_md) iniciarCopiarKarpathy(proyecto.karpathy_md);
+
+                var navEnlaces = document.querySelectorAll('.nav-enlaces a, .menu-movil a');
+                navEnlaces.forEach(function (a) {
+                    a.addEventListener('click', function (e) {
+                        var href = a.getAttribute('href');
+                        if (href && href.startsWith('#') && href.length > 1) {
+                            var target = document.querySelector(href);
+                            if (target) {
+                                e.preventDefault();
+                                target.scrollIntoView({ behavior: 'smooth' });
+                                if (menuMovil) { menuMovil.classList.remove('abierto'); botonMenu.setAttribute('aria-expanded', 'false'); }
+                            }
+                        }
+                    });
+                });
+            }
+
+            function iniciarGaleria(capturas) {
+                datosGaleria = capturas;
+                var galeriaImagen = document.getElementById('galeria-imagen');
+                var galeriaEtiqueta = document.getElementById('galeria-etiqueta');
+                var galeriaTitulo = document.getElementById('galeria-titulo');
+                var galeriaPuntos = document.getElementById('galeria-puntos');
+                var lightbox = document.getElementById('lightbox');
+                var lightboxImagen = document.getElementById('lightbox-imagen');
+
+                if (!galeriaImagen || !galeriaPuntos) return;
+
+                capturas.forEach(function (captura, indice) {
+                    var punto = document.createElement('button');
+                    punto.className = 'galeria-punto' + (indice === 0 ? ' activo' : '');
+                    punto.type = 'button';
+                    punto.setAttribute('aria-label', 'Ver captura ' + captura.etiqueta);
+                    punto.addEventListener('click', function () { mostrarCaptura(indice); });
+                    galeriaPuntos.appendChild(punto);
+                });
+
+                function mostrarCaptura(indice) {
+                    indiceGaleria = (indice + capturas.length) % capturas.length;
+                    var captura = capturas[indiceGaleria];
+                    var puntos = galeriaPuntos.querySelectorAll('.galeria-punto');
+                    puntos.forEach(function (p, i) { p.classList.toggle('activo', i === indiceGaleria); });
+                    galeriaImagen.style.opacity = '0';
+                    window.setTimeout(function () {
+                        galeriaImagen.src = captura.src;
+                        galeriaImagen.alt = captura.alt;
+                        if (galeriaEtiqueta) galeriaEtiqueta.textContent = captura.etiqueta;
+                        if (galeriaTitulo) galeriaTitulo.textContent = captura.texto;
+                        if (lightboxImagen) { lightboxImagen.src = captura.src; lightboxImagen.alt = captura.alt + ' ampliado'; }
+                        galeriaImagen.style.opacity = '1';
+                    }, 120);
+                }
+
+                var btnAnterior = document.getElementById('galeria-anterior');
+                var btnSiguiente = document.getElementById('galeria-siguiente');
+                if (btnAnterior) btnAnterior.addEventListener('click', function () { mostrarCaptura(indiceGaleria - 1); });
+                if (btnSiguiente) btnSiguiente.addEventListener('click', function () { mostrarCaptura(indiceGaleria + 1); });
+
+                if (galeriaImagen && lightbox && lightboxImagen) {
+                    var cerrarLightbox = function () {
+                        lightbox.classList.remove('abierto');
+                        document.body.style.overflow = '';
+                    };
+
+                    galeriaImagen.addEventListener('click', function () {
+                        lightbox.classList.add('abierto');
+                        document.body.style.overflow = 'hidden';
+                    });
+
+                    lightbox.addEventListener('click', cerrarLightbox);
+                    lightboxImagen.addEventListener('click', function (e) { e.stopPropagation(); });
+
+                    var lbCerrar = document.getElementById('lightbox-cerrar');
+                    if (lbCerrar) lbCerrar.addEventListener('click', cerrarLightbox);
+
+                    var lbAnterior = document.getElementById('lightbox-anterior');
+                    var lbSiguiente = document.getElementById('lightbox-siguiente');
+                    if (lbAnterior) lbAnterior.addEventListener('click', function (e) { e.stopPropagation(); mostrarCaptura(indiceGaleria - 1); });
+                    if (lbSiguiente) lbSiguiente.addEventListener('click', function (e) { e.stopPropagation(); mostrarCaptura(indiceGaleria + 1); });
+
+                    window.addEventListener('keydown', function (e) {
+                        if (e.key === 'Escape') cerrarLightbox();
+                        if (!lightbox.classList.contains('abierto')) return;
+                        if (e.key === 'ArrowLeft') mostrarCaptura(indiceGaleria - 1);
+                        if (e.key === 'ArrowRight') mostrarCaptura(indiceGaleria + 1);
+                    });
+                }
+            }
+
+            function iniciarCopiarKarpathy(contenidoMD) {
+                var btnCopiar = document.getElementById('btn-copiar');
+                if (!btnCopiar) return;
+                btnCopiar.addEventListener('click', function () {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(contenidoMD).then(function () {
+                            var span = btnCopiar.querySelector('span');
+                            var original = span.textContent;
+                            span.textContent = 'copiado';
+                            btnCopiar.classList.add('copiado');
+                            setTimeout(function () {
+                                span.textContent = original;
+                                btnCopiar.classList.remove('copiado');
+                            }, 1800);
+                        }).catch(function () {
+                            var span = btnCopiar.querySelector('span');
+                            span.textContent = 'error';
+                            setTimeout(function () { span.textContent = 'copiar'; }, 1800);
+                        });
+                    } else {
+                        var span = btnCopiar.querySelector('span');
+                        span.textContent = 'error';
+                        setTimeout(function () { span.textContent = 'copiar'; }, 1800);
+                    }
+                });
+            }
+            } catch (e) {
+                document.getElementById('contenido-principal').innerHTML =
+                    '<div class="estado-error"><h2>Error JS</h2><p>' + e.message + '</p><a href="index.html" class="btn btn-primario">Volver al portfolio</a></div>';
+            }
+        })();
+    </script>
+</body>
+
+</html>
