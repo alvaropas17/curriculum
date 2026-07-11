@@ -20,7 +20,7 @@
     <!-- Navegación -->
     <nav class="nav">
         <div class="contenedor nav-fila">
-            <a class="nav-marca" href="#top">Álvaro Pastor<span>— dev</span></a>
+            <a class="nav-marca" href="#top">Álvaro Pastor</a>
             <div class="nav-enlaces">
                 <a href="#proyectos">proyectos</a>
                 <a href="#perfil">perfil</a>
@@ -43,6 +43,13 @@
     </nav>
 
     <main>
+        <aside class="indice-4k" aria-label="Índice rápido">
+            <a href="#perfil">perfil</a>
+            <a href="#aporto">aporto</a>
+            <a href="#proyectos">proyectos</a>
+            <a href="#contacto">contacto</a>
+        </aside>
+
         <!-- Hero -->
         <header class="hero">
             <div class="contenedor hero-grid">
@@ -63,7 +70,7 @@
                             <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7"
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </svg></a>
-                    <a href="./cv.html" class="btn btn-secundario" target="_blank" rel="noopener">Ver CV</a>
+                    <a href="./cv.html" class="btn btn-secundario">Ver CV</a>
                 </div>
             </div>
         </header>
@@ -173,6 +180,11 @@
                             <img src="./img/ludoscript-quiz.png" alt="Quiz de LudoScript" loading="lazy" />
                             <img src="./img/progreso.png" alt="Panel de progreso de LudoScript" loading="lazy" />
                         </div>
+                        <aside class="anotaciones-proyecto" aria-label="Decisiones clave de LudoScript">
+                            <p><span>01</span>La práctica se adapta a cada respuesta.</p>
+                            <p><span>02</span>El progreso convierte el aprendizaje en algo visible.</p>
+                            <p><span>03</span>La IA ayuda; el usuario conserva el control.</p>
+                        </aside>
                     </div>
                     <div class="proyecto-info">
                         <p class="etiqueta">educación · ia</p>
@@ -229,6 +241,18 @@
                 </article>
             </div>
         </section>
+        <section class="seccion seccion-pensamiento" id="pensamiento">
+            <div class="contenedor revelar">
+                <p class="etiqueta">cómo pienso</p>
+                <h2 class="titulo-seccion">Tres perspectivas para una misma decisión</h2>
+                <div class="mapa-criterio" aria-label="Producto, desarrollo y marketing confluyen en una experiencia útil">
+                    <article class="criterio criterio-producto"><span>producto</span><strong>¿Resuelve algo que importa?</strong><p>Prioridad, flujo y una razón clara para cada función.</p></article>
+                    <article class="criterio criterio-desarrollo"><span>desarrollo</span><strong>¿Puede crecer sin romperse?</strong><p>Una base técnica legible, conectada y mantenible.</p></article>
+                    <article class="criterio criterio-marketing"><span>marketing</span><strong>¿Se entiende y llega a quien debe?</strong><p>Mensaje, contexto y un siguiente paso reconocible.</p></article>
+
+                </div>
+            </div>
+        </section>
         <!-- Contacto -->
         <section class="contacto" id="contacto">
             <div class="contenedor revelar">
@@ -238,9 +262,7 @@
                     IA y foco en el usuario. Si crees que encajo en tu proyecto, hablemos.</p>
                 <div class="acciones">
                     <a href="mailto:alvpastor17@gmail.com" class="btn btn-claro">Escríbeme</a>
-                    <a href="./cv.html" class="btn btn-contorno-claro" target="_blank" rel="noopener">Ver CV</a>
-                    <a href="./Alvaro_Pastor_CV.pdf" download="Alvaro_Pastor_CV.pdf"
-                        class="btn btn-contorno-claro">Descargar CV</a>
+                    <a href="./cv.html" class="btn btn-contorno-claro">Ver CV</a>
                 </div>
                 <p class="correo">o directamente: <a class="enlace"
                         href="mailto:alvpastor17@gmail.com">alvpastor17@gmail.com</a></p>
@@ -292,6 +314,22 @@
             document.querySelectorAll('.revelar').forEach((el) => observador.observe(el));
         } else {
             document.querySelectorAll('.revelar').forEach((el) => el.classList.add('visible'));
+        }
+        // Índice lateral: resalta la sección visible en pantallas panorámicas.
+        const indicePanoramico = document.querySelector('.indice-4k');
+        if (indicePanoramico) {
+            const seccionesIndice = [...indicePanoramico.querySelectorAll('a')]
+                .map((enlace) => ({ enlace, seccion: document.querySelector(enlace.getAttribute('href')) }))
+                .filter(({ seccion }) => seccion);
+            const actualizarIndice = () => {
+                let activa = seccionesIndice[0];
+                seccionesIndice.forEach((item) => {
+                    if (item.seccion.getBoundingClientRect().top <= window.innerHeight * 0.42) activa = item;
+                });
+                seccionesIndice.forEach((item) => item.enlace.classList.toggle('activo', item === activa));
+            };
+            window.addEventListener('scroll', actualizarIndice, { passive: true });
+            actualizarIndice();
         }
     </script>
 </body>

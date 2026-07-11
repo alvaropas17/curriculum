@@ -4,6 +4,7 @@
   const REJECTED = "rejected";
   const GA_ID = "G-EZ9VY5E3EE";
   const CLARITY_ID = "xhnoyjsnpn";
+  const REQUIRE_ANALYTICS_CONSENT = false;
 
   const ANALYTICS_COOKIE_NAMES = [
     "_ga",
@@ -274,6 +275,13 @@
   });
 
   function initConsent() {
+    if (!REQUIRE_ANALYTICS_CONSENT) {
+      setConsent(ACCEPTED);
+      removeBanner();
+      loadAnalytics();
+      return;
+    }
+
     const consent = getConsent();
 
     if (consent === ACCEPTED) {
