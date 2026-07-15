@@ -8,13 +8,14 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Ideas para alvaropastor.dev — Brainstorming · Álvaro Pastor</title>
     <meta name="description"
-        content="Cuaderno abierto de ideas para aprovechar el dominio alvaropastor.dev: contenido, un posible servicio de plantillas iTop, micro-herramientas gratuitas y storytelling." />
+        content="Notas personales y brainstorming abierto sobre cómo aprovechar alvaropastor.dev: contenido, un posible servicio, herramientas y storytelling." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="./styles/portfolio.css" />
+    <link rel="stylesheet" href="./styles/ideas.css" />
 </head>
 
 <body id="top">
@@ -50,9 +51,10 @@
                 <p class="etiqueta">brainstorming · alvaropastor.dev</p>
                 <h1>Ideas para aprovechar <span class="marca marca-anim">el dominio nuevo</span>.</h1>
                 <p class="hero-intro">
-                    Me acabo de comprar alvaropastor.dev y esto es mi cuaderno de ideas abierto: contenido, un
-                    posible servicio, herramientas gratuitas y algún experimento de storytelling. Nada está
-                    decidido todavía — es la fase de explorar antes de priorizar.
+                    Me acabo de comprar alvaropastor.dev y, en vez de dejarlo aparcado hasta tener el plan
+                    perfecto, prefiero escribir aquí mismo cómo pienso aprovecharlo. Esto no es una redacción
+                    pulida para venderme a nadie: es mi cuaderno de ideas, con las dudas y las partes a medio
+                    resolver incluidas.
                 </p>
                 <div class="tags" style="margin-top: 1.6rem;">
                     <span class="tag tag-acento">sin priorizar</span>
@@ -69,176 +71,210 @@
                 </div>
             </div>
             <div>
-                <div class="ventana">
-                    <div class="ventana-barra">
-                        <span class="ventana-punto"></span>
-                        <span class="ventana-punto"></span>
-                        <span class="ventana-punto lleno"></span>
-                        <span class="ventana-url">notas-ideas.md</span>
-                    </div>
-                    <div class="fichas" style="padding: 1.4rem; margin: 0;">
-                        <div class="ficha">
-                            <span class="campo">01 · contenido</span>
-                            <p>Blog, feed propio, micro-interacciones y analítica sin cookies.</p>
-                        </div>
-                        <div class="ficha">
-                            <span class="campo">02 · servicio</span>
-                            <p>Plantillas de email con iTop: de caso de estudio a oferta real.</p>
-                        </div>
-                        <div class="ficha">
-                            <span class="campo">03 · herramientas</span>
-                            <p>Micro-herramientas gratis, 100% frontend, para perfiles técnicos.</p>
-                        </div>
-                        <div class="ficha">
-                            <span class="campo">04 · storytelling</span>
-                            <p>Ganchos narrativos aplicados a marketing — por confirmar.</p>
-                        </div>
-                    </div>
+                <div class="laboratorio-lista" aria-label="Índice de ideas">
+                    <article>
+                        <span>01 · contenido</span>
+                        <strong>Marca personal con contenido propio</strong>
+                        <p>Blog, feed de publicaciones, micro-interacciones y analítica propia.</p>
+                    </article>
+                    <article>
+                        <span>02 · servicio</span>
+                        <strong>Plantillas de email con iTop</strong>
+                        <p>De caso de estudio a una página de servicio real.</p>
+                    </article>
+                    <article>
+                        <span>03 · herramientas</span>
+                        <strong>Micro-herramientas gratuitas</strong>
+                        <p>100% frontend, para atraer perfiles técnicos por SEO de cola larga.</p>
+                    </article>
+                    <article>
+                        <span>04 · storytelling</span>
+                        <strong>Ganchos narrativos en marketing</strong>
+                        <p>Interés personal, todavía sin decidir qué dirección tomar.</p>
+                    </article>
                 </div>
             </div>
         </header>
 
         <!-- 01 · Contenido y marca personal -->
         <section class="seccion seccion-alt" id="contenido">
-            <div class="contenedor revelar">
-                <p class="etiqueta">01 · contenido y marca personal</p>
-                <h2 class="titulo-seccion">Construir marca con contenido propio</h2>
-                <p class="texto-suave" style="max-width: 38rem; margin-block: 1rem 2.6rem;">
-                    Cuatro formas de usar el dominio para enseñar cómo pienso y cómo trabajo, no solo para
-                    enseñar proyectos ya terminados.
-                </p>
-                <div class="rejilla-tarjetas">
-                    <article class="tarjeta">
-                        <span class="campo">blog</span>
-                        <h3>Blog de artículos</h3>
-                        <p>Una sección <code>/blog</code> — probablemente Astro o Vite+MDX, compatible con el
-                            stack Vue que ya uso — para escribir sobre el cruce entre marketing y desarrollo,
-                            decisiones de diseño de mis propios proyectos y lo que voy aprendiendo.</p>
-                    </article>
-                    <article class="tarjeta">
-                        <span class="campo">feed</span>
-                        <h3>Recopilatorio de publicaciones</h3>
-                        <p>Una página tipo feed propio con los posts que más me representan de LinkedIn y X:
-                            enlace original más una nota de contexto. Mantenible a mano con un JSON (título,
-                            fecha, link, captura).</p>
-                    </article>
-                    <article class="tarjeta">
-                        <span class="campo">estilo</span>
-                        <h3>Micro-interacciones cuidadas</h3>
-                        <p>Fade-ins al hacer scroll, hover states y transiciones más pulidas, con un estilo
-                            visual cercano al de Anthropic. Con Vue: Intersection Observer + CSS transitions, o
-                            <code>@vueuse/motion</code> / GSAP para algo más fino.</p>
-                    </article>
-                    <article class="tarjeta">
-                        <span class="campo">analítica</span>
-                        <h3>Analítica propia</h3>
-                        <p>Plausible o Umami: ligeras y sin cookies, para ver de verdad qué tráfico entra y qué
-                            páginas funcionan.</p>
-                    </article>
+            <div class="contenedor dos-columnas revelar">
+                <div class="col-titulo">
+                    <p class="etiqueta">01 · contenido y marca personal</p>
+                    <h2 class="titulo-seccion">Construir marca con contenido propio</h2>
+                    <div class="resumen-rapido">
+                        <span class="resumen-etiqueta">en resumen</span>
+                        <ul>
+                            <li>Blog propio sobre marketing + dev</li>
+                            <li>Feed personal de publicaciones destacadas</li>
+                            <li>Micro-interacciones estilo Anthropic</li>
+                            <li>Analítica propia sin cookies</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="parrafos">
+                        <p>
+                            Ahora que tengo alvaropastor.dev, la primera idea es dejar de usar la web solo como
+                            escaparate de proyectos terminados y empezar a tratarla también como
+                            <span class="marca">cuaderno de trabajo público</span>. Pienso en un blog en
+                            <code>/blog</code> —probablemente con Astro o Vite+MDX, para que encaje con el stack
+                            de Vue que ya uso— donde escriba sobre el cruce entre
+                            <span class="resalta-azul">marketing y desarrollo</span>, las decisiones detrás de
+                            mis propios proyectos y lo que voy aprendiendo por el camino. No busco publicar
+                            mucho ni muy seguido: busco que quien entre note que hay
+                            <span class="resalta-calido">criterio</span> detrás, no solo código.
+                        </p>
+                        <p>
+                            En paralelo me gustaría montar una página tipo feed con los posts que más me
+                            representan de LinkedIn y X —el enlace original más una nota de contexto mía—. Nada
+                            de CMS ni backend: me basta un JSON con título, fecha, link y una captura, que voy
+                            actualizando a mano.
+                        </p>
+                        <p>
+                            Y luego está la parte que más me llama estéticamente: llevar el sitio hacia más
+                            <span class="resalta-verde">micro-interacciones</span> —fade-ins al hacer scroll,
+                            hover states, transiciones— con un estilo cercano al de Anthropic. Con Vue tengo dos
+                            caminos: Intersection Observer + CSS transitions si quiero algo ligero, o
+                            <code>@vueuse/motion</code> / GSAP si quiero pulirlo más. Para cerrar el círculo,
+                            meter una analítica propia —Plausible o Umami, sin cookies— y por fin saber de
+                            verdad qué tráfico entra y qué páginas funcionan, en vez de intuirlo.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- 02 · Servicio: plantillas de correo con iTop -->
         <section class="seccion" id="servicio">
-            <div class="contenedor revelar">
-                <p class="etiqueta">02 · servicio</p>
-                <h2 class="titulo-seccion">De caso de estudio a oferta real</h2>
-                <p class="texto-suave" style="max-width: 40rem; margin-block: 1rem 2.6rem;">
-                    Ya tengo el caso de estudio de las plantillas corporativas de iTop. La idea es ir un paso
-                    más allá y convertirlo en una página de servicio, no solo en un escaparate de trabajo hecho.
-                </p>
-                <div class="pasos">
-                    <article class="paso">
-                        <h3>Página de servicio</h3>
-                        <p>Problema → qué ofrezco → antes/después, en vez de solo mostrar el caso de estudio.</p>
-                    </article>
-                    <article class="paso">
-                        <h3>CTA claro</h3>
-                        <p>Formulario de contacto o Calendly para pedir una auditoría o una muestra gratuita.</p>
-                    </article>
-                    <article class="paso">
-                        <h3>SEO de entrada</h3>
-                        <p>Keywords muy específicas ("plantillas de correo iTop"), title y meta cuidados, 2-3
-                            artículos de apoyo en el blog y alta en Google Search Console.</p>
-                    </article>
+            <div class="contenedor dos-columnas revelar">
+                <div class="col-titulo">
+                    <p class="etiqueta">02 · servicio</p>
+                    <h2 class="titulo-seccion">De caso de estudio a oferta real</h2>
+                    <div class="resumen-rapido">
+                        <span class="resumen-etiqueta">en resumen</span>
+                        <ul>
+                            <li>Página de servicio: problema → oferta → antes/después</li>
+                            <li>CTA: formulario o Calendly</li>
+                            <li>Objetivo doble: darme a conocer + explorar si puedo cobrar</li>
+                            <li>SEO de entrada con keywords muy específicas</li>
+                        </ul>
+                    </div>
                 </div>
-                <aside class="nota" style="max-width: none; margin-top: 2rem;">
-                    Objetivo doble: darme a conocer y explorar si esto tiene potencial para cobrar por ello. Es
-                    mi primera vez haciendo SEO de intención específica, así que iré aprendiendo sobre la
-                    marcha.
-                </aside>
+                <div>
+                    <div class="parrafos">
+                        <p>
+                            El caso de estudio de las plantillas de iTop ya existe, pero se queda corto: solo
+                            enseña el trabajo hecho. Le doy vueltas a convertirlo en algo más ambicioso —una
+                            <span class="resalta-azul">página de servicio real</span>, no un portfolio pasivo—.
+                            Estructura clásica: problema → qué ofrezco → antes/después. Y un
+                            <span class="marca">CTA que no deje la conversación en el aire</span>: un formulario
+                            o un Calendly para pedir una auditoría o una muestra gratuita.
+                        </p>
+                        <p>
+                            Esto tiene un objetivo doble que todavía no sé cómo se va a resolver: por un lado es
+                            una forma de darme a conocer; por otro, es la primera vez que me planteo en serio si
+                            algo de esto tiene <span class="resalta-calido">potencial para cobrar</span>. No
+                            tengo experiencia previa en SEO, así que la entrada natural es un SEO de intención
+                            muy específica —algo como «plantillas de correo iTop»— con el title y la meta
+                            cuidados, dos o tres artículos de blog que apoyen la página, y darme de alta en
+                            Google Search Console. Es la parte donde más voy a tener que aprender sobre la
+                            marcha.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- 03 · Micro-herramientas gratuitas -->
         <section class="seccion seccion-alt" id="herramientas">
-            <div class="contenedor revelar">
-                <p class="etiqueta">03 · herramientas</p>
-                <h2 class="titulo-seccion">Micro-herramientas gratuitas, 100% frontend</h2>
-                <p class="texto-suave" style="max-width: 40rem; margin-block: 1rem 2.6rem;">
-                    Sin backend, pensadas para atraer a perfiles técnicos (devs, DevOps, responsables de
-                    soporte) vía SEO de cola larga.
-                </p>
-                <div class="rejilla-tarjetas">
-                    <article class="tarjeta">
-                        <span class="campo">csv ↔ json</span>
-                        <h3>Extractor/limpiador CSV↔JSON</h3>
-                        <p>Para exportaciones de iTop, Jira o Zendesk: selecciono y renombro columnas y exporto
-                            limpio.</p>
+            <div class="contenedor dos-columnas revelar">
+                <div class="col-titulo">
+                    <p class="etiqueta">03 · herramientas</p>
+                    <h2 class="titulo-seccion">Micro-herramientas gratuitas, 100% frontend</h2>
+                    <div class="resumen-rapido">
+                        <span class="resumen-etiqueta">en resumen</span>
                         <ul>
-                            <li>mismo público que iTop</li>
+                            <li>CSV↔JSON para exportaciones de iTop/Jira/Zendesk</li>
+                            <li>Formateador de logs de error</li>
+                            <li>Generador de scripts de automatización</li>
+                            <li>Las dos primeras más maduras que la tercera</li>
                         </ul>
-                    </article>
-                    <article class="tarjeta">
-                        <span class="campo">logs</span>
-                        <h3>Formateador de logs de error</h3>
-                        <p>Pego logs desordenados y los convierto en una tabla interactiva, resaltando
-                            ERROR/WARN, con filtro por palabras clave. Público muy técnico, buen escaparate
-                            visual.</p>
-                    </article>
-                    <article class="tarjeta">
-                        <span class="campo">scripts</span>
-                        <h3>Generador visual de scripts</h3>
-                        <p>Interfaz con toggles que genera scripts de bash, backups o SSH en vivo, con
-                            animación de escritura. Más vistoso para compartir, pero menos ligado a mi
-                            experiencia directa.</p>
-                        <ul>
-                            <li>necesita más documentación previa</li>
-                        </ul>
-                    </article>
+                    </div>
+                </div>
+                <div>
+                    <div class="parrafos">
+                        <p>
+                            La tercera idea es la más técnica, y la que menos tiene que ver con «venderme»
+                            directamente: un puñado de <span class="resalta-azul">micro-herramientas
+                                gratuitas</span>, 100% frontend, sin backend detrás. El objetivo no es
+                            monetizarlas: es atraer tráfico de perfiles técnicos —devs, DevOps, gente de
+                            soporte— a través de SEO de cola larga, gente que busca resolver un problema muy
+                            concreto y de paso descubre quién las ha hecho.
+                        </p>
+                        <p>
+                            La primera es un extractor/limpiador de CSV a JSON (y al revés), pensado para
+                            exportaciones de iTop, Jira o Zendesk: seleccionas y renombras columnas y exportas
+                            limpio. Es la que más <span class="resalta-verde">sinergia</span> tiene con la idea
+                            del servicio de iTop, porque apunta exactamente al mismo público.
+                        </p>
+                        <p>
+                            La segunda es un formateador de logs de error: pegas algo desordenado y sale una
+                            tabla interactiva que resalta ERROR/WARN y se puede filtrar por palabra clave.
+                            Público muy técnico, y visualmente es un buen escaparate para compartir.
+                        </p>
+                        <p>
+                            La tercera es la que menos tengo madura: un generador visual de scripts de
+                            automatización, con toggles que van generando en vivo un script de bash, backups o
+                            SSH, con animación de escritura. Es la más vistosa de las tres —la que mejor
+                            quedaría en LinkedIn— pero también la que
+                            <span class="resalta-calido">menos conecta con mi experiencia directa</span>.
+                            Necesitaría documentarme bastante más antes de ponerme.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- 04 · Storytelling / ganchos narrativos -->
         <section class="seccion" id="storytelling">
-            <div class="contenedor revelar">
-                <p class="etiqueta">04 · storytelling</p>
-                <h2 class="titulo-seccion">Qué engancha en una historia, aplicado a marketing</h2>
-                <p class="texto-suave" style="max-width: 40rem; margin-block: 1rem 1.6rem;">
-                    Esta es más un interés personal que una estrategia de SEO: el contraste que engancha en
-                    historias y vídeos de YouTube. Todavía no he decidido qué dirección tomar.
-                </p>
-                <div class="tags" style="margin-bottom: 2rem;">
-                    <span class="tag tag-acento">por confirmar</span>
-                </div>
-                <div class="fichas">
-                    <div class="ficha">
-                        <span class="campo">dirección A</span>
-                        <p>Un análisis o artículo sobre patrones narrativos de enganche (tensión-resolución,
-                            antes/después) aplicado a marketing. Conecta con mi interés en Schwartz y Hormozi.</p>
-                    </div>
-                    <div class="ficha">
-                        <span class="campo">dirección B</span>
-                        <p>Una micro-herramienta que analice transcripciones y detecte "momentos de gancho".
-                            Más técnica y más incierta: requeriría más validación antes de empezar.</p>
+            <div class="contenedor dos-columnas revelar">
+                <div class="col-titulo">
+                    <p class="etiqueta">04 · storytelling</p>
+                    <h2 class="titulo-seccion">Qué engancha en una historia, aplicado a marketing</h2>
+                    <div class="resumen-rapido">
+                        <span class="resumen-etiqueta">en resumen</span>
+                        <ul>
+                            <li>Interés personal en el contraste que engancha</li>
+                            <li>Dirección A: artículo sobre estos patrones en marketing</li>
+                            <li>Dirección B: herramienta que detecta "momentos de gancho"</li>
+                            <li>Sin decidir todavía — la más incierta de las cuatro</li>
+                        </ul>
                     </div>
                 </div>
-                <aside class="nota" style="max-width: none; margin-top: 1.6rem;">
-                    Todavía no tengo claro si esta es la lectura correcta de la idea original. La dejo aquí tal
-                    cual para revisarla con calma.
-                </aside>
+                <div>
+                    <div class="parrafos">
+                        <p>
+                            La última idea es la más difusa de las cuatro, y quizás la más personal. No nace
+                            tanto de una lógica de SEO como de algo que llevo tiempo notando: el
+                            <span class="marca">contraste que engancha</span> en historias y en vídeos de
+                            YouTube —ese antes/después, esa tensión que se resuelve— y por qué funciona tan bien
+                            también en marketing. Conecta directamente con lo que me interesa de gente como
+                            Schwartz o Hormozi.
+                        </p>
+                        <p>
+                            Tengo dos direcciones posibles y todavía no sé cuál seguir. La primera es la más
+                            segura: un <span class="resalta-azul">análisis o artículo</span> sobre los patrones
+                            narrativos de enganche —tensión-resolución, antes/después— aplicados a marketing. La
+                            segunda es más arriesgada y más técnica: una
+                            <span class="resalta-verde">micro-herramienta</span> que analice transcripciones y
+                            detecte «momentos de gancho» automáticamente. Me atrae más la segunda, pero es la
+                            que <span class="resalta-calido">menos validada tengo</span> —necesitaría probarla
+                            antes de prometerme nada—. La dejo aquí tal cual, sin forzarla, para volver a ella
+                            con la cabeza más fría.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -246,13 +282,16 @@
         <section class="seccion seccion-alt" id="notas">
             <div class="contenedor revelar">
                 <p class="etiqueta">notas</p>
-                <h2 class="titulo-seccion" style="margin-bottom: 2rem;">Notas generales</h2>
-                <div class="contribucion">
-                    <span class="campo">estado</span>
-                    <p>Ninguna de estas ideas tiene compromiso de desarrollo todavía: esto es fase de
-                        exploración, no una oferta de trabajo en la mesa. Varias comparten sinergia entre
-                        ellas — el extractor CSV y las plantillas de iTop apuntan al mismo público, y el blog
-                        puede dar soporte de contenido tanto al servicio de iTop como a las micro-herramientas.</p>
+                <h2 class="titulo-seccion" style="margin-bottom: 1.6rem;">Notas generales</h2>
+                <div class="parrafos" style="max-width: 46rem;">
+                    <p>
+                        Ninguna de estas cuatro ideas tiene <span class="resalta-azul">compromiso de
+                            desarrollo</span> todavía: esto es fase de exploración, no una oferta de trabajo en
+                        la mesa. Y varias comparten <span class="resalta-verde">sinergia</span> entre ellas —el
+                        extractor CSV y las plantillas de iTop apuntan al mismo público, y el blog puede dar
+                        soporte de contenido tanto al servicio de iTop como a las micro-herramientas—. Iré
+                        tachando, uniendo o descartando según avance.
+                    </p>
                 </div>
             </div>
         </section>
