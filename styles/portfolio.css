@@ -689,6 +689,16 @@ a {
   transform: translateX(4px);
 }
 
+.proyecto-enlace-pendiente {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 1.6rem;
+  font-family: var(--fuente-mono);
+  font-size: 0.88rem;
+  color: var(--tinta-50);
+  font-style: italic;
+}
+
 /* ventana de navegador */
 .ventana {
   border: 1.5px solid var(--tinta);
