@@ -818,20 +818,206 @@ a {
   border-bottom: 1px solid var(--linea-suave);
 }
 
-.cv-documento {
-  min-height: 0;
-  padding: clamp(0.75rem, 2vw, 1.5rem);
+/* ---------- cv contenido ---------- */
+
+.cv-contenido {
+  max-width: 56rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 3vw, 2.5rem);
+  background: var(--papel);
+  border-radius: 0;
+  box-shadow: none;
 }
 
-.cv-documento object {
-  display: block;
+.cv-head {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.75rem;
+  border-bottom: 2px solid var(--tinta);
+}
+.cv-cabecera-info,
+.cv-contacto-grupos { display: flex; align-items: flex-start; justify-content: space-between; gap: 1.25rem 2rem; }
+.cv-cabecera-info { margin-bottom: 1.15rem; }
+.cv-etiqueta, .cv-disponibilidad { font-family: var(--fuente-mono); font-size: 0.7rem; letter-spacing: 0.08em; line-height: 1.45; text-transform: uppercase; }
+.cv-etiqueta { margin-bottom: 0.45rem; color: var(--azul); }
+.cv-disponibilidad { max-width: 15rem; margin-top: 0.35rem; padding-left: 0.8rem; border-left: 2px solid var(--marca); color: var(--tinta-70); }
+
+.cv-head h1 {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
+  color: var(--tinta);
+}
+
+.cv-subtitulo {
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  color: var(--tinta-70);
+  margin: 0 0 1rem;
+  line-height: 1.4;
+}
+
+.cv-contacto {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1.2rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(0.7rem, 1.2vw, 0.78rem);
+  color: var(--tinta-70);
+}
+
+.cv-contacto-enlaces { justify-content: flex-end; }
+.cv-contacto-enlaces a { color: var(--azul); }
+
+.cv-contacto a {
+  color: var(--tinta);
+  text-decoration-color: var(--linea);
+  text-underline-offset: 2px;
+}
+
+.cv-contacto a:hover {
+  text-decoration-color: var(--marca);
+}
+
+/* secciones */
+
+.cv-seccion {
+  margin-bottom: 2rem;
+}
+
+.cv-seccion h2 {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--tinta);
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1.5px solid var(--linea);
+}
+
+.cv-seccion-clave { padding: 1.15rem 1.25rem; border: 1px solid var(--linea); border-radius: var(--radio); background: rgba(255, 216, 77, 0.12); }
+.cv-seccion-clave h2 { border-bottom-color: rgba(25, 23, 19, 0.28); }
+
+.cv-seccion p {
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  font-size: clamp(0.85rem, 1.3vw, 0.93rem);
+  line-height: 1.6;
+  color: var(--tinta-70);
+  margin: 0;
+}
+
+/* items (experiencia, formación, proyecto) */
+
+.cv-item {
+  margin-bottom: 1.25rem;
+}
+
+.cv-item:last-child {
+  margin-bottom: 0;
+}
+
+.cv-item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.8rem;
+  margin-bottom: 0.35rem;
+}
+
+.cv-item-head h3 {
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  font-size: clamp(0.9rem, 1.4vw, 0.98rem);
+  font-weight: 600;
+  color: var(--tinta);
+  margin: 0;
+}
+
+.cv-item-lugar {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(0.72rem, 1.2vw, 0.8rem);
+  color: var(--tinta-50);
+}
+
+.cv-item-fecha {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(0.65rem, 1.1vw, 0.72rem);
+  color: var(--tinta-50);
+  margin-left: auto;
+}
+
+.cv-item-enlace {
   width: 100%;
-  height: calc(100vh - 6.75rem);
-  min-height: 32rem;
-  border: 1.5px solid var(--tinta);
-  border-radius: 8px;
-  background: var(--papel);
-  box-shadow: 10px 10px 0 0 rgba(25, 23, 19, 0.08);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(0.65rem, 1.1vw, 0.72rem);
+}
+
+.cv-item-enlace a {
+  color: var(--tinta);
+  text-decoration-color: var(--linea);
+  text-underline-offset: 2px;
+}
+
+.cv-item-enlace a:hover {
+  text-decoration-color: var(--marca);
+}
+
+.cv-item ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cv-item li {
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  font-size: clamp(0.82rem, 1.3vw, 0.9rem);
+  line-height: 1.55;
+  color: var(--tinta-70);
+  padding-left: 1.1rem;
+  position: relative;
+  margin-bottom: 0.3rem;
+}
+
+.cv-item li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--marca);
+  font-weight: 600;
+}
+
+/* habilidades */
+
+.cv-skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 0.75rem 1.5rem;
+}
+
+.cv-skills-item {
+  padding: 0.6rem 0;
+}
+
+.cv-skills-item strong {
+  display: block;
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  font-size: clamp(0.82rem, 1.3vw, 0.9rem);
+  font-weight: 600;
+  color: var(--tinta);
+  margin-bottom: 0.1rem;
+}
+
+.cv-skills-item span {
+  font-family: "Instrument Sans", system-ui, sans-serif;
+  font-size: clamp(0.8rem, 1.2vw, 0.87rem);
+  color: var(--tinta-70);
+  line-height: 1.4;
 }
 
 @media (max-width: 40rem) {
@@ -845,9 +1031,25 @@ a {
     width: 100%;
   }
 
-  .cv-documento object {
-    height: calc(100vh - 12rem);
-    min-height: 28rem;
+  .cv-contenido {
+    padding: 1.5rem 1.1rem;
+  }
+
+  .cv-cabecera-info,
+  .cv-contacto-grupos { flex-direction: column; gap: 0.85rem; }
+  .cv-disponibilidad { max-width: none; margin-top: 0; }
+  .cv-contacto-enlaces { justify-content: flex-start; }
+  .cv-item-head {
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .cv-item-fecha {
+    margin-left: 0;
+  }
+
+  .cv-skills {
+    grid-template-columns: 1fr;
   }
 }
 

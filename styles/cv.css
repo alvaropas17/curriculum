@@ -30,7 +30,8 @@
   padding: clamp(0.75rem, 2vw, 1.5rem);
 }
 
-.cv-documento object {
+.cv-documento object,
+.cv-documento iframe {
   display: block;
   width: 100%;
   height: calc(100vh - 6.75rem);
@@ -52,7 +53,8 @@
     width: 100%;
   }
 
-  .cv-documento object {
+  .cv-documento object,
+  .cv-documento iframe {
     height: calc(100vh - 12rem);
     min-height: 28rem;
   }
