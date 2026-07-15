@@ -797,6 +797,8 @@ a {
   gap: 0.85rem;
 }
 
+.cv-descarga-movil { display: none; }
+
 .cv-pagina {
   min-height: 100vh;
   background: var(--papel-alt);
@@ -1022,20 +1024,76 @@ a {
 
 @media (max-width: 40rem) {
   .cv-topbar {
-    align-items: stretch;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
   }
 
-  .cv-topbar .cv-acciones,
-  .cv-topbar .btn {
-    width: 100%;
+  .cv-topbar .cv-acciones { display: flex; width: auto; }
+  .cv-descarga-escritorio { display: none; }
+
+  .cv-topbar .cv-volver-movil {
+    min-height: 2.75rem;
+    padding: 0.5rem 0.2rem;
+    border: 0;
+    background: transparent;
+    color: var(--tinta-70);
+    font-size: 0;
   }
 
-  .cv-contenido {
-    padding: 1.5rem 1.1rem;
+  .cv-topbar .cv-volver-movil::after {
+    content: "← Portfolio";
+    font-size: 0.75rem;
   }
 
-  .cv-cabecera-info,
+  .cv-topbar .cv-volver-movil:hover,
+  .cv-topbar .cv-volver-movil:focus-visible {
+    background: transparent;
+    color: var(--azul);
+  }
+
+  .cv-descarga-movil {
+    position: fixed;
+    z-index: 60;
+    right: 1rem;
+    bottom: max(0.85rem, env(safe-area-inset-bottom));
+    left: 1rem;
+    display: flex;
+    min-height: 3.35rem;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1rem;
+    border: 1.5px solid var(--tinta);
+    border-radius: var(--radio);
+    background: var(--tinta);
+    box-shadow: 6px 6px 0 rgba(25, 23, 19, 0.16);
+    color: var(--papel);
+    font-family: var(--fuente-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .cv-descarga-movil:focus-visible,
+  .cv-descarga-movil:hover { border-color: var(--azul); background: var(--azul); }
+
+  .cv-contenido { padding: 1.85rem 1.25rem calc(7.5rem + env(safe-area-inset-bottom)); }
+  .cv-head { margin-bottom: 2.85rem; padding-bottom: 2rem; }
+  .cv-head h1 { font-size: 2rem; }
+  .cv-subtitulo { font-size: 1.02rem; line-height: 1.55; }
+  .cv-contacto { gap: 0.55rem 1.25rem; font-size: 0.8rem; }
+  .cv-seccion { margin-bottom: 2.75rem; }
+  .cv-seccion h2 { margin-bottom: 1rem; }
+  .cv-seccion p { font-size: 0.98rem; line-height: 1.8; }
+  .cv-item { margin-bottom: 1.8rem; }
+  .cv-item-head { margin-bottom: 0.65rem; }
+  .cv-item-head h3 { font-size: 1.02rem; line-height: 1.3; }
+  .cv-item-lugar, .cv-item-fecha { font-size: 0.8rem; }
+  .cv-item li { font-size: 0.96rem; line-height: 1.75; margin-bottom: 0.75rem; }
+  .cv-skills-item { padding-block: 0.95rem; }
+  .cv-skills-item strong { font-size: 0.96rem; margin-bottom: 0.3rem; }
+  .cv-skills-item span { font-size: 0.94rem; line-height: 1.6; }
+.cv-cabecera-info,
   .cv-contacto-grupos { flex-direction: column; gap: 0.85rem; }
   .cv-disponibilidad { max-width: none; margin-top: 0; }
   .cv-contacto-enlaces { justify-content: flex-start; }
