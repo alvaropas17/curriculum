@@ -306,6 +306,14 @@ a {
   margin-left: 0.45rem;
 }
 
+.nav-marca .nav-apellido {
+  font-family: var(--fuente-display);
+  font-weight: 700;
+  font-size: inherit;
+  color: inherit;
+  margin-left: 0;
+}
+
 .nav-enlaces {
   display: none;
   align-items: center;
@@ -2150,6 +2158,10 @@ body {
     align-items: center;
     line-height: 1;
     transform: translateY(2px);
+  }
+
+  .nav-apellido {
+    display: none;
   }
 
   .nav-burger {
