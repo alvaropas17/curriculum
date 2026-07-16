@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Notas del rediseño — julio 2026</title>
+    <title>Notas del rediseño julio 2026</title>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -153,7 +153,7 @@
                             <div class="despues">Una sola hoja <code>styles/portfolio.css</code> (~19 KB) escrita a
                                 mano, compartida por index.html y proyecto/ludoscript.html.</div>
                         </div>
-                        <p class="razon"><strong>razón</strong> — El CDN de Tailwind está desaconsejado por el
+                        <p class="razon"><strong>razón</strong> El CDN de Tailwind está desaconsejado por el
                             propio Tailwind para producción: penaliza el rendimiento (genera estilos en tiempo de
                             ejecución) y es lo primero que un revisor técnico con DevTools abierto señala como mala
                             práctica. En un portfolio para conseguir empleo, el código de la propia página es parte
@@ -170,7 +170,7 @@
                                 <code>#191713</code>, azul <code>#2440ce</code>, subrayador <code>#ffd84d</code>,
                                 verde <code>#1e7a4a</code> y navy <code>#101637</code> para marcos de capturas.</div>
                         </div>
-                        <p class="razon"><strong>razón</strong> — El tema oscuro azulado es el default nº 1 de los
+                        <p class="razon"><strong>razón</strong> El tema oscuro azulado es el default nº 1 de los
                             portfolios genéricos. Sobre fondo claro, las capturas de LudoScript (que son oscuras)
                             ganan contraste y protagonismo. Reducir 25 colores heredados de Material a 6 tokens con
                             intención facilita el mantenimiento y hace el sistema coherente: cada color tiene un
@@ -185,7 +185,7 @@
                             <div class="despues">Bricolage Grotesque (titulares, con carácter), Instrument Sans
                                 (cuerpo, legible) e IBM Plex Mono (notas, etiquetas, tags, navegación).</div>
                         </div>
-                        <p class="razon"><strong>razón</strong> — Inter/Lexend es la pareja neutra que usa cualquier
+                        <p class="razon"><strong>razón</strong> Inter/Lexend es la pareja neutra que usa cualquier
                             plantilla: no aporta personalidad. La monoespaciada en etiquetas y notas conecta con el
                             mundo del desarrollo (comentarios de código, terminal) y es parte del concepto del
                             documento anotado. Se cargan solo los pesos necesarios vía Google Fonts con
@@ -200,7 +200,7 @@
                             <div class="despues">SVG inline de trazo simple solo donde el icono aporta: flechas de
                                 acción, menú móvil, cerrar lightbox.</div>
                         </div>
-                        <p class="razon"><strong>razón</strong> — Una fuente de iconos completa para usar 6 glifos
+                        <p class="razon"><strong>razón</strong> Una fuente de iconos completa para usar 6 glifos
                             es peso innecesario y produce FOUT (el texto del icono aparece antes que el glifo).
                             Los SVG inline pesan bytes, no parpadean y se colorean con <code>currentColor</code>.
                             Los iconos decorativos (estrella, insights, architecture…) se eliminaron directamente:
@@ -215,7 +215,7 @@
                             <div class="despues">Tarjetas planas con borde de 1.5px y hover sobrio; capturas dentro
                                 de "ventanas de navegador" con barra, puntos y URL visible.</div>
                         </div>
-                        <p class="razon"><strong>razón</strong> — El glassmorphism es el efecto más asociado a
+                        <p class="razon"><strong>razón</strong> El glassmorphism es el efecto más asociado a
                             plantillas de 2023-2024 y el blur tiene coste de render. La ventana de navegador con la
                             URL real (<code>ludoscript.vercel.app</code>) añade una señal de credibilidad: el
                             proyecto está desplegado y se puede visitar, no es un mockup.</p>
@@ -231,7 +231,7 @@
                                 animado al cargar con <code>.marca-anim</code>) y clase <code>.nota</code>
                                 (marginalia en mono itálica con prefijo <code>// nota</code>).</div>
                         </div>
-                        <p class="razon"><strong>razón</strong> — Es el elemento por el que se recuerda la página y
+                        <p class="razon"><strong>razón</strong> Es el elemento por el que se recuerda la página y
                             está justificado por la historia del candidato: marketing (subrayar lo importante de un
                             documento) + desarrollo (comentar el código). La decoración ahora explica decisiones en
                             lugar de rellenar espacio.</p>
@@ -247,7 +247,7 @@
                                 datos en JS; observer con <code>unobserve()</code> tras revelar; navegación por
                                 teclado del lightbox solo cuando está abierto.</div>
                         </div>
-                        <p class="razon"><strong>razón</strong> — Ocultar la navegación al bajar dificulta llegar al
+                        <p class="razon"><strong>razón</strong> Ocultar la navegación al bajar dificulta llegar al
                             CTA de contacto, que es la conversión del sitio. Los botones ocultos como almacén de
                             datos eran HTML fantasma: un array es más honesto y más corto. Las flechas del teclado
                             antes cambiaban la galería aunque el lightbox estuviera cerrado, lo que interfería con
@@ -265,7 +265,7 @@
                                 el pliegue, meta description en ambas páginas y <code>aria-label</code> /
                                 <code>aria-expanded</code> en los controles.</div>
                         </div>
-                        <p class="razon"><strong>razón</strong> — Quien evalúa a un candidato frontend mira estas
+                        <p class="razon"><strong>razón</strong> Quien evalúa a un candidato frontend mira estas
                             cosas. Además, un recruiter navegando con teclado o con animaciones reducidas debe poder
                             llegar igualmente al correo y al CV.</p>
                     </li>
@@ -278,7 +278,7 @@
                                 (tablet) y ancho mínimo, comprobando desbordamientos con un script temporal que
                                 medía <code>getBoundingClientRect()</code> de todos los elementos.</div>
                         </div>
-                        <p class="razon"><strong>razón</strong> — La maquetación fluida (grids con
+                        <p class="razon"><strong>razón</strong> La maquetación fluida (grids con
                             <code>auto-fit/minmax</code>, <code>clamp()</code> en titulares, flex con
                             <code>wrap</code>) se validó midiendo, no suponiendo. Nota del proceso: Chrome headless
                             impone un ancho mínimo de ventana (~500px), así que una captura "a 390px" en realidad
@@ -306,7 +306,7 @@
 
     <footer class="pie">
         <div class="contenedor pie-fila">
-            <p>Notas del rediseño — julio 2026 · documento de trabajo, no forma parte del portfolio público.</p>
+            <p>Notas del rediseño julio 2026 · documento de trabajo, no forma parte del portfolio público.</p>
         </div>
     </footer>
 </body>

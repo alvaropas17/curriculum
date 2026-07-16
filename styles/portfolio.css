@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Álvaro Pastor — portfolio
+   Álvaro Pastor portfolio
    Sistema visual: "documento de trabajo anotado"
    papel claro · tinta · subrayador amarillo · notas al margen en mono
    ========================================================================== */
@@ -611,6 +611,12 @@ a {
   margin-top: 0;
 }
 
+@media (max-width: 59.999rem) {
+  .proyecto.invertido .proyecto-info {
+    order: -1;
+  }
+}
+
 @media (min-width: 60rem) {
   .proyecto {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
@@ -800,12 +806,12 @@ a {
 .cv-descarga-movil { display: none; }
 
 .cv-pagina {
-  min-height: 100vh;
+  min-height: 100dvh;
   background: var(--papel-alt);
 }
 
 .cv-pantalla {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
 }
@@ -1386,7 +1392,7 @@ a {
 
 .lightbox img {
   max-width: min(94vw, 75rem);
-  max-height: 86vh;
+  max-height: 86dvh;
   object-fit: contain;
   border-radius: var(--radio);
   border: 1.5px solid rgba(246, 244, 238, 0.3);
@@ -1792,7 +1798,7 @@ a {
   }
   .hero {
     position: relative;
-    min-height: calc(100vh - 4.25rem);
+    min-height: calc(100dvh - 4.25rem);
     display: grid;
     align-items: center;
     padding-block: 7rem;
@@ -2380,12 +2386,21 @@ a {
     margin-top: 2rem;
   }
 
+  .caso-hero {
+    padding-block: 2.5rem 3.5rem;
+    gap: 2rem;
+  }
+
   .seccion-pensamiento .contenedor {
     padding-inline: 1.25rem;
   }
 }
 
 @media (max-width: 23.5rem) {
+  .caso-hero {
+    padding-block: 2rem 3rem;
+    gap: 1.5rem;
+  }
   .hero-meta {
     grid-template-columns: 1fr;
     gap: 0.28rem;

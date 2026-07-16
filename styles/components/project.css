@@ -11,6 +11,12 @@
   margin-top: 0;
 }
 
+@media (max-width: 59.999rem) {
+  .proyecto.invertido .proyecto-info {
+    order: -1;
+  }
+}
+
 @media (min-width: 60rem) {
   .proyecto {
     grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);

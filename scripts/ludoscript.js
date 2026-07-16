@@ -1,10 +1,10 @@
 (() => {
   const capturas = [
-    { src: '../img/ludoscript-home.png', etiqueta: 'Home', alt: 'LudoScript Home', texto: 'Home — la puerta de entrada a la plataforma.' },
-    { src: '../img/ludoscript-quiz.png', etiqueta: 'Quiz', alt: 'Quiz de LudoScript', texto: 'Quiz — preparación y práctica con preguntas.' },
-    { src: '../img/ludoscript-resultado-final.png', etiqueta: 'Resultados', alt: 'Resultado final de LudoScript', texto: 'Resultados — feedback tras completar la sesión.' },
-    { src: '../img/progreso.png', etiqueta: 'Progreso', alt: 'Panel de progreso de LudoScript', texto: 'Progreso — seguimiento de evolución y puntos débiles.' },
-    { src: '../img/aprendizaje.png', etiqueta: 'Aprendizaje', alt: 'Pantalla de aprendizaje de LudoScript', texto: 'Aprendizaje — repaso de conceptos dentro del flujo.' }
+    { src: '../img/ludoscript-home.png', etiqueta: 'Home', alt: 'LudoScript Home', texto: 'Home la puerta de entrada a la plataforma.' },
+    { src: '../img/ludoscript-quiz.png', etiqueta: 'Quiz', alt: 'Quiz de LudoScript', texto: 'Quiz preparación y práctica con preguntas.' },
+    { src: '../img/ludoscript-resultado-final.png', etiqueta: 'Resultados', alt: 'Resultado final de LudoScript', texto: 'Resultados feedback tras completar la sesión.' },
+    { src: '../img/progreso.png', etiqueta: 'Progreso', alt: 'Panel de progreso de LudoScript', texto: 'Progreso seguimiento de evolución y puntos débiles.' },
+    { src: '../img/aprendizaje.png', etiqueta: 'Aprendizaje', alt: 'Pantalla de aprendizaje de LudoScript', texto: 'Aprendizaje repaso de conceptos dentro del flujo.' }
   ];
 
   const galeriaImagen = document.querySelector('#galeria-imagen');
