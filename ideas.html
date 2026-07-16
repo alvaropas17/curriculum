@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <!-- Cuando esto pase a producción, la intención es restringir el acceso solo a mí (mecanismo aún por decidir). -->
+    <script src="./scripts/analytics-consent.js" defer></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Ideas para alvaropastor.dev — Brainstorming · Álvaro Pastor</title>
+    <meta name="description"
+        content="Cuaderno abierto de ideas para aprovechar el dominio alvaropastor.dev: contenido, un posible servicio de plantillas iTop, micro-herramientas gratuitas y storytelling." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/portfolio.css" />
+    <style>
+        /* Esta página es un cuaderno, no un dossier de proyectos: nada de
+           tarjetas. Las ideas se leen en prosa y cada bloque lleva su
+           propio color de subrayado a modo de rotulador distinto. */
+        :root {
+            --rosa: #b3395b;
+        }
+
+        .idea-encabezado {
+            display: flex;
+            align-items: baseline;
+            gap: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .idea-numero {
+            font-family: var(--fuente-display);
+            font-size: clamp(2.4rem, 5.6vw, 3.6rem);
+            font-weight: 800;
+            line-height: 0.8;
+            letter-spacing: -0.02em;
+        }
+
+        .idea-encabezado .idea-titulos .etiqueta {
+            margin-bottom: 0.4rem;
+        }
+
+        .idea-clave {
+            font-family: var(--fuente-display);
+            font-size: clamp(1.28rem, 2.6vw, 1.6rem);
+            font-weight: 600;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+            max-width: 40rem;
+            margin-block: 0 1.7rem;
+        }
+
+        .idea-cuerpo {
+            max-width: 42rem;
+            color: var(--tinta-70);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .idea-cuerpo p + p {
+            margin-top: 1.15rem;
+        }
+
+        .su {
+            text-decoration: underline;
+            text-decoration-thickness: 0.16em;
+            text-underline-offset: 0.1em;
+            text-decoration-skip-ink: none;
+            color: var(--tinta);
+        }
+
+        .su-marca { text-decoration-color: var(--marca); }
+        .su-azul { text-decoration-color: var(--azul); }
+        .su-verde { text-decoration-color: var(--verde); }
+        .su-rosa { text-decoration-color: var(--rosa); }
+
+        @media (max-width: 30rem) {
+            .idea-encabezado {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+        }
+
+        /* vista previa del "archivo" en el hero: texto corrido, no fichas */
+        .md-preview {
+            padding: 1.5rem 1.6rem;
+            background: var(--papel);
+            font-family: var(--fuente-mono);
+            font-size: 0.83rem;
+            line-height: 2.1;
+            color: var(--tinta-70);
+        }
+
+        .md-preview p {
+            white-space: normal;
+        }
+
+        .md-num {
+            color: var(--tinta-50);
+            margin-right: 0.5em;
+        }
+
+        /* cierre en prosa, sin caja destacada */
+        .idea-cierre {
+            max-width: 46rem;
+            color: var(--tinta-70);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body id="top">
+    <nav class="nav">
+        <div class="contenedor nav-fila">
+            <a class="nav-marca" href="./index.html">Álvaro Pastor<span class="nav-apellido"> Periago</span><span>—
+                    ideas</span></a>
+            <div class="nav-enlaces">
+                <a href="#contenido">contenido</a>
+                <a href="#servicio">servicio</a>
+                <a href="#herramientas">herramientas</a>
+                <a href="#storytelling">storytelling</a>
+            </div>
+            <a href="./index.html" class="btn btn-primario nav-cta">Volver al portfolio</a>
+            <button id="boton-menu" class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                    <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+        <div id="menu-movil" class="menu-movil">
+            <a href="#contenido">contenido</a>
+            <a href="#servicio">servicio</a>
+            <a href="#herramientas">herramientas</a>
+            <a href="#storytelling">storytelling</a>
+            <a href="./index.html">← volver al portfolio</a>
+        </div>
+    </nav>
+
+    <main>
+        <header class="contenedor caso-hero">
+            <div>
+                <p class="etiqueta">brainstorming · alvaropastor.dev</p>
+                <h1>Ideas para aprovechar <span class="marca marca-anim">el dominio nuevo</span>.</h1>
+                <p class="hero-intro">
+                    Me acabo de comprar alvaropastor.dev y esto es mi cuaderno de ideas abierto: contenido, un
+                    posible servicio, herramientas gratuitas y algún experimento de storytelling. Nada está
+                    decidido todavía — es la fase de explorar antes de priorizar.
+                </p>
+                <div class="tags" style="margin-top: 1.6rem;">
+                    <span class="tag tag-acento">sin priorizar</span>
+                    <span class="tag">fase de exploración</span>
+                    <span class="tag">sin compromiso de desarrollo</span>
+                </div>
+                <div class="hero-acciones">
+                    <a href="#contenido" class="btn btn-primario">Ver las ideas
+                        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                            <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg></a>
+                    <a href="#notas" class="btn btn-secundario">Notas generales</a>
+                </div>
+            </div>
+            <div>
+                <div class="ventana">
+                    <div class="ventana-barra">
+                        <span class="ventana-punto"></span>
+                        <span class="ventana-punto"></span>
+                        <span class="ventana-punto lleno"></span>
+                        <span class="ventana-url">notas-ideas.md</span>
+                    </div>
+                    <div class="md-preview">
+                        <p><span class="md-num">01</span><span class="su su-marca">contenido</span> — blog, feed
+                            propio y analítica sin cookies.</p>
+                        <p><span class="md-num">02</span><span class="su su-azul">servicio</span> — plantillas de
+                            email con iTop, de caso de estudio a oferta.</p>
+                        <p><span class="md-num">03</span><span class="su su-verde">herramientas</span> —
+                            micro-herramientas gratis, 100% frontend.</p>
+                        <p><span class="md-num">04</span><span class="su su-rosa">storytelling</span> — ganchos
+                            narrativos aplicados a marketing, por confirmar.</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- 01 · Contenido y marca personal -->
+        <section class="seccion seccion-alt" id="contenido">
+            <div class="contenedor revelar">
+                <div class="idea-encabezado">
+                    <span class="idea-numero" style="color: var(--marca);">01</span>
+                    <div class="idea-titulos">
+                        <p class="etiqueta">contenido y marca personal</p>
+                        <h2 class="titulo-seccion">Construir marca con contenido propio</h2>
+                    </div>
+                </div>
+                <p class="idea-clave">
+                    El objetivo: que se vea <span class="su su-marca">cómo pienso y cómo trabajo</span>, no solo
+                    el resultado ya terminado de un proyecto.
+                </p>
+                <div class="idea-cuerpo">
+                    <p>
+                        Un <span class="su su-marca">blog</span> propio en <code>/blog</code> —
+                        probablemente Astro o Vite+MDX, para no salirme del stack Vue que ya uso— donde escribir
+                        sobre el cruce entre marketing y desarrollo, las decisiones detrás de mis propios
+                        proyectos y lo que voy aprendiendo por el camino. Al lado, un feed curado con los posts
+                        de LinkedIn y X que mejor me representan: enlace original más una nota de contexto,
+                        mantenible a mano con un JSON sencillo.
+                    </p>
+                    <p>
+                        Todo esto pide un acabado más cuidado: micro-interacciones con fade-ins al hacer scroll,
+                        hover states y transiciones más finas — con Vue, Intersection Observer y CSS, o quizá
+                        <code>@vueuse/motion</code> o GSAP si quiero algo más pulido, con un estilo que mire de
+                        reojo al de Anthropic. Y para saber si algo de esto funciona, <span class="su su-marca">analítica
+                        propia sin cookies</span> (Plausible o Umami) en vez de depender de terceros.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 02 · Servicio: plantillas de correo con iTop -->
+        <section class="seccion" id="servicio">
+            <div class="contenedor revelar">
+                <div class="idea-encabezado">
+                    <span class="idea-numero" style="color: var(--azul);">02</span>
+                    <div class="idea-titulos">
+                        <p class="etiqueta">servicio</p>
+                        <h2 class="titulo-seccion">De caso de estudio a oferta real</h2>
+                    </div>
+                </div>
+                <p class="idea-clave">
+                    El objetivo: dejar de enseñar el trabajo hecho y empezar a
+                    <span class="su su-azul">ofrecerlo como servicio</span>.
+                </p>
+                <div class="idea-cuerpo">
+                    <p>
+                        Ya tengo el caso de estudio de las plantillas corporativas de iTop. Falta convertirlo en
+                        una página de servicio de verdad — problema, qué ofrezco, antes/después — con un
+                        <span class="su su-azul">CTA claro</span>: un formulario o un Calendly para pedir una
+                        auditoría o una muestra gratuita.
+                    </p>
+                    <p>
+                        La otra mitad es SEO de intención específica, algo que no he hecho nunca: keywords muy
+                        concretas como "plantillas de correo iTop", title y meta cuidados, dos o tres artículos
+                        de apoyo en el blog y alta en Search Console.
+                    </p>
+                </div>
+                <aside class="nota" style="max-width: none; margin-top: 2rem;">
+                    Objetivo doble: darme a conocer y explorar si esto tiene potencial para cobrar por ello. Es
+                    mi primera vez haciendo SEO de intención específica, así que iré aprendiendo sobre la
+                    marcha.
+                </aside>
+            </div>
+        </section>
+
+        <!-- 03 · Micro-herramientas gratuitas -->
+        <section class="seccion seccion-alt" id="herramientas">
+            <div class="contenedor revelar">
+                <div class="idea-encabezado">
+                    <span class="idea-numero" style="color: var(--verde);">03</span>
+                    <div class="idea-titulos">
+                        <p class="etiqueta">herramientas</p>
+                        <h2 class="titulo-seccion">Micro-herramientas gratuitas, 100% frontend</h2>
+                    </div>
+                </div>
+                <p class="idea-clave">
+                    El objetivo: atraer <span class="su su-verde">perfiles técnicos</span> vía SEO de cola
+                    larga, sin backend y sin fricción.
+                </p>
+                <div class="idea-cuerpo">
+                    <p>
+                        Tres ideas dando vueltas. Un extractor/limpiador <span class="su su-verde">CSV↔JSON</span>
+                        para exportaciones de iTop, Jira o Zendesk — selecciono y renombro columnas y exporto
+                        limpio; comparte público con las plantillas de iTop. Un formateador de logs de error
+                        que convierte un pegote de texto desordenado en una tabla interactiva, resaltando
+                        ERROR/WARN y con filtro por palabras clave: público muy técnico, buen escaparate
+                        visual.
+                    </p>
+                    <p>
+                        Y, más especulativo, un generador visual de scripts de bash, backups o SSH con
+                        animación de escritura — más vistoso para compartir, pero menos ligado a mi experiencia
+                        directa y necesita más documentación antes de arrancar.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 04 · Storytelling / ganchos narrativos -->
+        <section class="seccion" id="storytelling">
+            <div class="contenedor revelar">
+                <div class="idea-encabezado">
+                    <span class="idea-numero" style="color: var(--rosa);">04</span>
+                    <div class="idea-titulos">
+                        <p class="etiqueta">storytelling · por confirmar</p>
+                        <h2 class="titulo-seccion">Qué engancha en una historia, aplicado a marketing</h2>
+                    </div>
+                </div>
+                <p class="idea-clave">
+                    Esto es más un interés personal que una estrategia de SEO: entender qué
+                    <span class="su su-rosa">engancha</span> en una historia y aplicarlo al marketing.
+                </p>
+                <div class="idea-cuerpo">
+                    <p>
+                        Dos direcciones sin decidir. La primera, un análisis o artículo sobre patrones
+                        narrativos de enganche — tensión y resolución, antes/después — conectado con mi interés
+                        en Schwartz y Hormozi. La segunda, más técnica e incierta, una
+                        <span class="su su-rosa">micro-herramienta</span> que analice transcripciones y detecte
+                        "momentos de gancho": necesitaría bastante más validación antes de arrancar.
+                    </p>
+                </div>
+                <aside class="nota" style="max-width: none; margin-top: 1.6rem;">
+                    Todavía no tengo claro si esta es la lectura correcta de la idea original. La dejo aquí tal
+                    cual para revisarla con calma.
+                </aside>
+            </div>
+        </section>
+
+        <!-- Notas generales -->
+        <section class="seccion seccion-alt" id="notas">
+            <div class="contenedor revelar">
+                <p class="etiqueta">notas</p>
+                <h2 class="titulo-seccion" style="margin-bottom: 1.6rem;">Notas generales</h2>
+                <p class="idea-cierre">
+                    <span class="marca">Ninguna de estas ideas tiene compromiso de desarrollo todavía</span> —
+                    esto es fase de exploración, no una oferta de trabajo en la mesa. Varias comparten sinergia
+                    entre ellas: el extractor CSV y las plantillas de iTop apuntan al mismo público, y el blog
+                    puede dar soporte de contenido tanto al servicio de iTop como a las micro-herramientas.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section class="contacto" id="contacto">
+            <div class="contenedor revelar">
+                <p class="etiqueta">siguiente paso</p>
+                <h2>¿Te resuena alguna de estas ideas?</h2>
+                <p>Si alguna te parece interesante — o se te ocurre otra — escríbeme. De momento esto es una
+                    lista viva que iré actualizando.</p>
+                <div class="acciones">
+                    <a href="mailto:alvpastor17@gmail.com" class="btn btn-claro">Escríbeme</a>
+                    <a href="./index.html" class="btn btn-contorno-claro">Volver al portfolio</a>
+                </div>
+                <p class="correo">o directamente: <a class="enlace"
+                        href="mailto:alvpastor17@gmail.com">alvpastor17@gmail.com</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <div class="contenedor pie-fila">
+            <p>Ideas para alvaropastor.dev — cuaderno de brainstorming abierto.</p>
+            <div class="pie-enlaces">
+                <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" rel="noopener">LinkedIn</a>
+                <a href="https://github.com/alvaropas17/alvaropas17" rel="noopener">GitHub</a>
+                <a href="mailto:alvpastor17@gmail.com">Email</a>
+                <a href="#top">Arriba</a>
+            </div>
+        </div>
+    </footer>
+    <script src="./scripts/ui-comun.js"></script>
+</body>
+
+</html>
