@@ -12,7 +12,7 @@
 }
 
 @media (max-width: 59.999rem) {
-  .proyecto.invertido .proyecto-info {
+  .proyecto-info {
     order: -1;
   }
 }
