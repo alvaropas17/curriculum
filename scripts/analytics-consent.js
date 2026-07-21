@@ -3,7 +3,7 @@
   const ACCEPTED = "accepted";
   const REJECTED = "rejected";
   const GA_ID = "G-EZ9VY5E3EE";
-  const CLARITY_ID = "xhnoyjsnpn";
+  const CLARITY_ID = "xhrszupurh";
   const TRACK_ANALYTICS_BY_DEFAULT = true;
 
   const ANALYTICS_COOKIE_NAMES = [
