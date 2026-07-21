@@ -84,7 +84,7 @@
       y.parentNode.insertBefore(t, y);
     })(window, document, "clarity", "script", CLARITY_ID);
 
-    window.clarity("consent", true);
+    window.clarity("consent");
   }
 
   function loadAnalytics() {
