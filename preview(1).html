@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Generador de URLs UTM para redes sociales" />
+  <title>Generador de URLs UTM</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --text: #17202a;
+      --muted: #667085;
+      --border: #d9dee7;
+      --primary: #1f6feb;
+      --primary-hover: #1858b8;
+      --success: #18794e;
+      --shadow: 0 12px 30px rgba(23, 32, 42, 0.08);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .container {
+      width: min(920px, calc(100% - 32px));
+      margin: 48px auto;
+    }
+
+    header {
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1;
+    }
+
+    header p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 46px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0 12px;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+    }
+
+    input:focus,
+    select:focus {
+      outline: 3px solid rgba(31, 111, 235, 0.15);
+      border-color: var(--primary);
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.4;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    button {
+      min-height: 44px;
+      border: 0;
+      border-radius: 10px;
+      padding: 0 16px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .primary:hover {
+      background: var(--primary-hover);
+    }
+
+    .secondary {
+      background: #eef2f7;
+      color: var(--text);
+    }
+
+    .result-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .result-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      background: #fbfcfe;
+    }
+
+    .result-card h2 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+    }
+
+    .result-card p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .url-row {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .url-output {
+      flex: 1;
+      min-width: 0;
+      min-height: 44px;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .copy {
+      background: #e8f1ff;
+      color: #174ea6;
+      white-space: nowrap;
+      position: relative;
+    }
+
+    .copy-toast {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%) translateY(6px);
+      background: #18794e;
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .copy-toast::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: #18794e;
+    }
+
+    .copy-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .status {
+      min-height: 24px;
+      margin-top: 14px;
+      color: var(--success);
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.5;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        margin: 24px auto;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: auto;
+      }
+
+      .url-row {
+        flex-direction: column;
+      }
+
+      .copy {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Generador de URLs UTM</h1>
+      <p>
+        Crea enlaces personalizados para saber si una visita llega desde una publicación,
+        la descripción del perfil u otra ubicación de LinkedIn, Twitter/X o Instagram.
+      </p>
+    </header>
+
+    <section class="panel" aria-labelledby="config-title">
+      <h2 id="config-title">Configuración</h2>
+
+      <div class="grid">
+        <div class="field full">
+          <label for="baseUrl">URL de destino</label>
+          <input
+            id="baseUrl"
+            type="url"
+            value="https://alvaropastor.dev/"
+            placeholder="https://tudominio.com/"
+          />
+          <span class="hint">La página a la que llegará el visitante.</span>
+        </div>
+
+        <div class="field">
+          <label for="campaign">Nombre de la campaña</label>
+          <input
+            id="campaign"
+            type="text"
+            value="portfolio"
+            placeholder="portfolio"
+          />
+          <span class="hint">Ejemplo: portfolio, cv_2026 o lanzamiento_web.</span>
+        </div>
+
+        <div class="field">
+          <label for="medium">Medio</label>
+          <input id="medium" type="text" value="social" />
+          <span class="hint">Normalmente puedes dejarlo como “social”.</span>
+        </div>
+
+        <div class="field">
+          <label for="network">Red social</label>
+          <select id="network">
+            <option value="linkedin">LinkedIn</option>
+            <option value="twitter">Twitter / X</option>
+            <option value="instagram">Instagram</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="placement">Lugar del enlace</label>
+          <select id="placement">
+            <option value="publicacion">Publicación</option>
+            <option value="descripcion_perfil">Descripción del perfil</option>
+            <option value="destacados">Sección de destacados</option>
+            <option value="comentario">Comentario</option>
+            <option value="mensaje_privado">Mensaje privado</option>
+            <option value="historia">Historia</option>
+            <option value="otro">Otro lugar</option>
+          </select>
+        </div>
+
+        <div class="field full" id="customPlacementWrapper" hidden>
+          <label for="customPlacement">Nombre del lugar personalizado</label>
+          <input
+            id="customPlacement"
+            type="text"
+            placeholder="por ejemplo: enlace_bio_secundario"
+          />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="primary" id="generateButton" type="button">
+          Generar enlace
+        </button>
+        <button class="secondary" id="generateAllButton" type="button">
+          Generar todas las combinaciones
+        </button>
+      </div>
+
+      <div class="status" id="status" aria-live="polite"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="results-title">
+      <h2 id="results-title">Enlaces generados</h2>
+      <div class="result-list" id="results"></div>
+    </section>
+
+    <footer>
+      Los parámetros UTM no tienen que registrarse previamente. Google Analytics los
+      interpreta cuando el visitante abre la URL.
+    </footer>
+  </main>
+
+  <script>
+    const baseUrlInput = document.getElementById("baseUrl");
+    const campaignInput = document.getElementById("campaign");
+    const mediumInput = document.getElementById("medium");
+    const networkSelect = document.getElementById("network");
+    const placementSelect = document.getElementById("placement");
+    const customPlacementWrapper = document.getElementById("customPlacementWrapper");
+    const customPlacementInput = document.getElementById("customPlacement");
+    const results = document.getElementById("results");
+    const status = document.getElementById("status");
+
+    const networkLabels = {
+      linkedin: "LinkedIn",
+      twitter: "Twitter / X",
+      instagram: "Instagram"
+    };
+
+    const placementLabels = {
+      publicacion: "Publicación",
+      descripcion_perfil: "Descripción del perfil",
+      destacados: "Sección de destacados",
+      comentario: "Comentario",
+      mensaje_privado: "Mensaje privado",
+      historia: "Historia",
+      otro: "Otro lugar"
+    };
+
+    const defaultPlacementsByNetwork = {
+      linkedin: [
+        "publicacion",
+        "descripcion_perfil",
+        "destacados",
+        "comentario",
+        "mensaje_privado"
+      ],
+      twitter: [
+        "publicacion",
+        "descripcion_perfil",
+        "comentario",
+        "mensaje_privado"
+      ],
+      instagram: [
+        "publicacion",
+        "descripcion_perfil",
+        "historia",
+        "mensaje_privado"
+      ]
+    };
+
+    function normalizeValue(value) {
+      return value
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "");
+    }
+
+    function buildUrl(network, placement) {
+      const rawBaseUrl = baseUrlInput.value.trim();
+
+      if (!rawBaseUrl) {
+        throw new Error("Introduce una URL de destino.");
+      }
+
+      let url;
+
+      try {
+        url = new URL(rawBaseUrl);
+      } catch {
+        throw new Error("La URL de destino no es válida.");
+      }
+
+      const campaign = normalizeValue(campaignInput.value) || "portfolio";
+      const medium = normalizeValue(mediumInput.value) || "social";
+      const source = normalizeValue(network);
+      const content = normalizeValue(placement);
+
+      url.searchParams.set("utm_source", source);
+      url.searchParams.set("utm_medium", medium);
+      url.searchParams.set("utm_campaign", campaign);
+      url.searchParams.set("utm_content", content);
+
+      return url.toString();
+    }
+
+    function createResultCard(network, placement, url) {
+      const card = document.createElement("article");
+      card.className = "result-card";
+
+      const title = document.createElement("h2");
+      title.textContent = `${networkLabels[network]} · ${
+        placementLabels[placement] || placement.replaceAll("_", " ")
+      }`;
+
+      const description = document.createElement("p");
+      description.textContent =
+        "Fuente: " + network + " · Ubicación: " + placement;
+
+      const row = document.createElement("div");
+      row.className = "url-row";
+
+      const output = document.createElement("div");
+      output.className = "url-output";
+      output.textContent = url;
+
+      const copyButton = document.createElement("button");
+      copyButton.className = "copy";
+      copyButton.type = "button";
+      copyButton.textContent = "Copiar";
+
+      const toast = document.createElement("span");
+      toast.className = "copy-toast";
+      toast.textContent = "¡Copiado!";
+      copyButton.appendChild(toast);
+
+      copyButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(url);
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1400);
+        } catch {
+          status.textContent = "No se pudo copiar automáticamente. Selecciona el enlace manualmente.";
+        }
+      });
+
+      row.append(output, copyButton);
+      card.append(title, description, row);
+
+      return card;
+    }
+
+    function getSelectedPlacement() {
+      if (placementSelect.value !== "otro") {
+        return placementSelect.value;
+      }
+
+      const customValue = normalizeValue(customPlacementInput.value);
+
+      if (!customValue) {
+        throw new Error("Escribe el nombre del lugar personalizado.");
+      }
+
+      return customValue;
+    }
+
+    function showError(message) {
+      status.textContent = message;
+      status.style.color = "#b42318";
+    }
+
+    function showSuccess(message) {
+      status.textContent = message;
+      status.style.color = "var(--success)";
+    }
+
+    placementSelect.addEventListener("change", () => {
+      customPlacementWrapper.hidden = placementSelect.value !== "otro";
+    });
+
+    document.getElementById("generateButton").addEventListener("click", () => {
+      results.innerHTML = "";
+
+      try {
+        const network = networkSelect.value;
+        const placement = getSelectedPlacement();
+        const url = buildUrl(network, placement);
+
+        results.appendChild(createResultCard(network, placement, url));
+        showSuccess("Enlace generado correctamente.");
+      } catch (error) {
+        showError(error.message);
+      }
+    });
+
+    document.getElementById("generateAllButton").addEventListener("click", () => {
+      results.innerHTML = "";
+
+      try {
+        Object.entries(defaultPlacementsByNetwork).forEach(([network, placements]) => {
+          placements.forEach((placement) => {
+            const url = buildUrl(network, placement);
+            results.appendChild(createResultCard(network, placement, url));
+          });
+        });
+
+        showSuccess("Se han generado todas las combinaciones.");
+      } catch (error) {
+        showError(error.message);
+      }
+    });
+
+    document.getElementById("generateAllButton").click();
+  </script>
+</body>
+</html>

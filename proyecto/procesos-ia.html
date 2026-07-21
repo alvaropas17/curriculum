@@ -5,15 +5,15 @@
   <script src="../scripts/analytics-consent.js" defer></script>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Procesos con IA Archivo global de opencode · Álvaro Pastor</title>
+  <title>Procesos con IA: archivo global de OpenCode · Álvaro Pastor</title>
   <meta name="description"
-    content="Cómo configuro karpathy.md como archivo global de opencode para guiar el comportamiento de la IA en cualquier proyecto." />
+    content="Cómo utilizo karpathy.md como contexto global en OpenCode para trabajar con una IA más consistente, deliberada y verificable." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
     rel="stylesheet" />
-  <link rel="stylesheet" href="../styles/portfolio.css" />
+  <link rel="stylesheet" href="../styles/portfolio-seleccion.css" />
   <link rel="stylesheet" href="../styles/procesos-ia.css" />
 </head>
 
@@ -47,11 +47,9 @@
     <header class="contenedor caso-hero">
       <div>
         <p class="etiqueta">procesos con ia · harness</p>
-        <h1>Un archivo <span class="marca marca-anim">que enseña a la IA</span> a trabajar mejor.</h1>
+        <h1>Un archivo que da a la IA <span class="marca marca-anim">mejor contexto para decidir.</span></h1>
         <p class="hero-intro">
-          Basado en el enfoque de Andrej Karpathy, he creado un archivo de instrucciones global que opencode
-          carga en cualquier proyecto. Así la IA parte con unas guías claras sobre cómo escribir, pensar y
-          estructurar código.
+          Inspirado en el enfoque de Andrej Karpathy, he definido un archivo global que OpenCode carga en cada proyecto. No sustituye el criterio técnico: le da al agente un marco claro para analizar, proponer y verificar cambios.
         </p>
         <div class="tags" style="margin-top: 1.6rem;">
           <span class="tag">opencode</span>
@@ -135,22 +133,17 @@
         <div class="idea-grid">
           <div class="parrafos">
             <p>
-              Andrej Karpathy lleva tiempo insistiendo en que <strong>el prompt lo es todo</strong>. No importa
-              lo bueno que sea el modelo si las instrucciones son vagas o contradictorias. Un buen harness —
-              las guías que acompañan al código— puede marcar la diferencia entre una IA que alucina y una que
-              produce resultados sólidos.
+              La calidad de una respuesta no depende solo del modelo: también depende del contexto, las restricciones y los criterios con los que trabaja. Un buen <em>harness</em> —el conjunto de guías que acompaña al agente— reduce ambigüedades y hace el proceso más predecible.
             </p>
             <p>
-              opencode permite definir un archivo global (<code>karpathy.md</code>) que se inyecta como
-              contexto en <strong>todos los proyectos</strong>. Así no tengo que repetir las mismas
-              instrucciones cada vez que empiezo algo nuevo: la IA ya sabe cómo quiero que trabaje.
+              OpenCode permite cargar un archivo global (<code>karpathy.md</code>) como contexto en <strong>todos los proyectos</strong>. Así, los principios de trabajo no se pierden al cambiar de repositorio: el agente parte de una base común y adapto después las instrucciones específicas de cada caso.
             </p>
           </div>
           <div class="idea-tarjetas">
             <article class="tarjeta">
               <span class="campo">problema</span>
-              <h3>Instrucciones invisibles</h3>
-              <p>Cada nuevo proyecto empieza sin contexto. Hay que recordarle a la IA cómo quieres que piense y escriba.
+              <h3>El contexto se reinicia</h3>
+              <p>Sin una base común, cada proyecto empieza con las mismas aclaraciones: cómo analizar, qué priorizar y hasta dónde cambiar.
               </p>
             </article>
             <article class="tarjeta">
@@ -162,7 +155,7 @@
             <article class="tarjeta">
               <span class="campo">efecto</span>
               <h3>Consistencia</h3>
-              <p>El agente no empieza de cero: conoce mis principios de código, mi estilo y cómo manejar los trade-offs.
+              <p>El agente no empieza de cero: conoce mis principios de ingeniería, mi estilo de trabajo y cómo exponer los <em>trade-offs</em>.
               </p>
             </article>
           </div>
@@ -186,13 +179,12 @@
           </article>
           <article class="paso">
             <h3>2. Colocarlo en la ruta global</h3>
-            <p>Lo guardas en <code>~/.config/opencode/</code> y opencode lo carga automáticamente al iniciar
+            <p>Lo guardo en <code>~/.config/opencode/</code> y OpenCode lo carga automáticamente al iniciar
               cualquier proyecto.</p>
           </article>
           <article class="paso">
-            <h3>3. Listo</h3>
-            <p>Cada vez que hablas con el agente, las instrucciones están presentes. Sin setup adicional, sin
-              copiar archivos entre proyectos.</p>
+            <h3>3. Un punto de partida común</h3>
+            <p>Cada conversación empieza con estas guías presentes, sin repetir configuración ni copiar archivos entre proyectos.</p>
           </article>
         </div>
       </div>
@@ -211,7 +203,7 @@
             <li class="decision">
               <div>
                 <h3>Think Before Coding</h3>
-                <p><strong>qué dice</strong> No asumas. No escondas la confusión. Explica los trade-offs
+                <p><strong>qué dice</strong> No asumas ni ocultes la incertidumbre. Expón los <em>trade-offs</em>
                   antes de implementar.</p>
                 <p><strong>para qué sirve</strong> Evita que la IA se lance a escribir código sin entender
                   el contexto o sin preguntar cuando algo es ambiguo.</p>
@@ -229,10 +221,9 @@
             <li class="decision">
               <div>
                 <h3>Surgical Changes</h3>
-                <p><strong>qué dice</strong> Toca solo lo que debas. No "mejores" código adyacente ni
+                <p><strong>qué dice</strong> Cambia solo lo necesario. No “mejores” código adyacente ni
                   refactorices lo que no está roto.</p>
-                <p><strong>para qué sirve</strong>— Las IAs suelen reescribir más de lo necesario. Con esto
-                  limito los cambios a lo estrictamente pedido.</p>
+                <p><strong>para qué sirve</strong>Evita reescrituras que no aportan valor y limita cada intervención a lo estrictamente solicitado.</p>
               </div>
             </li>
             <li class="decision">
@@ -252,11 +243,11 @@
       <div class="contenedor dos-columnas revelar">
         <div class="col-titulo">
           <p class="etiqueta">resultado</p>
-          <h2 class="titulo-seccion">Menos vueltas, más acierto</h2>
+          <h2 class="titulo-seccion">Menos fricción, mejores decisiones</h2>
         </div>
         <div class="aprendizajes">
           <div class="aprendizaje">
-            <h3>La IA pregunta antes de escribir</h3>
+            <h3>Las dudas se hacen visibles</h3>
             <p>Cuando algo no está claro, el agente lo dice en lugar de asumir. Eso evita iteraciones
               desperdiciadas y código que no pedí.</p>
           </div>
@@ -271,7 +262,7 @@
               criterios.</p>
           </div>
           <div class="aprendizaje">
-            <h3>Iteraciones más cortas</h3>
+            <h3>Iteraciones con cierre verificable</h3>
             <p>Al tener objetivos claros desde el principio, cada ciclo de feedback produce cambios concretos y
               medibles.</p>
           </div>
@@ -282,9 +273,8 @@
     <section class="contacto" id="CTA">
       <div class="contenedor revelar">
         <p class="etiqueta">el archivo</p>
-        <h2>Un <span class="marca">harness</span> que no tocas, pero siempre está.</h2>
-        <p>El archivo global de opencode es una de esas configuraciones que hacen que todo funcione mejor sin
-          que tengas que acordarte. Lo pones una vez y la IA lo usa siempre.</p>
+        <h2>Un <span class="marca">harness</span> persistente para trabajar con mejor criterio.</h2>
+        <p>El archivo global convierte una preferencia de trabajo en una base reutilizable: se configura una vez, acompaña a cada proyecto y deja espacio para el contexto específico de cada tarea.</p>
         <div class="acciones">
           <a href="../karpathy.md" class="btn btn-claro" target="_blank" rel="noopener noreferrer">Ver karpathy.md</a>
           <a href="../index.html" class="btn btn-contorno-claro">Volver al portfolio</a>
@@ -295,7 +285,7 @@
 
   <footer class="pie">
     <div class="contenedor pie-fila">
-      <p>Procesos con IA archivo global karpathy.md para opencode.</p>
+      <p>Procesos con IA · archivo global karpathy.md para OpenCode.</p>
       <div class="pie-enlaces">
         <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" rel="noopener">LinkedIn</a>
         <a href="https://github.com/alvaropas17/alvaropas17" rel="noopener">GitHub</a>
