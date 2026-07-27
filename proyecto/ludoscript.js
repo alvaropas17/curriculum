@@ -43,18 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const quizDots = Array.from(document.querySelectorAll(".quiz-dot"));
   const progressDots = Array.from(document.querySelectorAll(".progress-dot"));
   const featureGroups = [
-    [{ src: "../img/ludoscript-home.png", alt: "LudoScript Home" }],
+    [{ src: "../img/ludoscript/ludoscript-home.png", alt: "LudoScript Home" }],
     [
-      { src: "../img/ludoscript-quiz.png", alt: "LudoScript Quiz" },
-      { src: "../img/ludoscript-in-quiz.png", alt: "LudoScript Quiz en curso" },
-      { src: "../img/ludoscript-resultado-final.png", alt: "LudoScript Resultado final" }
+      { src: "../img/ludoscript/ludoscript-quiz.png", alt: "LudoScript Quiz" },
+      { src: "../img/ludoscript/ludoscript-in-quiz.png", alt: "LudoScript Quiz en curso" },
+      { src: "../img/ludoscript/ludoscript-resultado-final.png", alt: "LudoScript Resultado final" }
     ],
     [
-      { src: "../img/preguntas-falladas.png", alt: "LudoScript Preguntas falladas" },
-      { src: "../img/progreso.png", alt: "LudoScript Progreso" },
-      { src: "../img/progreso-visual.png", alt: "LudoScript Progreso visual" }
+      { src: "../img/ludoscript/ludoscript-preguntas-falladas.png", alt: "LudoScript Preguntas falladas" },
+      { src: "../img/ludoscript/ludoscript-progreso.png", alt: "LudoScript Progreso" },
+      { src: "../img/ludoscript/ludoscript-progreso-visual.png", alt: "LudoScript Progreso visual" }
     ],
-    [{ src: "../img/aprendizaje.png", alt: "LudoScript Aprendizaje" }]
+    [{ src: "../img/ludoscript/ludoscript-aprendizaje.png", alt: "LudoScript Aprendizaje" }]
   ];
 
   let activeFeature = 0;
