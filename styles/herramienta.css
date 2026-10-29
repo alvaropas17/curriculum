@@ -1,0 +1,546 @@
+/* ---------- ficha de herramienta (estilo blog: imagen arriba, título debajo) ---------- */
+
+.caso-hero.herramienta-hero {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 2.5rem;
+  padding-block: 3rem 5rem;
+}
+
+.herramienta-hero .herramienta-portada {
+  order: -1;
+  width: 100%;
+  max-width: 62rem;
+  margin-inline: auto;
+}
+
+.herramienta-hero .herramienta-texto {
+  max-width: 46rem;
+  margin-inline: auto;
+}
+
+.herramienta-hero h1 {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+}
+
+.herramienta-hero .hero-intro {
+  max-width: 40rem;
+}
+
+.ejemplo-prompt {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.nota-ejemplos {
+  max-width: 38rem;
+  margin-block: 1rem 2.6rem;
+}
+
+/* ---------- flujos reales: pregunta → comando → salida → respuesta ---------- */
+
+.flujo {
+  margin-top: 2.6rem;
+  display: grid;
+  gap: 1rem;
+  counter-reset: flujo;
+}
+
+.flujo-titulo {
+  font-size: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
+.flujo-paso {
+  border: 1.5px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--papel);
+  padding: 1.2rem 1.4rem;
+  min-width: 0;
+}
+
+.flujo-paso > .campo {
+  display: block;
+  margin-bottom: 0.7rem;
+}
+
+.flujo-paso p {
+  margin: 0;
+}
+
+.flujo-paso pre {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  background: #11131a;
+  color: #e6e8ef;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  tab-size: 2;
+}
+
+.flujo-paso pre .dim {
+  color: #8b90a3;
+}
+
+.flujo-paso pre .hl {
+  color: #6ee7c8;
+}
+
+.flujo-pregunta p,
+.flujo-respuesta p {
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+
+.flujo-respuesta {
+  border-left: 4px solid var(--azul);
+}
+
+.flujo-nota {
+  font-size: 0.9rem;
+  color: var(--tinta-70);
+  margin-top: 0.7rem;
+}
+
+/* ---------- rediseño de la ficha: una familia tipográfica, jerarquía clara ---------- */
+
+.pagina-herramienta {
+  --fuente-display: var(--fuente-texto);
+  --codigo-fondo: #0f1220;
+  --codigo-borde: #22263a;
+}
+
+/* Instrument Sans para todo; la mono queda reservada al código */
+.pagina-herramienta h1,
+.pagina-herramienta h2,
+.pagina-herramienta h3 {
+  letter-spacing: -0.025em;
+}
+
+.pagina-herramienta h1 {
+  font-weight: 650;
+  line-height: 1.05;
+}
+
+.pagina-herramienta .titulo-seccion {
+  font-weight: 650;
+  max-width: 34rem;
+}
+
+.pagina-herramienta .etiqueta,
+.pagina-herramienta .campo,
+.pagina-herramienta .tarjeta .campo,
+.pagina-herramienta .tag,
+.pagina-herramienta .nav-marca span,
+.pagina-herramienta .nav-enlaces a,
+.pagina-herramienta .menu-movil a,
+.pagina-herramienta .decision strong,
+.pagina-herramienta .paso::before {
+  font-family: var(--fuente-texto);
+}
+
+.pagina-herramienta .etiqueta {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--azul);
+}
+
+.pagina-herramienta .etiqueta::before {
+  content: "";
+  display: inline-block;
+  width: 1.4rem;
+  height: 2px;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+  background: currentColor;
+}
+
+.pagina-herramienta .campo,
+.pagina-herramienta .tarjeta .campo {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.pagina-herramienta .tag {
+  font-size: 0.78rem;
+  font-weight: 500;
+  border-radius: 999px;
+}
+
+.pagina-herramienta code {
+  font-family: var(--fuente-mono);
+  font-size: 0.86em;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: rgba(36, 64, 206, 0.08);
+  color: var(--azul-oscuro);
+}
+
+.pagina-herramienta .seccion {
+  padding-block: 5.5rem;
+}
+
+.pagina-herramienta .tarjeta,
+.pagina-herramienta .paso,
+.pagina-herramienta .decision,
+.pagina-herramienta .flujo-paso {
+  border: 1px solid var(--linea);
+  border-radius: 10px;
+  background: #fff;
+}
+
+.pagina-herramienta .tarjeta:hover {
+  transform: none;
+  border-color: var(--linea);
+  box-shadow: 0 10px 28px -22px rgba(16, 22, 55, 0.5);
+}
+
+/* hero */
+.pagina-herramienta .hero-intro {
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+.pagina-herramienta .herramienta-hero .texto-suave {
+  margin-top: 1rem;
+  padding: 0.9rem 1.1rem;
+  border-left: 3px solid var(--azul);
+  background: rgba(36, 64, 206, 0.05);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+}
+
+/* pasos: 3 columnas, número en círculo */
+@media (min-width: 52rem) {
+  .pagina-herramienta .pasos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pagina-herramienta .paso::before {
+  content: counter(paso);
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--azul);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 650;
+  letter-spacing: 0;
+}
+
+.pagina-herramienta .paso h3 {
+  font-size: 1.1rem;
+  font-weight: 650;
+}
+
+/* flujos: línea temporal con raíl y nodos */
+.pagina-herramienta .flujo {
+  margin-top: 3.5rem;
+  gap: 0;
+  padding: 2rem;
+  border: 1px solid var(--linea);
+  border-radius: 14px;
+  background: var(--papel-alt);
+}
+
+.pagina-herramienta .flujo-titulo {
+  font-size: 1.2rem;
+  font-weight: 650;
+  margin-bottom: 1.6rem;
+}
+
+.pagina-herramienta .flujo-paso {
+  position: relative;
+  margin-left: 2.2rem;
+  margin-bottom: 1rem;
+  padding: 1.1rem 1.3rem;
+}
+
+.pagina-herramienta .flujo-paso:last-child {
+  margin-bottom: 0;
+}
+
+.pagina-herramienta .flujo-paso::before {
+  content: "";
+  position: absolute;
+  left: -1.65rem;
+  top: 1.25rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--azul);
+}
+
+.pagina-herramienta .flujo-paso:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(-1.65rem + 0.35rem - 1px);
+  top: 2.1rem;
+  bottom: calc(-1rem - 1.25rem);
+  width: 2px;
+  background: rgba(36, 64, 206, 0.22);
+}
+
+.pagina-herramienta .flujo-pregunta::before,
+.pagina-herramienta .flujo-respuesta::before {
+  background: var(--azul);
+}
+
+.pagina-herramienta .flujo-pregunta {
+  background: transparent;
+  border-style: dashed;
+}
+
+.pagina-herramienta .flujo-respuesta {
+  border-left: 1px solid var(--linea);
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #eef0fa;
+}
+
+.pagina-herramienta .flujo-respuesta > .campo {
+  color: #9fb0ff;
+}
+
+.pagina-herramienta .flujo-respuesta code {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.pagina-herramienta .flujo-pregunta > p:first-of-type code {
+  background: none;
+  padding: 0;
+  font-family: var(--fuente-texto);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--tinta);
+}
+
+.pagina-herramienta .flujo-paso pre {
+  background: var(--codigo-fondo);
+  border: 1px solid var(--codigo-borde);
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.pagina-herramienta .flujo-nota {
+  font-size: 0.86rem;
+  color: var(--tinta-50);
+}
+
+.pagina-herramienta .flujo-nota code {
+  font-size: 0.82em;
+}
+
+@media (max-width: 40rem) {
+  .pagina-herramienta .flujo {
+    padding: 1.2rem;
+  }
+
+  .pagina-herramienta .flujo-paso {
+    margin-left: 1.6rem;
+  }
+
+  .pagina-herramienta .flujo-paso::before {
+    left: -1.35rem;
+  }
+
+  .pagina-herramienta .flujo-paso:not(:last-child)::after {
+    left: calc(-1.35rem + 0.35rem - 1px);
+  }
+}
+
+/* casos de uso: rejilla de 2, la pregunta como cita */
+@media (min-width: 52rem) {
+  .pagina-herramienta #ejemplos .rejilla-tarjetas {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pagina-herramienta #ejemplos .tarjeta:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+.pagina-herramienta .ejemplo-prompt {
+  font-family: var(--fuente-texto);
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  padding-left: 0.9rem;
+  border-left: 3px solid var(--marca);
+}
+
+.pagina-herramienta #ejemplos .tarjeta p {
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+/* reglas */
+.pagina-herramienta .decision::before {
+  font-family: var(--fuente-texto);
+  font-weight: 650;
+  font-size: 1.5rem;
+  color: var(--azul);
+  -webkit-text-stroke: 0;
+}
+
+.pagina-herramienta .decision strong {
+  display: inline-block;
+  min-width: 6.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--tinta-50);
+}
+/* Setup instructions and copyable prompts. */
+#instalacion h3 { margin-block: 2rem .8rem; }
+#instalacion p { max-width: 68rem; margin-block: .8rem; }
+#instalacion pre { max-width: 100%; overflow-x: auto; padding: 1.25rem; background: var(--papel); border: 1px solid var(--linea-suave); border-radius: var(--radio); font-size: .85rem; }
+#instalacion .instalacion-prompt { white-space: pre-wrap; overflow-wrap: anywhere; margin-block: 1.2rem; }
+.instalacion-manual { margin-block: 2rem; padding: 1.25rem; border: 1px solid var(--linea-suave); }
+.instalacion-manual summary { cursor: pointer; font-weight: 600; }
+.instalacion-tabla { overflow-x: auto; margin-block: 1rem; }
+.instalacion-tabla table { width: 100%; border-collapse: collapse; text-align: left; }
+.instalacion-tabla th, .instalacion-tabla td { padding: .7rem; border-bottom: 1px solid var(--linea-suave); }
+
+/* Formato blog: texto corrido en lugar de tarjetas */
+.pagina-herramienta .idea-blog { display: block; }
+.pagina-herramienta .entradas { max-width: 44rem; margin-top: 1.6rem; }
+.pagina-herramienta .entrada { margin: 0 0 2.2rem; padding: 0; border: 0; background: none; box-shadow: none; }
+.pagina-herramienta .entrada::before { content: none; }
+.pagina-herramienta .entrada .campo { display: block; margin-bottom: 0.35rem; color: var(--azul); text-transform: uppercase; }
+.pagina-herramienta .entrada h3 { font-size: 1.25rem; font-weight: 650; line-height: 1.3; margin: 0 0 0.6rem; }
+.pagina-herramienta .entrada h3.ejemplo-prompt { font-size: 1.15rem; }
+.pagina-herramienta .entrada p { font-size: 1.02rem; line-height: 1.75; margin: 0 0 0.9rem; max-width: none; }
+.pagina-herramienta .entrada strong { color: var(--tinta-50); font-weight: 650; }
+.pagina-herramienta .entrada strong::after { content: ": "; }
+.pagina-herramienta #funcionamiento .entradas { margin-bottom: 1rem; }
+.pagina-herramienta .entrada + .entrada { padding-top: 1.6rem; border-top: 1px solid var(--linea); }
+
+/* ---------- formato blog: una sola columna, mismo ancho que la imagen ---------- */
+
+.pagina-herramienta {
+  --ancho: 64rem;
+  --hueco: 1.5rem;
+}
+
+.pagina-herramienta main .contenedor {
+  padding-inline: 1.25rem;
+}
+
+.pagina-herramienta .herramienta-hero .herramienta-portada,
+.pagina-herramienta .herramienta-hero .herramienta-texto,
+.pagina-herramienta .herramienta-hero .hero-intro,
+.pagina-herramienta .titulo-seccion,
+.pagina-herramienta .nota-ejemplos,
+.pagina-herramienta #rendimiento > .contenedor > .flujo-nota {
+  max-width: none;
+  margin-inline: 0;
+}
+
+.pagina-herramienta main,
+.pagina-herramienta .herramienta-texto,
+.pagina-herramienta .seccion,
+.pagina-herramienta .contacto {
+  text-align: left;
+}
+
+.pagina-herramienta .hero-acciones {
+  margin-inline: 0;
+  width: 100%;
+}
+
+.pagina-herramienta .titulo-seccion + p,
+.pagina-herramienta .titulo-seccion + .idea-grid {
+  margin-block: 1rem var(--hueco);
+}
+
+/* todo en una columna, como un artículo */
+.pagina-herramienta .idea-grid,
+.pagina-herramienta .dos-columnas,
+.pagina-herramienta .pasos,
+.pagina-herramienta .rejilla-tarjetas,
+.pagina-herramienta #ejemplos .rejilla-tarjetas {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.pagina-herramienta .idea-grid {
+  margin-top: 1rem;
+}
+
+.pagina-herramienta .dos-columnas > .col-titulo {
+  position: static;
+}
+
+.pagina-herramienta #ejemplos .tarjeta:last-child {
+  grid-column: auto;
+}
+
+/* mismos bordes y márgenes interiores en todas las cajas */
+.pagina-herramienta .tarjeta,
+.pagina-herramienta .paso,
+.pagina-herramienta .decision,
+.pagina-herramienta .flujo,
+.pagina-herramienta .flujo-paso,
+.pagina-herramienta .ventana {
+  border: 1px solid var(--linea);
+  border-radius: 10px;
+  padding: var(--hueco);
+}
+
+.pagina-herramienta .ventana {
+  padding: 0;
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.pagina-herramienta .flujo {
+  margin-top: 2.5rem;
+}
+
+.pagina-herramienta .flujo-respuesta {
+  border-color: var(--navy);
+}
+
+@media (min-width: 52rem) {
+  .pagina-herramienta .decision {
+    grid-template-columns: 3rem minmax(0, 1fr);
+  }
+}
+
+.pagina-herramienta .herramienta-portada .ventana {
+  margin: 0;
+  transform: none;
+}
+
+.pagina-herramienta main p,
+.pagina-herramienta main h2,
+.pagina-herramienta main h3,
+.pagina-herramienta .parrafos,
+.pagina-herramienta .contacto .contenedor > * {
+  max-width: none;
+}
+
+.pagina-herramienta .herramienta-portada,
+.pagina-herramienta .herramienta-portada .ventana {
+  width: 100%;
+  max-width: none;
+}
+
+.pagina-herramienta .contacto .contenedor {
+  padding-inline: 1.25rem;
+}

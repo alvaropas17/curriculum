@@ -38,3 +38,8 @@ mobile-snapshot.yml
 page-snapshot.yml
 
 AGENTS.MD
+
+# CV privado: conservar solo en local
+/cv.html
+/Alvaro_Pastor_CV_ATS.pdf
+/curriculum.md

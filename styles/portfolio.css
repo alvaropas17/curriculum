@@ -1238,6 +1238,12 @@ a {
   margin-top: 2.4rem;
 }
 
+.contacto .correo-icono {
+  display: inline-block;
+  vertical-align: middle;
+  margin-inline-end: .4rem;
+}
+
 .contacto .correo {
   font-family: var(--fuente-mono);
   font-size: 0.85rem;
@@ -2456,7 +2462,7 @@ a {
 
   .hero-meta span {
     min-width: 0;
-    white-space: nowrap;
+    white-space: normal;
   }
 
   .disponible {
@@ -2545,3 +2551,55 @@ body {
 @media (min-width:30rem) { .tickets-miniatura-fila { grid-template-columns:auto minmax(0,1fr) auto auto; }.tickets-miniatura-fila em { display:block; }.tickets-miniatura-fila button { grid-column:auto; } }
 @media (min-width:44rem) { .ticket { padding:1.25rem; }.ticket-resumen { grid-template-columns:auto minmax(13rem,1fr) auto; }.ticket-datos { grid-column:3; grid-row:1; margin:0; min-width:10rem; }.ticket-acciones { justify-content:flex-end; margin:.9rem 0 0 1.45rem; } }
 @media (prefers-reduced-motion:reduce) { .ticket-boton,.ticket-icono { transition:none; } }
+
+/* Language switch stays available on desktop and mobile. */
+.idioma-boton {
+  flex: 0 0 auto;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: .5rem .65rem;
+  border: 1.5px solid var(--linea);
+  border-radius: var(--radio);
+  background: var(--papel);
+  color: var(--tinta);
+  font: 500 .8rem var(--fuente-mono);
+  cursor: pointer;
+}
+.idioma-boton:hover { background: var(--papel-alt); }
+.idioma-boton:focus-visible { outline: 2px solid var(--marca); outline-offset: 3px; }
+.nav-acciones {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin-inline-start: auto;
+}
+.nav-acciones .nav-cta,
+.nav-fila .nav-acciones .idioma-boton { margin-inline-start: 0; }
+@media (max-width: 40rem) {
+  .nav-fila { gap: .5rem; }
+  .nav-fila .idioma-boton { margin-inline-start: auto; }
+  .nav-fila .nav-marca > span:last-child:not(.nav-apellido) { display: none; }
+  .cv-acciones { flex-wrap: wrap; }
+}
+@media print { .idioma-boton { display: none; } }
+/* Keep the tools heading in the first desktop viewport, including wide screens. */
+@media (min-width: 52rem) {
+  .portada .hero {
+    min-height: calc(76dvh - 4.25rem);
+    display: grid;
+    align-items: center;
+    padding-block: clamp(2.5rem, 8dvh, 5.5rem);
+  }
+  .portada .hero .contenedor { width: 100%; max-width: 84rem; }
+  .portada .hero-grid { min-height: 0; align-content: center; }
+  .portada .hero h1 { max-width: 100%; font-size: clamp(2.5rem, 4.5vw, 4.5rem); }
+  .portada .hero h1 .marca { display: table; margin-inline: auto; }
+  .portada .hero-intro { max-width: 52rem; font-size: 1.2rem; }
+  .portada .hero-acciones { width: min(100%, 21rem); grid-template-columns: 1fr; }
+  .portada #herramientas { padding-top: clamp(2.5rem, 10dvh, 6.5rem); }
+}
+@media (max-width: 40rem) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero h1 { overflow-wrap: anywhere; }
+  .hero-acciones { flex-wrap: wrap; }
+}
