@@ -8,17 +8,17 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="theme-color" content="#0c0c0d" />
-    <title>Álvaro Pastor · ¿Otra vez haciendo lo mismo? Lo convierto en herramienta</title>
+    <title>Álvaro Pastor · Tu agente es listo. Pero trabaja a ciegas</title>
     <meta name="description"
-        content="Álvaro Pastor, desarrollador. Trabajo con IA y construyo herramientas que quitan trabajo repetido. Estas son las que ya funcionan." />
+        content="Álvaro Pastor construye MCP y helpers para que tu agente de IA recuerde, encuentre tus archivos, entienda lo que señalas y controle tu ordenador." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://alvaropastor.dev/" />
-    <meta property="og:title" content="Doing the same thing again? I turn it into a tool." />
-    <meta property="og:description" content="Álvaro Pastor is a developer who works with AI and builds tools that remove repetitive work." />
+    <meta property="og:title" content="Your agent is smart. But it’s working blind." />
+    <meta property="og:description" content="Álvaro Pastor builds MCP servers and helpers that give coding agents memory, eyes and hands." />
     <meta property="og:image" content="https://alvaropastor.dev/img/og-alvaro-pastor.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Álvaro Pastor: Doing the same thing again? I turn it into a tool." />
+    <meta property="og:image:alt" content="Álvaro Pastor: Your agent is smart. But it’s working blind." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@alpas17_" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,8 +34,8 @@
         <div class="marco nav-fila">
             <a class="nav-marca" href="#top">Álvaro Pastor</a>
             <div class="nav-enlaces">
-                <a href="#problemas" data-t="nav-problemas">problemas</a>
-                <a href="#herramientas" data-t="nav-herramientas">herramientas</a>
+                <a href="#demo" data-t="nav-demo">demo</a>
+                <a href="#caja" data-t="nav-caja">mcp y helpers</a>
                 <a href="#notas" data-t="nav-notas">notas</a>
             </div>
             <div class="nav-acciones">
@@ -46,36 +46,112 @@
     </nav>
 
     <main>
-        <!-- El dolor y la solución -->
+        <!-- El dolor y quién lo resuelve -->
         <header class="hero">
             <div class="marco">
-                <h1><span data-t="hero-1">¿Otra vez haciendo lo mismo?</span> <span class="marca" data-t="hero-2">Lo convierto en herramienta.</span></h1>
-                <p class="hero-sub" data-t="hero-sub">Soy Álvaro Pastor, desarrollador. Trabajo con IA y construyo herramientas que me quitan trabajo repetido. Estas son las que ya funcionan.</p>
+                <h1><span data-t="hero-1">Tu agente es listo.</span> <span class="marca" data-t="hero-2">Pero trabaja a ciegas.</span></h1>
+                <p class="hero-sub" data-t="hero-sub">No recuerda lo que hicisteis, no encuentra tus archivos y no sabe qué le estás señalando. Soy Álvaro Pastor, desarrollador, y construyo los MCP y helpers que se lo arreglan.</p>
                 <div class="acciones">
-                    <a class="boton boton-senal" href="#problemas" data-umami-event="ver-trabajo" data-umami-event-tipo="hero" data-t="hero-cta">Ver lo que ya funciona</a>
-                    <a class="boton boton-contorno" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="contactar-x" data-umami-event-tipo="hero" data-t="contacto-x">Escríbeme por X</a>
+                    <a class="boton boton-senal" href="#demo" data-umami-event="ver-demo" data-umami-event-tipo="hero" data-t="hero-cta">Ver la diferencia</a>
+                    <a class="boton boton-contorno" href="#caja" data-umami-event="ver-caja" data-umami-event-tipo="hero" data-t="hero-cta2">Ver los MCP y helpers</a>
                 </div>
                 <dl class="cifras">
-                    <div><dt>~1 min → 4 s</dt><dd data-t="cif-1">de espera tras cada cambio en un entorno de desarrollo</dd></div>
-                    <div><dt>6</dt><dd data-t="cif-2">agentes de código en los que busca mi herramienta</dd></div>
-                    <div><dt>20</dt><dd data-t="cif-3">skills propias para agentes</dd></div>
-                    <div><dt>×5,55</dt><dd data-t="cif-4">más rápido al reescribir un lector en Rust</dd></div>
+                    <div><dt>5</dt><dd data-t="cif-1">servidores MCP propios</dd></div>
+                    <div><dt>20</dt><dd data-t="cif-2">skills propias para agentes</dd></div>
+                    <div><dt>6</dt><dd data-t="cif-3">agentes en los que busca mi herramienta pública</dd></div>
+                    <div><dt>0,1 s</dt><dd data-t="cif-4">para contar 2.339 archivos en todo un perfil de usuario</dd></div>
                 </dl>
             </div>
         </header>
 
-        <!-- Primer dolor: el producto estrella -->
-        <section class="lanzamiento" id="problemas" aria-labelledby="lanzamiento-titulo">
+        <!-- La diferencia, en una pantalla -->
+        <section class="demo" id="demo" aria-labelledby="demo-titulo">
             <div class="marco">
-                <h2 id="lanzamiento-titulo" data-t="lan-titulo">Sé que ya lo resolví con la IA, pero no sé en qué conversación.</h2>
+                <h2 id="demo-titulo" data-t="dem-titulo">Pídele esto a tu agente.</h2>
+                <div class="pestanas" id="pestanas" role="group" aria-label="Peticiones" style="margin-top: clamp(1.75rem, 3.5vw, 2.5rem)"></div>
+                <div id="duelo" aria-live="polite"></div>
+                <p class="nota" data-t="dem-nota">Conversaciones ilustrativas. Los comandos y capacidades son reales.</p>
+            </div>
+        </section>
+
+        <!-- Catálogo por dolor -->
+        <section class="caja" id="caja" aria-labelledby="caja-titulo">
+            <div class="marco">
+                <h2 id="caja-titulo" data-t="caj-titulo">Lo que le falta. Lo que le he dado.</h2>
+
+                <div class="caja-grupo">
+                    <h3 data-t="caj-mcp">Servidores MCP</h3>
+                    <div class="capacidad">
+                        <strong data-t="c1-t">No recuerda lo que hicisteis.</strong>
+                        <p data-t="c1-p">Busca en tus conversaciones de seis agentes y responde con la fuente exacta.</p>
+                        <p class="capacidad-nombre"><code>agent-history-search</code><a href="./herramientas/agent-history-search.html" data-lang-link data-umami-event="ver-producto" data-umami-event-tipo="caja" data-t="c-publico">Público · ver</a></p>
+                    </div>
+                    <div class="capacidad">
+                        <strong data-t="c2-t">No sabe qué le señalas.</strong>
+                        <p data-t="c2-p">Marcas un elemento en la web y recibe su selector, HTML, estilos y un recorte. En React, Next y Svelte, también el fichero y la línea.</p>
+                        <p class="capacidad-nombre"><code>dom-pick</code><span data-t="c-privado">Sin publicar</span></p>
+                    </div>
+                    <div class="capacidad">
+                        <strong data-t="c3-t">No encuentra tus archivos.</strong>
+                        <p data-t="c3-p">Responde dónde está algo en todo el PC usando el índice de Everything. Contó 2.339 archivos en 0,1 s; <code>find</code> seguía sin terminar a los 150 s.</p>
+                        <p class="capacidad-nombre"><code>find-everything</code><span data-t="c-privado">Sin publicar</span></p>
+                    </div>
+                    <div class="capacidad">
+                        <strong data-t="c4-t">No puede crearte un Word de verdad.</strong>
+                        <p data-t="c4-p">Controla Microsoft Word por su propia interfaz, sin clics ni portapapeles. Solo toca documentos creados por él.</p>
+                        <p class="capacidad-nombre"><code>word-mcp</code><span data-t="c-privado">Sin publicar</span></p>
+                    </div>
+                    <div class="capacidad">
+                        <strong data-t="c5-t">Carga skills que no va a usar.</strong>
+                        <p data-t="c5-p">Ve descripciones compactas de las skills de Matt Pocock y carga solo la que hace falta.</p>
+                        <p class="capacidad-nombre"><code>matt-skills-mcp</code><span data-t="c-piloto">Piloto sin publicar</span></p>
+                    </div>
+                </div>
+
+                <div class="caja-grupo">
+                    <h3 data-t="caj-helpers">Helpers y skills</h3>
+                    <div class="capacidad">
+                        <strong data-t="h1-t">Configuras lo mismo en cada agente.</strong>
+                        <p data-t="h1-p">Una sola fuente de MCP, sincronizada con Claude Code, Codex, Pi, Pi Pocket y OpenCode.</p>
+                        <p class="capacidad-nombre"><code>agent-sync</code><span data-t="c-privado">Sin publicar</span></p>
+                    </div>
+                    <div class="capacidad">
+                        <strong data-t="h2-t">Se traga una web entera por un dato.</strong>
+                        <p data-t="h2-p">Lee la página una vez, guarda el texto limpio y responde sin volcarla al contexto.</p>
+                        <p class="capacidad-nombre"><code>web-read</code><span data-t="c-privado">Sin publicar</span></p>
+                    </div>
+                    <div class="capacidad">
+                        <strong data-t="h3-t">Se para ante cualquier ventana.</strong>
+                        <p data-t="h3-p">Controla apps y ventanas de Windows. Con <code>win-dialog</code>, inspecciona y pulsa diálogos nativos desde Rust.</p>
+                        <p class="capacidad-nombre"><code>windows-computer-use</code><span data-t="c-privado">Sin publicar</span></p>
+                    </div>
+                    <div class="capacidad">
+                        <strong data-t="h4-t">Se cierra una app y nadie sabe por qué.</strong>
+                        <p data-t="h4-p">Llega a la firma, el módulo y la pila del fallo sin abrir un depurador.</p>
+                        <p class="capacidad-nombre"><code>windows-crash-triage</code><span data-t="c-privado">Sin publicar</span></p>
+                    </div>
+                    <div class="capacidad">
+                        <strong data-t="h5-t">Toca tu configuración y no hay vuelta atrás.</strong>
+                        <p data-t="h5-p">Guarda y restaura estados de la configuración de tus agentes con git.</p>
+                        <p class="capacidad-nombre"><code>config-checkpoints</code><span data-t="c-privado">Sin publicar</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- La pieza pública -->
+        <section class="lanzamiento" aria-labelledby="lanzamiento-titulo">
+            <div class="marco">
+                <p class="etiqueta" data-t="lan-etiqueta">Ya puedes instalarlo · gratis y de código abierto</p>
+                <h2 id="lanzamiento-titulo">Agent History Search</h2>
                 <div class="lanzamiento-rejilla">
                     <video id="video" controls playsinline preload="none" poster="./video/agent-history-search.webp" width="1280" height="720">
                         <source src="./video/agent-history-search.mp4" type="video/mp4" />
                         <track kind="captions" src="./video/agent-history-search.en.vtt" srclang="en" label="English" />
                     </video>
                     <div>
-                        <p class="lanzamiento-nombre">Agent History Search</p>
-                        <p class="lanzamiento-texto" data-t="lan-p">Le preguntas a tu agente y busca en vuestras conversaciones pasadas. Te responde con la fuente exacta para que la compruebes. Gratis, local y de solo lectura.</p>
+                        <p class="lanzamiento-nombre" data-t="lan-gancho">Sabes que ya lo resolviste. No sabes en qué conversación.</p>
+                        <p class="lanzamiento-texto" data-t="lan-p">Tu agente lo busca y te da la fuente exacta para que la compruebes. Local y de solo lectura.</p>
                         <p class="nota">Claude Code · Codex · OpenCode · Pi · omp · Pi Pocket</p>
                         <div class="acciones">
                             <a class="boton boton-senal" href="./herramientas/agent-history-search.html" data-lang-link data-umami-event="ver-producto" data-umami-event-tipo="portada" data-t="lan-cta">Ver cómo funciona</a>
@@ -86,129 +162,36 @@
             </div>
         </section>
 
-        <!-- Segundo dolor: una prueba que se ve -->
-        <section class="carrera" id="carrera" aria-labelledby="carrera-titulo">
-            <div class="marco">
-                <h2 id="carrera-titulo" data-t="car-titulo">Un minuto de espera. En cada cambio.</h2>
-                <p class="carrera-texto" data-t="car-p">Cada cambio obligaba a hacer <code>docker compose down</code> y levantarlo todo. Vi dónde se perdía el tiempo y decidí reiniciar solo lo que cambia. Construí el script con ayuda de la IA y la espera bajó a 4 segundos. Estas barras corren en tiempo real.</p>
-                <div class="pistas">
-                    <div class="pista">
-                        <p><span data-t="car-antes">Antes</span> <output id="tiempo-antes">≈ 60 s</output></p>
-                        <div class="barra"><i id="barra-antes" style="width: 100%"></i></div>
-                    </div>
-                    <div class="pista">
-                        <p><span data-t="car-despues">Después</span> <output id="tiempo-despues">4 s</output></p>
-                        <div class="barra"><i id="barra-despues" style="width: 6.67%"></i></div>
-                    </div>
-                </div>
-                <p class="carrera-fuente" data-t="car-fuente">Trabajo en una empresa, sin enlace público. El «antes» es aproximado.</p>
-            </div>
-        </section>
-
-        <!-- Más dolores, cada uno con su solución -->
-        <section class="trabajo" id="trabajo" aria-labelledby="trabajo-titulo">
-            <div class="marco">
-                <h2 id="trabajo-titulo" data-t="tra-titulo">¿Te suena alguno de estos?</h2>
-                <p class="nota trabajo-aviso" data-t="tra-aviso"></p>
-                <div class="catalogo">
-                    <a class="pieza pieza-grande" href="./proyecto/ludoscript.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="ludoscript">
-                        <img src="./img/ludoscript/ludoscript-home.webp" alt="Pantalla de modos de estudio de LudoScript" width="1600" height="783" loading="lazy" />
-                        <div>
-                            <p class="etiqueta" data-t="p1-e">LudoScript · plataforma educativa con IA · beta</p>
-                            <h3 data-t="p1-t">Estudias sin saber qué estás fallando.</h3>
-                            <p data-t="p1-p">Subes tus apuntes y la IA genera la práctica. Cada fallo orienta el siguiente repaso.</p>
-                            <p class="pieza-prueba" data-t="p1-d">Hice el backend: API, datos, IA y multijugador en tiempo real, con respaldo entre modelos para que un fallo no tumbe el servicio.</p>
-                        </div>
-                    </a>
-                    <a class="pieza pieza-lateral" href="./proyecto/gala-imparables.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="gala">
-                        <img src="./img/inicio-gala-imparables.webp" alt="Portada de la web de los Premios Imparables 2025" width="1600" height="777" loading="lazy" />
-                        <div>
-                            <p class="etiqueta" data-t="p2-e">Gala Imparables · web publicada</p>
-                            <h3 data-t="p2-t">Todos los patrocinadores compiten por la misma atención.</h3>
-                            <p data-t="p2-p">Un carrusel que da a cada uno el peso que le toca.</p>
-                        </div>
-                    </a>
-                    <a class="pieza pieza-texto" href="./proyecto/tickets.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="tickets">
-                        <div>
-                            <p class="etiqueta" data-t="p3-e">Panel de tickets · prototipo</p>
-                            <h3 data-t="p3-t">Incidencias que no se entienden de un vistazo.</h3>
-                            <p data-t="p3-p">Prioridad antes que detalle. La transcripción se abre solo cuando hace falta.</p>
-                        </div>
-                    </a>
-                    <a class="pieza pieza-texto" href="./proyecto/plantillas-itop.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="itop">
-                        <div>
-                            <p class="etiqueta" data-t="p4-e">Plantillas para iTop</p>
-                            <h3 data-t="p4-t">Tus emails se rompen en Outlook.</h3>
-                            <p data-t="p4-p">Siete plantillas adaptadas para que la marca llegue intacta.</p>
-                        </div>
-                    </a>
-                    <a class="pieza pieza-texto" href="./proyecto/procesos-ia.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="procesos">
-                        <div>
-                            <p class="etiqueta" data-t="p5-e">Procesos con IA</p>
-                            <h3 data-t="p5-t">Repites las mismas instrucciones en cada proyecto.</h3>
-                            <p data-t="p5-p">Un archivo que acompaña al agente en todos ellos.</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Prueba humana -->
-        <section class="reaccion" aria-label="Reacción a mi trabajo">
-            <div class="marco">
-                <blockquote>
-                    <p data-t="rea-1">«Guau, ¿quién ha hecho esto?»</p>
-                    <p data-t="rea-2">Hasta en administración sabían quién había hecho esos diseños.</p>
-                </blockquote>
-            </div>
-        </section>
-
-        <!-- Dolores de quien trabaja con agentes -->
-        <section class="herramientas" id="herramientas" aria-labelledby="herramientas-titulo">
-            <div class="marco herramientas-rejilla">
-                <div>
-                    <h2 id="herramientas-titulo" data-t="her-titulo">Si trabajas con agentes, esto te pasa.</h2>
-                    <p class="herramientas-texto" data-t="her-p">A mí también. Cada vez que algo me hacía perder tiempo dos veces, construí la solución. Ya son 20 skills y varias utilidades en Rust, Python y PowerShell.</p>
-                    <div class="acciones">
-                        <a class="boton boton-contorno" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="herramientas" data-t="seguir">Seguir en X</a>
-                    </div>
-                </div>
-                <div>
-                    <ul class="utilidades">
-                        <li><strong data-t="u-1">Explicarle a tu agente qué botón quieres cambiar.</strong><span><code>dom-pick</code> · <i data-t="u-1p">lo señalas y recibe su selector, HTML, estilos y un recorte.</i></span></li>
-                        <li><strong data-t="u-2">Configurar lo mismo en cinco agentes.</strong><span><code>agent-sync</code> · <i data-t="u-2p">una sola configuración de MCP, sincronizada con todos.</i></span></li>
-                        <li><strong data-t="u-3">Se cierra una ventana y no sabes por qué.</strong><span><code>windows-crash-triage</code> · <i data-t="u-3p">llega a la firma, el módulo y la pila sin abrir un depurador.</i></span></li>
-                        <li><strong data-t="u-4">Un diálogo de Windows frena a tu agente.</strong><span><code>win-dialog</code> · <i data-t="u-4p">lo inspecciona y lo pulsa desde Rust.</i></span></li>
-                        <li><strong data-t="u-5">Tocas la configuración y ya no puedes volver atrás.</strong><span><code>config-checkpoints</code> · <i data-t="u-5p">guarda y restaura estados con git.</i></span></li>
-                    </ul>
-                    <p class="nota" data-t="u-nota">Uso personal. Código todavía sin publicar.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Criterio -->
+        <!-- Criterio de construcción -->
         <section class="criterio" aria-labelledby="criterio-titulo">
             <div class="marco">
-                <h2 id="criterio-titulo" data-t="cri-titulo">Si algo casi no mejora, te lo digo.</h2>
-                <div class="comparativa">
-                    <div><p class="comparativa-cifra">×5,55</p><p data-t="cri-1">al volcar una sesión completa tras reescribir mi lector de historial en Rust.</p></div>
-                    <div><p class="comparativa-cifra comparativa-baja">×1,27</p><p data-t="cri-2">en búsqueda de texto, porque ahí manda SQLite. Esa cifra también va en el informe.</p></div>
-                </div>
+                <h2 id="criterio-titulo" data-t="cri-titulo">Dale acceso sin perder el control.</h2>
                 <div class="reglas">
                     <div>
-                        <h3 data-t="reg-1">Compruebo antes de retirar.</h3>
-                        <p data-t="reg-1p">Antes de jubilar la versión en Python, 12 de 12 códigos de salida coincidieron con Rust.</p>
+                        <h3 data-t="reg-1">No fallan en silencio.</h3>
+                        <p data-t="reg-1p">Si el índice se cae, <code>find-everything</code> avisa con <code>INDEX_DOWN=1</code>. Si una lectura queda incompleta, History Search también lo dice.</p>
                     </div>
                     <div>
-                        <h3 data-t="reg-2">Pruebo lo que publico.</h3>
-                        <p data-t="reg-2p">Agent History Search pasa 97 pruebas sin conexión en un clon limpio.</p>
+                        <h3 data-t="reg-2">Tocan lo mínimo.</h3>
+                        <p data-t="reg-2p">History Search es de solo lectura. <code>word-mcp</code> no abre tus documentos y borrar necesita que aceptes un diálogo.</p>
                     </div>
                     <div>
-                        <h3 data-t="reg-3">Digo dónde acaba.</h3>
-                        <p data-t="reg-3p">Solo lo he probado en Windows, y su página lo dice antes de que lo instales.</p>
+                        <h3 data-t="reg-3">Publico también lo que casi no mejora.</h3>
+                        <p data-t="reg-3p">Al pasar mi lector de historial a Rust gané ×5,55 volcando sesiones y solo ×1,27 buscando. Las dos cifras van en el informe.</p>
                     </div>
                 </div>
-                <p class="nota criterio-nota" data-t="cri-nota">Benchmark: 7 repeticiones por caso en una sola máquina. Es una medición concreta, no una verdad universal.</p>
+                <p class="nota criterio-nota" data-t="cri-nota">Todo está probado en Windows. Las mediciones salen de una sola máquina: son concretas, no universales.</p>
+            </div>
+        </section>
+
+        <!-- Conversación con el público -->
+        <section class="votar" aria-labelledby="votar-titulo">
+            <div class="marco">
+                <h2 id="votar-titulo" data-t="vot-titulo">¿Cuál publico primero?</h2>
+                <p data-t="vot-p">De momento solo Agent History Search es público. El resto funciona en mi equipo. Dime cuál te serviría a ti.</p>
+                <div class="acciones">
+                    <a class="boton boton-oscuro" id="votar-x" href="https://x.com/intent/post?text=%40alpas17_%20" target="_blank" rel="noopener noreferrer" data-umami-event="votar-x" data-t="vot-cta">Decírmelo en X</a>
+                </div>
             </div>
         </section>
 
@@ -227,8 +210,8 @@
                             <div><dt data-t="n1-d4">Clones únicos</dt><dd>61</dd></div>
                             <div><dt data-t="n1-d5">Estrellas</dt><dd>0</dd></div>
                         </dl>
-                        <p data-t="n1-p1">61 clones parecen 61 personas interesadas, pero solo 2 abrieron la página. 104 de los 126 clones llegaron en tres días seguidos tras el lanzamiento. Algunos son míos y sospecho que muchos son automáticos.</p>
-                        <p data-t="n1-p2"><strong>Lo que aprendí:</strong> no puedo decir que la herramienta no convenza, porque casi nadie ha llegado a verla. El problema que medir ahora es la distancia entre el post y el enlace.</p>
+                        <p data-t="n1-p1">61 clones parecen 61 personas interesadas, pero solo 2 abrieron la página. 104 de los 126 clones llegaron en tres días seguidos tras el lanzamiento.</p>
+                        <p data-t="n1-p2"><strong>Mi teoría:</strong> quienes clonan son agentes, no personas. Un agente no abre la página. Lo voy a medir en el próximo post.</p>
                     </article>
                     <article class="apunte" id="nota-menos-posts">
                         <p class="etiqueta" data-t="n2-f">3 nov 2026 · analíticas de X</p>
@@ -250,7 +233,7 @@
         <!-- Cierre -->
         <section class="cierre" id="hablemos" aria-labelledby="cierre-titulo">
             <div class="marco">
-                <h2 id="cierre-titulo" data-t="cie-titulo">¿Qué estás haciendo otra vez?</h2>
+                <h2 id="cierre-titulo" data-t="cie-titulo">¿Qué no puede hacer tu agente?</h2>
                 <p class="cierre-texto" data-t="cie-p">Cuéntamelo y te digo cómo lo atacaría.</p>
                 <div class="acciones">
                     <a class="boton boton-oscuro" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="contactar-x" data-umami-event-tipo="cierre" data-t="contacto-x">Escríbeme por X</a>
@@ -264,6 +247,8 @@
         <div class="marco pie-fila">
             <p>© 2026 Álvaro Pastor</p>
             <ul>
+                <li><a href="./proyecto/ludoscript.html" data-lang-link>LudoScript</a></li>
+                <li><a href="./proyecto/procesos-ia.html" data-lang-link data-t="pie-procesos">Procesos con IA</a></li>
                 <li><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="pie">X</a></li>
                 <li><a href="https://github.com/alvaropas17" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                 <li><a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>

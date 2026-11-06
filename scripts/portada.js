@@ -1,66 +1,59 @@
 (() => {
   const EN = {
-    'nav-problemas': 'problems', 'nav-herramientas': 'tools', 'nav-notas': 'notes', 'nav-cta': 'Write to me',
-    seguir: 'Follow on X', 'contacto-x': 'Message me on X',
-    'hero-1': 'Doing the same thing again?', 'hero-2': 'I turn it into a tool.',
-    'hero-sub': 'I’m Álvaro Pastor, a developer. I work with AI and build tools that take repetitive work off my plate. These are the ones that already work.',
-    'hero-cta': 'See what already works',
-    'cif-1': 'wait after each change in a dev environment', 'cif-2': 'coding agents my tool can search',
-    'cif-3': 'custom skills for agents', 'cif-4': 'faster after rewriting a reader in Rust',
-    'lan-titulo': 'I know I solved this with AI, but I can’t find the conversation.',
-    'lan-p': 'Ask your agent and it searches your past conversations. It answers with the exact source so you can check it. Free, local and read-only.',
+    'nav-demo': 'demo', 'nav-caja': 'mcp & helpers', 'nav-notas': 'notes', 'nav-cta': 'Write to me',
+    'contacto-x': 'Message me on X',
+    'hero-1': 'Your agent is smart.', 'hero-2': 'But it’s working blind.',
+    'hero-sub': 'It can’t remember what you did, can’t find your files and doesn’t know what you’re pointing at. I’m Álvaro Pastor, a developer, and I build the MCP servers and helpers that fix that.',
+    'hero-cta': 'See the difference', 'hero-cta2': 'See the MCP servers and helpers',
+    'cif-1': 'MCP servers of my own', 'cif-2': 'custom skills for agents',
+    'cif-3': 'agents my public tool can search', 'cif-4': 'to count 2,339 files across a user profile',
+    'dem-titulo': 'Ask your agent this.',
+    'dem-nota': 'Illustrative conversations. The commands and capabilities are real.',
+    'caj-titulo': 'What it’s missing. What I gave it.',
+    'caj-mcp': 'MCP servers', 'caj-helpers': 'Helpers and skills',
+    'c-publico': 'Public · see it', 'c-privado': 'Not published', 'c-piloto': 'Unpublished pilot',
+    'c1-t': 'It can’t remember what you did.',
+    'c1-p': 'Searches your conversations across six agents and answers with the exact source.',
+    'c2-t': 'It doesn’t know what you’re pointing at.',
+    'c2-p': 'Mark an element on a page and it gets the selector, HTML, styles and a crop. In React, Next and Svelte, also the file and line.',
+    'c3-t': 'It can’t find your files.',
+    'c3-p': 'Answers where something is across the whole PC using the Everything index. It counted 2,339 files in 0.1 s; <code>find</code> still hadn’t finished after 150 s.',
+    'c4-t': 'It can’t make you a real Word document.',
+    'c4-p': 'Controls Microsoft Word through its own interface, with no clicks or clipboard. It only touches documents it created.',
+    'c5-t': 'It loads skills it won’t use.',
+    'c5-p': 'Sees compact descriptions of Matt Pocock’s skills and loads only the one it needs.',
+    'h1-t': 'You configure the same thing in every agent.',
+    'h1-p': 'One MCP source, synced with Claude Code, Codex, Pi, Pi Pocket and OpenCode.',
+    'h2-t': 'It swallows a whole page for one fact.',
+    'h2-p': 'Reads the page once, stores clean text and answers without dumping it into context.',
+    'h3-t': 'It stops at any window.',
+    'h3-p': 'Controls Windows apps and windows. With <code>win-dialog</code>, it inspects and clicks native dialogs from Rust.',
+    'h4-t': 'An app closes and nobody knows why.',
+    'h4-p': 'Gets to the crash signature, module and stack without opening a debugger.',
+    'h5-t': 'It touches your config and there’s no way back.',
+    'h5-p': 'Saves and restores your agents’ configuration states with git.',
+    'lan-etiqueta': 'Install it today · free and open source',
+    'lan-gancho': 'You know you solved it. You don’t know in which conversation.',
+    'lan-p': 'Your agent finds it and gives you the exact source to check. Local and read-only.',
     'lan-cta': 'See how it works',
-    'car-titulo': 'A one-minute wait. On every change.',
-    'car-p': 'Every change meant running <code>docker compose down</code> and bringing everything back up. I saw where the time was going and decided to restart only what changed. I built the script with AI’s help and the wait dropped to 4 seconds. These bars run in real time.',
-    'car-antes': 'Before', 'car-despues': 'After',
-    'car-fuente': 'Work at a company, no public link. “Before” is approximate.',
-    'tra-titulo': 'Do any of these sound familiar?',
-    'tra-aviso': 'Case studies are in Spanish.',
-    'p1-e': 'LudoScript · AI education platform · beta',
-    'p1-t': 'You study without knowing what you’re getting wrong.',
-    'p1-p': 'Upload your notes and AI generates the practice. Every mistake guides the next review.',
-    'p1-d': 'I built the backend: API, data, AI and real-time multiplayer, with fallback between models so one failure doesn’t take the service down.',
-    'p2-e': 'Gala Imparables · live website',
-    'p2-t': 'Every sponsor competes for the same attention.',
-    'p2-p': 'A carousel that gives each one the weight it deserves.',
-    'p3-e': 'Ticket panel · prototype',
-    'p3-t': 'Incidents you can’t read at a glance.',
-    'p3-p': 'Priority before detail. The transcript only opens when it’s needed.',
-    'p4-e': 'iTop templates',
-    'p4-t': 'Your emails break in Outlook.',
-    'p4-p': 'Seven templates adapted so the brand arrives intact.',
-    'p5-e': 'Processes with AI',
-    'p5-t': 'You repeat the same instructions in every project.',
-    'p5-p': 'One file that goes with the agent into all of them.',
-    'rea-1': '“Wow, who made this?”',
-    'rea-2': 'Even the admin team knew who had made those designs.',
-    'her-titulo': 'If you work with agents, this happens to you.',
-    'her-p': 'It happens to me too. Whenever something cost me time twice, I built the fix. That’s 20 skills so far, plus utilities in Rust, Python and PowerShell.',
-    'u-1': 'Explaining to your agent which button you want to change.',
-    'u-1p': 'point at it and the agent gets its selector, HTML, styles and a crop.',
-    'u-2': 'Configuring the same thing in five agents.',
-    'u-2p': 'one MCP configuration, synced with all of them.',
-    'u-3': 'A window closes and you don’t know why.',
-    'u-3p': 'gets to the signature, module and stack without opening a debugger.',
-    'u-4': 'A Windows dialog blocks your agent.',
-    'u-4p': 'inspects and clicks it from Rust.',
-    'u-5': 'You change the config and can’t go back.',
-    'u-5p': 'saves and restores states with git.',
-    'u-nota': 'Personal use. Code not published yet.',
-    'cri-titulo': 'If something barely improves, I’ll tell you.',
-    'cri-1': 'dumping a full session, after rewriting my history reader in Rust.',
-    'cri-2': 'on text search, because SQLite sets the pace there. That number goes in the report too.',
-    'reg-1': 'I check before retiring.', 'reg-1p': 'Before dropping the Python version, 12 out of 12 exit codes matched Rust.',
-    'reg-2': 'I test what I publish.', 'reg-2p': 'Agent History Search passes 97 offline tests on a clean clone.',
-    'reg-3': 'I say where it ends.', 'reg-3p': 'I’ve only tested it on Windows, and its page says so before you install it.',
-    'cri-nota': 'Benchmark: 7 runs per case on a single machine. A specific measurement, not a universal truth.',
+    'cri-titulo': 'Give it access without losing control.',
+    'reg-1': 'They don’t fail silently.',
+    'reg-1p': 'If the index goes down, <code>find-everything</code> warns with <code>INDEX_DOWN=1</code>. If a read is incomplete, History Search says so too.',
+    'reg-2': 'They touch as little as possible.',
+    'reg-2p': 'History Search is read-only. <code>word-mcp</code> doesn’t open your documents, and deleting needs you to accept a dialog.',
+    'reg-3': 'I publish what barely improves too.',
+    'reg-3p': 'Moving my history reader to Rust gained ×5.55 dumping sessions and only ×1.27 searching. Both numbers go in the report.',
+    'cri-nota': 'Everything is tested on Windows. Measurements come from a single machine: specific, not universal.',
+    'vot-titulo': 'Which one should I publish first?',
+    'vot-p': 'So far only Agent History Search is public. The rest runs on my machine. Tell me which one would help you.',
+    'vot-cta': 'Tell me on X',
     'not-titulo': 'What I’m measuring.',
     'n1-f': '6 Nov 2026 · GitHub and X',
     'n1-t': '61 clones and 2 visitors: why I don’t believe my own number.',
     'n1-d1': 'Launch post views', 'n1-d2': 'Clicks on the GitHub link', 'n1-d3': 'Unique repository visitors',
     'n1-d4': 'Unique clones', 'n1-d5': 'Stars',
-    'n1-p1': '61 clones look like 61 interested people, but only 2 opened the page. 104 of the 126 clones came in three straight days after launch. Some are mine, and I suspect many are automated.',
-    'n1-p2': '<strong>What I learned:</strong> I can’t say the tool doesn’t convince people, because almost nobody has reached it. What I need to measure now is the gap between the post and the link.',
+    'n1-p1': '61 clones look like 61 interested people, but only 2 opened the page. 104 of the 126 clones came in three straight days after launch.',
+    'n1-p2': '<strong>My theory:</strong> the ones cloning are agents, not people. An agent doesn’t open the page. I’ll measure it on the next post.',
     'n2-f': '3 Nov 2026 · X analytics',
     'n2-t': 'I posted less and each post did twice as well.',
     'n2-d1': '1 Nov · 12 posts', 'n2-v1': '25 views/post',
@@ -70,26 +63,89 @@
     'n2-d5': 'Standalone statements', 'n2-v5': '18–28 views',
     'n2-p1': 'I had an agent pull the data from my profile and compare it by day. The posts that opened a conversation did best.',
     'n2-p2': '<strong>What I learned:</strong> three days prove nothing, but they give me something to test: fewer statements and more real questions.',
-    'cie-titulo': 'What are you doing again?',
+    'cie-titulo': 'What can’t your agent do?',
     'cie-p': 'Tell me about it and I’ll tell you how I’d tackle it.',
+    'pie-procesos': 'Processes with AI',
+  };
+
+  const PETICIONES = [
+    {
+      tool: 'history_search · search',
+      es: { tab: 'Recordar', pide: '¿Qué decidimos sobre el rediseño?', sin: 'No tengo acceso a conversaciones anteriores. ¿Me lo recuerdas?', con: 'Elegiste la portada A porque la B escondía la demo. Fuente: Claude Code, 12 oct, entrada a1.' },
+      en: { tab: 'Remember', pide: 'What did we decide about the redesign?', sin: 'I don’t have access to previous conversations. Can you remind me?', con: 'You chose homepage A because B hid the demo. Source: Claude Code, 12 Oct, entry a1.' },
+    },
+    {
+      tool: 'dompick_pending',
+      es: { tab: 'Señalar', pide: 'Cambia este botón.', sin: '¿Qué botón? Descríbeme dónde está.', con: 'Recibido: selector, HTML, estilos y recorte. Está en Hero.tsx, línea 42.' },
+      en: { tab: 'Point', pide: 'Change this button.', sin: 'Which button? Describe where it is.', con: 'Received: selector, HTML, styles and a crop. It’s in Hero.tsx, line 42.' },
+    },
+    {
+      tool: 'find_everything · where',
+      es: { tab: 'Encontrar', pide: '¿Dónde dejé el informe final?', sin: 'Dime en qué carpeta lo busco.', con: 'Está en D:\\Informes\\final-v3.pdf. Lo he sacado del índice de todo el PC.' },
+      en: { tab: 'Find', pide: 'Where did I leave the final report?', sin: 'Tell me which folder to search.', con: 'It’s at D:\\Reports\\final-v3.pdf. I got it from the index of the whole PC.' },
+    },
+    {
+      tool: 'word_create_document · word_insert_image',
+      es: { tab: 'Crear', pide: 'Pásalo a un Word con esta imagen.', sin: 'Te dejo el texto para que lo pegues tú.', con: 'Documento creado en Word con el texto y la imagen. No he tocado ningún otro archivo.' },
+      en: { tab: 'Create', pide: 'Put this in a Word document with this image.', sin: 'Here’s the text for you to paste yourself.', con: 'Document created in Word with the text and the image. I didn’t touch any other file.' },
+    },
+    {
+      tool: 'win-dialog',
+      es: { tab: 'Actuar', pide: 'Pulsa Aceptar en ese diálogo.', sin: 'No puedo interactuar con las ventanas de tu escritorio.', con: 'He inspeccionado el diálogo, he encontrado Aceptar y lo he pulsado.' },
+      en: { tab: 'Act', pide: 'Click OK in that dialog.', sin: 'I can’t interact with your desktop windows.', con: 'I inspected the dialog, found OK and clicked it.' },
+    },
+  ];
+
+  const ROTULOS = {
+    es: { sin: 'sin esto', con: 'con esto' },
+    en: { sin: 'without it', con: 'with it' },
   };
 
   const $ = (s) => document.querySelector(s);
   const nodos = [...document.querySelectorAll('[data-t]')].map((n) => ({ n, es: n.innerHTML, clave: n.dataset.t }));
-  const titulo = { es: document.title, en: 'Álvaro Pastor · Doing the same thing again? I turn it into a tool' };
-  const cifra = { es: '×5,55', en: '×5.55' };
-  const cifraBaja = { es: '×1,27', en: '×1.27' };
+  const titulo = { es: document.title, en: 'Álvaro Pastor · Your agent is smart. But it’s working blind' };
+  const velocidad = { es: '0,1 s', en: '0.1 s' };
+  const pestanas = $('#pestanas');
+  const duelo = $('#duelo');
   const boton = $('#idioma');
   let idioma = 'es';
+  let activo = 0;
+
+  const seguro = (t) => t.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+
+  const pintarPeticion = () => {
+    const p = PETICIONES[activo];
+    const t = p[idioma];
+    const r = ROTULOS[idioma];
+    duelo.innerHTML = `<p class="pide">«${seguro(t.pide)}»</p>`
+      + '<div class="duelo">'
+      + `<div class="duelo-sin"><p class="etiqueta">${r.sin}</p><p>${seguro(t.sin)}</p></div>`
+      + `<div class="duelo-con"><p class="etiqueta">${r.con}</p><p class="duelo-tool">${seguro(p.tool)}</p><p>${seguro(t.con)}</p></div>`
+      + '</div>';
+  };
+  const pintarPestanas = () => {
+    pestanas.innerHTML = '';
+    PETICIONES.forEach((p, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = p[idioma].tab;
+      b.setAttribute('aria-pressed', String(i === activo));
+      b.addEventListener('click', () => {
+        activo = i;
+        pestanas.querySelectorAll('button').forEach((x, j) => x.setAttribute('aria-pressed', String(j === i)));
+        pintarPeticion();
+        if (window.umami) window.umami.track('ver-demo-peticion', { peticion: PETICIONES[i].en.tab });
+      });
+      pestanas.append(b);
+    });
+  };
 
   const aplicar = (siguiente) => {
     idioma = siguiente === 'en' ? 'en' : 'es';
     document.documentElement.lang = idioma;
     document.title = titulo[idioma];
     nodos.forEach(({ n, es, clave }) => { n.innerHTML = idioma === 'en' && EN[clave] ? EN[clave] : es; });
-    document.querySelectorAll('.cifras dt')[3].textContent = cifra[idioma];
-    $('.comparativa-cifra').textContent = cifra[idioma];
-    $('.comparativa-baja').textContent = cifraBaja[idioma];
+    document.querySelectorAll('.cifras dt')[3].textContent = velocidad[idioma];
     boton.textContent = idioma === 'es' ? 'EN' : 'ES';
     boton.lang = idioma === 'es' ? 'en' : 'es';
     boton.setAttribute('aria-label', idioma === 'es' ? 'Switch to English' : 'Cambiar a español');
@@ -98,6 +154,8 @@
       url.searchParams.set('lang', idioma);
       a.href = url.href;
     });
+    pintarPestanas();
+    pintarPeticion();
     try { localStorage.setItem('portfolio-language', idioma); } catch { /* Sin almacenamiento se usa el idioma del navegador. */ }
   };
   boton.addEventListener('click', () => {
@@ -110,35 +168,6 @@
   $('#video').addEventListener('play', () => {
     if (window.umami) window.umami.track('reproducir-video');
   }, { once: true });
-
-  // La carrera solo arranca al verla. Sin JS, o con movimiento reducido, se queda en su estado final.
-  const ANTES = 60;
-  const DESPUES = 4;
-  const pintar = (t) => {
-    const formato = (s) => s.toFixed(1).replace('.', idioma === 'es' ? ',' : '.');
-    $('#barra-antes').style.width = `${(Math.min(t, ANTES) / ANTES) * 100}%`;
-    $('#barra-despues').style.width = `${(Math.min(t, DESPUES) / ANTES) * 100}%`;
-    $('#tiempo-antes').textContent = t >= ANTES ? '≈ 60 s' : `${formato(t)} s`;
-    $('#tiempo-despues').textContent = t >= DESPUES ? '4 s ✓' : `${formato(t)} s`;
-  };
-  const correr = () => {
-    const inicio = performance.now();
-    const paso = (ahora) => {
-      const t = (ahora - inicio) / 1000;
-      pintar(t);
-      if (t < ANTES) requestAnimationFrame(paso);
-    };
-    requestAnimationFrame(paso);
-  };
-  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const vigia = new IntersectionObserver((vistas) => {
-      if (vistas.some((v) => v.isIntersecting)) {
-        vigia.disconnect();
-        correr();
-      }
-    }, { threshold: 0.4 });
-    vigia.observe($('#carrera'));
-  }
 
   // Quien llega desde X puede no hablar español: sin elección previa, manda el navegador.
   const pedido = new URL(location.href).searchParams.get('lang');
