@@ -1,0 +1,36 @@
+# Álvaro Pastor
+
+> Developer who builds MCP servers and helpers that give coding agents memory, file search, page context and desktop control. Based in Spain. Everything below is tested on Windows only.
+
+Only Agent History Search is public. The other tools are in development and not published: there is nothing to install yet, and people can request them on X.
+
+## Published
+
+- [Agent History Search](https://alvaropastor.dev/herramientas/agent-history-search.md): recovers useful information from past conversations across Claude Code, Codex, OpenCode, Pi, omp and Pi Pocket. Local, read-only, MIT.
+- [Repository](https://github.com/alvaropas17/agent-history-search): source, README and setup prompt.
+
+## MCP servers in development
+
+- dom-pick: the user marks an element on a page and the agent gets its selector, HTML, styles and a crop. In React, Next and Svelte, also the source file and line.
+- find-everything: answers where files are across the whole PC using the Everything index. Counted 2,339 files in 0.1 s on one machine.
+- word-mcp: early development. Controls Microsoft Word without clicks or the clipboard, only on documents it created.
+- matt-skills-mcp: unpublished pilot. Exposes Matt Pocock's skills through compact descriptions and loads only the one needed.
+
+## Helpers in development
+
+- agent-sync: one MCP source synced with Claude Code, Codex, Pi, Pi Pocket and OpenCode.
+- web-read: reads a page once, stores clean text and answers without dumping it into context.
+- windows-computer-use: controls Windows apps and windows. With win-dialog, inspects and clicks native dialogs.
+- windows-crash-triage: gets to the crash signature, module and stack without opening a debugger.
+- config-checkpoints: saves and restores agent configuration states with git.
+
+## Contact
+
+- [X](https://x.com/alpas17_): preferred contact, including requests for unpublished tools.
+- [Email](mailto:contacto@alvaropastor.dev)
+- [GitHub](https://github.com/alvaropas17)
+
+## Optional
+
+- [Website](https://alvaropastor.dev/): the same information for people, in Spanish and English.
+- [Measurement notes](https://alvaropastor.dev/#notas): real numbers from GitHub and X.

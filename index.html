@@ -27,6 +27,9 @@
         href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="./styles/portada.css" />
+    <link rel="canonical" href="https://alvaropastor.dev/" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Summary for AI agents" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://alvaropastor.dev/#alvaro", "name": "Álvaro Pastor", "url": "https://alvaropastor.dev/", "jobTitle": "Developer", "description": "Builds MCP servers and helpers for coding agents.", "email": "mailto:contacto@alvaropastor.dev", "sameAs": ["https://x.com/alpas17_", "https://github.com/alvaropas17", "https://es.linkedin.com/in/%C3%A1lvaro-pastor"], "knowsAbout": ["Model Context Protocol", "AI coding agents", "Developer tools"]}</script>
 </head>
 
 <body id="top">
@@ -69,7 +72,13 @@
             <div class="marco">
                 <h2 id="demo-titulo" data-t="dem-titulo">Pídele esto a tu agente.</h2>
                 <div class="pestanas" id="pestanas" role="group" aria-label="Peticiones" style="margin-top: clamp(1.75rem, 3.5vw, 2.5rem)"></div>
-                <div id="duelo" aria-live="polite"></div>
+                <div id="duelo" aria-live="polite">
+                    <p class="pide">«¿Qué decidimos sobre el rediseño?»</p>
+                    <div class="duelo">
+                        <div class="duelo-sin"><p class="etiqueta">sin esto</p><p>No tengo acceso a conversaciones anteriores. ¿Me lo recuerdas?</p></div>
+                        <div class="duelo-con"><p class="etiqueta">con esto</p><p class="duelo-tool">history_search · search</p><p>Elegiste la portada A porque la B escondía la demo. Fuente: Claude Code, 12 oct, entrada a1.</p></div>
+                    </div>
+                </div>
                 <p class="nota" data-t="dem-nota">Conversaciones ilustrativas. Los comandos y capacidades son reales.</p>
             </div>
         </section>
