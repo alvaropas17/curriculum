@@ -7,130 +7,290 @@
     <script src="./scripts/analytics-consent.js" defer></script>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Álvaro Pastor · Herramientas para agentes de IA</title>
+    <title>Álvaro Pastor · No me creas. Compruébalo.</title>
     <meta name="description"
-        content="Herramientas propias para trabajar mejor con agentes de IA, por Álvaro Pastor: cómo funcionan, qué problema resuelven y dónde está el código." />
+        content="Álvaro Pastor, desarrollador web e IA. Construyo software para que los agentes de IA recuerden lo que hicieron y demuestren lo que dicen. Pregunta a esta web: cada respuesta trae su fuente." />
+    <meta property="og:title" content="Álvaro Pastor · No me creas. Compruébalo." />
+    <meta property="og:description" content="No leas un currículum. Interrógalo: cada respuesta trae su fuente." />
+    <meta property="og:url" content="https://alvaropastor.dev/" />
+    <meta property="og:type" content="website" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="./styles/portfolio.css" />
+    <link rel="stylesheet" href="./styles/portada.css" />
 </head>
 
-<body id="top" class="portada">
-    <!-- Navegación -->
-    <nav class="nav">
-        <div class="contenedor nav-fila">
-            <a class="nav-marca" href="#top">Álvaro Pastor<span class="nav-apellido"> Periago</span></a>
+<body id="top">
+    <a class="saltar" href="#pregunta" data-t="saltar">Saltar al buscador</a>
+
+    <nav class="nav" aria-label="Principal">
+        <div class="marco nav-fila">
+            <a class="nav-marca" href="#top">Álvaro Pastor</a>
             <div class="nav-enlaces">
-                <a href="#herramientas">herramientas</a>
-                <a href="#contacto">contacto</a>
+                <a href="#history-search">history_search</a>
+                <a href="#trabajo" data-t="nav-trabajo">trabajo</a>
+                <a href="#limites" data-t="nav-limites">límites</a>
             </div>
-            <a href="#contacto" class="btn btn-primario nav-cta">Hablemos</a>
-            <button id="boton-menu" class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                    <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
-                </svg>
-            </button>
-        </div>
-        <div id="menu-movil" class="menu-movil">
-            <a href="#herramientas">herramientas</a>
-            <a href="#contacto">contacto</a>
+            <div class="nav-acciones">
+                <button id="idioma" class="nav-idioma" type="button" lang="en" aria-label="Switch to English">EN</button>
+                <a class="nav-cta" href="#contacto" data-t="nav-cta">Hablemos</a>
+            </div>
         </div>
     </nav>
 
     <main>
-        <!-- Hero -->
-        <header class="hero">
-            <div class="contenedor hero-grid">
-                <p class="hero-meta">
-                    <span class="disponible">Una suite de herramientas para agentes de IA que sigue creciendo</span>
-                    <span>2026</span>
-                </p>
-                <h1>Haz más con IA. <span class="marca marca-anim">Con menos esfuerzo por tu parte.</span>
-                </h1>
-                <p class="hero-intro">
-                    Ayuda a tus agentes a recordar, buscar y verificar para dedicar menos tiempo a repetir contexto,
-                    encontrar información y revisar su trabajo.
-                </p>
-                <div class="hero-acciones">
-                    <a href="#herramientas" class="btn btn-primario">Explorar herramientas
-                        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                            <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg></a>
-                </div>
+        <!-- 1. La idea: el currículum se interroga -->
+        <header class="hero" id="pregunta">
+            <div class="marco">
+                <p class="anota" data-t="hero-meta">Álvaro Pastor · desarrollador web e IA · Murcia</p>
+                <h1><span data-t="hero-1">No me creas.</span> <span class="marca" data-t="hero-2">Compruébalo.</span></h1>
+                <p class="hero-sub" data-t="hero-sub">Construyo software para que los agentes de IA recuerden lo que hicieron y demuestren lo que dicen. Esta web funciona igual: pregunta, y cada respuesta trae su fuente.</p>
+
+                <form class="consola" id="consola" role="search">
+                    <label class="visual-oculto" for="q" data-t="q-label">Pregunta sobre mi trabajo</label>
+                    <span class="consola-prompt" aria-hidden="true">?</span>
+                    <input id="q" type="search" autocomplete="off" spellcheck="false" enterkeyhint="search"
+                        placeholder="Pregunta lo que le preguntarías a un candidato" />
+                </form>
+                <div class="chips" id="chips"></div>
+                <div class="resultados" id="resultados" aria-live="polite"></div>
+                <p class="consola-nota" id="consola-nota"></p>
             </div>
         </header>
 
-        <!-- Herramientas -->
-        <section class="seccion seccion-alt" id="herramientas">
-            <div class="contenedor">
-                <div class="revelar">
-                    <p class="etiqueta">herramientas</p>
-                    <h2 class="titulo-seccion">Lo que voy construyendo</h2>
-                    <p class="texto-suave" style="max-width: 39rem; margin-top: 1rem;">Cada herramienta tiene su propia página con la explicación y el enlace a GitHub.</p>
+        <!-- 2. Un número que se siente: la carrera corre en tiempo real -->
+        <section class="carrera" id="carrera" aria-labelledby="carrera-titulo">
+            <div class="marco">
+                <h2 id="carrera-titulo"><span data-t="car-1">Un minuto.</span><br /><span data-t="car-2">Cuatro segundos.</span></h2>
+                <div class="pistas" id="pistas">
+                    <div class="pista">
+                        <p class="pista-nombre" data-t="car-antes">Antes</p>
+                        <div class="pista-riel"><span class="pista-barra" id="barra-antes"></span></div>
+                        <p class="pista-tiempo" id="tiempo-antes">0,0 s</p>
+                    </div>
+                    <div class="pista">
+                        <p class="pista-nombre" data-t="car-despues">Después</p>
+                        <div class="pista-riel"><span class="pista-barra" id="barra-despues"></span></div>
+                        <p class="pista-tiempo" id="tiempo-despues">0,0 s</p>
+                    </div>
                 </div>
-                <article class="proyecto revelar">
-                    <div class="proyecto-media">
-                        <div class="ventana">
-                            <div class="ventana-barra">
-                                <span class="ventana-punto"></span>
-                                <span class="ventana-punto"></span>
-                                <span class="ventana-punto lleno"></span>
-                                <span class="ventana-url">history_search</span>
-                            </div>
-                            <a href="./herramientas/history-search.html" aria-label="Ver la herramienta history_search" data-umami-event="ver-herramienta" data-umami-event-nombre="history-search" data-umami-event-tipo="imagen">
-                                <img src="./img/herramientas/history-search.webp" alt="Ilustración de history_search: búsqueda en el historial de conversaciones con agentes" />
-                            </a>
-                        </div>
-                    </div>
-                    <div class="proyecto-info">
-                        <p class="etiqueta">herramienta · agentes de ia</p>
-                        <h3><a class="proyecto-titulo-enlace" href="./herramientas/history-search.html" data-umami-event="ver-herramienta" data-umami-event-nombre="history-search" data-umami-event-tipo="titulo">history_search</a></h3>
-                        <p class="descripcion">Busca en conversaciones anteriores con agentes de código (Claude Code, Codex, OpenCode, Pi, Pi Pocket) para recuperar decisiones y contexto sin volver a preguntar. Solo lectura, sin dependencias.</p>
-                        <a class="proyecto-enlace" href="./herramientas/history-search.html" data-umami-event="ver-herramienta" data-umami-event-nombre="history-search" data-umami-event-tipo="enlace">Cómo funciona
-                            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                                <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg></a>
-                    </div>
-                </article>
+                <div class="carrera-pie">
+                    <p data-t="car-texto">Las dos barras corren en tiempo real. Es lo que tardaba en arrancar el entorno de desarrollo en AGE2 antes y después de reorganizar Docker para aprovechar su caché. Puedes seguir bajando: la de arriba no ha terminado.</p>
+                    <button class="boton-linea" id="repetir" type="button" data-t="car-repetir">Repetir</button>
+                </div>
+                <p class="fuente" data-t="car-fuente">fuente: prácticas en AGE2, feb–jun 2026 · «antes» es aproximado (~1 min) · trabajo de empresa, sin enlace público</p>
             </div>
         </section>
 
-        <!-- Contacto -->
-        <section class="contacto" id="contacto">
-            <div class="contenedor revelar">
-                <p class="etiqueta">contacto</p>
-                <h2>¿Hablamos?</h2>
-                <p>Si te interesa alguna herramienta o quieres colaborar, escríbeme.</p>
-                <div class="acciones">
-                    <a href="https://x.com/alpas17_" class="btn btn-claro" target="_blank" rel="noopener noreferrer">X / Twitter · @alpas17_</a>
+        <!-- 3. El producto -->
+        <section class="producto" id="history-search" aria-labelledby="producto-titulo">
+            <div class="marco">
+                <p class="anota anota-claro">history_search</p>
+                <h2 id="producto-titulo" data-t="pro-titulo">Tu agente ya habló de esto. Ahora puede encontrarlo.</h2>
+                <p class="producto-sub" data-t="pro-sub">Cada agente de código guarda sus conversaciones a su manera. history_search las lee todas, sin tocarlas, y devuelve referencias exactas en lugar de suposiciones.</p>
+
+                <figure class="terminal">
+                    <div class="terminal-cuerpo" id="terminal" tabindex="0" role="group" aria-label="Ejemplo de búsqueda con history_search">
+<pre><code><span class="t-cmd">&gt; history_search.py search --host claude --query "rediseño" --limit 2</span>
+
+{
+  <span class="t-k">"status"</span>: "ok",
+  <span class="t-k">"route"</span>: { "source": "claude", <span class="t-mark">"automatic_fallback": false</span> },
+  <span class="t-k">"results"</span>: [{
+    "session_id": "11111111-2222-4333-8444-555555555555",
+    <span class="t-mark">"entry_id": "a1"</span>,
+    "timestamp": "2026-10-12T09:14:00.000Z",
+    "text": "Elegimos la portada A para el rediseño: la B escondía
+             la demo y la C pesaba demasiado en móvil."
+  }],
+  <span class="t-mark">"incomplete": false</span>,
+  "notes": []
+}</code></pre>
+                    </div>
+                    <figcaption class="fuente fuente-claro" data-t="pro-cap">salida real de la CLI, recortada, sobre una conversación de prueba escrita para este ejemplo</figcaption>
+                </figure>
+
+                <div class="reglas">
+                    <div>
+                        <h3 data-t="reg-1">Solo lectura.</h3>
+                        <p data-t="reg-1p">Nunca escribe, indexa ni migra tus historiales.</p>
+                    </div>
+                    <div>
+                        <h3 data-t="reg-2">Nunca cambia de fuente en silencio.</h3>
+                        <p data-t="reg-2p">Si quieres leer otro agente, lo pides tú y queda el motivo.</p>
+                    </div>
+                    <div>
+                        <h3 data-t="reg-3">Un vacío no es una prueba.</h3>
+                        <p data-t="reg-3p">Los huecos se declaran. Que no aparezca algo no significa que no pasara.</p>
+                    </div>
                 </div>
-                <p class="correo"><svg class="correo-icono" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6" /><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg> <a class="enlace"
-                        href="mailto:contacto@alvaropastor.dev">contacto@alvaropastor.dev</a></p>
+
+                <dl class="ficha">
+                    <div><dt>6</dt><dd data-t="fic-1">agentes: Claude Code, Codex, OpenCode, Pi, omp y Pi Pocket</dd></div>
+                    <div><dt>0</dt><dd data-t="fic-2">paquetes pip, cuentas o llamadas de red</dd></div>
+                    <div><dt>97</dt><dd data-t="fic-3">pruebas offline en verde en un clon limpio, 6 nov 2026</dd></div>
+                    <div><dt>MCP</dt><dd data-t="fic-4">opcional, para Codex y Claude Code</dd></div>
+                </dl>
+
+                <div class="acciones">
+                    <a class="boton boton-marca" href="./herramientas/history-search.html" data-lang-link data-umami-event="ver-herramienta" data-umami-event-nombre="history-search" data-umami-event-tipo="portada" data-t="pro-cta">Ver cómo funciona</a>
+                    <a class="boton boton-contorno" href="https://github.com/alvaropas17/agent-history-search" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="portada" data-t="pro-gh">Leer el código</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Criterio: medir también donde no se gana -->
+        <section class="medida" aria-labelledby="medida-titulo">
+            <div class="marco medida-rejilla">
+                <div>
+                    <h2 id="medida-titulo" data-t="med-titulo">También mido dónde no gano.</h2>
+                    <p class="texto-grande" data-t="med-texto">Reescribí en Rust un lector de historial que tenía en Python. Antes de retirar el original comprobé que ambos respondían igual: 12 de 12 códigos de salida y salidas idénticas, salvo un mensaje de error más limpio en Rust.</p>
+                    <p class="texto-grande" data-t="med-texto2">Luego medí. En búsqueda casi no hay margen, porque manda SQLite. Eso también va en el informe.</p>
+                </div>
+                <figure class="grafico">
+                    <figcaption data-t="med-cap">Cuántas veces más rápido es Rust que Python</figcaption>
+                    <ul class="barras" id="barras">
+                        <li title="Python 172 ms → Rust 31 ms"><span class="barra-nombre" data-t="med-b1">Volcar una sesión completa</span><span class="barra-riel"><span class="barra" style="--v: 5.55"></span></span><span class="barra-valor">×5,55</span></li>
+                        <li title="Python 467 ms → Rust 133 ms"><span class="barra-nombre" data-t="med-b2">Carga de trabajo mixta</span><span class="barra-riel"><span class="barra" style="--v: 3.51"></span></span><span class="barra-valor">×3,51</span></li>
+                        <li title="Python 96 ms → Rust 36 ms"><span class="barra-nombre" data-t="med-b3">Arranque</span><span class="barra-riel"><span class="barra" style="--v: 2.67"></span></span><span class="barra-valor">×2,67</span></li>
+                        <li title="Python 914 ms → Rust 720 ms"><span class="barra-nombre" data-t="med-b4">Búsqueda de texto</span><span class="barra-riel"><span class="barra" style="--v: 1.27"></span></span><span class="barra-valor">×1,27</span></li>
+                    </ul>
+                    <p class="fuente" data-t="med-fuente">fuente: oc-v2-sessions-bench · 7 repeticiones por caso, alternancia ABBA · una sola máquina y una sola instantánea de datos · repo privado, bajo petición</p>
+                </figure>
+            </div>
+        </section>
+
+        <!-- 5. Trabajo -->
+        <section class="trabajo" id="trabajo" aria-labelledby="trabajo-titulo">
+            <div class="marco">
+                <h2 id="trabajo-titulo" data-t="tra-titulo">Lo que decidí, y lo que me costó.</h2>
+
+                <article class="caso caso-grande">
+                    <a class="caso-img" href="./proyecto/ludoscript.html" tabindex="-1" aria-hidden="true" data-umami-event="ver-proyecto" data-umami-event-nombre="ludoscript">
+                        <img src="./img/ludoscript/ludoscript-home.webp" width="1600" height="783" loading="lazy" alt="" />
+                    </a>
+                    <div class="caso-texto">
+                        <p class="anota" data-t="c1-meta">TFG · plataforma educativa con IA · beta</p>
+                        <h3><a href="./proyecto/ludoscript.html" data-umami-event="ver-proyecto" data-umami-event-nombre="ludoscript">LudoScript</a></h3>
+                        <p class="caso-lema" data-t="c1-lema">Subes tus apuntes y la IA genera la práctica. Cada fallo orienta el siguiente repaso.</p>
+                        <dl class="caso-datos">
+                            <div><dt data-t="dato-decidi">Decidí</dt><dd data-t="c1-d">Un sistema de respaldo entre modelos de IA, para que un fallo de procesamiento no tumbe el servicio.</dd></div>
+                            <div><dt data-t="dato-costo">Me costó</dt><dd data-t="c1-c">Controlar prompts, validar cada respuesta y vigilar el coste por llamada.</dd></div>
+                            <div><dt data-t="dato-parte">Mi parte</dt><dd data-t="c1-p">Backend: API, datos, IA y multijugador en tiempo real. El frontend lo hizo sobre todo mi compañero de TFG.</dd></div>
+                        </dl>
+                    </div>
+                </article>
+
+
+                <article class="caso caso-grande caso-invertido">
+                    <a class="caso-img" href="./proyecto/gala-imparables.html" tabindex="-1" aria-hidden="true" data-umami-event="ver-proyecto" data-umami-event-nombre="gala-imparables">
+                        <img src="./img/inicio-gala-imparables.webp" width="1600" height="777" loading="lazy" alt="" />
+                    </a>
+                    <div class="caso-texto">
+                        <p class="anota" data-t="c4-meta">primer encargo real · web publicada</p>
+                        <h3><a href="./proyecto/gala-imparables.html" data-umami-event="ver-proyecto" data-umami-event-nombre="gala-imparables">Gala Imparables</a></h3>
+                        <p class="caso-lema" data-t="c4-lema">Me ofrecieron hacer la web antes de terminar de formarme.</p>
+                        <dl class="caso-datos">
+                            <div><dt data-t="dato-decidi">Decidí</dt><dd data-t="c4-d">Un carrusel con jerarquía visual para los patrocinadores, porque no todos tenían el mismo peso.</dd></div>
+                            <div><dt data-t="dato-costo">Me costó</dt><dd data-t="c4-c">Subestimé el tiempo. Ahí aprendí la diferencia entre un plazo optimista y uno real.</dd></div>
+                        </dl>
+                    </div>
+                </article>
+
+                <div class="casos">
+                    <article class="caso">
+                        <p class="anota" data-t="c2-meta">prototipo navegable</p>
+                        <h3><a href="./proyecto/tickets.html" data-umami-event="ver-proyecto" data-umami-event-nombre="tickets" data-t="c2-t">Panel de tickets</a></h3>
+                        <p class="caso-lema" data-t="c2-lema">Decidir una incidencia de un vistazo.</p>
+                        <dl class="caso-datos">
+                            <div><dt data-t="dato-decidi">Decidí</dt><dd data-t="c2-d">Prioridad antes que detalle, con etiqueta de texto además de color. La transcripción se abre solo cuando hace falta.</dd></div>
+                        </dl>
+                    </article>
+                    <article class="caso">
+                        <p class="anota" data-t="c3-meta">experiencia profesional · sin capturas por confidencialidad</p>
+                        <h3><a href="./proyecto/plantillas-itop.html" data-umami-event="ver-proyecto" data-umami-event-nombre="itop" data-t="c3-t">Plantillas de email para iTop</a></h3>
+                        <p class="caso-lema" data-t="c3-lema">Siete plantillas para que la marca sobreviva a Outlook.</p>
+                        <dl class="caso-datos">
+                            <div><dt data-t="dato-decidi">Decidí</dt><dd data-t="c3-d">Adaptar cada maquetación al HTML limitado de Outlook e insertar el logo en base64, la única forma fiable de que se mostrara.</dd></div>
+                        </dl>
+                    </article>
+                    <article class="caso">
+                        <p class="anota" data-t="c5-meta">forma de trabajar</p>
+                        <h3><a href="./proyecto/procesos-ia.html" data-umami-event="ver-proyecto" data-umami-event-nombre="procesos-ia" data-t="c5-t">Procesos con IA</a></h3>
+                        <p class="caso-lema" data-t="c5-lema">Un archivo que acompaña al agente en todos los proyectos.</p>
+                        <dl class="caso-datos">
+                            <div><dt data-t="dato-decidi">Decidí</dt><dd data-t="c5-d">Convertir mis criterios en una base común: exponer dudas, cambiar lo justo y definir cuándo una tarea está terminada.</dd></div>
+                        </dl>
+                    </article>
+                </div>
+                <p class="fuente" data-t="tra-nota" hidden></p>
+            </div>
+        </section>
+
+        <!-- 6. Iniciativa -->
+        <section class="iniciativa" aria-labelledby="iniciativa-titulo">
+            <div class="marco">
+                <h2 id="iniciativa-titulo" data-t="ini-titulo">Nadie me pidió nada de esto.</h2>
+                <p class="texto-grande" data-t="ini-texto">Cuando algo me molesta dos veces, lo convierto en herramienta. Llevo 20 skills propias para agentes y varias utilidades en Rust, Python y PowerShell.</p>
+                <ul class="utiles">
+                    <li><code>dom-pick</code><span data-t="u1">Señalas un elemento en una web y el agente recibe su selector, HTML, estilos y un recorte.</span></li>
+                    <li><code>agent-sync</code><span data-t="u2">Una sola configuración de MCP, sincronizada con cinco agentes distintos.</span></li>
+                    <li><code>windows-crash-triage</code><span data-t="u3">De una ventana cerrada a firma, módulo y pila, sin abrir un depurador.</span></li>
+                    <li><code>win-dialog</code><span data-t="u4">Inspecciona y pulsa diálogos nativos de Windows desde Rust, por FFI.</span></li>
+                    <li><code>config-checkpoints</code><span data-t="u5">Guarda y restaura estados de la configuración de agentes con git.</span></li>
+                </ul>
+                <p class="fuente" data-t="ini-fuente">fuente: metadatos de autor de mis skills locales, 6 nov 2026 · uso personal, código no publicado</p>
+            </div>
+        </section>
+
+        <!-- 7. Límites: lo que compra la credibilidad del resto -->
+        <section class="limites" id="limites" aria-labelledby="limites-titulo">
+            <div class="marco limites-rejilla">
+                <h2 id="limites-titulo" data-t="lim-titulo">Lo que esta web no te va a vender.</h2>
+                <ol class="lista-limites">
+                    <li data-t="lim-1">Soy junior. Mi experiencia profesional suma poco más de un año, con prácticas incluidas.</li>
+                    <li data-t="lim-2">history_search solo está probado en Windows.</li>
+                    <li data-t="lim-3">LudoScript está en beta, y la generación con IA sigue en pruebas.</li>
+                    <li data-t="lim-4">Mis benchmarks salen de una sola máquina. Son una medición concreta, no una verdad universal.</li>
+                    <li data-t="lim-5">Parte de lo que cuento vive en repos privados o en empresas. Lo marco siempre, y puedo enseñar lo privado si me lo pides.</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- 8. Origen -->
+        <section class="origen" aria-labelledby="origen-titulo">
+            <div class="marco">
+                <h2 id="origen-titulo" data-t="ori-titulo">Primero estudié por qué la gente elige algo. Después aprendí a construirlo.</h2>
+                <ol class="linea-tiempo">
+                    <li><span>2020–2025</span><p data-t="ori-1">Grado en Marketing y Dirección Comercial, UCAM</p></li>
+                    <li><span>2024–2026</span><p data-t="ori-2">Técnico Superior en Desarrollo de Aplicaciones Web, FP San Antonio</p></li>
+                    <li><span>2025</span><p data-t="ori-3">Inversus: webs corporativas y la landing de la Gala Imparables</p></li>
+                    <li><span>2026</span><p data-t="ori-4">AGE2: Docker, automatización y LLM en producción</p></li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- 9. Contacto -->
+        <section class="contacto" id="contacto" aria-labelledby="contacto-titulo">
+            <div class="marco">
+                <h2 id="contacto-titulo" data-t="con-titulo">Tu turno.</h2>
+                <p class="contacto-sub" data-t="con-sub">Pregúntame lo que el buscador no supo contestar. Estoy en Murcia y abierto a trabajo presencial, remoto o híbrido.</p>
+                <a class="contacto-correo" href="mailto:contacto@alvaropastor.dev" data-umami-event="contacto" data-umami-event-tipo="email">contacto@alvaropastor.dev</a>
+                <div class="contacto-enlaces">
+                    <a href="https://github.com/alvaropas17" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer">X</a>
+                    <a href="mailto:contacto@alvaropastor.dev?subject=CV" data-t="con-cv">Pedir el CV</a>
+                </div>
+                <p class="pie">© 2026 Álvaro Pastor</p>
             </div>
         </section>
     </main>
 
-    <!-- Pie -->
-    <footer class="pie">
-        <div class="contenedor">
-            <div class="pie-fila">
-                <p>© 2026 Álvaro Pastor · herramientas para agentes de IA.</p>
-                <div class="pie-enlaces">
-                    <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" rel="noopener">LinkedIn</a>
-                    <a href="https://github.com/alvaropas17/alvaropas17" rel="noopener">GitHub</a>
-                    <a href="#herramientas">Herramientas</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <script src="./scripts/ui-comun.js"></script>
-    <script src="./scripts/idioma.js"></script>
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/portada-datos.js"></script>
+    <script src="./scripts/portada.js"></script>
 </body>
 
 </html>
