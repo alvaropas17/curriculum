@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Portada personal, pensada para quien llega desde X: una frase de marca,
-   pruebas concretas y dos salidas (seguir o hablar).
+   Portada personal, pensada para quien llega desde X: cada pieza abre con un
+   problema reconocible y termina en una prueba. Contacto por X o correo.
    Tema sala oscura: negro, serif grande y un único color de señal.
    ========================================================================== */
 
@@ -202,12 +202,7 @@ h1 > span { display: block; }
   border-radius: 5px;
   background: #f7f7f9;
 }
-.lanzamiento-gancho {
-  font-family: var(--display);
-  font-size: clamp(2.2rem, 3.6vw, 3.25rem);
-  line-height: 1.02;
-}
-.lanzamiento-gancho span { display: block; }
+.lanzamiento-nombre { font-family: var(--display); font-size: clamp(2.2rem, 3.6vw, 3.25rem); line-height: 1.02; }
 .lanzamiento-texto { margin-block: 1rem 0.75rem; color: var(--texto-2); }
 .lanzamiento .acciones { margin-top: 1.5rem; }
 
@@ -219,6 +214,7 @@ h1 > span { display: block; }
   color: var(--sobre-senal);
 }
 .carrera h2 { font-size: clamp(3rem, 9.4vw, 8.25rem); line-height: 0.96; letter-spacing: -0.025em; }
+.carrera code { font-family: var(--mono); font-size: 0.92em; }
 .carrera-texto {
   max-width: 42rem;
   margin-top: 1.5rem;
@@ -267,6 +263,7 @@ h1 > span { display: block; }
 .pieza p:not(.etiqueta) { margin-top: 0.55rem; color: var(--texto-2); }
 .pieza p.pieza-prueba { font-size: 0.95rem; color: var(--texto-3); }
 .pieza-texto { grid-column: span 2; }
+.pieza-texto h3 { font-size: clamp(1.9rem, 2.6vw, 2.3rem); }
 
 @media (min-width: 901px) {
   .pieza-grande { grid-column: span 4; }
@@ -287,13 +284,9 @@ h1 > span { display: block; }
 .herramientas-texto { margin-block: 1.25rem 1.5rem; color: var(--texto-2); }
 .utilidades li { padding-block: 0.95rem; border-bottom: 1px solid var(--linea); }
 .utilidades li:first-child { border-top: 1px solid var(--linea); }
-.utilidades code {
-  display: block;
-  font-family: var(--mono);
-  font-size: 0.92rem;
-  color: var(--senal);
-}
-.utilidades span { display: block; margin-top: 0.15rem; color: var(--texto-2); line-height: 1.4; }
+.utilidades strong { display: block; font-family: var(--display); font-size: 1.6rem; font-weight: 400; line-height: 1.15; }
+.utilidades span { display: block; margin-top: 0.2rem; color: var(--texto-2); line-height: 1.4; }
+.utilidades code { font-family: var(--mono); font-size: 0.88rem; color: var(--senal); }
 .herramientas .nota { margin-top: 0.85rem; }
 
 /* ---------- criterio ---------- */
@@ -325,22 +318,51 @@ h1 > span { display: block; }
 .reglas p { margin-top: 0.6rem; color: var(--texto-2); }
 .criterio-nota { margin-top: 2rem; }
 
-/* ---------- quién ---------- */
+/* ---------- reacción ---------- */
 
-.quien { padding-bottom: var(--bloque); }
-.quien-rejilla {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: clamp(2rem, 6vw, 5rem);
-  align-items: start;
-  padding-top: var(--bloque);
+.reaccion { padding-bottom: var(--bloque); }
+.reaccion blockquote {
+  margin: 0;
+  padding-top: clamp(2.5rem, 5vw, 4rem);
   border-top: 1px solid var(--linea);
 }
-.quien h2 { font-size: clamp(2.6rem, 5.2vw, 4.5rem); line-height: 1.02; }
-.quien p { color: var(--texto-2); }
-.quien h3 { margin-top: 2rem; font-size: 1.9rem; line-height: 1.1; }
-.ofertas { margin-top: 0.75rem; }
-.ofertas li { padding-block: 0.7rem; border-top: 1px solid var(--linea); line-height: 1.4; }
+.reaccion p:first-child {
+  font-family: var(--display);
+  font-size: clamp(3rem, 8.4vw, 7.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.reaccion p + p { margin-top: 1rem; font-size: clamp(1.15rem, 2vw, 1.4rem); color: var(--texto-2); }
+
+/* ---------- notas ---------- */
+
+.notas { padding-block: var(--bloque); background: var(--fondo-alt); }
+.notas-rejilla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: clamp(2rem, 4vw, 3.25rem);
+}
+.apunte {
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  background: var(--fondo);
+  border: 1px solid var(--linea);
+  border-radius: 5px;
+  scroll-margin-top: 5rem;
+}
+.apunte h3 { margin-top: 0.4rem; font-size: clamp(2rem, 3.2vw, 2.75rem); line-height: 1.05; }
+.apunte > p:not(.etiqueta) { margin-top: 0.85rem; color: var(--texto-2); }
+.apunte strong { color: var(--texto-1); font-weight: 600; }
+.datos { margin-top: 1.25rem; }
+.datos div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.5rem;
+  border-top: 1px solid var(--linea);
+}
+.datos dt { color: var(--texto-2); line-height: 1.35; }
+.datos dd { font-family: var(--mono); color: var(--senal); white-space: nowrap; }
 
 /* ---------- cierre ---------- */
 
@@ -352,6 +374,7 @@ h1 > span { display: block; }
 .cierre :focus-visible { outline-color: var(--sobre-senal); }
 .cierre h2 { max-width: 66rem; font-size: clamp(3.2rem, 10vw, 9rem); line-height: 0.96; letter-spacing: -0.025em; }
 .cierre-texto { margin-top: 1.25rem; font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.4; }
+.cierre .boton-contorno-oscuro { overflow-wrap: anywhere; }
 .cierre .acciones { margin-top: clamp(1.75rem, 3.5vw, 2.5rem); }
 
 /* ---------- pie ---------- */
@@ -366,7 +389,7 @@ h1 > span { display: block; }
 
 @media (max-width: 900px) {
   .nav-enlaces { display: none; }
-  .lanzamiento-rejilla, .herramientas-rejilla, .quien-rejilla { grid-template-columns: 1fr; }
+  .lanzamiento-rejilla, .herramientas-rejilla, .notas-rejilla { grid-template-columns: 1fr; }
   .cifras { grid-template-columns: repeat(2, 1fr); }
   .reglas { grid-template-columns: 1fr; gap: 1.75rem; }
 }

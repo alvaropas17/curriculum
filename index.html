@@ -8,17 +8,17 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="theme-color" content="#0c0c0d" />
-    <title>Álvaro Pastor · Lo que me molesta dos veces, lo convierto en herramienta</title>
+    <title>Álvaro Pastor · ¿Otra vez haciendo lo mismo? Lo convierto en herramienta</title>
     <meta name="description"
-        content="Álvaro Pastor, desarrollador web e IA. Construyo productos web y herramientas para agentes de código. Agent History Search, LudoScript y más." />
+        content="Álvaro Pastor, desarrollador. Trabajo con IA y construyo herramientas que quitan trabajo repetido. Estas son las que ya funcionan." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://alvaropastor.dev/" />
-    <meta property="og:title" content="If it annoys me twice, I turn it into a tool." />
-    <meta property="og:description" content="Álvaro Pastor builds web products and tools for coding agents." />
+    <meta property="og:title" content="Doing the same thing again? I turn it into a tool." />
+    <meta property="og:description" content="Álvaro Pastor is a developer who works with AI and builds tools that remove repetitive work." />
     <meta property="og:image" content="https://alvaropastor.dev/img/og-alvaro-pastor.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Álvaro Pastor: If it annoys me twice, I turn it into a tool." />
+    <meta property="og:image:alt" content="Álvaro Pastor: Doing the same thing again? I turn it into a tool." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@alpas17_" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -34,65 +34,63 @@
         <div class="marco nav-fila">
             <a class="nav-marca" href="#top">Álvaro Pastor</a>
             <div class="nav-enlaces">
-                <a href="#lanzamiento" data-t="nav-lanzamiento">lanzamiento</a>
-                <a href="#trabajo" data-t="nav-trabajo">trabajo</a>
+                <a href="#problemas" data-t="nav-problemas">problemas</a>
                 <a href="#herramientas" data-t="nav-herramientas">herramientas</a>
-                <a href="#hablemos" data-t="nav-hablemos">hablemos</a>
+                <a href="#notas" data-t="nav-notas">notas</a>
             </div>
             <div class="nav-acciones">
                 <button id="idioma" class="nav-idioma" type="button" lang="en" aria-label="Switch to English">EN</button>
-                <a class="nav-cta" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="nav" data-t="seguir">Seguir en X</a>
+                <a class="nav-cta" href="#hablemos" data-umami-event="ir-contacto" data-umami-event-tipo="nav" data-t="nav-cta">Escríbeme</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- La marca en una frase -->
+        <!-- El dolor y la solución -->
         <header class="hero">
             <div class="marco">
-                <h1><span data-t="hero-1">Lo que me molesta dos veces,</span> <span class="marca" data-t="hero-2">lo convierto en herramienta.</span></h1>
-                <p class="hero-sub" data-t="hero-sub">Soy Álvaro Pastor, desarrollador web e IA. Construyo productos web y herramientas para agentes de código, y en X cuento cómo salen.</p>
+                <h1><span data-t="hero-1">¿Otra vez haciendo lo mismo?</span> <span class="marca" data-t="hero-2">Lo convierto en herramienta.</span></h1>
+                <p class="hero-sub" data-t="hero-sub">Soy Álvaro Pastor, desarrollador. Trabajo con IA y construyo herramientas que me quitan trabajo repetido. Estas son las que ya funcionan.</p>
                 <div class="acciones">
-                    <a class="boton boton-senal" href="#lanzamiento" data-umami-event="ver-trabajo" data-umami-event-tipo="hero" data-t="hero-cta">Ver lo que he construido</a>
-                    <a class="boton boton-contorno" href="#hablemos" data-umami-event="ir-contacto" data-umami-event-tipo="hero" data-t="hero-cta2">Trabajar conmigo</a>
+                    <a class="boton boton-senal" href="#problemas" data-umami-event="ver-trabajo" data-umami-event-tipo="hero" data-t="hero-cta">Ver lo que ya funciona</a>
+                    <a class="boton boton-contorno" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="contactar-x" data-umami-event-tipo="hero" data-t="contacto-x">Escríbeme por X</a>
                 </div>
                 <dl class="cifras">
-                    <div><dt>~1 min → 4 s</dt><dd data-t="cif-1">arranque de un entorno de desarrollo</dd></div>
-                    <div><dt>6</dt><dd data-t="cif-2">agentes de código compatibles con mi buscador</dd></div>
+                    <div><dt>~1 min → 4 s</dt><dd data-t="cif-1">de espera tras cada cambio en un entorno de desarrollo</dd></div>
+                    <div><dt>6</dt><dd data-t="cif-2">agentes de código en los que busca mi herramienta</dd></div>
                     <div><dt>20</dt><dd data-t="cif-3">skills propias para agentes</dd></div>
                     <div><dt>×5,55</dt><dd data-t="cif-4">más rápido al reescribir un lector en Rust</dd></div>
                 </dl>
             </div>
         </header>
 
-        <!-- El producto estrella -->
-        <section class="lanzamiento" id="lanzamiento" aria-labelledby="lanzamiento-titulo">
+        <!-- Primer dolor: el producto estrella -->
+        <section class="lanzamiento" id="problemas" aria-labelledby="lanzamiento-titulo">
             <div class="marco">
-                <p class="etiqueta" data-t="lan-etiqueta">Último lanzamiento · gratis y de código abierto</p>
-                <h2 id="lanzamiento-titulo">Agent History Search</h2>
+                <h2 id="lanzamiento-titulo" data-t="lan-titulo">Sé que ya lo resolví con la IA, pero no sé en qué conversación.</h2>
                 <div class="lanzamiento-rejilla">
                     <video id="video" controls playsinline preload="none" poster="./video/agent-history-search.webp" width="1280" height="720">
                         <source src="./video/agent-history-search.mp4" type="video/mp4" />
                         <track kind="captions" src="./video/agent-history-search.en.vtt" srclang="en" label="English" />
                     </video>
                     <div>
-                        <p class="lanzamiento-gancho"><span data-t="lan-1">Tú te acuerdas.</span> <span class="marca" data-t="lan-2">Tu agente, no.</span></p>
-                        <p class="lanzamiento-texto" data-t="lan-p">Tu agente busca en vuestras conversaciones pasadas y responde con una fuente que puedes comprobar. Local y de solo lectura.</p>
+                        <p class="lanzamiento-nombre">Agent History Search</p>
+                        <p class="lanzamiento-texto" data-t="lan-p">Le preguntas a tu agente y busca en vuestras conversaciones pasadas. Te responde con la fuente exacta para que la compruebes. Gratis, local y de solo lectura.</p>
                         <p class="nota">Claude Code · Codex · OpenCode · Pi · omp · Pi Pocket</p>
                         <div class="acciones">
-                            <a class="boton boton-senal" href="./herramientas/agent-history-search.html" data-lang-link data-umami-event="ver-producto" data-umami-event-tipo="lanzamiento" data-t="lan-cta">Conocerlo e instalarlo</a>
-                            <a class="boton boton-contorno" href="https://github.com/alvaropas17/agent-history-search" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="lanzamiento">GitHub</a>
+                            <a class="boton boton-senal" href="./herramientas/agent-history-search.html" data-lang-link data-umami-event="ver-producto" data-umami-event-tipo="portada" data-t="lan-cta">Ver cómo funciona</a>
+                            <a class="boton boton-contorno" href="https://github.com/alvaropas17/agent-history-search" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="portada">GitHub</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Una prueba que se ve -->
+        <!-- Segundo dolor: una prueba que se ve -->
         <section class="carrera" id="carrera" aria-labelledby="carrera-titulo">
             <div class="marco">
-                <h2 id="carrera-titulo" data-t="car-titulo">Un minuto. Cuatro segundos.</h2>
-                <p class="carrera-texto" data-t="car-p">Reorganicé Docker para aprovechar su caché y el entorno de desarrollo de AGE2 dejó de tardar un minuto en arrancar. Estas barras corren en tiempo real.</p>
+                <h2 id="carrera-titulo" data-t="car-titulo">Un minuto de espera. En cada cambio.</h2>
+                <p class="carrera-texto" data-t="car-p">Cada cambio obligaba a hacer <code>docker compose down</code> y levantarlo todo. Vi dónde se perdía el tiempo y decidí reiniciar solo lo que cambia. Construí el script con ayuda de la IA y la espera bajó a 4 segundos. Estas barras corren en tiempo real.</p>
                 <div class="pistas">
                     <div class="pista">
                         <p><span data-t="car-antes">Antes</span> <output id="tiempo-antes">≈ 60 s</output></p>
@@ -103,21 +101,21 @@
                         <div class="barra"><i id="barra-despues" style="width: 6.67%"></i></div>
                     </div>
                 </div>
-                <p class="carrera-fuente" data-t="car-fuente">Prácticas en AGE2, 2026. El «antes» es aproximado. Trabajo de empresa, sin enlace público.</p>
+                <p class="carrera-fuente" data-t="car-fuente">Trabajo en una empresa, sin enlace público. El «antes» es aproximado.</p>
             </div>
         </section>
 
-        <!-- Catálogo -->
+        <!-- Más dolores, cada uno con su solución -->
         <section class="trabajo" id="trabajo" aria-labelledby="trabajo-titulo">
             <div class="marco">
-                <h2 id="trabajo-titulo" data-t="tra-titulo">También hago productos.</h2>
+                <h2 id="trabajo-titulo" data-t="tra-titulo">¿Te suena alguno de estos?</h2>
                 <p class="nota trabajo-aviso" data-t="tra-aviso"></p>
                 <div class="catalogo">
                     <a class="pieza pieza-grande" href="./proyecto/ludoscript.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="ludoscript">
                         <img src="./img/ludoscript/ludoscript-home.webp" alt="Pantalla de modos de estudio de LudoScript" width="1600" height="783" loading="lazy" />
                         <div>
-                            <p class="etiqueta" data-t="p1-e">Plataforma educativa con IA · beta</p>
-                            <h3>LudoScript</h3>
+                            <p class="etiqueta" data-t="p1-e">LudoScript · plataforma educativa con IA · beta</p>
+                            <h3 data-t="p1-t">Estudias sin saber qué estás fallando.</h3>
                             <p data-t="p1-p">Subes tus apuntes y la IA genera la práctica. Cada fallo orienta el siguiente repaso.</p>
                             <p class="pieza-prueba" data-t="p1-d">Hice el backend: API, datos, IA y multijugador en tiempo real, con respaldo entre modelos para que un fallo no tumbe el servicio.</p>
                         </div>
@@ -125,63 +123,73 @@
                     <a class="pieza pieza-lateral" href="./proyecto/gala-imparables.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="gala">
                         <img src="./img/inicio-gala-imparables.webp" alt="Portada de la web de los Premios Imparables 2025" width="1600" height="777" loading="lazy" />
                         <div>
-                            <p class="etiqueta" data-t="p2-e">Primer encargo real · publicada</p>
-                            <h3>Gala Imparables</h3>
-                            <p data-t="p2-p">La web de unos premios, con un carrusel que da a cada patrocinador el peso que le toca.</p>
+                            <p class="etiqueta" data-t="p2-e">Gala Imparables · web publicada</p>
+                            <h3 data-t="p2-t">Todos los patrocinadores compiten por la misma atención.</h3>
+                            <p data-t="p2-p">Un carrusel que da a cada uno el peso que le toca.</p>
                         </div>
                     </a>
                     <a class="pieza pieza-texto" href="./proyecto/tickets.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="tickets">
                         <div>
-                            <p class="etiqueta" data-t="p3-e">Prototipo navegable</p>
-                            <h3 data-t="p3-t">Panel de tickets</h3>
-                            <p data-t="p3-p">Decidir una incidencia de un vistazo: prioridad antes que detalle.</p>
+                            <p class="etiqueta" data-t="p3-e">Panel de tickets · prototipo</p>
+                            <h3 data-t="p3-t">Incidencias que no se entienden de un vistazo.</h3>
+                            <p data-t="p3-p">Prioridad antes que detalle. La transcripción se abre solo cuando hace falta.</p>
                         </div>
                     </a>
                     <a class="pieza pieza-texto" href="./proyecto/plantillas-itop.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="itop">
                         <div>
-                            <p class="etiqueta" data-t="p4-e">Trabajo profesional</p>
-                            <h3 data-t="p4-t">Plantillas para iTop</h3>
-                            <p data-t="p4-p">Siete plantillas de email para que la marca sobreviva a Outlook.</p>
+                            <p class="etiqueta" data-t="p4-e">Plantillas para iTop</p>
+                            <h3 data-t="p4-t">Tus emails se rompen en Outlook.</h3>
+                            <p data-t="p4-p">Siete plantillas adaptadas para que la marca llegue intacta.</p>
                         </div>
                     </a>
                     <a class="pieza pieza-texto" href="./proyecto/procesos-ia.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="procesos">
                         <div>
-                            <p class="etiqueta" data-t="p5-e">Forma de trabajar</p>
-                            <h3 data-t="p5-t">Procesos con IA</h3>
-                            <p data-t="p5-p">Un archivo que acompaña al agente en todos los proyectos.</p>
+                            <p class="etiqueta" data-t="p5-e">Procesos con IA</p>
+                            <h3 data-t="p5-t">Repites las mismas instrucciones en cada proyecto.</h3>
+                            <p data-t="p5-p">Un archivo que acompaña al agente en todos ellos.</p>
                         </div>
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- Lo que nadie pidió -->
+        <!-- Prueba humana -->
+        <section class="reaccion" aria-label="Reacción a mi trabajo">
+            <div class="marco">
+                <blockquote>
+                    <p data-t="rea-1">«Guau, ¿quién ha hecho esto?»</p>
+                    <p data-t="rea-2">Hasta en administración sabían quién había hecho esos diseños.</p>
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Dolores de quien trabaja con agentes -->
         <section class="herramientas" id="herramientas" aria-labelledby="herramientas-titulo">
             <div class="marco herramientas-rejilla">
                 <div>
-                    <h2 id="herramientas-titulo" data-t="her-titulo">Nadie me pidió nada de esto.</h2>
-                    <p class="herramientas-texto" data-t="her-p">Tengo 20 skills propias para agentes y utilidades en Rust, Python y PowerShell. Agent History Search salió de aquí. Lo siguiente lo contaré en X.</p>
+                    <h2 id="herramientas-titulo" data-t="her-titulo">Si trabajas con agentes, esto te pasa.</h2>
+                    <p class="herramientas-texto" data-t="her-p">A mí también. Cada vez que algo me hacía perder tiempo dos veces, construí la solución. Ya son 20 skills y varias utilidades en Rust, Python y PowerShell.</p>
                     <div class="acciones">
-                        <a class="boton boton-senal" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="herramientas" data-t="seguir">Seguir en X</a>
+                        <a class="boton boton-contorno" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="herramientas" data-t="seguir">Seguir en X</a>
                     </div>
                 </div>
                 <div>
                     <ul class="utilidades">
-                        <li><code>dom-pick</code><span data-t="u-1">Señalas un elemento en una web y el agente recibe su selector, HTML, estilos y un recorte.</span></li>
-                        <li><code>agent-sync</code><span data-t="u-2">Una sola configuración de MCP, sincronizada con cinco agentes distintos.</span></li>
-                        <li><code>windows-crash-triage</code><span data-t="u-3">De una ventana cerrada a firma, módulo y pila, sin abrir un depurador.</span></li>
-                        <li><code>win-dialog</code><span data-t="u-4">Inspecciona y pulsa diálogos nativos de Windows desde Rust.</span></li>
-                        <li><code>config-checkpoints</code><span data-t="u-5">Guarda y restaura estados de la configuración de agentes con git.</span></li>
+                        <li><strong data-t="u-1">Explicarle a tu agente qué botón quieres cambiar.</strong><span><code>dom-pick</code> · <i data-t="u-1p">lo señalas y recibe su selector, HTML, estilos y un recorte.</i></span></li>
+                        <li><strong data-t="u-2">Configurar lo mismo en cinco agentes.</strong><span><code>agent-sync</code> · <i data-t="u-2p">una sola configuración de MCP, sincronizada con todos.</i></span></li>
+                        <li><strong data-t="u-3">Se cierra una ventana y no sabes por qué.</strong><span><code>windows-crash-triage</code> · <i data-t="u-3p">llega a la firma, el módulo y la pila sin abrir un depurador.</i></span></li>
+                        <li><strong data-t="u-4">Un diálogo de Windows frena a tu agente.</strong><span><code>win-dialog</code> · <i data-t="u-4p">lo inspecciona y lo pulsa desde Rust.</i></span></li>
+                        <li><strong data-t="u-5">Tocas la configuración y ya no puedes volver atrás.</strong><span><code>config-checkpoints</code> · <i data-t="u-5p">guarda y restaura estados con git.</i></span></li>
                     </ul>
                     <p class="nota" data-t="u-nota">Uso personal. Código todavía sin publicar.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Por qué fiarse -->
+        <!-- Criterio -->
         <section class="criterio" aria-labelledby="criterio-titulo">
             <div class="marco">
-                <h2 id="criterio-titulo" data-t="cri-titulo">También te enseño dónde casi no gano.</h2>
+                <h2 id="criterio-titulo" data-t="cri-titulo">Si algo casi no mejora, te lo digo.</h2>
                 <div class="comparativa">
                     <div><p class="comparativa-cifra">×5,55</p><p data-t="cri-1">al volcar una sesión completa tras reescribir mi lector de historial en Rust.</p></div>
                     <div><p class="comparativa-cifra comparativa-baja">×1,27</p><p data-t="cri-2">en búsqueda de texto, porque ahí manda SQLite. Esa cifra también va en el informe.</p></div>
@@ -204,18 +212,37 @@
             </div>
         </section>
 
-        <!-- Quién hay detrás -->
-        <section class="quien" aria-labelledby="quien-titulo">
-            <div class="marco quien-rejilla">
-                <h2 id="quien-titulo" data-t="qui-titulo">Primero estudié por qué la gente elige algo. Después aprendí a construirlo.</h2>
-                <div>
-                    <p data-t="qui-p">Soy graduado en Marketing y técnico superior en Desarrollo de Aplicaciones Web. Llevo poco más de un año de experiencia profesional, con prácticas incluidas, y trabajo cada día con agentes de código.</p>
-                    <h3 data-t="ofr-titulo">Para qué puedes llamarme</h3>
-                    <ul class="ofertas">
-                        <li data-t="ofr-1">Construir tu web o producto, del diseño al despliegue.</li>
-                        <li data-t="ofr-2">Meter IA en tu producto con control de fallos y de coste.</li>
-                        <li data-t="ofr-3">Poner a trabajar agentes de código en tu equipo.</li>
-                    </ul>
+        <!-- Notas: experimentos con datos reales -->
+        <section class="notas" id="notas" aria-labelledby="notas-titulo">
+            <div class="marco">
+                <h2 id="notas-titulo" data-t="not-titulo">Lo que voy midiendo.</h2>
+                <div class="notas-rejilla">
+                    <article class="apunte" id="nota-61-clones">
+                        <p class="etiqueta" data-t="n1-f">6 nov 2026 · GitHub y X</p>
+                        <h3 data-t="n1-t">61 clones y 2 visitantes: por qué no me creo mi propio dato.</h3>
+                        <dl class="datos">
+                            <div><dt data-t="n1-d1">Vistas del post de lanzamiento</dt><dd>594</dd></div>
+                            <div><dt data-t="n1-d2">Clics en el enlace a GitHub</dt><dd>2</dd></div>
+                            <div><dt data-t="n1-d3">Visitantes únicos del repositorio</dt><dd>2</dd></div>
+                            <div><dt data-t="n1-d4">Clones únicos</dt><dd>61</dd></div>
+                            <div><dt data-t="n1-d5">Estrellas</dt><dd>0</dd></div>
+                        </dl>
+                        <p data-t="n1-p1">61 clones parecen 61 personas interesadas, pero solo 2 abrieron la página. 104 de los 126 clones llegaron en tres días seguidos tras el lanzamiento. Algunos son míos y sospecho que muchos son automáticos.</p>
+                        <p data-t="n1-p2"><strong>Lo que aprendí:</strong> no puedo decir que la herramienta no convenza, porque casi nadie ha llegado a verla. El problema que medir ahora es la distancia entre el post y el enlace.</p>
+                    </article>
+                    <article class="apunte" id="nota-menos-posts">
+                        <p class="etiqueta" data-t="n2-f">3 nov 2026 · analíticas de X</p>
+                        <h3 data-t="n2-t">Publiqué menos y cada post rindió el doble.</h3>
+                        <dl class="datos">
+                            <div><dt data-t="n2-d1">1 nov · 12 posts</dt><dd data-t="n2-v1">25 vistas/post</dd></div>
+                            <div><dt data-t="n2-d2">2 nov · 9 posts</dt><dd data-t="n2-v2">38 vistas/post</dd></div>
+                            <div><dt data-t="n2-d3">3 nov · 7 posts (día sin cerrar)</dt><dd data-t="n2-v3">56 vistas/post</dd></div>
+                            <div><dt data-t="n2-d4">Mejor post, una pregunta</dt><dd data-t="n2-v4">133 vistas</dd></div>
+                            <div><dt data-t="n2-d5">Afirmaciones sueltas</dt><dd data-t="n2-v5">18–28 vistas</dd></div>
+                        </dl>
+                        <p data-t="n2-p1">Hice que un agente sacara los datos de mi perfil y los comparara por días. Los posts que abrían conversación fueron los que mejor funcionaron.</p>
+                        <p data-t="n2-p2"><strong>Lo que aprendí:</strong> tres días no demuestran nada, pero dan una pista que probar: menos afirmaciones y más preguntas reales.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -223,11 +250,11 @@
         <!-- Cierre -->
         <section class="cierre" id="hablemos" aria-labelledby="cierre-titulo">
             <div class="marco">
-                <h2 id="cierre-titulo" data-t="cie-titulo">¿Qué te molesta a ti dos veces?</h2>
-                <p class="cierre-texto" data-t="cie-p">Cuéntamelo. Estoy en Murcia y abierto a trabajo presencial, remoto o híbrido.</p>
+                <h2 id="cierre-titulo" data-t="cie-titulo">¿Qué estás haciendo otra vez?</h2>
+                <p class="cierre-texto" data-t="cie-p">Cuéntamelo y te digo cómo lo atacaría.</p>
                 <div class="acciones">
-                    <a class="boton boton-oscuro" href="mailto:contacto@alvaropastor.dev" data-umami-event="contactar" data-umami-event-tipo="cierre" data-t="cie-cta">Escríbeme</a>
-                    <a class="boton boton-contorno-oscuro" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="cierre" data-t="seguir">Seguir en X</a>
+                    <a class="boton boton-oscuro" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="contactar-x" data-umami-event-tipo="cierre" data-t="contacto-x">Escríbeme por X</a>
+                    <a class="boton boton-contorno-oscuro" href="mailto:contacto@alvaropastor.dev" data-umami-event="contactar-correo" data-umami-event-tipo="cierre">contacto@alvaropastor.dev</a>
                 </div>
             </div>
         </section>
@@ -237,7 +264,6 @@
         <div class="marco pie-fila">
             <p>© 2026 Álvaro Pastor</p>
             <ul>
-                <li><a href="mailto:contacto@alvaropastor.dev">contacto@alvaropastor.dev</a></li>
                 <li><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="pie">X</a></li>
                 <li><a href="https://github.com/alvaropas17" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                 <li><a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
