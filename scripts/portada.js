@@ -11,7 +11,7 @@
     'dem-nota': 'Illustrative conversations. The commands and capabilities are real.',
     'caj-titulo': 'What it’s missing. What I gave it.',
     'caj-mcp': 'MCP servers', 'caj-helpers': 'Helpers and skills',
-    'c-publico': 'Public · see it', 'c-privado': 'Not published', 'c-piloto': 'Unpublished pilot',
+    'c-publico': 'Public · see it', 'c-privado': 'In development · not published', 'c-word': 'Early development · not published', 'c-pedir': 'Ask me on X', 'c-piloto': 'Unpublished pilot',
     'c1-t': 'It can’t remember what you did.',
     'c1-p': 'Searches your conversations across six agents and answers with the exact source.',
     'c2-t': 'It doesn’t know what you’re pointing at.',
@@ -45,7 +45,7 @@
     'reg-3p': 'Moving my history reader to Rust gained ×5.55 dumping sessions and only ×1.27 searching. Both numbers go in the report.',
     'cri-nota': 'Everything is tested on Windows. Measurements come from a single machine: specific, not universal.',
     'vot-titulo': 'Which one should I publish first?',
-    'vot-p': 'So far only Agent History Search is public. The rest runs on my machine. Tell me which one would help you.',
+    'vot-p': 'So far only Agent History Search is public. The rest is still in development. Tell me which one would help you.',
     'vot-cta': 'Tell me on X',
     'not-titulo': 'What I’m measuring.',
     'n1-f': '6 Nov 2026 · GitHub and X',
@@ -53,7 +53,7 @@
     'n1-d1': 'Launch post views', 'n1-d2': 'Clicks on the GitHub link', 'n1-d3': 'Unique repository visitors',
     'n1-d4': 'Unique clones', 'n1-d5': 'Stars',
     'n1-p1': '61 clones look like 61 interested people, but only 2 opened the page. 104 of the 126 clones came in three straight days after launch.',
-    'n1-p2': '<strong>My theory:</strong> the ones cloning are agents, not people. An agent doesn’t open the page. I’ll measure it on the next post.',
+    'n1-p2': '<strong>My theory:</strong> the ones cloning are agents, not people. An agent doesn’t open the page.',
     'n2-f': '3 Nov 2026 · X analytics',
     'n2-t': 'I posted less and each post did twice as well.',
     'n2-d1': '1 Nov · 12 posts', 'n2-v1': '25 views/post',
@@ -65,7 +65,6 @@
     'n2-p2': '<strong>What I learned:</strong> three days prove nothing, but they give me something to test: fewer statements and more real questions.',
     'cie-titulo': 'What can’t your agent do?',
     'cie-p': 'Tell me about it and I’ll tell you how I’d tackle it.',
-    'pie-procesos': 'Processes with AI',
   };
 
   const PETICIONES = [

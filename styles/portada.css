@@ -251,7 +251,7 @@ h1 > span { display: block; }
 }
 .capacidad {
   display: grid;
-  grid-template-columns: 1.1fr 1.3fr 11rem;
+  grid-template-columns: 1.1fr 1.3fr 15.5rem;
   gap: 0.35rem clamp(1.25rem, 3vw, 2.5rem);
   align-items: baseline;
   padding-block: 1.1rem;
@@ -266,8 +266,8 @@ h1 > span { display: block; }
 .capacidad p { color: var(--texto-2); line-height: 1.45; }
 .capacidad-nombre { font-family: var(--mono); font-size: 0.82rem; line-height: 1.5; overflow-wrap: anywhere; }
 .capacidad-nombre code { display: block; font-family: inherit; color: var(--senal); }
-.capacidad-nombre span { color: var(--texto-3); }
-.capacidad-nombre a { color: var(--texto-1); text-underline-offset: 3px; }
+.capacidad-nombre span { display: block; color: var(--texto-3); }
+.capacidad-nombre a { display: block; color: var(--texto-1); text-underline-offset: 3px; }
 
 /* ---------- lanzamiento dentro de la portada ---------- */
 
