@@ -186,11 +186,10 @@ how to check it in a new session. Report any checks still pending.`,
     if (window.umami) window.umami.track('reproducir-video');
   }, { once: true });
 
-  // Sin elección previa: español solo con zona horaria de España y navegador en español.
+  // Sin elección previa manda el idioma del navegador: español si lo usa, inglés en el resto.
   const pedido = new URL(location.href).searchParams.get('lang');
   let guardado = null;
   try { guardado = localStorage.getItem('portfolio-language'); } catch { /* Sin almacenamiento. */ }
-  const enEspana = ['Europe/Madrid', 'Africa/Ceuta', 'Atlantic/Canary'].includes(Intl.DateTimeFormat().resolvedOptions().timeZone);
-  const delNavegador = enEspana && (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+  const delNavegador = (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
   aplicar(pedido === 'es' || pedido === 'en' ? pedido : guardado === 'es' || guardado === 'en' ? guardado : delNavegador);
 })();

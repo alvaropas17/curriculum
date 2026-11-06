@@ -210,8 +210,7 @@
   });
   let saved;
   try { saved = localStorage.getItem('portfolio-language'); } catch { /* Spanish is the default. */ }
-  const inSpain = ['Europe/Madrid', 'Africa/Ceuta', 'Atlantic/Canary'].includes(Intl.DateTimeFormat().resolvedOptions().timeZone);
-  const detected = inSpain && (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+  const detected = (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
   const initialLanguage = validLanguage(saved) ? saved : detected;
   apply(validLanguage(requestedLanguage()) ? requestedLanguage() : initialLanguage);
   window.addEventListener('popstate', () => {
