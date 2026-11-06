@@ -95,7 +95,7 @@
     'IA y automatización': 'AI and automation', 'Herramientas y despliegue': 'Tools and deployment',
     'Gemini API, DeepSeek, Qwen, LM Studio, agentes de IA, Bash': 'Gemini API, DeepSeek, Qwen, LM Studio, AI agents, Bash',
     'Experiencia profesional': 'Work experience', 'Desarrollo Web, Automatización e IA': 'Web Development, Automation and AI',
-    'Prácticas Formativas AGE2': 'AGE2 Internship', 'Febrero 2026 Junio 2026': 'February 2026 – June 2026',
+    'Febrero 2026 Junio 2026': 'February 2026 – June 2026',
     'Reduje el tiempo de arranque del entorno de desarrollo de aproximadamente 1 minuto a 4 segundos, reorganizando la configuración de Docker para aprovechar su sistema de caché.': 'Reduced development environment startup time from about 1 minute to 4 seconds by reorganizing the Docker configuration to take advantage of caching.',
     'Diseñé plantillas corporativas de email reutilizables para reducir el tiempo de producción de comunicaciones y unificar la imagen de marca entre proyectos.': 'Designed reusable corporate email templates to reduce production time and keep branding consistent across projects.',
     'Rediseñé la estrategia de prompting y gestión de contexto de los modelos de lenguaje (LLM), mejorando la fiabilidad y consistencia de las respuestas en producción.': 'Redesigned LLM prompting and context management to improve the reliability and consistency of responses in production.',
