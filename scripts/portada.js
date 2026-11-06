@@ -173,6 +173,8 @@ how to check it in a new session. Report any checks still pending.`,
       const seleccion = getSelection();
       seleccion.removeAllRanges();
       seleccion.addRange(rango);
+      // El navegador integrado de X y otras apps puede negar la API del portapapeles.
+      hecho = document.execCommand('copy');
     }
     const original = copiar.textContent;
     copiar.textContent = hecho ? ROTULOS[idioma].copiado : ROTULOS[idioma].fallo;
