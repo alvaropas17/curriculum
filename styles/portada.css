@@ -182,9 +182,7 @@ h1 > span { display: block; width: fit-content; }
 .marca {
   color: var(--senal);
   font-style: italic;
-  animation: encender 900ms 250ms ease-out backwards;
 }
-@keyframes encender { from { opacity: 0; } }
 
 .hero-sub {
   margin-top: clamp(1.5rem, 3vw, 2.25rem);
@@ -260,7 +258,7 @@ h1 > span { display: block; width: fit-content; }
 .ev:nth-of-type(2) { animation-delay: 40ms; }
 .ev:nth-of-type(3) { animation-delay: 80ms; }
 .ev:nth-of-type(4) { animation-delay: 120ms; }
-@keyframes aparecer { from { opacity: 0; transform: translateY(6px); } }
+@keyframes aparecer { from { transform: translateY(6px); } }
 .ev > p:first-child {
   font-size: clamp(1.05rem, 1.7vw, 1.22rem);
   line-height: 1.42;
