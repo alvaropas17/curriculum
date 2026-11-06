@@ -88,63 +88,79 @@
             <div class="marco">
                 <h2 id="caja-titulo" data-t="caj-titulo">Lo que le falta. Lo que le he dado.</h2>
 
-                <div class="caja-grupo">
-                    <h3 data-t="caj-mcp">Servidores MCP</h3>
-                    <div class="capacidad">
-                        <strong data-t="c1-t">No recuerda lo que hicisteis.</strong>
-                        <p data-t="c1-p">Dile qué había en aquella respuesta y la recupera de tus chats con seis agentes, con la fuente exacta.</p>
-                        <p class="capacidad-nombre"><code>agent-history-search</code><a href="./herramientas/agent-history-search.html" data-lang-link data-umami-event="ver-producto" data-umami-event-tipo="caja" data-t="c-publico">Público · ver</a></p>
+                <article class="destacada">
+                    <p class="etiqueta" data-t="caj-ya">Ya disponible</p>
+                    <h3 data-t="c1-t">No recuerda lo que hicisteis.</h3>
+                    <p data-t="c1-p">Dile qué había en aquella respuesta y la recupera de tus chats con seis agentes, con la fuente exacta.</p>
+                    <div class="destacada-pie">
+                        <code>agent-history-search</code>
+                        <a class="boton boton-senal" href="./herramientas/agent-history-search.html" data-lang-link data-umami-event="ver-producto" data-umami-event-tipo="caja" data-t="c-ver">Ver la herramienta</a>
                     </div>
-                    <div class="capacidad">
-                        <strong data-t="c2-t">No sabe qué le señalas.</strong>
-                        <p data-t="c2-p">Marcas un elemento en la web y recibe su selector, HTML, estilos y un recorte. En React, Next y Svelte, también el fichero y la línea.</p>
-                        <p class="capacidad-nombre"><code>dom-pick</code><span data-t="c-privado">En desarrollo · sin publicar</span><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="pedir-herramienta" data-umami-event-tipo="dom-pick" data-t="c-pedir">Pídemelo por X</a></p>
-                    </div>
-                    <div class="capacidad">
-                        <strong data-t="c3-t">No encuentra tus archivos.</strong>
-                        <p data-t="c3-p">Responde dónde está algo en todo el PC usando el índice de Everything. Contó 2.339 archivos en 0,1 s; <code>find</code> seguía sin terminar a los 150 s.</p>
-                        <p class="capacidad-nombre"><code>find-everything</code><span data-t="c-privado">En desarrollo · sin publicar</span><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="pedir-herramienta" data-umami-event-tipo="find-everything" data-t="c-pedir">Pídemelo por X</a></p>
-                    </div>
-                    <div class="capacidad">
-                        <strong data-t="c4-t">No puede crearte un Word de verdad.</strong>
-                        <p data-t="c4-p">Controla Microsoft Word por su propia interfaz, sin clics ni portapapeles. Solo toca documentos creados por él.</p>
-                        <p class="capacidad-nombre"><code>word-mcp</code><span data-t="c-word">Early development · sin publicar</span><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="pedir-herramienta" data-umami-event-tipo="word-mcp" data-t="c-pedir">Pídemelo por X</a></p>
-                    </div>
-                    <div class="capacidad">
-                        <strong data-t="c5-t">Carga skills que no va a usar.</strong>
-                        <p data-t="c5-p">Ve descripciones compactas de las skills de Matt Pocock y carga solo la que hace falta.</p>
-                        <p class="capacidad-nombre"><code>matt-skills-mcp</code><span data-t="c-piloto">Piloto sin publicar</span><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="pedir-herramienta" data-umami-event-tipo="matt-skills-mcp" data-t="c-pedir">Pídemelo por X</a></p>
-                    </div>
-                </div>
+                </article>
 
-                <div class="caja-grupo">
-                    <h3 data-t="caj-helpers">Helpers y skills</h3>
-                    <div class="capacidad">
-                        <strong data-t="h1-t">Configuras lo mismo en cada agente.</strong>
-                        <p data-t="h1-p">Una sola fuente de MCP, sincronizada con Claude Code, Codex, Pi, Pi Pocket y OpenCode.</p>
-                        <p class="capacidad-nombre"><code>agent-sync</code><span data-t="c-privado">En desarrollo · sin publicar</span><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="pedir-herramienta" data-umami-event-tipo="agent-sync" data-t="c-pedir">Pídemelo por X</a></p>
+                <div class="caja-cabecera">
+                    <div>
+                        <h3 data-t="caj-dev">En desarrollo</h3>
+                        <p data-t="caj-dev-p">Aún sin publicar. Si quieres alguna, escríbeme.</p>
                     </div>
-                    <div class="capacidad">
-                        <strong data-t="h2-t">Se traga una web entera por un dato.</strong>
-                        <p data-t="h2-p">Lee la página una vez, guarda el texto limpio y responde sin volcarla al contexto.</p>
-                        <p class="capacidad-nombre"><code>web-read</code><span data-t="c-privado">En desarrollo · sin publicar</span><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="pedir-herramienta" data-umami-event-tipo="web-read" data-t="c-pedir">Pídemelo por X</a></p>
-                    </div>
-                    <div class="capacidad">
-                        <strong data-t="h3-t">Se para ante cualquier ventana.</strong>
-                        <p data-t="h3-p">Controla apps y ventanas de Windows. Con <code>win-dialog</code>, inspecciona y pulsa diálogos nativos desde Rust.</p>
-                        <p class="capacidad-nombre"><code>windows-computer-use</code><span data-t="c-privado">En desarrollo · sin publicar</span><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="pedir-herramienta" data-umami-event-tipo="windows-computer-use" data-t="c-pedir">Pídemelo por X</a></p>
-                    </div>
-                    <div class="capacidad">
-                        <strong data-t="h4-t">Se cierra una app y nadie sabe por qué.</strong>
-                        <p data-t="h4-p">Llega a la firma, el módulo y la pila del fallo sin abrir un depurador.</p>
-                        <p class="capacidad-nombre"><code>windows-crash-triage</code><span data-t="c-privado">En desarrollo · sin publicar</span><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="pedir-herramienta" data-umami-event-tipo="windows-crash-triage" data-t="c-pedir">Pídemelo por X</a></p>
-                    </div>
-                    <div class="capacidad">
-                        <strong data-t="h5-t">Toca tu configuración y no hay vuelta atrás.</strong>
-                        <p data-t="h5-p">Guarda y restaura estados de la configuración de tus agentes con git.</p>
-                        <p class="capacidad-nombre"><code>config-checkpoints</code><span data-t="c-privado">En desarrollo · sin publicar</span><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="pedir-herramienta" data-umami-event-tipo="config-checkpoints" data-t="c-pedir">Pídemelo por X</a></p>
-                    </div>
+                    <a class="boton boton-contorno" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="pedir-herramienta" data-umami-event-tipo="caja" data-t="c-pedir">Pídemela por X</a>
                 </div>
+                <ul class="tarjetas" tabindex="0">
+                    <li class="tarjeta">
+                        <p class="tarjeta-tipo">MCP</p>
+                        <h4 data-t="c2-t">No sabe qué le señalas.</h4>
+                        <p data-t="c2-p">Marca un elemento y recibe su contexto y su línea de código.</p>
+                        <code>dom-pick</code>
+                    </li>
+                    <li class="tarjeta">
+                        <p class="tarjeta-tipo">MCP</p>
+                        <h4 data-t="c3-t">No encuentra tus archivos.</h4>
+                        <p data-t="c3-p">Busca en todo el PC en menos de un segundo.</p>
+                        <code>find-everything</code>
+                    </li>
+                    <li class="tarjeta">
+                        <p class="tarjeta-tipo">MCP · <span data-t="c-word">Early development</span></p>
+                        <h4 data-t="c4-t">No puede crearte un Word.</h4>
+                        <p data-t="c4-p">Crea documentos reales en Microsoft Word.</p>
+                        <code>word-mcp</code>
+                    </li>
+                    <li class="tarjeta">
+                        <p class="tarjeta-tipo">MCP · <span data-t="c-piloto">Piloto</span></p>
+                        <h4 data-t="c5-t">Carga skills que no usa.</h4>
+                        <p data-t="c5-p">Carga solo la que hace falta.</p>
+                        <code>matt-skills-mcp</code>
+                    </li>
+                    <li class="tarjeta">
+                        <p class="tarjeta-tipo">Helper</p>
+                        <h4 data-t="h1-t">Configuras cada agente por separado.</h4>
+                        <p data-t="h1-p">Una sola configuración de MCP para todos.</p>
+                        <code>agent-sync</code>
+                    </li>
+                    <li class="tarjeta">
+                        <p class="tarjeta-tipo">Helper</p>
+                        <h4 data-t="h2-t">Se traga webs enteras.</h4>
+                        <p data-t="h2-p">Lee la página y guarda solo el texto limpio.</p>
+                        <code>web-read</code>
+                    </li>
+                    <li class="tarjeta">
+                        <p class="tarjeta-tipo">Helper</p>
+                        <h4 data-t="h3-t">Se para ante cualquier ventana.</h4>
+                        <p data-t="h3-p">Controla apps y diálogos de Windows.</p>
+                        <code>windows-computer-use</code>
+                    </li>
+                    <li class="tarjeta">
+                        <p class="tarjeta-tipo">Helper</p>
+                        <h4 data-t="h4-t">Una app se cierra sin explicación.</h4>
+                        <p data-t="h4-p">Encuentra la causa sin abrir un depurador.</p>
+                        <code>windows-crash-triage</code>
+                    </li>
+                    <li class="tarjeta">
+                        <p class="tarjeta-tipo">Helper</p>
+                        <h4 data-t="h5-t">Cambia tu config sin vuelta atrás.</h4>
+                        <p data-t="h5-p">Guarda y restaura estados con git.</p>
+                        <code>config-checkpoints</code>
+                    </li>
+                </ul>
             </div>
         </section>
 
