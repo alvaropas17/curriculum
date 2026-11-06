@@ -363,6 +363,8 @@ h1 > span { display: block; }
 
 /* ---------- notas ---------- */
 
+.notas-intro { max-width: 40rem; margin-top: 1rem; color: var(--texto-2); font-size: clamp(1.1rem, 1.8vw, 1.3rem); line-height: 1.45; }
+
 .notas { padding-block: var(--bloque); background: var(--fondo-alt); }
 .notas-rejilla {
   display: grid;
