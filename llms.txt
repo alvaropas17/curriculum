@@ -33,4 +33,4 @@ Only Agent History Search is public. The other tools are in development and not 
 ## Optional
 
 - [Website](https://alvaropastor.dev/): the same information for people, in Spanish and English.
-- [Measurement notes](https://alvaropastor.dev/#notas): real numbers from GitHub and X.
+- [Measurement notes](https://alvaropastor.dev/notas): real numbers from GitHub and X.

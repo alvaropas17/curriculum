@@ -26,7 +26,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="./styles/portada.css?v=20261106c" />
+    <link rel="stylesheet" href="./styles/portada.css?v=20261106d" />
     <link rel="canonical" href="https://alvaropastor.dev/" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="Summary for AI agents" />
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://alvaropastor.dev/#alvaro", "name": "Álvaro Pastor", "url": "https://alvaropastor.dev/", "jobTitle": "Developer", "description": "Builds MCP servers and helpers for coding agents.", "email": "mailto:contacto@alvaropastor.dev", "sameAs": ["https://x.com/alpas17_", "https://github.com/alvaropas17", "https://es.linkedin.com/in/%C3%A1lvaro-pastor"], "knowsAbout": ["Model Context Protocol", "AI coding agents", "Developer tools"]}</script>
@@ -39,7 +39,7 @@
             <div class="nav-enlaces">
                 <a href="#demo" data-t="nav-demo">demo</a>
                 <a href="#caja" data-t="nav-caja">mcp y helpers</a>
-                <a href="#notas" data-t="nav-notas">notas</a>
+                <a href="./notas.html" data-lang-link data-t="nav-notas">notas</a>
             </div>
             <div class="nav-acciones">
                 <button id="idioma" class="nav-idioma" type="button" lang="en" aria-label="Switch to English">EN</button>
@@ -220,42 +220,6 @@
             </div>
         </section>
 
-        <!-- Notas: experimentos con datos reales -->
-        <section class="notas" id="notas" aria-labelledby="notas-titulo">
-            <div class="marco">
-                <h2 id="notas-titulo" data-t="not-titulo">¿Le importa esto a alguien?</h2>
-                <p class="notas-intro" data-t="not-intro">Construir es la mitad. La otra es saber si llega. Aquí apunto lo que mido, aunque los números sean pequeños.</p>
-                <div class="notas-rejilla">
-                    <article class="apunte" id="nota-61-clones">
-                        <p class="etiqueta" data-t="n1-f">6 nov 2026 · GitHub y X</p>
-                        <h3 data-t="n1-t">61 clones y 2 visitantes: por qué no me creo mi propio dato.</h3>
-                        <dl class="datos">
-                            <div><dt data-t="n1-d1">Vistas del post de lanzamiento</dt><dd>594</dd></div>
-                            <div><dt data-t="n1-d2">Clics en el enlace a GitHub</dt><dd>2</dd></div>
-                            <div><dt data-t="n1-d3">Visitantes únicos del repositorio</dt><dd>2</dd></div>
-                            <div><dt data-t="n1-d4">Clones únicos</dt><dd>61</dd></div>
-                            <div><dt data-t="n1-d5">Estrellas</dt><dd>0</dd></div>
-                        </dl>
-                        <p data-t="n1-p1">61 clones parecen 61 personas interesadas, pero solo 2 abrieron la página. 104 de los 126 clones llegaron en tres días seguidos tras el lanzamiento.</p>
-                        <p data-t="n1-p2"><strong>Mi teoría:</strong> quienes clonan son agentes, no personas. Un agente no abre la página.</p>
-                    </article>
-                    <article class="apunte" id="nota-menos-posts">
-                        <p class="etiqueta" data-t="n2-f">3 nov 2026 · analíticas de X</p>
-                        <h3 data-t="n2-t">Publiqué menos y cada post rindió el doble.</h3>
-                        <dl class="datos">
-                            <div><dt data-t="n2-d1">1 nov · 12 posts</dt><dd data-t="n2-v1">25 vistas/post</dd></div>
-                            <div><dt data-t="n2-d2">2 nov · 9 posts</dt><dd data-t="n2-v2">38 vistas/post</dd></div>
-                            <div><dt data-t="n2-d3">3 nov · 7 posts (día sin cerrar)</dt><dd data-t="n2-v3">56 vistas/post</dd></div>
-                            <div><dt data-t="n2-d4">Mejor post, una pregunta</dt><dd data-t="n2-v4">133 vistas</dd></div>
-                            <div><dt data-t="n2-d5">Afirmaciones sueltas</dt><dd data-t="n2-v5">18–28 vistas</dd></div>
-                        </dl>
-                        <p data-t="n2-p1">Hice que un agente sacara los datos de mi perfil y los comparara por días. Los posts que abrían conversación fueron los que mejor funcionaron.</p>
-                        <p data-t="n2-p2"><strong>Lo que aprendí:</strong> tres días no demuestran nada, pero dan una pista que probar: menos afirmaciones y más preguntas reales.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
         <!-- Cierre -->
         <section class="cierre" id="hablemos" aria-labelledby="cierre-titulo">
             <div class="marco">
@@ -273,6 +237,7 @@
         <div class="marco pie-fila">
             <p>© 2026 Álvaro Pastor</p>
             <ul>
+                <li><a href="./notas.html" data-lang-link data-t="nav-notas">Notas</a></li>
                 <li><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="pie">X</a></li>
                 <li><a href="https://github.com/alvaropas17" target="_blank" rel="noopener noreferrer">GitHub</a></li>
                 <li><a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
@@ -280,7 +245,7 @@
         </div>
     </footer>
 
-    <script src="./scripts/portada.js?v=20261106c"></script>
+    <script src="./scripts/portada.js?v=20261106d"></script>
 </body>
 
 </html>
