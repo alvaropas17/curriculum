@@ -12,7 +12,7 @@
     'caj-titulo': 'What it’s missing. What I gave it.',
     'caj-ya': 'Available now', 'caj-dev': 'In development', 'caj-dev-p': 'Not published yet. If you want one, write to me.',
     'c-ver': 'See the tool', 'c-pedir': 'Ask me on X', 'c-word': 'Early development', 'c-piloto': 'Pilot',
-    'c1-t': 'Stop explaining the same thing to your agent. <span class="marca">Let it search.</span>',
+    'c1-t': 'Stop explaining the same thing to your agent. <span class="marca">Tell it to search.</span>',
     'c1-p': 'Tell it what was in that answer and it recovers it from your chats with six agents, with the exact source.',
     'c2-t': 'It doesn’t know what you’re pointing at.', 'c2-p': 'Mark an element and it gets its context and code line.',
     'c3-t': 'It can’t find your files.', 'c3-p': 'Searches your whole PC in under a second.',
