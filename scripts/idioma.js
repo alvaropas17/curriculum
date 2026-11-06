@@ -200,17 +200,19 @@
       url.searchParams.set('lang', language);
       link.href = url.href;
     });
-    try { localStorage.setItem('portfolio-language', language); } catch { /* Storage may be unavailable. */ }
   };
   button.addEventListener('click', () => {
     apply(language === 'es' ? 'en' : 'es');
+    try { localStorage.setItem('portfolio-language', language); } catch { /* Storage may be unavailable. */ }
     const url = new URL(location.href);
     url.searchParams.set('lang', language);
     history.pushState(null, '', url);
   });
   let saved;
   try { saved = localStorage.getItem('portfolio-language'); } catch { /* Spanish is the default. */ }
-  const initialLanguage = validLanguage(saved) ? saved : 'es';
+  const inSpain = ['Europe/Madrid', 'Africa/Ceuta', 'Atlantic/Canary'].includes(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  const detected = inSpain && (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+  const initialLanguage = validLanguage(saved) ? saved : detected;
   apply(validLanguage(requestedLanguage()) ? requestedLanguage() : initialLanguage);
   window.addEventListener('popstate', () => {
     const requested = requestedLanguage();

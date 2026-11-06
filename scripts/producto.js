@@ -152,10 +152,10 @@ how to check it in a new session. Report any checks still pending.`,
     });
     pintarPestanas();
     pintarEjemplo();
-    try { localStorage.setItem('portfolio-language', idioma); } catch { /* Sin almacenamiento se usa el idioma del navegador. */ }
   };
   boton.addEventListener('click', () => {
     aplicar(idioma === 'es' ? 'en' : 'es');
+    try { localStorage.setItem('portfolio-language', idioma); } catch { /* Sin almacenamiento dura hasta recargar. */ }
     const url = new URL(location.href);
     url.searchParams.set('lang', idioma);
     history.replaceState(null, '', url);
@@ -186,10 +186,11 @@ how to check it in a new session. Report any checks still pending.`,
     if (window.umami) window.umami.track('reproducir-video');
   }, { once: true });
 
-  // Quien llega desde X puede no hablar español: sin elección previa, manda el navegador.
+  // Sin elección previa: español solo con zona horaria de España y navegador en español.
   const pedido = new URL(location.href).searchParams.get('lang');
   let guardado = null;
   try { guardado = localStorage.getItem('portfolio-language'); } catch { /* Sin almacenamiento. */ }
-  const delNavegador = (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+  const enEspana = ['Europe/Madrid', 'Africa/Ceuta', 'Atlantic/Canary'].includes(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  const delNavegador = enEspana && (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
   aplicar(pedido === 'es' || pedido === 'en' ? pedido : guardado === 'es' || guardado === 'en' ? guardado : delNavegador);
 })();
