@@ -8,17 +8,17 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta name="theme-color" content="#0c0c0d" />
-    <title>Agent History Search · Tú te acuerdas. Tu agente, no.</title>
+    <title>Álvaro Pastor · Lo que me molesta dos veces, lo convierto en herramienta</title>
     <meta name="description"
-        content="Busca en tus conversaciones pasadas con Claude Code, Codex, OpenCode, Pi, omp y Pi Pocket. Local, de solo lectura, gratis y de código abierto." />
+        content="Álvaro Pastor, desarrollador web e IA. Construyo productos web y herramientas para agentes de código. Agent History Search, LudoScript y más." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://alvaropastor.dev/" />
-    <meta property="og:title" content="You remember. Your agent doesn’t." />
-    <meta property="og:description" content="Agent History Search lets your coding agent search your past conversations. Local, read-only, free and open source." />
-    <meta property="og:image" content="https://alvaropastor.dev/img/og-agent-history-search.png" />
+    <meta property="og:title" content="If it annoys me twice, I turn it into a tool." />
+    <meta property="og:description" content="Álvaro Pastor builds web products and tools for coding agents." />
+    <meta property="og:image" content="https://alvaropastor.dev/img/og-alvaro-pastor.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Agent History Search: You remember. Your agent doesn’t." />
+    <meta property="og:image:alt" content="Álvaro Pastor: If it annoys me twice, I turn it into a tool." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:creator" content="@alpas17_" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,235 +32,216 @@
 <body id="top">
     <nav class="nav" aria-label="Principal">
         <div class="marco nav-fila">
-            <a class="nav-marca" href="#top">Agent History Search</a>
+            <a class="nav-marca" href="#top">Álvaro Pastor</a>
             <div class="nav-enlaces">
-                <a href="#ejemplos" data-t="nav-ejemplos">ejemplos</a>
-                <a href="#instalar" data-t="nav-instalar">instalar</a>
-                <a href="#preguntas" data-t="nav-preguntas">preguntas</a>
+                <a href="#lanzamiento" data-t="nav-lanzamiento">lanzamiento</a>
+                <a href="#trabajo" data-t="nav-trabajo">trabajo</a>
+                <a href="#herramientas" data-t="nav-herramientas">herramientas</a>
+                <a href="#hablemos" data-t="nav-hablemos">hablemos</a>
             </div>
             <div class="nav-acciones">
                 <button id="idioma" class="nav-idioma" type="button" lang="en" aria-label="Switch to English">EN</button>
-                <a class="nav-cta" href="https://github.com/alvaropas17/agent-history-search" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="nav">GitHub</a>
+                <a class="nav-cta" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="nav" data-t="seguir">Seguir en X</a>
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- Gancho: el dolor en una frase, la solución en otra, y una acción -->
+        <!-- La marca en una frase -->
         <header class="hero">
             <div class="marco">
-                <h1><span data-t="hero-1">Tú te acuerdas.</span> <span class="marca" data-t="hero-2">Tu agente, no.</span></h1>
-                <p class="hero-sub" data-t="hero-sub">Agent History Search le permite buscar en tus conversaciones pasadas y responder con una fuente que puedes comprobar.</p>
+                <h1><span data-t="hero-1">Lo que me molesta dos veces,</span> <span class="marca" data-t="hero-2">lo convierto en herramienta.</span></h1>
+                <p class="hero-sub" data-t="hero-sub">Soy Álvaro Pastor, desarrollador web e IA. Construyo productos web y herramientas para agentes de código, y en X cuento cómo salen.</p>
                 <div class="acciones">
-                    <a class="boton boton-senal" href="#instalar" data-umami-event="ir-instalar" data-umami-event-tipo="hero" data-t="hero-cta">Instalar gratis</a>
-                    <a class="boton boton-contorno" href="https://github.com/alvaropas17/agent-history-search" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="hero" data-t="hero-gh">Ver el código</a>
+                    <a class="boton boton-senal" href="#lanzamiento" data-umami-event="ver-trabajo" data-umami-event-tipo="hero" data-t="hero-cta">Ver lo que he construido</a>
+                    <a class="boton boton-contorno" href="#hablemos" data-umami-event="ir-contacto" data-umami-event-tipo="hero" data-t="hero-cta2">Trabajar conmigo</a>
                 </div>
-                <ul class="sellos">
-                    <li data-t="sello-1">Código abierto</li>
-                    <li data-t="sello-2">Local</li>
-                    <li data-t="sello-3">Solo lectura</li>
-                    <li data-t="sello-4">Sin cuentas</li>
-                </ul>
+                <dl class="cifras">
+                    <div><dt>~1 min → 4 s</dt><dd data-t="cif-1">arranque de un entorno de desarrollo</dd></div>
+                    <div><dt>6</dt><dd data-t="cif-2">agentes de código compatibles con mi buscador</dd></div>
+                    <div><dt>20</dt><dd data-t="cif-3">skills propias para agentes</dd></div>
+                    <div><dt>×5,55</dt><dd data-t="cif-4">más rápido al reescribir un lector en Rust</dd></div>
+                </dl>
             </div>
         </header>
 
-        <!-- La pieza que vende -->
-        <section class="pelicula" aria-label="Vídeo de presentación">
+        <!-- El producto estrella -->
+        <section class="lanzamiento" id="lanzamiento" aria-labelledby="lanzamiento-titulo">
             <div class="marco">
-                <video id="video" controls playsinline preload="none" poster="./video/agent-history-search.webp" width="1280" height="720">
-                    <source src="./video/agent-history-search.mp4" type="video/mp4" />
-                    <track kind="captions" src="./video/agent-history-search.en.vtt" srclang="en" label="English" />
-                </video>
-                <p class="agentes"><span data-t="agentes">Funciona con</span> Claude Code · Codex · OpenCode · Pi · omp · Pi Pocket</p>
-            </div>
-        </section>
-
-        <!-- Demostración -->
-        <section class="ejemplos" id="ejemplos" aria-labelledby="ejemplos-titulo">
-            <div class="marco">
-                <h2 id="ejemplos-titulo" data-t="eje-titulo">Pregúntale lo que ya hablasteis.</h2>
-                <div class="pestanas" id="pestanas" role="group" aria-label="Ejemplos"></div>
-                <div class="chat" id="chat" aria-live="polite"></div>
-                <p class="nota" data-t="eje-nota">Ejemplos ilustrativos. Las respuestas salen de tu propio historial.</p>
-            </div>
-        </section>
-
-        <!-- Antes y después -->
-        <section class="contraste" aria-labelledby="contraste-titulo">
-            <div class="marco">
-                <h2 id="contraste-titulo" data-t="con-titulo">Deja de explicárselo todo otra vez.</h2>
-                <div class="contraste-rejilla">
+                <p class="etiqueta" data-t="lan-etiqueta">Último lanzamiento · gratis y de código abierto</p>
+                <h2 id="lanzamiento-titulo">Agent History Search</h2>
+                <div class="lanzamiento-rejilla">
+                    <video id="video" controls playsinline preload="none" poster="./video/agent-history-search.webp" width="1280" height="720">
+                        <source src="./video/agent-history-search.mp4" type="video/mp4" />
+                        <track kind="captions" src="./video/agent-history-search.en.vtt" srclang="en" label="English" />
+                    </video>
                     <div>
-                        <h3 data-t="sin">Sin esto</h3>
-                        <ul>
-                            <li data-t="sin-1">Repites el contexto en cada sesión.</li>
-                            <li data-t="sin-2">Abres ficheros enormes para encontrar una frase.</li>
-                            <li data-t="sin-3">Rehaces un arreglo que ya funcionó.</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 data-t="con">Con esto</h3>
-                        <ul>
-                            <li data-t="con-1">Preguntas al agente que ya usas.</li>
-                            <li data-t="con-2">Recibes el mensaje exacto, con sesión y fecha.</li>
-                            <li data-t="con-3">Compruebas la fuente antes de fiarte.</li>
-                        </ul>
+                        <p class="lanzamiento-gancho"><span data-t="lan-1">Tú te acuerdas.</span> <span class="marca" data-t="lan-2">Tu agente, no.</span></p>
+                        <p class="lanzamiento-texto" data-t="lan-p">Tu agente busca en vuestras conversaciones pasadas y responde con una fuente que puedes comprobar. Local y de solo lectura.</p>
+                        <p class="nota">Claude Code · Codex · OpenCode · Pi · omp · Pi Pocket</p>
+                        <div class="acciones">
+                            <a class="boton boton-senal" href="./herramientas/agent-history-search.html" data-lang-link data-umami-event="ver-producto" data-umami-event-tipo="lanzamiento" data-t="lan-cta">Conocerlo e instalarlo</a>
+                            <a class="boton boton-contorno" href="https://github.com/alvaropas17/agent-history-search" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="lanzamiento">GitHub</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Confianza -->
-        <section class="confianza" aria-labelledby="confianza-titulo">
+        <!-- Una prueba que se ve -->
+        <section class="carrera" id="carrera" aria-labelledby="carrera-titulo">
             <div class="marco">
-                <h2 id="confianza-titulo" data-t="tru-titulo">Referencias exactas, no suposiciones.</h2>
-                <figure class="terminal">
-                    <div class="terminal-cuerpo" tabindex="0" role="group" aria-label="Salida de la herramienta">
-<pre><code><span class="t-cmd">&gt; history_search.py search --host claude --query "rediseño" --limit 2</span>
-
-{
-  <span class="t-k">"status"</span>: "ok",
-  <span class="t-k">"route"</span>: { "source": "claude", <span class="t-mark">"automatic_fallback": false</span> },
-  <span class="t-k">"results"</span>: [{
-    "session_id": "11111111-2222-4333-8444-555555555555",
-    <span class="t-mark">"entry_id": "a1"</span>,
-    "timestamp": "2026-10-12T09:14:00.000Z",
-    "text": "Elegimos la portada A para el rediseño: la B escondía
-             la demo y la C pesaba demasiado en móvil."
-  }],
-  <span class="t-mark">"incomplete": false</span>,
-  "notes": []
-}</code></pre>
+                <h2 id="carrera-titulo" data-t="car-titulo">Un minuto. Cuatro segundos.</h2>
+                <p class="carrera-texto" data-t="car-p">Reorganicé Docker para aprovechar su caché y el entorno de desarrollo de AGE2 dejó de tardar un minuto en arrancar. Estas barras corren en tiempo real.</p>
+                <div class="pistas">
+                    <div class="pista">
+                        <p><span data-t="car-antes">Antes</span> <output id="tiempo-antes">≈ 60 s</output></p>
+                        <div class="barra"><i id="barra-antes" style="width: 100%"></i></div>
                     </div>
-                    <figcaption class="nota" data-t="tru-cap">Salida real de la CLI, recortada, sobre una conversación de prueba.</figcaption>
-                </figure>
+                    <div class="pista">
+                        <p><span data-t="car-despues">Después</span> <output id="tiempo-despues">4 s</output></p>
+                        <div class="barra"><i id="barra-despues" style="width: 6.67%"></i></div>
+                    </div>
+                </div>
+                <p class="carrera-fuente" data-t="car-fuente">Prácticas en AGE2, 2026. El «antes» es aproximado. Trabajo de empresa, sin enlace público.</p>
+            </div>
+        </section>
+
+        <!-- Catálogo -->
+        <section class="trabajo" id="trabajo" aria-labelledby="trabajo-titulo">
+            <div class="marco">
+                <h2 id="trabajo-titulo" data-t="tra-titulo">También hago productos.</h2>
+                <p class="nota trabajo-aviso" data-t="tra-aviso"></p>
+                <div class="catalogo">
+                    <a class="pieza pieza-grande" href="./proyecto/ludoscript.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="ludoscript">
+                        <img src="./img/ludoscript/ludoscript-home.webp" alt="Pantalla de modos de estudio de LudoScript" width="1600" height="783" loading="lazy" />
+                        <div>
+                            <p class="etiqueta" data-t="p1-e">Plataforma educativa con IA · beta</p>
+                            <h3>LudoScript</h3>
+                            <p data-t="p1-p">Subes tus apuntes y la IA genera la práctica. Cada fallo orienta el siguiente repaso.</p>
+                            <p class="pieza-prueba" data-t="p1-d">Hice el backend: API, datos, IA y multijugador en tiempo real, con respaldo entre modelos para que un fallo no tumbe el servicio.</p>
+                        </div>
+                    </a>
+                    <a class="pieza pieza-lateral" href="./proyecto/gala-imparables.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="gala">
+                        <img src="./img/inicio-gala-imparables.webp" alt="Portada de la web de los Premios Imparables 2025" width="1600" height="777" loading="lazy" />
+                        <div>
+                            <p class="etiqueta" data-t="p2-e">Primer encargo real · publicada</p>
+                            <h3>Gala Imparables</h3>
+                            <p data-t="p2-p">La web de unos premios, con un carrusel que da a cada patrocinador el peso que le toca.</p>
+                        </div>
+                    </a>
+                    <a class="pieza pieza-texto" href="./proyecto/tickets.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="tickets">
+                        <div>
+                            <p class="etiqueta" data-t="p3-e">Prototipo navegable</p>
+                            <h3 data-t="p3-t">Panel de tickets</h3>
+                            <p data-t="p3-p">Decidir una incidencia de un vistazo: prioridad antes que detalle.</p>
+                        </div>
+                    </a>
+                    <a class="pieza pieza-texto" href="./proyecto/plantillas-itop.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="itop">
+                        <div>
+                            <p class="etiqueta" data-t="p4-e">Trabajo profesional</p>
+                            <h3 data-t="p4-t">Plantillas para iTop</h3>
+                            <p data-t="p4-p">Siete plantillas de email para que la marca sobreviva a Outlook.</p>
+                        </div>
+                    </a>
+                    <a class="pieza pieza-texto" href="./proyecto/procesos-ia.html" data-lang-link data-umami-event="ver-proyecto" data-umami-event-tipo="procesos">
+                        <div>
+                            <p class="etiqueta" data-t="p5-e">Forma de trabajar</p>
+                            <h3 data-t="p5-t">Procesos con IA</h3>
+                            <p data-t="p5-p">Un archivo que acompaña al agente en todos los proyectos.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lo que nadie pidió -->
+        <section class="herramientas" id="herramientas" aria-labelledby="herramientas-titulo">
+            <div class="marco herramientas-rejilla">
+                <div>
+                    <h2 id="herramientas-titulo" data-t="her-titulo">Nadie me pidió nada de esto.</h2>
+                    <p class="herramientas-texto" data-t="her-p">Tengo 20 skills propias para agentes y utilidades en Rust, Python y PowerShell. Agent History Search salió de aquí. Lo siguiente lo contaré en X.</p>
+                    <div class="acciones">
+                        <a class="boton boton-senal" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="herramientas" data-t="seguir">Seguir en X</a>
+                    </div>
+                </div>
+                <div>
+                    <ul class="utilidades">
+                        <li><code>dom-pick</code><span data-t="u-1">Señalas un elemento en una web y el agente recibe su selector, HTML, estilos y un recorte.</span></li>
+                        <li><code>agent-sync</code><span data-t="u-2">Una sola configuración de MCP, sincronizada con cinco agentes distintos.</span></li>
+                        <li><code>windows-crash-triage</code><span data-t="u-3">De una ventana cerrada a firma, módulo y pila, sin abrir un depurador.</span></li>
+                        <li><code>win-dialog</code><span data-t="u-4">Inspecciona y pulsa diálogos nativos de Windows desde Rust.</span></li>
+                        <li><code>config-checkpoints</code><span data-t="u-5">Guarda y restaura estados de la configuración de agentes con git.</span></li>
+                    </ul>
+                    <p class="nota" data-t="u-nota">Uso personal. Código todavía sin publicar.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Por qué fiarse -->
+        <section class="criterio" aria-labelledby="criterio-titulo">
+            <div class="marco">
+                <h2 id="criterio-titulo" data-t="cri-titulo">También te enseño dónde casi no gano.</h2>
+                <div class="comparativa">
+                    <div><p class="comparativa-cifra">×5,55</p><p data-t="cri-1">al volcar una sesión completa tras reescribir mi lector de historial en Rust.</p></div>
+                    <div><p class="comparativa-cifra comparativa-baja">×1,27</p><p data-t="cri-2">en búsqueda de texto, porque ahí manda SQLite. Esa cifra también va en el informe.</p></div>
+                </div>
                 <div class="reglas">
                     <div>
-                        <h3 data-t="reg-1">Solo lectura.</h3>
-                        <p data-t="reg-1p">Nunca escribe, indexa ni migra tus historiales.</p>
+                        <h3 data-t="reg-1">Compruebo antes de retirar.</h3>
+                        <p data-t="reg-1p">Antes de jubilar la versión en Python, 12 de 12 códigos de salida coincidieron con Rust.</p>
                     </div>
                     <div>
-                        <h3 data-t="reg-2">Tú eliges qué lee.</h3>
-                        <p data-t="reg-2p">Nunca cambia de fuente en silencio. Leer otro agente requiere que lo pidas.</p>
+                        <h3 data-t="reg-2">Pruebo lo que publico.</h3>
+                        <p data-t="reg-2p">Agent History Search pasa 97 pruebas sin conexión en un clon limpio.</p>
                     </div>
                     <div>
-                        <h3 data-t="reg-3">Un vacío no es una prueba.</h3>
-                        <p data-t="reg-3p">Declara sus huecos. Que algo no aparezca no significa que no pasara.</p>
+                        <h3 data-t="reg-3">Digo dónde acaba.</h3>
+                        <p data-t="reg-3p">Solo lo he probado en Windows, y su página lo dice antes de que lo instales.</p>
                     </div>
                 </div>
-                <dl class="ficha">
-                    <div><dt>6</dt><dd data-t="fic-1">agentes compatibles</dd></div>
-                    <div><dt>0</dt><dd data-t="fic-2">paquetes pip, cuentas o claves de API</dd></div>
-                    <div><dt>97</dt><dd data-t="fic-3">pruebas offline en verde</dd></div>
-                    <div><dt>MIT</dt><dd data-t="fic-4">gratis y de código abierto</dd></div>
-                </dl>
+                <p class="nota criterio-nota" data-t="cri-nota">Benchmark: 7 repeticiones por caso en una sola máquina. Es una medición concreta, no una verdad universal.</p>
             </div>
         </section>
 
-        <!-- Conversión -->
-        <section class="instalar" id="instalar" aria-labelledby="instalar-titulo">
-            <div class="marco instalar-rejilla">
+        <!-- Quién hay detrás -->
+        <section class="quien" aria-labelledby="quien-titulo">
+            <div class="marco quien-rejilla">
+                <h2 id="quien-titulo" data-t="qui-titulo">Primero estudié por qué la gente elige algo. Después aprendí a construirlo.</h2>
                 <div>
-                    <h2 id="instalar-titulo" data-t="ins-titulo">Tu agente se lo instala solo.</h2>
-                    <ol class="pasos">
-                        <li><span data-t="ins-1">Descarga el repositorio.</span> <a href="https://github.com/alvaropas17/agent-history-search" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="pasos" data-t="ins-1a">Abrir GitHub</a></li>
-                        <li data-t="ins-2">Abre tu agente con acceso a esa carpeta y pégale este prompt.</li>
-                        <li data-t="ins-3">Abre una sesión nueva y pregúntale por algo que ya hicisteis.</li>
-                    </ol>
-                    <p class="nota" data-t="ins-req">Requisitos: Windows 10/11 y Python 3.10 o superior.</p>
-                    <p class="nota"><a href="./herramientas/history-search.html" data-lang-link data-t="ins-guia">Prefiero la guía paso a paso</a></p>
-                </div>
-                <div class="prompt">
-                    <div class="prompt-barra">
-                        <span data-t="ins-prompt">prompt de instalación</span>
-                        <button class="boton boton-senal boton-peque" id="copiar" type="button" data-t="ins-copiar">Copiar</button>
-                    </div>
-                    <pre id="prompt" tabindex="0" data-t="prompt">Configura Agent History Search en este equipo.
-Repositorio: https://github.com/alvaropas17/agent-history-search
-Carpeta del paquete: [RUTA ABSOLUTA]
-Agente que usaré: [codex / claude / opencode / pi / omp / pocket]
-Historiales que autorizo a leer: [FUENTES Y RUTAS]
-
-Lee el README y la documentación de instalación de la versión descargada.
-Comprueba Python 3.10+, sqlite3, la ayuda del CLI y las pruebas offline.
-Para Codex o Claude Code, configura el MCP incluido history_mcp.py con un
-host fijo y solo los historiales autorizados. Para el resto, configura el
-helper history_search.py y su skill o instrucciones locales.
-Antes de editar configuración, muestra los cambios propuestos y haz una
-copia de seguridad. No sustituyas archivos completos ni toques otros MCP.
-Si faltan rutas o autorizaciones, pregúntame. No cambies de fuente tras
-un error o un resultado vacío. No modifiques historiales ni borres WAL.
-Verifica la conexión real con una lectura mínima autorizada y dime cómo
-comprobarla en una sesión nueva. Si falta alguna prueba, indícalo.</pre>
-                </div>
-            </div>
-        </section>
-
-        <!-- Objeciones -->
-        <section class="preguntas" id="preguntas" aria-labelledby="preguntas-titulo">
-            <div class="marco preguntas-rejilla">
-                <h2 id="preguntas-titulo" data-t="faq-titulo">Antes de instalarlo.</h2>
-                <div class="faq">
-                    <details open>
-                        <summary data-t="faq-1">¿Mis conversaciones salen de mi ordenador?</summary>
-                        <p data-t="faq-1r">La herramienta no usa la red. Lo que encuentra se lo entrega a tu agente, así que llega a su modelo como cualquier otro texto que le enseñes.</p>
-                    </details>
-                    <details>
-                        <summary data-t="faq-2">¿Cuánto cuesta?</summary>
-                        <p data-t="faq-2r">Nada. Es de código abierto con licencia MIT, sin cuentas ni claves de API.</p>
-                    </details>
-                    <details>
-                        <summary data-t="faq-3">¿Funciona en Mac o Linux?</summary>
-                        <p data-t="faq-3r">Todavía no lo sé. Está probado en Windows y no depende de paquetes externos, pero no lo he validado en otros sistemas.</p>
-                    </details>
-                    <details>
-                        <summary data-t="faq-4">¿Cómo se conecta a mi agente?</summary>
-                        <p data-t="faq-4r">Codex y Claude Code pueden usar el servidor MCP incluido. OpenCode, Pi, omp y Pi Pocket usan un script de Python con su skill.</p>
-                    </details>
-                    <details>
-                        <summary data-t="faq-5">¿Un agente puede leer el historial de otro?</summary>
-                        <p data-t="faq-5r">Solo si lo autorizas y se lo pides. Nunca cambia de fuente por su cuenta, ni siquiera tras un error o un resultado vacío.</p>
-                    </details>
+                    <p data-t="qui-p">Soy graduado en Marketing y técnico superior en Desarrollo de Aplicaciones Web. Llevo poco más de un año de experiencia profesional, con prácticas incluidas, y trabajo cada día con agentes de código.</p>
+                    <h3 data-t="ofr-titulo">Para qué puedes llamarme</h3>
+                    <ul class="ofertas">
+                        <li data-t="ofr-1">Construir tu web o producto, del diseño al despliegue.</li>
+                        <li data-t="ofr-2">Meter IA en tu producto con control de fallos y de coste.</li>
+                        <li data-t="ofr-3">Poner a trabajar agentes de código en tu equipo.</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
         <!-- Cierre -->
-        <section class="cierre" aria-labelledby="cierre-titulo">
+        <section class="cierre" id="hablemos" aria-labelledby="cierre-titulo">
             <div class="marco">
-                <h2 id="cierre-titulo" data-t="cie-titulo">Ya hiciste el trabajo. Pídele a tu agente que lo encuentre.</h2>
+                <h2 id="cierre-titulo" data-t="cie-titulo">¿Qué te molesta a ti dos veces?</h2>
+                <p class="cierre-texto" data-t="cie-p">Cuéntamelo. Estoy en Murcia y abierto a trabajo presencial, remoto o híbrido.</p>
                 <div class="acciones">
-                    <a class="boton boton-oscuro" href="#instalar" data-umami-event="ir-instalar" data-umami-event-tipo="cierre" data-t="hero-cta">Instalar gratis</a>
-                    <a class="boton boton-contorno-oscuro" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="cierre" data-t="cie-x">Seguir en X</a>
+                    <a class="boton boton-oscuro" href="mailto:contacto@alvaropastor.dev" data-umami-event="contactar" data-umami-event-tipo="cierre" data-t="cie-cta">Escríbeme</a>
+                    <a class="boton boton-contorno-oscuro" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="cierre" data-t="seguir">Seguir en X</a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="pie">
-        <div class="marco pie-rejilla">
-            <div>
-                <p class="pie-autor" data-t="pie-autor">Lo hace Álvaro Pastor.</p>
-                <p data-t="pie-bio">Desarrollador web en Murcia. Trabajo a diario con agentes de código y publico en X lo que voy construyendo.</p>
-                <a class="pie-correo" href="mailto:contacto@alvaropastor.dev">contacto@alvaropastor.dev</a>
-            </div>
-            <nav aria-label="Otros trabajos">
-                <p class="nota" data-t="pie-otros">Otros trabajos</p>
-                <ul>
-                    <li><a href="./proyecto/ludoscript.html">LudoScript</a></li>
-                    <li><a href="./proyecto/procesos-ia.html" data-t="pie-procesos">Procesos con IA</a></li>
-                    <li><a href="./proyecto/tickets.html" data-t="pie-tickets">Panel de tickets</a></li>
-                    <li><a href="./proyecto/gala-imparables.html">Gala Imparables</a></li>
-                </ul>
-            </nav>
-            <nav aria-label="Enlaces">
-                <p class="nota" data-t="pie-sigue">Sígueme</p>
-                <ul>
-                    <li><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="pie">X · @alpas17_</a></li>
-                    <li><a href="https://github.com/alvaropas17" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                    <li><a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                </ul>
-            </nav>
+        <div class="marco pie-fila">
+            <p>© 2026 Álvaro Pastor</p>
+            <ul>
+                <li><a href="mailto:contacto@alvaropastor.dev">contacto@alvaropastor.dev</a></li>
+                <li><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="pie">X</a></li>
+                <li><a href="https://github.com/alvaropas17" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                <li><a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            </ul>
         </div>
     </footer>
 
