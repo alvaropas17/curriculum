@@ -441,6 +441,8 @@ h1 > span { display: block; }
   .tarjeta { flex: 0 0 82%; scroll-snap-align: start; }
   .marco { width: calc(100% - 2rem); }
   .hero .boton { flex: 1 1 100%; }
+  .cierre .acciones { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .cierre .boton { width: 100%; min-width: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
