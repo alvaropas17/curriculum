@@ -1,7 +1,7 @@
 // Builds an independent marketing site. Never copies the technology portfolio.
 // Cloudflare Pages: node scripts/build-marketing.mjs, output dist-marketing.
 // Existing output is renamed to a backup so local builds remain reversible.
-import { existsSync, mkdtempSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdtempSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { dirname, isAbsolute, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -26,6 +26,7 @@ if (/href=["'](?:https?:\/\/alvaropastor\.dev|\.\.\/index\.html)/i.test(html)) {
   throw new Error('The marketing page must not link to the technology portfolio.');
 }
 writeFileSync(join(staging, 'index.html'), html);
+copyFileSync(join(root, 'img/marketing-social.png'), join(staging, 'marketing-social.png'));
 writeFileSync(join(staging, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: https://${host}/sitemap.xml\n`);
 writeFileSync(join(staging, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://${host}/</loc></url></urlset>\n`);
 writeFileSync(join(staging, '_redirects'), '/proyecto/marketing-emocional.html / 301\n/index.html / 301\n');

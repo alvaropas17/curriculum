@@ -11,11 +11,17 @@ const run = (env = {}) => execFileSync(process.execPath, ['scripts/build-marketi
 });
 console.log(run());
 const output = join(root, 'dist-marketing');
-assert.deepEqual(readdirSync(output).sort(), ['404.html', '_redirects', 'index.html', 'robots.txt', 'sitemap.xml']);
+assert.deepEqual(readdirSync(output).sort(), ['404.html', '_redirects', 'index.html', 'marketing-social.png', 'robots.txt', 'sitemap.xml']);
 const html = readFileSync(join(output, 'index.html'), 'utf8');
 assert.ok(html.includes('https://marketing.alvaropastor.dev/"'));
 assert.ok(html.includes('href="#"'));
 assert.ok(html.includes('marketing-language'));
+assert.ok(html.includes('https://marketing.alvaropastor.dev/marketing-social.png'));
+assert.ok(html.includes('summary_large_image'));
+const preview = readFileSync(join(output, 'marketing-social.png'));
+assert.equal(preview.subarray(1, 4).toString(), 'PNG');
+assert.equal(preview.readUInt32BE(16), 1200);
+assert.equal(preview.readUInt32BE(20), 630);
 assert.ok(!html.includes('analytics-consent.js'));
 assert.ok(!/href=["']https?:\/\/alvaropastor\.dev/i.test(html));
 assert.ok(!/src=["']\.\.\//i.test(html));
