@@ -238,18 +238,29 @@
     /* ficha */
     dialog { background: var(--fondo-2); color: var(--texto); border: 1px solid var(--linea); border-radius: 16px; padding: 0; width: min(56rem, 100% - 24px); max-height: calc(100svh - 24px); }
     dialog::backdrop { background: var(--velo); backdrop-filter: blur(4px); }
-    .ficha { display: grid; grid-template-columns: 1.2fr 1fr; }
-    @media (max-width: 760px) { .ficha { grid-template-columns: 1fr; } }
+    /* El vídeo va arriba a todo el ancho; debajo, cabecera + cifras y luego texto | barras. */
+    @media (min-width: 761px) { dialog { width: min(60rem, 100% - 48px); } }
+    .ficha-medio { background: #000; }
+    .ficha-medio .aviso { color: rgba(255, 255, 255, 0.6); margin: 0; }
     .ficha-video { position: relative; aspect-ratio: 16/9; background: #000; }
     .ficha-video button { all: unset; cursor: pointer; position: absolute; inset: 0; display: grid; place-items: center; }
     .ficha-video img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
     .ficha-video .play { position: relative; width: 70px; height: 70px; border-radius: 50%; background: rgba(0, 0, 0, 0.6); border: 2px solid #fff; display: grid; place-items: center; }
     .ficha-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .ficha-cuerpo { padding: 1.6rem; overflow-y: auto; }
+    .ficha-cuerpo { padding: 1.4rem 1.6rem 1.6rem; }
+    .ficha-cabecera { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 0.8rem 1.6rem; }
     .ficha-cuerpo h3 { font-size: 2rem; }
-    .ficha-cuerpo .sub { color: var(--texto-3); font-size: 0.9rem; margin: 0.3rem 0 1rem; }
+    .ficha-cuerpo .sub { color: var(--texto-3); font-size: 0.9rem; margin: 0.3rem 0 0; }
     .ficha-cuerpo p { color: var(--texto-2); font-size: 0.98rem; }
-    .ficha-datos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin: 1rem 0; }
+    .ficha-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.8rem; margin-top: 1.2rem; padding-top: 1.2rem; border-top: 1px solid var(--linea); }
+    .ficha-cols > div > p:first-child { margin-top: 0; }
+    @media (max-width: 760px) {
+      .ficha-cuerpo { padding: 1.1rem 1rem 1.3rem; }
+      .ficha-cuerpo h3 { font-size: 1.6rem; }
+      .ficha-cabecera .ficha-datos { width: 100%; }
+      .ficha-cols { grid-template-columns: 1fr; gap: 1.2rem; }
+    }
+    .ficha-datos { display: grid; grid-template-columns: repeat(3, minmax(5.5rem, 1fr)); gap: 0.5rem; margin: 0; }
     .ficha-datos div { border: 1px solid var(--linea); border-radius: 10px; padding: 0.6rem; }
     .ficha-datos b { display: block; font: 700 1.5rem var(--display); }
     .ficha-datos span { font-size: 0.75rem; color: var(--texto-3); }
@@ -914,22 +925,30 @@
         $("#cerrar").setAttribute("aria-label", t(T.cerrar));
         $("#ficha-contenido").innerHTML = `
           <div class="ficha">
-            <div>
+            <div class="ficha-medio">
               <div class="ficha-video" id="ficha-video"><button type="button" aria-label="${t(T.reproducir)} ${a.nombre}"><img src="${mini(a.yt)}" alt="" /><span class="play"><svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></button></div>
               <p class="aviso">${t(T.aviso)}</p>
             </div>
             <div class="ficha-cuerpo">
-              <p class="mono" style="margin-bottom:0.3rem">${t(a.ano)}</p>
-              <h3>${a.nombre}</h3>
-              <p class="sub">${t(a.titulo)}</p>
-              <p>${t(a.largo)}</p>
-              <div class="ficha-datos">
-                <div><b>${fmt(a.atencion, 1)}</b><span>${t(T.atencion)}</span></div>
-                <div><b>${fmt(a.gusto, 1)}</b><span>${t(T.gusto)}</span></div>
-                <div><b>${fmt(a.fijacion, 1)}</b><span>${t(T.fijacion)}</span></div>
+              <div class="ficha-cabecera">
+                <div>
+                  <p class="mono" style="margin:0 0 0.3rem">${t(a.ano)}</p>
+                  <h3>${a.nombre}</h3>
+                  <p class="sub">${t(a.titulo)}</p>
+                </div>
+                <div class="ficha-datos">
+                  <div><b>${fmt(a.atencion, 1)}</b><span>${t(T.atencion)}</span></div>
+                  <div><b>${fmt(a.gusto, 1)}</b><span>${t(T.gusto)}</span></div>
+                  <div><b>${fmt(a.fijacion, 1)}</b><span>${t(T.fijacion)}</span></div>
+                </div>
               </div>
-              <p class="mono" style="margin:0.4rem 0">${rel(t(T.intensidadMedia), { n: a.n })}</p>
-              <div class="intensidades">${orden.map(([d, v]) => `<div class="intensidad"><span>${d}</span><div class="barra"><i style="width:${v * 10}%;background:var(${a.color})"></i></div><span class="num">${fmt(v, 1)}</span></div>`).join("")}</div>
+              <div class="ficha-cols">
+                <div><p>${t(a.largo)}</p></div>
+                <div>
+                  <p class="mono" style="margin:0 0 0.5rem">${rel(t(T.intensidadMedia), { n: a.n })}</p>
+                  <div class="intensidades">${orden.map(([d, v]) => `<div class="intensidad"><span>${d}</span><div class="barra"><i style="width:${v * 10}%;background:var(${a.color})"></i></div><span class="num">${fmt(v, 1)}</span></div>`).join("")}</div>
+                </div>
+              </div>
             </div>
           </div>`;
         $("#ficha-video button").addEventListener("click", () => {
