@@ -148,10 +148,11 @@
     /* HERO */
     .hero { min-height: 100svh; display: grid; grid-template-rows: 1fr auto; padding: 6rem 0 2rem; position: relative; }
     .hero::before { content: ""; position: absolute; inset: 0 calc(50% - 50vw); z-index: -1; background: radial-gradient(60rem 30rem at 70% 20%, var(--halo-dgt), transparent 70%), radial-gradient(40rem 30rem at 10% 90%, var(--halo-teka), transparent 70%); pointer-events: none; }
-    .hero-texto { align-self: center; position: relative; }
-    .hero h1 { font-size: clamp(2.6rem, 6.4vw, 5.2rem); font-weight: 700; max-width: 15ch; }
+    /* Columna de lectura centrada, como el resto del artículo; la tira de abajo sigue a ancho completo. */
+    .hero-texto { align-self: center; position: relative; width: min(44rem, 100%); margin-inline: auto; }
+    .hero h1 { font-size: clamp(2.6rem, 5.4vw, 4.4rem); font-weight: 700; text-wrap: wrap; }
     .hero h1 .serif { color: var(--dgt); font-size: 1.08em; }
-    .hero-sub { font-size: clamp(1.1rem, 2vw, 1.35rem); color: var(--texto-2); max-width: 36rem; margin-top: 1.8rem; }
+    .hero-sub { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--texto-2); margin-top: 1.8rem; }
     .hero-sub strong { color: var(--texto); }
     .tira { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 3rem; position: relative; }
     .fotograma { position: relative; aspect-ratio: 16/10; border-radius: 6px; overflow: hidden; background: var(--fondo-3); border: 0; padding: 0; cursor: pointer; }
