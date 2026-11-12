@@ -26,7 +26,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="../styles/producto.css?v=20261106b" />
+    <link rel="stylesheet" href="../styles/producto.css?v=20261112" />
     <link rel="canonical" href="https://alvaropastor.dev/herramientas/agent-history-search" />
     <link rel="alternate" type="text/markdown" href="/herramientas/agent-history-search.md" title="Summary for AI agents" />
     <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "Agent History Search", "description": "Recovers useful information from past conversations with coding agents. Local and read-only.", "url": "https://alvaropastor.dev/herramientas/agent-history-search", "codeRepository": "https://github.com/alvaropas17/agent-history-search", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Python", "runtimePlatform": "Python 3.10+", "targetProduct": {"@type": "SoftwareApplication", "name": "Agent History Search", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows 10, Windows 11", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}}, "author": {"@type": "Person", "@id": "https://alvaropastor.dev/#alvaro", "name": "Álvaro Pastor"}}</script>
@@ -171,7 +171,7 @@
                         <li data-t="ins-3">Abre una sesión nueva y pregúntale por algo que ya hicisteis.</li>
                     </ol>
                     <p class="nota" data-t="ins-req">Requisitos: Windows 10/11 y Python 3.10 o superior.</p>
-                    <p class="nota"><a href="./history-search.html" data-lang-link data-t="ins-guia">Prefiero la guía paso a paso</a></p>
+                    <p class="nota"><a href="#guia" data-t="ins-guia">Prefiero la guía paso a paso</a></p>
                 </div>
                 <div class="prompt">
                     <div class="prompt-barra">
@@ -196,6 +196,61 @@ un error o un resultado vacío. No modifiques historiales ni borres WAL.
 Verifica la conexión real con una lectura mínima autorizada y dime cómo
 comprobarla en una sesión nueva. Si falta alguna prueba, indícalo.</pre>
                 </div>
+            </div>
+        </section>
+
+        <!-- Guía manual y uso -->
+        <section class="preguntas guia" id="guia" aria-labelledby="guia-titulo">
+            <div class="marco preguntas-rejilla">
+                <h2 id="guia-titulo" data-t="gui-titulo">Paso a paso.</h2>
+                <div class="faq">
+                    <details>
+                        <summary data-t="gui-1">1 · Comprueba Python y el paquete</summary>
+                        <p data-t="gui-1r">En PowerShell, desde la carpeta descargada. Las pruebas no leen tus conversaciones; si fallan, resuelve el error antes de seguir.</p>
+                        <pre>py -3 --version
+py -3 -c "import sqlite3; print(sqlite3.sqlite_version)"
+py -3 -B history_search.py --help
+py -3 -B -m unittest discover -s tests</pre>
+                    </details>
+                    <details>
+                        <summary data-t="gui-2">2 · Elige qué historiales autorizas</summary>
+                        <p data-t="gui-2r">Rutas habituales en Windows; comprueba las de tu instalación. El agente solo lee otra fuente si se lo pides.</p>
+                        <pre>Claude Code  --host claude    $HOME/.claude/projects
+Codex        --host codex     $HOME/.codex/sessions
+Pi           --host pi        $HOME/.pi/agent/sessions
+omp          --host omp       $HOME/.omp/agent/sessions
+OpenCode     --host opencode  $HOME/.local/share/opencode/opencode.db
+Pi Pocket    --host pocket    $HOME/.pi-pocket/pocket.sqlite</pre>
+                    </details>
+                    <details>
+                        <summary data-t="gui-3">3 · Valida la ruta antes de leer</summary>
+                        <p data-t="gui-3r"><code>--plan</code> valida los argumentos, pero no abre el historial ni demuestra que la ruta exista.</p>
+                        <pre>py -3 -B history_search.py list --host claude --store "$HOME/.claude/projects" --plan</pre>
+                    </details>
+                    <details>
+                        <summary data-t="gui-4">4 · Conéctalo a mano</summary>
+                        <p data-t="gui-4r">Claude Code (supone el paquete en C:/Tools/agent-history-search):</p>
+                        <pre>claude mcp add agent-history-search --scope user -- py -3 -B C:/Tools/agent-history-search/history_mcp.py --host claude</pre>
+                        <p data-t="gui-4r2">Codex: añade este bloque a tu config.toml sin sustituir el archivo. Las rutas deben ser absolutas.</p>
+                        <pre>[mcp_servers.agent_history_search]
+command = "py"
+args = ["-3", "-B", "C:/Tools/agent-history-search/history_mcp.py", "--host", "codex", "--store", "codex=C:/Users/YOUR_USER/.codex/sessions"]
+startup_timeout_sec = 30</pre>
+                        <p data-t="gui-4r3">OpenCode, Pi, omp y Pi Pocket usan <code>history_search.py</code> con su skill. Con OpenCode o Pi Pocket abiertos y un archivo WAL, usa la herramienta de snapshot incluida o cierra la aplicación. No borres el WAL.</p>
+                    </details>
+                    <details>
+                        <summary data-t="gui-5">5 · Comprueba la conexión</summary>
+                        <p data-t="gui-5r">En una sesión nueva, pide que liste tu conversación más reciente con su fuente e ID, sin mostrar el contenido, y comprueba que llama a la herramienta del MCP (o al script). Después busca una palabra que sepas que existe. Si configuraste MCP, una prueba con el script no demuestra que MCP funcione.</p>
+                    </details>
+                    <details>
+                        <summary data-t="gui-6">Qué puede hacer tu agente</summary>
+                        <p data-t="gui-6r"><strong>Buscar</strong> una frase literal en conversaciones pasadas. <strong>Listar y leer</strong> sesiones recientes, o una por su ID exacto. <strong>Inspeccionar llamadas</strong> con <code>--tool-calls</code>: comandos, argumentos y resultados, con fallos marcados solo si el historial lo prueba.</p>
+                        <pre>py -3 -B history_search.py search --host claude --store "$HOME\.claude\projects" --query "portfolio-anterior" --limit 1 --context 120
+py -3 -B history_search.py expand --host claude --store "$HOME\.claude\projects" --session &lt;id&gt; --entry &lt;id&gt; --context 400
+py -3 -B history_search.py search --host claude --store "$HOME\.claude\projects" --tool-calls --state failure --since 2026-10-25 --limit 1</pre>
+                    </details>
+                </div>
+                <p class="nota guia-enlaces"><a href="https://github.com/alvaropas17/agent-history-search/blob/main/README.md#set-it-up" data-t="gui-l1">Guía completa</a> · <a href="https://github.com/alvaropas17/agent-history-search/blob/main/docs/ADAPTERS.md" data-t="gui-l2">Guía por agente</a></p>
             </div>
         </section>
 
@@ -267,7 +322,7 @@ comprobarla en una sesión nueva. Si falta alguna prueba, indícalo.</pre>
         </div>
     </footer>
 
-    <script src="../scripts/producto.js?v=20261106b"></script>
+    <script src="../scripts/producto.js?v=20261112"></script>
 </body>
 
 </html>
