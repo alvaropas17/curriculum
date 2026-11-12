@@ -174,7 +174,7 @@
     actions.append(cta, button);
   }
   const siteRoot = new URL('../', document.currentScript.src);
-  const translatedPages = new Set(['', 'index.html', 'cv.html', 'herramientas/history-search.html']
+  const translatedPages = new Set(['', 'index.html', 'cv.html', 'herramientas/agent-history-search.html']
     .map((path) => new URL(path, siteRoot).pathname));
   const pageLinks = [...document.querySelectorAll('a[href]')].filter((link) => {
     if (link.hasAttribute('download') || link.getAttribute('href').startsWith('#')) return false;

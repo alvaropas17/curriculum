@@ -474,3 +474,20 @@ h1 > span { display: block; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; }
 }
+
+/* ---------- guía paso a paso ---------- */
+.guia { background: var(--fondo-alt); }
+.guia .preguntas-rejilla > * { min-width: 0; }
+.guia pre {
+  margin: 0 0 1.15rem;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid var(--linea);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--texto-2);
+}
+.guia code { font-family: var(--mono); font-size: 0.9em; }
+.guia-enlaces { grid-column: 2; margin-top: 1.25rem; }
+@media (max-width: 900px) { .guia-enlaces { grid-column: 1; } }
