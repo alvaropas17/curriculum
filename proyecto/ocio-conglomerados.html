@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <script>
+    (function () {
+      var pref = null;
+      try { pref = localStorage.getItem("marketing-theme"); } catch (e) { /* sin almacenamiento */ }
+      if (pref !== "light" && pref !== "dark") pref = "auto";
+      var claroSistema = window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches;
+      document.documentElement.dataset.pref = pref;
+      document.documentElement.dataset.tema = pref === "auto" ? (claroSistema ? "light" : "dark") : pref;
+    })();
+  </script>
+  <title>Cómo te diviertes · Álvaro Pastor</title>
+  <meta name="description"
+    content="Un trabajo de comportamiento del consumidor sobre ocio, agrupado en cuatro tribus con el método de Ward. Marca lo que haces tú y mira a cuál te pareces." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="¿A qué tribu de ocio perteneces?" />
+  <meta property="og:description" content="Cuatro grupos de actividades, 18 encuestados y un método de agrupación explicado sin fórmulas." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:creator" content="@alpas17_" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --fondo: #0e0d0c;
+      --fondo-2: #171614;
+      --fondo-3: #211f1c;
+      --texto: #f3efe6;
+      --texto-2: #bdb7ab;
+      --texto-3: #857f75;
+      --linea: rgba(243, 239, 230, 0.14);
+      --linea-2: rgba(243, 239, 230, 0.07);
+      --luz: #ffd84d;
+      --sobre-luz: #1a1600;
+      --vidrio: rgba(14, 13, 12, 0.72);
+      --g-social: #f2c21b;
+      --g-relax: #4fb7c9;
+      --g-aventura: #f2963a;
+      --g-deporte: #e5534d;
+      --display: "Bricolage Grotesque", "Arial Black", sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "Instrument Sans", "Segoe UI", sans-serif;
+      --mono: "IBM Plex Mono", Consolas, monospace;
+      color-scheme: dark;
+    }
+
+    :root[data-tema="light"] {
+      --fondo: #faf7f0;
+      --fondo-2: #f1ece1;
+      --fondo-3: #e7e0d2;
+      --texto: #1b1814;
+      --texto-2: #4f493f;
+      --texto-3: #6b645a;
+      --linea: rgba(27, 24, 20, 0.18);
+      --linea-2: rgba(27, 24, 20, 0.09);
+      --luz: #8f5f00;
+      --sobre-luz: #ffffff;
+      --vidrio: rgba(250, 247, 240, 0.8);
+      --g-social: #a67800;
+      --g-relax: #168aa0;
+      --g-aventura: #bd6208;
+      --g-deporte: #d23a3a;
+      color-scheme: light;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font: 18px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+    a { color: var(--luz); }
+    button { font: inherit; color: inherit; }
+    h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.02; letter-spacing: -0.025em; }
+    p { margin: 0 0 1.1rem; }
+    em, .serif { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
+
+    .ancho { width: min(72rem, 100% - 32px); margin-inline: auto; }
+    .lectura { width: min(40rem, 100% - 32px); margin-inline: auto; }
+    .lectura p { color: var(--texto-2); font-size: 1.15rem; }
+    .lectura p strong { color: var(--texto); font-weight: 600; }
+    .mono { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--texto-3); }
+
+    .progreso { position: fixed; top: 0; left: 0; height: 3px; background: var(--luz); width: 0; z-index: 30; }
+    .flotante { position: fixed; top: 14px; z-index: 30; font: 500 0.8rem var(--mono); color: var(--texto-2); text-decoration: none; background: var(--vidrio); backdrop-filter: blur(8px); padding: 0.35rem 0.75rem; border-radius: 99px; border: 1px solid var(--linea); cursor: pointer; }
+    .flotante:hover { color: var(--texto); border-color: var(--texto-3); }
+    .volver { left: 16px; }
+    .tema { right: 16px; }
+    :focus-visible { outline: 2px solid var(--luz); outline-offset: 2px; }
+
+    .aparece { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.2, .7, .2, 1); }
+    .aparece.visto { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .aparece { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
+
+    /* HERO */
+    .hero { min-height: 88svh; display: grid; align-items: center; padding: 6rem 0 3rem; position: relative; }
+    .hero::before { content: ""; position: absolute; inset: 0 calc(50% - 50vw); z-index: -1; background: radial-gradient(50rem 28rem at 75% 15%, color-mix(in srgb, var(--g-relax) 14%, transparent), transparent 70%), radial-gradient(40rem 28rem at 10% 90%, color-mix(in srgb, var(--g-aventura) 12%, transparent), transparent 70%); pointer-events: none; }
+    .hero-texto { width: min(44rem, 100%); margin-inline: auto; }
+    .hero h1 { font-size: clamp(2.6rem, 5.6vw, 4.6rem); font-weight: 700; }
+    .hero h1 .serif { color: var(--luz); font-size: 1.08em; }
+    .hero-sub { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--texto-2); margin-top: 1.8rem; }
+    .hero-sub strong { color: var(--texto); }
+    .bajar { display: inline-block; margin-top: 1.6rem; }
+
+    section { padding: 4.5rem 0; }
+    .titulo { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: 1.2rem; }
+    .titulo .serif { color: var(--luz); }
+
+    /* JUEGO */
+    .juego { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 2rem; align-items: start; margin-top: 2rem; }
+    @media (max-width: 900px) { .juego { grid-template-columns: 1fr; } }
+    .mapa { background: var(--fondo-2); border: 1px solid var(--linea-2); border-radius: 14px; padding: 8px; }
+    .mapa svg { width: 100%; height: auto; display: block; }
+    .halo { fill: var(--c); opacity: 0.09; stroke: var(--c); stroke-opacity: 0.35; stroke-dasharray: 4 6; transition: opacity .3s; }
+    .halo.gana { opacity: 0.2; }
+    .etiqueta-grupo { font: 600 15px var(--display); fill: var(--c); letter-spacing: -0.01em; }
+    .burbuja { cursor: pointer; }
+    .burbuja circle { fill: var(--fondo-3); stroke: var(--c); stroke-width: 1.5; transition: fill .25s, transform .25s; transform-box: fill-box; transform-origin: center; }
+    .burbuja text { font: 500 10.5px var(--sans); fill: var(--texto-2); pointer-events: none; text-anchor: middle; }
+    .burbuja:hover circle { transform: scale(1.08); }
+    .burbuja.on circle { fill: var(--c); }
+    .burbuja.on text { fill: var(--sobre-luz); font-weight: 700; }
+
+    .panel { position: sticky; top: 64px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 1.4rem; }
+    .chip { border: 1px solid var(--c); background: transparent; border-radius: 99px; padding: 0.3rem 0.8rem; font-size: 0.9rem; cursor: pointer; color: var(--texto-2); transition: background .2s, color .2s; }
+    .chip:hover { color: var(--texto); }
+    .chip[aria-pressed="true"] { background: var(--c); color: var(--sobre-luz); font-weight: 600; }
+    .barras { display: grid; gap: 10px; margin-bottom: 1.4rem; }
+    .barra { display: grid; grid-template-columns: 8.2rem 1fr 2.6rem; align-items: center; gap: 10px; font-size: 0.9rem; color: var(--texto-2); }
+    .barra .pista { height: 10px; border-radius: 99px; background: var(--fondo-3); overflow: hidden; }
+    .barra .pista i { display: block; height: 100%; width: 0; background: var(--c); border-radius: 99px; transition: width .5s cubic-bezier(.2, .7, .2, 1); }
+    .barra b { font: 500 0.78rem var(--mono); color: var(--texto-3); text-align: right; }
+    .resultado { border: 1px solid var(--linea); border-radius: 12px; padding: 1.1rem 1.2rem; background: var(--fondo-2); min-height: 8.5rem; }
+    .resultado h3 { font-size: 1.7rem; margin: 0.3rem 0 0.5rem; color: var(--c, var(--texto)); }
+    .resultado p { color: var(--texto-2); font-size: 1rem; margin: 0; }
+    .limpiar { margin-top: 0.9rem; background: none; border: 0; color: var(--texto-3); font: 500 0.8rem var(--mono); text-decoration: underline; cursor: pointer; padding: 0; }
+    .limpiar:hover { color: var(--texto); }
+
+    /* tags y notas */
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0.2rem 0 1.4rem; }
+    .tag { font: 500 0.8rem var(--mono); border: 1px solid var(--linea); border-radius: 6px; padding: 0.2rem 0.55rem; color: var(--texto-2); }
+    .tag.alta { border-color: var(--g-relax); }
+    .tag.baja { border-color: var(--g-aventura); }
+
+    .formula { background: var(--fondo-2); border-left: 3px solid var(--luz); padding: 1rem 1.2rem; border-radius: 0 10px 10px 0; margin: 1.6rem 0; font-size: 1.02rem; color: var(--texto-2); }
+    .formula strong { color: var(--texto); }
+
+    .tabla-f { width: 100%; border-collapse: collapse; margin: 1.2rem 0 1.6rem; font-size: 0.98rem; }
+    .tabla-f th, .tabla-f td { text-align: left; padding: 0.55rem 0.7rem; border-bottom: 1px solid var(--linea-2); }
+    .tabla-f th { font: 500 0.75rem var(--mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--texto-3); }
+
+    footer { border-top: 1px solid var(--linea-2); padding: 2.5rem 0 4rem; color: var(--texto-3); font-size: 0.95rem; }
+  </style>
+</head>
+
+<body>
+  <div class="progreso" id="progreso"></div>
+  <a class="flotante volver" href="../index.html">← Álvaro Pastor</a>
+  <button class="flotante tema" id="tema" type="button" aria-label="Cambiar tema">◐ tema</button>
+
+  <header class="hero">
+    <div class="ancho">
+      <div class="hero-texto aparece">
+        <p class="mono">Comportamiento del consumidor · UCAM · 2024</p>
+        <h1>Dime cómo te diviertes y te diré <span class="serif">con quién te pareces</span></h1>
+        <p class="hero-sub">Preguntamos a <strong>18 personas</strong> con qué frecuencia hacían distintas actividades de ocio. Luego dejamos que un algoritmo juntara las que se parecen. Salieron <strong>cuatro tribus</strong>.</p>
+        <a class="mono bajar" href="#juego">↓ Marca lo que haces tú</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="juego">
+    <div class="ancho">
+      <div class="aparece">
+        <h2 class="titulo">Elige tus planes y mira <span class="serif">dónde caes</span></h2>
+        <p class="lectura" style="margin-inline:0;color:var(--texto-2)">Toca las burbujas del mapa o los botones de la derecha. Cada grupo de actividades se llena según cuántas de las suyas haces.</p>
+      </div>
+
+      <div class="juego aparece">
+        <div class="mapa">
+          <svg id="mapa" viewBox="0 0 800 660" role="group" aria-label="Mapa de actividades de ocio agrupadas en cuatro tribus"></svg>
+        </div>
+        <div class="panel">
+          <div class="chips" id="chips"></div>
+          <div class="barras" id="barras" aria-live="polite"></div>
+          <div class="resultado" id="resultado" aria-live="polite"></div>
+          <button class="limpiar" id="limpiar" type="button">vaciar selección</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="lectura aparece">
+      <h2 class="titulo">Cómo se forman <span class="serif">las tribus</span></h2>
+      <p>Cada persona dijo cuánto practica cada actividad. Con eso se calcula <strong>cuánto se parecen dos actividades</strong>: si la gente que hace mucho cine también hace mucha música, esas dos quedan cerca.</p>
+      <p>Después se usa el <strong>método de Ward</strong>. Empieza con cada actividad sola y va uniendo, paso a paso, las dos que menos separan al juntarlas. Al final queda un árbol, el dendrograma, y se corta a la altura que dé grupos con sentido.</p>
+      <div class="formula"><strong>En una frase:</strong> el método no sabe qué es «yoga» ni «picnic». Solo ve que las mismas personas los practican con frecuencias parecidas.</div>
+      <p class="mono" style="margin-bottom:.6rem">Lo que más y menos se hace</p>
+      <div class="tags">
+        <span class="tag alta">más: senderismo</span><span class="tag alta">más: yoga</span><span class="tag alta">más: voluntariado</span>
+        <span class="tag baja">menos: pesca</span><span class="tag baja">menos: jardinería</span><span class="tag baja">menos: baile</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="lectura aparece">
+      <h2 class="titulo">¿Hay diferencias <span class="serif">de verdad?</span></h2>
+      <p>La tabla ANOVA compara dos cosas: cuánto varía la gente <strong>dentro</strong> de cada grupo y cuánto varía <strong>entre</strong> grupos. De ahí salen dos números.</p>
+      <table class="tabla-f">
+        <tr><th>Número</th><th>Qué dice</th></tr>
+        <tr><td><strong>F</strong></td><td>Si es alto, los grupos se separan más de lo que varían por dentro.</td></tr>
+        <tr><td><strong>Sig. (p)</strong></td><td>La probabilidad de ver esa diferencia por pura casualidad. Cuanto más baja, mejor.</td></tr>
+      </table>
+      <p>F alto y p bajo salieron en <strong>bailar, pesca, cocina, trabajo voluntario y lectura</strong>. Son las actividades donde la gente más se reparte: unos las hacen mucho y otros casi nada. Para detectar casos raros también se miró la distancia de Mahalanobis con chi cuadrado.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="lectura aparece">
+      <h2 class="titulo">Lo que esto <span class="serif">no dice</span></h2>
+      <p>Son <strong>18 personas</strong>. Sirve para practicar el método y ver cómo se forman los grupos, no para decir cómo se divierte la gente en general.</p>
+      <p>El «test» de arriba es un juego: cuenta cuántas actividades de cada grupo marcas. No es un resultado del estudio.</p>
+      <p>Para un negocio, la lectura útil es otra: quien va al cine suele ir también a conciertos, y eso permite <strong>poner dos propuestas cerca</strong> en vez de adivinar.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="lectura">Trabajo en grupo de Análisis del comportamiento del consumidor · Grado en Marketing y Dirección Comercial, UCAM · Murcia, abril de 2024. Página rehecha por Álvaro Pastor.</div>
+  </footer>
+
+  <script>
+    (function () {
+      const GRUPOS = [
+        { id: "social", nombre: "Tribu social", c: "var(--g-social)", x: 190, y: 170, acts: ["videojuegos", "juegos de mesa", "voluntariado", "baile"], desc: "Ocio que se hace con otros: jugar, colaborar, moverse en compañía. Lo importante es la gente." },
+        { id: "relax", nombre: "Tribu de la calma", c: "var(--g-relax)", x: 560, y: 235, acts: ["cine", "arte", "música", "cocina", "fotografía", "yoga", "pesca", "jardinería", "meditación"], desc: "Planes tranquilos y creativos, de bajar el ritmo. Es el grupo más grande y el de los gustos más variados." },
+        { id: "aventura", nombre: "Tribu aventura", c: "var(--g-aventura)", x: 190, y: 440, acts: ["picnics", "festivales", "viajes", "acampadas"], desc: "Salir de la rutina: viajes, festivales, campo. Ocio de fin de semana y de planificar con antelación." },
+        { id: "deporte", nombre: "Tribu deporte", c: "var(--g-deporte)", x: 590, y: 545, acts: ["carrera", "natación", "deportes de interior", "deportes"], desc: "Ocio que se mide en movimiento y esfuerzo físico, solo o en equipo." }
+      ];
+
+      const sel = new Set();
+      const svg = document.getElementById("mapa");
+      const NS = "http://www.w3.org/2000/svg";
+      const chips = document.getElementById("chips");
+      const barras = document.getElementById("barras");
+      const resultado = document.getElementById("resultado");
+      const nodos = {}; // actividad -> {burbuja, chip}
+      const hal = {};
+      const barraEl = {};
+
+      function el(tag, attrs, parent) {
+        const e = document.createElementNS(NS, tag);
+        for (const k in attrs) e.setAttribute(k, attrs[k]);
+        if (parent) parent.appendChild(e);
+        return e;
+      }
+
+      GRUPOS.forEach(function (g) {
+        const n = g.acts.length;
+        const R = n === 9 ? 110 : 64;
+        const h = el("circle", { cx: g.x, cy: g.y, r: R + 46, class: "halo" }, svg);
+        h.style.setProperty("--c", g.c);
+        hal[g.id] = h;
+        const et = el("text", { x: g.x, y: g.y - R - 62, "text-anchor": "middle", class: "etiqueta-grupo" }, svg);
+        et.style.setProperty("--c", g.c);
+        et.textContent = g.nombre;
+
+        g.acts.forEach(function (a, i) {
+          const ang = (i / n) * Math.PI * 2 - Math.PI / 2;
+          const cx = g.x + Math.cos(ang) * R, cy = g.y + Math.sin(ang) * R;
+          const b = el("g", { class: "burbuja", tabindex: 0, role: "button", "aria-pressed": "false", "aria-label": a }, svg);
+          b.style.setProperty("--c", g.c);
+          el("circle", { cx: cx, cy: cy, r: 34 }, b);
+          const palabras = a.split(" ");
+          const t = el("text", { x: cx, y: cy + (palabras.length > 1 ? -2 : 4) }, b);
+          if (palabras.length > 1) {
+            palabras.forEach(function (p, k) {
+              const s = el("tspan", { x: cx, dy: k === 0 ? 0 : 12 }, t);
+              s.textContent = p;
+            });
+          } else t.textContent = a;
+          b.addEventListener("click", function () { alternar(a); });
+          b.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); alternar(a); } });
+
+          const c = document.createElement("button");
+          c.type = "button"; c.className = "chip"; c.textContent = a; c.setAttribute("aria-pressed", "false");
+          c.style.setProperty("--c", g.c);
+          c.addEventListener("click", function () { alternar(a); });
+          chips.appendChild(c);
+          nodos[a] = { b: b, c: c };
+        });
+
+        const fila = document.createElement("div");
+        fila.className = "barra"; fila.style.setProperty("--c", g.c);
+        fila.innerHTML = "<span>" + g.nombre.replace("Tribu ", "") + "</span><div class=\"pista\"><i></i></div><b>0/" + n + "</b>";
+        barras.appendChild(fila);
+        barraEl[g.id] = fila;
+      });
+
+      function alternar(a) { sel.has(a) ? sel.delete(a) : sel.add(a); pintar(); }
+
+      function pintar() {
+        let mejor = 0, ganadores = [];
+        GRUPOS.forEach(function (g) {
+          const k = g.acts.filter(function (a) { return sel.has(a); }).length;
+          const p = k / g.acts.length;
+          barraEl[g.id].querySelector("i").style.width = (p * 100) + "%";
+          barraEl[g.id].querySelector("b").textContent = k + "/" + g.acts.length;
+          if (k > 0 && p > mejor + 1e-9) { mejor = p; ganadores = [g]; }
+          else if (k > 0 && Math.abs(p - mejor) < 1e-9) ganadores.push(g);
+        });
+        for (const a in nodos) {
+          const on = sel.has(a);
+          nodos[a].b.classList.toggle("on", on);
+          nodos[a].b.setAttribute("aria-pressed", on);
+          nodos[a].c.setAttribute("aria-pressed", on);
+        }
+        GRUPOS.forEach(function (g) { hal[g.id].classList.toggle("gana", ganadores.indexOf(g) !== -1); });
+
+        if (!ganadores.length) {
+          resultado.style.removeProperty("--c");
+          resultado.innerHTML = "<span class=\"mono\">Tu tribu</span><h3>Aún sin tribu</h3><p>Marca al menos una actividad que hagas de verdad, no la que quedaría bien.</p>";
+        } else if (ganadores.length === 1) {
+          const g = ganadores[0];
+          resultado.style.setProperty("--c", g.c);
+          resultado.innerHTML = "<span class=\"mono\">Tu tribu</span><h3>" + g.nombre + "</h3><p>" + g.desc + "</p>";
+        } else {
+          resultado.style.setProperty("--c", ganadores[0].c);
+          resultado.innerHTML = "<span class=\"mono\">Empate</span><h3>" + ganadores.map(function (g) { return g.nombre.replace("Tribu ", ""); }).join(" + ") + "</h3><p>Repartes tu ocio por igual entre estas tribus. Un perfil mezclado, que también existe.</p>";
+        }
+      }
+      document.getElementById("limpiar").addEventListener("click", function () { sel.clear(); pintar(); });
+      pintar();
+
+      // progreso y aparición
+      const prog = document.getElementById("progreso");
+      addEventListener("scroll", function () {
+        const h = document.documentElement.scrollHeight - innerHeight;
+        prog.style.width = (h > 0 ? scrollY / h * 100 : 0) + "%";
+      }, { passive: true });
+      const io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("visto"); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".aparece").forEach(function (n) { io.observe(n); });
+
+      // tema: auto → claro → oscuro, misma clave que el resto del sitio
+      const raiz = document.documentElement;
+      document.getElementById("tema").addEventListener("click", function () {
+        const orden = ["auto", "light", "dark"];
+        const sig = orden[(orden.indexOf(raiz.dataset.pref) + 1) % 3];
+        try { sig === "auto" ? localStorage.removeItem("marketing-theme") : localStorage.setItem("marketing-theme", sig); } catch (e) { }
+        raiz.dataset.pref = sig;
+        raiz.dataset.tema = sig === "auto" ? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark") : sig;
+      });
+    })();
+  </script>
+</body>
+
+</html>
