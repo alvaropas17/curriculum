@@ -1,5 +1,7 @@
 # Outliers: vídeos de referencia
 
+Forma parte del [método de mejora continua](../metodo.md). Las reglas que salen de aquí van al [playbook](../playbook.md).
+
 Vídeos que rinden muy por encima de lo normal, guardados para reutilizar sus patrones.
 
 | Fecha | Vídeo | Cuenta | Vistas | Tipo de outlier | Patrón clave |
