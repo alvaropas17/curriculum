@@ -72,7 +72,7 @@ mkdirSync(caseAssets, { recursive: true });
 copyFileSync(join(root, 'styles/caso-jane.css'), join(caseAssets, 'caso-jane.css'));
 const portadaAssets = join(staging, 'assets/portada-caso');
 mkdirSync(portadaAssets, { recursive: true });
-for (const name of ['antes.webp', 'despues.webp', 'antes-movil.webp', 'despues-movil.webp']) {
+for (const name of ['antes.webp', 'despues.webp', 'antes-movil.webp', 'despues-movil.webp', 'portada-tarjeta.webp']) {
   copyFileSync(join(root, 'assets/portada-caso', name), join(portadaAssets, name));
 }
 const urls = pages.map((page) => `<url><loc>https://${host}/${page.path}</loc></url>`).join('');
