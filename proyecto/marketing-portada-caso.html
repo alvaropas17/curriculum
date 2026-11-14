@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mi portada lo explicaba todo menos lo importante · Álvaro Pastor</title>
+  <meta name="description" content="El antes y después de mi propia portada: por qué cambié cifras y botones por beneficios y un ejemplo real, y cómo lo hice señalando la página en vez de describirla.">
+  <link rel="canonical" href="https://marketing.alvaropastor.dev/portada/">
+  <meta property="og:type" content="article"><meta property="og:title" content="Mi portada lo explicaba todo. Menos qué ganabas tú."><meta property="og:description" content="El antes y después de mi propia web, contado desde la noche en que me di cuenta."><meta property="og:image" content="https://marketing.alvaropastor.dev/assets/portada-caso/despues.webp"><meta name="twitter:card" content="summary_large_image">
+  <script>try{var t=localStorage.getItem('marketing-theme')||'light';document.documentElement.dataset.pref=t;document.documentElement.dataset.tema=t==='auto'?(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'):t}catch(e){}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/caso-jane.css">
+  <style>
+    .caso-moviles{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;max-width:760px;margin:2rem auto 0}
+    .caso-moviles figure{margin:0}.caso-moviles img{display:block;width:100%;height:auto;border:1px solid var(--linea);border-radius:18px}
+    .caso-moviles figcaption{font-size:.8rem;color:var(--texto-3);margin-top:.6rem}
+    .caso-cifra{display:flex;align-items:baseline;gap:.6rem;margin-top:1.6rem}.caso-cifra b{font:600 3rem/1 var(--display);color:var(--luz)}
+    .caso-pasos{padding-left:1.4rem}.caso-pasos li{padding-block:.5rem}.caso-pasos li strong{display:block}
+    /* Estructura por bloques, como la pagina de la herramienta */
+    .caso-hero{padding:clamp(3rem,7vw,5rem) 0 2rem;max-width:970px}
+    .caso-hero h1{font-size:clamp(3rem,6.5vw,5.4rem);margin:1rem 0 1.4rem}.caso-hero h1 em{color:var(--luz)}
+    .caso-sellos{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;list-style:none;padding:0;margin:1.6rem 0 0;font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--texto-3)}
+    .caso-sellos li::before{content:"\2713 ";color:var(--luz)}
+    .acciones-hero{display:flex;flex-wrap:wrap;gap:.8rem}
+    .caso-mapa{padding-block:1.6rem 2.4rem;border-top:1px solid var(--linea)}
+    .caso-mapa>h2{font:500 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--texto-3);margin:0 0 1rem}
+    .caso-mapa ol{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0;padding:0;border:2px solid var(--texto);border-radius:6px;background:var(--papel)}
+    .caso-mapa li{position:relative;border-right:2px solid var(--texto);min-width:0}.caso-mapa li:last-child{border-right:0}
+    .caso-mapa a{display:flex;flex-direction:column;gap:.35rem;height:100%;padding:1rem 1rem 1.15rem;min-height:44px}
+    .caso-mapa a:hover strong{color:var(--luz)}
+    .mapa-num{font:italic 400 1.5rem/1 var(--serif);color:var(--texto-3)}
+    .caso-mapa strong{font:600 1rem/1.25 var(--sans)}.caso-mapa a>span:last-child{font-size:.8rem;line-height:1.5;color:var(--texto-2)}
+    .mapa-aqui{background:var(--fondo-2)}.mapa-aqui .mapa-num{color:var(--luz)}
+    .mapa-aqui em{position:absolute;top:-.8rem;right:.7rem;font:italic 400 1.05rem var(--serif);color:var(--luz);background:var(--fondo);padding:0 .4rem;transform:rotate(-3deg)}
+    .caso-bloque{scroll-margin-top:72px}
+    .caso-bloque>.etiqueta,.caso-lectura .etiqueta{font:500 .72rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--luz)}
+    .caso-bloque>.seccion-cab{margin-top:1.2rem}
+    .caso-cierre{background:var(--luz-fondo);color:var(--sobre-luz);border-radius:24px;padding:clamp(2rem,5vw,3.5rem)!important;border:0!important;margin-block:3rem}
+    .caso-cierre .mono,.caso-cierre p:not(.mono){color:var(--sobre-luz)!important}
+    .caso-cierre .boton{background:var(--sobre-luz);color:#fff}
+    @media(max-width:900px){.caso-mapa ol{grid-template-columns:repeat(2,minmax(0,1fr))}.caso-mapa li{border-bottom:2px solid var(--texto)}.caso-mapa li:nth-child(2n){border-right:0}.caso-mapa li:last-child{border-bottom:0;grid-column:1/-1}}
+    @media(max-width:560px){.caso-moviles{gap:.8rem}.caso-mapa ol{grid-template-columns:1fr}.caso-mapa li{border-right:0}.caso-mapa li:last-child{grid-column:auto}}
+    /* Mismos márgenes en todo: un único ancho y laterales estrechos */
+    .ancho{width:min(1160px,100% - 2*var(--lateral))!important}
+    .caso-lectura,.caso-hero,.caso-entradilla,.caso-contexto,.caso-moviles{max-width:none}
+    .caso-moviles{max-width:900px}
+    :root{--lateral:24px}
+    @media(max-width:560px){:root{--lateral:20px}}
+  </style>
+</head>
+<body>
+  <header class="barra"><div class="ancho"><a class="marca" href="marketing-portada.html">Álvaro Pastor Periago<span>.</span></a><nav aria-label="Secciones"><a href="#escena" data-en="story">historia</a><a href="#comparativa" data-en="before / after">antes y después</a><a href="#como" data-en="how">cómo</a><a href="#prueba" data-en="try it">pruébalo</a></nav><a class="volver" href="marketing-portada.html" data-en="← Back to the blog">← Volver al blog</a><button class="tema" id="idioma" type="button" aria-label="Switch to English">EN</button><button class="tema" id="tema" type="button" aria-label="Cambiar tema">◐ claro</button></div></header>
+  <main class="ancho caso-jane">
+    <header class="caso-hero"><p class="mono" data-en="Start here · My own homepage · 14 Nov 2026">Empieza aquí · Mi propia portada · 14 nov 2026</p><h1><span data-en="My homepage explained everything.">Mi portada lo explicaba todo.</span> <em data-en="Except what you gain.">Menos qué ganabas tú.</em></h1><p class="caso-entradilla" data-en="I build tools that give AI agents memory. My website listed numbers about them. Visitors didn’t know what they would gain. This is how I fixed it in one session, and what I still can’t prove.">Construyo herramientas que dan memoria a los agentes de IA. Mi web enseñaba cifras sobre ellas. Quien entraba no sabía qué ganaba. Así lo cambié en una sola sesión, y lo que todavía no puedo demostrar.</p>
+      <div class="acciones-hero"><a class="boton" href="#escena" data-en="Start with the story ↓">Empieza por la historia ↓</a><a class="fantasma" href="#comparativa" data-en="Go to before and after">Ir al antes y después</a></div>
+      <ul class="caso-sellos"><li data-en="Real screenshots">Capturas reales</li><li data-en="Reversible changes">Cambios reversibles</li><li data-en="No invented results">Sin resultados inventados</li></ul>
+    </header>
+
+    <nav class="caso-mapa" aria-labelledby="mapa-titulo"><h2 id="mapa-titulo" data-en="What you’ll see">Lo que vas a ver</h2>
+      <ol>
+        <li class="mapa-aqui"><a href="#escena"><span class="mapa-num">I</span><strong data-en="The night I noticed">La noche que lo vi</strong><span data-en="Why the numbers didn’t sell.">Por qué las cifras no vendían.</span></a><em data-en="You are here">Estás aquí</em></li>
+        <li><a href="#comparativa"><span class="mapa-num">II</span><strong data-en="Before and after">Antes y después</strong><span data-en="Real screenshots, desktop and mobile.">Capturas reales, escritorio y móvil.</span></a></li>
+        <li><a href="#como"><span class="mapa-num">III</span><strong data-en="How I did it">Cómo lo hice</strong><span data-en="Pointing at the page, not describing it.">Señalando la página, no describiéndola.</span></a></li>
+        <li><a href="#decisiones"><span class="mapa-num">IV</span><strong data-en="Four decisions">Cuatro decisiones</strong><span data-en="What changed, and why.">Qué cambió y por qué.</span></a></li>
+        <li><a href="#prueba"><span class="mapa-num">V</span><strong data-en="Try it on yours">Pruébalo con tu web</strong><span data-en="What this doesn’t prove, and three questions.">Lo que no demuestra y tres preguntas.</span></a></li>
+      </ol>
+    </nav>
+
+    <div class="caso-lectura"><section id="escena" class="caso-bloque"><p class="etiqueta" data-en="I · The night I noticed">I · La noche que lo vi</p><h2 data-en="I had just shipped the tool. My homepage didn’t sell it.">Acababa de publicar la herramienta. Mi portada no la vendía.</h2><p data-en="November 13, at night. I had just published Agent History Search, the tool that lets your agent recover what you did in earlier chats. I opened my homepage as if I were someone else.">13 de noviembre, por la noche. Acababa de publicar Agent History Search, la herramienta que deja a tu agente recuperar lo que hiciste en chats anteriores. Abrí mi portada como si fuera otra persona.</p><p data-en="A big headline. Then four numbers: 5 MCP servers, 20 skills, 6 agents, 0.1 s. Two buttons side by side. All of it true. None of it answered the only question a visitor brings: what does this do for me?">Un titular grande. Después, cuatro cifras: 5 servidores MCP, 20 skills, 6 agentes, 0,1 s. Dos botones juntos. Todo cierto. Nada respondía a la única pregunta que trae quien entra: ¿qué hace esto por mí?</p><aside class="caso-giro" data-en="The numbers impressed me because I knew what was behind them. The visitor didn’t.">Las cifras me impresionaban a mí porque sabía qué había detrás. A quien entraba, no.</aside></section></div>
+
+    <section class="comparativa caso-bloque" id="comparativa" aria-labelledby="comparativa-titulo"><p class="etiqueta" data-en="II · Before and after">II · Antes y después</p><div class="seccion-cab"><h2 id="comparativa-titulo" data-en="Same website. A different first screen.">La misma web. Otra primera pantalla.</h2><span class="mono" data-en="Drag to compare">Arrastra para comparar</span></div>
+      <figure class="caso-captura">
+        <div class="caso-slider" style="--corte:50%">
+          <img id="captura-despues" src="../assets/portada-caso/despues.webp" width="1440" height="900" alt="Portada nueva: beneficio en el titular, un solo botón y un ejemplo real con el tiempo de búsqueda" draggable="false">
+          <img id="captura-antes" src="../assets/portada-caso/antes.webp" width="1440" height="900" alt="Portada anterior: titular, dos botones y cuatro cifras sueltas" draggable="false">
+          <span class="caso-lado caso-lado-antes" data-en="Before">Antes</span>
+          <span class="caso-lado caso-lado-despues" data-en="After">Después</span>
+          <div class="caso-separador" aria-hidden="true"><span>‹ ›</span></div>
+          <input id="comparador" type="range" min="0" max="100" step="1" value="50" aria-label="Comparar la portada anterior y la nueva" aria-describedby="pie-captura">
+        </div>
+        <figcaption id="pie-captura" data-en="Drag the divider to explore the before and after. You can also use the arrow keys when the slider is focused.">Arrastra la línea para explorar el antes y el después. También puedes usar las flechas del teclado al seleccionar el comparador.</figcaption>
+      </figure>
+      <div class="caso-moviles"><figure><img src="../assets/portada-caso/antes-movil.webp" width="780" height="1688" loading="lazy" alt="Portada anterior en el móvil"><figcaption data-en="Before · mobile">Antes · móvil</figcaption></figure><figure><img src="../assets/portada-caso/despues-movil.webp" width="780" height="1688" loading="lazy" alt="Portada nueva en el móvil"><figcaption data-en="After · mobile">Después · móvil</figcaption></figure></div>
+      <p class="caso-contexto" data-en="Real screenshots of the live website, taken minutes before and after publishing, with the same browser and window sizes (1440 × 900 and 390 × 844).">Capturas reales de la web publicada, tomadas minutos antes y después de publicar, con el mismo navegador y tamaños de ventana (1440 × 900 y 390 × 844).</p></section>
+
+    <div class="caso-lectura"><section id="como" class="caso-bloque"><p class="etiqueta" data-en="III · How I did it">III · Cómo lo hice</p><h2 data-en="I stopped describing changes. I pointed at them.">Dejé de describir los cambios. Los señalé.</h2><p data-en="Describing a website in words is slow: “the second card, the button under the heading, no, the other one”. So I used a selector I built for myself. I click the part of the page I don’t like, write what I want in one sentence and press Send. My agent receives the exact element and changes the code.">Describir una web con palabras es lento: «la segunda tarjeta, el botón de debajo del título, no, el otro». Así que usé un selector que construí para mí. Hago clic en la parte de la página que no me gusta, escribo en una frase lo que quiero y pulso Enviar. Mi agente recibe el elemento exacto y cambia el código.</p>
+      <div class="caso-cifra"><b>12</b><span data-en="changes requested by pointing at the page, in a single session.">cambios pedidos señalando la página, en una sola sesión.</span></div>
+      <ol class="caso-pasos"><li><strong data-en="I looked at it on my phone.">Lo miré en el móvil.</strong><span data-en="That’s where most visitors arrive. The layout broke and the button was half width.">Es donde llega casi todo el mundo. La maqueta se rompía y el botón ocupaba medio ancho.</span></li><li><strong data-en="I pointed and wrote one sentence.">Señalé y escribí una frase.</strong><span data-en="“The visitor doesn’t know what ‘expand it’ means. Use very simple words.”">«El usuario no sabe qué es “ampliarlo”. Ponlo con palabras muy sencillas.»</span></li><li><strong data-en="I reviewed the result and pointed again.">Revisé el resultado y volví a señalar.</strong><span data-en="Every change was reversible: I saved a restore point before starting.">Cada cambio era reversible: guardé un punto de restauración antes de empezar.</span></li></ol></section></div>
+
+    <section class="caso-decisiones caso-bloque" id="decisiones"><p class="etiqueta" data-en="IV · Four decisions">IV · Cuatro decisiones</p><div class="seccion-cab"><h2 data-en="Four changes that make the offer easier to understand.">Cuatro cambios que hacen más fácil entender la oferta.</h2></div><div class="caso-cuatro"><article><span class="mono">01</span><h3 data-en="Benefit before numbers.">Beneficio antes que cifras.</h3><p data-en="From “5 MCP servers” to “imagine opening a new chat and your agent already knows what you did yesterday”.">De «5 servidores MCP» a «imagina abrir un chat nuevo y que tu agente ya sepa lo que hicisteis ayer».</p></article><article><span class="mono">02</span><h3 data-en="Show it working.">Enseñarlo funcionando.</h3><p data-en="A real example that plays the search with its measured time: 376 ms. You see what to expect before reading a word more.">Un ejemplo real que reproduce la búsqueda con su tiempo medido: 376 ms. Ves qué esperar antes de leer nada más.</p></article><article><span class="mono">03</span><h3 data-en="One clear next step.">Un solo paso siguiente.</h3><p data-en="Two competing buttons became one: “See what your agent gains ↓”. It invites you to scroll and says why.">Dos botones que competían pasaron a uno: «Mira qué gana tu agente ↓». Invita a bajar y dice para qué.</p></article><article><span class="mono">04</span><h3 data-en="Words anyone understands.">Palabras que entiende cualquiera.</h3><p data-en="“Memory, eyes and hands” instead of technical labels. “Under half a second” instead of “226 ms to find it, 150 ms to expand it”.">«Memoria, ojos y manos» en vez de etiquetas técnicas. «Menos de medio segundo» en vez de «226 ms encontrarlo, 150 ms ampliarlo».</p></article></div></section>
+
+    <div class="caso-lectura"><section id="prueba" class="caso-bloque"><p class="etiqueta" data-en="V · What this doesn’t prove">V · Lo que no demuestra</p><h2 data-en="A clearer homepage. A result still to measure.">Una portada más clara. Un resultado por medir.</h2><p data-en="The new homepage changes the order in which you discover what I do: first what you gain, then a real example, then how it works and why you can trust it. It does not prove yet that more people try the tool or write to me.">La portada nueva cambia el orden en el que descubres lo que hago: primero qué ganas, después un ejemplo real, luego cómo funciona y por qué puedes fiarte. Todavía no demuestra que más gente pruebe la herramienta o me escriba.</p><p data-en="The next step is to compare, with similar traffic, how many visitors reach the tool page and how many start the conversation. When I have the numbers, I’ll publish them here, even if the change barely moves anything.">El siguiente paso es comparar, con tráfico parecido, cuántos visitantes llegan a la página de la herramienta y cuántos empiezan la conversación. Cuando tenga los números los publicaré aquí, aunque el cambio apenas mueva nada.</p></section>
+
+    <section class="caso-prueba"><p class="mono" data-en="Try this with your own website">Pruébalo con tu web</p><h2 data-en="Cover your logo. Show your homepage to someone else.">Tapa tu logo. Enséñale tu portada a otra persona.</h2><p data-en="Give them five seconds. Then ask these three questions without explaining anything:">Dale cinco segundos. Después hazle estas tres preguntas sin explicar nada:</p><ol><li data-en="What problem does this solve for you?">¿Qué problema te resuelve?</li><li data-en="What will you get when you start?">¿Qué te llevas cuando empiezas?</li><li data-en="What would you do next?">¿Qué harías ahora?</li></ol><p data-en="If a number on your homepage needs you beside it to explain it, it’s talking to you, not to your visitor. Save the questions and send them to whoever reviews your website with you.">Si una cifra de tu portada necesita que estés al lado para explicarla, te habla a ti, no a quien entra. Guarda las preguntas y pásaselas a quien revise tu web contigo.</p><div class="caso-enlaces"><a class="boton" id="compartir" href="https://wa.me/" data-en="Send it to whoever reviews your website ↗">Envíaselo a quien revise tu web ↗</a><button class="fantasma" id="copiar" type="button" data-en="Copy the three questions">Copiar las tres preguntas</button></div><p id="copia-estado" role="status" class="caso-contexto"></p></section>
+
+    <section class="caso-cierre"><p class="mono" data-en="Your website is next">Ahora, tu web</p><h2 data-en="What does your homepage say before anyone scrolls?">¿Qué dice tu portada antes de que nadie haga scroll?</h2><p data-en="Send me the page and tell me what you want visitors to do. We can start with what they need to understand before their first click.">Pásame la página y cuéntame qué quieres que haga quien entra. Podemos empezar por lo que necesita entender antes de su primer clic.</p><a class="boton" href="https://x.com/alpas17_" data-en="Tell me on X ↗">Cuéntamelo por X ↗</a></section></div>
+  </main><footer><div class="ancho"><span>Detrás de lo que elegimos · Álvaro Pastor Periago</span><a href="marketing-portada.html" data-en="Back to the blog →">Volver al blog →</a></div></footer>
+  <script>
+  (()=>{
+    let lang=new URLSearchParams(location.search).get('lang');
+    try{if(!['es','en'].includes(lang))lang=localStorage.getItem('marketing-language')}catch(e){}
+    if(!['es','en'].includes(lang))lang='es';
+    const nodes=[...document.querySelectorAll('[data-en]')].map(node=>({node,es:node.textContent,en:node.dataset.en}));
+    const l=(es,en)=>lang==='en'?en:es;
+    const control=document.getElementById('comparador');
+    const superficie=document.querySelector('.caso-slider');
+    function comparar(){
+      superficie.style.setProperty('--corte',control.value+'%');
+      control.setAttribute('aria-valuetext',l(control.value+' % de la portada anterior, '+(100-control.value)+' % de la nueva',control.value+'% previous homepage, '+(100-control.value)+'% new one'));
+    }
+    function mover(event){
+      const rect=superficie.getBoundingClientRect();
+      control.value=String(Math.round(Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width))*100));
+      comparar();
+    }
+    control.addEventListener('input',comparar);
+    control.addEventListener('pointerdown',event=>{
+      if(!event.isPrimary || event.button!==0)return;
+      event.preventDefault();
+      control.focus({preventScroll:true});
+      control.setPointerCapture(event.pointerId);
+      mover(event);
+    });
+    control.addEventListener('pointermove',event=>{if(control.hasPointerCapture(event.pointerId))mover(event)});
+    function soltar(event){if(control.hasPointerCapture(event.pointerId))control.releasePointerCapture(event.pointerId)}
+    control.addEventListener('pointerup',soltar);
+    control.addEventListener('pointercancel',soltar);
+    function tema(){const r=document.documentElement;document.getElementById('tema').textContent='◐ '+l({light:'claro',dark:'oscuro',auto:'auto'}[r.dataset.pref||'light'],r.dataset.pref||'light');}
+    const links=[...document.querySelectorAll('a[href]')].filter(a=>!a.getAttribute('href').startsWith('#')&&!/^[a-z]+:/i.test(a.getAttribute('href'))).map(node=>({node,href:node.getAttribute('href')}));
+    const alts=[['captura-antes','Portada anterior: titular, dos botones y cuatro cifras sueltas','Previous homepage: headline, two buttons and four standalone numbers'],['captura-despues','Portada nueva: beneficio en el titular, un solo botón y un ejemplo real con el tiempo de búsqueda','New homepage: benefit in the headline, one button and a real example with its search time']];
+    function traducir(){document.documentElement.lang=lang;nodes.forEach(x=>x.node.textContent=x[lang]);document.getElementById('idioma').textContent=l('EN','ES');document.getElementById('idioma').setAttribute('aria-label',l('Switch to English','Cambiar a español'));document.title=l('Mi portada lo explicaba todo menos lo importante · Álvaro Pastor','My homepage explained everything except what mattered · Álvaro Pastor');alts.forEach(([id,es,en])=>document.getElementById(id).alt=l(es,en));control.setAttribute('aria-label',l('Comparar la portada anterior y la nueva','Compare the previous and the new homepage'));document.getElementById('tema').setAttribute('aria-label',l('Cambiar tema','Change theme'));links.forEach(x=>{const u=new URL(x.href,location.href);u.searchParams.set('lang',lang);x.node.href=u.href});const u=new URL('https://marketing.alvaropastor.dev/portada/');u.searchParams.set('lang',lang);document.getElementById('compartir').href='https://wa.me/?text='+encodeURIComponent(l('Probemos esto con nuestra web: cinco segundos y tres preguntas. Mira este antes y después: ','Let’s try this with our website: five seconds and three questions. See this before and after: ')+u.href);comparar();tema();document.getElementById('copia-estado').textContent='';try{localStorage.setItem('marketing-language',lang)}catch(e){}}
+    document.getElementById('idioma').addEventListener('click',()=>{lang=l('en','es');traducir();const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u)});
+    document.getElementById('tema').addEventListener('click',()=>{const r=document.documentElement;const t=r.dataset.pref==='dark'?'light':'dark';r.dataset.pref=t;r.dataset.tema=t;try{localStorage.setItem('marketing-theme',t)}catch(e){}tema()});
+    document.getElementById('copiar').addEventListener('click',async()=>{const text=l('Tapa el logo y enseña tu web a otra persona durante cinco segundos.\n1. ¿Qué problema te resuelve?\n2. ¿Qué te llevas cuando empiezas?\n3. ¿Qué harías ahora?','Cover the logo and show your website to someone for five seconds.\n1. What problem does this solve for you?\n2. What will you get when you start?\n3. What would you do next?');try{await navigator.clipboard.writeText(text);document.getElementById('copia-estado').textContent=l('Preguntas copiadas.','Questions copied.')}catch(e){document.getElementById('copia-estado').textContent=text}});
+    traducir();
+    const bloques=['escena','comparativa','como','decisiones','prueba'].map(id=>document.getElementById(id));
+    const items=[...document.querySelectorAll('.caso-mapa li')];
+    const aqui=document.querySelector('.mapa-aqui em');
+    if('IntersectionObserver' in window){
+      const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const i=bloques.indexOf(e.target);items.forEach((li,k)=>{li.classList.toggle('mapa-aqui',k===i);if(k===i)li.appendChild(aqui)})})},{rootMargin:'-30% 0px -60% 0px'});
+      bloques.forEach(b=>b&&io.observe(b));
+    }
+  })();
+  </script>
+</body></html>

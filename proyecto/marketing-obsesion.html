@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <meta name="robots" content="noindex" /> <!-- BORRADOR: quitar al publicar -->
+  <script>
+    (function () {
+      var pref = null;
+      try { pref = localStorage.getItem("marketing-theme"); } catch (e) { /* sin almacenamiento */ }
+      if (pref !== "light" && pref !== "dark") pref = "auto";
+      var claroSistema = window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches;
+      document.documentElement.dataset.pref = pref;
+      document.documentElement.dataset.tema = pref === "auto" ? (claroSistema ? "light" : "dark") : pref;
+    })();
+  </script>
+  <title>La sorpresa que se cuenta · Álvaro Pastor</title>
+  <meta name="description" content="La gente no recomienda la calidad, recomienda la sorpresa. Cómo lo hizo Anthropic y un plan de una hora para aplicarlo a tu negocio esta semana." />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Por qué Anthropic se obsesionó con los desarrolladores" />
+  <meta property="og:description" content="Un año de trabajo en una hora. Cómo provocar esa frase en tu negocio." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:creator" content="@alpas17_" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --fondo: #0e0d0c; --fondo-2: #171614; --fondo-3: #211f1c;
+      --texto: #f3efe6; --texto-2: #bdb7ab; --texto-3: #857f75;
+      --linea: rgba(243, 239, 230, 0.14); --linea-2: rgba(243, 239, 230, 0.07);
+      --luz: #ffd84d; --sobre-luz: #1a1600; --vidrio: rgba(14, 13, 12, 0.72);
+      --luz-suave: color-mix(in srgb, var(--luz) 14%, transparent);
+      --display: "Bricolage Grotesque", "Arial Black", sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "Instrument Sans", "Segoe UI", sans-serif;
+      --mono: "IBM Plex Mono", Consolas, monospace;
+      color-scheme: dark;
+    }
+    :root[data-tema="light"] {
+      --fondo: #faf7f0; --fondo-2: #f1ece1; --fondo-3: #e7e0d2;
+      --texto: #1b1814; --texto-2: #4f493f; --texto-3: #6b645a;
+      --linea: rgba(27, 24, 20, 0.18); --linea-2: rgba(27, 24, 20, 0.09);
+      --luz: #8f5f00; --sobre-luz: #ffffff; --vidrio: rgba(250, 247, 240, 0.8);
+      color-scheme: light;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font: 19px/1.75 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+    a { color: var(--luz); }
+    button { font: inherit; color: inherit; }
+    h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.04; letter-spacing: -0.025em; text-wrap: balance; }
+    p { margin: 0 0 1.45rem; }
+    em, .serif { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
+    .ancho { width: min(72rem, 100% - 32px); margin-inline: auto; }
+    .lectura { width: min(46rem, 100% - 32px); margin-inline: auto; }
+    /* bloques visuales: salen de la columna de texto y usan más pantalla */
+    .lectura .sale { margin-inline: calc((min(62rem, 100vw - 32px) - 100%) / -2); }
+    .medio { width: min(62rem, 100% - 32px); margin-inline: auto; }
+    .lectura p, .lectura li { color: var(--texto-2); font-size: 1.2rem; }
+    .lectura strong, .medio strong { color: var(--texto); font-weight: 600; }
+    .mono { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--texto-3); }
+    .progreso { position: fixed; top: 0; left: 0; height: 3px; background: var(--luz); width: 0; z-index: 30; }
+    .flotante { position: fixed; top: 14px; z-index: 30; font: 500 0.8rem var(--mono); color: var(--texto-2); text-decoration: none; background: var(--vidrio); backdrop-filter: blur(8px); padding: 0.35rem 0.75rem; border-radius: 99px; border: 1px solid var(--linea); cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; }
+    .flotante:hover { color: var(--texto); border-color: var(--texto-3); }
+    .volver { left: 16px; } .tema { right: 16px; }
+    :focus-visible { outline: 2px solid var(--luz); outline-offset: 2px; }
+    .aparece { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1); }
+    .aparece.visto { opacity: 1; transform: none; }
+
+    .borrador { background: var(--luz); color: var(--sobre-luz); text-align: center; font: 500 0.78rem var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: .4rem 1rem; }
+
+    /* portada */
+    .hero { min-height: 80svh; display: grid; align-items: center; padding: 6.5rem 0 3rem; position: relative; }
+    .hero::before { content: ""; position: absolute; inset: 0 calc(50% - 50vw); z-index: -1; background: radial-gradient(50rem 30rem at 78% 18%, var(--luz-suave), transparent 70%); pointer-events: none; }
+    .hero-texto { width: min(62rem, 100%); margin-inline: auto; }
+    .bocadillo { position: relative; margin: 1.8rem 0 1rem; padding: 1.6rem 1.9rem 1.7rem; background: var(--fondo-2); border: 1px solid var(--linea); border-radius: 22px 22px 22px 6px; max-width: 44rem; }
+    .bocadillo::after { content: ""; position: absolute; left: -1px; bottom: -14px; width: 22px; height: 14px; background: var(--fondo-2); border-left: 1px solid var(--linea); clip-path: polygon(0 0, 100% 0, 0 100%); }
+    .bocadillo p { font: 500 clamp(1.7rem, 4.6vw, 2.7rem)/1.08 var(--display); letter-spacing: -.02em; color: var(--texto); margin: 0; }
+    .bocadillo p .serif { color: var(--luz); }
+    .quien { display: flex; gap: .6rem; align-items: center; margin: 1.4rem 0 2.6rem; }
+    .avatar { width: 36px; height: 36px; border-radius: 99px; background: var(--fondo-3); border: 1px solid var(--linea); display: grid; place-items: center; font: 600 .8rem var(--mono); color: var(--texto-2); flex: none; }
+    .hero h1 { font-size: clamp(2.4rem, 5.8vw, 4.8rem); font-weight: 700; }
+    .hero h1 .serif { color: var(--luz); font-size: 1.08em; }
+    .hero-sub { font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.65; color: var(--texto-2); margin-top: 1.6rem; max-width: 44rem; }
+    .hero-sub strong { color: var(--texto); }
+    .baja { display: inline-flex; gap: .5rem; align-items: center; margin-top: 1.2rem; text-decoration: none; }
+    .baja::after { content: "↓"; animation: flota 2s ease-in-out infinite; }
+    @keyframes flota { 50% { transform: translateY(4px); } }
+
+    /* capítulos */
+    section { padding: 3.4rem 0; }
+    section + section { border-top: 1px solid var(--linea-2); }
+    .capitulo { display: flex; align-items: baseline; gap: .9rem; margin-bottom: 1.2rem; }
+    .capitulo b { font: 800 clamp(2.6rem, 6vw, 3.6rem)/1 var(--display); color: transparent; -webkit-text-stroke: 1.2px var(--luz); letter-spacing: -.03em; }
+    .titulo { font-size: clamp(2rem, 4.4vw, 3.2rem); font-weight: 700; margin-bottom: 2rem; }
+    .titulo .serif { color: var(--luz); }
+    .lectura ul { padding-left: 1.2rem; margin: 0 0 1.2rem; }
+    .lectura li { margin-bottom: .5rem; }
+
+    /* pregunta */
+    .pregunta { background: var(--fondo-2); border: 1px solid var(--linea); border-radius: 20px; padding: clamp(1.3rem, 3.5vw, 2rem); margin: 2rem 0; }
+    .pregunta > p { color: var(--texto); font: 600 1.25rem/1.3 var(--display); margin-bottom: 1rem; }
+    .opciones { display: grid; gap: 8px; }
+    .opcion { text-align: left; min-height: 48px; padding: .7rem 1rem; border-radius: 12px; border: 1px solid var(--linea); background: var(--fondo); cursor: pointer; font-size: 1.02rem; transition: border-color .2s, background .2s; }
+    .opcion:hover { border-color: var(--texto-3); }
+    .opcion[aria-pressed="true"] { border-color: var(--luz); background: var(--luz-suave); }
+    .veredicto { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--linea-2); }
+    .veredicto p { font-size: 1.05rem; margin: 0; color: var(--texto-2); }
+
+    /* la distancia */
+    .distancia { margin: 1.4rem 0; display: grid; gap: 14px; }
+    .fila-d span { display: block; font: 500 .78rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--texto-3); margin-bottom: .35rem; }
+    .pista { height: 54px; border-radius: 10px; background: var(--fondo-2); border: 1px solid var(--linea-2); position: relative; overflow: hidden; }
+    .relleno { position: absolute; inset: 0 auto 0 0; width: 0; background: var(--fondo-3); border-right: 2px solid var(--texto-3); transition: width 1.2s cubic-bezier(.2, .7, .2, 1); display: flex; align-items: center; padding-left: .9rem; font-weight: 600; white-space: nowrap; }
+    .hueco { position: absolute; inset: 0 auto 0 55%; width: 0; background: repeating-linear-gradient(135deg, var(--luz-suave) 0 8px, color-mix(in srgb, var(--luz) 30%, transparent) 8px 16px); border-right: 2px solid var(--luz); transition: width 1s .9s cubic-bezier(.2, .7, .2, 1); }
+    .distancia.visto .esperado { width: 55%; }
+    .distancia.visto .recibido { width: 55%; }
+    .distancia.visto .hueco { width: 32%; }
+    .etiqueta-hueco { display: flex; justify-content: flex-end; gap: .5rem; font: 500 .8rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--luz); padding-right: 13%; opacity: 0; transition: opacity .6s 1.8s; }
+    .distancia.visto .etiqueta-hueco { opacity: 1; }
+
+    .regla { margin: 2.4rem 0; padding: 2.2rem 0; border-block: 1px solid var(--linea); text-align: center; }
+    .regla small { display: block; margin-bottom: .8rem; }
+    .regla p { font: 700 clamp(1.8rem, 5vw, 3.2rem)/1.1 var(--display); letter-spacing: -.02em; color: var(--texto); margin: 0; text-wrap: balance; }
+    .regla p .serif { color: var(--luz); }
+
+    .cubo { display: grid; grid-template-columns: 92px 1fr; gap: 1.2rem; align-items: center; margin: 1.4rem 0; }
+    .cubo svg { width: 92px; height: auto; color: var(--texto-3); }
+    .cubo .gota { fill: var(--luz); animation: cae 1.6s ease-in infinite; }
+    .cubo .gota:nth-of-type(2) { animation-delay: .8s; }
+    @keyframes cae { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(26px); opacity: 0; } }
+    .cubo p { margin: 0; }
+
+    /* cifras */
+    .cifras { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 16px; margin: 2.2rem 0 .8rem; }
+    .cifra { background: var(--fondo-2); border: 1px solid var(--linea-2); border-radius: 16px; padding: 1.5rem 1.4rem 1.3rem; }
+    .cifra b { display: block; font: 700 clamp(2.2rem, 4.6vw, 3.2rem)/1 var(--display); color: var(--luz); letter-spacing: -.03em; }
+    .cifra span { display: block; margin-top: .5rem; font-size: .92rem; color: var(--texto-2); line-height: 1.35; }
+    .lectura .nota { font-size: .72rem; line-height: 1.5; color: var(--texto-3); }
+
+    /* la cadena */
+    .cadena { list-style: none; counter-reset: paso; margin: 1.8rem 0; padding: 0; position: relative; }
+    .cadena::before { content: ""; position: absolute; left: 19px; top: 20px; bottom: 20px; width: 2px; background: linear-gradient(var(--luz), var(--linea)); }
+    .cadena li { counter-increment: paso; position: relative; display: grid; grid-template-columns: 40px 1fr; gap: 1.2rem; padding: .2rem 0 1.8rem; margin: 0; }
+    .cadena li::before { content: counter(paso); width: 40px; height: 40px; border-radius: 99px; display: grid; place-items: center; font: 700 1rem var(--display); background: var(--fondo); border: 2px solid var(--luz); color: var(--luz); position: relative; }
+    .cadena li.giro::before { background: var(--luz); color: var(--sobre-luz); }
+    .cadena b { display: block; color: var(--texto); font: 600 1.15rem/1.3 var(--display); margin-top: .45rem; }
+    .cadena span { display: block; color: var(--texto-2); font-size: 1.02rem; }
+    .cadena .corte { display: block; margin: .2rem 0 .5rem; font: 500 .74rem var(--mono); text-transform: uppercase; letter-spacing: .1em; color: var(--luz); }
+
+    .cita { margin: 2rem 0; padding: 0; }
+    .cita p { font: italic clamp(1.7rem, 4vw, 2.2rem)/1.2 var(--serif); color: var(--texto); margin: 0 0 .5rem; }
+    .cita p::before { content: "“"; color: var(--luz); }
+    .cita p::after { content: "”"; color: var(--luz); }
+    .cita span { font: 500 .78rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--texto-3); }
+
+    /* negocios */
+    .negocios { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 2.2rem 0 2.4rem; }
+    @media (min-width: 780px) { .negocios { grid-template-columns: repeat(3, 1fr); } }
+    .negocio { background: var(--fondo-2); border: 1px solid var(--linea-2); border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; gap: .9rem; }
+    .negocio h3 { font-size: 1.25rem; }
+    .negocio .espera { color: var(--texto-3); font-size: .98rem; margin: 0; }
+    .negocio .espera s { text-decoration-color: color-mix(in srgb, var(--texto-3) 70%, transparent); }
+    .negocio .giro-n { margin: 0; padding: .9rem 1rem; border-radius: 12px; background: var(--luz-suave); border: 1px solid color-mix(in srgb, var(--luz) 40%, transparent); color: var(--texto); font-size: 1.02rem; line-height: 1.45; }
+    .negocio .giro-n::before { content: "¡anda!"; display: block; font: 500 .72rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--luz); margin-bottom: .3rem; }
+    .negocio .cuenta { margin: auto 0 0; font-size: .92rem; color: var(--texto-2); }
+    .negocio .cuenta::before { content: "Lo que contará: "; font-weight: 600; color: var(--texto); }
+
+    /* marco guardable */
+    .marco { background: var(--fondo-2); border: 1px solid var(--luz); border-radius: 22px; padding: clamp(1.5rem, 4vw, 2.6rem); margin: 2.6rem 0; box-shadow: 0 0 0 6px var(--luz-suave); }
+    .marco h3 { font-size: clamp(1.6rem, 3.6vw, 2rem); margin: .3rem 0 1.2rem; }
+    .marco ol { list-style: none; counter-reset: p; margin: 0; padding: 0; display: grid; gap: 1.3rem 2.4rem; }
+    @media (min-width: 820px) { .marco ol { grid-template-columns: 1fr 1fr; } }
+    .marco li { counter-increment: p; display: grid; grid-template-columns: 2.2rem 1fr; gap: .7rem; font-size: 1.02rem; color: var(--texto-2); }
+    .marco li::before { content: counter(p); font: 700 1.1rem var(--display); color: var(--sobre-luz); background: var(--luz); width: 2rem; height: 2rem; border-radius: 99px; display: grid; place-items: center; }
+    .marco li b { color: var(--texto); display: block; }
+    .acciones { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.4rem; }
+    .boton { display: inline-flex; align-items: center; min-height: 44px; padding: .5rem 1.1rem; border-radius: 99px; border: 1px solid var(--luz); background: var(--luz); color: var(--sobre-luz); font-weight: 600; text-decoration: none; cursor: pointer; }
+    .boton.sec { background: transparent; color: var(--luz); }
+
+    /* plan */
+    .plan { list-style: none; margin: 2rem 0 1rem; padding: 0; display: grid; gap: 14px; }
+    .plan label { display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start; background: var(--fondo-2); border: 1px solid var(--linea-2); border-radius: 16px; padding: 1.3rem 1.4rem; cursor: pointer; transition: border-color .2s, opacity .2s; }
+    .plan label:hover { border-color: var(--linea); }
+    .plan input { appearance: none; width: 26px; height: 26px; border-radius: 8px; border: 2px solid var(--luz); margin: .15rem 0 0; display: grid; place-items: center; cursor: pointer; }
+    .plan input:checked { background: var(--luz); }
+    .plan input:checked::after { content: "✓"; color: var(--sobre-luz); font-weight: 700; font-size: .9rem; }
+    .plan .dia { display: block; font: 500 .74rem var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--luz); }
+    .plan b { display: block; color: var(--texto); font-size: 1.05rem; }
+    .plan .det { display: block; color: var(--texto-2); font-size: .98rem; line-height: 1.5; margin-top: .2rem; }
+    .plan label:has(input:checked) { opacity: .62; }
+    .plan label:has(input:checked) b { text-decoration: line-through; text-decoration-color: var(--luz); }
+    .cuenta-plan { font: 500 .8rem var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--texto-3); }
+
+    /* prueba */
+    details.prueba { background: var(--fondo-2); border: 1px solid var(--linea); border-radius: 16px; padding: 1.1rem 1.2rem; margin: 2rem 0; }
+    details.prueba summary { cursor: pointer; font: 600 1.15rem/1.35 var(--display); list-style: none; display: flex; justify-content: space-between; gap: 1rem; align-items: center; }
+    details.prueba summary::-webkit-details-marker { display: none; }
+    details.prueba .fantasma { font: 500 .74rem var(--mono); text-transform: uppercase; letter-spacing: .08em; color: var(--sobre-luz); background: var(--luz); padding: .35rem .7rem; border-radius: 99px; white-space: nowrap; }
+    details.prueba[open] .fantasma { display: none; }
+    .respuesta { margin-top: 1rem; }
+    .respuesta .grande { font: 700 1.6rem/1.15 var(--display); color: var(--texto); }
+
+    .limites { display: grid; gap: 1.4rem; margin: 2rem 0; }
+    .limite { border-left: 2px solid var(--linea); padding: .2rem 0 .2rem 1rem; }
+    .limite b { display: block; color: var(--texto); }
+    .limite p { margin: .2rem 0 0; font-size: 1.02rem; }
+
+    .pronto { border: 1px dashed var(--linea); border-radius: 16px; padding: 1.3rem; margin: 1.6rem 0; }
+    .pronto p { margin: .4rem 0 .6rem; }
+    footer { border-top: 1px solid var(--linea-2); padding: 2.5rem 0 4rem; color: var(--texto-3); font-size: .95rem; }
+    footer ul { padding-left: 1.1rem; }
+    footer a { word-break: break-word; }
+
+    @media (max-width: 600px) {
+      .hero { padding-top: 8.5rem; }
+      .cubo { grid-template-columns: 64px 1fr; }
+      .cubo svg { width: 64px; }
+      .etiqueta-hueco { padding-right: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .aparece { opacity: 1; transform: none; transition: none; }
+      html { scroll-behavior: auto; }
+      .relleno, .hueco, .etiqueta-hueco { transition: none; }
+      .baja::after, .cubo .gota { animation: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progreso" id="progreso"></div>
+  <div class="borrador">Borrador · primera parte · sin publicar</div>
+  <a class="flotante volver" href="marketing-portada.html">← Marketing</a>
+  <button class="flotante tema" id="tema" type="button" aria-label="Cambiar tema">◐ tema</button>
+
+  <header class="hero">
+    <div class="ancho">
+      <div class="hero-texto aparece">
+        <p class="mono">Marketing para negocios · Caso de estudio · 7 min</p>
+        <blockquote class="bocadillo">
+          <p>Lo que nos llevó un año, <span class="serif">hecho en una hora.</span></p>
+        </blockquote>
+        <div class="quien">
+          <span class="avatar" aria-hidden="true">G</span>
+          <span class="mono">Un ingeniero de Google sobre Claude Code, resumido · Fortune, ene. 2026</span>
+        </div>
+        <h1>Ahora imagina que esa frase es sobre <span class="serif">tu negocio.</span></h1>
+        <p class="hero-sub">Y que la dice un cliente, en voz alta, delante de otros. Esa frase no se compra con anuncios. Anthropic hizo todo lo posible por provocarla, y lo que hizo se puede copiar <strong>esta semana</strong>. Aunque vendas cortes de pelo.</p>
+        <a class="mono baja" href="#uno">Empieza por ti</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 01 · el lector en el sitio del cliente -->
+  <section id="uno">
+    <div class="lectura aparece">
+      <div class="capitulo"><b>01</b><span class="mono">Tú ya lo has hecho</span></div>
+      <h2 class="titulo">Lo has vivido <span class="serif">desde el otro lado</span></h2>
+
+      <div class="pregunta sale" id="pregunta">
+        <p>Piensa en el último sitio que recomendaste sin que nadie te lo pidiera. ¿Por qué lo hiciste?</p>
+        <div class="opciones" role="group" aria-label="Elige una respuesta">
+          <button class="opcion" type="button" aria-pressed="false" data-r="bueno">Porque era bueno</button>
+          <button class="opcion" type="button" aria-pressed="false" data-r="barato">Porque era barato</button>
+          <button class="opcion" type="button" aria-pressed="false" data-r="sorpresa">Porque fue mejor de lo que esperaba</button>
+        </div>
+        <div class="veredicto" id="veredicto" hidden aria-live="polite"><p></p></div>
+      </div>
+
+      <p>Esperabas «correcto» y te dieron «madre mía». Esa distancia es lo que contaste.</p>
+    </div>
+
+    <div class="lectura">
+      <div class="distancia sale" id="distancia" aria-label="Lo que esperabas llega a la mitad; lo que recibiste llega más lejos, y esa diferencia es lo que cuentas">
+        <div class="fila-d"><span>Lo que esperabas</span><div class="pista"><div class="relleno esperado">correcto</div></div></div>
+        <div class="fila-d"><span>Lo que te dieron</span><div class="pista"><div class="relleno recibido">correcto</div><div class="hueco"></div></div></div>
+        <div class="etiqueta-hueco">↑ «madre mía»: esto es lo que cuentas</div>
+      </div>
+
+      <div class="regla sale aparece">
+        <small class="mono">Quédate con esto</small>
+        <p>La gente no recomienda la calidad. <span class="serif">Recomienda la sorpresa.</span></p>
+      </div>
+    </div>
+
+    <div class="lectura aparece">
+      <div class="cubo">
+        <svg viewBox="0 0 64 80" aria-hidden="true">
+          <path d="M8 14 h48 l-6 46 h-36 z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" />
+          <ellipse cx="32" cy="14" rx="24" ry="5" fill="none" stroke="currentColor" stroke-width="2.5" />
+          <circle cx="32" cy="60" r="2.5" fill="currentColor" />
+          <circle class="gota" cx="32" cy="66" r="2.4" />
+          <circle class="gota" cx="32" cy="66" r="2.4" />
+        </svg>
+        <p>Casi ningún negocio lo mira así. Gasta en que llegue más gente <strong>sin comprobar si alguien se sorprende al llegar.</strong> Es llenar un cubo con un agujero.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · el caso -->
+  <section>
+    <div class="lectura aparece">
+      <div class="capitulo"><b>02</b><span class="mono">El caso</span></div>
+      <h2 class="titulo">Anthropic eligió <span class="serif">a quién sorprender</span></h2>
+      <p>Anthropic hace Claude, una inteligencia artificial. Hace tres años casi nadie la conocía. Hoy es una de las empresas de software que más rápido ha crecido.</p>
+
+      <div class="cifras sale" role="list">
+        <div class="cifra" role="listitem"><b>&lt; 3 años</b><span>desde su primer dólar de ingresos</span></div>
+        <div class="cifra" role="listitem"><b>14.000 M$</b><span>de ingresos al ritmo anual de febrero de 2026</span></div>
+        <div class="cifra" role="listitem"><b>2.500 M$</b><span>solo su herramienta para programar, el doble que a principios de año</span></div>
+      </div>
+      <p class="mono nota">Fuente: Anthropic, ronda de 30.000 M$, 12 feb. 2026. «Ritmo anual»: lo que facturaría en un año si ese mes se repitiera.</p>
+
+      <p>¿El secreto es tener el mejor modelo? Hay otros modelos buenos. Lo distinto fue el orden: <strong>no fueron a por todo el mundo, fueron a por quien programa.</strong> Su responsable de Claude Code lo cuenta así: primero desarrollan con clientes técnicos y después lo amplían a más gente.</p>
+      <p>Mira lo que pasó después:</p>
+
+      <ol class="cadena">
+        <li><div><b>Sorprenden a quien programa.</b><span>Ve el resultado enseguida: el programa funciona o no funciona.</span></div></li>
+        <li><div><b>Lo cuentan.</b><span>En redes, en el trabajo, en foros. Una frase como la del principio.</span></div></li>
+        <li><div><b>Los escuchan otros.</b><span>Cuando un ingeniero de Google habla, otros ingenieros se enteran.</span></div></li>
+        <li class="giro"><div><span class="corte">Lo que no esperaban</span><b>Llega a quien no programa.</b><span>Gente sin base técnica la usa para sacar entradas, hacer la declaración o vigilar tomateras.</span></div></li>
+        <li class="giro"><div><b>Hacen un producto para ellos.</b><span>En semana y media, casi todo con su propia herramienta.</span></div></li>
+      </ol>
+
+      <figure class="cita">
+        <p lang="en">Engineers just feel unshackled.</p>
+        <span>Boris Cherny, responsable de Claude Code · Fortune</span>
+      </figure>
+
+      <p><strong>Primero sorprendieron a quien lo cuenta. Después la sorpresa llegó sola a los demás.</strong></p>
+    </div>
+  </section>
+
+  <!-- 03 · aplicarlo -->
+  <section>
+    <div class="lectura aparece">
+      <div class="capitulo"><b>03</b><span class="mono">Tu turno</span></div>
+      <h2 class="titulo">Ahora ponte <span class="serif">en tu sitio</span></h2>
+      <p>No vendes software. Pero tienes lo mismo: un primer contacto, unos minutos o unos días, y un momento en que el cliente decide si esto es especial o es uno más.</p>
+      <p>Tres negocios imaginarios para verlo:</p>
+    </div>
+
+    <div class="medio">
+      <div class="negocios">
+        <article class="negocio aparece">
+          <h3>Fisioterapia</h3>
+          <p class="espera">Se espera: <s>una cita, un diagnóstico, otra cita.</s></p>
+          <p class="giro-n">El primer día te enseñan en cinco minutos qué movimiento te duele y por qué.</p>
+          <p class="cuenta">«Por fin alguien me lo explicó.»</p>
+        </article>
+        <article class="negocio aparece">
+          <h3>Gestoría</h3>
+          <p class="espera">Se espera: <s>papeles, esperas, llamadas.</s></p>
+          <p class="giro-n">En 24 horas te dicen cuánto pagarás este trimestre, con una foto de lo que enviaste.</p>
+          <p class="cuenta">«Me lo dijeron al día siguiente.»</p>
+        </article>
+        <article class="negocio aparece">
+          <h3>Panadería de barrio</h3>
+          <p class="espera">Se espera: <s>pan.</s></p>
+          <p class="giro-n">El pan de ayer, regalado, con una nota para recalentarlo bien.</p>
+          <p class="cuenta">«Hasta te enseñan a no tirarlo.»</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="lectura aparece">
+      <p>Ninguna cuesta mucho. Lo que cambia es que <strong>el cliente sale con una historia.</strong> Y una historia es lo único que viaja sin que pagues por ella.</p>
+      <p>Lo que hizo Anthropic cabe en cuatro pasos. No son suyos: son mi lectura, traducida a un negocio normal.</p>
+
+      <div class="marco sale" id="marco">
+        <span class="mono">Marco · guárdalo</span>
+        <h3>La sorpresa que se cuenta</h3>
+        <ol>
+          <li><div><b>Elige a quien lo cuenta.</b>No tu cliente más grande. El que más habla de lo que le pasa y al que otros escuchan. Escribe tres nombres.</div></li>
+          <li><div><b>Mide el camino hasta el «¡anda!».</b>¿Cuántos minutos, o días, pasan desde que alguien te conoce hasta que ve algo que no esperaba? Quita un paso.</div></li>
+          <li><div><b>Que supere lo que esperaba.</b>Promete lo normal y entrega un poco más. La sorpresa es esa distancia.</div></li>
+          <li><div><b>Que se pueda enseñar.</b>Una foto, una frase, un resultado. Si no cabe en una línea, no lo contará.</div></li>
+        </ol>
+        <div class="acciones">
+          <button class="boton" id="copiar" type="button">Copiar el marco</button>
+          <a class="boton sec" id="enviar" href="#" target="_blank" rel="noopener">Envíaselo a quien tenga un negocio</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · plan -->
+  <section>
+    <div class="lectura aparece">
+      <div class="capitulo"><b>04</b><span class="mono">Esta semana</span></div>
+      <h2 class="titulo">Una hora. <span class="serif">Cero euros.</span></h2>
+      <p>Doce minutos al día durante cinco días. Marca cada uno al terminarlo.</p>
+
+      <ol class="plan" id="plan">
+        <li><label><input type="checkbox" data-d="1" /><span><span class="dia">Día 1 · el camino</span><b>Escribe el camino de un cliente nuevo.</b><span class="det">Paso a paso, desde que te encuentra hasta que paga. Marca dónde podría sorprenderse. Si no hay ningún sitio, ya tienes el problema.</span></span></label></li>
+        <li><label><input type="checkbox" data-d="2" /><span><span class="dia">Día 2 · sus palabras</span><b>Pregunta a tus cinco mejores clientes.</b><span class="det">«¿En qué momento pensaste que esto era distinto?». Apunta lo que digan, palabra por palabra.</span></span></label></li>
+        <li><label><input type="checkbox" data-d="3" /><span><span class="dia">Día 3 · quitar</span><b>Quita un paso que no sorprenda ni aporte.</b><span class="det">Una espera, un formulario, una explicación larga.</span></span></label></li>
+        <li><label><input type="checkbox" data-d="4" /><span><span class="dia">Día 4 · enseñar</span><b>Haz que lo que se llevan se pueda enseñar.</b><span class="det">Un resumen, una foto, un número. Algo que quepa en un mensaje de móvil.</span></span></label></li>
+        <li><label><input type="checkbox" data-d="5" /><span><span class="dia">Día 5 · medir</span><b>Cuenta quién menciona ese momento sin que preguntes.</b><span class="det">Esa es tu medida. Si sube, la sorpresa viaja.</span></span></label></li>
+      </ol>
+      <p class="cuenta-plan" id="cuenta-plan" aria-live="polite">0 de 5 hechos</p>
+
+      <details class="prueba">
+        <summary><span>Pregúntale hoy a tu último cliente: «¿Qué es lo que más te gustó?». ¿Qué crees que dirá?</span><span class="fantasma">Ver qué significa</span></summary>
+        <div class="respuesta">
+          <p class="grande">Si dice «todo bien» o «buen servicio», no tienes sorpresa.</p>
+          <p>«Todo bien» no se cuenta a nadie. Una respuesta concreta, como «me explicaron el dolor en cinco minutos», sí. Esa frase concreta es la que tienes que provocar a propósito.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 05 · límites -->
+  <section>
+    <div class="lectura aparece">
+      <div class="capitulo"><b>05</b><span class="mono">Con honestidad</span></div>
+      <h2 class="titulo">Lo que <span class="serif">no sé</span> todavía</h2>
+      <p>Un caso sin límites es solo una historia bonita. Estos son los míos:</p>
+      <div class="limites">
+        <div class="limite"><b>No puedo probar que la sorpresa sea la causa principal.</b><p>Anthropic tiene también un buen modelo, ventas a empresas y dinero. Más de la mitad de los ingresos de su herramienta para programar ya viene de empresas.</p></div>
+        <div class="limite"><b>Tu negocio no es Anthropic.</b><p>Los cuatro pasos son una hipótesis para probar, no una receta.</p></div>
+        <div class="limite"><b>La sorpresa solo funciona si cumples.</b><p>Si prometes un año de trabajo en una hora y entregas una hora de problemas, la historia que se cuenta es la contraria.</p></div>
+      </div>
+
+      <div class="pronto">
+        <span class="mono">Parte 2 · lo que queda por contar</span>
+        <p><strong>Por qué los desarrolladores y no otro grupo.</strong> Hay una razón de psicología que aún no he explicado, y es la que decide a quién debes sorprender tú primero.</p>
+        <a href="https://x.com/alpas17_" rel="noopener">Avísame cuando salga →</a>
+      </div>
+      <p><strong>Guarda</strong> el marco para lo próximo que lances. <strong>Mándaselo</strong> a quien tenga un negocio bueno que casi nadie conoce.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="lectura">
+      <p>Fuentes (consultadas el 12 de noviembre de 2026):</p>
+      <ul>
+        <li><a href="https://www.anthropic.com/news/anthropic-raises-30-billion-series-g-funding-380-billion-post-money-valuation" rel="noopener">Anthropic: ronda Serie G de 30.000 M$, 12 de febrero de 2026</a></li>
+        <li><a href="https://fortune.com/2026/01/24/anthropic-boris-cherny-claude-code-non-coders-software-engineers/" rel="noopener">Fortune: Claude Code y los usuarios sin conocimientos técnicos, 24 de enero de 2026</a></li>
+      </ul>
+      <p>Los ejemplos de la fisioterapia, la gestoría y la panadería son imaginarios. Las cifras de Anthropic son de febrero de 2026 y han cambiado desde entonces.</p>
+    </div>
+  </footer>
+
+
+<script>
+    (function () {
+      const prog = document.getElementById("progreso");
+      addEventListener("scroll", function () {
+        const h = document.documentElement.scrollHeight - innerHeight;
+        prog.style.width = (h > 0 ? scrollY / h * 100 : 0) + "%";
+      }, { passive: true });
+      const io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("visto"); io.unobserve(e.target); } });
+      }, { threshold: 0.12 });
+      document.querySelectorAll(".aparece, #distancia").forEach(function (n) { io.observe(n); });
+
+      // pregunta: cualquier respuesta lleva a la misma idea
+      const textos = {
+        bueno: "Hay mil sitios buenos que nunca has recomendado. «Bueno» es lo que esperabas. Lo que te hizo hablar fue otra cosa: algo que no esperabas.",
+        barato: "Lo barato se busca, pero rara vez se cuenta. Si lo contaste, seguro que fue porque era más de lo que esperabas por ese precio.",
+        sorpresa: "Eso es. No lo recomendaste por bueno: hay mil sitios buenos. Lo recomendaste porque fue mejor de lo que esperabas."
+      };
+      const veredicto = document.getElementById("veredicto");
+      document.querySelectorAll(".opcion").forEach(function (b) {
+        b.addEventListener("click", function () {
+          document.querySelectorAll(".opcion").forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+          veredicto.querySelector("p").textContent = textos[b.dataset.r];
+          veredicto.hidden = false;
+        });
+      });
+
+      // plan: se recuerda solo en este navegador
+      const CLAVE = "obsesion-plan";
+      let hechos = [];
+      try { hechos = JSON.parse(localStorage.getItem(CLAVE) || "[]"); } catch (e) { hechos = []; }
+      const casillas = document.querySelectorAll("#plan input");
+      const cuenta = document.getElementById("cuenta-plan");
+      function pintarPlan() {
+        const n = Array.prototype.filter.call(casillas, function (c) { return c.checked; }).length;
+        cuenta.textContent = n === 5 ? "5 de 5 hechos · ya sabes dónde está tu sorpresa" : n + " de 5 hechos";
+      }
+      casillas.forEach(function (c) {
+        c.checked = hechos.indexOf(c.dataset.d) !== -1;
+        c.addEventListener("change", function () {
+          const lista = Array.prototype.filter.call(casillas, function (x) { return x.checked; }).map(function (x) { return x.dataset.d; });
+          try { localStorage.setItem(CLAVE, JSON.stringify(lista)); } catch (e) { }
+          pintarPlan();
+        });
+      });
+      pintarPlan();
+
+      // copiar y enviar: el texto sale de la propia tarjeta
+      const MARCO = "La sorpresa que se cuenta\n1. Elige a quien lo cuenta: el cliente que habla y al que escuchan.\n2. Mide el camino hasta el «¡anda!» y quita un paso.\n3. Que supere lo que esperaba.\n4. Que se pueda enseñar en una línea.";
+      const mensaje = "Mira esto para tu negocio: la gente no recomienda la calidad, recomienda la sorpresa. Lo explica con el caso de Anthropic y un plan para esta semana: " + location.href.split("#")[0];
+      document.getElementById("enviar").href = "https://wa.me/?text=" + encodeURIComponent(mensaje);
+      const copiar = document.getElementById("copiar");
+      copiar.addEventListener("click", function () {
+        const hecho = function () { copiar.textContent = "Copiado"; setTimeout(function () { copiar.textContent = "Copiar el marco"; }, 1800); };
+        if (navigator.clipboard) navigator.clipboard.writeText(MARCO).then(hecho, function () { /* sin permiso */ });
+      });
+
+      // tema: auto → claro → oscuro, misma clave que el resto del sitio
+      const raiz = document.documentElement;
+      const nombres = { auto: "automático", light: "claro", dark: "oscuro" };
+      function pintarTema() { document.getElementById("tema").textContent = "◐ " + nombres[raiz.dataset.pref]; }
+      document.getElementById("tema").addEventListener("click", function () {
+        const orden = ["auto", "light", "dark"];
+        const sig = orden[(orden.indexOf(raiz.dataset.pref) + 1) % 3];
+        try { sig === "auto" ? localStorage.removeItem("marketing-theme") : localStorage.setItem("marketing-theme", sig); } catch (e) { }
+        raiz.dataset.pref = sig;
+        raiz.dataset.tema = sig === "auto" ? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark") : sig;
+        pintarTema();
+      });
+      pintarTema();
+    })();
+  </script>
+</body>
+
+</html>

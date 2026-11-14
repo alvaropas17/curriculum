@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <script>
+    (function () {
+      var pref = null;
+      try { pref = localStorage.getItem("marketing-theme"); } catch (e) { /* sin almacenamiento */ }
+      if (pref !== "light" && pref !== "dark" && pref !== "auto") pref = "light";
+      var claroSistema = window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches;
+      document.documentElement.dataset.pref = pref;
+      document.documentElement.dataset.tema = pref === "auto" ? (claroSistema ? "light" : "dark") : pref;
+    })();
+  </script>
+  <title>¿Qué posts tuyos se guardan? · Beta · Álvaro Pastor</title>
+  <meta name="description"
+    content="Copia un texto, pégalo en tu agente de IA y sabrás cuáles de tus últimos 50 posts de X funcionan, cuáles no y por qué. Beta gratis." />
+  <link rel="canonical" href="https://marketing.alvaropastor.dev/x-post-audit/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="¿Qué posts tuyos se guardan? · Beta gratis" />
+  <meta property="og:description" content="Copia un texto, pégalo en tu agente de IA y sabrás cuáles de tus últimos 50 posts de X funcionan, cuáles no y por qué." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:creator" content="@alpas17_mkt" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --fondo: #faf7f0; --fondo-2: #f2ede2; --fondo-3: #e8e1d3; --papel: #fffdf8;
+      --texto: #1b1814; --texto-2: #4f493f; --texto-3: #6b645a;
+      --linea: rgba(27, 24, 20, 0.14); --linea-2: rgba(27, 24, 20, 0.07);
+      --luz: #8f5f00; --luz-fondo: #ffd84d; --sobre-luz: #1a1600; --dgt: #d23a3a;
+      --display: "Bricolage Grotesque", "Arial Black", sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "Instrument Sans", "Segoe UI", sans-serif;
+      --mono: "IBM Plex Mono", Consolas, monospace;
+      --sombra: 0 1px 2px rgba(27, 24, 20, .04), 0 12px 32px -12px rgba(27, 24, 20, .12);
+      color-scheme: light;
+    }
+    :root[data-tema="dark"] {
+      --fondo: #1a1714; --fondo-2: #23201c; --fondo-3: #2e2a25; --papel: #26221e;
+      --texto: #f3efe6; --texto-2: #c4bdb1; --texto-3: #8f887d;
+      --linea: rgba(243, 239, 230, 0.14); --linea-2: rgba(243, 239, 230, 0.07);
+      --luz: #ffd84d; --luz-fondo: #ffd84d; --sobre-luz: #1a1600; --dgt: #f0605f;
+      --sombra: 0 1px 2px rgba(0, 0, 0, .2), 0 12px 32px -12px rgba(0, 0, 0, .4);
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font: 18px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { font-family: var(--display); margin: 0; letter-spacing: -0.03em; line-height: 1.04; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    em { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.005em; }
+    .mono { font: 500 .7rem/1.5 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--texto-3); }
+    .ancho { width: min(62rem, 100% - 40px); margin-inline: auto; }
+    :focus-visible { outline: 2px solid var(--luz); outline-offset: 3px; }
+    .rojo { color: var(--dgt); }
+
+    .boton { display: inline-flex; align-items: center; gap: .5rem; min-height: 50px; padding: 0 1.4rem; border-radius: 99px; background: var(--luz-fondo); color: var(--sobre-luz); font: 600 1rem var(--sans); border: 0; cursor: pointer; transition: transform .25s cubic-bezier(.3, 1.5, .5, 1); }
+    .boton:hover { transform: translateX(3px); }
+    .fantasma { display: inline-flex; align-items: center; min-height: 46px; padding: 0 1.2rem; border: 1px solid var(--linea); border-radius: 99px; font: 600 .95rem var(--sans); color: var(--texto); background: transparent; cursor: pointer; transition: border-color .2s, color .2s; }
+    .fantasma:hover { border-color: var(--luz); color: var(--luz); }
+
+    .barra { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--fondo) 82%, transparent); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--linea-2); }
+    .barra .ancho { display: flex; align-items: center; gap: 1rem; min-height: 60px; }
+    .marca { font: 700 1rem var(--display); letter-spacing: -0.02em; margin-right: auto; }
+    .marca span { color: var(--dgt); }
+    .tema { font: 500 .7rem var(--mono); color: var(--texto-2); background: transparent; border: 1px solid var(--linea); border-radius: 99px; padding: 0 .85rem; min-height: 34px; cursor: pointer; }
+    .tema:hover { color: var(--luz); border-color: var(--luz); }
+
+    .cabecera { text-align: center; padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(2rem, 4vw, 3rem); }
+    .plazas { display: inline-flex; align-items: center; gap: .55rem; padding: .35rem .9rem; border: 1px solid var(--linea); border-radius: 99px; }
+    .plazas i { width: 8px; height: 8px; border-radius: 50%; background: var(--dgt); box-shadow: 0 0 0 4px color-mix(in srgb, var(--dgt) 22%, transparent); }
+    .cabecera h1 { font-size: clamp(2.8rem, 8vw, 5.6rem); font-weight: 700; letter-spacing: -0.045em; margin: 1.2rem 0 1.2rem; }
+    .cabecera .sub { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--texto-2); max-width: 38rem; margin-inline: auto; }
+    .cabecera .acciones { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin-top: 2rem; }
+
+    .seccion { margin-top: clamp(3.5rem, 8vw, 5.5rem); }
+    .seccion-cab { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--linea); padding-top: 1rem; margin-bottom: 1.6rem; }
+    .seccion-cab h2 { font: 600 1.05rem var(--sans); letter-spacing: 0; }
+
+    .caja { background: var(--papel); border: 1px solid var(--linea-2); border-radius: 24px; box-shadow: var(--sombra); padding: clamp(1.6rem, 4vw, 2.8rem); }
+    .prueba h3 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 700; margin: .8rem 0 .4rem; }
+    .prueba > p { color: var(--texto-2); }
+    .datos { display: grid; grid-template-columns: repeat(3, 1fr); margin: 1.6rem 0; border-block: 1px solid var(--linea-2); }
+    .datos div { padding: 1rem .2rem; }
+    .datos div + div { border-left: 1px solid var(--linea-2); padding-left: 1rem; }
+    .datos b { display: block; font: 700 clamp(1.9rem, 4vw, 2.6rem)/1 var(--display); letter-spacing: -0.04em; }
+    .datos span { font-size: .82rem; color: var(--texto-3); line-height: 1.3; display: block; margin-top: .35rem; }
+    .giro { font: 400 clamp(1.4rem, 3vw, 1.9rem)/1.2 var(--serif); font-style: italic; }
+    .giro b { font-family: var(--sans); font-style: normal; font-weight: 700; font-size: .8em; }
+
+    .lista { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; }
+    .item { background: var(--papel); border: 1px solid var(--linea-2); border-radius: 20px; padding: 1.5rem 1.6rem; box-shadow: var(--sombra); }
+    .item .n { font: 400 2.4rem/1 var(--serif); font-style: italic; color: var(--dgt); }
+    .item h3 { font-size: 1.35rem; font-weight: 700; margin: .7rem 0 .45rem; }
+    .item p { color: var(--texto-2); font-size: 1rem; }
+    .promesa { margin-top: 1.4rem; padding: 1.1rem 1.4rem; border-left: 3px solid var(--luz-fondo); background: var(--fondo-2); border-radius: 0 14px 14px 0; color: var(--texto-2); }
+    .promesa b { color: var(--texto); }
+
+    .pasos { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; }
+    .pasos li { display: grid; grid-template-columns: 3.2rem 1fr; gap: 1rem; padding: 1.3rem 0; border-top: 1px solid var(--linea-2); }
+    .pasos li:first-child { border-top: 0; padding-top: 0; }
+    .pasos .num { width: 2.6rem; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--texto); color: var(--fondo); font: 700 1rem var(--display); }
+    .pasos h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: .3rem; }
+    .pasos p { color: var(--texto-2); font-size: 1rem; }
+    .pasos .cuando { margin-top: .4rem; }
+
+    .pido { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .pido div { border: 1px solid var(--linea); border-radius: 18px; padding: 1.2rem 1.3rem; }
+    .pido b { display: block; font: 700 1.1rem/1.2 var(--display); letter-spacing: -0.02em; margin-bottom: .35rem; }
+    .pido span { color: var(--texto-2); font-size: .95rem; display: block; }
+
+    .dudas details { border-top: 1px solid var(--linea-2); }
+    .dudas details:last-child { border-bottom: 1px solid var(--linea-2); }
+    .dudas summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.1rem 0; font: 600 1.05rem var(--sans); min-height: 44px; }
+    .dudas summary::-webkit-details-marker { display: none; }
+    .dudas summary::after { content: "+"; font: 400 1.6rem/1 var(--sans); color: var(--texto-3); transition: transform .25s; flex: none; }
+    .dudas details[open] summary::after { transform: rotate(45deg); }
+    .dudas details p { color: var(--texto-2); padding: 0 0 1.2rem; max-width: 46rem; }
+
+    /* herramienta: tu @ → texto listo para pegar */
+    .campo { display: flex; align-items: center; gap: .3rem; margin-top: .8rem; max-width: 26rem; border: 1px solid var(--linea); border-radius: 14px; background: var(--fondo); padding: 0 .9rem; }
+    .campo:focus-within { border-color: var(--luz); box-shadow: 0 0 0 3px color-mix(in srgb, var(--luz-fondo) 40%, transparent); }
+    .campo span { font: 600 1.05rem var(--mono); color: var(--texto-3); }
+    .campo input { flex: 1; min-width: 0; min-height: 48px; border: 0; background: transparent; color: var(--texto); font: 500 1.05rem var(--mono); outline: none; }
+    .texto-agente { margin: .9rem 0 0; padding: 1.1rem 1.2rem; max-height: 22rem; overflow: auto; white-space: pre-wrap; word-break: break-word; background: var(--fondo-2); border: 1px solid var(--linea-2); border-radius: 14px; font: 400 .82rem/1.6 var(--mono); color: var(--texto); }
+    .copiar-fila { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; margin-top: .9rem; }
+    .copiar-fila .aviso { font-size: .85rem; color: var(--texto-3); }
+    .opciones-datos { display: grid; gap: .6rem; margin-top: .7rem; }
+    .opciones-datos div { border: 1px solid var(--linea-2); border-radius: 12px; padding: .8rem 1rem; font-size: .95rem; color: var(--texto-2); }
+    .opciones-datos b { color: var(--texto); }
+
+    .final { text-align: center; }
+    .final h2 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; margin: .8rem 0 .8rem; }
+    .final .sub { color: var(--texto-2); max-width: 34rem; margin-inline: auto; }
+    .final .acciones { display: flex; flex-wrap: wrap; justify-content: center; gap: .7rem; margin-top: 1.6rem; }
+    .compartir { margin-top: 2.2rem; padding-top: 1.6rem; border-top: 1px solid var(--linea-2); }
+    .compartir p { color: var(--texto-2); margin-bottom: 1rem; }
+    .compartir .acciones { margin-top: 0; }
+
+    footer { margin-top: 4rem; border-top: 1px solid var(--linea); padding: 2rem 0 3rem; color: var(--texto-3); font-size: .85rem; }
+    footer .ancho { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem; align-items: center; }
+    footer nav { display: flex; gap: 1.4rem; }
+    footer nav a { min-height: 44px; display: inline-flex; align-items: center; color: var(--texto-2); }
+    footer nav a:hover { color: var(--luz); }
+
+    @media (max-width: 760px) {
+      .lista, .pido { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .ancho { width: calc(100% - 32px); }
+      .marca { font-size: .9rem; }
+      .tema { padding-inline: .6rem; min-height: 44px; }
+      .datos span { font-size: .72rem; }
+      .datos div + div { padding-left: .6rem; }
+      .pasos li { grid-template-columns: 2.6rem 1fr; gap: .8rem; }
+      .pasos .num { width: 2.2rem; font-size: .9rem; }
+      .boton, .fantasma { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="barra">
+    <div class="ancho">
+      <a class="marca" href="marketing-portada.html">Álvaro Pastor Periago<span>.</span></a>
+      <button class="tema" id="idioma" type="button" lang="en" aria-label="Switch to English">EN</button>
+      <button class="tema" id="tema" type="button" aria-label="Cambiar tema">◐ tema</button>
+    </div>
+  </header>
+
+  <main class="ancho">
+    <section class="cabecera">
+      <p class="plazas mono"><i aria-hidden="true"></i><span data-en="Free beta">Beta gratis</span></p>
+      <h1 data-en="Which of your posts get <em class=&quot;rojo&quot;>saved?</em>">¿Qué posts tuyos se <em class="rojo">guardan?</em></h1>
+      <p class="sub" data-en="Copy a text, paste it into your AI agent and in a few minutes you'll know which of your last 50 posts on X work, which don't, and why.">Copia un texto, pégalo en tu agente de IA y en unos minutos sabrás cuáles de tus últimos 50 posts de X funcionan, cuáles no y por qué.</p>
+      <div class="acciones">
+        <a class="boton" href="#como" data-en="Get the text <span aria-hidden=&quot;true&quot;>→</span>">Conseguir el texto <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <!-- prueba: primero me lo hice a mí -->
+    <section class="caja prueba" aria-labelledby="prueba-h">
+      <p class="mono" data-en="I tried it on myself first">Primero me lo hice a mí</p>
+      <h3 id="prueba-h" data-en="Two weeks of my own account, measured.">Dos semanas de mi cuenta, medidas.</h3>
+      <p data-en="X Analytics for @alpas17_, from 30 October to 12 November 2026. These totals include posts and replies; impressions are not unique people.">X Analytics de @alpas17_, del 30 de octubre al 12 de noviembre de 2026. Estos totales incluyen posts y respuestas; las impresiones no son personas únicas.</p>
+      <div class="datos">
+        <div><b>121,8K</b><span data-en="impressions">impresiones</span></div>
+        <div><b>391</b><span data-en="replies received">respuestas recibidas</span></div>
+        <div><b class="rojo">26</b><span data-en="bookmarks">guardados</span></div>
+      </div>
+      <p class="giro" data-en="A total doesn't tell you which posts work. <b>You need to compare them one by one.</b>">Un total no te dice qué posts funcionan. <b>Hay que compararlos uno a uno.</b></p>
+    </section>
+
+    <!-- qué te llevas -->
+    <section class="seccion" aria-labelledby="llevas-h">
+      <div class="seccion-cab"><h2 id="llevas-h" data-en="What you get">Qué te llevas</h2><span class="mono" data-en="for your account">para tu cuenta</span></div>
+      <div class="lista">
+        <div class="item">
+          <span class="n">1</span>
+          <h3 data-en="Your posts, ranked">Tus posts, ordenados</h3>
+          <p data-en="From the one that worked best to the one that worked worst, by views, saves and replies. No guessing.">Del que mejor funcionó al que peor, por vistas, guardados y respuestas. Sin intuiciones.</p>
+        </div>
+        <div class="item">
+          <span class="n">2</span>
+          <h3 data-en="Why the good ones work">Por qué funcionan los buenos</h3>
+          <p data-en="What your best posts have in common: the first line, the topic, the format, the time. And what your worst ones share.">Qué tienen en común tus mejores posts: la primera línea, el tema, el formato, la hora. Y qué repiten los peores.</p>
+        </div>
+        <div class="item">
+          <span class="n">3</span>
+          <h3 data-en="Three changes for your next 10 posts">Tres cambios para tus próximos 10 posts</h3>
+          <p data-en="Concrete and specific to your account. Not “post more” or “be authentic”.">Concretos y de tu cuenta. Nada de «publica más» o «sé auténtico».</p>
+        </div>
+        <div class="item">
+          <span class="n">4</span>
+          <h3 data-en="Before and after, in two weeks">El antes y el después, en dos semanas</h3>
+          <p data-en="Paste the same text again in two weeks and you'll see whether the changes worked.">Pegas el mismo texto dentro de dos semanas y ves si los cambios funcionaron.</p>
+        </div>
+      </div>
+      <p class="promesa" data-en="<b>I don't promise you more followers.</b> I promise you'll know what works in your account and what doesn't.">
+        <b>No te prometo más seguidores.</b> Te prometo que sabrás qué funciona en tu cuenta y qué no.</p>
+    </section>
+
+    <!-- cómo funciona -->
+    <section class="seccion" id="como" aria-labelledby="como-h">
+      <div class="seccion-cab"><h2 id="como-h" data-en="How it works">Cómo funciona</h2><span class="mono" data-en="4 steps">4 pasos</span></div>
+      <div class="caja">
+        <ol class="pasos">
+          <li>
+            <span class="num">1</span>
+            <div>
+              <h3 data-en="Type your @ and copy the text">Escribe tu @ y copia el texto</h3>
+              <p data-en="The text is already written. It fills in with your account as you type.">El texto ya está escrito. Se completa con tu cuenta mientras escribes.</p>
+              <label class="campo" for="usuario"><span aria-hidden="true">@</span><input id="usuario" name="usuario" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="tu_cuenta" /></label>
+              <pre class="texto-agente" id="texto-agente" tabindex="0"></pre>
+              <div class="copiar-fila">
+                <button class="boton" id="copiar-texto" type="button" data-en="Copy the text">Copiar el texto</button>
+                <span class="aviso" id="aviso-texto" role="status" aria-live="polite"></span>
+              </div>
+            </div>
+          </li>
+          <li>
+            <span class="num">2</span>
+            <div>
+              <h3 data-en="Paste it into your agent">Pégalo en tu agente</h3>
+              <p data-en="Claude, ChatGPT, Gemini… Your agent needs your posts, in one of these two ways:">Claude, ChatGPT, Gemini… Tu agente necesita tus posts, de una de estas dos formas:</p>
+              <div class="opciones-datos">
+                <div data-en="&lt;b&gt;If you have X Premium:&lt;/b&gt; in Analytics, download the CSV of your posts and attach it with the text. It's the most reliable option."><b>Si tienes X Premium:</b> en Analytics, descarga el CSV de tus posts y adjúntalo con el texto. Es lo más fiable.</div>
+                <div data-en="&lt;b&gt;If you don't:&lt;/b&gt; use an agent that can browse X with your session, such as Claude in Chrome or ChatGPT's agent. It will read your profile."><b>Si no:</b> usa un agente que pueda navegar por X con tu sesión, como Claude en Chrome o el agente de ChatGPT. Leerá tu perfil.</div>
+              </div>
+              <p class="mono cuando" data-en="Ready in a few minutes">Listo en unos minutos</p>
+            </div>
+          </li>
+          <li>
+            <span class="num">3</span>
+            <div>
+              <h3 data-en="Send me the summary">Mándame el resumen</h3>
+              <p data-en="Your agent ends with a five-line summary. Send it to me on X and tell me what helped and what didn't.">Tu agente termina con un resumen de 5 líneas. Mándamelo por X y cuéntame qué te sirvió y qué no.</p>
+            </div>
+          </li>
+          <li>
+            <span class="num">4</span>
+            <div>
+              <h3 data-en="In two weeks, do it again">En dos semanas, repítelo</h3>
+              <p data-en="Paste the same text, compare both summaries and send me the second one. That's the real result.">Pega el mismo texto, compara los dos resúmenes y mándame el segundo. Ese es el resultado de verdad.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- qué te pido -->
+    <section class="seccion" aria-labelledby="pido-h">
+      <div class="seccion-cab"><h2 id="pido-h" data-en="What I ask in return">Qué te pido a cambio</h2><span class="mono" data-en="no money">sin dinero</span></div>
+      <div class="pido">
+        <div><b data-en="The summary">El resumen</b><span data-en="The five lines your agent gives you, and what you thought of them.">Las 5 líneas que te da tu agente, y qué te parecieron.</span></div>
+        <div><b data-en="Honesty">Sinceridad</b><span data-en="If something is useless, I want to know. That's what the beta is for.">Si algo no sirve, quiero saberlo. Para eso es la beta.</span></div>
+        <div><b data-en="Permission to show it">Permiso para enseñarlo</b><span data-en="Your result, with your name or without it. You choose.">Tu resultado, con tu nombre o sin él. Tú eliges.</span></div>
+      </div>
+    </section>
+
+    <!-- dudas -->
+    <section class="seccion dudas" aria-labelledby="dudas-h">
+      <div class="seccion-cab"><h2 id="dudas-h" data-en="Questions">Dudas</h2></div>
+      <details>
+        <summary data-en="How much does it cost?">¿Cuánto cuesta?</summary>
+        <p data-en="Nothing during the beta. I'm testing whether this helps someone other than me, and your opinion is worth more to me right now than anything I could charge.">Nada durante la beta. Estoy comprobando si esto le sirve a alguien además de a mí, y ahora mismo tu opinión me vale más que lo que podría cobrar.</p>
+      </details>
+      <details>
+        <summary data-en="Do you get access to my account or my data?">¿Tienes acceso a mi cuenta o a mis datos?</summary>
+        <p data-en="No. Everything happens between you and your agent. I only see what you decide to send me, and I won't publish it without your permission.">No. Todo pasa entre tu agente y tú. Yo solo veo lo que decidas mandarme, y no lo publico sin tu permiso.</p>
+      </details>
+      <details>
+        <summary data-en="Which agent works?">¿Qué agente me sirve?</summary>
+        <p data-en="Any agent that accepts a CSV file (Claude, ChatGPT, Gemini) or that can browse X with your session. If yours can do neither, the text tells it to say so instead of making up numbers.">Cualquiera que acepte un archivo CSV (Claude, ChatGPT, Gemini) o que pueda navegar por X con tu sesión. Si el tuyo no puede ni una cosa ni otra, el texto le pide que te lo diga en vez de inventarse los números.</p>
+      </details>
+      <details>
+        <summary data-en="My account is small. Is it worth it?">Mi cuenta es pequeña. ¿Me sirve?</summary>
+        <p data-en="Yes. Mine had 288 followers. What matters is that you've published at least 30 posts, so there's something to compare.">Sí. La mía tenía 288 seguidores. Lo que importa es que hayas publicado al menos 30 posts, para tener con qué comparar.</p>
+      </details>
+      <details>
+        <summary data-en="Does it work with Instagram?">¿Funciona con Instagram?</summary>
+        <p data-en="Not in this beta. Only X for now.">En esta beta, no. Por ahora solo X.</p>
+      </details>
+      <details>
+        <summary data-en="What happens after the beta?">¿Qué pasa después de la beta?</summary>
+        <p data-en="With what you send me, I'll improve the text and build a more complete version. Beta testers will get it first.">Con lo que me mandéis, mejoraré el texto y prepararé una versión más completa. Quienes estén en la beta la tendrán antes que nadie.</p>
+      </details>
+    </section>
+
+    <!-- cierre -->
+    <section class="seccion caja final" aria-labelledby="final-h">
+      <p class="mono" data-en="Free beta">Beta gratis</p>
+      <h2 id="final-h" data-en="Want to know what <em>works</em> for you?">¿Quieres saber qué te <em>funciona</em>?</h2>
+      <p class="sub" data-en="Try it and send me the summary on X. I read every one.">Pruébalo y mándame el resumen por X. Los leo todos.</p>
+      <div class="acciones">
+        <a class="boton" href="#como" data-en="Get the text <span aria-hidden=&quot;true&quot;>→</span>">Conseguir el texto <span aria-hidden="true">→</span></a>
+        <a class="fantasma" href="https://x.com/alpas17_mkt" rel="noopener" data-en="Send me the summary">Mandarme el resumen</a>
+      </div>
+      <div class="compartir">
+        <p data-en="Know someone who posts every day without knowing what works? Send this to them.">¿Conoces a alguien que publica todos los días sin saber qué le funciona? Mándaselo.</p>
+        <div class="acciones">
+          <a class="fantasma" id="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="fantasma" id="en-x" href="#" target="_blank" rel="noopener" data-en="Share on X">Compartir en X</a>
+          <button class="fantasma" id="copiar" type="button" data-en="Copy link">Copiar enlace</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="ancho">
+      <span data-en="Behind what we choose · Álvaro Pastor Periago">Detrás de lo que elegimos · Álvaro Pastor Periago</span>
+      <nav aria-label="Pie">
+        <a href="marketing-portada.html" data-en="Blog">Blog</a>
+        <a href="https://x.com/alpas17_mkt" rel="noopener">X</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const $ = (s) => document.querySelector(s);
+      /* Idioma: ?lang manda, luego lo elegido con el botón y, si no, el navegador:
+         español si lo tiene entre sus idiomas configurados; cualquier otro, inglés. */
+      const navegador = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ""]);
+      let idioma = navegador.some((x) => /^es\b/i.test(x)) ? "es" : "en";
+      const solicitado = new URLSearchParams(location.search).get("lang");
+      let guardado;
+      try { guardado = localStorage.getItem("marketing-language"); } catch (e) { }
+      if (["es", "en"].includes(solicitado)) idioma = solicitado;
+      else if (["es", "en"].includes(guardado)) idioma = guardado;
+      const l = (es, en) => idioma === "en" ? en : es;
+
+      /* Cada texto guarda su versión en inglés en data-en; el español es el HTML original. */
+      const textos = [...document.querySelectorAll("[data-en]")].map((node) => ({ node, es: node.innerHTML, en: node.dataset.en }));
+      const enlacesInternos = [...document.querySelectorAll("a[href]")].filter((a) => {
+        const href = a.getAttribute("href");
+        return !href.startsWith("#") && !/^[a-z]+:/i.test(href);
+      }).map((node) => ({ node, href: node.getAttribute("href") }));
+      const enlace = ($('link[rel="canonical"]') || {}).href || location.href;
+      const raiz = document.documentElement, botonTema = $("#tema");
+
+      function mostrarTema() {
+        const nombres = idioma === "en" ? { auto: "auto", light: "light", dark: "dark" } : { auto: "automático", light: "claro", dark: "oscuro" };
+        const nombre = nombres[raiz.dataset.pref] || nombres.light;
+        botonTema.textContent = "◐ " + nombre;
+        botonTema.setAttribute("aria-label", l("Tema " + nombre + ". Cambiar tema", "Theme: " + nombre + ". Change theme"));
+      }
+      function compartir() {
+        const url = new URL(enlace);
+        url.searchParams.set("lang", idioma);
+        const msg = l("Mira esto: pegas un texto en tu agente de IA y te dice cuáles de tus últimos 50 posts de X funcionan y por qué. Gratis: ", "Check this out: paste a text into your AI agent and it tells you which of your last 50 posts on X work and why. Free: ");
+        $("#whatsapp").href = "https://wa.me/?text=" + encodeURIComponent(msg + url.href);
+        $("#en-x").href = "https://x.com/intent/post?text=" + encodeURIComponent(msg) + "&url=" + encodeURIComponent(url.href);
+        $("#copiar").onclick = function () {
+          const boton = this, antes = boton.textContent;
+          const hecho = function () { boton.textContent = l("Copiado", "Copied"); setTimeout(function () { boton.textContent = antes; }, 1800); };
+          if (navigator.clipboard) navigator.clipboard.writeText(url.href).then(hecho, function () { boton.textContent = l("Cópialo a mano", "Copy the address manually"); });
+          else boton.textContent = l("Cópialo a mano", "Copy the address manually");
+        };
+      }
+      /* Texto para el agente: se rehace con cada tecla y al cambiar de idioma. */
+      const campo = $("#usuario"), salida = $("#texto-agente"), aviso = $("#aviso-texto");
+      function cuenta() {
+        return campo.value.trim()
+          .replace(/^https?:\/\/(?:www\.|mobile\.)?(?:x|twitter)\.com\//i, "")
+          .replace(/^@+/, "")
+          .split(/[/?#\s]/)[0]
+          .replace(/[^A-Za-z0-9_]/g, "")
+          .slice(0, 15);
+      }
+      function textoAgente() {
+        const c = cuenta() || l("tu_cuenta", "your_account");
+        const es = [
+          "Eres un analista de contenido en X. Quiero saber qué posts míos funcionan y por qué.",
+          "",
+          "Mi cuenta: @" + c,
+          "",
+          "Datos:",
+          "- Si te adjunto un CSV de X Analytics, usa ese archivo.",
+          "- Si no hay archivo y puedes navegar, abre x.com/" + c + " y lee mis últimos 50 posts (sin respuestas ni reposts), con vistas, me gusta, respuestas, reposts y guardados si se ven.",
+          "- Si no puedes ni una cosa ni otra, dímelo y para. No inventes datos.",
+          "",
+          "Haz esto:",
+          "1. Una tabla con mis posts ordenados por guardados y después por vistas (si no hay guardados, usa respuestas y reposts). Marca los 5 mejores y los 5 peores.",
+          "2. Cuántas vistas tiene un post normal mío (la mediana, pero dila como «la mitad de tus posts no pasa de X vistas») y cuántas veces los han guardado en total.",
+          "3. Qué tienen en común los 5 mejores (primera línea, tema, formato, hora, imagen o vídeo) y qué repiten los 5 peores. Cita los posts.",
+          "4. Tres cambios concretos para mis próximos 10 posts. Nada genérico como «publica más» o «sé auténtico».",
+          "5. Al final, un resumen de 5 líneas que empiece por «Resumen para Álvaro:».",
+          "",
+          "Usa palabras sencillas, que entienda un niño de 8 años. Nada de jerga.",
+          "Responde en español."
+        ];
+        const en = [
+          "You are a content analyst for X. I want to know which of my posts work and why.",
+          "",
+          "My account: @" + c,
+          "",
+          "Data:",
+          "- If I attach a CSV from X Analytics, use that file.",
+          "- If there is no file and you can browse, open x.com/" + c + " and read my last 50 posts (no replies or reposts), with views, likes, replies, reposts and bookmarks where visible.",
+          "- If you can do neither, tell me and stop. Do not make up data.",
+          "",
+          "Do this:",
+          "1. A table of my posts sorted by bookmarks, then by views (if there are no bookmarks, use replies and reposts). Mark the 5 best and the 5 worst.",
+          "2. How many views a normal post of mine gets (the median, but say it as \"half your posts don't get more than X views\") and how many times they were bookmarked in total.",
+          "3. What the 5 best have in common (first line, topic, format, time, image or video) and what the 5 worst repeat. Quote the posts.",
+          "4. Three concrete changes for my next 10 posts. Nothing generic like \"post more\" or \"be authentic\".",
+          "5. At the end, a five-line summary that starts with \"Summary for Álvaro:\".",
+          "",
+          "Use simple words an 8-year-old would understand. No jargon.",
+          "Answer in English."
+        ];
+        return l(es, en).join("\n");
+      }
+      function pintarTexto() { salida.textContent = textoAgente(); aviso.textContent = ""; }
+      campo.addEventListener("input", pintarTexto);
+      $("#copiar-texto").addEventListener("click", function () {
+        if (!cuenta()) {
+          aviso.textContent = l("Escribe primero tu @.", "Type your @ first.");
+          campo.focus();
+          return;
+        }
+        const ok = function () { aviso.textContent = l("Copiado. Ahora pégalo en tu agente.", "Copied. Now paste it into your agent."); };
+        const mal = function () {
+          const r = document.createRange();
+          r.selectNodeContents(salida);
+          const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+          aviso.textContent = l("Seleccionado. Cópialo con Ctrl+C.", "Selected. Copy it with Ctrl+C.");
+        };
+        if (navigator.clipboard) navigator.clipboard.writeText(textoAgente()).then(ok, mal);
+        else mal();
+      });
+
+      function aplicarIdioma() {
+        raiz.lang = idioma;
+        campo.placeholder = l("tu_cuenta", "your_account");
+        campo.setAttribute("aria-label", l("Tu cuenta de X", "Your X account"));
+        salida.setAttribute("aria-label", l("Texto para tu agente", "Text for your agent"));
+        pintarTexto();
+        textos.forEach(({ node, es, en }) => { node.innerHTML = l(es, en); });
+        document.title = l("¿Qué posts tuyos se guardan? · Beta · Álvaro Pastor", "Which of your posts get saved? · Beta · Álvaro Pastor");
+        const descripcion = l("Copia un texto, pégalo en tu agente de IA y sabrás cuáles de tus últimos 50 posts de X funcionan, cuáles no y por qué. Beta gratis.", "Copy a text, paste it into your AI agent and you'll know which of your last 50 posts on X work, which don't, and why. Free beta.");
+        $('meta[name="description"]').content = descripcion;
+        $('meta[property="og:description"]').content = descripcion;
+        $("#idioma").textContent = l("EN", "ES");
+        $("#idioma").lang = l("en", "es");
+        $("#idioma").setAttribute("aria-label", l("Switch to English", "Cambiar a español"));
+        $("footer nav").setAttribute("aria-label", l("Pie", "Footer"));
+        enlacesInternos.forEach(({ node, href }) => {
+          const url = new URL(href, location.href);
+          url.searchParams.set("lang", idioma);
+          node.href = url.href;
+        });
+        compartir();
+        mostrarTema();
+        try { localStorage.setItem("marketing-language", idioma); } catch (e) { }
+      }
+      $("#idioma").addEventListener("click", function () {
+        idioma = l("en", "es");
+        aplicarIdioma();
+        const url = new URL(location.href);
+        url.searchParams.set("lang", idioma);
+        history.replaceState(null, "", url);
+      });
+      botonTema.addEventListener("click", function () {
+        const orden = ["light", "dark", "auto"];
+        const sig = orden[(orden.indexOf(raiz.dataset.pref) + 1) % 3];
+        try { localStorage.setItem("marketing-theme", sig); } catch (e) { }
+        raiz.dataset.pref = sig;
+        raiz.dataset.tema = sig === "auto" ? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark") : sig;
+        mostrarTema();
+      });
+      aplicarIdioma();
+    })();
+  </script>
+</body>
+
+</html>

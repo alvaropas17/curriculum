@@ -311,7 +311,7 @@
 
 <body>
   <div class="progreso" id="progreso"></div>
-  <a class="flotante volver" id="volver" href="marketing-portada.html">← Álvaro Pastor</a>
+  <a class="flotante volver" id="volver" href="marketing-portada.html" aria-label="Volver a la portada del blog" data-t-aria="volver-aria">← Álvaro Pastor</a>
   <div class="controles">
     <button class="flotante tema" id="tema" type="button" aria-label="Tema: automático (sistema). Cambiar a claro" title="Tema: automático (sistema). Cambiar a claro">
       <svg class="auto" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2" /><path d="M8 20h8M12 16v4" /></svg>
@@ -581,6 +581,7 @@
         "hero-h1": 'The ad that <span class="serif">scared</span> people most was the one they remembered best.',
         "hero-sub": "I sent four Spanish ads to 311 people and asked what they had felt while watching, and how strongly. <strong>169 answered.</strong> This is what happened inside their heads, and what a brand can learn from it.",
         "bajar": "Start",
+        "volver-aria": "Back to the blog home",
         "c1-num": "Chapter 1 · The bet",
         "c1-h": "Before I tell you anything, place a bet.",
         "c1-p": "Four very different ads: a 1986 laundry detergent that dares you to compare, a road-safety campaign from Spain’s traffic authority (the DGT), a boy in a stadium and a kitchen where life happens. Each person watched one or more and rated from 1 to 10 how well it held their attention.",
@@ -1097,22 +1098,22 @@
         boton.setAttribute("aria-label", idioma === "es" ? "Switch to English" : "Cambiar a español");
         pintarTema();
         const volver = new URL($("#volver").href); volver.searchParams.set("lang", idioma); $("#volver").href = volver.href;
+        tooltip.style.opacity = 0;
         pintarTira();
         document.querySelectorAll("[data-apuesta]").forEach(c => pintarApuesta(c, false));
         pintarCarrera(); pintarCata(); pintarHuellas(); pintarGanchos(); pintarTurno(); pintarFicha();
       }
       $("#idioma").addEventListener("click", () => {
         aplicar(idioma === "es" ? "en" : "es");
-        try { localStorage.setItem("portfolio-language", idioma); } catch (e) { /* sin almacenamiento */ }
+        try { localStorage.setItem("marketing-language", idioma); } catch (e) { /* sin almacenamiento */ }
         const url = new URL(location.href); url.searchParams.set("lang", idioma); history.replaceState(null, "", url);
       });
 
-      // Mismo criterio que la portada: ?lang, luego la elección guardada, luego el idioma del navegador.
+      // Mismo criterio que la portada: ?lang válido, elección guardada válida y español por defecto.
       const pedido = new URL(location.href).searchParams.get("lang");
       let guardado = null;
-      try { guardado = localStorage.getItem("portfolio-language"); } catch (e) { /* sin almacenamiento */ }
-      const delNavegador = (navigator.language || "es").toLowerCase().startsWith("es") ? "es" : "en";
-      aplicar(pedido === "es" || pedido === "en" ? pedido : guardado === "es" || guardado === "en" ? guardado : delNavegador);
+      try { guardado = localStorage.getItem("marketing-language"); } catch (e) { /* sin almacenamiento */ }
+      aplicar(pedido === "es" || pedido === "en" ? pedido : guardado === "es" || guardado === "en" ? guardado : "es");
     })();
   </script>
 </body>

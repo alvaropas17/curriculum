@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <script>
+    (function () {
+      var pref = null;
+      try { pref = localStorage.getItem("marketing-theme"); } catch (e) { /* sin almacenamiento */ }
+      if (pref !== "light" && pref !== "dark" && pref !== "auto") pref = "light";
+      var claroSistema = window.matchMedia && matchMedia("(prefers-color-scheme: light)").matches;
+      document.documentElement.dataset.pref = pref;
+      document.documentElement.dataset.tema = pref === "auto" ? (claroSistema ? "light" : "dark") : pref;
+    })();
+  </script>
+  <title>Apps pequeñas de IA y tecnología · Álvaro Pastor</title>
+  <meta name="description"
+    content="Un escaparate de apps pequeñas de inteligencia artificial y tecnología que casi nadie conoce. Descubre las de otros y enseña la tuya." />
+  <link rel="canonical" href="https://marketing.alvaropastor.dev/webs/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Apps pequeñas de IA y tecnología · Álvaro Pastor" />
+  <meta property="og:description" content="Apps pequeñas de IA y tecnología que merecen verse. Enseña la tuya." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:creator" content="@alpas17_" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --fondo: #faf7f0; --fondo-2: #f2ede2; --fondo-3: #e8e1d3; --papel: #fffdf8;
+      --texto: #1b1814; --texto-2: #4f493f; --texto-3: #6b645a;
+      --linea: rgba(27, 24, 20, 0.14); --linea-2: rgba(27, 24, 20, 0.07);
+      --luz: #8f5f00; --luz-fondo: #ffd84d; --sobre-luz: #1a1600; --dgt: #d23a3a;
+      --tema-ia: #3566c9; --tema-tecnologia: #12805a;
+      --display: "Bricolage Grotesque", "Arial Black", sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "Instrument Sans", "Segoe UI", sans-serif;
+      --mono: "IBM Plex Mono", Consolas, monospace;
+      --sombra: 0 1px 2px rgba(27, 24, 20, .04), 0 12px 32px -12px rgba(27, 24, 20, .12);
+      color-scheme: light;
+    }
+    :root[data-tema="dark"] {
+      --fondo: #1a1714; --fondo-2: #23201c; --fondo-3: #2e2a25; --papel: #26221e;
+      --texto: #f3efe6; --texto-2: #c4bdb1; --texto-3: #8f887d;
+      --linea: rgba(243, 239, 230, 0.14); --linea-2: rgba(243, 239, 230, 0.07);
+      --luz: #ffd84d; --luz-fondo: #ffd84d; --sobre-luz: #1a1600; --dgt: #f0605f;
+      --tema-ia: #6b9bf0; --tema-tecnologia: #4cc596;
+      --sombra: 0 1px 2px rgba(0, 0, 0, .2), 0 12px 32px -12px rgba(0, 0, 0, .4);
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font: 18px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3 { font-family: var(--display); margin: 0; letter-spacing: -0.03em; line-height: 1.04; text-wrap: balance; }
+    p { margin: 0; text-wrap: pretty; }
+    em, .serif { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.005em; }
+    .mono { font: 500 .7rem/1.5 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--texto-3); }
+    .ancho { width: min(70rem, 100% - 40px); margin-inline: auto; }
+    :focus-visible { outline: 2px solid var(--luz); outline-offset: 3px; }
+    .rojo { color: var(--dgt); }
+    [hidden] { display: none !important; }
+
+    .boton { display: inline-flex; align-items: center; gap: .5rem; min-height: 46px; padding: 0 1.3rem; border-radius: 99px; background: var(--luz-fondo); color: var(--sobre-luz); font: 600 .95rem var(--sans); border: 0; cursor: pointer; transition: transform .25s cubic-bezier(.3, 1.5, .5, 1); }
+    .boton:hover { transform: translateX(3px); }
+    .boton[disabled] { opacity: .6; cursor: progress; transform: none; }
+    .fantasma { display: inline-flex; align-items: center; min-height: 46px; padding: 0 1.2rem; border: 1px solid var(--linea); border-radius: 99px; font: 600 .95rem var(--sans); color: var(--texto); background: transparent; cursor: pointer; transition: border-color .2s, color .2s; }
+    .fantasma:hover { border-color: var(--luz); color: var(--luz); }
+    .leer { color: var(--luz); font-weight: 600; display: inline-flex; gap: .4rem; align-items: center; }
+
+    .sube { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .9s cubic-bezier(.2, .7, .2, 1); }
+    .sube.visto { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .sube { opacity: 1; transform: none; transition: none; } }
+
+    /* barra */
+    .barra { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--fondo) 82%, transparent); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--linea-2); }
+    .barra .ancho { display: flex; align-items: center; gap: 1.6rem; min-height: 60px; }
+    .marca { font: 700 1rem var(--display); letter-spacing: -0.02em; margin-right: auto; }
+    .marca span { color: var(--dgt); }
+    .barra nav { display: flex; gap: 1.4rem; font-size: .92rem; color: var(--texto-2); }
+    .barra nav a:hover, .barra nav a[aria-current] { color: var(--texto); }
+    .tema { font: 500 .7rem var(--mono); color: var(--texto-2); background: transparent; border: 1px solid var(--linea); border-radius: 99px; padding: 0 .85rem; min-height: 34px; cursor: pointer; }
+    .tema:hover { color: var(--luz); border-color: var(--luz); }
+
+    /* cabecera */
+    .cabecera { text-align: center; padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(2.5rem, 5vw, 3.5rem); }
+    .cabecera h1 { font-size: clamp(3rem, 8.5vw, 6.4rem); font-weight: 700; letter-spacing: -0.045em; margin: 1rem 0 1.2rem; }
+    .cabecera .sub { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--texto-2); max-width: 36rem; margin-inline: auto; }
+    .controles { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: .6rem; margin-top: 1.8rem; }
+    .temas { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem; }
+    .temas button { font: inherit; font-size: .85rem; color: var(--texto-2); background: transparent; border: 1px solid var(--linea); border-radius: 99px; padding: .4rem .95rem; min-height: 44px; cursor: pointer; transition: color .2s, border-color .2s; }
+    .temas button:hover { color: var(--texto); border-color: var(--texto-3); }
+    .temas button[aria-pressed="true"] { background: var(--texto); color: var(--fondo); border-color: var(--texto); }
+    .temas button small { font: 500 .7rem var(--mono); opacity: .7; margin-left: .35rem; }
+    .buscar { font: inherit; font-size: .85rem; color: var(--texto); background: var(--papel); border: 1px solid var(--linea); border-radius: 99px; padding: 0 1rem; min-height: 44px; width: min(15rem, 100%); }
+    .buscar::placeholder { color: var(--texto-3); }
+    .filtro-estado { color: var(--texto-2); font-size: .85rem; margin-bottom: 1rem; scroll-margin-top: 80px; }
+
+    /* rejilla de webs */
+    .rejilla { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .tarjeta { position: relative; display: flex; flex-direction: column; background: var(--papel); border: 1px solid var(--linea-2); border-radius: 22px; overflow: hidden; box-shadow: var(--sombra); transition: transform .3s; }
+    .tarjeta:hover { transform: translateY(-4px); }
+    .tarjeta .vista { aspect-ratio: 16 / 7; position: relative; overflow: hidden; display: grid; place-items: center; background: radial-gradient(circle at 50% 60%, color-mix(in srgb, var(--c) 24%, transparent), transparent 62%), var(--fondo-2); }
+    .tarjeta .vista i { position: absolute; width: 34%; aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--c); background: color-mix(in srgb, var(--c) 18%, transparent); transition: transform .8s cubic-bezier(.3, 1.4, .5, 1); }
+    .tarjeta:hover .vista i { transform: scale(1.12); }
+    .tarjeta .vista b { position: relative; font: 400 clamp(3rem, 7vw, 4.4rem)/1 var(--serif); font-style: italic; color: var(--c); text-transform: lowercase; }
+    .tarjeta .texto { padding: 1.4rem 1.6rem 1.6rem; display: flex; flex-direction: column; gap: .6rem; flex: 1; }
+    .tarjeta h3 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); font-weight: 700; overflow-wrap: anywhere; }
+    .tarjeta h3 a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+    .tarjeta p { color: var(--texto-2); font-size: 1rem; }
+    .meta { display: flex; flex-wrap: wrap; gap: .3rem .9rem; }
+    .meta .cat { color: var(--c); }
+    .pie-tarjeta { margin-top: auto; padding-top: .6rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: .3rem 1rem; font-size: .9rem; }
+    .pie-tarjeta .autor { position: relative; z-index: 2; color: var(--texto-2); min-height: 44px; display: inline-flex; align-items: center; }
+    .pie-tarjeta .autor:hover { color: var(--luz); }
+    .pie-tarjeta .destino { font: 500 .78rem var(--mono); color: var(--luz); display: inline-flex; align-items: center; overflow-wrap: anywhere; }
+    .tarjeta[data-tema="ia"] { --c: var(--tema-ia); }
+    .tarjeta[data-tema="tecnologia"] { --c: var(--tema-tecnologia); }
+
+    .vacia { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; background: var(--papel); border: 1px solid var(--linea-2); border-radius: 22px; overflow: hidden; box-shadow: var(--sombra); --c: var(--dgt); }
+    .vacia .vista { min-height: 15rem; background: radial-gradient(circle at 50% 55%, color-mix(in srgb, var(--dgt) 22%, transparent), transparent 60%), var(--fondo-2); display: grid; place-items: center; }
+    .vacia .vista b { font: 400 clamp(3rem, 7vw, 4.6rem)/1 var(--serif); font-style: italic; color: var(--dgt); }
+    .vacia .texto { padding: clamp(1.6rem, 4vw, 2.6rem); display: flex; flex-direction: column; justify-content: center; gap: .8rem; }
+    .vacia h3 { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; }
+    .vacia h3 em { color: var(--dgt); }
+    .vacia p { color: var(--texto-2); }
+    .vacia .boton { align-self: flex-start; margin-top: .4rem; }
+
+    /* proponer */
+    .seccion-cab { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--linea); padding-top: 1rem; margin: clamp(3rem, 7vw, 4.5rem) 0 1.6rem; scroll-margin-top: 70px; }
+    .seccion-cab h2 { font: 600 1.05rem var(--sans); letter-spacing: 0; }
+    .proponer { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(1.5rem, 4vw, 3rem); background: var(--papel); border: 1px solid var(--linea-2); border-radius: 24px; padding: clamp(1.6rem, 4vw, 3rem); box-shadow: var(--sombra); }
+    .proponer h3 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; margin: .7rem 0 1rem; }
+    .proponer .reglas { color: var(--texto-2); }
+    .reglas ul { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; gap: .7rem; }
+    .reglas li { display: grid; grid-template-columns: 1.4rem 1fr; gap: .4rem; font-size: .98rem; }
+    .reglas li::before { content: "✓"; color: var(--tema-tecnologia); font-weight: 700; }
+    .reglas li.no::before { content: "✕"; color: var(--dgt); }
+    form { display: grid; gap: 1rem; align-content: start; }
+    .campo { display: grid; gap: .35rem; }
+    .campo label { font: 500 .7rem var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--texto-3); }
+    .campo input, .campo select, .campo textarea { font: inherit; font-size: 1rem; color: var(--texto); background: var(--fondo); border: 1px solid var(--linea); border-radius: 14px; padding: .7rem .9rem; min-height: 48px; width: 100%; }
+    .campo textarea { resize: vertical; min-height: 6rem; }
+    .campo input:focus, .campo select:focus, .campo textarea:focus { outline: 2px solid var(--luz); outline-offset: 1px; border-color: var(--luz); }
+    .campo small { color: var(--texto-3); font-size: .8rem; }
+    .fila { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .envio { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.2rem; }
+    .mensaje { font-size: .95rem; color: var(--texto-2); }
+    .mensaje.ok { color: var(--tema-tecnologia); font-weight: 600; }
+    .mensaje.error { color: var(--dgt); }
+    .mensaje a { text-decoration: underline; text-underline-offset: 3px; }
+
+    footer { margin-top: 4rem; border-top: 1px solid var(--linea); padding: 2rem 0 3rem; color: var(--texto-3); font-size: .85rem; }
+    footer .ancho { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem; align-items: center; }
+    footer nav { display: flex; gap: 1.4rem; }
+    footer nav a { min-height: 44px; display: inline-flex; align-items: center; color: var(--texto-2); }
+    footer nav a:hover { color: var(--luz); }
+
+    @media (max-width: 860px) {
+      .rejilla, .proponer, .vacia { grid-template-columns: 1fr; }
+      .vacia .vista { min-height: 11rem; }
+      .barra nav { display: none; }
+    }
+    @media (max-width: 560px) {
+      .ancho { width: calc(100% - 32px); }
+      .barra .ancho { gap: .5rem; }
+      .marca { font-size: .9rem; }
+      .tema { padding-inline: .6rem; min-height: 44px; }
+      .fila { grid-template-columns: 1fr; }
+      .tarjeta .texto { padding: 1.3rem; }
+      .temas button { font-size: .78rem; padding: .25rem .8rem; }
+      .buscar { width: 100%; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="barra">
+    <div class="ancho">
+      <a class="marca" href="marketing-portada.html">Álvaro Pastor Periago<span>.</span></a>
+      <nav aria-label="Principal">
+        <a href="marketing-portada.html">Blog</a>
+        <a href="#lista" aria-current="page">Apps</a>
+        <a href="#proponer">Añade la tuya</a>
+      </nav>
+      <button class="tema" id="tema" type="button" aria-label="Cambiar tema">◐ tema</button>
+    </div>
+  </header>
+
+  <main class="ancho">
+    <section class="cabecera">
+      <p class="mono">Las apps pequeñas no se encuentran</p>
+      <h1>Tu app es buena. <em>Nadie la ha encontrado.</em></h1>
+      <p class="sub">Un escaparate de apps pequeñas de inteligencia artificial y tecnología, hechas por una persona o un equipo pequeño. Por ahora, solo de esos dos temas.</p>
+      <div class="controles">
+        <div class="temas" id="temas" role="group" aria-label="Filtrar apps por tema"></div>
+        <input class="buscar" id="buscar" type="search" placeholder="Buscar una app" aria-label="Buscar una app por nombre, autor o descripción" autocomplete="off" />
+      </div>
+    </section>
+
+    <p class="filtro-estado" id="lista" role="status" aria-live="polite" aria-atomic="true"></p>
+    <div class="rejilla" id="rejilla"></div>
+
+    <div class="seccion-cab" id="proponer"><h2>Añade la tuya</h2><span class="mono">La reviso antes de publicarla</span></div>
+    <section class="proponer sube" aria-labelledby="proponer-h">
+      <div class="reglas">
+        <p class="mono">Cómo entra una app</p>
+        <h3 id="proponer-h">Si la has hecho tú y va de IA o tecnología, <em>enséñala.</em></h3>
+        <ul>
+          <li>La has hecho tú, sola o con un equipo pequeño.</li>
+          <li>Trata de inteligencia artificial o de tecnología.</li>
+          <li>Se puede probar sin registrarse ni pagar.</li>
+          <li class="no">Si va de otra cosa, no entra. Esta lista es solo de esos dos temas.</li>
+        </ul>
+      </div>
+      <form id="formulario" novalidate>
+        <div class="fila">
+          <div class="campo">
+            <label for="f-nombre">Nombre de la app</label>
+            <input id="f-nombre" name="nombre" type="text" required minlength="2" maxlength="60" autocomplete="off" />
+          </div>
+          <div class="campo">
+            <label for="f-autor">Tu usuario en X</label>
+            <input id="f-autor" name="autor" type="text" required maxlength="16" placeholder="@usuario" autocomplete="off" autocapitalize="none" spellcheck="false" />
+          </div>
+        </div>
+        <div class="campo">
+          <label for="f-url">Dirección</label>
+          <input id="f-url" name="url" type="url" required placeholder="https://" autocomplete="off" autocapitalize="none" spellcheck="false" />
+        </div>
+        <div class="campo">
+          <label for="f-tema">Tema</label>
+          <select id="f-tema" name="tema" required></select>
+        </div>
+        <div class="campo">
+          <label for="f-descripcion">Qué problema resuelve, en una frase</label>
+          <textarea id="f-descripcion" name="descripcion" required minlength="10" maxlength="160" rows="3"></textarea>
+          <small id="contador">0 / 160</small>
+        </div>
+        <div class="trampa" aria-hidden="true">
+          <label for="f-extra">No rellenes este campo</label>
+          <input id="f-extra" name="sitio_extra" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <div class="envio">
+          <button class="boton" id="enviar" type="submit">Enviar mi app <span aria-hidden="true">→</span></button>
+          <p class="mensaje" id="mensaje" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="ancho">
+      <span>Apps pequeñas de IA y tecnología · Álvaro Pastor Periago</span>
+      <nav aria-label="Pie">
+        <a href="marketing-portada.html">Blog</a>
+        <a href="https://x.com/alpas17_" rel="noopener">X</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- El build sustituye esto por los temas y la lista de proyecto/marketing-webs.json. -->
+  <script type="application/json" id="webs-datos">{}</script>
+  <script>
+    (function () {
+      const $ = (s) => document.querySelector(s);
+      let datos = { temas: [], webs: [] };
+      try { datos = Object.assign(datos, JSON.parse($("#webs-datos").textContent)); } catch (e) { /* sin datos */ }
+      const temas = datos.temas;
+      const nombreTema = Object.fromEntries(temas.map((t) => [t.id, t.nombre]));
+      // Las más recientes primero; a igual fecha se mantiene el orden del fichero.
+      const webs = datos.webs.map((w, i) => ({ w, i })).sort((a, b) => (b.w.fecha || "").localeCompare(a.w.fecha || "") || a.i - b.i).map((x) => x.w);
+
+      const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+      const mes = (f) => { const [a, m] = (f || "").split("-"); return meses[Number(m) - 1] ? meses[Number(m) - 1] + " " + a : ""; };
+      const dominio = (url) => new URL(url).hostname.replace(/^www\./, "");
+      const sinTildes = (t) => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+      function el(tag, clase, texto) {
+        const n = document.createElement(tag);
+        if (clase) n.className = clase;
+        if (texto !== undefined) n.textContent = texto;
+        return n;
+      }
+
+      function tarjeta(w) {
+        const a = el("article", "tarjeta sube visto");
+        a.dataset.tema = w.tema;
+        const vista = el("div", "vista");
+        vista.setAttribute("aria-hidden", "true");
+        vista.append(el("i"), el("b", "", dominio(w.url).charAt(0)));
+        const texto = el("div", "texto");
+        const meta = el("div", "meta mono");
+        meta.append(el("span", "cat", nombreTema[w.tema] || w.tema));
+        if (mes(w.fecha)) { const t = el("time", "", mes(w.fecha)); t.dateTime = w.fecha; meta.append(t); }
+        const h3 = el("h3");
+        const enlace = el("a", "", w.nombre);
+        enlace.href = w.url;
+        enlace.target = "_blank";
+        enlace.rel = "noopener nofollow ugc";
+        h3.append(enlace);
+        const pie = el("div", "pie-tarjeta");
+        const autor = el("a", "autor", "por " + w.autor);
+        autor.href = "https://x.com/" + encodeURIComponent(w.autor.replace(/^@/, ""));
+        autor.rel = "noopener";
+        autor.target = "_blank";
+        pie.append(autor, el("span", "destino", dominio(w.url) + " ↗"));
+        texto.append(meta, h3, el("p", "", w.descripcion), pie);
+        a.append(vista, texto);
+        return a;
+      }
+
+      const rejilla = $("#rejilla"), estado = $("#lista"), cajaTemas = $("#temas"), buscar = $("#buscar");
+      let tema = "todo";
+
+      function vacia() {
+        const d = el("div", "vacia");
+        const vista = el("div", "vista");
+        vista.setAttribute("aria-hidden", "true");
+        vista.append(el("b", "", "tu app"));
+        const texto = el("div", "texto");
+        texto.append(el("p", "mono", "Todavía no hay ninguna"));
+        const h3 = el("h3");
+        h3.innerHTML = "La primera puede ser <em>la tuya.</em>";
+        const p = el("p", "", "Aquí se enseñan apps pequeñas que casi nadie conoce. Si has hecho una de inteligencia artificial o tecnología, súbela y que la vea más gente.");
+        const boton = el("a", "boton", "Añadir mi app →");
+        boton.href = "#proponer";
+        texto.append(h3, p, boton);
+        d.append(vista, texto);
+        return d;
+      }
+
+      function pintar() {
+        const q = sinTildes(buscar.value.trim());
+        const visibles = webs.filter((w) => (tema === "todo" || w.tema === tema) &&
+          (!q || sinTildes([w.nombre, w.autor, w.descripcion, dominio(w.url)].join(" ")).includes(q)));
+        rejilla.replaceChildren();
+        if (!webs.length) {
+          rejilla.append(vacia());
+          estado.textContent = "Aún no hay apps en la lista";
+          return;
+        }
+        visibles.forEach((w) => rejilla.append(tarjeta(w)));
+        estado.textContent = visibles.length === 0 ? "Ninguna app coincide con tu búsqueda"
+          : visibles.length === 1 ? "1 app" : visibles.length + " apps";
+      }
+
+      function pintarTemas() {
+        if (!webs.length) { cajaTemas.hidden = true; buscar.hidden = true; return; }
+        const botones = [{ id: "todo", nombre: "Todo" }].concat(temas);
+        botones.forEach((t) => {
+          const n = t.id === "todo" ? webs.length : webs.filter((w) => w.tema === t.id).length;
+          const b = el("button", "", t.nombre);
+          b.type = "button";
+          b.dataset.filtro = t.id;
+          b.setAttribute("aria-pressed", String(t.id === tema));
+          b.append(el("small", "", String(n)));
+          b.addEventListener("click", () => {
+            tema = t.id;
+            cajaTemas.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+            pintar();
+          });
+          cajaTemas.append(b);
+        });
+      }
+      buscar.addEventListener("input", pintar);
+      pintarTemas();
+      pintar();
+
+      /* formulario */
+      const selector = $("#f-tema");
+      const aviso = el("option", "", "Elige un tema");
+      aviso.value = "";
+      selector.append(aviso);
+      temas.forEach((t) => { const o = el("option", "", t.nombre); o.value = t.id; selector.append(o); });
+      const desc = $("#f-descripcion"), contador = $("#contador");
+      desc.addEventListener("input", () => { contador.textContent = desc.value.length + " / 160"; });
+
+      const form = $("#formulario"), mensaje = $("#mensaje"), enviar = $("#enviar");
+      function decir(texto, clase) { mensaje.className = "mensaje " + (clase || ""); mensaje.textContent = texto; }
+      function fallo() {
+        decir("No se ha podido enviar. Escríbeme por ", "error");
+        const x = el("a", "", "X");
+        x.href = "https://x.com/alpas17_";
+        x.rel = "noopener";
+        mensaje.append(x, " y la añado a mano.");
+        enviar.disabled = false;
+      }
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        if (!form.checkValidity()) { form.reportValidity(); return; }
+        const cuerpo = Object.fromEntries(new FormData(form));
+        enviar.disabled = true;
+        decir("Enviando…");
+        try {
+          const r = await fetch("/proponer-web", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(cuerpo) });
+          const res = await r.json().catch(() => ({}));
+          if (r.status === 400 && res.error) { decir(res.error, "error"); enviar.disabled = false; return; }
+          if (!r.ok) { fallo(); return; }
+          form.reset();
+          contador.textContent = "0 / 160";
+          decir("Recibida. La reviso y, si encaja, aparecerá aquí.", "ok");
+          enviar.disabled = false;
+        } catch (err) {
+          fallo();
+        }
+      });
+
+      /* tema: claro por defecto; automático y oscuro, a elección */
+      const raiz = document.documentElement, botonTema = $("#tema");
+      function mostrarTema() {
+        const nombres = { auto: "automático", light: "claro", dark: "oscuro" };
+        const nombre = nombres[raiz.dataset.pref] || nombres.light;
+        botonTema.textContent = "◐ " + nombre;
+        botonTema.setAttribute("aria-label", "Tema " + nombre + ". Cambiar tema");
+      }
+      botonTema.addEventListener("click", function () {
+        const orden = ["light", "dark", "auto"];
+        const sig = orden[(orden.indexOf(raiz.dataset.pref) + 1) % 3];
+        try { localStorage.setItem("marketing-theme", sig); } catch (e) { }
+        raiz.dataset.pref = sig;
+        raiz.dataset.tema = sig === "auto" ? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark") : sig;
+        mostrarTema();
+      });
+      mostrarTema();
+
+      const io = new IntersectionObserver(function (es) {
+        es.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add("visto"); io.unobserve(x.target); } });
+      }, { threshold: 0.15 });
+      document.querySelectorAll(".sube:not(.visto)").forEach(function (n) { io.observe(n); });
+    })();
+  </script>
+</body>
+
+</html>

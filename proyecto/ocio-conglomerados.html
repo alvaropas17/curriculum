@@ -7,6 +7,11 @@
   <meta name="color-scheme" content="dark light" />
   <script>
     (function () {
+      var language = new URLSearchParams(location.search).get("lang");
+      if (language !== "es" && language !== "en") {
+        try { language = localStorage.getItem("marketing-language"); } catch (e) { language = null; }
+      }
+      document.documentElement.lang = language === "en" ? "en" : "es";
       var pref = null;
       try { pref = localStorage.getItem("marketing-theme"); } catch (e) { /* sin almacenamiento */ }
       if (pref !== "light" && pref !== "dark") pref = "auto";
@@ -15,12 +20,12 @@
       document.documentElement.dataset.tema = pref === "auto" ? (claroSistema ? "light" : "dark") : pref;
     })();
   </script>
-  <title>Cómo te diviertes · Álvaro Pastor</title>
+  <title>¿Por qué nunca os apetece el mismo plan? · Álvaro Pastor</title>
   <meta name="description"
-    content="Un trabajo de comportamiento del consumidor sobre ocio, agrupado en cuatro tribus con el método de Ward. Marca lo que haces tú y mira a cuál te pareces." />
+    content="Unos quieren salir, otros desconectar. Explora cuatro grupos de actividades a partir de 18 respuestas y descubre qué puede enseñarte mirar los hábitos juntos." />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="¿A qué tribu de ocio perteneces?" />
-  <meta property="og:description" content="Cuatro grupos de actividades, 18 encuestados y un método de agrupación explicado sin fórmulas." />
+  <meta property="og:title" content="Mismos amigos. Distintas ganas de hacer planes." />
+  <meta property="og:description" content="Marca tus planes, explora las coincidencias y descubre el giro: aquí se agrupan actividades, no personas." />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:creator" content="@alpas17_" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -90,7 +95,12 @@
     .flotante { position: fixed; top: 14px; z-index: 30; font: 500 0.8rem var(--mono); color: var(--texto-2); text-decoration: none; background: var(--vidrio); backdrop-filter: blur(8px); padding: 0.35rem 0.75rem; border-radius: 99px; border: 1px solid var(--linea); cursor: pointer; }
     .flotante:hover { color: var(--texto); border-color: var(--texto-3); }
     .volver { left: 16px; }
-    .tema { right: 16px; }
+    .tema { right: 16px; min-height: 44px; }
+    .idiomas { right: 16px; top: 68px; display: flex; padding: 2px; gap: 2px; }
+    .idiomas button { min-width: 44px; min-height: 44px; border: 0; border-radius: 99px; background: transparent; cursor: pointer; font: inherit; }
+    .idiomas button[aria-pressed="true"] { background: var(--luz); color: var(--sobre-luz); }
+    .chip, .limpiar, .volver { min-height: 44px; }
+    .volver { display: inline-flex; align-items: center; }
     :focus-visible { outline: 2px solid var(--luz); outline-offset: 2px; }
 
     .aparece { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.2, .7, .2, 1); }
@@ -101,6 +111,7 @@
     .hero { min-height: 88svh; display: grid; align-items: center; padding: 6rem 0 3rem; position: relative; }
     .hero::before { content: ""; position: absolute; inset: 0 calc(50% - 50vw); z-index: -1; background: radial-gradient(50rem 28rem at 75% 15%, color-mix(in srgb, var(--g-relax) 14%, transparent), transparent 70%), radial-gradient(40rem 28rem at 10% 90%, color-mix(in srgb, var(--g-aventura) 12%, transparent), transparent 70%); pointer-events: none; }
     .hero-texto { width: min(44rem, 100%); margin-inline: auto; }
+    @media (max-width: 600px) { .hero { padding-top: 9rem; } }
     .hero h1 { font-size: clamp(2.6rem, 5.6vw, 4.6rem); font-weight: 700; }
     .hero h1 .serif { color: var(--luz); font-size: 1.08em; }
     .hero-sub { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--texto-2); margin-top: 1.8rem; }
@@ -114,6 +125,12 @@
     /* JUEGO */
     .juego { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 2rem; align-items: start; margin-top: 2rem; }
     @media (max-width: 900px) { .juego { grid-template-columns: 1fr; } }
+    .juego > * { min-width: 0; }
+    @media (max-width: 600px) {
+      .panel .chips { gap: 6px; margin-bottom: 1.2rem; }
+      .chips .chip { font-size: .8rem; padding: .2rem .65rem; min-height: 34px; line-height: 1.2; }
+      .barras .barra { grid-template-columns: 6.6rem 1fr 2rem; font-size: .85rem; }
+    }
     .mapa { background: var(--fondo-2); border: 1px solid var(--linea-2); border-radius: 14px; padding: 8px; }
     .mapa svg { width: 100%; height: auto; display: block; }
     .halo { fill: var(--c); opacity: 0.09; stroke: var(--c); stroke-opacity: 0.35; stroke-dasharray: 4 6; transition: opacity .3s; }
@@ -161,16 +178,20 @@
 
 <body>
   <div class="progreso" id="progreso"></div>
-  <a class="flotante volver" href="../index.html">← Álvaro Pastor</a>
+  <a class="flotante volver" href="marketing-portada.html">← Álvaro Pastor</a>
   <button class="flotante tema" id="tema" type="button" aria-label="Cambiar tema">◐ tema</button>
+  <div class="flotante idiomas" role="group" aria-label="Idioma" data-i18n-aria="language">
+    <button type="button" lang="es" aria-label="Español" data-language="es" aria-pressed="true">ES</button>
+    <button type="button" lang="en" aria-label="English" data-language="en" aria-pressed="false">EN</button>
+  </div>
 
   <header class="hero">
     <div class="ancho">
       <div class="hero-texto aparece">
-        <p class="mono">Comportamiento del consumidor · UCAM · 2024</p>
-        <h1>Dime cómo te diviertes y te diré <span class="serif">con quién te pareces</span></h1>
-        <p class="hero-sub">Preguntamos a <strong>18 personas</strong> con qué frecuencia hacían distintas actividades de ocio. Luego dejamos que un algoritmo juntara las que se parecen. Salieron <strong>cuatro tribus</strong>.</p>
-        <a class="mono bajar" href="#juego">↓ Marca lo que haces tú</a>
+        <p class="mono" data-i18n="eyebrow">Cuando elegir un plan parece imposible</p>
+        <h1 data-i18n="headline">Llega el fin de semana. <span class="serif">Nadie quiere el mismo plan.</span></h1>
+        <p class="hero-sub" data-i18n="intro">Tú propones un concierto. Alguien prefiere una ruta. Otra persona quiere quedarse en casa. Si todos queréis pasarlo bien, <strong>¿por qué cuesta tanto ponerse de acuerdo?</strong> En un trabajo con 18 personas buscamos qué actividades se parecían por la frecuencia con que las practicaban. Aparecieron cuatro grupos. Antes de ver cómo, prueba con tus propios planes.</p>
+        <a class="mono bajar" href="#juego" data-i18n="start">↓ Explora tus planes en el mapa</a>
       </div>
     </div>
   </header>
@@ -178,19 +199,19 @@
   <section id="juego">
     <div class="ancho">
       <div class="aparece">
-        <h2 class="titulo">Elige tus planes y mira <span class="serif">dónde caes</span></h2>
-        <p class="lectura" style="margin-inline:0;color:var(--texto-2)">Toca las burbujas del mapa o los botones de la derecha. Cada grupo de actividades se llena según cuántas de las suyas haces.</p>
+        <h2 class="titulo" data-i18n="choose">¿Tus planes van juntos <span class="serif">o cada uno por su lado?</span></h2>
+        <p class="lectura" style="margin-inline:0;color:var(--texto-2)" data-i18n="instructions">Marca las actividades que sueles hacer en el mapa o en los botones. Las barras muestran qué proporción has marcado en cada grupo. Es un juego para explorar el mapa, no un test de personalidad.</p>
       </div>
 
       <div class="juego aparece">
         <div class="mapa">
-          <svg id="mapa" viewBox="0 0 800 660" role="group" aria-label="Mapa de actividades de ocio agrupadas en cuatro tribus"></svg>
+          <svg id="mapa" viewBox="0 0 800 660" role="group" aria-label="Mapa de actividades de ocio agrupadas en cuatro tribus" data-i18n-aria="map"></svg>
         </div>
         <div class="panel">
           <div class="chips" id="chips"></div>
           <div class="barras" id="barras" aria-live="polite"></div>
           <div class="resultado" id="resultado" aria-live="polite"></div>
-          <button class="limpiar" id="limpiar" type="button">vaciar selección</button>
+          <button class="limpiar" id="limpiar" type="button" data-i18n="clear">vaciar selección</button>
         </div>
       </div>
     </div>
@@ -198,46 +219,119 @@
 
   <section>
     <div class="lectura aparece">
-      <h2 class="titulo">Cómo se forman <span class="serif">las tribus</span></h2>
-      <p>Cada persona dijo cuánto practica cada actividad. Con eso se calcula <strong>cuánto se parecen dos actividades</strong>: si la gente que hace mucho cine también hace mucha música, esas dos quedan cerca.</p>
-      <p>Después se usa el <strong>método de Ward</strong>. Empieza con cada actividad sola y va uniendo, paso a paso, las dos que menos separan al juntarlas. Al final queda un árbol, el dendrograma, y se corta a la altura que dé grupos con sentido.</p>
-      <div class="formula"><strong>En una frase:</strong> el método no sabe qué es «yoga» ni «picnic». Solo ve que las mismas personas los practican con frecuencias parecidas.</div>
-      <p class="mono" style="margin-bottom:.6rem">Lo que más y menos se hace</p>
+      <h2 class="titulo" data-i18n="formation">El giro: agrupamos planes, <span class="serif">no personas.</span></h2>
+      <p data-i18n="similarity">Al marcar tus planes quizá has quedado entre varios grupos. Tiene sentido: <strong>el análisis no buscaba meter a cada persona en una tribu.</strong> Buscaba actividades con patrones parecidos en las respuestas. Si quienes hacen mucho cine también hacen mucha música, esas dos actividades pueden quedar cerca.</p>
+      <p data-i18n="ward">Para formar los grupos usamos el <strong>método de Ward</strong>. Al principio, cada actividad está sola. En cada paso se unen los dos grupos cuya unión aumenta menos la variación interna. Esas uniones forman un árbol, llamado dendrograma. Al cortarlo a una altura elegida, quedan los grupos que vamos a interpretar.</p>
+      <div class="formula" data-i18n="summary"><strong>La idea para recordar:</strong> dos planes pueden parecerte muy distintos y aun así quedar juntos si sus frecuencias se parecen entre las personas encuestadas. Los nombres de las «tribus» los ponemos después.</div>
+      <p class="mono" style="margin-bottom:.6rem" data-i18n="frequency">En estas 18 respuestas: lo más y menos frecuente</p>
       <div class="tags">
-        <span class="tag alta">más: senderismo</span><span class="tag alta">más: yoga</span><span class="tag alta">más: voluntariado</span>
-        <span class="tag baja">menos: pesca</span><span class="tag baja">menos: jardinería</span><span class="tag baja">menos: baile</span>
+        <span class="tag alta" data-i18n="moreHiking">más: senderismo</span><span class="tag alta" data-i18n="moreYoga">más: yoga</span><span class="tag alta" data-i18n="moreVolunteering">más: voluntariado</span>
+        <span class="tag baja" data-i18n="lessFishing">menos: pesca</span><span class="tag baja" data-i18n="lessGardening">menos: jardinería</span><span class="tag baja" data-i18n="lessDancing">menos: baile</span>
       </div>
     </div>
   </section>
 
   <section>
     <div class="lectura aparece">
-      <h2 class="titulo">¿Hay diferencias <span class="serif">de verdad?</span></h2>
-      <p>La tabla ANOVA compara dos cosas: cuánto varía la gente <strong>dentro</strong> de cada grupo y cuánto varía <strong>entre</strong> grupos. De ahí salen dos números.</p>
+      <h2 class="titulo" data-i18n="differences">¿Hay diferencias <span class="serif">de verdad?</span></h2>
+      <p data-i18n="anova">La tabla ANOVA compara dos cosas: cuánto varía la gente <strong>dentro</strong> de cada grupo y cuánto varía <strong>entre</strong> grupos. De ahí salen dos números.</p>
       <table class="tabla-f">
-        <tr><th>Número</th><th>Qué dice</th></tr>
-        <tr><td><strong>F</strong></td><td>Si es alto, los grupos se separan más de lo que varían por dentro.</td></tr>
-        <tr><td><strong>Sig. (p)</strong></td><td>La probabilidad de ver esa diferencia por pura casualidad. Cuanto más baja, mejor.</td></tr>
+        <tr><th data-i18n="number">Número</th><th data-i18n="meaning">Qué dice</th></tr>
+        <tr><td><strong>F</strong></td><td data-i18n="fMeaning">Si es alto, los grupos se separan más de lo que varían por dentro.</td></tr>
+        <tr><td><strong data-i18n="significance">Sig. (p)</strong></td><td data-i18n="pMeaning">La probabilidad de ver esa diferencia por pura casualidad. Cuanto más baja, mejor.</td></tr>
       </table>
-      <p>F alto y p bajo salieron en <strong>bailar, pesca, cocina, trabajo voluntario y lectura</strong>. Son las actividades donde la gente más se reparte: unos las hacen mucho y otros casi nada. Para detectar casos raros también se miró la distancia de Mahalanobis con chi cuadrado.</p>
+      <p data-i18n="findings">F alto y p bajo salieron en <strong>bailar, pesca, cocina, trabajo voluntario y lectura</strong>. Son las actividades donde la gente más se reparte: unos las hacen mucho y otros casi nada. Para detectar casos raros también se miró la distancia de Mahalanobis con chi cuadrado.</p>
     </div>
   </section>
 
   <section>
     <div class="lectura aparece">
-      <h2 class="titulo">Lo que esto <span class="serif">no dice</span></h2>
-      <p>Son <strong>18 personas</strong>. Sirve para practicar el método y ver cómo se forman los grupos, no para decir cómo se divierte la gente en general.</p>
-      <p>El «test» de arriba es un juego: cuenta cuántas actividades de cada grupo marcas. No es un resultado del estudio.</p>
-      <p>Para un negocio, la lectura útil es otra: quien va al cine suele ir también a conciertos, y eso permite <strong>poner dos propuestas cerca</strong> en vez de adivinar.</p>
+      <h2 class="titulo" data-i18n="limitsTitle">Antes de usarlo para decidir, <span class="serif">mira hasta dónde llega.</span></h2>
+      <p data-i18n="sample">Son <strong>18 personas</strong>. Sirve para practicar el método y ver cómo se forman los grupos, no para decir cómo se divierte la gente en general.</p>
+      <p data-i18n="gameLimit">El juego cuenta la proporción de actividades que marcas en cada grupo. <strong>No calcula tu pertenencia a un conglomerado</strong> ni reproduce el análisis de frecuencias del trabajo. Puedes cambiar la selección para ver cómo se mueve el resultado.</p>
+      <p data-i18n="business">Si estás pensando en una propuesta para tu público, vuelve a esta pregunta: <strong>¿qué otras cosas hacen quienes ya se interesan por lo que ofreces?</strong> Busca esas coincidencias en tus propios datos antes de juntar dos propuestas. Este ejercicio sirve para entender cómo buscarlas; las 18 respuestas no bastan para decidir por tus clientes.</p>
     </div>
   </section>
 
   <footer>
-    <div class="lectura">Trabajo en grupo de Análisis del comportamiento del consumidor · Grado en Marketing y Dirección Comercial, UCAM · Murcia, abril de 2024. Página rehecha por Álvaro Pastor.</div>
+    <div class="lectura" data-i18n="credits">Trabajo en grupo de Análisis del comportamiento del consumidor · Grado en Marketing y Dirección Comercial, UCAM · Murcia, abril de 2024. Página rehecha por Álvaro Pastor.</div>
   </footer>
 
   <script>
     (function () {
+      // Only these author-written strings can enter translated HTML. URL values never do.
+      let language = document.documentElement.lang;
+      const TEXT = {
+        title: ["¿Por qué nunca os apetece el mismo plan? · Álvaro Pastor", "Why can’t you agree on a plan? · Álvaro Pastor"],
+        description: ["Unos quieren salir, otros desconectar. Explora cuatro grupos de actividades a partir de 18 respuestas y descubre qué puede enseñarte mirar los hábitos juntos.", "Some want to go out, others want to unwind. Explore four activity groups based on 18 responses and see what looking at habits together can reveal."],
+        ogTitle: ["Mismos amigos. Distintas ganas de hacer planes.", "Same friends. Different ideas of a good time."],
+        ogDescription: ["Marca tus planes, explora las coincidencias y descubre el giro: aquí se agrupan actividades, no personas.", "Select your activities, explore the overlaps and discover the twist: this groups activities, not people."],
+        language: ["Idioma", "Language"],
+        map: ["Mapa de actividades de ocio agrupadas en cuatro tribus", "Map of leisure activities clustered into four tribes"],
+        eyebrow: ["Cuando elegir un plan parece imposible", "When choosing a plan feels impossible"],
+        headline: ["Llega el fin de semana. <span class=\"serif\">Nadie quiere el mismo plan.</span>", "The weekend is here. <span class=\"serif\">Nobody wants the same plan.</span>"],
+        intro: ["Tú propones un concierto. Alguien prefiere una ruta. Otra persona quiere quedarse en casa. Si todos queréis pasarlo bien, <strong>¿por qué cuesta tanto ponerse de acuerdo?</strong> En un trabajo con 18 personas buscamos qué actividades se parecían por la frecuencia con que las practicaban. Aparecieron cuatro grupos. Antes de ver cómo, prueba con tus propios planes.", "You suggest a concert. Someone prefers a hike. Someone else wants to stay home. If everyone wants a good time, <strong>why is agreeing so hard?</strong> In a project with 18 people, we looked for activities with similar patterns of participation. Four groups emerged. Before seeing how, try exploring your own activities."],
+        start: ["↓ Explora tus planes en el mapa", "↓ Explore your activities on the map"],
+        choose: ["¿Tus planes van juntos <span class=\"serif\">o cada uno por su lado?</span>", "Do your activities cluster together <span class=\"serif\">or spread across the map?</span>"],
+        instructions: ["Marca las actividades que sueles hacer en el mapa o en los botones. Las barras muestran qué proporción has marcado en cada grupo. Es un juego para explorar el mapa, no un test de personalidad.", "Select the activities you usually do on the map or with the buttons. The bars show the proportion selected in each group. This is a way to explore the map, not a personality test."],
+        clear: ["vaciar selección", "clear selection"],
+        formation: ["El giro: agrupamos planes, <span class=\"serif\">no personas.</span>", "The twist: we grouped activities, <span class=\"serif\">not people.</span>"],
+        similarity: ["Al marcar tus planes quizá has quedado entre varios grupos. Tiene sentido: <strong>el análisis no buscaba meter a cada persona en una tribu.</strong> Buscaba actividades con patrones parecidos en las respuestas. Si quienes hacen mucho cine también hacen mucha música, esas dos actividades pueden quedar cerca.", "Your choices may spread across several groups. That makes sense: <strong>the analysis was not trying to put each person into a tribe.</strong> It looked for activities with similar response patterns. If people who often go to the cinema also often enjoy music, those activities may end up close together."],
+        ward: ["Para formar los grupos usamos el <strong>método de Ward</strong>. Al principio, cada actividad está sola. En cada paso se unen los dos grupos cuya unión aumenta menos la variación interna. Esas uniones forman un árbol, llamado dendrograma. Al cortarlo a una altura elegida, quedan los grupos que vamos a interpretar.", "We used <strong>Ward’s method</strong> to build the groups. Each activity starts on its own. At each step, the two groups whose merger adds the least within-group variation are joined. These joins form a tree called a dendrogram. Cutting it at a chosen height gives the groups we then interpret."],
+        summary: ["<strong>La idea para recordar:</strong> dos planes pueden parecerte muy distintos y aun así quedar juntos si sus frecuencias se parecen entre las personas encuestadas. Los nombres de las «tribus» los ponemos después.", "<strong>The idea to remember:</strong> two activities can seem very different yet end up together if their frequencies follow similar patterns across respondents. We give the “tribes” their names afterwards."],
+        frequency: ["En estas 18 respuestas: lo más y menos frecuente", "In these 18 responses: most and least frequent"],
+        moreHiking: ["más: senderismo", "more: hiking"],
+        moreYoga: ["más: yoga", "more: yoga"],
+        moreVolunteering: ["más: voluntariado", "more: volunteering"],
+        lessFishing: ["menos: pesca", "less: fishing"],
+        lessGardening: ["menos: jardinería", "less: gardening"],
+        lessDancing: ["menos: baile", "less: dancing"],
+        differences: ['¿Hay diferencias <span class="serif">de verdad?</span>', 'Are the differences <span class="serif">real?</span>'],
+        anova: ['La tabla ANOVA compara dos cosas: cuánto varía la gente <strong>dentro</strong> de cada grupo y cuánto varía <strong>entre</strong> grupos. De ahí salen dos números.', 'The ANOVA table compares two things: how much people vary <strong>within</strong> each group and how much they vary <strong>between</strong> groups. This gives two numbers.'],
+        number: ["Número", "Number"],
+        meaning: ["Qué dice", "What it tells us"],
+        fMeaning: ["Si es alto, los grupos se separan más de lo que varían por dentro.", "A high value means the groups differ more from each other than they vary within themselves."],
+        significance: ["Sig. (p)", "Sig. (p)"],
+        pMeaning: ["La probabilidad de ver esa diferencia por pura casualidad. Cuanto más baja, mejor.", "The probability of seeing that difference purely by chance. The lower, the better."],
+        findings: ['F alto y p bajo salieron en <strong>bailar, pesca, cocina, trabajo voluntario y lectura</strong>. Son las actividades donde la gente más se reparte: unos las hacen mucho y otros casi nada. Para detectar casos raros también se miró la distancia de Mahalanobis con chi cuadrado.', 'High F and low p values appeared for <strong>dancing, fishing, cooking, voluntary work and reading</strong>. These are the activities where people differ most: some do them often and others hardly at all. Mahalanobis distance with chi-square was also examined to detect unusual cases.'],
+        limitsTitle: ["Antes de usarlo para decidir, <span class=\"serif\">mira hasta dónde llega.</span>", "Before using it to decide, <span class=\"serif\">check its limits.</span>"],
+        sample: ['Son <strong>18 personas</strong>. Sirve para practicar el método y ver cómo se forman los grupos, no para decir cómo se divierte la gente en general.', 'There are <strong>18 people</strong>. This is useful for practising the method and seeing how groups form, not for describing how people in general spend their leisure time.'],
+        gameLimit: ["El juego cuenta la proporción de actividades que marcas en cada grupo. <strong>No calcula tu pertenencia a un conglomerado</strong> ni reproduce el análisis de frecuencias del trabajo. Puedes cambiar la selección para ver cómo se mueve el resultado.", "The game counts the proportion of activities you select in each group. <strong>It does not calculate cluster membership</strong> or reproduce the project’s frequency analysis. Change your choices to see how the result moves."],
+        business: ["Si estás pensando en una propuesta para tu público, vuelve a esta pregunta: <strong>¿qué otras cosas hacen quienes ya se interesan por lo que ofreces?</strong> Busca esas coincidencias en tus propios datos antes de juntar dos propuestas. Este ejercicio sirve para entender cómo buscarlas; las 18 respuestas no bastan para decidir por tus clientes.", "If you are planning an offer for your audience, return to this question: <strong>what else do the people interested in your offer do?</strong> Look for those overlaps in your own data before combining two offers. This exercise helps explain how to look; 18 responses are not enough to decide for your customers."],
+        credits: ['Trabajo en grupo de Análisis del comportamiento del consumidor · Grado en Marketing y Dirección Comercial, UCAM · Murcia, abril de 2024. Página rehecha por Álvaro Pastor.', 'Group project for Consumer Behaviour Analysis · Degree in Marketing and Commercial Management, UCAM · Murcia, April 2024. Page rebuilt by Álvaro Pastor.'],
+        yourTribe: ["Tus planes en este mapa", "Your activities on this map"],
+        noTribe: ["El mapa empieza contigo", "Start with your activities"],
+        empty: ["Marca un plan que hagas habitualmente. Después añade otro: ¿quedan juntos o en grupos distintos?", "Select something you do regularly. Then add another activity: do they sit together or in different groups?"],
+        tie: ["Empate", "Tie"],
+        mixed: ["Has marcado la misma proporción de actividades en estos grupos. Prueba a añadir o quitar un plan y observa qué cambia.", "You selected the same proportion of activities in these groups. Try adding or removing one and see what changes."],
+        themeAuto: ["automático", "automatic"],
+        themeLight: ["claro", "light"],
+        themeDark: ["oscuro", "dark"],
+        themeLabel: ["Cambiar tema. Actual: ", "Change theme. Current: "],
+        themeNext: [". Siguiente: ", ". Next: "]
+      };
+      const ACTIVITIES = {
+        "videojuegos": ["videojuegos", "video games"], "juegos de mesa": ["juegos de mesa", "board games"],
+        "voluntariado": ["voluntariado", "volunteering"], "baile": ["baile", "dancing"],
+        "cine": ["cine", "cinema"], "arte": ["arte", "art"], "música": ["música", "music"],
+        "cocina": ["cocina", "cooking"], "fotografía": ["fotografía", "photography"], "yoga": ["yoga", "yoga"],
+        "pesca": ["pesca", "fishing"], "jardinería": ["jardinería", "gardening"], "meditación": ["meditación", "meditation"],
+        "picnics": ["picnics", "picnics"], "festivales": ["festivales", "festivals"], "viajes": ["viajes", "travel"],
+        "acampadas": ["acampadas", "camping"], "carrera": ["carrera", "running"], "natación": ["natación", "swimming"],
+        "deportes de interior": ["deportes de interior", "indoor sports"], "deportes": ["deportes", "sports"]
+      };
+      const GROUP_EN = {
+        social: { name: "Social tribe", short: "Social", desc: "Leisure with others: playing, helping out and moving together. The people are what matter." },
+        relax: { name: "Calm tribe", short: "Calm", desc: "Quiet, creative activities that slow things down. This is the largest group, with the widest range of interests." },
+        aventura: { name: "Adventure tribe", short: "Adventure", desc: "Breaking out of the routine: travel, festivals and the countryside. Weekend leisure that takes some planning ahead." },
+        deporte: { name: "Sport tribe", short: "Sport", desc: "Leisure measured in movement and physical effort, alone or as a team." }
+      };
+      function t(key) { return TEXT[key][language === "en" ? 1 : 0]; }
+      function activity(key) { return ACTIVITIES[key][language === "en" ? 1 : 0]; }
+      function groupName(g) { return language === "en" ? GROUP_EN[g.id].name : g.nombre; }
+      function groupShort(g) { return language === "en" ? GROUP_EN[g.id].short : g.nombre.replace("Tribu ", ""); }
+      function groupDescription(g) { return language === "en" ? GROUP_EN[g.id].desc : g.desc; }
+
       const GRUPOS = [
         { id: "social", nombre: "Tribu social", c: "var(--g-social)", x: 190, y: 170, acts: ["videojuegos", "juegos de mesa", "voluntariado", "baile"], desc: "Ocio que se hace con otros: jugar, colaborar, moverse en compañía. Lo importante es la gente." },
         { id: "relax", nombre: "Tribu de la calma", c: "var(--g-relax)", x: 560, y: 235, acts: ["cine", "arte", "música", "cocina", "fotografía", "yoga", "pesca", "jardinería", "meditación"], desc: "Planes tranquilos y creativos, de bajar el ritmo. Es el grupo más grande y el de los gustos más variados." },
@@ -262,47 +356,53 @@
         return e;
       }
 
-      GRUPOS.forEach(function (g) {
-        const n = g.acts.length;
-        const R = n === 9 ? 110 : 64;
-        const h = el("circle", { cx: g.x, cy: g.y, r: R + 46, class: "halo" }, svg);
-        h.style.setProperty("--c", g.c);
-        hal[g.id] = h;
-        const et = el("text", { x: g.x, y: g.y - R - 62, "text-anchor": "middle", class: "etiqueta-grupo" }, svg);
-        et.style.setProperty("--c", g.c);
-        et.textContent = g.nombre;
+      function renderGame() {
+        svg.replaceChildren();
+        chips.replaceChildren();
+        barras.replaceChildren();
+        GRUPOS.forEach(function (g) {
+          const n = g.acts.length;
+          const R = n === 9 ? 110 : 64;
+          const h = el("circle", { cx: g.x, cy: g.y, r: R + 46, class: "halo" }, svg);
+          h.style.setProperty("--c", g.c);
+          hal[g.id] = h;
+          const et = el("text", { x: g.x, y: g.y - R - 62, "text-anchor": "middle", class: "etiqueta-grupo" }, svg);
+          et.style.setProperty("--c", g.c);
+          et.textContent = groupName(g);
 
-        g.acts.forEach(function (a, i) {
-          const ang = (i / n) * Math.PI * 2 - Math.PI / 2;
-          const cx = g.x + Math.cos(ang) * R, cy = g.y + Math.sin(ang) * R;
-          const b = el("g", { class: "burbuja", tabindex: 0, role: "button", "aria-pressed": "false", "aria-label": a }, svg);
-          b.style.setProperty("--c", g.c);
-          el("circle", { cx: cx, cy: cy, r: 34 }, b);
-          const palabras = a.split(" ");
-          const t = el("text", { x: cx, y: cy + (palabras.length > 1 ? -2 : 4) }, b);
-          if (palabras.length > 1) {
-            palabras.forEach(function (p, k) {
-              const s = el("tspan", { x: cx, dy: k === 0 ? 0 : 12 }, t);
-              s.textContent = p;
-            });
-          } else t.textContent = a;
-          b.addEventListener("click", function () { alternar(a); });
-          b.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); alternar(a); } });
+          g.acts.forEach(function (a, i) {
+            const ang = (i / n) * Math.PI * 2 - Math.PI / 2;
+            const cx = g.x + Math.cos(ang) * R, cy = g.y + Math.sin(ang) * R;
+            const b = el("g", { class: "burbuja", tabindex: 0, role: "button", "aria-pressed": "false", "aria-label": activity(a) }, svg);
+            b.style.setProperty("--c", g.c);
+            el("circle", { cx: cx, cy: cy, r: 34 }, b);
+            const palabras = activity(a).split(" ");
+            const t = el("text", { x: cx, y: cy + (palabras.length > 1 ? -2 : 4) }, b);
+            if (palabras.length > 1) {
+              palabras.forEach(function (p, k) {
+                const s = el("tspan", { x: cx, dy: k === 0 ? 0 : 12 }, t);
+                s.textContent = p;
+              });
+            } else t.textContent = activity(a);
+            b.addEventListener("click", function () { alternar(a); });
+            b.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); alternar(a); } });
 
-          const c = document.createElement("button");
-          c.type = "button"; c.className = "chip"; c.textContent = a; c.setAttribute("aria-pressed", "false");
-          c.style.setProperty("--c", g.c);
-          c.addEventListener("click", function () { alternar(a); });
-          chips.appendChild(c);
-          nodos[a] = { b: b, c: c };
+            const c = document.createElement("button");
+            c.type = "button"; c.className = "chip"; c.textContent = activity(a); c.setAttribute("aria-pressed", "false");
+            c.style.setProperty("--c", g.c);
+            c.addEventListener("click", function () { alternar(a); });
+            chips.appendChild(c);
+            nodos[a] = { b: b, c: c };
+          });
+
+          const fila = document.createElement("div");
+          fila.className = "barra"; fila.style.setProperty("--c", g.c);
+          fila.innerHTML = "<span>" + groupShort(g) + "</span><div class=\"pista\"><i></i></div><b>0/" + n + "</b>";
+          barras.appendChild(fila);
+          barraEl[g.id] = fila;
         });
-
-        const fila = document.createElement("div");
-        fila.className = "barra"; fila.style.setProperty("--c", g.c);
-        fila.innerHTML = "<span>" + g.nombre.replace("Tribu ", "") + "</span><div class=\"pista\"><i></i></div><b>0/" + n + "</b>";
-        barras.appendChild(fila);
-        barraEl[g.id] = fila;
-      });
+        pintar();
+      }
 
       function alternar(a) { sel.has(a) ? sel.delete(a) : sel.add(a); pintar(); }
 
@@ -326,18 +426,68 @@
 
         if (!ganadores.length) {
           resultado.style.removeProperty("--c");
-          resultado.innerHTML = "<span class=\"mono\">Tu tribu</span><h3>Aún sin tribu</h3><p>Marca al menos una actividad que hagas de verdad, no la que quedaría bien.</p>";
+          resultado.innerHTML = '<span class="mono">' + t("yourTribe") + '</span><h3>' + t("noTribe") + '</h3><p>' + t("empty") + '</p>';
         } else if (ganadores.length === 1) {
           const g = ganadores[0];
           resultado.style.setProperty("--c", g.c);
-          resultado.innerHTML = "<span class=\"mono\">Tu tribu</span><h3>" + g.nombre + "</h3><p>" + g.desc + "</p>";
+          resultado.innerHTML = '<span class="mono">' + t("yourTribe") + '</span><h3>' + groupName(g) + '</h3><p>' + groupDescription(g) + '</p>';
         } else {
           resultado.style.setProperty("--c", ganadores[0].c);
-          resultado.innerHTML = "<span class=\"mono\">Empate</span><h3>" + ganadores.map(function (g) { return g.nombre.replace("Tribu ", ""); }).join(" + ") + "</h3><p>Repartes tu ocio por igual entre estas tribus. Un perfil mezclado, que también existe.</p>";
+          resultado.innerHTML = '<span class="mono">' + t("tie") + '</span><h3>' + ganadores.map(groupShort).join(" + ") + '</h3><p>' + t("mixed") + '</p>';
         }
       }
       document.getElementById("limpiar").addEventListener("click", function () { sel.clear(); pintar(); });
-      pintar();
+
+      function renderTheme() {
+        const keys = { auto: "themeAuto", light: "themeLight", dark: "themeDark" };
+        const order = ["auto", "light", "dark"];
+        const current = document.documentElement.dataset.pref;
+        const next = order[(order.indexOf(current) + 1) % order.length];
+        const button = document.getElementById("tema");
+        button.textContent = "◐ " + t(keys[current]);
+        button.setAttribute("aria-label", t("themeLabel") + t(keys[current]) + t("themeNext") + t(keys[next]));
+      }
+
+      function applyLanguage() {
+        document.documentElement.lang = language;
+        document.title = t("title");
+        document.querySelector('meta[name="description"]').content = t("description");
+        document.querySelector('meta[property="og:title"]').content = t("ogTitle");
+        document.querySelector('meta[property="og:description"]').content = t("ogDescription");
+        document.querySelectorAll("[data-i18n]").forEach(function (node) {
+          node.innerHTML = t(node.dataset.i18n);
+        });
+        document.querySelectorAll("[data-i18n-aria]").forEach(function (node) {
+          node.setAttribute("aria-label", t(node.dataset.i18nAria));
+        });
+        document.querySelectorAll("[data-language]").forEach(function (button) {
+          button.setAttribute("aria-pressed", String(button.dataset.language === language));
+        });
+        document.querySelectorAll("a[href]").forEach(function (link) {
+          const href = link.getAttribute("href");
+          const url = new URL(href, location.href);
+          // Keep external URLs and non-navigation protocols unchanged.
+          if (!(["http:", "https:", "file:"].includes(url.protocol)) || url.origin !== location.origin) return;
+          if (url.protocol === "file:" && /^(?:[a-z]+:|\/\/)/i.test(href)) return;
+          url.searchParams.set("lang", language);
+          // Preserve relative source paths so the marketing build can rewrite them.
+          const path = href.split(/[?#]/)[0];
+          link.setAttribute("href", path + url.search + url.hash);
+        });
+        renderGame();
+        renderTheme();
+      }
+      document.querySelectorAll("[data-language]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          language = button.dataset.language;
+          try { localStorage.setItem("marketing-language", language); } catch (e) { /* storage is optional */ }
+          const url = new URL(location.href);
+          url.searchParams.set("lang", language);
+          try { history.replaceState(null, "", url); } catch (e) { /* file previews can restrict history */ }
+          applyLanguage();
+        });
+      });
+      applyLanguage();
 
       // progreso y aparición
       const prog = document.getElementById("progreso");
@@ -358,7 +508,13 @@
         try { sig === "auto" ? localStorage.removeItem("marketing-theme") : localStorage.setItem("marketing-theme", sig); } catch (e) { }
         raiz.dataset.pref = sig;
         raiz.dataset.tema = sig === "auto" ? (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark") : sig;
+        renderTheme();
       });
+      if (window.matchMedia) {
+        matchMedia("(prefers-color-scheme: light)").addEventListener("change", function (event) {
+          if (raiz.dataset.pref === "auto") raiz.dataset.tema = event.matches ? "light" : "dark";
+        });
+      }
     })();
   </script>
 </body>
