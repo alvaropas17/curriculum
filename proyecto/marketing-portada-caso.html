@@ -2,143 +2,485 @@
 <html lang="es">
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Dame 4 minutos y te enseño por qué tu portada no vende · Álvaro Pastor</title>
-  <meta name="description" content="Casi todas las portadas enseñan lo que te impresiona a ti, no lo que gana quien entra. El antes y después real de la mía y una prueba de cinco segundos para la tuya.">
+  <title>Una portada que invita a seguir leyendo · Álvaro Pastor</title>
+  <meta name="description" content="Un caso real sobre cómo explicar mejor tu web: capturas del antes y después, cuatro cambios y una prueba sencilla para aplicar en tu portada.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="author" content="Álvaro Pastor Periago">
   <link rel="canonical" href="https://marketing.alvaropastor.dev/portada/">
-  <meta property="og:type" content="article"><meta property="og:title" content="Dame 4 minutos y te enseño por qué tu portada no vende."><meta property="og:description" content="Casi todas las portadas fallan por lo mismo. El antes y después real de la mía y una prueba de cinco segundos para la tuya."><meta property="og:image" content="https://marketing.alvaropastor.dev/assets/portada-caso/despues.webp"><meta name="twitter:card" content="summary_large_image">
+  <meta property="og:type" content="article"><meta property="og:site_name" content="Álvaro Pastor Periago."><meta property="og:locale" content="es_ES"><meta property="og:url" content="https://marketing.alvaropastor.dev/portada/">
+  <meta property="og:title" content="Una portada que invita a seguir leyendo."><meta property="og:description" content="Un caso real sobre cómo explicar mejor tu web: capturas del antes y después, cuatro cambios y una prueba sencilla para aplicar en tu portada.">
+  <meta property="og:image" content="https://marketing.alvaropastor.dev/assets/og/portada.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Dibujo antes y después: la portada con cifras frente a la portada que dice lo que ganas.">
+  <meta property="article:published_time" content="2026-11-14"><meta property="article:author" content="Álvaro Pastor Periago">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@alpas17_"><meta name="twitter:title" content="Una portada que invita a seguir leyendo."><meta name="twitter:description" content="Un caso real sobre cómo explicar mejor tu web: capturas del antes y después, cuatro cambios y una prueba sencilla para aplicar en tu portada."><meta name="twitter:image" content="https://marketing.alvaropastor.dev/assets/og/portada.jpg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://marketing.alvaropastor.dev/portada/#articulo","headline":"Una portada que invita a seguir leyendo","description":"Un caso real sobre cómo explicar mejor tu web: capturas del antes y después, cuatro cambios y una prueba sencilla para aplicar en tu portada.","inLanguage":"es","datePublished":"2026-11-14","dateModified":"2026-11-14","image":"https://marketing.alvaropastor.dev/assets/og/portada.jpg","mainEntityOfPage":"https://marketing.alvaropastor.dev/portada/","author":{"@type":"Person","name":"Álvaro Pastor Periago","url":"https://x.com/alpas17_"},"publisher":{"@type":"Person","name":"Álvaro Pastor Periago"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog de marketing","item":"https://marketing.alvaropastor.dev/"},{"@type":"ListItem","position":2,"name":"Una portada que invita a seguir leyendo","item":"https://marketing.alvaropastor.dev/portada/"}]}]}</script>
   <script>try{var t=localStorage.getItem('marketing-theme')||'light';document.documentElement.dataset.pref=t;document.documentElement.dataset.tema=t==='auto'?(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'):t}catch(e){}</script>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles/caso-jane.css">
-  <style>
-    .caso-moviles{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;max-width:760px;margin:2rem auto 0}
-    .caso-moviles figure{margin:0}.caso-moviles img{display:block;width:100%;height:auto;border:1px solid var(--linea);border-radius:18px}
-    .caso-moviles figcaption{font-size:.8rem;color:var(--texto-3);margin-top:.6rem}
-    .caso-cifra{display:flex;align-items:baseline;gap:.6rem;margin-top:1.6rem}.caso-cifra b{font:600 3rem/1 var(--display);color:var(--luz)}
-    .caso-pasos{padding-left:1.4rem}.caso-pasos li{padding-block:.5rem}.caso-pasos li strong{display:block}
-    /* Estructura por bloques, como la pagina de la herramienta */
-    .caso-hero{padding:clamp(3rem,7vw,5rem) 0 2rem;max-width:970px}
-    .caso-hero h1{font-size:clamp(3rem,6.5vw,5.4rem);margin:1rem 0 1.4rem}.caso-hero h1 em{color:var(--luz)}
-    .caso-sellos{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;list-style:none;padding:0;margin:1.6rem 0 0;font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--texto-3)}
-    .caso-sellos li::before{content:"\2713 ";color:var(--luz)}
-    .acciones-hero{display:flex;flex-wrap:wrap;gap:.8rem}
-    .caso-mapa{padding-block:1.6rem 2.4rem;border-top:1px solid var(--linea)}
-    .caso-mapa>h2{font:500 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--texto-3);margin:0 0 1rem}
-    .caso-mapa ol{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0;padding:0;border:2px solid var(--texto);border-radius:6px;background:var(--papel)}
-    .caso-mapa li{position:relative;border-right:2px solid var(--texto);min-width:0}.caso-mapa li:last-child{border-right:0}
-    .caso-mapa a{display:flex;flex-direction:column;gap:.35rem;height:100%;padding:1rem 1rem 1.15rem;min-height:44px}
-    .caso-mapa a:hover strong{color:var(--luz)}
-    .mapa-num{font:italic 400 1.5rem/1 var(--serif);color:var(--texto-3)}
-    .caso-mapa strong{font:600 1rem/1.25 var(--sans)}.caso-mapa a>span:last-child{font-size:.8rem;line-height:1.5;color:var(--texto-2)}
-    .mapa-aqui{background:var(--fondo-2)}.mapa-aqui .mapa-num{color:var(--luz)}
-    .mapa-aqui em{position:absolute;top:-.8rem;right:.7rem;font:italic 400 1.05rem var(--serif);color:var(--luz);background:var(--fondo);padding:0 .4rem;transform:rotate(-3deg)}
-    .caso-bloque{scroll-margin-top:72px}
-    .caso-bloque>.etiqueta,.caso-lectura .etiqueta{font:500 .72rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--luz)}
-    .caso-bloque>.seccion-cab{margin-top:1.2rem}
-    .caso-cierre{background:var(--luz-fondo);color:var(--sobre-luz);border-radius:24px;padding:clamp(2rem,5vw,3.5rem)!important;border:0!important;margin-block:3rem}
-    .caso-cierre .mono,.caso-cierre p:not(.mono){color:var(--sobre-luz)!important}
-    .caso-cierre .boton{background:var(--sobre-luz);color:#fff}
-    @media(max-width:900px){.caso-mapa ol{grid-template-columns:repeat(2,minmax(0,1fr))}.caso-mapa li{border-bottom:2px solid var(--texto)}.caso-mapa li:nth-child(2n){border-right:0}.caso-mapa li:last-child{border-bottom:0;grid-column:1/-1}}
-    @media(max-width:560px){.caso-moviles{gap:.8rem}.caso-mapa ol{grid-template-columns:1fr}.caso-mapa li{border-right:0}.caso-mapa li:last-child{grid-column:auto}}
-    /* Mismos márgenes en todo: un único ancho y laterales estrechos */
-    .ancho{width:min(1160px,100% - 2*var(--lateral))!important}
-    .caso-lectura,.caso-hero,.caso-entradilla,.caso-contexto,.caso-moviles{max-width:none}
-    .caso-moviles{max-width:900px}
-    :root{--lateral:24px}
-    @media(max-width:560px){:root{--lateral:20px}}
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&amp;family=Instrument+Sans:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/portada-caso.css">
 </head>
-<body>
-  <header class="barra"><div class="ancho"><a class="marca" href="marketing-portada.html">Álvaro Pastor Periago<span>.</span></a><nav aria-label="Secciones"><a href="#escena" data-en="story">historia</a><a href="#comparativa" data-en="before / after">antes y después</a><a href="#como" data-en="how">cómo</a><a href="#prueba" data-en="try it">pruébalo</a></nav><a class="volver" href="marketing-portada.html" data-en="← Back to the blog">← Volver al blog</a><button class="tema" id="idioma" type="button" aria-label="Switch to English">EN</button><button class="tema" id="tema" type="button" aria-label="Cambiar tema">◐ claro</button></div></header>
-  <main class="ancho caso-jane">
-    <header class="caso-hero"><p class="mono" data-en="Start here · My own homepage · 14 Nov 2026">Empieza aquí · Mi propia portada · 14 nov 2026</p><h1><span data-en="Give me 4 minutes">Dame 4 minutos</span> <em data-en="and I’ll show you why your homepage isn’t selling.">y te enseño por qué tu portada no vende.</em></h1><p class="caso-entradilla" data-en="Almost every homepage fails the same way: it shows what impresses you, not what the visitor gains. Mine did too. Here is the real before and after, and a five-second test for yours.">Casi todas las portadas fallan por lo mismo: enseñan lo que te impresiona a ti, no lo que gana quien entra. A mí me pasó con la mía. Aquí tienes el antes y después real, y una prueba de cinco segundos para la tuya.</p>
-      <div class="acciones-hero"><a class="boton" href="#escena" data-en="See why it isn’t selling ↓">Ver por qué no vende ↓</a></div>
-      <ul class="caso-sellos"><li data-en="Real screenshots">Capturas reales</li><li data-en="Reversible changes">Cambios reversibles</li><li data-en="No invented results">Sin resultados inventados</li></ul>
+<body class="bg-paper text-ink font-sans antialiased selection:bg-accent selection:text-white">
+
+  <div id="editorial-toast" role="status" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <div class="bg-ink text-paper px-4 py-3 rounded-xl shadow-lg flex items-center gap-2.5 text-xs font-medium">
+      <span class="w-2 h-2 rounded-full bg-accent"></span>
+      <span id="editorial-toast-text"></span>
+    </div>
+  </div>
+
+  <header class="sticky top-0 z-40 bg-paper/90 backdrop-blur-md border-b border-rule">
+    <div class="w-full h-[2px]"><div id="reading-progress" class="h-full bg-accent w-0 transition-all duration-75"></div></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center gap-3 sm:gap-4">
+      <a href="marketing-portada.html" class="font-serif text-lg sm:text-xl font-medium tracking-tight text-ink hover:opacity-80 transition-opacity shrink-0 mr-auto">Álvaro Pastor Periago<span class="text-accent font-semibold">.</span></a>
+      <nav aria-label="Secciones" class="hidden md:flex items-center gap-6 text-xs font-medium text-ink-muted">
+        <a href="#sec-historia" data-nav="sec-historia" class="nav-link hover:text-ink transition-colors py-1" data-en="story">historia</a>
+        <a href="#sec-antes-despues" data-nav="sec-antes-despues" class="nav-link hover:text-ink transition-colors py-1" data-en="before / after">antes y después</a>
+        <a href="#sec-como" data-nav="sec-como" class="nav-link hover:text-ink transition-colors py-1" data-en="how">cómo</a>
+        <a href="#sec-reglas" data-nav="sec-reglas" class="nav-link hover:text-ink transition-colors py-1" data-en="4 rules">4 reglas</a>
+        <a href="#sec-pruebalo" data-nav="sec-pruebalo" class="nav-link hover:text-ink transition-colors py-1" data-en="try it">pruébalo</a>
+      </nav>
+      <a href="marketing-portada.html" class="hidden sm:inline-flex items-center text-xs font-medium text-ink-muted hover:text-ink px-3 py-1.5 rounded-lg border border-rule bg-paper-card hover:border-ink-light transition-all shrink-0" data-en="← Back to the blog">← Volver al blog</a>
+      <button id="idioma" type="button" aria-label="Switch to English" class="font-mono text-[11px] text-ink-muted border border-rule rounded-full px-3 min-h-[34px] hover:text-accent hover:border-accent transition-colors cursor-pointer shrink-0">EN</button>
+      <button id="tema" type="button" aria-label="Cambiar tema" class="font-mono text-[11px] text-ink-muted border border-rule rounded-full px-3 min-h-[34px] hover:text-accent hover:border-accent transition-colors cursor-pointer shrink-0">◐ claro</button>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-16 pb-20">
+
+    <header class="max-w-3xl mx-auto text-left sm:text-center pb-8 sm:pb-10">
+      <div class="inline-flex flex-wrap items-center justify-start sm:justify-center gap-2 font-mono text-xs text-ink-muted tracking-wide uppercase mb-5">
+        <span data-en="Real case · My own website">Caso real · Mi propia web</span>
+        <span>·</span>
+        <time datetime="2026-11-14" data-en="14 Nov 2026">14 nov 2026</time>
+      </div>
+      <h1 class="editorial-title"><span data-en="Give visitors a reason to">Dale al lector un motivo para</span> <em data-en="keep reading.">seguir leyendo.</em></h1>
+      <p class="editorial-deck" data-en="My homepage explained how my tool worked. It forgot to explain why anyone should care. Here is the before and after, with four changes you can try on your own website.">Mi portada explicaba cómo funcionaba mi herramienta. Olvidaba explicar por qué debía importarle a quien entraba. Este es el antes y después, con cuatro cambios que puedes probar en tu propia web.</p><div class="editorial-byline"><span>Álvaro Pastor Periago</span><span data-en="4 min read · Real screenshots">4 min de lectura · Capturas reales</span></div>
     </header>
 
-    <nav class="caso-mapa" aria-labelledby="mapa-titulo"><h2 id="mapa-titulo" data-en="What you’ll see">Lo que vas a ver</h2>
-      <ol>
-        <li class="mapa-aqui"><a href="#escena"><span class="mapa-num">I</span><strong data-en="The mistake I couldn’t see">El error que no veía</strong><span data-en="Showcase numbers: why they don’t sell.">Cifras de escaparate: por qué no venden.</span></a><em data-en="You are here">Estás aquí</em></li>
-        <li><a href="#comparativa"><span class="mapa-num">II</span><strong data-en="Before and after">Antes y después</strong><span data-en="Real screenshots, desktop and mobile.">Capturas reales, escritorio y móvil.</span></a></li>
-        <li><a href="#como"><span class="mapa-num">III</span><strong data-en="How to change it without knowing design">Cómo cambiarla sin saber diseño</strong><span data-en="Point at the page instead of describing it.">Señalando la página en vez de describirla.</span></a></li>
-        <li><a href="#decisiones"><span class="mapa-num">IV</span><strong data-en="4 rules you can copy today">4 reglas que puedes copiar hoy</strong><span data-en="What changed, and why it works.">Qué cambió y por qué funciona.</span></a></li>
-        <li><a href="#prueba"><span class="mapa-num">V</span><strong data-en="The five-second test">La prueba de 5 segundos</strong><span data-en="Three questions for your homepage.">Tres preguntas para tu portada.</span></a></li>
-      </ol>
-    </nav>
-
-    <div class="caso-lectura"><section id="escena" class="caso-bloque"><p class="etiqueta" data-en="I · The mistake I couldn’t see">I · El error que no veía</p><h2 data-en="My homepage was full of showcase numbers.">Mi portada estaba llena de cifras de escaparate.</h2><p data-en="November 13, at night. I had just published Agent History Search, the tool that lets your agent recover what you did in earlier chats. I opened my homepage as if I were someone else.">13 de noviembre, por la noche. Acababa de publicar Agent History Search, la herramienta que deja a tu agente recuperar lo que hiciste en chats anteriores. Abrí mi portada como si fuera otra persona.</p><p data-en="A big headline. Then four numbers: 5 MCP servers, 20 skills, 6 agents, 0.1 s. Two buttons side by side. All of it true. None of it answered the only question a visitor brings: what does this do for me?">Un titular grande. Después, cuatro cifras: 5 servidores MCP, 20 skills, 6 agentes, 0,1 s. Dos botones juntos. Todo cierto. Nada respondía a la única pregunta que trae quien entra: ¿qué hace esto por mí?</p><aside class="caso-giro" data-en="The numbers impressed me because I knew what was behind them. The visitor didn’t. That’s a showcase number: only someone who already knows what’s behind it understands it.">Las cifras me impresionaban a mí porque sabía qué había detrás. A quien entraba, no. Eso es una cifra de escaparate: solo la entiende quien ya sabe lo que hay detrás.</aside></section></div>
-
-    <section class="comparativa caso-bloque" id="comparativa" aria-labelledby="comparativa-titulo"><p class="etiqueta" data-en="II · Before and after">II · Antes y después</p><div class="seccion-cab"><h2 id="comparativa-titulo" data-en="Same website. A different first screen.">La misma web. Otra primera pantalla.</h2><span class="mono" data-en="Drag to compare">Arrastra para comparar</span></div>
-      <figure class="caso-captura">
-        <div class="caso-slider" style="--corte:50%">
-          <img id="captura-despues" src="../assets/portada-caso/despues.webp" width="1440" height="900" alt="Portada nueva: beneficio en el titular, un solo botón y un ejemplo real con el tiempo de búsqueda" draggable="false">
-          <img id="captura-antes" src="../assets/portada-caso/antes.webp" width="1440" height="900" alt="Portada anterior: titular, dos botones y cuatro cifras sueltas" draggable="false">
-          <span class="caso-lado caso-lado-antes" data-en="Before">Antes</span>
-          <span class="caso-lado caso-lado-despues" data-en="After">Después</span>
-          <div class="caso-separador" aria-hidden="true"><span>‹ ›</span></div>
-          <input id="comparador" type="range" min="0" max="100" step="1" value="50" aria-label="Comparar la portada anterior y la nueva" aria-describedby="pie-captura">
+    <section class="reader-brief max-w-[68ch] mx-auto mb-12 sm:mb-14" aria-labelledby="reader-brief-title">
+      <div class="bg-paper-card rounded-2xl border border-rule p-6 sm:p-7 space-y-4 shadow-2xs">
+        <div class="flex items-center justify-between gap-3">
+          <span id="reader-brief-title" class="font-mono text-xs font-semibold uppercase tracking-wider text-accent" data-en="What you can use on your website">Lo que puedes aplicar en tu web</span>
+          <span class="font-mono text-[11px] text-ink-light" data-en="Practical read · 4 min">Lectura práctica · 4 min</span>
         </div>
-        <figcaption id="pie-captura" data-en="Drag the divider to explore the before and after. You can also use the arrow keys when the slider is focused.">Arrastra la línea para explorar el antes y el después. También puedes usar las flechas del teclado al seleccionar el comparador.</figcaption>
-      </figure>
-      <div class="caso-moviles"><figure><img src="../assets/portada-caso/antes-movil.webp" width="780" height="1688" loading="lazy" alt="Portada anterior en el móvil"><figcaption data-en="Before · mobile">Antes · móvil</figcaption></figure><figure><img src="../assets/portada-caso/despues-movil.webp" width="780" height="1688" loading="lazy" alt="Portada nueva en el móvil"><figcaption data-en="After · mobile">Después · móvil</figcaption></figure></div>
-      <p class="caso-contexto" data-en="Real screenshots of the live website, taken minutes before and after publishing, with the same browser and window sizes (1440 × 900 and 390 × 844).">Capturas reales de la web publicada, tomadas minutos antes y después de publicar, con el mismo navegador y tamaños de ventana (1440 × 900 y 390 × 844).</p></section>
+        <p class="text-sm sm:text-[15px] text-ink-muted leading-relaxed" data-en="A headline that explains the benefit. An example that supports it. A clear next step. You do not need to make software to use these ideas.">Un titular que explique el beneficio. Un ejemplo que lo sostenga. Un siguiente paso claro. No necesitas hacer software para aplicar estas ideas.</p>
+        <p class="evidence-note" data-en="<strong>Scope of this case:</strong> a comparison of the message and layout. The screenshots show what changed; they do not demonstrate a sales increase."><strong>Alcance del caso:</strong> una comparación del mensaje y la presentación. Las capturas muestran qué cambió; no demuestran un aumento de ventas.</p><a class="editorial-text-link" href="#sec-reglas" data-en="Go to the four changes ↓">Ir a los cuatro cambios ↓</a>
+      </div>
+    </section>
 
-    <div class="caso-lectura"><section id="como" class="caso-bloque"><p class="etiqueta" data-en="III · How to change it without knowing design">III · Cómo cambiarla sin saber diseño</p><h2 data-en="I stopped describing changes. I pointed at them.">Dejé de describir los cambios. Los señalé.</h2><p data-en="Describing a website in words is slow: “the second card, the button under the heading, no, the other one”. So I used a selector I built for myself. I click the part of the page I don’t like, write what I want in one sentence and press Send. My agent receives the exact element and changes the code.">Describir una web con palabras es lento: «la segunda tarjeta, el botón de debajo del título, no, el otro». Así que usé un selector que construí para mí. Hago clic en la parte de la página que no me gusta, escribo en una frase lo que quiero y pulso Enviar. Mi agente recibe el elemento exacto y cambia el código.</p>
-      <div class="caso-cifra"><b>12</b><span data-en="changes requested by pointing at the page, in a single session.">cambios pedidos señalando la página, en una sola sesión.</span></div>
-      <ol class="caso-pasos"><li><strong data-en="I looked at it on my phone.">Lo miré en el móvil.</strong><span data-en="That’s where most visitors arrive. The layout broke and the button was half width.">Es donde llega casi todo el mundo. La maqueta se rompía y el botón ocupaba medio ancho.</span></li><li><strong data-en="I pointed and wrote one sentence.">Señalé y escribí una frase.</strong><span data-en="“The visitor doesn’t know what ‘expand it’ means. Use very simple words.”">«El usuario no sabe qué es “ampliarlo”. Ponlo con palabras muy sencillas.»</span></li><li><strong data-en="I reviewed the result and pointed again.">Revisé el resultado y volví a señalar.</strong><span data-en="Every change was reversible: I saved a restore point before starting.">Cada cambio era reversible: guardé un punto de restauración antes de empezar.</span></li></ol></section></div>
+    <figure class="evidence-comparison mb-16 sm:mb-20">
+    <div class="space-y-3">
+      <div class="flex items-center justify-between gap-3 font-mono text-xs px-1">
+        <span class="inline-flex items-center gap-1.5 text-ink-muted"><span class="w-2 h-2 rounded-full bg-ink-light"></span><span data-en="BEFORE (internal numbers, 2 buttons)">ANTES (Cifras internas y 2 botones)</span></span>
+        <span class="text-ink-light hidden sm:inline" data-en="← Drag the divider →">← Arrastra el divisor →</span>
+        <span class="inline-flex items-center gap-1.5 text-ok font-medium"><span data-en="AFTER (clear benefit, real proof)">DESPUÉS (Beneficio claro y prueba real)</span><span class="w-2 h-2 rounded-full bg-ok"></span></span>
+      </div>
+      <div id="compare-container" role="slider" tabindex="0" aria-label="Comparador interactivo entre la versión antes y después en escritorio" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" class="relative w-full aspect-[16/10] rounded-2xl overflow-hidden border border-rule bg-paper-card shadow-sm select-none cursor-ew-resize">
+        <img id="captura-despues" fetchpriority="high" decoding="async" src="../assets/portada-caso/despues.webp" data-src-en="../assets/portada-caso/despues-en.webp" width="1440" height="900" alt="Portada después del cambio en escritorio" draggable="false" class="absolute inset-0 w-full h-full object-cover object-top pointer-events-none">
+        <div id="compare-before-clip" class="absolute inset-0 w-full h-full pointer-events-none" style="clip-path: inset(0 50% 0 0);">
+          <img id="captura-antes" decoding="async" src="../assets/portada-caso/antes.webp" data-src-en="../assets/portada-caso/antes-en.webp" width="1440" height="900" alt="Portada antes del cambio en escritorio" draggable="false" class="w-full h-full object-cover object-top">
+        </div>
+        <div id="compare-divider" class="compare-slider-handle absolute top-0 bottom-0 w-0.5 bg-accent shadow-md pointer-events-none" style="left: 50%;">
+          <div class="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-paper-card border-2 border-accent shadow-md flex items-center justify-center text-accent">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l-4 3 4 3m8-6l4 3-4 3"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+      <figcaption class="mt-3 text-center font-mono text-xs text-ink-light" data-en="Drag the bar to compare my homepage before (left) and after (right). Real screenshots.">Arrastra la barra para comparar mi portada antes (izquierda) y después (derecha). Capturas reales.</figcaption>
+    </figure>
 
-    <section class="caso-decisiones caso-bloque" id="decisiones"><p class="etiqueta" data-en="IV · 4 rules you can copy today">IV · 4 reglas que puedes copiar hoy</p><div class="seccion-cab"><h2 data-en="Four rules that make any offer easier to understand.">Cuatro reglas que hacen más fácil entender cualquier oferta.</h2></div><div class="caso-cuatro"><article><span class="mono">01</span><h3 data-en="Benefit before numbers.">Beneficio antes que cifras.</h3><p data-en="From “5 MCP servers” to “imagine opening a new chat and your agent already knows what you did yesterday”.">De «5 servidores MCP» a «imagina abrir un chat nuevo y que tu agente ya sepa lo que hicisteis ayer».</p></article><article><span class="mono">02</span><h3 data-en="Show it working.">Enseñarlo funcionando.</h3><p data-en="A real example that plays the search with its measured time: 376 ms. You see what to expect before reading a word more.">Un ejemplo real que reproduce la búsqueda con su tiempo medido: 376 ms. Ves qué esperar antes de leer nada más.</p></article><article><span class="mono">03</span><h3 data-en="One clear next step.">Un solo paso siguiente.</h3><p data-en="Two competing buttons became one: “See what your agent gains ↓”. It invites you to scroll and says why.">Dos botones que competían pasaron a uno: «Mira qué gana tu agente ↓». Invita a bajar y dice para qué.</p></article><article><span class="mono">04</span><h3 data-en="Words anyone understands.">Palabras que entiende cualquiera.</h3><p data-en="“Memory, eyes and hands” instead of technical labels. “Under half a second” instead of “226 ms to find it, 150 ms to expand it”.">«Memoria, ojos y manos» en vez de etiquetas técnicas. «Menos de medio segundo» en vez de «226 ms encontrarlo, 150 ms ampliarlo».</p></article></div></section>
+    <article class="space-y-20 sm:space-y-24">
 
-    <div class="caso-lectura"><section id="prueba" class="caso-bloque"><p class="etiqueta" data-en="V · What this doesn’t prove">V · Lo que no demuestra</p><h2 data-en="A clearer homepage. A result still to measure.">Una portada más clara. Un resultado por medir.</h2><p data-en="The new homepage changes the order in which you discover what I do: first what you gain, then a real example, then how it works and why you can trust it. It does not prove yet that more people try the tool or write to me.">La portada nueva cambia el orden en el que descubres lo que hago: primero qué ganas, después un ejemplo real, luego cómo funciona y por qué puedes fiarte. Todavía no demuestra que más gente pruebe la herramienta o me escriba.</p><p data-en="The next step is to compare, with similar traffic, how many visitors reach the tool page and how many start the conversation. When I have the numbers, I’ll publish them here, even if the change barely moves anything.">El siguiente paso es comparar, con tráfico parecido, cuántos visitantes llegan a la página de la herramienta y cuántos empiezan la conversación. Cuando tenga los números los publicaré aquí, aunque el cambio apenas mueva nada.</p></section>
+      <section id="sec-historia" class="max-w-[68ch] mx-auto scroll-mt-24 space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs font-semibold uppercase tracking-widest text-accent" data-en="I · Story · The mistake I couldn’t see">I · Historia · El error que no veía</span>
+          <div class="h-px bg-rule flex-1"></div>
+        </div>
+        <h2 class="font-serif text-2xl sm:text-4xl font-normal text-ink leading-tight" data-en="I was answering a question the visitor had not asked.">Respondía a una pregunta que el lector no había hecho.</h2>
+        <div class="space-y-5 text-base sm:text-[17px] text-ink-muted leading-[1.8]">
+          <p class="editorial-dropcap" data-en="I had just put together <strong class='font-semibold text-ink'>Agent History Search</strong> and was proud of how it worked inside. So when I wrote the homepage I put at the very top what impressed me most: <strong class='font-semibold text-ink'>5 MCP servers, 20 skills, 6 agents and searches in 0.1 s</strong>. And right below, two different buttons competing for the click.">Acababa de montar <strong class="font-semibold text-ink">Agent History Search</strong> y estaba orgulloso de cómo funcionaba por dentro. Así que, cuando escribí la portada, puse arriba del todo lo que a mí me parecía más impresionante: <strong class="font-semibold text-ink">5 servidores MCP, 20 skills, 6 agentes y búsquedas en 0,1 s</strong>. Y justo debajo, dos botones distintos compitiendo por el clic.</p>
+          <p data-en="When I looked at it through the eyes of someone arriving for the first time, I saw the flaw: if you don’t know what an MCP server is or how the system is built inside, that screen makes you work to guess what it’s for.">Cuando la miré con los ojos de alguien que llega por primera vez, me di cuenta del fallo: si no sabes qué es un servidor MCP ni cómo está construido el sistema por dentro, esa pantalla te obliga a hacer un esfuerzo mental para adivinar para qué sirve.</p>
+          <p data-en="I was explaining the machinery before the benefit. The visitor first needed a simpler answer: what can I do with this that I cannot do now?">Estaba explicando la maquinaria antes que el beneficio. Quien entraba necesitaba primero una respuesta más sencilla: ¿qué puedo hacer con esto que ahora no puedo?</p>
+        </div>
+        <aside class="bg-paper-card border border-rule rounded-2xl p-6 sm:p-7 shadow-2xs space-y-3 my-6">
+          <div class="flex items-center justify-between gap-3">
+            <span class="font-mono text-xs font-semibold uppercase tracking-wider text-accent" data-en="Key diagnosis">Diagnóstico clave</span>
+            <span class="font-mono text-[11px] text-ink-light" data-en="What you take from this story">Lo que te llevas de esta historia</span>
+          </div>
+          <h3 class="font-serif text-xl sm:text-2xl text-ink" data-en="The “showcase number” syndrome">El síndrome de la «cifra de escaparate»</h3>
+          <p class="text-sm sm:text-[15px] text-ink-muted leading-relaxed" data-en="On my website it was “5 MCP servers, 20 skills and 6 agents”. In a shop or service it’s usually “10+ years of experience”, “360° methodology” or “over 500 references”. These details can build trust, but <strong class='font-semibold text-ink'>they do not replace an explanation of what the visitor gains</strong>.">En mi web eran «5 servidores MCP, 20 skills y 6 agentes». En una tienda o servicio suelen ser «+10 años de experiencia», «metodología 360°» o «más de 500 referencias». Estos datos pueden aportar confianza, pero <strong class="font-semibold text-ink">no sustituyen la explicación de qué gana quien acaba de entrar</strong>.</p>
+          <div class="pt-2 border-t border-rule text-xs sm:text-sm text-ink font-medium" data-en="→ What to do on your website: find the first number or technical word in your header and swap it for the concrete result your visitor gets.">→ Qué hacer en tu web: localiza el primer número o palabra técnica de tu cabecera y cámbialo por el resultado concreto que obtiene quien te visita.</div>
+        </aside>
+        <figure class="editorial-figure">
+          <div class="figure-topline"><span data-en="Fig. 01 · The editorial choice">Fig. 01 · La decisión editorial</span><span data-en="Illustration, not data">Ilustración, no datos</span></div>
+          <svg viewBox="0 0 560 310" role="img" aria-labelledby="editorial-art-title editorial-art-desc">
+            <title id="editorial-art-title" data-en="Two pages: listing features versus making the benefit visible">Dos páginas: enumerar características frente a destacar el beneficio</title>
+            <desc id="editorial-art-desc" data-en="An open notebook with many equally sized blocks on the left. On the right, a highlighted headline, an example and one primary button. A pencil rests beside it.">Un cuaderno abierto con muchos bloques iguales a la izquierda. A la derecha, un titular subrayado, un ejemplo y un botón principal. Un lápiz descansa al lado.</desc>
+            <ellipse cx="266" cy="281" rx="219" ry="13" class="soft"/>
+            <path d="M42 50L251 36L268 268L59 283Z" class="sheet-edge"/>
+            <path d="M268 268L482 280L496 45L282 34Z" class="sheet-edge"/>
+            <path d="M38 39L251 28Q266 29 272 39L268 266Q258 256 248 258L54 273Z" class="sheet"/>
+            <path d="M272 39Q283 29 296 30L495 38L481 271L289 259Q276 258 268 266Z" class="sheet"/>
+            <path d="M272 40L268 263M54 267L247 253M290 254L479 265" class="line" opacity=".5"/>
+            <rect x="67" y="62" width="65" height="5" rx="2" class="muted"/>
+            <rect x="67" y="83" width="150" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="67" y="95" width="136" height="3" rx="1.5" class="muted" opacity=".55"/>
+            <rect x="67" y="119" width="71" height="40" rx="3" class="soft"/>
+            <rect x="148" y="119" width="71" height="40" rx="3" class="soft"/>
+            <rect x="67" y="169" width="71" height="40" rx="3" class="soft"/>
+            <rect x="148" y="169" width="71" height="40" rx="3" class="soft"/>
+            <rect x="77" y="130" width="42" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="77" y="142" width="30" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="77" y="180" width="42" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="77" y="192" width="30" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="158" y="130" width="42" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="158" y="142" width="30" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="158" y="180" width="42" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="158" y="192" width="30" height="3" rx="1.5" class="muted" opacity=".55"/>
+            <rect x="67" y="228" width="71" height="16" rx="8" class="muted" opacity=".45"/>
+            <rect x="148" y="228" width="71" height="16" rx="8" class="muted" opacity=".45"/>
+            <rect x="306" y="63" width="47" height="4" rx="2" class="muted"/>
+            <path d="M302 100L464 96L463 111L303 115Z" class="mark"/>
+            <rect x="305" y="83" width="141" height="7" rx="2" class="ink"/>
+            <rect x="305" y="99" width="152" height="7" rx="2" class="ink"/>
+            <rect x="305" y="122" width="133" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="305" y="134" width="112" height="3" rx="1.5" class="muted" opacity=".55"/>
+            <rect x="305" y="154" width="155" height="50" rx="4" class="soft"/>
+            <rect x="314" y="162" width="24" height="33" rx="2" class="sheet"/>
+            <rect x="348" y="165" width="98" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="348" y="177" width="84" height="3" rx="1.5" class="muted" opacity=".55"/><rect x="348" y="189" width="68" height="3" rx="1.5" class="muted" opacity=".55"/>
+            <rect x="305" y="222" width="104" height="20" rx="10" class="mark"/>
+            <path d="M316 232h77m-5 -4l5 4l-5 4" class="line" style="stroke:#1b1814"/>
+            <circle cx="270" cy="269" r="1" class="muted"/><circle cx="276" cy="269" r="1" class="muted"/><circle cx="282" cy="269" r="1" class="muted"/><circle cx="288" cy="269" r="1" class="muted"/><circle cx="294" cy="269" r="1" class="muted"/><circle cx="300" cy="269" r="1" class="muted"/>
+            <path d="M448 58L460 50L538 167L530 179Z" style="fill:var(--highlight);stroke:var(--ink-light)"/>
+            <path d="M448 58L455 57L533 174L530 179Z" class="sheet-edge"/>
+            <path d="M448 66l8 -5" class="line" opacity=".45"/><path d="M452 72l8 -5" class="line" opacity=".45"/><path d="M456 78l8 -5" class="line" opacity=".45"/><path d="M460 84l8 -5" class="line" opacity=".45"/><path d="M464 90l8 -5" class="line" opacity=".45"/><path d="M468 96l8 -5" class="line" opacity=".45"/><path d="M472 102l8 -5" class="line" opacity=".45"/><path d="M476 108l8 -5" class="line" opacity=".45"/><path d="M480 114l8 -5" class="line" opacity=".45"/><path d="M484 120l8 -5" class="line" opacity=".45"/><path d="M488 126l8 -5" class="line" opacity=".45"/><path d="M492 132l8 -5" class="line" opacity=".45"/>
+            <path d="M530 179L544 190L538 167Z" class="sheet"/>
+            <path d="M540 184L544 190L538 187Z" class="ink"/>
+            <path d="M447 57L440 47Q439 42 445 39Q450 37 453 41L460 50Z" class="sheet-edge"/>
+          </svg>
+          <figcaption data-en="Same page, different priorities. On the left, everything competes for attention. On the right, a benefit, an example and a next step give the reader a route through it.">La misma página, con otras prioridades. A la izquierda, todo compite por atención. A la derecha, un beneficio, un ejemplo y un siguiente paso dan al lector un recorrido.</figcaption>
+        </figure>
+      </section>
 
-    <section class="caso-prueba"><p class="mono" data-en="The five-second test">La prueba de 5 segundos</p><h2 data-en="Cover your logo. Show your homepage to someone else.">Tapa tu logo. Enséñale tu portada a otra persona.</h2><p data-en="Give them five seconds. Then ask these three questions without explaining anything:">Dale cinco segundos. Después hazle estas tres preguntas sin explicar nada:</p><ol><li data-en="What problem does this solve for you?">¿Qué problema te resuelve?</li><li data-en="What will you get when you start?">¿Qué te llevas cuando empiezas?</li><li data-en="What would you do next?">¿Qué harías ahora?</li></ol><p data-en="If a number on your homepage needs you beside it to explain it, it’s a showcase number: it talks to you, not to your visitor. Save the questions and send them to whoever reviews your website with you.">Si una cifra de tu portada necesita que estés al lado para explicarla, es una cifra de escaparate: te habla a ti, no a quien entra. Guarda las preguntas y pásaselas a quien revise tu web contigo.</p><div class="caso-enlaces"><a class="boton" id="compartir" href="https://wa.me/" data-en="Send it to whoever reviews your website ↗">Envíaselo a quien revise tu web ↗</a><button class="fantasma" id="copiar" type="button" data-en="Copy the three questions">Copiar las tres preguntas</button></div><p id="copia-estado" role="status" class="caso-contexto"></p></section>
+      <section id="sec-antes-despues" class="scroll-mt-24 space-y-8">
+        <div class="max-w-[68ch] mx-auto space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs font-semibold uppercase tracking-widest text-accent" data-en="II · Before and after">II · Antes y después</span>
+            <div class="h-px bg-rule flex-1"></div>
+          </div>
+          <h2 class="font-serif text-2xl sm:text-4xl font-normal text-ink leading-tight" data-en="On a phone, every line has to earn its place.">En el móvil, cada línea tiene que ganarse su sitio.</h2>
+          <p class="text-sm sm:text-base text-ink-muted leading-relaxed" data-en="Compare what gets priority in each screenshot. Before: internal numbers. After: a use case. The change is not adding more information, but deciding what deserves to come first.">Compara qué ocupa el primer plano en cada captura. Antes: cifras internas. Después: una situación de uso. El cambio no consiste en añadir información, sino en decidir qué merece aparecer primero.</p>
+        </div>
 
-    <section class="caso-cierre"><p class="mono" data-en="Your website is next">Ahora, tu web</p><h2 data-en="What does your homepage say before anyone scrolls?">¿Qué dice tu portada antes de que nadie haga scroll?</h2><p data-en="Send me the link to your homepage. I’ll tell you which showcase number I’d remove first, and what I’d put in its place.">Mándame el enlace a tu portada. Te digo qué cifra de escaparate quitaría primero y qué pondría en su lugar.</p><a class="boton" href="https://x.com/alpas17_" data-en="Send me your homepage on X ↗">Mándame tu portada por X ↗</a></section></div>
-  </main><footer><div class="ancho"><span>Detrás de lo que elegimos · Álvaro Pastor Periago</span><a href="marketing-portada.html" data-en="Back to the blog →">Volver al blog →</a></div></footer>
+        <div class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+            <figure class="bg-paper-card rounded-2xl border border-rule p-4 space-y-3 shadow-2xs">
+              <div class="flex items-center justify-between gap-2 font-mono text-xs">
+                <span class="px-2 py-0.5 rounded bg-paper-subtle text-ink-muted border border-rule" data-en="BEFORE · Mobile">ANTES · Móvil</span>
+                <span class="text-ink-light" data-en="Technical jargon on top">Jerga técnica arriba</span>
+              </div>
+              <div class="rounded-xl overflow-hidden border border-rule bg-paper-subtle"><img id="movil-antes" src="../assets/portada-caso/antes-movil.webp" data-src-en="../assets/portada-caso/antes-movil-en.webp" width="780" height="1688" loading="lazy" alt="Vista móvil antes del rediseño" class="w-full h-auto block"></div>
+              <figcaption class="text-xs text-ink-muted leading-relaxed" data-en="Forces you to read acronyms (“MCP”, “skills”) and choose between two different actions before showing any real example.">Obliga a leer siglas («MCP», «skills») y elegir entre dos acciones distintas antes de mostrar ningún ejemplo real.</figcaption>
+            </figure>
+            <figure class="bg-paper-card rounded-2xl border border-rule p-4 space-y-3 shadow-2xs">
+              <div class="flex items-center justify-between gap-2 font-mono text-xs">
+                <span class="px-2 py-0.5 rounded bg-ok-soft text-ok border border-ok-border font-medium" data-en="AFTER · Mobile">DESPUÉS · Móvil</span>
+                <span class="text-ok" data-en="Clear in 5 s">Claridad en 5 s</span>
+              </div>
+              <div class="rounded-xl overflow-hidden border border-rule bg-paper-subtle"><img id="movil-despues" src="../assets/portada-caso/despues-movil.webp" data-src-en="../assets/portada-caso/despues-movil-en.webp" width="780" height="1688" loading="lazy" alt="Vista móvil después del rediseño" class="w-full h-auto block"></div>
+              <figcaption class="text-xs text-ink-muted leading-relaxed" data-en="A headline that explains the human benefit, one clear call to action and proof visible without scrolling.">Un titular que explica el beneficio humano, una sola llamada a la acción clara y prueba visible sin hacer scroll.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-como" class="max-w-[68ch] mx-auto scroll-mt-24 space-y-7">
+        <div class="space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs font-semibold uppercase tracking-widest text-accent" data-en="III · From observation to revision">III · De la observación al cambio</span>
+            <div class="h-px bg-rule flex-1"></div>
+          </div>
+          <h2 class="font-serif text-2xl sm:text-4xl font-normal text-ink leading-tight" data-en="I changed specific sentences, not just colours.">Cambié frases concretas, no solo colores.</h2>
+          <p class="text-base sm:text-[17px] text-ink-muted leading-[1.75]" data-en="I didn’t hire an agency or open complex design programs. I went through the real page element by element, asking myself what someone who doesn’t know me at all would think.">No contraté una agencia ni abrí programas complejos de diseño. Fui revisando la página real elemento por elemento, preguntándome qué pensaría alguien que no me conoce de nada.</p>
+        </div>
+
+        <div class="bg-paper-card rounded-2xl border border-rule px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 shadow-2xs">
+          <span class="font-serif text-4xl sm:text-5xl text-accent leading-none shrink-0">12</span>
+          <div class="space-y-0.5">
+            <p class="font-sans text-sm sm:text-base font-medium text-ink" data-en="changes requested by pointing directly at each block of the page, in a single session.">cambios pedidos señalando directamente cada bloque de la página, en una sola sesión.</p>
+            <p class="font-mono text-xs text-ink-light" data-en="No endless sketches · Correcting on the real website">Sin bocetos interminables · Corrigiendo sobre la web real</p>
+          </div>
+        </div>
+
+        <div class="bg-paper-card rounded-2xl border border-rule divide-y divide-rule shadow-2xs">
+          <div class="p-6 sm:p-7 flex items-start gap-4">
+            <span class="w-8 h-8 rounded-full bg-accent-soft text-accent border border-accent-border font-mono text-xs font-semibold flex items-center justify-center shrink-0 mt-0.5">1</span>
+            <div class="space-y-1.5">
+              <h3 class="font-sans font-semibold text-base sm:text-lg text-ink" data-en="I looked at it on my phone first">Lo miré primero en el móvil</h3>
+              <p class="text-sm text-ink-muted leading-relaxed" data-en="I opened the homepage on my phone the way someone arriving from a link sees it, without scrolling, to check what filled the first centimetres of screen.">Abrí la portada en el teléfono tal y como la ve alguien que llega desde un enlace, sin hacer scroll, para comprobar qué ocupaba los primeros centímetros de pantalla.</p>
+            </div>
+          </div>
+          <div class="p-6 sm:p-7 flex items-start gap-4">
+            <span class="w-8 h-8 rounded-full bg-accent-soft text-accent border border-accent-border font-mono text-xs font-semibold flex items-center justify-center shrink-0 mt-0.5">2</span>
+            <div class="space-y-2">
+              <h3 class="font-sans font-semibold text-base sm:text-lg text-ink" data-en="I pointed at each confusing spot with one direct sentence">Señalé cada punto confuso con una frase directa</h3>
+              <p class="text-sm text-ink-muted leading-relaxed" data-en="Instead of asking “make it prettier”, I pointed at exactly which sentence confused the visitor. For example, this was one of the literal notes I left:">En lugar de pedir «hazlo más bonito», señalé exactamente qué frase confundía al visitante. Por ejemplo, esta fue una de las notas literales que dejé:</p>
+              <blockquote class="p-3 rounded-xl bg-paper-subtle border border-rule font-mono text-xs text-ink" data-en="“The visitor doesn’t know what ‘expand it’ means. Use very simple words.”">«El usuario no sabe qué es “ampliarlo”. Ponlo con palabras muy sencillas.»</blockquote>
+            </div>
+          </div>
+          <div class="p-6 sm:p-7 flex items-start gap-4">
+            <span class="w-8 h-8 rounded-full bg-accent-soft text-accent border border-accent-border font-mono text-xs font-semibold flex items-center justify-center shrink-0 mt-0.5">3</span>
+            <div class="space-y-1.5">
+              <h3 class="font-sans font-semibold text-base sm:text-lg text-ink" data-en="I reviewed the result and pointed again">Revisé el resultado y volví a señalar</h3>
+              <p class="text-sm text-ink-muted leading-relaxed" data-en="I repeated the process to remove phrases that needed an explanation. The next step is to check it with someone outside the project.">Repetí el proceso para quitar frases que necesitaban una explicación. El siguiente paso es comprobarlo con alguien ajeno al proyecto.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sec-reglas" class="scroll-mt-24 space-y-8">
+        <div class="max-w-[68ch] mx-auto space-y-3">
+          <div class="flex items-center gap-3">
+            <span class="font-mono text-xs font-semibold uppercase tracking-widest text-accent" data-en="IV · 4 rules you can copy today">IV · Las 4 reglas que puedes copiar hoy</span>
+            <div class="h-px bg-rule flex-1"></div>
+          </div>
+          <h2 class="font-serif text-2xl sm:text-4xl font-normal text-ink leading-tight" data-en="The 4 real changes on my homepage (and how to apply each one on yours).">Los 4 cambios reales de mi portada (y cómo aplicar cada uno en la tuya).</h2>
+          <p class="text-sm sm:text-base text-ink-muted leading-relaxed" data-en="Each change includes the original wording, the revision and an idea for your website. Read them in any order; start with the one that matches your page.">Cada cambio incluye la versión anterior, la nueva y una idea para tu web. Léelos en el orden que quieras; empieza por el que reconozcas en tu página.</p>
+
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="rules-grid">
+
+          <div id="rule-card-1" data-rule="1" class="rule-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between shadow-2xs">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="rule-badge font-mono text-xs font-semibold px-2.5 py-0.5 rounded border bg-accent-soft text-accent border-accent-border" data-en="01 · Headline">01 · Titular</span>
+                
+              </div>
+              <h3 class="font-serif text-2xl text-ink" data-en="Benefit before numbers">Beneficio antes que cifras</h3>
+            </div>
+            <div class="rule-body relative mt-5">
+            <div class="rule-content space-y-4">
+              <p class="text-sm text-ink-muted leading-relaxed" data-en="Take the technical or showcase numbers out of the first line. Open with the everyday scene your customer lives when using what you do.">Quita las cifras técnicas o de escaparate de la primera línea. Abre con la escena cotidiana que vive el cliente cuando usa lo que haces.</p>
+              <div class="space-y-2 pt-3 border-t border-rule text-xs">
+                <div class="p-2.5 rounded-lg bg-paper-subtle text-ink-light line-through" data-en="Before: “5 MCP servers · 20 skills · 6 agents · 0.1 s”">Antes: "5 servidores MCP · 20 skills · 6 agentes · 0,1 s"</div>
+                <div class="p-2.5 rounded-lg bg-ok-soft border border-ok-border text-ink font-medium" data-en="After: “Imagine opening a new chat and your agent already knows what you did yesterday”">Después: "Imagina abrir un chat nuevo y que tu agente ya sepa lo que hicisteis ayer"</div>
+              </div>
+              <p class="text-xs font-medium text-accent pt-1" data-en="What you take for your website: start with the “before and after” in your customer’s life, not with your spec sheet.">Qué te llevas para tu web: empieza por el «antes y después» en la vida de tu cliente, no por tu ficha técnica.</p>
+            </div>
+            
+          </div>
+          </div>
+
+          <div id="rule-card-2" data-rule="2" class="rule-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="rule-badge font-mono text-xs font-semibold px-2.5 py-0.5 rounded border" data-en="02 · Visual proof">02 · Prueba visual</span>
+                
+              </div>
+              <h3 class="font-serif text-2xl text-ink" data-en="Show it working">Enseñarlo funcionando</h3>
+            </div>
+            <div class="rule-body relative mt-5">
+            <div class="rule-content space-y-4">
+              <p class="text-sm text-ink-muted leading-relaxed" data-en="Instead of asking for blind faith with abstract promises, show real proof of use or a measured figure in context as soon as they arrive.">En lugar de pedir fe ciega con promesas abstractas, muestra una prueba real de uso o un dato medido en contexto nada más entrar.</p>
+              <div class="space-y-2 pt-3 border-t border-rule text-xs">
+                <div class="p-2.5 rounded-lg bg-paper-subtle text-ink-light line-through" data-en="Before: Theoretical promises without showing how the search responds">Antes: Promesas teóricas sin enseñar cómo responde la búsqueda</div>
+                <div class="p-2.5 rounded-lg bg-ok-soft border border-ok-border text-ink font-medium" data-en="After: A real screenshot showing the search answer to a specific question">Después: Una captura real con la respuesta de la búsqueda a una pregunta concreta</div>
+              </div>
+              <p class="text-xs font-medium text-accent pt-1" data-en="What you take for your website: put a screenshot, photo or real example at the very top before listing features.">Qué te llevas para tu web: pon una captura, foto o ejemplo real arriba del todo antes de listar características.</p>
+            </div>
+            
+          </div>
+          </div>
+
+          <div id="rule-card-3" data-rule="3" class="rule-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="rule-badge font-mono text-xs font-semibold px-2.5 py-0.5 rounded border" data-en="03 · Action">03 · Acción</span>
+                
+              </div>
+              <h3 class="font-serif text-2xl text-ink" data-en="One single next step">Un solo paso siguiente</h3>
+            </div>
+            <div class="rule-body relative mt-5">
+            <div class="rule-content space-y-4">
+              <p class="text-sm text-ink-muted leading-relaxed" data-en="When you put two equal buttons side by side, you force a decision before understanding. Leave one clear, logical step.">Cuando pones dos botones iguales uno al lado del otro, obligas a decidir antes de entender. Deja un único paso lógico y claro.</p>
+              <div class="space-y-2 pt-3 border-t border-rule text-xs">
+                <div class="p-2.5 rounded-lg bg-paper-subtle text-ink-light line-through" data-en="Before: Two buttons competing at the very top with no prior context">Antes: Dos botones compitiendo arriba del todo sin contexto previo</div>
+                <div class="p-2.5 rounded-lg bg-ok-soft border border-ok-border text-ink font-medium" data-en="After: One guiding button that invites you to keep going: “See what your agent gains ↓”">Después: Un solo botón guía que invita a seguir: "Mira qué gana tu agente ↓"</div>
+              </div>
+              <p class="text-xs font-medium text-accent pt-1" data-en="For your website: make one action primary. Keep secondary links if they help the visitor decide.">Para tu web: destaca una acción principal. Conserva enlaces secundarios si ayudan al lector a decidir.</p>
+            </div>
+            
+          </div>
+          </div>
+
+          <div id="rule-card-4" data-rule="4" class="rule-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="rule-badge font-mono text-xs font-semibold px-2.5 py-0.5 rounded border" data-en="04 · Language">04 · Lenguaje</span>
+                
+              </div>
+              <h3 class="font-serif text-2xl text-ink" data-en="Words anyone understands">Palabras que entiende cualquiera</h3>
+            </div>
+            <div class="rule-body relative mt-5">
+            <div class="rule-content space-y-4">
+              <p class="text-sm text-ink-muted leading-relaxed" data-en="Translate every internal technicality into human words anyone can picture in a second, without reading the sentence twice.">Traduce cada tecnicismo interno a palabras humanas que visualice cualquiera en un segundo, sin tener que leer la frase dos veces.</p>
+              <div class="space-y-2 pt-3 border-t border-rule text-xs">
+                <div class="p-2.5 rounded-lg bg-paper-subtle text-ink-light line-through" data-en="Before: “226 ms to find it, 150 ms to expand it”">Antes: "226 ms encontrarlo, 150 ms ampliarlo"</div>
+                <div class="p-2.5 rounded-lg bg-ok-soft border border-ok-border text-ink font-medium" data-en="After: A use case — finding what you discussed with your agent yesterday">Después: Una situación de uso: encontrar lo que hablaste ayer con tu agente</div>
+              </div>
+              <p class="text-xs font-medium text-accent pt-1" data-en="What you take for your website: read your page out loud; if a word sounds like a manual, swap it for an everyday image.">Qué te llevas para tu web: lee tu página en voz alta; si una palabra suena a manual técnico, cámbiala por una imagen cotidiana.</p>
+            </div>
+            
+          </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section id="sec-pruebalo" class="max-w-3xl mx-auto scroll-mt-24 space-y-6">
+        <div class="flex items-center gap-3">
+          <span class="font-mono text-xs font-semibold uppercase tracking-widest text-accent" data-en="V · Try it today on your homepage">V · Pruébalo hoy en tu portada</span>
+          <div class="h-px bg-rule flex-1"></div>
+        </div>
+
+        <div class="bg-paper-card rounded-2xl border border-rule p-6 sm:p-9 shadow-sm space-y-6">
+          <div class="space-y-2">
+            <span class="font-mono text-xs text-accent font-medium" data-en="Quick audit, no tools">Auditoría rápida sin herramientas</span>
+            <h2 class="font-serif text-2xl sm:text-4xl font-normal text-ink" data-en="The 5-second test">La prueba de 5 segundos</h2>
+            <p class="text-sm sm:text-base text-ink-muted leading-relaxed" data-en="Show your homepage to someone outside your project for five seconds. Hide it, then ask these three questions without giving hints. Hesitation gives you a starting point, not a sales forecast. Tick each question they can answer clearly.">Enseña tu portada durante cinco segundos a alguien ajeno al proyecto. Ocúltala y haz estas tres preguntas sin dar pistas. Las dudas te dan un punto de partida, no una previsión de ventas. Marca cada pregunta que pueda responder con claridad.</p>
+          </div>
+
+          <div class="space-y-3">
+            <label class="flex items-start gap-3.5 p-4 rounded-xl bg-paper border border-rule hover:border-ink-light transition-colors cursor-pointer">
+              <input type="checkbox" class="mt-1 w-4 h-4 accent-accent">
+              <div><span class="font-mono text-xs text-accent font-semibold block" data-en="01 / PROBLEM">01 / PROBLEMA</span><span class="text-sm sm:text-base font-medium text-ink" data-en="What problem does this solve for you?">¿Qué problema te resuelve?</span></div>
+            </label>
+            <label class="flex items-start gap-3.5 p-4 rounded-xl bg-paper border border-rule hover:border-ink-light transition-colors cursor-pointer">
+              <input type="checkbox" class="mt-1 w-4 h-4 accent-accent">
+              <div><span class="font-mono text-xs text-accent font-semibold block" data-en="02 / RESULT">02 / RESULTADO</span><span class="text-sm sm:text-base font-medium text-ink" data-en="What will you get when you start?">¿Qué te llevas cuando empiezas?</span></div>
+            </label>
+            <label class="flex items-start gap-3.5 p-4 rounded-xl bg-paper border border-rule hover:border-ink-light transition-colors cursor-pointer">
+              <input type="checkbox" class="mt-1 w-4 h-4 accent-accent">
+              <div><span class="font-mono text-xs text-accent font-semibold block" data-en="03 / NEXT STEP">03 / SIGUIENTE PASO</span><span class="text-sm sm:text-base font-medium text-ink" data-en="What would you do next?">¿Qué harías ahora?</span></div>
+            </label>
+          </div>
+
+          <div class="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <a id="compartir" href="https://wa.me/" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 bg-ink hover:opacity-85 text-paper font-medium text-sm px-5 py-3 rounded-xl transition-opacity" data-en="Send the questions on WhatsApp ↗">Enviar preguntas por WhatsApp ↗</a>
+            <button type="button" id="copiar" class="inline-flex items-center justify-center gap-2 bg-paper hover:bg-paper-subtle text-ink font-medium text-sm px-4 py-3 rounded-xl border border-rule transition-colors cursor-pointer">
+              <svg class="w-4 h-4 text-ink-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              <span data-en="Copy the 3 questions">Copiar las 3 preguntas</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-paper-card rounded-2xl border border-rule p-6 sm:p-7 space-y-3 shadow-2xs">
+          <span class="font-mono text-xs font-semibold uppercase tracking-wider text-accent block" data-en="In short · What you take from these 4 minutes">En resumen · Lo que te llevas de estos 4 minutos</span>
+          <ul class="space-y-2 text-sm text-ink-muted leading-relaxed">
+            <li class="flex items-start gap-2.5"><span class="text-accent font-mono font-bold">1.</span><span data-en="<strong class='text-ink font-medium'>Drop your showcase number:</strong> swap your technical figures or opening medals for the real problem you solve."><strong class="text-ink font-medium">Quita tu cifra de escaparate:</strong> cambia tus datos técnicos o medallas iniciales por el problema real que resuelves.</span></li>
+            <li class="flex items-start gap-2.5"><span class="text-accent font-mono font-bold">2.</span><span data-en="<strong class='text-ink font-medium'>Show real proof at the top:</strong> a screenshot or working example is worth more than three paragraphs promising quality."><strong class="text-ink font-medium">Enseña una prueba real arriba:</strong> una captura o ejemplo funcionando vale más que tres párrafos prometiendo calidad.</span></li>
+            <li class="flex items-start gap-2.5"><span class="text-accent font-mono font-bold">3.</span><span data-en="<strong class='text-ink font-medium'>Leave one button and everyday words:</strong> if someone has to translate a sentence, rewrite it the way you talk over coffee."><strong class="text-ink font-medium">Deja un solo botón y palabras cotidianas:</strong> si alguien tiene que traducir una frase, reescríbela como hablas tomando un café.</span></li>
+            <li class="flex items-start gap-2.5"><span class="text-accent font-mono font-bold">4.</span><span data-en="<strong class='text-ink font-medium'>Pass the 5-second test:</strong> check your changes with a real person before touching a single colour."><strong class="text-ink font-medium">Pasa la prueba de los 5 segundos:</strong> valida tus cambios con alguien real antes de tocar ni un color.</span></li>
+          </ul>
+        </div>
+
+        <div class="bg-paper-card rounded-2xl border border-rule p-6 sm:p-7 space-y-3 shadow-2xs">
+          <span class="font-mono text-xs font-semibold uppercase tracking-wider text-accent block" data-en="Keep reading">Sigue leyendo</span>
+          <ul class="space-y-2 text-sm text-ink-muted leading-relaxed">
+            <li><a href="marketing-emocional.html" class="font-medium text-ink underline underline-offset-4 decoration-rule hover:decoration-accent" data-en="I showed 4 ads to 169 people. The winner sold nothing.">Enseñé 4 anuncios a 169 personas. Ganó el que no vendía nada</a></li>
+            <li><a href="marketing-beta.html" class="font-medium text-ink underline underline-offset-4 decoration-rule hover:decoration-accent" data-en="Which of your posts get saved? Audit your X account.">¿Qué posts tuyos se guardan? Audita tu cuenta de X</a></li>
+          </ul>
+        </div>
+
+        <details class="service-note"><summary data-en="Want help with your website?">¿Quieres ayuda con tu web?</summary><div class="space-y-3">
+          <span class="font-mono text-xs font-semibold uppercase tracking-widest text-accent" data-en="Now, your website">Ahora, tu web</span>
+          <h3 class="font-serif text-xl text-ink" data-en="Tell me what your page needs to explain.">Cuéntame qué necesita explicar tu página.</h3>
+          <p class="text-sm sm:text-base text-ink-muted leading-relaxed" data-en="I’ll help you solve your problem. Message me on Twitter and we’ll go through it. I charge <strong class='text-ink font-semibold'>€5,000</strong>."><span>Te ayudo a resolver tu problema, escríbeme por Twitter y lo vemos. Cobro <strong class="text-ink font-semibold">5.000 €</strong>.</span></p>
+          <div class="pt-1 flex flex-wrap items-center gap-4">
+            <a href="https://x.com/alpas17_" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white font-medium text-sm px-5 py-3 rounded-xl shadow-xs transition-colors" data-en="Message me on Twitter ↗">Escríbeme por Twitter ↗</a>
+            <a href="marketing-portada.html" class="text-sm font-medium text-ink-muted hover:text-ink transition-colors" data-en="← Back to the blog">← Volver al blog</a>
+          </div>
+        </div></details>
+      </section>
+
+    </article>
+  </main>
+
+  <footer class="border-t border-rule bg-paper-card">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-muted">
+      <div class="font-serif text-sm text-ink"><span data-en="Behind what we choose">Detrás de lo que elegimos</span> · <span class="font-medium">Álvaro Pastor Periago<span class="text-accent">.</span></span></div>
+      <div class="flex items-center gap-5 font-mono">
+        <a href="https://x.com/alpas17_" target="_blank" rel="noopener" class="hover:text-ink transition-colors">@alpas17_</a>
+        <span>·</span>
+        <a href="marketing-portada.html" class="hover:text-ink transition-colors" data-en="← Back to the blog">← Volver al blog</a>
+      </div>
+    </div>
+  </footer>
+
   <script>
   (()=>{
     let lang=new URLSearchParams(location.search).get('lang');
     try{if(!['es','en'].includes(lang))lang=localStorage.getItem('marketing-language')}catch(e){}
     if(!['es','en'].includes(lang))lang='es';
-    const nodes=[...document.querySelectorAll('[data-en]')].map(node=>({node,es:node.textContent,en:node.dataset.en}));
     const l=(es,en)=>lang==='en'?en:es;
-    const control=document.getElementById('comparador');
-    const superficie=document.querySelector('.caso-slider');
-    function comparar(){
-      superficie.style.setProperty('--corte',control.value+'%');
-      control.setAttribute('aria-valuetext',l(control.value+' % de la portada anterior, '+(100-control.value)+' % de la nueva',control.value+'% previous homepage, '+(100-control.value)+'% new one'));
-    }
-    function mover(event){
-      const rect=superficie.getBoundingClientRect();
-      control.value=String(Math.round(Math.max(0,Math.min(1,(event.clientX-rect.left)/rect.width))*100));
-      comparar();
-    }
-    control.addEventListener('input',comparar);
-    control.addEventListener('pointerdown',event=>{
-      if(!event.isPrimary || event.button!==0)return;
-      event.preventDefault();
-      control.focus({preventScroll:true});
-      control.setPointerCapture(event.pointerId);
-      mover(event);
-    });
-    control.addEventListener('pointermove',event=>{if(control.hasPointerCapture(event.pointerId))mover(event)});
-    function soltar(event){if(control.hasPointerCapture(event.pointerId))control.releasePointerCapture(event.pointerId)}
-    control.addEventListener('pointerup',soltar);
-    control.addEventListener('pointercancel',soltar);
-    function tema(){const r=document.documentElement;document.getElementById('tema').textContent='◐ '+l({light:'claro',dark:'oscuro',auto:'auto'}[r.dataset.pref||'light'],r.dataset.pref||'light');}
+    const $=id=>document.getElementById(id);
+    const nodes=[...document.querySelectorAll('[data-en]')].map(node=>({node,es:node.innerHTML,en:node.dataset.en}));
     const links=[...document.querySelectorAll('a[href]')].filter(a=>!a.getAttribute('href').startsWith('#')&&!/^[a-z]+:/i.test(a.getAttribute('href'))).map(node=>({node,href:node.getAttribute('href')}));
-    const alts=[['captura-antes','Portada anterior: titular, dos botones y cuatro cifras sueltas','Previous homepage: headline, two buttons and four standalone numbers'],['captura-despues','Portada nueva: beneficio en el titular, un solo botón y un ejemplo real con el tiempo de búsqueda','New homepage: benefit in the headline, one button and a real example with its search time']];
-    function traducir(){document.documentElement.lang=lang;nodes.forEach(x=>x.node.textContent=x[lang]);document.getElementById('idioma').textContent=l('EN','ES');document.getElementById('idioma').setAttribute('aria-label',l('Switch to English','Cambiar a español'));document.title=l('Dame 4 minutos y te enseño por qué tu portada no vende · Álvaro Pastor','Give me 4 minutes and I’ll show you why your homepage isn’t selling · Álvaro Pastor');alts.forEach(([id,es,en])=>document.getElementById(id).alt=l(es,en));control.setAttribute('aria-label',l('Comparar la portada anterior y la nueva','Compare the previous and the new homepage'));document.getElementById('tema').setAttribute('aria-label',l('Cambiar tema','Change theme'));links.forEach(x=>{const u=new URL(x.href,location.href);u.searchParams.set('lang',lang);x.node.href=u.href});const u=new URL('https://marketing.alvaropastor.dev/portada/');u.searchParams.set('lang',lang);document.getElementById('compartir').href='https://wa.me/?text='+encodeURIComponent(l('Probemos esto con nuestra web: cinco segundos y tres preguntas. Mira este antes y después: ','Let’s try this with our website: five seconds and three questions. See this before and after: ')+u.href);comparar();tema();document.getElementById('copia-estado').textContent='';try{localStorage.setItem('marketing-language',lang)}catch(e){}}
-    document.getElementById('idioma').addEventListener('click',()=>{lang=l('en','es');traducir();const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u)});
-    document.getElementById('tema').addEventListener('click',()=>{const r=document.documentElement;const t=r.dataset.pref==='dark'?'light':'dark';r.dataset.pref=t;r.dataset.tema=t;try{localStorage.setItem('marketing-theme',t)}catch(e){}tema()});
-    document.getElementById('copiar').addEventListener('click',async()=>{const text=l('Tapa el logo y enseña tu web a otra persona durante cinco segundos.\n1. ¿Qué problema te resuelve?\n2. ¿Qué te llevas cuando empiezas?\n3. ¿Qué harías ahora?','Cover the logo and show your website to someone for five seconds.\n1. What problem does this solve for you?\n2. What will you get when you start?\n3. What would you do next?');try{await navigator.clipboard.writeText(text);document.getElementById('copia-estado').textContent=l('Preguntas copiadas.','Questions copied.')}catch(e){document.getElementById('copia-estado').textContent=text}});
-    traducir();
-    const bloques=['escena','comparativa','como','decisiones','prueba'].map(id=>document.getElementById(id));
-    const items=[...document.querySelectorAll('.caso-mapa li')];
-    const aqui=document.querySelector('.mapa-aqui em');
-    if('IntersectionObserver' in window){
-      const io=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;const i=bloques.indexOf(e.target);items.forEach((li,k)=>{li.classList.toggle('mapa-aqui',k===i);if(k===i)li.appendChild(aqui)})})},{rootMargin:'-30% 0px -60% 0px'});
-      bloques.forEach(b=>b&&io.observe(b));
+    const imgs=[...document.querySelectorAll('img[data-src-en]')].map(img=>({img,es:img.getAttribute('src'),en:img.dataset.srcEn}));
+    const alts=[['captura-antes','Portada antes del cambio en escritorio','Homepage before the change, on desktop'],['captura-despues','Portada después del cambio en escritorio','Homepage after the change, on desktop'],['movil-antes','Vista móvil antes del rediseño','Mobile view before the redesign'],['movil-despues','Vista móvil después del rediseño','Mobile view after the redesign']];
+
+    // Comparador antes / después (ratón, táctil y teclado)
+    const compare=$('compare-container'),clip=$('compare-before-clip'),divider=$('compare-divider');
+    let arrastrando=false;
+    function posicion(p){
+      const v=Math.max(2,Math.min(98,p));
+      clip.style.clipPath='inset(0 '+(100-v)+'% 0 0)';divider.style.left=v+'%';
+      compare.setAttribute('aria-valuenow',Math.round(v));
+      compare.setAttribute('aria-valuetext',l(Math.round(v)+' % de la portada anterior','Previous homepage '+Math.round(v)+'%'));
     }
+    function desdeX(x){const r=compare.getBoundingClientRect();posicion((x-r.left)/r.width*100)}
+    compare.addEventListener('pointerdown',e=>{if(!e.isPrimary||e.button!==0)return;arrastrando=true;try{compare.setPointerCapture(e.pointerId)}catch(_){}if(e.pointerType==='mouse')desdeX(e.clientX)});
+    compare.addEventListener('pointermove',e=>{if(arrastrando)desdeX(e.clientX)});
+    const soltar=()=>{arrastrando=false};
+    compare.addEventListener('pointerup',soltar);compare.addEventListener('pointercancel',soltar);
+    compare.addEventListener('keydown',e=>{
+      const v=parseFloat(compare.getAttribute('aria-valuenow'))||50;
+      if(e.key==='ArrowLeft'){e.preventDefault();posicion(v-5)}else if(e.key==='ArrowRight'){e.preventDefault();posicion(v+5)}
+    });
+
+    // Barra de progreso y navegación activa
+    const secciones=['sec-historia','sec-antes-despues','sec-como','sec-reglas','sec-pruebalo'];
+    const navLinks=[...document.querySelectorAll('.nav-link')];
+    function scroll(){
+      const alto=document.documentElement.scrollHeight-innerHeight;
+      $('reading-progress').style.width=(alto>0?Math.min(100,Math.max(0,scrollY/alto*100)):0)+'%';
+      let activa=secciones[0];
+      secciones.forEach(id=>{const el=$(id);if(el&&el.getBoundingClientRect().top<=180)activa=id});
+      navLinks.forEach(a=>{const on=a.dataset.nav===activa;a.classList.toggle('text-ink',on);a.classList.toggle('font-semibold',on)});
+    }
+    addEventListener('scroll',scroll,{passive:true});
+
+    // Los ejemplos permanecen visibles, también sin JavaScript.
+    const toast=msg=>{const t=$('editorial-toast');$('editorial-toast-text').textContent=msg;t.classList.remove('translate-y-20','opacity-0');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.add('translate-y-20','opacity-0'),3400)};
+
+    // Copiar las tres preguntas
+    $('copiar').addEventListener('click',async()=>{
+      const text=l('Hazme la prueba de los 5 segundos con mi web (mírala 5 segundos y dime):\n1. ¿Qué problema te resuelve?\n2. ¿Qué te llevas cuando empiezas?\n3. ¿Qué harías ahora?','Do the 5-second test with my website (look at it for 5 seconds and tell me):\n1. What problem does this solve for you?\n2. What will you get when you start?\n3. What would you do next?');
+      try{await navigator.clipboard.writeText(text);toast(l('Las 3 preguntas se han copiado al portapapeles.','The 3 questions were copied to the clipboard.'))}catch(e){toast(text)}
+    });
+
+    // Tema e idioma, como el resto de páginas de marketing
+    function tema(){const r=document.documentElement,p=r.dataset.pref||'light';$('tema').textContent='◐ '+l({light:'claro',dark:'oscuro',auto:'auto'}[p]||p,p);$('tema').setAttribute('aria-label',l('Cambiar tema','Change theme'))}
+    function traducir(){
+      document.documentElement.lang=lang;
+      nodes.forEach(x=>x.node.innerHTML=x[lang]);
+      $('idioma').textContent=l('EN','ES');$('idioma').setAttribute('aria-label',l('Switch to English','Cambiar a español'));
+      document.title=l('Una portada que invita a seguir leyendo · Álvaro Pastor','Give visitors a reason to keep reading · Álvaro Pastor');
+      alts.forEach(([id,es,en])=>$(id).alt=l(es,en));
+      imgs.forEach(x=>x.img.setAttribute('src',x[lang]));
+      compare.setAttribute('aria-label',l('Comparador interactivo entre la versión antes y después en escritorio','Interactive before and after comparison on desktop'));
+      links.forEach(x=>{const u=new URL(x.href,location.href);u.searchParams.set('lang',lang);x.node.href=u.href});
+      const u=new URL('https://marketing.alvaropastor.dev/portada/');u.searchParams.set('lang',lang);
+      $('compartir').href='https://wa.me/?text='+encodeURIComponent(l('Hazme la prueba de los 5 segundos con mi web (mírala 5 segundos y dime):\n1) ¿Qué problema te resuelve?\n2) ¿Qué te llevas cuando empiezas?\n3) ¿Qué harías ahora?','Do the 5-second test with my website (look at it for 5 seconds and tell me):\n1) What problem does this solve for you?\n2) What will you get when you start?\n3) What would you do next?'));
+      posicion(parseFloat(compare.getAttribute('aria-valuenow'))||50);tema();scroll();
+      try{localStorage.setItem('marketing-language',lang)}catch(e){}
+    }
+    $('idioma').addEventListener('click',()=>{lang=l('en','es');traducir();const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u)});
+    $('tema').addEventListener('click',()=>{const r=document.documentElement,t=r.dataset.pref==='dark'?'light':'dark';r.dataset.pref=t;r.dataset.tema=t;try{localStorage.setItem('marketing-theme',t)}catch(e){}tema()});
+    traducir();
   })();
   </script>
-</body></html>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Carriles: turismo vs más de 3.500 kg · Teórico DGT</title>
+<style>
+:root{
+  --bg:#f4eedd; --card:#fbf7ea; --ink:#2b2a24; --muted:#7a7565; --line:#ddd4bb; --accent:#c4252c; --accent-soft:#f7dcd8;
+  --grass:#e6e3c2; --road:#cfc7b0; --roadEdge:#b9b095; --paint:#faf6e8; --me:#2f6fba; --meDark:#22548f; --truck:#d2553a; --truckDark:#a83f29; --heavy:#6b5aa8; --heavyDark:#4f4280;
+  --ok:#2e8b57; --warn:#d99a00;
+  --display:"Overpass","Arial Narrow",Arial,sans-serif; --body:"Inter",system-ui,sans-serif; --mono:ui-monospace,"JetBrains Mono",monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#14171d; --card:#1b1f27; --ink:#ebeee9; --muted:#9aa1ad; --line:#2b313c; --accent:#f06a70; --accent-soft:#3a191c;
+  --grass:#23301f; --road:#3a3f48; --roadEdge:#2d3139; --paint:#d9dde2; --me:#5f9de8; --meDark:#3f78bd; --truck:#e0674a; --truckDark:#b4503a; --heavy:#a795e8; --heavyDark:#7b68c4;
+  --ok:#4fc27f; --warn:#f0b93a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);padding:16px}
+.app{max-width:1120px;margin:0 auto;display:grid;gap:14px}
+.crumb{font:700 .72rem var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font:900 clamp(1.6rem,4vw,2.3rem)/1.05 var(--display);margin:2px 0 4px}
+h1 em{color:var(--accent);font-style:italic}
+.sub{color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.chip{border:1px solid var(--line);border-radius:10px;padding:7px 9px;background:var(--bg);display:grid;gap:1px}
+.chip small{font:700 .62rem var(--body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.chip b{font:800 .95rem var(--display);transition:color .2s}
+.chip b.ok{color:var(--ok)} .chip b.no{color:var(--accent)} .chip b.mid{color:var(--warn)}
+.stage{position:relative;border-radius:12px;overflow:hidden;background:var(--bg)}
+svg{display:block;width:100%;height:auto}
+.bar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:8px;flex-wrap:wrap}
+.btn{font:700 .82rem var(--body);padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.steps{display:flex;gap:0;margin-top:12px;overflow-x:auto;padding-bottom:4px}
+.st{flex:1;min-width:84px;display:grid;justify-items:center;gap:4px;text-align:center;cursor:pointer;background:none;border:0;color:var(--muted);font:600 .72rem/1.2 var(--body);position:relative}
+.st i{font:800 .8rem var(--mono);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);background:var(--card);font-style:normal;z-index:1}
+.st::before{content:"";position:absolute;top:12px;left:-50%;width:100%;height:2px;background:var(--line)}
+.st:first-child::before{display:none}
+.st.done i{background:var(--ok);border-color:var(--ok);color:#fff} .st.cur i{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.st.cur{color:var(--ink)}
+.tag{display:inline-block;font:800 .68rem var(--body);letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.side h2{font:900 1.35rem/1.15 var(--display);margin:8px 0}
+.side p{margin:0 0 10px}
+.idea{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:9px 11px;background:var(--bg);font-size:.92rem}
+.idea b{display:block;font:800 .66rem var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:12px}
+.joke{font-style:italic;color:var(--muted);font-size:.9rem;margin-top:10px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="crumb">Tema 1 · El uso de las vías · Uso de carriles</div>
+    <h1>Tres carriles, una regla: <em>tu masa decide</em></h1>
+    <p class="sub">Sentido único y fuera de poblado. Mira cómo se adelanta, y con el botón convierte el coche en un furgón de más de 3.500 kg.</p>
+  </header>
+
+  <div class="grid">
+    <section class="card">
+      <div class="chips" aria-live="polite">
+        <div class="chip"><small>Vía</small><b id="cVia">Fuera de poblado</b></div>
+        <div class="chip"><small>Vehículo</small><b id="cVeh">Turismo</b></div>
+        <div class="chip"><small>Masa</small><b id="cMas">1.500 kg</b></div>
+        <div class="chip"><small>Carril</small><b id="cCar">Derecho</b></div>
+      </div>
+      <div class="bar">
+        <button class="btn" id="bHeavy" aria-pressed="false">Furgón de 4.000 kg</button>
+        <button class="btn" id="bRep">↻ Repetir</button>
+        <button class="btn" id="bPause" aria-pressed="false">Pausa</button>
+      </div>
+      <div class="stage"><svg id="sc" viewBox="0 0 760 400" role="img" aria-label="Escena isométrica de una vía de sentido único con tres carriles y un adelantamiento"></svg></div>
+      <div class="steps" id="steps"></div>
+    </section>
+
+    <aside class="card side">
+      <span class="tag" id="tag">Paso 1 / 6</span>
+      <h2 id="tit"></h2>
+      <p id="txt"></p>
+      <div class="idea"><b>Idea clave</b><span id="idea"></span></div>
+      <p class="joke" id="joke"></p>
+      <div class="nav"><button class="btn" id="bBack">← Atrás</button><button class="btn primary" id="bNext">Siguiente →</button></div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),NS="http://www.w3.org/2000/svg";
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+/* ---- proyección isométrica: u = a lo largo de la vía, v = a lo ancho (v+ = derecha) ---- */
+const K=17,C=.866*K,S=.5*K,OX=60,OY=372;
+const P=(u,v,z=0)=>[OX+(u+v)*C,OY+(v-u)*S-z*K];
+const pts=a=>a.map(p=>p.join(",")).join(" ");
+const el=(t,at={},par)=>{const e=document.createElementNS(NS,t);for(const k in at)e.setAttribute(k,at[k]);if(par)par.appendChild(e);return e};
+
+const svg=$("#sc");
+const gGround=el("g",{},svg),gDyn=el("g",{},svg),gUI=el("g",{},svg);
+
+/* ---- carriles: derecho +3.6 · central 0 · izquierdo -3.6 ---- */
+const R=3.6,M=0,L=-3.6,EDGE=5.4;
+/* KF[i] = posición al final del paso i+1 */
+const KF=[
+ {me:[1,R],bl:null},
+ {me:[6,R],bl:"L"},
+ {me:[11,M],bl:"L"},
+ {me:[17,L],bl:"L"},
+ {me:[21,M],bl:"R"},
+ {me:[25,R],bl:null},
+];
+const TRUCK_U=13.2;
+
+const TXT=[
+ ["Cuenta los carriles","Sentido único, fuera de poblado, tres carriles. La regla es simple: tu sitio es el <b>derecho</b>. Los otros dos son de paso, uno detrás de otro.","Fuera de poblado, por defecto el derecho; el resto, para adelantar.","Aunque el del medio vaya vacío y se sienta protagonista."],
+ ["Señaliza","Intermitente <b>izquierdo</b> antes de moverte. Avisar no te da permiso: solo evita sustos a los que vienen detrás.","El intermitente es un aviso, no una autorización.","Parpadear no es una maniobra, por mucho que insistas."],
+ ["El central, de paso","Aquí adelantas. Está permitido, pero es un carril <b>de paso</b>: si alguien llega más rápido por detrás, no le cierres la puerta.","El central se usa para adelantar, no para instalarse.","Instalarse en el central es mudarse a un carril que no es tuyo."],
+ ["Izquierdo: solo para pasar","Para rebasar un camión o un conjunto lento puedes usar el <b>izquierdo</b>. Es el último recurso y no es una meta.","El izquierdo nunca es un carril para quedarse.","Pulsa el botón del furgón: este paso se convierte en «prohibido»."],
+ ["Vuelve al derecho","Intermitente derecho y regreso en cuanto hay hueco. Se vuelve <b>carril a carril</b>: del izquierdo al central y luego al derecho.","Se vuelve carril a carril, no de un salto.","Cruzar tres carriles como el que va a por el pan es postureo."],
+ ["Y si pasas de 3.500 kg","Camión, furgón pesado o conjunto de más de <b>7 m</b>: por el derecho y, <b>excepcionalmente</b>, por el inmediato. El izquierdo no es una opción.","Más de 3.500 kg o más de 7 m: derecho y, como mucho, el central.","El carril izquierdo no se hizo para que cupiera más hierro."],
+];
+let heavy=false, cur=0, tAnim=1, playing=true, last=performance.now();
+let fromU=KF[0].me[0], fromV=KF[0].me[1], lastU=fromU, lastV=fromV;
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2, lerp=(a,b,t)=>a+(b-a)*t;
+
+/* ---- terreno: calzada única de 3 carriles ---- */
+function ground(){
+  gGround.innerHTML="";
+  el("polygon",{points:pts([P(-30,-40),P(60,-40),P(60,40),P(-30,40)]),fill:css("--grass")},gGround);
+  el("polygon",{points:pts([P(-30,-EDGE),P(60,-EDGE),P(60,EDGE),P(-30,EDGE)]),fill:css("--road")},gGround);
+  [-EDGE,EDGE].forEach(v=>el("polyline",{points:pts([P(-30,v),P(60,v)]),stroke:css("--paint"),"stroke-width":2.6,fill:"none"},gGround));
+  [-1.8,1.8].forEach(v=>el("polyline",{points:pts([P(-30,v),P(60,v)]),stroke:css("--paint"),"stroke-width":2,fill:"none","stroke-dasharray":"16 13"},gGround));
+  // flechas de sentido único, una por carril
+  [R,M,L].forEach(v=>[8,20,32].forEach(u=>{
+    el("polygon",{points:pts([P(u+1.6,v),P(u-.5,v-.55),P(u-.5,v+.55)]),fill:css("--paint"),opacity:.75},gGround)}));
+  // etiquetas de carril al fondo
+  [[R,"derecho"],[M,"central"],[L,"izquierdo"]].forEach(([v,t])=>{
+    const [x,y]=P(35.5,v);const tx=el("text",{x,y:y+4,"text-anchor":"middle","font-size":10,"font-weight":700,fill:css("--muted"),"font-family":"system-ui","letter-spacing":".06em"},gGround);
+    tx.textContent=t.toUpperCase()});
+  // árboles
+  [[2,10.5],[12,11.5],[24,10.5],[36,11.5],[6,-10.5],[18,-11.5],[30,-10.5]].forEach(([u,v])=>{
+    const [x,y]=P(u,v);el("rect",{x:x-1.5,y:y-6,width:3,height:8,fill:"#8c6b4a"},gGround);el("ellipse",{cx:x,cy:y-12,rx:9,ry:11,fill:css("--ok"),opacity:.5},gGround)});
+}
+
+/* ---- cajas isométricas ---- */
+function box(g,u,v,l,w,h,top,side,rear,z0=0){
+  const u0=u-l/2,u1=u+l/2,v0=v-w/2,v1=v+w/2;
+  el("polygon",{points:pts([P(u0,v1,z0),P(u1,v1,z0),P(u1,v1,z0+h),P(u0,v1,z0+h)]),fill:side},g);
+  el("polygon",{points:pts([P(u0,v0,z0),P(u0,v1,z0),P(u0,v1,z0+h),P(u0,v0,z0+h)]),fill:rear},g);
+  el("polygon",{points:pts([P(u0,v0,z0+h),P(u1,v0,z0+h),P(u1,v1,z0+h),P(u0,v1,z0+h)]),fill:top},g);
+}
+function car(g,u,v,main,dark,{len=4,wid=2,tall=1.3,truck=false,bl=null,t=0,glass=true}={}){
+  el("ellipse",{cx:P(u,v)[0],cy:P(u,v)[1]+2,rx:len*7,ry:wid*4,fill:"#000",opacity:.12},g);
+  if(truck){
+    box(g,u-1.5,v,len*.6,wid,tall*1.7,"#f2ece0","#e2dccd","#c9c2b0");
+    box(g,u+len*.36,v,len*.36,wid,tall,main,dark,dark);
+  }else{
+    box(g,u,v,len,wid,tall*.55,main,dark,dark);
+    box(g,u-.2,v,len*.5,wid*.86,tall*.5,glass?"#bcd3e4":main,glass?"#8fb0c8":dark,"#7d9db5",tall*.55);
+  }
+  if(bl){
+    const on=Math.sin(t*10)>0, fv=bl==="L"?v-wid/2:v+wid/2;
+    [u+len/2,u-len/2].forEach(uu=>{const [x,y]=P(uu,fv,.5);el("circle",{cx:x,cy:y,r:on?5:3,fill:on?"#ffb300":"#9a7a2a",opacity:on?1:.6},g)});
+  }
+}
+function pill(g,x,y,txt,col){
+  const w=txt.length*6.4+16;
+  el("rect",{x:x-w/2,y:y-11,width:w,height:20,rx:10,fill:css("--card"),stroke:col,"stroke-width":1.4},g);
+  const t=el("text",{x,y:y+3,"text-anchor":"middle","font-size":11,"font-weight":700,fill:css("--ink"),"font-family":"system-ui"},g);
+  t.textContent=txt;
+}
+
+/* ---- dibujo por frame ---- */
+function draw(time){
+  gDyn.innerHTML="";gUI.innerHTML="";
+  const tgt=KF[cur],k=ease(Math.min(1,tAnim));
+  let u=lerp(fromU,tgt.me[0],k), v=lerp(fromV,tgt.me[1],k);
+  // con más de 3.500 kg, el izquierdo se cierra
+  const blockedLeft=heavy&&tgt.me[1]===L;
+  if(heavy&&v<M)v=M;
+  lastU=u;lastV=v;
+  const bl=blockedLeft?"L":tgt.bl;
+  const objs=[
+    {u:TRUCK_U,v:R,f:g=>car(g,TRUCK_U,R,css("--truck"),css("--truckDark"),{len:6,wid:2.15,truck:true})},
+    {u,v,f:g=>car(g,u,v,heavy?css("--heavy"):css("--me"),heavy?css("--heavyDark"):css("--meDark"),{len:heavy?4.6:4,wid:heavy?2.15:2,bl,t:time,truck:heavy})},
+  ].sort((p,q)=>(p.v-p.u)-(q.v-q.u));
+  objs.forEach(o=>o.f(el("g",{},gDyn)));
+  // etiquetas
+  let [x,y]=P(u,v,3.6);pill(gUI,x,y,heavy?"tú · 4.000 kg":"tú",heavy?css("--heavy"):css("--me"));
+  [x,y]=P(TRUCK_U,R,6.8);pill(gUI,x-86,y-6,"camión lento",css("--truck"));
+  if(blockedLeft)pill(gUI,122,376,"✕ carril izquierdo: prohibido",css("--accent"));
+  // chips
+  const setC=(id,txt,cl)=>{const e=$(id);e.textContent=txt;e.className=cl||""};
+  setC("#cVia","Fuera de poblado","ok");
+  setC("#cVeh",heavy?"Furgón":"Turismo",heavy?"no":"ok");
+  setC("#cMas",heavy?"4.000 kg > 3.500":"1.500 kg",heavy?"no":"ok");
+  setC("#cCar",Math.abs(v-R)<.4?"Derecho":Math.abs(v-M)<.4?"Central":"Izquierdo",Math.abs(v-R)<.4?"ok":Math.abs(v-M)<.4?"mid":"no");
+}
+
+/* ---- UI ---- */
+const stepsEl=$("#steps");
+TXT.forEach((t,i)=>{const b=document.createElement("button");b.className="st";b.innerHTML=`<i>${i+1}</i><span>${t[0]}</span>`;b.onclick=()=>go(i);stepsEl.appendChild(b)});
+function go(i){
+  fromU=lastU;fromV=lastV;
+  cur=Math.max(0,Math.min(5,i));tAnim=0;const t=TXT[cur];
+  $("#tag").textContent=`Paso ${cur+1} / 6`;
+  $("#tit").textContent=t[0];$("#txt").innerHTML=t[1];$("#idea").textContent=t[2];$("#joke").textContent=t[3];
+  [...stepsEl.children].forEach((b,j)=>{b.classList.toggle("cur",j===cur);b.classList.toggle("done",j<cur)});
+  $("#bBack").disabled=cur===0;$("#bNext").textContent=cur===5?"Volver a empezar":"Siguiente →";
+}
+$("#bNext").onclick=()=>go(cur===5?0:cur+1);
+$("#bBack").onclick=()=>go(cur-1);
+$("#bRep").onclick=()=>{const p=KF[Math.max(0,cur-1)];lastU=p.me[0];lastV=p.me[1];go(cur)};
+$("#bPause").onclick=e=>{playing=!playing;e.target.setAttribute("aria-pressed",!playing);e.target.textContent=playing?"Pausa":"Seguir"};
+$("#bHeavy").onclick=e=>{heavy=!heavy;e.target.setAttribute("aria-pressed",heavy);e.target.textContent=heavy?"Furgón de 4.000 kg (activo)":"Furgón de 4.000 kg"};
+document.addEventListener("keydown",e=>{if(e.key==="ArrowRight")$("#bNext").click();if(e.key==="ArrowLeft")$("#bBack").click()});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",ground);
+
+let T=0;
+(function loop(now){
+  requestAnimationFrame(loop);
+  const dt=Math.min(.05,(now-last)/1000);last=now;
+  if(playing){T+=dt;tAnim=Math.min(1,tAnim+dt/3.2)}
+  draw(T);
+})(performance.now());
+ground();go(0);
+</script>
+</body>
+</html>

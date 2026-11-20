@@ -46,3 +46,8 @@ AGENTS.MD
 
 # Copia para marketing.alvaropastor.dev (generada)
 /dist-marketing/
+
+# Netlify y Worker de bloqueos (generados)
+/netlify/marketing/dist/
+.netlify/
+.wrangler/

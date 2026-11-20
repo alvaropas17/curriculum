@@ -25,6 +25,8 @@
             <a class="nav-marca" href="#top">Álvaro Pastor<span class="nav-apellido"> Periago</span></a>
             <div class="nav-enlaces">
                 <a href="#herramientas">herramientas</a>
+                <a href="#proyectos">proyectos</a>
+                <a href="#sobre-mi">sobre mí</a>
                 <a href="#contacto">contacto</a>
             </div>
             <a href="#contacto" class="btn btn-primario nav-cta">Hablemos</a>
@@ -36,41 +38,44 @@
         </div>
         <div id="menu-movil" class="menu-movil">
             <a href="#herramientas">herramientas</a>
+            <a href="#proyectos">proyectos</a>
+            <a href="#sobre-mi">sobre mí</a>
             <a href="#contacto">contacto</a>
         </div>
     </nav>
 
     <main>
-        <!-- Hero -->
+        <!-- Hero: quién soy, qué hago y prueba inmediata -->
         <header class="hero">
             <div class="contenedor hero-grid">
                 <p class="hero-meta">
-                    <span class="disponible">Una suite de herramientas para agentes de IA que sigue creciendo</span>
-                    <span>2026</span>
+                    <span class="disponible">Álvaro Pastor · desarrollador web e IA</span>
+                    <span>código abierto</span>
                 </p>
                 <h1>Haz más con IA. <span class="marca marca-anim">Con menos esfuerzo por tu parte.</span>
                 </h1>
                 <p class="hero-intro">
-                    Ayuda a tus agentes a recordar, buscar y verificar para dedicar menos tiempo a repetir contexto,
-                    encontrar información y revisar su trabajo.
+                    Construyo herramientas que ayudan a tus agentes a recordar, buscar y verificar, para dedicar menos
+                    tiempo a repetir contexto, encontrar información y revisar su trabajo.
                 </p>
                 <div class="hero-acciones">
-                    <a href="#herramientas" class="btn btn-primario">Explorar herramientas
+                    <a href="./herramientas/history-search.html" class="btn btn-primario" data-umami-event="ver-herramienta" data-umami-event-nombre="history-search" data-umami-event-tipo="hero">Ver history_search
                         <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                             <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7"
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </svg></a>
+                    <a href="https://github.com/alvaropas17/agent-history-search" class="btn btn-secundario" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="hero">Código en GitHub</a>
                 </div>
+
             </div>
         </header>
 
-        <!-- Herramientas -->
+        <!-- Herramienta destacada -->
         <section class="seccion seccion-alt" id="herramientas">
             <div class="contenedor">
                 <div class="revelar">
-                    <p class="etiqueta">herramientas</p>
-                    <h2 class="titulo-seccion">Lo que voy construyendo</h2>
-                    <p class="texto-suave" style="max-width: 39rem; margin-top: 1rem;">Cada herramienta tiene su propia página con la explicación y el enlace a GitHub.</p>
+                    <p class="etiqueta">herramienta destacada</p>
+                    <h2 class="titulo-seccion">Tu agente ya habló de esto. Ahora puede encontrarlo.</h2>
                 </div>
                 <article class="proyecto revelar">
                     <div class="proyecto-media">
@@ -90,13 +95,100 @@
                         <p class="etiqueta">herramienta · agentes de ia</p>
                         <h3><a class="proyecto-titulo-enlace" href="./herramientas/history-search.html" data-umami-event="ver-herramienta" data-umami-event-nombre="history-search" data-umami-event-tipo="titulo">history_search</a></h3>
                         <p class="descripcion">Busca en conversaciones anteriores con agentes de código (Claude Code, Codex, OpenCode, Pi, Pi Pocket) para recuperar decisiones y contexto sin volver a preguntar. Solo lectura, sin dependencias.</p>
-                        <a class="proyecto-enlace" href="./herramientas/history-search.html" data-umami-event="ver-herramienta" data-umami-event-nombre="history-search" data-umami-event-tipo="enlace">Cómo funciona
-                            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                                <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg></a>
+                        <div class="tags">
+                            <span class="tag">solo lectura</span>
+                            <span class="tag">python</span>
+                            <span class="tag">MCP</span>
+                            <span class="tag">sin dependencias</span>
+                        </div>
+                <ul class="hero-compatible" aria-label="Agentes compatibles">
+                    <li class="hero-compatible-titulo">Funciona con</li>
+                    <li>Claude Code</li>
+                    <li>Codex</li>
+                    <li>OpenCode</li>
+                    <li>Pi</li>
+                    <li>Pi Pocket</li>
+                </ul>
+                        <div class="proyecto-enlaces">
+                            <a class="proyecto-enlace" href="./herramientas/history-search.html" data-umami-event="ver-herramienta" data-umami-event-nombre="history-search" data-umami-event-tipo="enlace">Cómo funciona
+                                <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                                    <path d="M2 8h11m0 0L9 4m4 4-4 4" stroke="currentColor" stroke-width="1.7"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg></a>
+                            <a class="proyecto-enlace" href="https://github.com/alvaropas17/agent-history-search" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="tarjeta">Ver código</a>
+                        </div>
                     </div>
                 </article>
+
+                <!-- Ejemplo de uso: la pregunta engancha más que la descripción -->
+                <div class="demo revelar">
+                    <div class="demo-barra">
+                        <span class="ventana-punto"></span>
+                        <span class="ventana-punto"></span>
+                        <span class="ventana-punto lleno"></span>
+                        <span class="ventana-url">ejemplo de uso</span>
+                    </div>
+                    <div class="demo-cuerpo">
+                        <p class="demo-linea demo-tu"><span class="demo-quien">tú</span><span>¿Qué decidimos sobre el rediseño de la web y por qué?</span></p>
+                        <p class="demo-linea demo-herramienta"><span class="demo-quien">history_search</span><span>busca en tus conversaciones anteriores con el agente</span></p>
+                        <p class="demo-linea demo-agente"><span class="demo-quien">agente</span><span>Responde con la opción que elegiste, las alternativas descartadas y los motivos, citando la sesión y el mensaje para que puedas comprobarlo.</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Proyectos -->
+        <section class="seccion" id="proyectos">
+            <div class="contenedor">
+                <div class="revelar">
+                    <p class="etiqueta">proyectos</p>
+                    <h2 class="titulo-seccion">Desarrollo web e IA aplicada</h2>
+                    <p class="texto-suave" style="max-width: 39rem; margin-top: 1rem;">Cada caso parte de un problema, explica una decisión y recoge lo aprendido durante el proceso.</p>
+                </div>
+                <div class="rejilla-tarjetas proyectos-rejilla revelar">
+                    <a class="tarjeta tarjeta-enlace" href="./proyecto/procesos-ia.html" data-umami-event="ver-proyecto" data-umami-event-nombre="procesos-ia">
+                        <span class="campo">experiencia profesional · ia</span>
+                        <h3>Procesos con IA</h3>
+                        <p>Skills, agentes y gestión de contexto para que los agentes de IA comprendan mejor el proyecto y resuelvan tareas de desarrollo con menos fricción.</p>
+                        <span class="tarjeta-mas">Leer el caso</span>
+                    </a>
+                    <a class="tarjeta tarjeta-enlace" href="./proyecto/ludoscript.html" data-umami-event="ver-proyecto" data-umami-event-nombre="ludoscript">
+                        <span class="campo">proyecto propio · ia</span>
+                        <h3>LudoScript</h3>
+                        <p>Plataforma educativa en beta que genera práctica con IA a partir de documentos PDF y registra resultados para orientar el repaso.</p>
+                        <span class="tarjeta-mas">Leer el caso</span>
+                    </a>
+                    <a class="tarjeta tarjeta-enlace" href="./proyecto/tickets.html" data-umami-event="ver-proyecto" data-umami-event-nombre="tickets">
+                        <span class="campo">interfaz de gestión</span>
+                        <h3>Panel de tickets</h3>
+                        <p>Una pantalla de consulta de llamadas que ordena prioridad, contexto y acciones para revisar cada incidencia con menos fricción.</p>
+                        <span class="tarjeta-mas">Ver el rediseño</span>
+                    </a>
+                    <a class="tarjeta tarjeta-enlace" href="./proyecto/plantillas-itop.html" data-umami-event="ver-proyecto" data-umami-event-nombre="itop">
+                        <span class="campo">diseño de comunicaciones</span>
+                        <h3>Plantillas de email para iTop</h3>
+                        <p>Siete plantillas que hacen más legibles las notificaciones a clientes y funcionan en clientes de correo con soporte HTML limitado.</p>
+                        <span class="tarjeta-mas">Ver el rediseño</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sobre mí -->
+        <section class="seccion seccion-alt" id="sobre-mi">
+            <div class="contenedor dos-columnas">
+                <div class="col-titulo revelar">
+                    <p class="etiqueta">sobre mí</p>
+                    <h2 class="titulo-seccion">Quién está detrás</h2>
+                </div>
+                <div class="parrafos revelar">
+                    <p>Soy desarrollador web (DAW) y trabajo a diario con agentes de IA. Las herramientas de esta web nacen de problemas que me encuentro en mi propio flujo de trabajo.</p>
+                    <p>En mis prácticas en AGE2 reduje el arranque del entorno de desarrollo de un minuto a cuatro segundos reorganizando Docker, y rediseñé el prompting y la gestión de contexto de los LLM en producción.</p>
+                    <p>Vivo en Murcia y estoy abierto a trabajo presencial, remoto o híbrido.</p>
+                    <div class="cv-acciones">
+                        <a href="./cv.html" class="btn btn-secundario">Ver CV</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -105,12 +197,13 @@
             <div class="contenedor revelar">
                 <p class="etiqueta">contacto</p>
                 <h2>¿Hablamos?</h2>
-                <p>Si te interesa alguna herramienta o quieres colaborar, escríbeme.</p>
+                <p>Si te interesa alguna herramienta, quieres colaborar o tienes un puesto en mente, escríbeme.</p>
                 <div class="acciones">
-                    <a href="https://x.com/alpas17_" class="btn btn-claro" target="_blank" rel="noopener noreferrer">X / Twitter · @alpas17_</a>
+                    <a href="mailto:contacto@alvaropastor.dev" class="btn btn-claro">contacto@alvaropastor.dev</a>
+                    <a href="https://github.com/alvaropas17" class="btn btn-contorno-claro" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" class="btn btn-contorno-claro" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://x.com/alpas17_" class="btn btn-contorno-claro" target="_blank" rel="noopener noreferrer">X · @alpas17_</a>
                 </div>
-                <p class="correo"><svg class="correo-icono" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6" /><path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" /></svg> <a class="enlace"
-                        href="mailto:contacto@alvaropastor.dev">contacto@alvaropastor.dev</a></p>
             </div>
         </section>
     </main>

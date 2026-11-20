@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0c0c0d" />
+<meta name="robots" content="noindex" />
+<title>Evidencia · Agent History Search</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400..700&display=swap" rel="stylesheet" />
+<style>
+:root{--fondo:#0c0c0d;--fondo-alt:#141416;--linea:#2a2a2e;--texto-1:#f2f0eb;--texto-2:#b8b5ad;--texto-3:#7d7a73;--senal:#ff5a1f;--display:"Instrument Serif",Georgia,serif;--mono:"IBM Plex Mono",ui-monospace,monospace;--sans:"Instrument Sans",system-ui,sans-serif}
+@media (prefers-color-scheme:light){:root{--fondo:#f7f5f0;--fondo-alt:#fff;--linea:#ddd8cc;--texto-1:#151412;--texto-2:#4a4740;--texto-3:#7d7a73;--senal:#d9430b}}
+*{box-sizing:border-box;margin:0}
+body{background:var(--fondo);color:var(--texto-1);font:16px/1.6 var(--sans)}
+.marco{max-width:52rem;margin:0 auto;padding:0 16px}
+nav{border-bottom:1px solid var(--linea)}nav .marco{display:flex;justify-content:space-between;align-items:center;min-height:56px;gap:1rem}
+a{color:var(--senal);text-underline-offset:4px}nav a{color:var(--texto-1);text-decoration:none;font-size:.9rem}
+button{font:500 .8rem var(--mono);background:none;border:1px solid var(--linea);color:var(--texto-1);padding:.4rem .8rem;border-radius:4px;cursor:pointer;min-height:36px}
+header{padding:2.5rem 0 1.5rem}.etiqueta{font:400 .7rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--senal)}
+h1{font:400 clamp(2.2rem,6vw,3.4rem)/1.05 var(--display);margin:.6rem 0 .8rem}h1 em{color:var(--senal)}
+.sub{color:var(--texto-2);max-width:40rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem;padding:0;list-style:none}.chips li{font:400 .72rem var(--mono);border:1px solid var(--linea);border-radius:99px;padding:.2rem .7rem;color:var(--texto-2)}
+section{padding:1.75rem 0;border-top:1px solid var(--linea)}h2{font:400 1.6rem/1.2 var(--display);margin-bottom:1rem}
+.recuperado{border:1px solid var(--linea);border-left:3px solid var(--senal);background:var(--fondo-alt);border-radius:4px;padding:1.25rem}
+.recuperado blockquote{font:400 clamp(1.3rem,3vw,1.7rem)/1.3 var(--display);overflow-wrap:anywhere}.recuperado blockquote code{font:500 .95rem/1.6 var(--mono);color:var(--senal)}
+.recuperado p{margin-top:.8rem;font-size:.85rem;color:var(--texto-3)}
+.tiempos{display:grid;gap:1rem}.tiempo{display:grid;grid-template-columns:7rem 1fr;gap:.25rem 1rem;align-items:center}
+.tiempo b{font:400 2.4rem/1 var(--display);color:var(--senal)}.tiempo b small{font:400 .8rem var(--mono);color:var(--texto-3);margin-left:.2rem}
+.barra{height:8px;background:var(--linea);border-radius:4px;overflow:hidden}.barra i{display:block;height:100%;background:var(--senal);border-radius:4px}
+.tiempo .meta{grid-column:2;font:400 .72rem var(--mono);color:var(--texto-3)}.tiempo .nombre{font-weight:600}
+pre{background:var(--fondo-alt);border:1px solid var(--linea);border-radius:4px;padding:1rem;font:400 .8rem/1.7 var(--mono);white-space:pre-wrap;overflow-wrap:anywhere}
+.k{color:var(--texto-3)}.s{color:var(--senal)}.n{color:var(--texto-1);font-weight:500}
+dl.datos{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:1rem;margin-top:1rem}dl.datos dt{font:400 1.8rem/1 var(--display)}dl.datos dd{font-size:.8rem;color:var(--texto-2);margin-top:.3rem}
+ul.limites{padding-left:1.2rem;color:var(--texto-2)}ul.limites li+li{margin-top:.4rem}
+.metodo{color:var(--texto-2)}
+footer{padding:1.5rem 0 3rem;border-top:1px solid var(--linea);font-size:.85rem;color:var(--texto-3);display:flex;flex-wrap:wrap;gap:1rem}
+footer .marco{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
+@media(max-width:480px){.tiempo{grid-template-columns:5.5rem 1fr}.tiempo b{font-size:2rem}}
+</style>
+</head>
+<body>
+<nav><div class="marco"><a href="/herramientas/agent-history-search.html" id="volver">← Agent History Search</a><button id="idioma" type="button">EN</button></div></nav>
+<main class="marco" id="app"><header><p class="etiqueta">…</p></header></main>
+<footer><div class="marco"><a id="raw" href="#">JSON original</a><span id="pie"></span></div></footer>
+<script>
+(() => {
+  const CASOS = {
+    deploy: '/evidence/history-search-deploy-case-20261113.json',
+    script: '/evidence/history-search-script-case-20261112.json',
+  };
+  const T = {
+    es: {
+      label: 'Evidencia · uso real registrado', notBench: 'No es un benchmark',
+      deploy: ['Recuperó el <em>comando de despliegue</em>.', 'Un comando escrito en una sesión de Pi Pocket el día anterior, recuperado desde Claude Code.'],
+      script: ['Recuperó el <em>guion</em> con una frase.', 'Una frase recordada bastó para encontrar el borrador de un vídeo en una sesión anterior de Claude Code.'],
+      recovered: 'Lo que recuperó', from: 'Fuente', times: 'Tiempos medidos', search: 'Búsqueda', expand: 'Ampliación',
+      call: 'Llamada', result: 'respuesta', query: 'Lo que buscó el agente', results: 'resultados', ctx: 'caracteres de contexto pedidos', msg: 'caracteres del mensaje ampliado',
+      method: 'Cómo se midió', limits: 'Límites', raw: 'Ver JSON original', back: '← Agent History Search', priv: 'Sin identificadores de chats, rutas locales ni conversaciones completas.',
+      date: (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' }),
+      agent: { pocket: 'Pi Pocket' },
+    },
+    en: {
+      label: 'Evidence · recorded real use', notBench: 'Not a benchmark',
+      deploy: ['It recovered the <em>deploy command</em>.', 'A command written in a Pi Pocket session the day before, recovered from Claude Code.'],
+      script: ['One line recovered <em>the script</em>.', 'One remembered line was enough to find a video draft in an earlier Claude Code session.'],
+      recovered: 'What it recovered', from: 'Source', times: 'Measured times', search: 'Search', expand: 'Expansion',
+      call: 'Call', result: 'response', query: 'What the agent searched for', results: 'results', ctx: 'characters of context requested', msg: 'characters in the expanded message',
+      method: 'How it was measured', limits: 'Limits', raw: 'View original JSON', back: '← Agent History Search', priv: 'No chat identifiers, local paths or complete conversations.',
+      date: (d) => new Date(d + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }),
+      agent: { pocket: 'Pi Pocket' },
+    },
+  };
+  // Traducciones de los textos libres del JSON (método y límites), que vienen en inglés.
+  const ES_TEXTO = {
+    'Subtract tool_use timestamp from matching tool_result timestamp in the stored Claude Code transcript. Pair by tool_use_id, not proximity.': 'Se resta la marca de tiempo de la llamada a la de su resultado en el registro de Claude Code. Se emparejan por tool_use_id, no por cercanía.',
+    'Timestamp differences between calls and responses paired by tool_use_id in the private log.': 'Diferencia entre la marca de tiempo de cada llamada y la de su respuesta, emparejadas por tool_use_id en el registro privado.',
+    'One observed case; no repeated benchmark or speed guarantee.': 'Un caso observado; no es un benchmark repetido ni una garantía de velocidad.',
+    'Excludes agent thinking between calls and end-to-end response time.': 'No incluye la reflexión del agente entre llamadas ni el tiempo total de respuesta.',
+    'The command is trimmed to its public part: chat identifiers and local tool paths are omitted.': 'El comando se recorta a su parte pública: se omiten identificadores de chat y rutas locales.',
+    'The search ran on 2026-11-13 to reproduce a lookup of an answer written the day before.': 'La búsqueda se hizo el 13-11-2026 para recuperar una respuesta escrita el día anterior.',
+    'One observed case, not a speed guarantee.': 'Un caso observado, no una garantía de velocidad.',
+    'Excludes agent thinking and total response time.': 'No incluye la reflexión del agente ni el tiempo total de respuesta.',
+    'Chat IDs, internal refs, paths and unrelated text omitted.': 'Se omiten IDs de chat, referencias internas, rutas y texto no relacionado.',
+  };
+
+  const url = new URL(location.href);
+  const caso = CASOS[url.searchParams.get('caso')] ? url.searchParams.get('caso') : 'deploy';
+  let idioma = url.searchParams.get('lang');
+  if (idioma !== 'es' && idioma !== 'en') {
+    try { idioma = localStorage.getItem('portfolio-language'); } catch { idioma = null; }
+    if (idioma !== 'es' && idioma !== 'en') idioma = (navigator.language || 'es').toLowerCase().startsWith('es') ? 'es' : 'en';
+  }
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const hora = (iso) => iso.slice(11, 23) + ' UTC';
+  const json = (o) => esc(JSON.stringify(o, null, 2))
+    .replace(/(&quot;[^&]+?&quot;)(?=:)/g, '<span class="k">$1</span>')
+    .replace(/: (&quot;.*?&quot;)/g, ': <span class="s">$1</span>')
+    .replace(/: (\d+)/g, ': <span class="n">$1</span>');
+  let datos = null;
+
+  const pintar = () => {
+    const t = T[idioma];
+    const tr = (s) => idioma === 'es' ? (ES_TEXTO[s] || s) : s;
+    document.documentElement.lang = idioma;
+    document.getElementById('idioma').textContent = idioma === 'es' ? 'EN' : 'ES';
+    document.getElementById('raw').textContent = t.raw;
+    document.getElementById('raw').href = CASOS[caso];
+    document.getElementById('pie').textContent = t.priv;
+    document.getElementById('volver').href = '/herramientas/agent-history-search.html?lang=' + idioma;
+    document.getElementById('volver').textContent = t.back;
+    const d = datos;
+    const [titulo, sub] = t[caso];
+    document.title = (idioma === 'es' ? 'Evidencia' : 'Evidence') + ' · ' + t.date(d.case_date);
+    const max = Math.max(...d.measurements.map((m) => m.elapsed_ms));
+    const rec = d.recovered_source
+      ? `<blockquote><code>${esc(d.recovered_source.command_excerpt)}</code></blockquote><p>${t.from}: ${esc(t.agent[d.recovered_source.agent] || d.recovered_source.agent)} · ${esc(t.date(d.recovered_source.timestamp.slice(0, 10)))}, ${esc(hora(d.recovered_source.timestamp))}</p>`
+      : `<blockquote>“${esc(d.recovered_quote_en)}”</blockquote><p>${t.from}: Claude Code · ${esc(t.date(d.case_date))}</p>`;
+    const extra = [
+      [d.search_result_count, t.results],
+      [d.expansion_requested_context?.toLocaleString(idioma), t.ctx],
+      d.expanded_message_characters ? [d.expanded_message_characters.toLocaleString(idioma), t.msg] : null,
+    ].filter(Boolean);
+    document.getElementById('app').innerHTML = `
+      <header>
+        <p class="etiqueta">${t.label} · ${esc(t.date(d.case_date))}</p>
+        <h1>${titulo}</h1>
+        <p class="sub">${sub}</p>
+        <ul class="chips"><li>${esc(d.tool)}</li><li>${t.notBench}</li></ul>
+      </header>
+      <section><h2>${t.recovered}</h2><div class="recuperado">${rec}</div></section>
+      <section><h2>${t.times}</h2><div class="tiempos">${d.measurements.map((m) => `
+        <div class="tiempo"><b>${m.elapsed_ms}<small>ms</small></b>
+          <div><span class="nombre">${m.action === 'search' ? t.search : t.expand}</span><div class="barra"><i style="width:${(m.elapsed_ms / max * 100).toFixed(1)}%"></i></div></div>
+          <span class="meta">${t.call} ${esc(hora(m.call_at))} → ${t.result} ${esc(hora(m.result_at))}</span></div>`).join('')}
+      </div></section>
+      <section><h2>${t.query}</h2><pre>${json(d.search_arguments)}</pre>
+        <dl class="datos">${extra.map(([v, l]) => `<div><dt>${esc(v)}</dt><dd>${l}</dd></div>`).join('')}</dl></section>
+      <section><h2>${t.method}</h2><p class="metodo">${esc(tr(d.method))}</p></section>
+      <section><h2>${t.limits}</h2><ul class="limites">${d.limits.map((l) => `<li>${esc(tr(l))}</li>`).join('')}</ul></section>`;
+  };
+
+  document.getElementById('idioma').addEventListener('click', () => {
+    idioma = idioma === 'es' ? 'en' : 'es';
+    try { localStorage.setItem('portfolio-language', idioma); } catch { /* sin almacenamiento */ }
+    url.searchParams.set('lang', idioma); history.replaceState(null, '', url);
+    pintar();
+  });
+
+  fetch(CASOS[caso]).then((r) => r.json()).then((d) => { datos = d; pintar(); })
+    .catch(() => { document.getElementById('app').innerHTML = `<header><h1>No se pudo cargar la evidencia.</h1><p class="sub"><a href="${CASOS[caso]}">JSON original</a></p></header>`; });
+})();
+</script>
+</body>

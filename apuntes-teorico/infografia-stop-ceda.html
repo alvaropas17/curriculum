@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stop vs Ceda · infografía</title>
+<style>
+:root{--bg:#ecebe6;--paper:#fbf9f5;--ink:#0d1b3a;--sub:#7a88ab;--body:#2d3a5c;--blueBg:#e9eef8;--peachBg:#f8efe6;--green:#8dba8c;--amber:#d9b98a;--track:#e4e6ee;--key:#e6eaf7;--red:#c4252c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);padding:20px;font:16px/1.5 "Inter",system-ui,sans-serif;color:var(--body)}
+.card{max-width:760px;margin:0 auto;background:var(--paper);border-radius:22px;padding:clamp(18px,4vw,38px);box-shadow:0 10px 40px rgba(13,27,58,.12);display:grid;gap:clamp(14px,2.6vw,22px)}
+.top{display:flex;justify-content:space-between;font:600 .72rem/1 system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)}
+h1{margin:0;font:900 clamp(2.4rem,9vw,4.2rem)/.95 "Overpass","Arial Narrow",Arial,sans-serif;color:var(--ink);letter-spacing:-.02em}
+.q{margin:0;font:700 clamp(1.1rem,3.4vw,1.6rem)/1.2 system-ui;color:var(--sub)}
+.intro{margin:0;font-size:clamp(.95rem,2.4vw,1.1rem)}
+.vs{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:clamp(10px,2.4vw,18px)}
+.side{border-radius:18px;padding:clamp(12px,2.6vw,20px);display:grid;gap:10px;align-content:start}
+.a{background:var(--blueBg)} .b{background:var(--peachBg)}
+.sign{display:grid;place-items:center;height:clamp(96px,22vw,140px)}
+.sign svg{height:100%;width:auto;filter:drop-shadow(0 6px 8px rgba(13,27,58,.2))}
+.side h2{margin:0;font:800 clamp(1.05rem,3vw,1.35rem)/1.1 system-ui;color:var(--ink)}
+.row{display:grid;grid-template-columns:22px 1fr;gap:4px 8px;align-items:center;font-size:clamp(.72rem,2vw,.9rem)}
+.row svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.row .t{display:block;color:var(--ink);font-weight:600;line-height:1.2}
+.bar{grid-column:2;height:9px;border-radius:9px;background:var(--track);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:9px;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.a .bar i{background:var(--green)} .b .bar i{background:var(--amber)}
+.go .bar i{width:var(--w)}
+.vsdot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:#eceef6;display:grid;place-items:center;font:800 .85rem system-ui;color:var(--sub);box-shadow:0 0 0 5px var(--paper)}
+.legend{font-size:.74rem;color:var(--sub);margin:-6px 0 0}
+.trap{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(12px,3vw,26px);align-items:center}
+.trap h3{margin:0 0 4px;font:700 .78rem/1 system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)}
+.trap p{margin:0;font-size:clamp(.82rem,2.2vw,.98rem)}
+.road{width:100%;height:auto;display:block}
+@media (max-width:560px){.trap{grid-template-columns:1fr}}
+.key{display:grid;grid-template-columns:auto 1px 1fr;gap:16px;align-items:center;background:var(--key);border-radius:16px;padding:clamp(12px,3vw,20px)}
+.key svg{width:44px;height:44px;stroke:var(--ink);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.key hr{width:1px;height:100%;border:0;background:#aeb7d3;margin:0}
+.key small{font:700 .68rem/1 system-ui;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)}
+.key b{display:block;margin-top:5px;font:700 clamp(.95rem,2.6vw,1.12rem)/1.35 system-ui;color:var(--ink)}
+.joke{margin:0;text-align:center;font-style:italic;font-size:.85rem;color:var(--sub)}
+.btn{justify-self:center;font:600 .8rem system-ui;padding:7px 14px;border-radius:99px;border:1px solid #c9cfe0;background:#fff;color:var(--body);cursor:pointer}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<article class="card" id="card">
+  <div class="top"><span>Teórico DGT · Tema 3 · Señalización</span><span>04 / 09</span></div>
+  <h1>Stop vs Ceda</h1>
+  <p class="q">¿Cuándo te paras de verdad?</p>
+  <p class="intro">Las dos te hacen ceder el paso. Solo una te obliga a poner el coche a cero. Aquí está la diferencia que el examen te cambia de sitio.</p>
+
+  <div class="vs" id="vs">
+    <div class="side a">
+      <div class="sign"><svg viewBox="0 0 120 120" aria-label="Señal de stop"><polygon points="36,4 84,4 116,36 116,84 84,116 36,116 4,84 4,36" fill="#c4252c"/><polygon points="38,12 82,12 108,38 108,82 82,108 38,108 12,82 12,38" fill="none" stroke="#fff" stroke-width="3"/><text x="60" y="72" text-anchor="middle" font-family="Arial Black,Arial" font-weight="900" font-size="30" fill="#fff">STOP</text></svg></div>
+      <h2>R-2 · Stop</h2>
+      <div class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg><span class="t">Detención obligatoria</span><div class="bar"><i style="--w:100%"></i></div></div>
+      <div class="row"><svg viewBox="0 0 24 24"><path d="M4 12h12M12 6l6 6-6 6"/></svg><span class="t">Cedes el paso</span><div class="bar"><i style="--w:100%"></i></div></div>
+      <div class="row"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><path d="M12 6v12"/></svg><span class="t">Línea continua en el suelo</span><div class="bar"><i style="--w:100%"></i></div></div>
+      <div class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/></svg><span class="t">Paras otra vez si no ves</span><div class="bar"><i style="--w:100%"></i></div></div>
+    </div>
+    <div class="side b">
+      <div class="sign"><svg viewBox="0 0 120 120" aria-label="Señal de ceda el paso"><polygon points="8,16 112,16 60,108" fill="#c4252c" stroke="#c4252c" stroke-width="8" stroke-linejoin="round"/><polygon points="24,26 96,26 60,90" fill="#fff"/></svg></div>
+      <h2>R-1 · Ceda el paso</h2>
+      <div class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg><span class="t">Detención obligatoria</span><div class="bar"><i style="--w:12%"></i></div></div>
+      <div class="row"><svg viewBox="0 0 24 24"><path d="M4 12h12M12 6l6 6-6 6"/></svg><span class="t">Cedes el paso</span><div class="bar"><i style="--w:100%"></i></div></div>
+      <div class="row"><svg viewBox="0 0 24 24"><path d="M3 12h18" stroke-dasharray="3 3"/><path d="M12 6v12"/></svg><span class="t">Línea discontinua en el suelo</span><div class="bar"><i style="--w:55%"></i></div></div>
+      <div class="row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/></svg><span class="t">Paras otra vez si no ves</span><div class="bar"><i style="--w:0%"></i></div></div>
+    </div>
+    <div class="vsdot">VS</div>
+  </div>
+  <p class="legend">Barra llena = obligatorio siempre · barra corta = solo si hace falta.</p>
+
+  <div class="trap">
+    <div><h3>El detalle trampa</h3><p><b>Stop:</b> te paras <b>antes de la línea</b> (o de la intersección si no hay) y, si desde ahí no ves, <b>otra vez</b> donde veas. <b>Ceda:</b> cedes, y solo te paras si <b>hace falta</b>.</p></div>
+    <svg class="road" viewBox="0 0 320 130" aria-label="Dos coches ante una intersección">
+      <rect x="0" y="40" width="320" height="52" rx="6" fill="#d9dbe4"/>
+      <rect x="196" y="0" width="52" height="130" fill="#d9dbe4"/>
+      <line x1="0" y1="66" x2="190" y2="66" stroke="#fff" stroke-width="2.5" stroke-dasharray="10 8"/>
+      <line x1="170" y1="42" x2="170" y2="90" stroke="#c4252c" stroke-width="5"/>
+      <text x="170" y="34" text-anchor="middle" font-size="11" font-weight="700" fill="#c4252c" font-family="system-ui">línea de stop</text>
+      <g id="car"><rect x="24" y="52" width="46" height="22" rx="7" fill="#2f6fba"/><rect x="40" y="55" width="18" height="14" rx="3" fill="#bcd3e4"/><circle cx="72" cy="54" r="3" fill="#ffb300"/></g>
+      <path d="M92 63h58" stroke="#0d1b3a" stroke-width="2" stroke-dasharray="3 5"/><path d="M146 58l6 5-6 5" fill="none" stroke="#0d1b3a" stroke-width="2"/>
+      <text x="100" y="118" font-size="11" fill="#0d1b3a" font-weight="600" font-family="system-ui">Te paras aquí, antes de la línea</text>
+    </svg>
+  </div>
+
+  <div class="key">
+    <svg viewBox="0 0 48 48"><path d="M24 6v34M12 40h24M10 14h28"/><path d="M10 14L4 28a6 6 0 0 0 12 0zM38 14l-6 14a6 6 0 0 0 12 0z"/></svg><hr>
+    <div><small>Idea clave</small><b>Ceda = «cedo y miro». Stop = «cedo, me paro del todo y miro». Una raya continua es la pista.</b></div>
+  </div>
+  <p class="joke">Frenar en un ceda «por si acaso» tampoco te hace mala persona. Solo lenta.</p>
+  <button class="btn" id="re">↻ Ver otra vez</button>
+</article>
+<script>
+const card=document.getElementById("card"),vs=document.getElementById("vs"),car=document.getElementById("car");
+function play(){vs.classList.remove("go");void vs.offsetWidth;requestAnimationFrame(()=>vs.classList.add("go"));
+  if(!matchMedia("(prefers-reduced-motion:reduce)").matches)car.animate([{transform:"translateX(-30px)"},{transform:"translateX(52px)",offset:.7},{transform:"translateX(52px)"}],{duration:2600,easing:"ease-out",fill:"forwards"})}
+document.getElementById("re").onclick=play;
+new IntersectionObserver(e=>{if(e[0].isIntersecting)play()},{threshold:.3}).observe(card);
+</script>
+</body>
+</html>

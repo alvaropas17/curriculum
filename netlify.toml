@@ -1,0 +1,17 @@
+# Web principal (alvaropastor.dev) en Netlify.
+# Es estática: se publica la raíz del repo tal cual, igual que en Cloudflare Pages.
+# La copia de marketing es otro sitio de Netlify con su propia configuración:
+# netlify/marketing/netlify.toml (Base directory = netlify/marketing).
+
+[build]
+  publish = "."
+  command = "echo 'Sitio estático, sin build'"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # playwright es solo para pruebas locales: no descargar navegadores en el build.
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
+
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"

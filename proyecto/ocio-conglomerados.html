@@ -31,7 +31,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&display=swap"
     rel="stylesheet" />
   <style>
     :root {
@@ -50,10 +50,10 @@
       --g-relax: #4fb7c9;
       --g-aventura: #f2963a;
       --g-deporte: #e5534d;
-      --display: "Bricolage Grotesque", "Arial Black", sans-serif;
-      --serif: "Instrument Serif", Georgia, serif;
-      --sans: "Instrument Sans", "Segoe UI", sans-serif;
-      --mono: "IBM Plex Mono", Consolas, monospace;
+      --display: "Newsreader", Georgia, serif;
+      --serif: "Newsreader", Georgia, serif;
+      --sans: "Newsreader", Georgia, serif;
+      --mono: "Newsreader", Georgia, serif;
       color-scheme: dark;
     }
 
@@ -78,10 +78,10 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; overflow-x: clip; }
-    body { margin: 0; background: var(--fondo); color: var(--texto); font: 18px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font: 20px/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
     a { color: var(--luz); }
     button { font: inherit; color: inherit; }
-    h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.02; letter-spacing: -0.025em; }
+    h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.02; letter-spacing: -0.02em; }
     p { margin: 0 0 1.1rem; }
     em, .serif { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
 
@@ -89,7 +89,7 @@
     .lectura { width: min(40rem, 100% - 32px); margin-inline: auto; }
     .lectura p { color: var(--texto-2); font-size: 1.15rem; }
     .lectura p strong { color: var(--texto); font-weight: 600; }
-    .mono { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--texto-3); }
+    .mono { font-family: var(--mono); font-size: 0.88rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--texto-3); }
 
     .progreso { position: fixed; top: 0; left: 0; height: 3px; background: var(--luz); width: 0; z-index: 30; }
     .flotante { position: fixed; top: 14px; z-index: 30; font: 500 0.8rem var(--mono); color: var(--texto-2); text-decoration: none; background: var(--vidrio); backdrop-filter: blur(8px); padding: 0.35rem 0.75rem; border-radius: 99px; border: 1px solid var(--linea); cursor: pointer; }
@@ -112,7 +112,7 @@
     .hero::before { content: ""; position: absolute; inset: 0 calc(50% - 50vw); z-index: -1; background: radial-gradient(50rem 28rem at 75% 15%, color-mix(in srgb, var(--g-relax) 14%, transparent), transparent 70%), radial-gradient(40rem 28rem at 10% 90%, color-mix(in srgb, var(--g-aventura) 12%, transparent), transparent 70%); pointer-events: none; }
     .hero-texto { width: min(44rem, 100%); margin-inline: auto; }
     @media (max-width: 600px) { .hero { padding-top: 9rem; } }
-    .hero h1 { font-size: clamp(2.6rem, 5.6vw, 4.6rem); font-weight: 700; }
+    .hero h1 { font-size: clamp(2.6rem, 5.6vw, 4.6rem); font-weight: 400; }
     .hero h1 .serif { color: var(--luz); font-size: 1.08em; }
     .hero-sub { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--texto-2); margin-top: 1.8rem; }
     .hero-sub strong { color: var(--texto); }
@@ -135,7 +135,7 @@
     .mapa svg { width: 100%; height: auto; display: block; }
     .halo { fill: var(--c); opacity: 0.09; stroke: var(--c); stroke-opacity: 0.35; stroke-dasharray: 4 6; transition: opacity .3s; }
     .halo.gana { opacity: 0.2; }
-    .etiqueta-grupo { font: 600 15px var(--display); fill: var(--c); letter-spacing: -0.01em; }
+    .etiqueta-grupo { font: 500 15px var(--display); fill: var(--c); letter-spacing: -0.01em; }
     .burbuja { cursor: pointer; }
     .burbuja circle { fill: var(--fondo-3); stroke: var(--c); stroke-width: 1.5; transition: fill .25s, transform .25s; transform-box: fill-box; transform-origin: center; }
     .burbuja text { font: 500 10.5px var(--sans); fill: var(--texto-2); pointer-events: none; text-anchor: middle; }

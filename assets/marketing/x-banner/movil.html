@@ -1,0 +1,37 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&display=swap" rel="stylesheet">
+<style>
+  :root{--fondo:#faf7f0;--texto:#1b1814;--texto-2:#4f493f;--texto-3:#7d7569;--linea:rgba(27,24,20,.14);--dgt:#d23a3a}
+  body.dark{--fondo:#1a1714;--texto:#f3efe6;--texto-2:#c4bdb1;--texto-3:#9a9387;--linea:rgba(243,239,230,.14);--dgt:#f0605f}
+  *{box-sizing:border-box;margin:0}
+  body{width:1500px;height:500px;overflow:hidden;background:var(--fondo);color:var(--texto);font-family:"Newsreader",Georgia,serif;-webkit-font-smoothing:antialiased;position:relative}
+  svg.fondo{position:absolute;inset:0}
+  .bloque{position:absolute;right:90px;top:70px;text-align:right}
+  .ceja{font-size:34px;letter-spacing:.12em;text-transform:uppercase;color:var(--texto-3);display:flex;justify-content:flex-end;align-items:center;gap:18px}
+  .ceja i{width:44px;height:2px;background:var(--dgt);display:block}
+  h1{font-weight:500;font-size:132px;line-height:.95;letter-spacing:-.03em;margin-top:18px}
+  h1 em{font-style:normal;color:var(--dgt)}
+  .url{position:absolute;right:90px;bottom:52px;font-size:34px;color:var(--texto-2)}
+  .url span{color:var(--dgt)}
+  .grano{position:absolute;inset:0;opacity:.07;mix-blend-mode:multiply}
+  body.dark .grano{mix-blend-mode:screen;opacity:.05}
+</style></head>
+<body class="__TEMA__">
+<svg class="fondo" viewBox="0 0 1500 500">
+  <defs><radialGradient id="halo"><stop offset="0%" stop-color="var(--dgt)" stop-opacity=".4"/><stop offset="100%" stop-color="var(--dgt)" stop-opacity="0"/></radialGradient></defs>
+  <g fill="none" stroke="var(--linea)" stroke-width="1.6">
+    <circle cx="300" cy="190" r="70"/><circle cx="300" cy="190" r="130"/><circle cx="300" cy="190" r="195"/><circle cx="300" cy="190" r="262"/><circle cx="300" cy="190" r="330"/>
+  </g>
+  <circle cx="300" cy="190" r="160" fill="url(#halo)"/>
+  <path d="M-40 470 C 60 430, 150 330, 220 270 S 280 210, 300 190 S 400 90, 500 70 S 600 40, 680 -20" fill="none" stroke="var(--texto-3)" stroke-width="2.2" stroke-dasharray="4 10"/>
+  <g fill="var(--dgt)"><circle cx="208" cy="282" r="7" opacity=".55"/><circle cx="455" cy="80" r="9" opacity=".75"/><circle cx="590" cy="38" r="5" opacity=".45"/></g>
+  <circle cx="300" cy="190" r="38" fill="var(--dgt)"/>
+</svg>
+<svg class="grano" width="1500" height="500"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>
+<div class="bloque">
+  <div class="ceja"><i></i>Marketing con datos reales</div>
+  <h1>Compramos con<br>el <em>estómago.</em></h1>
+</div>
+<div class="url">marketing.alvaropastor.dev <span>→</span></div>
+</body></html>

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "build-webmcp-tools": {
+      "source": "GoogleChromeLabs/webmcp-tools",
+      "sourceType": "github",
+      "skillPath": "webmcp-skills/skills/build-webmcp-tools/SKILL.md",
+      "computedHash": "95b99fdda4cef71c286ce8ef6edac7b054b1c5866383fb69c8d21febae119296"
+    }
+  }
+}

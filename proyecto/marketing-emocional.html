@@ -19,18 +19,22 @@
   </script>
   <title>Enseñé 4 anuncios a 169 personas. Ganó el que no vendía nada · Álvaro Pastor</title>
   <meta name="description"
-    content="Se los envié a 311 personas y 169 me contaron qué sintieron. El que más miedo dio fue el que mejor se recordó. 5 minutos, 3 apuestas y 3 reglas para tu próximo anuncio." />
+    content="169 personas me contaron qué sintieron con 4 anuncios. El que más miedo dio fue el que mejor se recordó; el que más gustó dejaba tristeza. 5 minutos, 3 apuestas y 3 reglas para tu próximo anuncio." />
   <!-- Solo se enlaza desde marketing.alvaropastor.dev: allí es la URL canónica. -->
   <link rel="canonical" href="https://marketing.alvaropastor.dev/proyecto/marketing-emocional.html" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Enseñé 4 anuncios a 169 personas. Ganó el que no vendía nada." />
-  <meta property="og:description" content="Se los envié a 311 personas y 169 me contaron qué sintieron. El que más miedo dio fue el que mejor se recordó. 5 minutos, 3 apuestas y 3 reglas para tu próximo anuncio." />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:description" content="169 personas me contaron qué sintieron con 4 anuncios. El que más miedo dio fue el que mejor se recordó; el que más gustó dejaba tristeza. 5 minutos, 3 apuestas y 3 reglas para tu próximo anuncio." />
+  <meta property="og:image" content="https://marketing.alvaropastor.dev/assets/og/tfg.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Enseñé 4 anuncios a 169 personas. Ganó el que no vendía nada." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:creator" content="@alpas17_" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&display=swap"
     rel="stylesheet" />
   <style>
     :root {
@@ -58,10 +62,10 @@
       /* Rueda de Plutchik */
       --e-alegria: #f2c21b; --e-confianza: #9bd04f; --e-miedo: #35b066; --e-sorpresa: #2fb4c9;
       --e-tristeza: #4f86e6; --e-asco: #9a6ad9; --e-ira: #e5534d; --e-anticipacion: #f2963a;
-      --display: "Bricolage Grotesque", "Arial Black", sans-serif;
-      --serif: "Instrument Serif", Georgia, serif;
-      --sans: "Instrument Sans", "Segoe UI", sans-serif;
-      --mono: "IBM Plex Mono", Consolas, monospace;
+      --display: "Newsreader", Georgia, serif;
+      --serif: "Newsreader", Georgia, serif;
+      --sans: "Newsreader", Georgia, serif;
+      --mono: "Newsreader", Georgia, serif;
       color-scheme: dark;
     }
 
@@ -96,10 +100,10 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; overflow-x: clip; }
-    body { margin: 0; background: var(--fondo); color: var(--texto); font: 18px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font: 20px/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
     a { color: var(--luz); }
     button { font: inherit; color: inherit; }
-    h1, h2, h3 { font-family: var(--display); margin: 0; line-height: 1.02; letter-spacing: -0.025em; }
+    h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; line-height: 1.02; letter-spacing: -0.02em; }
     p { margin: 0 0 1.1rem; }
     em, .serif { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
 
@@ -107,7 +111,7 @@
     .lectura { width: min(40rem, 100% - 32px); margin-inline: auto; }
     .lectura p { color: var(--texto-2); font-size: 1.15rem; }
     .lectura p strong { color: var(--texto); font-weight: 600; }
-    .mono { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--texto-3); }
+    .mono { font-family: var(--mono); font-size: 0.88rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--texto-3); }
 
     /* barra superior */
     .progreso { position: fixed; top: 0; left: 0; height: 3px; background: var(--luz); width: 0; z-index: 30; }
@@ -139,7 +143,7 @@
     .hero::before { content: ""; position: absolute; inset: 0 calc(50% - 50vw); z-index: -1; background: radial-gradient(60rem 30rem at 70% 20%, var(--halo-dgt), transparent 70%), radial-gradient(40rem 30rem at 10% 90%, var(--halo-teka), transparent 70%); pointer-events: none; }
     /* Columna de lectura centrada, como el resto del artículo; la tira de abajo sigue a ancho completo. */
     .hero-texto { align-self: center; position: relative; width: min(44rem, 100%); margin-inline: auto; }
-    .hero h1 { font-size: clamp(2.6rem, 5.4vw, 4.4rem); font-weight: 700; text-wrap: wrap; }
+    .hero h1 { font-size: clamp(2.6rem, 5.4vw, 4.4rem); font-weight: 400; text-wrap: wrap; }
     .hero h1 .serif { color: var(--dgt); font-size: 1.08em; }
     .hero-sub { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--texto-2); margin-top: 1.8rem; }
     .hero-sub strong { color: var(--texto); }
@@ -147,7 +151,7 @@
     .fotograma { position: relative; aspect-ratio: 16/10; border-radius: 6px; overflow: hidden; background: var(--fondo-3); border: 0; padding: 0; cursor: pointer; }
     .fotograma img { width: 100%; height: 100%; object-fit: cover; filter: var(--foto); transition: filter .5s, transform .8s; }
     .fotograma:hover img { filter: none; transform: scale(1.04); }
-    .fotograma span { position: absolute; left: 10px; bottom: 8px; font: 600 0.85rem var(--display); display: flex; align-items: center; gap: 6px; color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); }
+    .fotograma span { position: absolute; left: 10px; bottom: 8px; font: 500 0.85rem var(--display); display: flex; align-items: center; gap: 6px; color: #fff; text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7); }
     .fotograma span i { width: 8px; height: 8px; border-radius: 50%; }
     @media (max-width: 640px) { .tira { grid-template-columns: repeat(2, 1fr); } }
     .bajar { font: 500 0.8rem var(--mono); color: var(--texto-3); text-align: center; margin-top: 2.5rem; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -164,18 +168,18 @@
 
     /* apuesta */
     .apuesta { background: var(--fondo-2); border: 1px solid var(--linea); border-radius: 14px; padding: clamp(1.4rem, 3vw, 2.4rem); margin: 2.5rem auto 0; width: min(46rem, 100% - 32px); }
-    .apuesta-pregunta { font: 700 clamp(1.35rem, 2.6vw, 1.8rem)/1.15 var(--display); margin-bottom: 0.4rem; }
+    .apuesta-pregunta { font: 500 clamp(1.35rem, 2.6vw, 1.8rem)/1.15 var(--display); margin-bottom: 0.4rem; }
     .apuesta-ayuda { color: var(--texto-3); font-size: 0.92rem; margin-bottom: 1.4rem; }
     .opciones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; }
     @media (max-width: 640px) { .opciones { grid-template-columns: repeat(2, 1fr); } }
     .opcion { background: var(--fondo-3); border: 1px solid var(--linea); border-radius: 10px; padding: 0.55rem; cursor: pointer; text-align: left; transition: border-color .2s, transform .2s; }
     .opcion:hover { border-color: var(--texto-2); transform: translateY(-2px); }
     .opcion img { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 6px; display: block; filter: brightness(0.85); }
-    .opcion b { display: block; font: 600 0.95rem var(--display); margin-top: 0.45rem; }
+    .opcion b { display: block; font: 500 0.95rem var(--display); margin-top: 0.45rem; }
     .resultado-apuesta { display: none; margin-top: 1.6rem; }
     .apuesta.resuelta .resultado-apuesta { display: block; }
     .apuesta.resuelta .opciones { display: none; }
-    .veredicto-apuesta { font: 700 1.25rem var(--display); margin-bottom: 1rem; }
+    .veredicto-apuesta { font: 500 1.25rem var(--display); margin-bottom: 1rem; }
     .barra-fila { display: grid; grid-template-columns: 6.5rem 1fr 3.6rem; align-items: center; gap: 0.8rem; margin-bottom: 0.55rem; font-size: 0.92rem; }
     .barra-fila .tu { color: var(--texto-3); font: 0.75rem var(--mono); margin-left: 0.3rem; }
     .barra { height: 12px; border-radius: 99px; background: var(--linea-2); overflow: hidden; }
@@ -203,8 +207,8 @@
     .cata { width: min(46rem, 100% - 32px); margin: 2.4rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
     .vaso { background: var(--fondo-2); border: 1px solid var(--linea); border-radius: 14px; padding: 1.4rem; text-align: center; transition: border-color .4s; }
     .vaso svg { width: 90px; height: 120px; display: block; margin: 0 auto 0.8rem; }
-    .vaso-etiqueta { font: 700 1.2rem var(--display); min-height: 1.5em; }
-    .vaso-pct { font: 700 2.8rem var(--display); line-height: 1; margin: 0.4rem 0; transition: color .4s; }
+    .vaso-etiqueta { font: 500 1.2rem var(--display); min-height: 1.5em; }
+    .vaso-pct { font: 500 2.8rem var(--display); line-height: 1; margin: 0.4rem 0; transition: color .4s; }
     .vaso small { color: var(--texto-3); font-size: 0.82rem; }
     .cata-control { grid-column: 1 / -1; display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
     .cata-nota { grid-column: 1 / -1; text-align: center; color: var(--texto-2); font-size: 0.98rem; min-height: 3em; }
@@ -252,7 +256,7 @@
     }
     .ficha-datos { display: grid; grid-template-columns: repeat(3, minmax(5.5rem, 1fr)); gap: 0.5rem; margin: 0; }
     .ficha-datos div { border: 1px solid var(--linea); border-radius: 10px; padding: 0.6rem; }
-    .ficha-datos b { display: block; font: 700 1.5rem var(--display); }
+    .ficha-datos b { display: block; font: 500 1.5rem var(--display); }
     .ficha-datos span { font-size: 0.75rem; color: var(--texto-3); }
     .intensidades { display: grid; gap: 0.35rem; margin-top: 0.5rem; }
     .intensidad { display: grid; grid-template-columns: 7.5rem 1fr 2.4rem; gap: 0.6rem; align-items: center; font-size: 0.85rem; color: var(--texto-2); }
@@ -263,7 +267,7 @@
     /* engancha */
     .engancha { width: min(46rem, 100% - 32px); margin: 2.4rem auto 0; }
     .gancho { display: grid; grid-template-columns: 8.5rem 1fr 3.5rem; gap: 0.8rem; align-items: center; margin-bottom: 0.9rem; }
-    .gancho span:first-child { font: 600 1.05rem var(--display); }
+    .gancho span:first-child { font: 500 1.05rem var(--display); }
     .gancho .barra { height: 34px; border-radius: 8px; }
     .gancho .barra i { border-radius: 8px; background: var(--teka); }
     .gancho .num { font: 600 1rem var(--mono); text-align: right; }
@@ -307,6 +311,90 @@
     .creditos { color: var(--texto-3); font-size: 0.88rem; margin-top: 2.5rem; }
 
     .tooltip { position: fixed; pointer-events: none; z-index: 50; background: var(--texto); color: var(--fondo); font-size: 0.82rem; padding: 0.4rem 0.6rem; border-radius: 6px; opacity: 0; transition: opacity .12s; }
+      .acciones-hero { margin-top: 2rem; } .acciones-hero .boton { display: inline-block; text-decoration: none; padding: 0.85rem 1.6rem; }
+    .caso-sellos{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;list-style:none;padding:0;margin:1.6rem 0 0;font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--texto-3)}
+    .caso-sellos li::before{content:"\2713 ";color:var(--luz)}
+    .caso-mapa{padding-block:1.6rem 0;margin-top:2.4rem;border-top:1px solid var(--linea)}
+    .caso-mapa>h2{font:500 .7rem var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--texto-3);margin:0 0 1rem}
+    .caso-mapa ol{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:0;padding:0;border:2px solid var(--texto);border-radius:6px;background:var(--fondo)}
+    .caso-mapa li{position:relative;border-right:2px solid var(--texto);min-width:0}.caso-mapa li:last-child{border-right:0}
+    .caso-mapa a{display:flex;flex-direction:column;gap:.35rem;height:100%;padding:1rem 1rem 1.15rem;min-height:44px;color:inherit;text-decoration:none}
+    .caso-mapa a:hover strong{color:var(--luz)}
+    .mapa-num{font:italic 400 1.5rem/1 var(--serif);color:var(--texto-3)}
+    .caso-mapa strong{font:600 1rem/1.25 var(--sans)}.caso-mapa a>span:last-child{font-size:.8rem;line-height:1.5;color:var(--texto-2)}
+    .mapa-aqui{background:var(--fondo-2)}.mapa-aqui .mapa-num{color:var(--luz)}
+    .mapa-aqui em{position:absolute;top:-.8rem;right:.7rem;font:italic 400 1.05rem var(--serif);color:var(--luz);background:var(--fondo);padding:0 .4rem;transform:rotate(-3deg)}
+    @media(max-width:900px){.caso-mapa ol{grid-template-columns:repeat(2,minmax(0,1fr))}.caso-mapa li{border-bottom:2px solid var(--texto)}.caso-mapa li:nth-child(2n){border-right:0}.caso-mapa li:last-child{border-bottom:0;grid-column:1/-1}}
+  
+    .caso-giro { margin: 1.8rem 0; padding: 0.2rem 0 0.2rem 1.2rem; border-left: 3px solid var(--luz); font: italic 400 1.45rem/1.35 var(--serif); color: var(--texto); }
+    .tira-nota { font: 500 0.72rem var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--texto-3); margin: 0.8rem 0 0; }
+    /* Ajuste editorial local: solo presentación; contenido e interacciones intactos. */
+    :root[data-tema="dark"] {
+      --fondo: #1a1714;
+      --fondo-2: #211d19;
+      --fondo-3: #2b251f;
+      --vidrio: rgba(26, 23, 20, 0.88);
+      --vidrio-fuerte: rgba(26, 23, 20, 0.94);
+    }
+    body { line-height: 1.7; }
+    .ancho { width: min(68rem, 100% - 32px); }
+    .lectura { width: min(50rem, 100% - 32px); }
+    .lectura p { font-size: 1.0625rem; text-wrap: pretty; }
+    h1, h2, h3 { text-wrap: balance; }
+    .hero { min-height: 0; display: block; padding: 7rem 0 2rem; }
+    .hero::before { background: none; }
+    .hero-texto { width: min(50rem, 100%); }
+    .hero h1 { font-size: clamp(2rem, 4.1vw, 3.3rem); line-height: 1.12; letter-spacing: -0.02em; }
+    .hero-sub { font-size: 1.0625rem; margin-top: 1.4rem; }
+    .mono, .capitulo-num, .caso-sellos, .tira-nota { letter-spacing: 0.045em; }
+    .hero .mono { line-height: 1.65; }
+    .acciones-hero { margin-top: 1.4rem; }
+    .caso-sellos { margin-top: 1.2rem; line-height: 1.7; }
+    .caso-mapa { width: min(50rem, 100%); margin: 2rem auto 0; padding-top: 1.4rem; }
+    .caso-mapa ol { display: block; border: 0; background: transparent; }
+    .caso-mapa li, .caso-mapa li:last-child { border: 0; border-bottom: 1px solid var(--linea-2); background: transparent; }
+    .caso-mapa a { display: grid; grid-template-columns: 1.8rem 1fr; gap: 0.25rem 0.7rem; padding: 0.8rem 0; }
+    .mapa-num { grid-row: 1 / 3; font-size: 1rem; padding-top: 0.15rem; }
+    .caso-mapa strong { font-size: 0.95rem; }
+    .caso-mapa a > span:last-child { grid-column: 2; }
+    .mapa-aqui em { position: static; display: block; transform: none; background: none; padding: 0 0 0.65rem 2.5rem; font-size: 0.8rem; }
+    .capitulo { padding: clamp(2.5rem, 5vw, 4rem) 0; scroll-margin-top: 5rem; }
+    .capitulo-num { margin-bottom: 0.9rem; font-size: 0.73rem; }
+    .capitulo h2 { font-size: clamp(1.65rem, 3.2vw, 2.35rem); line-height: 1.18; max-width: none; margin-bottom: 1.3rem; }
+    .separador { padding: 2.5rem 20px; background: transparent; }
+    .gran-frase { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.4; max-width: 34ch; text-align: left; }
+    .apuesta, .carrera, .cata, .engancha { width: min(54rem, 100% - 32px); margin-top: 1.6rem; margin-bottom: 1.6rem; }
+    .apuesta, .carrera { padding: clamp(1rem, 2.5vw, 1.7rem); }
+    .apuesta-pregunta { font-size: clamp(1.2rem, 2.3vw, 1.5rem); line-height: 1.3; }
+    .huellas { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 1.7rem; }
+    .huella svg { max-height: 210px; }
+    .caso-giro { font-size: 1.2rem; line-height: 1.5; margin-block: 1.5rem; }
+    .leccion { padding: 1.4rem 0; gap: 1rem; grid-template-columns: 3rem 1fr; }
+    .leccion-num { font-size: 2.4rem; }
+    .leccion h3 { font-size: 1.45rem; line-height: 1.3; }
+    .letra { padding: 2.8rem 0 2rem; }
+    .flotante, .boton, .chip, summary { min-height: 44px; }
+    .flotante { display: inline-flex; align-items: center; justify-content: center; }
+    .tema { min-width: 44px; }
+    .boton:not(.boton-sec) { background: #ffd84d; color: #1a1600; }
+    :focus-visible { outline: 2px solid var(--luz); outline-offset: 3px; }
+    @media (max-width: 640px) {
+      body { font-size: 19px; }
+      .hero { padding-top: 6rem; }
+      .hero h1 { font-size: 2rem; }
+      .hero h1 .serif { font-size: 1em; }
+      .hero-sub, .lectura p { font-size: 1rem; }
+      .volver { left: 12px; }
+      .controles { right: 12px; gap: 6px; }
+      .flotante { font-size: 0.72rem; }
+      .capitulo { padding-block: 2.4rem; }
+      .huellas { grid-template-columns: 1fr; }
+      .huella svg { max-height: 190px; }
+      .barra-fila { grid-template-columns: 5.4rem minmax(0, 1fr) 3rem; gap: 0.4rem; font-size: 0.8rem; }
+      .barra-fila .num { font-size: 0.75rem; }
+      .leccion { grid-template-columns: 2rem 1fr; gap: 0.75rem; }
+      .leccion-num { font-size: 1.8rem; }
+    }
   </style>
 </head>
 
@@ -325,33 +413,39 @@
   <!-- HERO -->
   <header class="hero ancho">
     <div class="hero-texto">
-      <p class="mono aparece" data-t="hero-eti">5 minutos · 3 apuestas · 3 reglas para tu próximo anuncio</p>
+      <p class="mono aparece" data-t="hero-eti">Mi TFG en 5 minutos · 3 apuestas · 3 reglas que puedes usar mañana</p>
       <h1 class="aparece" data-t="hero-h1">Enseñé 4 anuncios a 169 personas. Ganó el que <span class="serif">no vendía nada.</span></h1>
-      <p class="hero-sub aparece" data-t="hero-sub">Si haces anuncios, vídeos o publicaciones, esto te interesa: envié cuatro anuncios a 311 personas, <strong>169 me contaron qué sintieron</strong> y unos se recordaron mucho más que otros. Antes de cada respuesta, apuesta tú.</p>
-      <div class="tira aparece" id="tira"></div>
+      <p class="hero-sub aparece" data-t="hero-sub">Casi todos los anuncios fallan por lo mismo: intentan convencer a la razón cuando la emoción ya ha decidido. Lo comprobé en mi trabajo de fin de grado: puse cuatro anuncios delante de 311 personas y <strong>169</strong> me contaron qué sintieron. Aquí tienes los resultados reales, tres apuestas contra tu instinto y tres reglas para tu próximo anuncio.</p>
+
     </div>
-    <p class="bajar" data-t="bajar">Baja y haz la primera apuesta</p>
+    <nav class="caso-mapa" aria-labelledby="mapa-titulo"><h2 id="mapa-titulo" data-t="mapa-h">Lo que vas a ver</h2>
+      <ol>
+        <li class="mapa-aqui"><a href="#c1"><span class="mapa-num">I</span><strong data-t="m1-h">El anuncio que te atrapa</strong><span data-t="m1-p">Apuesta 1: ¿cuál se llevó la atención?</span></a><em data-t="aqui">Estás aquí</em></li>
+        <li><a href="#c2"><span class="mapa-num">II</span><strong data-t="m2-h">Por qué gana el miedo</strong><span data-t="m2-p">La vía rápida de tu cerebro y la cata de refrescos.</span></a></li>
+        <li><a href="#c4"><span class="mapa-num">III</span><strong data-t="m3-h">Gustar no es atrapar</strong><span data-t="m3-p">Apuesta 2 y la huella que deja cada anuncio.</span></a></li>
+        <li><a href="#c6"><span class="mapa-num">IV</span><strong data-t="m4-h">Lo que de verdad engancha</strong><span data-t="m4-p">Apuesta 3: historia, música… o nada.</span></a></li>
+        <li><a href="#c8"><span class="mapa-num">V</span><strong data-t="m5-h">3 reglas y tu prueba</strong><span data-t="m5-p">Compara tu instinto con 169 personas.</span></a></li>
+      </ol>
+    </nav>
   </header>
 
   <!-- 1 -->
   <section class="capitulo" id="c1">
     <div class="lectura aparece">
-      <span class="capitulo-num" data-t="c1-num">Capítulo 1 · La apuesta</span>
-      <h2 data-t="c1-h">Antes de que te cuente nada, apuesta.</h2>
-      <p data-t="c1-p">Cuatro anuncios muy distintos: un detergente de 1986 que te pide que compares, una campaña de tráfico, un niño en
-        un estadio y una cocina donde pasa la vida. Cada persona vio uno o varios y puntuó de 1 a 10 si le había mantenido atento.</p>
+      <span class="capitulo-num" data-t="c1-num">I · El anuncio que te atrapa</span>
+      <h2 data-t="c1-h">Tres anuncios vendían algo. El cuarto solo quería que siguieras vivo.</h2>
+      <p data-t="c1-p">Para mi trabajo de fin de grado me hice una pregunta sencilla: ¿por qué recordamos anuncios de hace décadas y olvidamos el de ayer? Elegí cuatro anuncios emitidos en España, muy distintos entre sí: un detergente de 1986 que te reta a comparar, una campaña de la DGT, un niño en un estadio y una cocina donde pasa la vida. Se los mandé a 311 personas. Cada una vio uno o varios y puntuó de 1 a 10 cuánto le había mantenido atenta. Contestaron 169.</p>
     </div>
+    <div class="lectura aparece"><p data-t="c1-p2">Antes de ver el resultado, apuesta. Si aciertas, tu instinto funciona como el de tu público. Si fallas, acabas de descubrir por qué tu próximo anuncio necesita otro enfoque.</p></div>
     <div class="apuesta aparece" data-apuesta="atencion"></div>
   </section>
 
   <!-- 2 -->
   <section class="capitulo" id="c2" style="padding-top:0">
     <div class="lectura aparece">
-      <span class="capitulo-num" data-t="c2-num">Capítulo 2 · Por qué funciona</span>
-      <h2 data-t="c2-h">Tu cerebro reacciona antes de que tú lo decidas.</h2>
-      <p data-t="c2-p1">Cuando algo entra por los ojos, el cerebro tiene dos caminos para decidir qué hacer con ello. Uno es corto:
-        del tálamo directo a la <strong>amígdala</strong>, casi sin pensar. Sirve para apartarte de un coche antes de saber
-        qué ha pasado. El otro da la vuelta por la corteza, que pone contexto, y llega después.</p>
+      <span class="capitulo-num" data-t="c2-num">II · Por qué gana el miedo</span>
+      <h2 data-t="c2-h">El miedo no convence. Llega antes.</h2>
+      <p data-t="c2-p1">Cuando algo te entra por los ojos, tu cerebro tiene dos caminos. Uno es cortísimo: del tálamo directo a la <strong>amígdala</strong>, casi sin pensar. Es el que te aparta de un coche antes de saber qué ha pasado. El otro da un rodeo por la corteza, que le pone contexto, y llega tarde.</p>
     </div>
     <div class="carrera aparece">
       <svg viewBox="0 0 560 270" role="img" aria-label="Dos caminos desde los sentidos hasta la amígdala: uno directo y otro por la corteza y el hipocampo" data-t-aria="svg-aria">
@@ -371,11 +465,9 @@
       <div class="marcador" id="marcador" aria-live="polite"></div>
     </div>
     <div class="lectura aparece">
-      <p data-t="c2-p2">Durante siglos se pensó que la emoción estorbaba a la razón. En 1995, el neurocientífico Antonio Damasio
-        mostró que van por el mismo circuito: cuando decides, tu cerebro simula cada opción y la marca con lo que te hace
-        sentir. Si Descartes dijo «pienso, luego existo», Damasio propone algo más incómodo:
-        <strong>siento, actúo, luego existo.</strong></p>
-      <p data-t="c2-p3">El miedo usa la vía rápida. Por eso el anuncio de la DGT no necesitó convencer a nadie: llegó antes.</p>
+      <p data-t="c2-p2">Durante siglos se pensó que la emoción estorbaba a la razón. En 1995, el neurocientífico Antonio Damasio demostró lo contrario: usan el mismo circuito. Cuando decides, tu cerebro prueba cada opción y la marca con lo que te hace sentir. Descartes dijo «pienso, luego existo». Damasio, algo más incómodo: <strong>siento, actúo, luego existo.</strong></p>
+      <aside class="caso-giro" data-t="giro-1">Las razones convencen a la razón. Pero quien decide si sigues mirando es la emoción, y llega primero.</aside>
+      <p data-t="c2-p3">Ahí está el error de casi todos los anuncios: se esfuerzan en dar razones, y las razones van por la vía lenta. Cuando llegan, la emoción ya ha votado. El de la DGT no tuvo que convencer a nadie.</p>
     </div>
   </section>
 
@@ -386,8 +478,8 @@
   <!-- 3 -->
   <section class="capitulo" id="c3">
     <div class="lectura aparece">
-      <span class="capitulo-num" data-t="c3-num">Capítulo 3 · La marca sabe mejor</span>
-      <h2 data-t="c3-h">Mismo refresco. Otro cerebro.</h2>
+      <span class="capitulo-num" data-t="c3-num">II · La prueba de los refrescos</span>
+      <h2 data-t="c3-h">Mismo refresco. Otro sabor en cuanto ves la marca.</h2>
       <p data-t="c3-p1">En 2003, Read Montague metió a un grupo de personas en una resonancia magnética y les dio a probar Pepsi y
         Coca-Cola. Pruébalo con ellos: primero sin etiquetas.</p>
     </div>
@@ -411,18 +503,17 @@
       <p class="cata-nota" id="cata-nota" aria-live="polite"></p>
     </div>
     <div class="lectura aparece">
-      <p data-t="c3-p2">Ese salto lo publicó en 2004 y le puso nombre a una disciplina: el <strong>neuromarketing</strong>. Si el
-        recuerdo de una marca cambia cómo sabe un refresco, ¿qué hace un anuncio de treinta segundos?</p>
-      <p data-t="c3-p3">Eso es lo que quise medir.</p>
+      <p data-t="c3-p2">Ese resultado lo publicó en 2004 y dio nombre a una disciplina: el <strong>neuromarketing</strong>. Si recordar una marca cambia cómo sabe un refresco, ¿qué hace un anuncio de treinta segundos?</p>
+      <p data-t="c3-p3">Eso fui a medir, con anuncios de verdad y gente de verdad. Segunda apuesta.</p>
     </div>
   </section>
 
   <!-- 4 -->
   <section class="capitulo" id="c4" style="padding-top:2rem">
     <div class="lectura aparece">
-      <span class="capitulo-num" data-t="c4-num">Capítulo 4 · Segunda apuesta</span>
-      <h2 data-t="c4-h">Gustar no es recordar. ¿Cuál gustó más?</h2>
-      <p data-t="c4-p">No es lo mismo prestar atención que disfrutar. Cada persona puntuó también de 1 a 10 cuánto le había gustado el anuncio.</p>
+      <span class="capitulo-num" data-t="c4-num">III · Gustar no es atrapar</span>
+      <h2 data-t="c4-h">Que te miren no es que te quieran.</h2>
+      <p data-t="c4-p">Un anuncio puede atrapar la mirada y caer mal. Por eso cada persona también puntuó de 1 a 10 cuánto le había gustado. ¿Cuál crees que ganó aquí?</p>
     </div>
     <div class="apuesta aparece" data-apuesta="gusto"></div>
   </section>
@@ -431,10 +522,9 @@
   <section class="capitulo" id="c5" style="background:var(--fondo-2);border-block:1px solid var(--linea-2)">
     <div class="ancho">
       <div class="lectura aparece" style="margin-left:0">
-        <span class="capitulo-num" data-t="c5-num">Capítulo 5 · Cuatro huellas</span>
+        <span class="capitulo-num" data-t="c5-num">III · Lo que sintió la gente</span>
         <h2 data-t="c5-h">Cada anuncio deja una huella distinta.</h2>
-        <p data-t="c5-p">Robert Plutchik ordenó las emociones básicas en una rueda de ocho pétalos. Pedí a cada persona que marcara las
-          que había sentido. Aquí, cada pétalo crece según cuántos la marcaron. Toca un anuncio para verlo entero.</p>
+        <p data-t="c5-p">Pedí a cada persona que marcara las emociones que había sentido, con la rueda de ocho pétalos de Robert Plutchik. Cuantas más personas marcan una emoción, más crece su pétalo. Toca un anuncio y míralo entero.</p>
       </div>
       <div class="huellas" id="huellas"></div>
       <div class="leyenda-flor" id="leyenda-flor"></div>
@@ -444,9 +534,9 @@
   <!-- 6 -->
   <section class="capitulo" id="c6">
     <div class="lectura aparece">
-      <span class="capitulo-num" data-t="c6-num">Capítulo 6 · Última apuesta</span>
-      <h2 data-t="c6-h">¿Cuál dejó indiferente a más gente?</h2>
-      <p data-t="c6-p">Al final pregunté qué les había enganchado: la historia, las imágenes, la música, el conjunto… o nada.</p>
+      <span class="capitulo-num" data-t="c6-num">IV · Lo que de verdad engancha</span>
+      <h2 data-t="c6-h">Lo peor no es que odien tu anuncio. Es que no sientan nada.</h2>
+      <p data-t="c6-p">Al final pregunté qué les había enganchado: la historia, las imágenes, la música, todo junto… o nada. Última apuesta: ¿cuál dejó frío a más gente?</p>
     </div>
     <div class="apuesta aparece" data-apuesta="indiferencia"></div>
   </section>
@@ -454,16 +544,14 @@
   <!-- 7 -->
   <section class="capitulo" id="c7" style="padding-top:0">
     <div class="lectura aparece">
-      <span class="capitulo-num" data-t="c7-num">Capítulo 7 · Qué engancha</span>
-      <h2 data-t="c7-h">No fue la música. Fue la historia.</h2>
+      <span class="capitulo-num" data-t="c7-num">IV · El resultado</span>
+      <h2 data-t="c7-h">No fue la música. No fueron las imágenes. Fue la historia.</h2>
       <p data-t="c7-p1">En el anuncio de Teka, el que más gustó, el 85,7 % dijo que algo le había enganchado. Esto es lo que señalaron
         (cada persona podía marcar varias cosas):</p>
     </div>
     <div class="engancha aparece" id="engancha"></div>
     <div class="lectura aparece" style="margin-top:2.4rem">
-      <p data-t="c7-p2">Pasó lo mismo en los cuatro: casi nadie menciona la música o las imágenes por separado. Lo que funciona es una
-        historia, sostenida por todo lo demás. Es lo que la investigación llama <em>storytelling</em>: ponerte dentro de la escena
-        para que lo que siente el protagonista lo sientas tú.</p>
+      <p data-t="c7-p2">Pasó en los cuatro: casi nadie nombra la música o las imágenes por separado. Lo que funciona es una historia, y todo lo demás la sostiene. Se llama <em>storytelling</em>: meterte en la escena para que lo que siente el protagonista lo sientas tú.</p>
     </div>
   </section>
 
@@ -471,17 +559,16 @@
   <section class="capitulo" id="c8" style="background:var(--fondo-2);border-block:1px solid var(--linea-2)">
     <div class="ancho">
       <div class="lectura aparece" style="margin-left:0">
-        <span class="capitulo-num" data-t="c8-num">Capítulo 8 · Tu turno</span>
-        <h2 data-t="c8-h">¿Sientes como 169 personas? Compruébalo en un minuto.</h2>
-        <p data-t="c8-p">Elige un anuncio, míralo (está en su ficha del capítulo 5) y puntúa las mismas nueve emociones que puntuaron
-          ellos. Tus respuestas no salen de tu navegador.</p>
+        <span class="capitulo-num" data-t="c8-num">V · Tu prueba</span>
+        <h2 data-t="c8-h">¿Tu instinto siente como tu público? Compruébalo en un minuto.</h2>
+        <p data-t="c8-p">Elige un anuncio, míralo (está en su ficha de «Cuatro anuncios, cuatro huellas») y puntúa las mismas nueve emociones que puntuaron ellos. Verás en qué te pareces a las 169 personas. Tus respuestas no salen de tu navegador.</p>
       </div>
       <div class="turno">
         <div class="panel aparece">
           <div class="chips" id="chips-turno" role="group"></div>
           <div id="deslizadores"></div>
           <div style="display:flex;gap:0.5rem;margin-top:1rem;flex-wrap:wrap">
-            <button class="boton" id="comparar" type="button" data-t="comparar">Compararme</button>
+            <button class="boton" id="comparar" type="button" data-t="comparar">Ver si siento como ellos</button>
             <button class="boton boton-sec" id="reiniciar" type="button" data-t="reiniciar">Reiniciar</button>
           </div>
         </div>
@@ -498,14 +585,14 @@
   <section class="capitulo" id="c9">
     <div class="ancho">
       <div class="lectura aparece" style="margin-left:0">
-        <span class="capitulo-num" data-t="c9-num">Capítulo 9 · Lo que me llevo</span>
-        <h2 data-t="c9-h">3 reglas para que tu próximo anuncio se recuerde.</h2>
+        <span class="capitulo-num" data-t="c9-num">V · 3 reglas que puedes copiar hoy</span>
+        <h2 data-t="c9-h">Cómo evitar el anuncio de folleto en el tuyo.</h2>
       </div>
       <div class="lecciones">
         <div class="leccion aparece">
           <span class="leccion-num">1</span>
           <div>
-            <h3 data-t="l1-h">Elige pocas emociones y llévalas lejos.</h3>
+            <h3 data-t="l1-h">No intentes que sientan todo. Elige una o dos y llévalas al límite.</h3>
             <p data-t="l1-p">Ningún anuncio intentó despertarlo todo. Los que venden apostaron por confianza y alegría; el que advierte,
               por miedo, tristeza y sorpresa. Los más intensos (DGT y Teka) fueron también los que más atención captaron y
               más gente quería repetir. Colon y Mastercard, más suaves, gustaron menos.</p>
@@ -514,23 +601,21 @@
         <div class="leccion aparece">
           <span class="leccion-num">2</span>
           <div>
-            <h3 data-t="l2-h">Una emoción negativa no espanta.</h3>
-            <p data-t="l2-p">El que más gustó tuvo la tristeza como emoción más intensa (7,3). El que mejor fijó su idea usó el miedo
-              (7,8). Merece la pena investigar si lo que el cerebro lee como peligro deja más huella que lo agradable.</p>
+            <h3 data-t="l2-h">No tengas miedo de incomodar.</h3>
+            <p data-t="l2-p">El que más gustó tuvo la tristeza como emoción más intensa (7,3). El que mejor fijó su idea usó el miedo (7,8). Con una muestra así no puedo demostrarlo, pero apunta a algo: lo que el cerebro lee como peligro puede dejar más huella que lo agradable.</p>
           </div>
         </div>
         <div class="leccion aparece">
           <span class="leccion-num">3</span>
           <div>
-            <h3 data-t="l3-h">Cuenta una historia. Lo demás la sostiene.</h3>
+            <h3 data-t="l3-h">Cuenta una historia. La música y las imágenes solo la sostienen.</h3>
             <p data-t="l3-p">La historia es lo único que la gente nombra por sí solo cuando explica qué le enganchó. Imagen y música
               suman, pero en grupo.</p>
           </div>
         </div>
       </div>
-      <p class="aviso-honesto aparece" data-t="honesto">Un aviso honesto: la muestra es de conveniencia (sobre todo gente cercana a mí), así que esto describe a quienes
-        respondieron, no a toda la población. Sirve para hacer preguntas mejores, no para cerrarlas.</p>
-      <div class="cierre-oferta aparece"><p data-t="cierre-p">¿Tienes un anuncio, un vídeo o un post que nadie recuerda? Mándamelo y te digo qué emoción le falta.</p><a class="boton" href="https://x.com/alpas17_" data-t="cierre-a">Mándamelo por X ↗</a></div>
+      <p class="aviso-honesto aparece" data-t="honesto">Ojo con esto: pregunté sobre todo a gente cercana, así que esto cuenta lo que les pasó a quienes respondieron, no a todo el mundo. Sirve para hacerte mejores preguntas, no para cerrarlas.</p>
+      <div class="cierre-oferta aparece"><p data-t="cierre-p">Si tu anuncio no se recuerda, casi nunca le faltan datos. Es un anuncio de folleto: enumera razones y le falta una emoción que llegue antes que la razón. ¿Tienes un anuncio, un vídeo o un post que pasa sin pena ni gloria? Mándamelo y te digo qué emoción le falta. Gratis, en un mensaje. ¿Te parece justo?</p><a class="boton" href="https://x.com/alpas17_" data-t="cierre-a">Mándame tu anuncio por X ↗</a></div>
     </div>
   </section>
 
@@ -539,9 +624,9 @@
     <div class="ancho">
       <h2 data-t="letra-h">La letra pequeña</h2>
       <details>
-        <summary data-t="como-h">Cómo se hizo</summary>
+        <summary data-t="como-h">Cómo lo hice</summary>
         <ul data-t="como-ul">
-          <li>Estudio descriptivo transversal. Cuestionario de 20 preguntas en Microsoft Forms, enviado por QR, WhatsApp y correo; análisis con Excel y SPSS 26.0.</li>
+          <li>Cuestionario de 20 preguntas en Microsoft Forms, enviado por QR, WhatsApp y correo; análisis con Excel y SPSS 26.0.</li>
           <li>1244 encuestas enviadas a 311 personas (171 mujeres y 140 hombres); 169 respondidas (13,6 %). Respuestas anónimas.</li>
           <li>Anuncios: Colon 1986 «Busque, compare y si encuentra algo mejor, cómprelo» (58 respuestas), DGT verano 2022 con Eduard Fernández (32), Mastercard «Niño en el estadio» (33) y Teka «Donde se cocina la vida» (49).</li>
           <li>Base teórica: el mapa de 27 emociones de Cowen y Keltner (Berkeley, 2017) y la rueda de ocho emociones básicas de Plutchik.</li>
@@ -578,62 +663,72 @@
 
       /* ================= textos fijos en inglés (el español está en el HTML) ================= */
       const EN = {
-        "hero-eti": "5 minutes · 3 bets · 3 rules for your next ad",
+        "hero-eti": "My thesis in 5 minutes · 3 bets · 3 rules you can use tomorrow",
         "hero-h1": 'I showed 4 ads to 169 people. The winner <span class="serif">sold nothing.</span>',
-        "hero-sub": "If you make ads, videos or posts, this is for you: I sent four Spanish ads to 311 people, <strong>169 told me what they felt</strong>, and some were remembered far better than others. Before each answer, place your own bet.",
-        "bajar": "Scroll down and place your first bet",
+        "hero-sub": "Almost every ad fails the same way: it tries to convince reason when emotion has already decided. I tested it for my undergraduate thesis: I put four ads in front of 311 people and <strong>169</strong> told me what they felt. Here are the real results, three bets against your instinct and three rules for your next ad.",
+        "hero-boton": "See which one won ↓",
+        "sello-1": "169 real responses", "sello-2": "Ads aired in Spain", "sello-3": "No inflated conclusions",
+        "mapa-h": "What you’ll see", "aqui": "You are here",
+        "m1-h": "The ad that grabs you", "m1-p": "Bet 1: which one took the attention?",
+        "m2-h": "Why fear wins", "m2-p": "Your brain’s fast route and the soda taste test.",
+        "m3-h": "Liked isn’t grabbed", "m3-p": "Bet 2 and the mark each ad leaves.",
+        "m4-h": "What really hooks people", "m4-p": "Bet 3: story, music… or nothing.",
+        "m5-h": "3 rules and your test", "m5-p": "Compare your instinct with 169 people.",
         "volver-aria": "Back to the blog home",
-        "c1-num": "Chapter 1 · The bet",
-        "c1-h": "Before I tell you anything, place a bet.",
-        "c1-p": "Four very different ads: a 1986 laundry detergent that dares you to compare, a road-safety campaign from Spain’s traffic authority (the DGT), a boy in a stadium and a kitchen where life happens. Each person watched one or more and rated from 1 to 10 how well it held their attention.",
-        "c2-num": "Chapter 2 · Why it works",
-        "c2-h": "Your brain reacts before you decide to.",
-        "c2-p1": "When something comes in through your eyes, the brain has two routes to decide what to do with it. One is short: from the thalamus straight to the <strong>amygdala</strong>, almost without thinking. It’s what gets you out of a car’s way before you know what happened. The other takes the long way round through the cortex, which adds context, and arrives later.",
+        "c1-p2": "Before you see the result, place a bet. If you get it right, your instinct works like your audience’s. If you don’t, you’ve just found out why your next ad needs a different approach.",
+        "tira-nota": "Tap one to watch it and read its card.",
+        "giro-1": "Reasons persuade reason. But what decides whether you keep watching is emotion, and it gets there first.",
+        "c1-num": "I · The ad that grabs you",
+        "c1-h": "Three ads were selling something. The fourth just wanted you alive.",
+        "c1-p": "For my undergraduate thesis I asked a simple question: why do we remember ads from decades ago and forget yesterday’s? I picked four ads aired in Spain, very different from each other: a 1986 laundry detergent that dares you to compare, a road-safety campaign from Spain’s traffic authority (the DGT), a boy in a stadium and a kitchen where life happens. I sent them to 311 people. Each watched one or more and rated from 1 to 10 how well it held their attention. 169 answered.",
+        "c2-num": "II · Why fear wins",
+        "c2-h": "Fear doesn’t persuade. It gets there first.",
+        "c2-p1": "When something comes in through your eyes, your brain has two routes. One is very short: from the thalamus straight to the <strong>amygdala</strong>, almost without thinking. It’s what gets you out of a car’s way before you know what happened. The other takes a detour through the cortex, which adds context, and arrives late.",
         "svg-aria": "Two routes from the senses to the amygdala: a direct one, and one through the cortex and the hippocampus",
         "n-ojos": "Eyes and ears", "n-talamo": "thalamus", "n-corteza": "Cortex", "n-contexto": "context",
         "n-hipocampo": "Hippocampus", "n-amigdala": "Amygdala", "n-peligro": "danger?",
         "via-rapida": "Fast route: emotion", "via-lenta": "Slow route: reason",
-        "c2-p2": "For centuries, emotion was thought to get in the way of reason. In 1995, neuroscientist Antonio Damasio showed that they run on the same circuit: when you decide, your brain simulates each option and tags it with how it makes you feel. If Descartes said “I think, therefore I am”, Damasio proposes something less comfortable: <strong>I feel, I act, therefore I am.</strong>",
-        "c2-p3": "Fear takes the fast route. That’s why the DGT ad didn’t need to convince anyone: it got there first.",
+        "c2-p2": "For centuries, emotion was thought to get in the way of reason. In 1995, neuroscientist Antonio Damasio showed the opposite: they run on the same circuit. When you decide, your brain tries out each option and tags it with how it makes you feel. Descartes said “I think, therefore I am”. Damasio says something less comfortable: <strong>I feel, I act, therefore I am.</strong>",
+        "c2-p3": "That’s the mistake almost every ad makes: it works hard to give reasons, and reasons take the slow route. By the time they arrive, emotion has already voted. The DGT ad didn’t have to convince anyone.",
         "frase": "“The heart has its reasons, which reason knows nothing of.” The difference is that now <b>they can be measured.</b>",
-        "c3-num": "Chapter 3 · The brand tastes better",
-        "c3-h": "Same soda. Different brain.",
+        "c3-num": "II · The soda test",
+        "c3-h": "Same soda. A different taste the moment you see the brand.",
         "c3-p1": "In 2003, Read Montague put a group of people in an MRI scanner and gave them Pepsi and Coca-Cola to taste. Try it with them: first with no labels.",
         "prefirio": "preferred it",
         "cata-ciegas": "Blind", "cata-marca": "Reveal the brands",
-        "c3-p2": "He published that jump in 2004, and it gave a discipline its name: <strong>neuromarketing</strong>. If remembering a brand changes how a soda tastes, what does a thirty-second ad do?",
-        "c3-p3": "That’s what I set out to measure.",
-        "c4-num": "Chapter 4 · Second bet",
-        "c4-h": "Liking isn’t remembering. Which one did people like most?",
-        "c4-p": "Paying attention isn’t the same as enjoying it. Each person also rated from 1 to 10 how much they had liked the ad.",
-        "c5-num": "Chapter 5 · Four fingerprints",
+        "c3-p2": "He published that result in 2004, and it gave a discipline its name: <strong>neuromarketing</strong>. If remembering a brand changes how a soda tastes, what does a thirty-second ad do?",
+        "c3-p3": "That’s what I set out to measure, with real ads and real people. Second bet.",
+        "c4-num": "III · Liked isn’t grabbed",
+        "c4-h": "Being watched isn’t being liked.",
+        "c4-p": "An ad can grab your eye and still rub you the wrong way. So each person also rated from 1 to 10 how much they had liked it. Which one do you think won here?",
+        "c5-num": "III · What people felt",
         "c5-h": "Every ad leaves a different fingerprint.",
-        "c5-p": "Robert Plutchik arranged the basic emotions in a wheel of eight petals. I asked each person to tick the ones they had felt. Here, each petal grows with how many people ticked it. Tap an ad to see it in full.",
-        "c6-num": "Chapter 6 · Last bet",
-        "c6-h": "Which one left the most people cold?",
-        "c6-p": "At the end, I asked what had hooked them: the story, the images, the music, the whole thing… or nothing.",
-        "c7-num": "Chapter 7 · What hooks people",
-        "c7-h": "It wasn’t the music. It was the story.",
+        "c5-p": "I asked each person to tick the emotions they had felt, using Robert Plutchik’s wheel of eight petals. The more people tick an emotion, the more its petal grows. Tap an ad to see it in full.",
+        "c6-num": "IV · What really hooks people",
+        "c6-h": "The worst isn’t that they hate your ad. It’s that they feel nothing.",
+        "c6-p": "At the end I asked what had hooked them: the story, the images, the music, all of it together… or nothing. Last bet: which one left the most people cold?",
+        "c7-num": "IV · The result",
+        "c7-h": "It wasn’t the music. It wasn’t the images. It was the story.",
         "c7-p1": "In the Teka ad, the most liked one, 85.7% said something had hooked them. This is what they pointed to (each person could tick several):",
-        "c7-p2": "The same happened in all four: almost nobody names the music or the images on their own. What works is a story, carried by everything else. Research calls it <em>storytelling</em>: putting you inside the scene so that what the protagonist feels, you feel too.",
-        "c8-num": "Chapter 8 · Your turn",
-        "c8-h": "Do you feel what 169 people felt? Find out in a minute.",
-        "c8-p": "Pick an ad, watch it (it’s in its card in chapter 5) and rate the same nine emotions they rated. Your answers never leave your browser.",
-        "comparar": "Compare me", "reiniciar": "Reset",
-        "c9-num": "Chapter 9 · What I take away",
-        "c9-h": "3 rules to make your next ad memorable.",
-        "l1-h": "Pick a few emotions and push them far.",
+        "c7-p2": "It happened in all four: almost nobody names the music or the images on their own. What works is a story, and everything else holds it up. It’s called <em>storytelling</em>: putting you inside the scene so that what the protagonist feels, you feel too.",
+        "c8-num": "V · Your test",
+        "c8-h": "Does your instinct feel like your audience? Find out in a minute.",
+        "c8-p": "Pick an ad, watch it (it’s in its card under “Four ads, four fingerprints”) and rate the same nine emotions they rated. You’ll see where you match the 169 people. Your answers never leave your browser.",
+        "comparar": "See if I feel like them", "reiniciar": "Reset",
+        "c9-num": "V · 3 rules you can copy today",
+        "c9-h": "How to keep a brochure ad out of your next one.",
+        "l1-h": "Don’t try to make them feel everything. Pick one or two and push them to the limit.",
         "l1-p": "No ad tried to trigger everything. The ones selling something went for trust and joy; the one giving a warning went for fear, sadness and surprise. The most intense ones (DGT and Teka) also held the most attention and were the ones most people wanted to repeat. Colon and Mastercard, milder, were liked less.",
-        "l2-h": "A negative emotion doesn’t scare people off.",
-        "l2-p": "The most liked ad had sadness as its most intense emotion (7.3). The one that best fixed its idea used fear (7.8). It’s worth investigating whether what the brain reads as danger leaves a deeper mark than what feels good.",
-        "l3-h": "Tell a story. Everything else holds it up.",
+        "l2-h": "Don’t be afraid to make people uncomfortable.",
+        "l2-p": "The most liked ad had sadness as its most intense emotion (7.3). The one that best fixed its idea used fear (7.8). I can’t prove it with a sample like this, but it points to something: what the brain reads as danger may leave a deeper mark than what feels good.",
+        "l3-h": "Tell a story. Music and images only hold it up.",
         "l3-p": "The story is the only thing people name on its own when they explain what hooked them. Images and music add up, but as a group.",
-        "cierre-p": "Got an ad, a video or a post nobody remembers? Send it to me and I’ll tell you which emotion it’s missing.",
-        "cierre-a": "Send it to me on X ↗",
-        "honesto": "An honest warning: this is a convenience sample (mostly people close to me), so it describes the people who answered, not the whole population. It’s good for asking better questions, not for settling them.",
+        "cierre-p": "When an ad isn’t remembered, it’s rarely missing data. It’s a brochure ad: it lists reasons and is missing an emotion that gets there before reason. Got an ad, a video or a post that leaves people feeling nothing? Send it to me and I’ll tell you which emotion it’s missing. Free, in one message. Fair?",
+        "cierre-a": "Send me your ad on X ↗",
+        "honesto": "Careful with this: I asked mostly people close to me, so it tells you what happened to those who answered, not to everyone. It’s good for asking better questions, not for settling them.",
         "letra-h": "The fine print",
-        "como-h": "How it was done",
-        "como-ul": "<li>Descriptive cross-sectional study. A 20-question Microsoft Forms questionnaire sent by QR code, WhatsApp and email; analysed with Excel and SPSS 26.0.</li><li>1,244 surveys sent to 311 people (171 women and 140 men); 169 answered (13.6%). Responses were anonymous.</li><li>Ads, all Spanish: Colon 1986 “Busque, compare y si encuentra algo mejor, cómprelo” (58 responses), DGT summer 2022 with Eduard Fernández (32), Mastercard “Niño en el estadio” (33) and Teka “Donde se cocina la vida” (49).</li><li>Theory: Cowen and Keltner’s map of 27 emotions (Berkeley, 2017) and Plutchik’s wheel of eight basic emotions.</li>",
+        "como-h": "How I did it",
+        "como-ul": "<li>A 20-question Microsoft Forms questionnaire sent by QR code, WhatsApp and email; analysed with Excel and SPSS 26.0.</li><li>1,244 surveys sent to 311 people (171 women and 140 men); 169 answered (13.6%). Responses were anonymous.</li><li>Ads, all Spanish: Colon 1986 “Busque, compare y si encuentra algo mejor, cómprelo” (58 responses), DGT summer 2022 with Eduard Fernández (32), Mastercard “Niño en el estadio” (33) and Teka “Donde se cocina la vida” (49).</li><li>Theory: Cowen and Keltner’s map of 27 emotions (Berkeley, 2017) and Plutchik’s wheel of eight basic emotions.</li>",
         "notas-h": "Notes on the data",
         "notas-ul": "<li>Where the thesis text and its tables disagree, I use the tables: idea recall for Mastercard (6.67), Teka’s intensities (the highest is sadness) and goal achieved for Mastercard (84.8%).</li><li>Teka’s idea-recall figure is exactly the same as Mastercard’s in the document; it should be checked against the original data.</li><li>Montague’s experiment is summarised with the ratio given in the thesis (split when blind, 3 to 1 for Coca-Cola with the brand visible).</li><li>Responses per ad add up to 172, slightly off from the 169 surveys in total.</li>",
         "refs-h": "References",
@@ -644,8 +739,8 @@
       const T = {
         titulo: { es: "Enseñé 4 anuncios a 169 personas. Ganó el que no vendía nada · Álvaro Pastor", en: "I showed 4 ads to 169 people. The winner sold nothing · Álvaro Pastor" },
         desc: {
-          es: "Se los envié a 311 personas y 169 me contaron qué sintieron. El que más miedo dio fue el que mejor se recordó. 5 minutos, 3 apuestas y 3 reglas para tu próximo anuncio.",
-          en: "I sent them to 311 people and 169 told me what they felt. The ad that scared people most was the one they remembered best. 5 minutes, 3 bets and 3 rules for your next ad."
+          es: "169 personas me contaron qué sintieron con 4 anuncios. El que más miedo dio fue el que mejor se recordó; el que más gustó dejaba tristeza. 5 minutos, 3 apuestas y 3 reglas para tu próximo anuncio.",
+          en: "169 people told me what they felt watching 4 ads. The scariest one was remembered best; the most liked one left people sad. 5 minutes, 3 bets and 3 rules for your next ad."
         },
         temaEtiqueta: { es: "Tema: {actual}. Cambiar a {siguiente}", en: "Theme: {actual}. Switch to {siguiente}" },
         lanzar: { es: "Lanzar un estímulo", en: "Launch a stimulus" },
@@ -841,7 +936,7 @@
 
       /* ================= piezas ================= */
       function pintarTira() {
-        $("#tira").innerHTML = ADS.map((a, i) => `<button class="fotograma" type="button" data-ficha="${i}" aria-label="${t(T.verFicha)} ${a.nombre}"><img src="${mini(a.yt)}" alt="" /><span><i style="background:var(${a.color})"></i>${a.nombre}</span></button>`).join("");
+        if ($("#tira")) $("#tira").innerHTML = ADS.map((a, i) => `<button class="fotograma" type="button" data-ficha="${i}" aria-label="${t(T.verFicha)} ${a.nombre}"><img src="${mini(a.yt)}" alt="" /><span><i style="background:var(${a.color})"></i>${a.nombre}</span></button>`).join("");
       }
 
       function pintarApuesta(caja, animar) {
@@ -1085,6 +1180,19 @@
       sistemaClaro.addEventListener("change", () => { if (raiz.dataset.pref === "auto") fijarPref("auto", true); });
 
       /* ================= idioma ================= */
+      /* índice: «Estás aquí» sigue a la sección visible */
+      (function () {
+        const items = [...document.querySelectorAll(".caso-mapa li")];
+        const marca = document.querySelector(".mapa-aqui em");
+        if (!marca || !("IntersectionObserver" in window)) return;
+        const io = new IntersectionObserver(es => es.forEach(e => {
+          if (!e.isIntersecting) return;
+          const li = items.find(l => l.querySelector("a").getAttribute("href") === "#" + e.target.id);
+          if (!li) return;
+          items.forEach(l => l.classList.remove("mapa-aqui")); li.classList.add("mapa-aqui"); li.appendChild(marca);
+        }), { rootMargin: "-45% 0px -50% 0px" });
+        items.forEach(l => { const d = document.querySelector(l.querySelector("a").getAttribute("href")); if (d) io.observe(d); });
+      })();
       const fijos = [...document.querySelectorAll("[data-t]")].map(n => ({ n, clave: n.dataset.t, es: n.innerHTML }));
       const arias = [...document.querySelectorAll("[data-t-aria]")].map(n => ({ n, clave: n.dataset.tAria, es: n.getAttribute("aria-label") }));
       const descripcion = document.querySelector('meta[name="description"]');

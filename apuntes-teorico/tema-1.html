@@ -1,0 +1,514 @@
+<title>Tema 1 · Uso de las vías</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: columna de lectura con diagramas de carretera a ancho completo; paleta de señalización vial española */
+:root{
+  --bg:#f5f7fa; --surface:#ffffff; --ink:#18212d; --muted:#5b6778; --line:#d7dde6;
+  --blue:#1d5fae; --blue-soft:#e3edf9; --red:#c8262d; --red-soft:#fbe5e6;
+  --amber:#c98a00; --amber-soft:#fff3d1; --green:#1f8a4c; --green-soft:#def3e6;
+  --asphalt:#4a5260; --asphalt-2:#5f6876; --paint:#ffffff; --verge:#c9b98f; --grass:#9cc28a;
+  --display:"Overpass","Arial Narrow",Arial,sans-serif; --body:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f141b; --surface:#171e28; --ink:#e7ecf3; --muted:#9aa6b6; --line:#2a3442;
+  --blue:#5e9be6; --blue-soft:#16263b; --red:#f06a70; --red-soft:#3a1a1d; --amber:#f0b93a; --amber-soft:#36290b; --green:#4fc27f; --green-soft:#14301f;
+  --asphalt:#3a414c; --asphalt-2:#4a525e; --paint:#e9edf2; --verge:#7a6d4d; --grass:#4d6b43; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141b; --surface:#171e28; --ink:#e7ecf3; --muted:#9aa6b6; --line:#2a3442;
+  --blue:#5e9be6; --blue-soft:#16263b; --red:#f06a70; --red-soft:#3a1a1d; --amber:#f0b93a; --amber-soft:#36290b; --green:#4fc27f; --green-soft:#14301f;
+  --asphalt:#3a414c; --asphalt-2:#4a525e; --paint:#e9edf2; --verge:#7a6d4d; --grass:#4d6b43; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+main{max-width:860px;margin:0 auto;padding-block:32px 80px;display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.1rem,6vw,3.4rem);font-weight:900;letter-spacing:-.01em}
+h2{font-size:clamp(1.5rem,4vw,2rem);font-weight:800;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+h3{font-size:1.15rem;font-weight:800;margin-top:8px}
+p{margin:0}
+section{display:grid;gap:18px;min-width:0}
+.eyebrow{font:600 .75rem/1 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lead{font-size:1.1rem;color:var(--muted);max-width:62ch}
+.plate{display:inline-flex;align-items:center;justify-content:center;min-width:2.2em;height:2.2em;padding:0 .4em;border-radius:6px;background:var(--blue);color:#fff;font:900 1rem/1 var(--display)}
+.hot{font:700 .7rem/1 var(--body);letter-spacing:.08em;text-transform:uppercase;padding:5px 8px;border-radius:99px;background:var(--red-soft);color:var(--red)}
+.verify{font:600 .72rem/1.3 var(--body);padding:4px 8px;border-radius:6px;background:var(--amber-soft);color:var(--amber);display:inline-block}
+ul.rules{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+ul.rules li{padding-left:22px;position:relative}
+ul.rules li::before{content:"";position:absolute;left:4px;top:.6em;width:8px;height:8px;border-radius:2px;background:var(--blue)}
+ul.rules li.trap::before{background:var(--red);transform:rotate(45deg)}
+.trapbox{border-left:4px solid var(--red);background:var(--red-soft);padding:14px 16px;border-radius:0 10px 10px 0;display:grid;gap:8px}
+.trapbox strong.t{color:var(--red);font:800 .8rem/1 var(--display);letter-spacing:.08em;text-transform:uppercase}
+.filters{background:var(--blue-soft);border-radius:14px;padding:18px 20px;display:grid;gap:10px}
+.filters ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.93rem;min-width:520px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 .75rem/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:12px;min-width:0}
+.fig svg{width:100%;height:auto;display:block}
+.fig figcaption,.cap{font-size:.85rem;color:var(--muted)}
+.svgtext{font:600 13px var(--body);fill:var(--ink)}
+.svgsmall{font:500 11px var(--body);fill:var(--muted)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:600 .85rem var(--body);padding:8px 12px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+button:focus-visible,summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.82rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.compare>div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.compare .k{font:800 1.05rem var(--display)}
+/* parejas */
+.pairs{display:grid;gap:12px}
+.pair{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.pair .qs{display:grid;grid-template-columns:1fr 1fr}
+.pair .q{padding:14px 16px;display:grid;gap:4px;align-content:start}
+.pair .q+.q{border-left:1px dashed var(--line)}
+.pair .tag{font:700 .7rem/1 var(--mono);color:var(--blue)}
+.pair .diff{background:var(--amber-soft);color:var(--ink);padding:0 3px;border-radius:3px;font-weight:600}
+.pair .bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 16px;border-top:1px solid var(--line);background:var(--bg)}
+.pair .ans{padding:12px 16px;border-top:1px solid var(--line);background:var(--green-soft);font-size:.93rem}
+.btn{font:600 .82rem var(--body);padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn.ok[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+.btn.ko[aria-pressed="true"]{background:var(--red);border-color:var(--red);color:#fff}
+.btn.reveal{background:var(--blue);border-color:var(--blue);color:#fff}
+.spacer{flex:1}
+@media (max-width:560px){.pair .qs{grid-template-columns:1fr}.pair .q+.q{border-left:0;border-top:1px dashed var(--line)}}
+/* barra de progreso */
+.prog{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:.85rem}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.prog .meter{flex:1;min-width:120px;height:8px;border-radius:99px;background:var(--line);overflow:hidden;display:flex}
+.prog .meter span{display:block;height:100%}
+.toc{display:flex;flex-wrap:wrap;gap:6px}
+.toc a{font:600 .8rem var(--body);color:var(--blue);text-decoration:none;padding:5px 10px;border-radius:99px;background:var(--blue-soft)}
+.ladder{display:grid;gap:5px}
+.ladder div{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:center;font-size:.9rem}
+.ladder b{font:800 .95rem var(--mono);color:var(--blue);text-align:right}
+.ladder span{background:var(--blue-soft);border-radius:6px;padding:6px 10px;border-left:4px solid var(--blue)}
+.snow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
+.snow div{border-radius:10px;padding:12px;font-size:.88rem;display:grid;gap:4px;border:1px solid var(--line);background:var(--surface)}
+.snow b{font:800 .95rem var(--display)}
+.dot{width:14px;height:14px;border-radius:50%;display:inline-block;vertical-align:-2px;margin-right:6px;border:1px solid rgba(0,0,0,.2)}
+@media (prefers-reduced-motion:no-preference){.pair .ans{animation:in .25s ease}@keyframes in{from{opacity:.4;transform:translateY(-4px)}}}
+</style>
+
+<main>
+<header style="display:grid;gap:14px">
+  <span class="eyebrow">Permiso B · Teórico DGT · Manual AEOL</span>
+  <h1>Tema 1 · El uso de las vías</h1>
+  <p class="lead">Tu fallo típico no es no saber la norma: es aplicar la regla general cuando la pregunta trae la excepción. Cada bloque tiene la regla, la trampa y parejas de preguntas casi iguales con un solo detalle cambiado. Responde tú antes de pulsar «Ver respuesta».</p>
+  <nav class="toc" aria-label="Índice">
+    <a href="#filtros">4 filtros</a><a href="#vias">Tipos de vía</a><a href="#carriles">Carriles</a><a href="#especiales">Carriles especiales</a><a href="#arcen">Arcén</a><a href="#distancia">Distancia</a><a href="#peatones">Peatones</a><a href="#velocidad">Velocidad</a><a href="#prioridad">Prioridad</a><a href="#estrecha">Estrechamientos</a><a href="#defs">Definiciones</a>
+  </nav>
+</header>
+
+<div class="prog" aria-live="polite">
+  <strong>Parejas:</strong> <span id="pc">0 / 0</span>
+  <div class="meter" aria-hidden="true"><span id="mOk" style="background:var(--green);width:0"></span><span id="mKo" style="background:var(--red);width:0"></span></div>
+  <button class="btn" id="onlyKo" aria-pressed="false">Solo las que fallé</button>
+  <button class="btn" id="reset">Reiniciar</button>
+</div>
+
+<section id="filtros">
+  <div class="filters">
+    <h2 style="font-size:1.3rem">Antes de cada pregunta, pasa 4 filtros</h2>
+    <ol>
+      <li><b>¿Dentro o fuera de poblado?</b> La travesía cuenta como poblado; una autopista o autovía urbana sigue las normas de fuera.</li>
+      <li><b>¿Qué vía?</b> Autopista, autovía, vía para automóviles, multicarril o convencional.</li>
+      <li><b>¿Qué vehículo?</b> MMA hasta 3.500 kg o más, y longitud de 7 m o 10 m.</li>
+      <li><b>¿Hay señal o agente?</b> Si lo hay, manda sobre la norma general.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="vias">
+  <h2><span class="plate">1</span> Partes y tipos de vía <span class="hot">Bicis y arcén: 44 % de error</span></h2>
+  <figure class="fig" style="margin:0">
+    <svg viewBox="0 0 760 230" role="img" aria-label="Sección transversal de una carretera: cuneta, berma, arcén, calzada con dos carriles, arcén, berma y cuneta. La plataforma es la calzada más los arcenes.">
+      <rect x="0" y="120" width="760" height="70" fill="var(--grass)"/>
+      <path d="M20 120 L50 150 L80 120 Z" fill="var(--asphalt-2)"/>
+      <path d="M680 120 L710 150 L740 120 Z" fill="var(--asphalt-2)"/>
+      <rect x="80" y="112" width="60" height="10" fill="var(--verge)"/>
+      <rect x="620" y="112" width="60" height="10" fill="var(--verge)"/>
+      <rect x="140" y="108" width="80" height="14" fill="var(--asphalt-2)"/>
+      <rect x="540" y="108" width="80" height="14" fill="var(--asphalt-2)"/>
+      <rect x="220" y="104" width="320" height="18" fill="var(--asphalt)"/>
+      <rect x="218" y="104" width="4" height="4" fill="var(--paint)"/><rect x="538" y="104" width="4" height="4" fill="var(--paint)"/>
+      <rect x="376" y="104" width="8" height="4" fill="var(--paint)"/>
+      <g class="svgtext" text-anchor="middle">
+        <text x="50" y="175">Cuneta</text><text x="110" y="100">Berma</text><text x="180" y="96">Arcén</text>
+        <text x="300" y="96">Carril</text><text x="460" y="96">Carril</text>
+        <text x="580" y="96">Arcén</text><text x="650" y="100">Berma</text><text x="710" y="175">Cuneta</text>
+      </g>
+      <g stroke="var(--blue)" stroke-width="2" fill="none"><path d="M222 60 V52 H538 V60"/><path d="M142 30 V22 H618 V30"/></g>
+      <text x="380" y="46" text-anchor="middle" class="svgtext" style="fill:var(--blue)">Calzada</text>
+      <text x="380" y="16" text-anchor="middle" class="svgtext" style="fill:var(--blue)">Plataforma = calzada + arcenes</text>
+      <text x="380" y="215" text-anchor="middle" class="svgsmall">Hay carril aunque no haya línea pintada: basta con que quepa una fila de automóviles que no sean motos.</text>
+    </svg>
+  </figure>
+
+  <div class="compare">
+    <div><span class="k">Autopista</span><span>Calzadas separadas · sin cruces a nivel · <b>sin acceso</b> a las propiedades de al lado · puede ser de peaje</span></div>
+    <div><span class="k">Autovía</span><span>Calzadas separadas · sin cruces a nivel · acceso <b>limitado</b> a las propiedades de al lado</span></div>
+    <div><span class="k">Vía para automóviles</span><span><b>Una</b> calzada, sin acceso a las propiedades de al lado</span></div>
+    <div><span class="k">Multicarril</span><span>Al menos 2 carriles por sentido; <b>puede</b> tener cruces a nivel</span></div>
+  </div>
+
+  <ul class="rules">
+    <li>Pueden ir por autopista y autovía: los automóviles que alcancen <b>60 km/h en llano</b> y los vehículos especiales que superen 60 km/h (o con autorización, si exceden masas o dimensiones).</li>
+    <li>Prohibidos: ciclos, ciclomotores, ciclos de motor, vehículos para movilidad reducida, VMP, peatones, animales y vehículos de tracción animal.</li>
+    <li class="trap">Ciclistas <b>mayores de 14 años</b>: pueden ir por el <b>arcén de la autovía</b> (no de la autopista), salvo que una señal lo prohíba. Nunca por la calzada.</li>
+    <li class="trap">Autopistas y autovías también pueden pasar por poblado, y siguen con sus normas.</li>
+  </ul>
+  <div class="pairs" data-sec="vias"></div>
+</section>
+
+<section id="carriles">
+  <h2><span class="plate">2</span> Qué carril usar <span class="hot">Tu tema con más error: 30 %</span></h2>
+  <figure class="fig" style="margin:0">
+    <div class="seg" role="group" aria-label="Elige vehículo">
+      <button data-v="tur" aria-pressed="true">Turismo</button>
+      <button data-v="fur3">Furgón 3.000 kg</button>
+      <button data-v="fur4">Furgón 4.000 kg</button>
+      <button data-v="conj8">Turismo + remolque, 8 m</button>
+      <button data-v="cam">Camión</button>
+    </div>
+    <div class="seg" role="group" aria-label="Elige vía">
+      <button data-r="fuera" aria-pressed="true">Sentido único, fuera de poblado, 3 carriles</button>
+      <button data-r="doble">Doble sentido, 3 carriles</button>
+      <button data-r="urb">Ciudad, carriles marcados</button>
+    </div>
+    <svg id="lanes" viewBox="0 0 760 210" role="img" aria-label="Diagrama de tres carriles coloreados según el vehículo elegido"></svg>
+    <div class="legend"><span><i style="background:var(--green)"></i>Normal</span><span><i style="background:var(--amber)"></i>Excepcional / solo para una maniobra</span><span><i style="background:var(--red)"></i>Prohibido</span></div>
+    <p class="cap" id="laneExplain"></p>
+  </figure>
+  <ul class="rules">
+    <li>Dentro de poblado con carriles marcados: el que mejor convenga a tu destino, y no cambias salvo para girar, adelantar, parar o estacionar. Sin marcas: el derecho.</li>
+    <li class="trap">Al contar carriles <b>no cuentan</b> los reservados (bus, VAO, aceleración…). <b>Sí cuenta</b> el carril de velocidad mínima de las subidas.</li>
+    <li>Isletas o refugios que separan <b>dos sentidos</b>: déjalos a la izquierda. En <b>sentido único</b>: por cualquier lado.</li>
+    <li>Glorietas, plazas y cruces: el centro siempre a tu izquierda. Para salir de la glorieta, ponte en el carril derecho.</li>
+  </ul>
+  <div class="pairs" data-sec="carriles"></div>
+</section>
+
+<section id="especiales">
+  <h2><span class="plate">3</span> Carriles especiales <span class="hot">Prioridad 4 de tu repaso</span></h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Carril</th><th>Quién puede usarlo</th><th>Luz</th><th>Velocidad</th></tr></thead>
+    <tbody>
+      <tr><td><b>Reversible</b><br><span class="cap">Doble línea discontinua a cada lado; semáforos cuadrados</span></td><td><b>Todos</b>. No invadir el sentido contrario</td><td>Cruce, de día y de noche</td><td class="n">La de la vía</td></tr>
+      <tr><td><b>Adicional circunstancial</b><br><span class="cap">Usa los dos arcenes: quedan 2 carriles en un sentido y 1 en el otro</span></td><td>Todos. Con las líneas pintadas <b>entre las ruedas</b>, sin tocar los conos</td><td>Cruce, de día y de noche</td><td class="n">máx 80 · mín 60</td></tr>
+      <tr><td><b>Sentido contrario</b>, por <b>fluidez</b></td><td>Solo <b>motos y turismos sin remolque</b></td><td>Cruce</td><td class="n">máx 80 · mín 60</td></tr>
+      <tr><td><b>Sentido contrario</b>, por <b>obras</b></td><td>Todos los permitidos en esa vía, salvo prohibición</td><td>Cruce</td><td class="n">máx 80 · mín 60</td></tr>
+      <tr><td>Carril normal <b>junto</b> a uno en sentido contrario</td><td>—</td><td>Cruce</td><td class="n">80 / 60 si es tu único carril; si tienes más, los de la vía</td></tr>
+      <tr><td><b>Bus</b> (y taxi si lo pone)</td><td>Transporte colectivo. Donde la línea es discontinua, los demás entran para maniobrar, pero <b>no</b> para parar, estacionar, cambiar de sentido ni adelantar</td><td>—</td><td class="n">—</td></tr>
+      <tr><td><b>VAO</b></td><td>Motos, turismos y mixtos adaptables con la ocupación indicada. <b>Con solo el conductor</b>: V-15, autobuses, taxis, motos de 2 ruedas y turismos <b>0 emisiones</b>; ECO, C o B solo si lo indica el panel. Prohibidos: turismo con remolque, camiones y furgones</td><td>—</td><td class="n">—</td></tr>
+      <tr><td><b>Velocidad mínima</b> (subidas)</td><td>Quien vaya a la velocidad de la señal o más; aun así, mejor el derecho si puedes. Sí cuenta como carril</td><td>—</td><td class="n">≥ señal</td></tr>
+    </tbody>
+  </table></div>
+  <p class="cap">Otros carriles de maniobra: <b>aceleración</b> (para entrar), <b>deceleración</b> (para salir), <b>trenzado</b> (uno de aceleración seguido de uno de deceleración) y <b>espera</b> (para girar a la izquierda en vías de doble sentido).</p>
+  <div class="pairs" data-sec="especiales"></div>
+</section>
+
+<section id="arcen">
+  <h2><span class="plate">4</span> El arcén</h2>
+  <ul class="rules">
+    <li><b>Deben</b> ir por el arcén derecho, si es transitable y suficiente (si no, por la parte imprescindible de la calzada): ciclos, ciclomotores, vehículos de tracción animal, <b>especiales hasta 3.500 kg</b>, vehículos para movilidad reducida y vehículos que acompañan a ciclistas.</li>
+    <li>También los vehículos <b>de hasta 3.500 kg</b> que, por una emergencia, vayan a velocidad anormalmente reducida. Si no lo hacen, por el carril derecho.</li>
+    <li>Con tráfico denso no puedes usar el arcén para llegar antes a la salida.</li>
+  </ul>
+  <div class="compare">
+    <div><span class="k">Bicicletas</span><span>En columna de <b>dos</b>, arrimadas a la derecha. En <b>fila de uno</b> si no hay visibilidad o hay aglomeración. Pueden adelantarse entre ellas aunque tarden. En bajadas largas con curvas pueden ocupar la parte derecha de la calzada.</span></div>
+    <div><span class="k">Ciclomotores</span><span>En columna de dos <b>solo</b> si el arcén es transitable y suficiente, sin invadir la calzada.</span></div>
+    <div><span class="k">El resto</span><span>Nunca en paralelo. Adelantarse entre ellos está prohibido si van en paralelo más de <b>15 s</b> o <b>200 m</b>.</span></div>
+  </div>
+  <div class="pairs" data-sec="arcen"></div>
+</section>
+
+<section id="distancia">
+  <h2><span class="plate">5</span> Distancia de seguridad</h2>
+  <figure class="fig" style="margin:0">
+    <svg viewBox="0 0 760 170" role="img" aria-label="En túneles: turismo 100 metros o 4 segundos; vehículo de más de 3.500 kg 150 metros o 6 segundos y ver tres galones">
+      <text x="0" y="22" class="svgtext">Túnel, sin intención de adelantar</text>
+      <rect x="0" y="40" width="70" height="30" rx="6" fill="var(--blue)"/><text x="35" y="60" text-anchor="middle" style="font:700 12px var(--body);fill:#fff">Turismo</text>
+      <rect x="80" y="52" width="340" height="6" rx="3" fill="var(--blue-soft)" stroke="var(--blue)"/>
+      <text x="250" y="88" text-anchor="middle" class="svgtext">100 m o 4 s</text>
+      <rect x="0" y="105" width="70" height="30" rx="6" fill="var(--red)"/><text x="35" y="125" text-anchor="middle" style="font:700 12px var(--body);fill:#fff">&gt;3.500 kg</text>
+      <rect x="80" y="117" width="510" height="6" rx="3" fill="var(--red-soft)" stroke="var(--red)"/>
+      <text x="335" y="155" text-anchor="middle" class="svgtext">150 m o 6 s, y ver 3 galones</text>
+      <g fill="var(--amber)"><path d="M610 112 l12 8 l12 -8 v6 l-12 8 l-12 -8z"/><path d="M650 112 l12 8 l12 -8 v6 l-12 8 l-12 -8z"/><path d="M690 112 l12 8 l12 -8 v6 l-12 8 l-12 -8z"/></g>
+    </svg>
+  </figure>
+  <ul class="rules">
+    <li>Vehículos de más de <b>3.500 kg</b> o de más de <b>10 m</b> de largo, si no van a adelantar, dejan <b>al menos 50 m</b> para que los adelanten.</li>
+    <li class="trap">Basta con no chocar (no hacen falta los 50 m): <b>en poblado</b> · donde está <b>prohibido adelantar</b> · con <b>más de un carril</b> en tu sentido · con <b>circulación saturada</b> · si <b>vas a adelantar</b>.</li>
+    <li>Galones pintados: deja al menos <b>2</b> en cualquier vía.</li>
+    <li>Circulación saturada: se va en paralelo, y los carriles de la derecha pueden ir más rápido <b>sin</b> que cuente como adelantar. Prohibido cambiar de carril (salvo para girar o salir) y adelantar por el arcén.</li>
+  </ul>
+  <div class="snow">
+    <div><b><span class="dot" style="background:#2e9d55"></span>Verde</b>Carretera y tráfico normales.</div>
+    <div><b><span class="dot" style="background:#e8c21a"></span>Amarillo</b>Empieza a cubrirse. Prohibidos camiones y articulados; turismos y autobuses a 60 como máximo.</div>
+    <div><b><span class="dot" style="background:#d33"></span>Rojo</b>Cubierta del todo; solo con cadenas, a 30 como máximo. Prohibidos articulados, camiones y autobuses.</div>
+    <div><b><span class="dot" style="background:#111"></span>Negro</b>Intransitable para cualquier vehículo.</div>
+  </div>
+  <div class="pairs" data-sec="distancia"></div>
+</section>
+
+<section id="peatones">
+  <h2><span class="plate">6</span> Peatones y animales <span class="hot">37,5 % de error</span></h2>
+  <figure class="fig" style="margin:0">
+    <svg viewBox="0 0 760 200" role="img" aria-label="Fuera de poblado sin acera: el peatón va por la izquierda, de cara a los coches; quien lleva una bicicleta a mano, una silla de ruedas o un grupo va por la derecha">
+      <rect x="0" y="40" width="760" height="120" fill="var(--asphalt)"/>
+      <g fill="var(--paint)"><rect x="20" y="98" width="50" height="4"/><rect x="120" y="98" width="50" height="4"/><rect x="220" y="98" width="50" height="4"/><rect x="320" y="98" width="50" height="4"/><rect x="420" y="98" width="50" height="4"/><rect x="520" y="98" width="50" height="4"/><rect x="620" y="98" width="50" height="4"/><rect x="720" y="98" width="40" height="4"/></g>
+      <text x="740" y="30" text-anchor="end" class="svgsmall">sentido de la marcha del peatón →</text>
+      <path d="M560 60 h50 l10 8 v10 h-70 v-10z" fill="var(--blue-soft)" stroke="var(--blue)"/>
+      <path d="M560 140 h-50 l-10 -8 v-10 h70 v10z" fill="var(--blue-soft)" stroke="var(--blue)"/>
+      <circle cx="300" cy="56" r="7" fill="var(--green)"/><rect x="295" y="64" width="10" height="16" rx="3" fill="var(--green)"/>
+      <text x="320" y="72" class="svgtext" style="fill:var(--paint)">Peatón: por la IZQUIERDA, de cara a los coches</text>
+      <circle cx="200" cy="130" r="7" fill="var(--amber)"/><rect x="195" y="138" width="10" height="16" rx="3" fill="var(--amber)"/>
+      <circle cx="225" cy="148" r="8" fill="none" stroke="var(--amber)" stroke-width="3"/><circle cx="255" cy="148" r="8" fill="none" stroke="var(--amber)" stroke-width="3"/>
+      <text x="275" y="140" class="svgtext" style="fill:var(--paint)">Con bici a mano, silla de ruedas o grupo: por la DERECHA</text>
+      <text x="0" y="185" class="svgsmall">Fuera de poblado y en travesías, sin acera ni arcén. Dentro de poblado: el lado que convenga.</text>
+    </svg>
+  </figure>
+  <ul class="rules">
+    <li>También es peatón: quien va en silla de ruedas (con o sin motor), quien empuja un carrito y quien lleva <b>a pie</b> una bici o un ciclomotor de 2 ruedas.</li>
+    <li>Si hay acera, se va por ella, por la de la <b>derecha</b>; si vas por la izquierda, cedes a los que vienen de frente.</li>
+    <li>Cruzar: por el paso de peatones si hay uno cerca (prohibido cruzar cerca de él), en perpendicular. Las glorietas no se cruzan por la calzada: se rodean.</li>
+    <li>De noche, fuera de poblado: algo luminoso o reflectante visible a <b>150 m</b>.</li>
+    <li class="trap">En autopista y autovía no se recoge a autoestopistas, <b>tampoco en las explanadas del peaje</b>.</li>
+  </ul>
+  <div class="trapbox">
+    <strong class="t">Por regla general tienes prioridad sobre el peatón, salvo en estos casos</strong>
+    <ul class="rules">
+      <li>En los <b>pasos de peatones</b> señalizados.</li>
+      <li>Cuando <b>giras para entrar en otra calle</b> y hay peatones cruzándola, <b>aunque no haya paso</b>.</li>
+      <li>Cuando <b>cruzas un arcén</b> por el que van peatones que no tienen acera.</li>
+      <li>Cuando cruzas una zona peatonal por un paso habilitado.</li>
+      <li>Con viajeros que bajan o suben de un <b>bus</b> en una parada señalizada y están entre el vehículo y la acera.</li>
+      <li>Con filas escolares, tropas en formación y comitivas organizadas. <span class="verify">Ilegible en el PDF: comprueba en el manual</span></li>
+    </ul>
+  </div>
+  <ul class="rules">
+    <li>Animales: solo por la vía si no hay vía pecuaria, con un conductor <b>mayor de 18 años</b>. Los rebaños ocupan como mucho la mitad derecha. Prohibidos en autopista y autovía.</li>
+    <li>Cedes a los animales: en <b>cañadas</b> señalizadas (P-23 con el panel «Cañada»), cuando giras y hay animales cruzando, y cuando cruzas un arcén por el que van animales.</li>
+  </ul>
+  <div class="pairs" data-sec="peatones"></div>
+</section>
+
+<section id="velocidad">
+  <h2><span class="plate">7</span> Velocidad</h2>
+  <p><span class="verify">La tabla del PDF es una imagen: estos valores son los de la norma vigente. Compruébalos con tu manual.</span></p>
+  <div class="tbl"><table>
+    <thead><tr><th>Vía</th><th>Turismo / moto</th><th>Autobús</th><th>Camión, furgón, conjunto</th></tr></thead>
+    <tbody>
+      <tr><td>Autopista / autovía</td><td class="n">120</td><td class="n">100</td><td class="n">90</td></tr>
+      <tr><td>Convencional</td><td class="n">90</td><td class="n">90</td><td class="n">80</td></tr>
+      <tr><td>Ciudad: calzada y acera al mismo nivel</td><td class="n" colspan="3">20</td></tr>
+      <tr><td>Ciudad: <b>1 carril</b> por sentido</td><td class="n" colspan="3">30 (el ayuntamiento puede subirla a 50 con señal)</td></tr>
+      <tr><td>Ciudad: <b>2 o más carriles</b> por sentido, y travesías</td><td class="n" colspan="3">50</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="rules">
+    <li class="trap">Para contar carriles en ciudad, el carril bus <b>no cuenta</b>.</li>
+    <li class="trap">Ya <b>no existe</b> el margen de +20 para adelantar: si el de delante va a tu máxima, no puedes adelantarlo.</li>
+    <li><b>Mínima</b>: 60 en autopista y autovía; en las demás, <b>la mitad</b> de la máxima de cada vehículo, aunque no haya nadie. No la tienen que cumplir ciclos, tracción animal, especiales, transportes especiales ni quien acompaña a otro vehículo.</li>
+    <li>Si por una emergencia vas muy despacio por autopista o autovía, sal por la <b>primera salida</b>.</li>
+    <li>Mercancías peligrosas: <b>10 km/h menos</b> fuera de poblado. Ciclos con remolque fuera de poblado: <b>un 10 % menos</b>.</li>
+    <li><b>V-4</b>: disco con la velocidad máxima de ese vehículo. <b>V-5</b>: vehículo lento, de 40 km/h como máximo.</li>
+    <li class="trap"><b>Exceso de velocidad</b> = pasar del límite. <b>Velocidad excesiva</b> = ir más rápido de lo que permiten las circunstancias, aunque estés por debajo del límite.</li>
+    <li>En un cruce sin prioridad, señalizado y con visibilidad casi nula: <b>50 km/h</b> como máximo.</li>
+    <li>Para frenar fuerte: mira el retrovisor <b>interior</b> y avisa con varios toques de freno o moviendo el brazo arriba y abajo. Una marcha de más de 50 ciclistas necesita autorización.</li>
+  </ul>
+  <div class="pairs" data-sec="velocidad"></div>
+</section>
+
+<section id="prioridad">
+  <h2><span class="plate">8</span> Prioridad <span class="hot">Peatones y prioridad: 37,5 %</span></h2>
+  <figure class="fig" style="margin:0">
+    <svg viewBox="0 0 760 250" role="img" aria-label="Cruce sin señales: cedes al que viene por tu derecha. Excepciones: vía pavimentada sobre camino de tierra, autopista sobre quien entra y vía pública sobre quien sale de una privada">
+      <rect x="300" y="0" width="120" height="250" fill="var(--asphalt)"/><rect x="0" y="80" width="760" height="100" fill="var(--asphalt)"/>
+      <rect x="330" y="170" width="28" height="44" rx="5" fill="var(--blue)"/><text x="344" y="240" text-anchor="middle" class="svgsmall">Tú</text>
+      <rect x="440" y="100" width="44" height="26" rx="5" fill="var(--red)"/>
+      <path d="M430 113 h-30" stroke="var(--red)" stroke-width="3" marker-end="url(#ar)"/>
+      <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--red)"/></marker></defs>
+      <text x="500" y="70" class="svgtext">Viene por tu derecha:</text>
+      <text x="500" y="88" class="svgtext" style="fill:var(--red)">pasa él, sea el vehículo que sea</text>
+      <g class="svgsmall"><text x="500" y="205">Excepciones (pasa quien va por la vía principal):</text>
+      <text x="500" y="222">· vía pavimentada sobre camino de tierra</text>
+      <text x="500" y="239">· autopista sobre quien entra · vía sobre salida privada</text></g>
+      <text x="10" y="30" class="svgtext">Sin señales ni agente</text>
+    </svg>
+  </figure>
+  <ul class="rules">
+    <li>Si no tienes prioridad, que se te note: reduce la velocidad con antelación y no obligues al otro a frenar o desviarse de golpe.</li>
+    <li class="trap">Aunque tengas prioridad, <b>no entres</b> en un cruce, paso de peatones o paso de ciclistas si te vas a quedar parado bloqueándolo. Si te quedas atrapado en un cruce con semáforo, sal aunque no tengas verde, sin estorbar.</li>
+    <li>El tren tiene prioridad siempre. En los cruces con tranvía puede haber señales a favor de los coches.</li>
+  </ul>
+  <div class="trapbox">
+    <strong class="t">Cedes a los ciclistas cuando…</strong>
+    <ul class="rules">
+      <li>Cruzan un <b>carril bici, un paso para ciclistas o un arcén</b> señalizados.</li>
+      <li><b>Giras</b> para entrar en otra vía y hay un ciclista cerca.</li>
+      <li>Van <b>en grupo</b> y el primero ya ha empezado a cruzar o ha entrado en la glorieta: el grupo cuenta como un solo vehículo.</li>
+    </ul>
+  </div>
+  <div class="compare">
+    <div><span class="k">Prioritario de verdad</span><span>En servicio urgente con luz <b>azul V-1</b> y sirena a la vez (solo la luz, excepcionalmente, si no hay peligro). Puede saltarse normas y límites, <b>nunca a los agentes</b>. Los demás se apartan a la derecha o paran.</span></div>
+    <div><span class="k">Particular en una urgencia</span><span><b>No</b> es prioritario: claxon a intervalos, luces de emergencia o un pañuelo, y cumple <b>todas</b> las normas.</span></div>
+    <div><span class="k">Grúa o auxilio</span><span>Luz <b>V-2 amarilla</b>; tritonal mientras llega, solo la luz mientras trabaja. Tiene preferencia si lo ha comunicado a la autoridad.</span></div>
+  </div>
+  <div class="pairs" data-sec="prioridad"></div>
+</section>
+
+<section id="estrecha">
+  <h2><span class="plate">9</span> Estrechamientos <span class="hot">Error concreto de tu lista</span></h2>
+  <ol class="rules" style="list-style:none;padding:0;display:grid;gap:8px">
+    <li><b>1.</b> Si hay señal, manda la señal.</li>
+    <li><b>2.</b> Si no hay señal, pasa <b>el que entró primero</b>.</li>
+    <li><b>3.</b> Si no se sabe quién entró primero, pasa el que tiene <b>más difícil maniobrar</b>, según esta lista:</li>
+  </ol>
+  <div class="fig">
+    <div class="ladder">
+      <div><b>1</b><span>Vehículos especiales que <b>exceden</b> las masas o dimensiones</span></div>
+      <div><b>2</b><span>Conjuntos de vehículos (salvo los del 4)</span></div>
+      <div><b>3</b><span>Tracción animal</span></div>
+      <div><b>4</b><span>Turismo con remolque de hasta 750 kg y autocaravanas</span></div>
+      <div><b>5</b><span>Autobuses</span></div>
+      <div><b>6</b><span>Camiones, tractocamiones y furgones</span></div>
+      <div><b>7</b><span>Turismos y derivados de turismo</span></div>
+      <div><b>8</b><span>Especiales que <b>no exceden</b>, cuadriciclos y cuadriciclos ligeros</span></div>
+      <div><b>9</b><span>Vehículos de 3 ruedas, motos con sidecar, ciclomotores de 3 ruedas</span></div>
+      <div><b>10</b><span>Motos sin sidecar, ciclomotores de 2 ruedas y bicicletas</span></div>
+    </div>
+    <p class="cap">El PDF lo trae desordenado; el 7 no se lee. <span class="verify">Compruébalo en el manual</span> · Truco: cuanto más cuesta dar marcha atrás, más arriba está.</p>
+  </div>
+  <ul class="rules">
+    <li>Si son del mismo tipo: pasa el que tendría que dar <b>más marcha atrás</b>. Si aun así empatan: el de más <b>anchura, longitud o MMA</b>.</li>
+    <li>Puentes: si en tu lado hay un «ceda el paso» o la señal de prioridad al sentido contrario, <b>te toca retroceder a ti</b>. Los vehículos con autorización especial no se cruzan en puentes de menos de <b>6 m</b>.</li>
+  </ul>
+  <figure class="fig" style="margin:0">
+    <svg viewBox="0 0 760 190" role="img" aria-label="Estrechamiento en pendiente de al menos el 7 por ciento: pasa el que sube, salvo que tenga más cerca un apartadero">
+      <path d="M0 170 L760 40 L760 190 L0 190 Z" fill="var(--asphalt)"/>
+      <path d="M300 117 L460 90" stroke="var(--amber)" stroke-width="6" stroke-dasharray="10 8"/>
+      <text x="380" y="80" text-anchor="middle" class="svgtext">estrechamiento</text>
+      <rect x="160" y="128" width="50" height="24" rx="5" fill="var(--green)" transform="rotate(-10 185 140)"/>
+      <text x="120" y="120" class="svgtext" style="fill:var(--green)">SUBE: pasa</text>
+      <rect x="560" y="64" width="50" height="24" rx="5" fill="var(--red)" transform="rotate(-10 585 76)"/>
+      <text x="560" y="50" class="svgtext" style="fill:var(--red)">BAJA: espera</text>
+      <text x="740" y="175" text-anchor="end" style="font:800 22px var(--mono);fill:var(--paint)">≥ 7 %</text>
+      <text x="10" y="22" class="svgsmall">Salvo que el que sube tenga un apartadero más cerca. Con menos del 7 %, se aplican las reglas normales.</text>
+    </svg>
+  </figure>
+  <div class="pairs" data-sec="estrecha"></div>
+</section>
+
+<section id="defs">
+  <h2><span class="plate">10</span> Definiciones que confunden</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Concepto</th><th>Lo que decide la respuesta</th></tr></thead>
+    <tbody>
+      <tr><td>Vehículo a motor</td><td><b>No</b> lo son: ciclomotores, ciclos de motor, tranvías, vehículos para movilidad reducida, bicis de pedaleo asistido y VMP</td></tr>
+      <tr><td>Automóvil</td><td>Vehículo a motor para personas o cosas. Los vehículos especiales <b>no</b> son automóviles</td></tr>
+      <tr><td>Remolque ligero</td><td class="n">MMA ≤ 750 kg</td></tr>
+      <tr><td>Bici de pedaleo asistido</td><td class="n">≤ 250 W; corta a 25 km/h o al dejar de pedalear</td></tr>
+      <tr><td>Ciclo de motor</td><td>≤ 1.000 W, corta a 25 km/h. No es ciclomotor, pero necesita <b>matrícula y licencia</b></td></tr>
+      <tr><td>Ciclomotor</td><td class="n">≤ 50 cm³ y ≤ 45 km/h</td></tr>
+      <tr><td>Cuadriciclo ligero</td><td>Es ciclomotor: 2 plazas, 45 km/h, ≤ 425 kg sin baterías</td></tr>
+      <tr><td>Cuadriciclo pesado</td><td>≤ 450 kg (personas) o 600 kg (mercancías). Cuenta como <b>vehículo de 3 ruedas</b></td></tr>
+      <tr><td>VMP</td><td>1 plaza, eléctrico, entre 6 y 25 km/h. Con asiento solo si tiene autoequilibrado</td></tr>
+      <tr><td>Turismo / autobús</td><td>Turismo: <b>hasta 9</b> plazas con el conductor. Autobús: <b>más de 9</b></td></tr>
+      <tr><td>Furgón / camión</td><td>Cabina <b>integrada</b> en la carrocería = furgón · <b>separada</b> = camión</td></tr>
+      <tr><td>Derivado de turismo</td><td>Para mercancías, con <b>una sola fila</b> de asientos</td></tr>
+      <tr><td>Autoturismo</td><td>Servicio público con licencia municipal; el <b>taxi no</b> lo es</td></tr>
+      <tr><td>Pick-up</td><td>≤ 3.500 kg y ≤ 2 m de alto: normas de turismo</td></tr>
+      <tr><td>Tren de carretera / articulado</td><td>Con <b>remolque</b> = tren de carretera · con <b>semirremolque</b> = articulado</td></tr>
+      <tr><td>Masa en orden de marcha</td><td>Tara + 75 kg del conductor (+75 kg del acompañante en autobuses)</td></tr>
+      <tr><td>Vehículo de uso compartido</td><td>Señal <b>V-26</b>, arriba a la <b>izquierda</b> del parabrisas, por dentro</td></tr>
+    </tbody>
+  </table></div>
+  <ul class="rules">
+    <li class="trap">Auriculares: prohibidos, <b>salvo</b> en las pruebas de circuito abierto. El intercomunicador homologado del casco está permitido.</li>
+    <li class="trap">Avisador de radares (dice dónde están): <b>permitido</b>. Detector: <b>prohibido</b>. Inhibidor: <b>prohibido</b>.</li>
+    <li>Pantallas en marcha: prohibidas, salvo la cámara de marcha atrás, la de subida y bajada de viajeros y el GPS (sin tocarlo en marcha). Ángulo de visión: <b>180°</b>.</li>
+  </ul>
+  <div class="pairs" data-sec="defs"></div>
+</section>
+</main>
+
+<script>
+const P={
+vias:[["4a","Ciclista de <span class=diff>15</span> años en una <span class=diff>autovía</span>: ¿puede ir por el arcén?","El mismo ciclista en una <span class=diff>autopista</span>.","Autovía: sí, salvo señal que lo prohíba. Autopista: no. Y con 13 años tampoco en la autovía (tiene que ser mayor de 14)."]],
+carriles:[["5a","Furgón de <span class=diff>3.000 kg</span>, autovía de 3 carriles: ¿puede usar el izquierdo?","Furgón de <span class=diff>4.000 kg</span>, misma autovía.","3.000 kg: sí (la limitación es para más de 3.500 kg). 4.000 kg: carril derecho y, solo excepcionalmente, el central; el izquierdo nunca."],
+["5c","Turismo con remolque, conjunto de <span class=diff>8 m</span>, autovía de 3 carriles.","El mismo turismo <span class=diff>sin remolque</span>.","Con remolque (más de 7 m): derecho y, excepcionalmente, el central. Sin remolque: cualquier carril."],
+["5d","Ciudad, 3 carriles marcados en tu sentido: ¿cuál usas?","Una <span class=diff>autovía</span> que atraviesa la ciudad.","En ciudad, el que más convenga a tu destino. En la autovía urbana, las normas de fuera de poblado: el de la derecha y los demás para adelantar."],
+["5e","Calzada con 2 carriles normales y <span class=diff>un carril bus</span>: ¿cuántos carriles cuentan?","Igual, pero con un carril de <span class=diff>velocidad mínima</span>.","Con el bus cuentan 2 (los reservados no cuentan). El de velocidad mínima sí cuenta: 3."]],
+especiales:[["6a","Velocidad máxima en un <span class=diff>carril reversible</span>.","Velocidad máxima en un <span class=diff>carril adicional circunstancial</span>.","Reversible: la de la vía, sin límite propio. Adicional: 80 como máximo y 60 como mínimo."],
+["6b","Furgoneta en un carril en sentido contrario habilitado por <span class=diff>fluidez</span>.","La misma furgoneta, carril habilitado por <span class=diff>obras</span>.","Por fluidez, no: solo motos y turismos sin remolque. Por obras, sí: todos los que pueden circular por esa vía."],
+["6c","Turismo <span class=diff>ECO</span> con solo el conductor: ¿carril VAO?","Turismo <span class=diff>0 emisiones</span> con solo el conductor.","ECO: solo si lo indica el panel de mensaje variable. 0 emisiones: sí."],
+["6d","Turismo con 3 ocupantes: ¿carril VAO?","El mismo turismo con 3 ocupantes y <span class=diff>remolque</span>.","Sin remolque, sí (si se cumple la ocupación fijada). Con remolque, no: los conjuntos tienen prohibido el VAO."]],
+arcen:[["7a","Dos ciclomotores por un arcén amplio: ¿en paralelo?","Dos <span class=diff>tractores agrícolas</span> por el arcén.","Ciclomotores: sí, en columna de dos, si el arcén es transitable y suficiente. Tractores: no; los demás nunca van en paralelo."],
+["7b","Vehículo especial de <span class=diff>3.000 kg</span>: ¿por dónde va?","Vehículo especial de <span class=diff>4.000 kg</span>.","3.000 kg: por el arcén. 4.000 kg: por la calzada."],
+["7c","Un ciclomotor adelanta a otro en el arcén y van en paralelo 20 s: ¿es legal?","Lo mismo, pero son <span class=diff>dos bicicletas</span>.","Ciclomotores: no (más de 15 s). Bicicletas: sí, están exentas de esa limitación."]],
+distancia:[["8a","Camión de 12 t en una convencional de un carril por sentido, sin intención de adelantar: ¿qué distancia deja?","El mismo camión en una <span class=diff>autovía de 2 carriles</span>.","Convencional: al menos 50 m. Autovía con más de un carril por sentido: basta con poder frenar sin chocar."],
+["8b","Túnel: ¿qué distancia deja un <span class=diff>turismo</span>?","Túnel: ¿y un <span class=diff>camión</span>?","Turismo: 100 m o 4 s. Más de 3.500 kg: 150 m o 6 s, viendo 3 galones."]],
+peatones:[["9a","Peatón por una carretera fuera de poblado sin arcén ni acera: ¿qué lado?","El mismo peatón <span class=diff>llevando una bici a mano</span>.","Solo: por la izquierda (de cara a los coches). Con la bici: por la derecha."],
+["9b","Giras a la derecha en un cruce <span class=diff>sin paso de peatones</span> y alguien cruza la calle <span class=diff>a la que entras</span>: ¿quién pasa?","Alguien cruza, sin paso, la calle <span class=diff>de la que sales</span>.","Si cruza la calle a la que entras, pasa el peatón. Si cruza la de la que sales, se aplica la norma general: tienes prioridad, con precaución."]],
+velocidad:[["11a","Convencional: velocidad mínima de un <span class=diff>turismo</span>.","Convencional: velocidad mínima de un <span class=diff>camión</span>.","Turismo: 45 (la mitad de 90). Camión: 40 (la mitad de 80)."],
+["11b","Calle con <span class=diff>1 carril por sentido y un carril bus</span>: ¿límite?","Calle con <span class=diff>2 carriles normales</span> por sentido.","Con el bus: 30, porque el bus no cuenta y queda 1 carril. Con 2 normales: 50."],
+["11c","Turismo a 90 en una convencional: ¿puedes adelantarlo con tu turismo?","El de delante es un <span class=diff>camión a 80</span>.","Turismo a 90: no, ya va a tu máxima (no hay +20). Camión a 80: sí, hasta 90."]],
+prioridad:[["12c","Ambulancia con luz azul <span class=diff>sin sirena</span>, en una calle vacía: ¿es prioritaria?","Un <span class=diff>coche particular</span> lleva a un herido con las luces de emergencia.","Ambulancia: excepcionalmente sí, si la sirena no hace falta. Particular: no es prioritario y cumple todas las normas."],
+["12d","Cruce sin señales: un camión viene por tu derecha y tú vas en moto. ¿Quién pasa?","El camión sale de un <span class=diff>camino de tierra</span>.","Si viene por tu derecha, pasa el camión. Si sale de un camino de tierra, pasas tú."],
+["12e","Grupo de ciclistas: el primero ya ha entrado en la glorieta cuando llegas. ¿Quién pasa?","El grupo <span class=diff>aún no ha empezado</span> a entrar.","Si el primero ya entró, pasa todo el grupo. Si no, normas generales."]],
+estrecha:[["12a","Estrechamiento sin señal: turismo y autobús, y no se sabe quién entró primero.","Turismo y <span class=diff>bicicleta</span>, en el mismo caso.","Autobús (5) antes que turismo (7). Turismo (7) antes que bicicleta (10)."],
+["12b","Estrechamiento en pendiente del <span class=diff>8 %</span>: ¿quién pasa?","Lo mismo, en pendiente del <span class=diff>5 %</span>.","8 %: el que sube, salvo que tenga un apartadero más cerca. 5 %: no es gran pendiente; reglas normales (entró primero, o la lista)."]],
+defs:[["1a","¿Puedes llevar un aparato que <span class=diff>detecta</span> radares?","¿Y uno que <span class=diff>avisa</span> de dónde están?","El detector está prohibido. El avisador está permitido."],
+["2a","Vehículo de <span class=diff>9 plazas</span> con el conductor: ¿turismo o autobús?","Con <span class=diff>10 plazas</span>.","9: turismo. 10: autobús."],
+["2c","¿Qué es, a efectos de normas, un cuadriciclo <span class=diff>ligero</span>?","¿Y uno <span class=diff>pesado</span>?","Ligero: ciclomotor. Pesado: vehículo de 3 ruedas."]]
+};
+const KEY="tema1-estado";let st={};try{st=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}};
+let onlyKo=false;
+document.querySelectorAll(".pairs").forEach(box=>{(P[box.dataset.sec]||[]).forEach(([id,a,b,ans])=>{
+  const el=document.createElement("div");el.className="pair";el.dataset.id=id;
+  el.innerHTML=`<div class="qs"><div class="q"><span class="tag">${id} · A</span><span>${a}</span></div><div class="q"><span class="tag">${id} · B</span><span>${b}</span></div></div>
+  <div class="bar"><button class="btn reveal">Ver respuesta</button><span class="spacer"></span><button class="btn ok" aria-pressed="false">Lo sabía</button><button class="btn ko" aria-pressed="false">Fallé</button></div>
+  <div class="ans" hidden>${ans}</div>`;
+  const r=el.querySelector(".reveal"),an=el.querySelector(".ans");
+  r.onclick=()=>{an.hidden=!an.hidden;r.textContent=an.hidden?"Ver respuesta":"Ocultar respuesta"};
+  el.querySelector(".ok").onclick=()=>mark(id,"ok");el.querySelector(".ko").onclick=()=>mark(id,"ko");
+  box.appendChild(el)})});
+function mark(id,v){st[id]=st[id]===v?undefined:v;if(!st[id])delete st[id];save();paint()}
+function paint(){const all=[...document.querySelectorAll(".pair")];let ok=0,ko=0;
+  all.forEach(el=>{const v=st[el.dataset.id];el.querySelector(".ok").setAttribute("aria-pressed",v==="ok");el.querySelector(".ko").setAttribute("aria-pressed",v==="ko");
+    if(v==="ok")ok++;if(v==="ko")ko++;el.hidden=onlyKo&&v!=="ko"});
+  document.getElementById("pc").textContent=`${ok} sabidas · ${ko} falladas · ${all.length} en total`;
+  document.getElementById("mOk").style.width=ok/all.length*100+"%";document.getElementById("mKo").style.width=ko/all.length*100+"%"}
+document.getElementById("onlyKo").onclick=e=>{onlyKo=!onlyKo;e.target.setAttribute("aria-pressed",onlyKo);paint()};
+document.getElementById("reset").onclick=()=>{st={};save();paint()};
+paint();
+
+/* simulador de carriles */
+const V={tur:{n:"Turismo",heavy:false},fur3:{n:"Furgón de 3.000 kg",heavy:false},fur4:{n:"Furgón de 4.000 kg",heavy:true},conj8:{n:"Turismo con remolque (8 m)",heavy:true},cam:{n:"Camión",heavy:true}};
+let cv="tur",cr="fuera";
+const C={g:"var(--green)",a:"var(--amber)",r:"var(--red)"};
+function lanes(){let cols,labels,txt,arrows;const v=V[cv];
+  if(cr==="fuera"){cols=v.heavy?["r","a","g"]:["g","g","g"];labels=v.heavy?["Nunca","Excepcional","Normal"]:["Sí","Sí","Normal"];arrows=["↑","↑","↑"];
+    txt=v.heavy?`${v.n}: va por el carril derecho; puede usar el central solo excepcionalmente y nunca el izquierdo. Afecta a camiones, furgones y especiales de más de 3.500 kg, y a conjuntos de más de 7 m.`:`${v.n}: puede usar todos los carriles. La limitación es solo para más de 3.500 kg o conjuntos de más de 7 m.`}
+  else if(cr==="doble"){cols=["r","a","g"];labels=["Sentido contrario","Adelantar o girar a la izquierda","Normal"];arrows=["↓","↕","↑"];
+    txt="Doble sentido con 3 carriles: para todos los vehículos, el derecho. El central solo para adelantar o girar a la izquierda. El izquierdo es del sentido contrario: nunca."}
+  else{cols=["g","g","g"];labels=["Según destino","Según destino","Según destino"];arrows=["↑","↑","↑"];
+    txt="En ciudad, con carriles marcados, el que más convenga a tu destino, sin cambiar si no es para girar, adelantar, parar o estacionar. Sin marcas: el derecho. Si es una autovía urbana, se aplican las normas de fuera de poblado."}
+  const w=220,x0=50;let s=`<rect x="0" y="0" width="760" height="210" fill="var(--asphalt)"/><rect x="0" y="0" width="${x0}" height="210" fill="var(--grass)"/><rect x="${x0+3*w}" y="0" width="${760-x0-3*w}" height="210" fill="var(--grass)"/>`;
+  for(let i=0;i<3;i++){const x=x0+i*w;s+=`<rect x="${x+8}" y="14" width="${w-16}" height="182" rx="10" fill="${C[cols[i]]}" opacity=".28"/><rect x="${x+8}" y="14" width="${w-16}" height="6" rx="3" fill="${C[cols[i]]}"/>`;
+    s+=`<text x="${x+w/2}" y="110" text-anchor="middle" style="font:800 46px var(--display);fill:var(--paint)">${arrows[i]}</text><text x="${x+w/2}" y="170" text-anchor="middle" style="font:700 14px var(--body);fill:var(--paint)">${labels[i]}</text>`;
+    if(i>0){const solid=cr==="doble"&&false;for(let y=10;y<210;y+=34)s+=`<rect x="${x-2}" y="${y}" width="4" height="18" fill="var(--paint)"/>`}}
+  s+=`<text x="${x0+2.5*w}" y="44" text-anchor="middle" style="font:600 12px var(--body);fill:var(--paint)">derecha</text><text x="${x0+.5*w}" y="44" text-anchor="middle" style="font:600 12px var(--body);fill:var(--paint)">izquierda</text>`;
+  document.getElementById("lanes").innerHTML=s;document.getElementById("laneExplain").textContent=txt}
+document.querySelectorAll("[data-v]").forEach(b=>b.onclick=()=>{cv=b.dataset.v;document.querySelectorAll("[data-v]").forEach(x=>x.setAttribute("aria-pressed",x===b));lanes()});
+document.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>{cr=b.dataset.r;document.querySelectorAll("[data-r]").forEach(x=>x.setAttribute("aria-pressed",x===b));lanes()});
+lanes();
+</script>

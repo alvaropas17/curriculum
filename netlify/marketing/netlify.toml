@@ -1,0 +1,11 @@
+# marketing.alvaropastor.dev en Netlify.
+# En Netlify: Site configuration > Build & deploy > Base directory = netlify/marketing
+# Con eso Netlify usa este fichero y no el netlify.toml de la raíz.
+
+[build]
+  command = "cd ../.. && MARKETING_OUTPUT=netlify/marketing/dist node scripts/build-marketing.mjs"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"

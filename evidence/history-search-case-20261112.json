@@ -1,0 +1,41 @@
+{
+  "case_date": "2026-11-12",
+  "type": "recorded real use; not a benchmark",
+  "tool": "Agent History Search via Claude Code MCP",
+  "search_arguments": {
+    "action": "search",
+    "query": "vende el MCP",
+    "query_variants": [
+      "portada vende",
+      "notas en /notas",
+      "por dolor"
+    ],
+    "limit": 8
+  },
+  "measurements": [
+    {
+      "action": "search",
+      "call_at": "2026-11-12T20:14:55.405Z",
+      "result_at": "2026-11-12T20:14:55.919Z",
+      "elapsed_ms": 514
+    },
+    {
+      "action": "expand",
+      "call_at": "2026-11-12T20:15:00.166Z",
+      "result_at": "2026-11-12T20:15:00.293Z",
+      "elapsed_ms": 127
+    }
+  ],
+  "recovered_source": {
+    "agent": "codex",
+    "timestamp": "2026-11-08T21:21:34.846Z",
+    "quote_es": "Notas en `/notas`, fuera de la portada: son otro tema y ninguna transición encajaba…"
+  },
+  "method": "Subtract tool_use timestamp from matching tool_result timestamp in the stored Claude Code transcript. Pair by tool_use_id, not proximity.",
+  "limits": [
+    "One observed case; no repeated benchmark or speed guarantee.",
+    "Excludes agent thinking between calls and end-to-end response time.",
+    "Only the relevant public-website decision is quoted; chat identifiers, local paths and unrelated chats are omitted.",
+    "English on-page excerpt is a translation."
+  ]
+}

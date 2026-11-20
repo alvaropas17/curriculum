@@ -1,0 +1,42 @@
+{
+  "case_date": "2026-11-13",
+  "type": "recorded real use; not a benchmark",
+  "tool": "Agent History Search via Claude Code MCP",
+  "search_arguments": {
+    "action": "search",
+    "query": "wrangler pages deploy",
+    "query_variants": [
+      "Deployment complete",
+      "alvaropastor-marketing"
+    ],
+    "limit": 5
+  },
+  "measurements": [
+    {
+      "action": "search",
+      "call_at": "2026-11-13T20:31:14.338Z",
+      "result_at": "2026-11-13T20:31:14.564Z",
+      "elapsed_ms": 226
+    },
+    {
+      "action": "expand",
+      "call_at": "2026-11-13T20:31:16.633Z",
+      "result_at": "2026-11-13T20:31:16.783Z",
+      "elapsed_ms": 150
+    }
+  ],
+  "search_result_count": 5,
+  "expansion_requested_context": 500,
+  "recovered_source": {
+    "agent": "pocket",
+    "timestamp": "2026-11-12T11:34:44.840Z",
+    "command_excerpt": "wrangler pages deploy dist-marketing --project-name alvaropastor-marketing --branch main"
+  },
+  "method": "Subtract tool_use timestamp from matching tool_result timestamp in the stored Claude Code transcript. Pair by tool_use_id, not proximity.",
+  "limits": [
+    "One observed case; no repeated benchmark or speed guarantee.",
+    "Excludes agent thinking between calls and end-to-end response time.",
+    "The command is trimmed to its public part: chat identifiers and local tool paths are omitted.",
+    "The search ran on 2026-11-13 to reproduce a lookup of an answer written the day before."
+  ]
+}

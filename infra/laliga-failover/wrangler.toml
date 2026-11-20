@@ -1,0 +1,28 @@
+name = "laliga-failover"
+main = "src/index.js"
+compatibility_date = "2026-11-01"
+
+# Cada 2 minutos: hayahora.futbol actualiza sus listas cada pocos minutos.
+[triggers]
+crons = ["*/2 * * * *"]
+
+# La sonda es el dominio propio de este Worker. Siempre va con proxy, así que resuelve
+# a las IPs de Cloudflare de la zona aunque la web esté en gris. Además enseña el estado.
+[[routes]]
+pattern = "estado.alvaropastor.dev"
+custom_domain = true
+
+[vars]
+# ID de zona de alvaropastor.dev (Cloudflare > alvaropastor.dev > Overview, columna derecha).
+ZONE_ID = "PENDIENTE"
+SONDA = "estado.alvaropastor.dev"
+REGISTROS = "alvaropastor.dev,www.alvaropastor.dev,marketing.alvaropastor.dev"
+# Minutos seguidos sin bloqueo antes de volver a poner el proxy.
+ESPERA_MINUTOS = "15"
+# auto | gris (forzar sin proxy) | naranja (forzar con proxy)
+MODO = "auto"
+
+# Secreto (no va aquí): npx wrangler secret put CF_API_TOKEN
+
+[observability]
+enabled = true

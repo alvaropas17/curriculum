@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="{{lang}}">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{title}} · Álvaro Pastor</title>
+  <meta name="description" content="{{intro}}"><meta name="theme-color" content="#0c0c0d">
+  <link rel="canonical" href="https://alvaropastor.dev{{canonical}}">
+  <link rel="alternate" hreflang="es" href="https://alvaropastor.dev/apps/">
+  <link rel="alternate" hreflang="en" href="https://alvaropastor.dev/apps/en/">
+  <link rel="alternate" hreflang="x-default" href="https://alvaropastor.dev/apps/">
+  <meta property="og:type" content="website"><meta property="og:title" content="{{title}} · Álvaro Pastor">
+  <meta property="og:description" content="{{intro}}"><meta property="og:url" content="https://alvaropastor.dev{{canonical}}">
+  <script>
+    (()=>{const u=new URL(location.href),l=u.searchParams.get('lang');if(l==='es'||l==='en'){try{localStorage.setItem('portfolio-language',l)}catch{}const target=l==='en'?'/apps/en/':'/apps/';if(u.pathname!==target){u.pathname=target;location.replace(u.href)}}})();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Instrument+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles/portada.css?v=20261106d"><link rel="stylesheet" href="/styles/apps.css?v=list2">
+  <script src="/scripts/apps.js?v=directory1" defer></script>
+</head>
+<body class="directory-page">
+  <a class="skip-link" href="#directory">{{directory}}</a>
+  <nav class="nav" aria-label="{{directory}}"><div class="marco nav-fila">
+    <a class="nav-marca" href="/?lang={{lang}}">Álvaro Pastor</a>
+    <div class="nav-enlaces"><a href="/?lang={{lang}}">{{home}}</a><a href="{{canonical}}" aria-current="page">{{directory}}</a><a href="/notas.html?lang={{lang}}">{{notes}}</a></div>
+    <div class="nav-acciones"><a class="nav-idioma" id="directory-language" href="{{alternate}}" lang="{{toggle}}" aria-label="{{toggleLabel}}">{{toggle}}</a></div>
+  </div></nav>
+  <main class="marco" id="directory">
+    <header class="directory-hero"><p class="etiqueta">{{eyebrow}}</p><h1>{{h1}} <span class="marca">{{accent}}</span></h1><p class="directory-intro">{{intro}}</p></header>
+    <section aria-label="{{directory}}" class="directory-content">
+      <div class="directory-controls"><div class="directory-filters" role="group" aria-label="{{directory}}">{{filters}}</div><div class="directory-search"><label class="sr-only" for="app-search">{{search}}</label><input id="app-search" type="search" placeholder="{{search}}" autocomplete="off"><button type="button" id="clear-search" aria-label="{{clear}}" hidden>×</button></div></div>
+      <p id="directory-count" class="etiqueta directory-count" role="status" aria-live="polite">{{countText}}</p>
+      <div class="directory-grid">{{cards}}</div>
+      <div id="directory-empty" class="directory-empty" hidden><p>{{empty}}</p><button type="button" class="boton boton-contorno" id="reset-directory">{{reset}}</button></div>
+      <p class="directory-note">{{note}}</p>
+    </section>
+  </main>
+  <footer class="pie"><div class="marco pie-fila"><p>{{footer}}</p><ul><li><a href="/?lang={{lang}}">{{home}}</a></li><li><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer">X</a></li></ul></div></footer>
+  <script type="application/json" id="directory-data">{{clientData}}</script>
+</body></html>

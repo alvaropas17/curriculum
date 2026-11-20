@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>No tienes un entorno lento: tienes un impuesto por arranque · Álvaro Pastor</title>
+  <meta name="description" content="El impuesto por arranque: el minuto que tu equipo paga antes de empezar. Lo bajé de un minuto a 4 segundos sin cambiar de herramienta, y te dejo 3 pasos para medir el tuyo.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="author" content="Álvaro Pastor Periago">
+  <link rel="canonical" href="https://marketing.alvaropastor.dev/arranque/">
+  <meta property="og:type" content="article"><meta property="og:site_name" content="Álvaro Pastor Periago."><meta property="og:locale" content="es_ES"><meta property="og:url" content="https://marketing.alvaropastor.dev/arranque/">
+  <meta property="og:title" content="No tienes un entorno lento: tienes un impuesto por arranque."><meta property="og:description" content="El impuesto por arranque: el minuto que tu equipo paga antes de empezar. Lo bajé de un minuto a 4 segundos sin cambiar de herramienta, y te dejo 3 pasos para medir el tuyo.">
+  <meta property="og:image" content="https://marketing.alvaropastor.dev/assets/og/arranque.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Dibujo antes y después: un muñeco con café y una telaraña esperando una barra casi vacía de «1 min»; después, la barra llena y «4 seg» para ponerse a trabajar">
+  <meta property="article:published_time" content="2026-11-16"><meta property="article:author" content="Álvaro Pastor Periago">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@alpas17_"><meta name="twitter:title" content="No tienes un entorno lento: tienes un impuesto por arranque."><meta name="twitter:description" content="El impuesto por arranque: el minuto que tu equipo paga antes de empezar. Lo bajé de un minuto a 4 segundos sin cambiar de herramienta, y te dejo 3 pasos para medir el tuyo."><meta name="twitter:image" content="https://marketing.alvaropastor.dev/assets/og/arranque.jpg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://marketing.alvaropastor.dev/arranque/#articulo","headline":"No tienes un entorno lento: tienes un impuesto por arranque.","description":"El impuesto por arranque: el minuto que tu equipo paga antes de empezar. Lo bajé de un minuto a 4 segundos sin cambiar de herramienta, y te dejo 3 pasos para medir el tuyo.","inLanguage":"es","datePublished":"2026-11-16","dateModified":"2026-11-16","image":"https://marketing.alvaropastor.dev/assets/og/arranque.jpg","mainEntityOfPage":"https://marketing.alvaropastor.dev/arranque/","author":{"@type":"Person","name":"Álvaro Pastor Periago","url":"https://x.com/alpas17_"},"publisher":{"@type":"Person","name":"Álvaro Pastor Periago"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog de marketing","item":"https://marketing.alvaropastor.dev/"},{"@type":"ListItem","position":2,"name":"No tienes un entorno lento: tienes un impuesto por arranque.","item":"https://marketing.alvaropastor.dev/arranque/"}]}]}</script>
+  <script>try{var t=localStorage.getItem('marketing-theme')||'light';document.documentElement.dataset.pref=t;document.documentElement.dataset.tema=t==='auto'?(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'):t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/portada-caso.css">
+  <style>
+/* Estilos exclusivos de este artículo; la tipografía Newsreader actual se conserva. */
+:root{--story-red:#b72c25;--story-yellow:#ffd84d;--story-mark:#fff0aa}
+:root[data-tema="dark"]{--story-red:#f28a7d;--story-mark:#55451d}
+.arranque-main{max-width:960px;margin:auto;padding:64px 24px 80px}
+.article-heading{max-width:740px;margin:0 auto 32px}
+.eyebrow,.chapter{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-muted)}
+.eyebrow{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.article-heading h1{font-size:clamp(32px,3.6vw,50px);line-height:1.08;letter-spacing:-.03em;font-weight:500;max-width:720px;text-wrap:balance}
+.standfirst{font-size:23px;line-height:1.45;color:var(--ink-muted);max-width:650px;margin-top:24px;text-wrap:pretty}
+.hero-gains{list-style:none;margin:20px 0 24px;padding:0;font-size:18px;line-height:1.45;max-width:600px}
+.hero-gains li{position:relative;padding-left:26px;margin-bottom:8px;text-wrap:pretty}
+.hero-gains li::before{content:"✓";position:absolute;left:0;color:var(--story-red);font-weight:700}
+.hero-dibujo{max-width:800px;margin:0 auto 60px}
+.hero-dibujo img{width:100%;height:auto;border:1px solid var(--rule);border-radius:3px}
+.hero-dibujo figcaption,.sketch figcaption{font-size:14px;line-height:1.5;color:var(--ink-muted);margin-top:12px}
+.story{max-width:650px;margin:auto;font-size:20px;line-height:1.7}
+.story section{scroll-margin-top:108px;margin-bottom:56px}
+.story .chapter{margin:0 0 14px;line-height:1.4}
+.story h2{font-size:clamp(29px,3.2vw,39px);line-height:1.14;letter-spacing:-.025em;font-weight:500;margin-bottom:24px;text-wrap:balance}
+.story p{margin-bottom:22px;text-wrap:pretty}
+.story strong{font-weight:600;color:var(--ink);background:linear-gradient(transparent 62%,var(--story-mark) 62%,var(--story-mark) 92%,transparent 92%)}
+.story .opening::first-letter{font-size:3.7em;float:left;line-height:.8;margin:9px 9px 0 0}
+.sketch{margin:30px 0 32px;padding:16px 12px 0;border-block:1px solid var(--rule)}
+.sketch svg{width:100%;height:auto;color:var(--ink)}
+.ink-line{fill:none;stroke:currentColor;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.red-stroke{fill:none;stroke:var(--story-red);stroke-width:9;stroke-linecap:round}
+.yellow-stroke{fill:none;stroke:var(--story-yellow);stroke-width:18;stroke-linecap:round;opacity:.7}
+.sketch-label{fill:currentColor;font-family:"Newsreader",Georgia,serif;font-size:22px;font-style:italic}
+.sketch figcaption{margin-bottom:16px}
+.story .evidence-note{font-size:17px;color:var(--ink-muted);padding-left:20px;border-left:2px solid var(--rule)}
+.story .lead-line{font-size:23px;line-height:1.45;margin-bottom:24px}
+.story .closing-line{font-size:26px;line-height:1.4;font-style:italic;margin-top:32px}
+.closing-offer{scroll-margin-top:108px;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);padding:32px 0 24px;margin-top:56px}
+.closing-offer p{font-size:18px;line-height:1.6}
+.offer-link{display:inline-flex;align-items:center;min-height:48px;padding:12px 22px;border-radius:5px;background:var(--story-yellow);color:#231e17;font-size:18px;font-weight:600;line-height:1.3;text-decoration:none;transition:transform .15s}
+.offer-link:hover{transform:translateX(3px)}
+.story .offer-detail{margin:16px 0 0;font-size:15px;color:var(--ink-muted)}
+.read-next{display:flex;justify-content:space-between;gap:16px;margin-top:28px;font-size:16px;line-height:1.5;color:var(--ink-muted)}
+.read-next a{text-decoration:underline;text-underline-offset:4px;color:var(--ink)}
+body>header button{min-height:44px;min-width:44px}
+body>header .nav-link{display:flex;align-items:center;min-height:44px}
+body>header nav{gap:18px}
+body>header .bg-accent{background:var(--story-red)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--story-red);outline-offset:5px}
+::selection{background:var(--story-yellow);color:#231e17}
+@media(max-width:767px){.arranque-main{padding:36px 20px 56px}.article-heading{margin-bottom:24px}.article-heading h1{font-size:34px;line-height:1.1}.standfirst{font-size:21px;margin-top:20px}.hero-gains{font-size:17px;margin:16px 0 20px}.hero-dibujo{margin-bottom:40px}.hero-dibujo figcaption{font-size:13px}.story{font-size:19px;line-height:1.65}.story section{margin-bottom:42px}.story h2{font-size:31px}.sketch{padding:12px 0 0;margin-block:24px}.sketch-label{font-size:24px}.story .closing-line{font-size:24px}.closing-offer{margin-top:40px}.read-next{display:block}.read-next span{display:block;margin-bottom:8px}body>header>div:nth-child(2){gap:8px;padding-inline:16px}body>header>div:nth-child(2)>a:first-child{font-size:16px;flex-shrink:1;line-height:1.1;max-width:160px}body>header button{padding-inline:10px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body class="bg-paper text-ink font-sans antialiased selection:bg-accent selection:text-white">
+
+  <header class="sticky top-0 z-40 bg-paper/90 backdrop-blur-md border-b border-rule">
+    <div class="w-full h-[2px]"><div id="reading-progress" class="h-full bg-accent w-0 transition-all duration-75"></div></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center gap-3 sm:gap-4">
+      <a href="marketing-portada.html" class="font-serif text-lg sm:text-xl font-medium tracking-tight text-ink hover:opacity-80 transition-opacity shrink-0 mr-auto">Álvaro Pastor Periago<span class="text-accent font-semibold">.</span></a>
+      <nav aria-label="Secciones" class="hidden md:flex items-center gap-6 text-xs font-medium text-ink-muted">
+        <a href="#sec-1" data-nav="sec-1" class="nav-link hover:text-ink transition-colors py-1" data-en="The tax">El impuesto</a>
+        <a href="#sec-2" data-nav="sec-2" class="nav-link hover:text-ink transition-colors py-1" data-en="The change">El cambio</a>
+        <a href="#sec-3" data-nav="sec-3" class="nav-link hover:text-ink transition-colors py-1" data-en="The test">La prueba</a>
+        <a href="#sec-4" data-nav="sec-4" class="nav-link hover:text-ink transition-colors py-1" data-en="Your website">Tu web</a>
+        </nav>
+      <a href="marketing-portada.html" class="hidden sm:inline-flex items-center text-xs font-medium text-ink-muted hover:text-ink px-3 py-1.5 rounded-lg border border-rule bg-paper-card hover:border-ink-light transition-colors" data-en="← Back to the blog">← Volver al blog</a>
+      <button id="idioma" type="button" aria-label="Switch to English" class="font-mono text-[11px] text-ink-muted border border-rule rounded-full px-3 min-h-[34px] hover:text-accent hover:border-accent transition-colors cursor-pointer">EN</button>
+      <button id="tema" type="button" aria-label="Cambiar tema" class="font-mono text-[11px] text-ink-muted border border-rule rounded-full px-3 min-h-[34px] hover:text-accent hover:border-accent transition-colors cursor-pointer">◐ claro</button>
+    </div>
+  </header>
+
+  <main class="arranque-main">
+    <header class="article-heading">
+      <p class="eyebrow"><span data-en="Real case · My internship">Caso real · Mis prácticas</span> <span aria-hidden="true">/</span> <time datetime="2026-11-16" data-en="16 Nov 2026">16 nov 2026</time></p>
+      <h1 data-en="You do not have a slow environment. You have a start-up tax.">No tienes un entorno lento. Tienes un impuesto por arranque.</h1>
+      <p class="standfirst" data-en="You pay it before you can work, every morning, and it never appears on an invoice. Here is how I took mine from a minute to 4 seconds without switching tools.">Lo pagas antes de poder trabajar, cada mañana, y no aparece en ninguna factura. Así bajé el mío de un minuto a 4 segundos sin cambiar de herramienta.</p>
+      <ul class="hero-gains">
+        <li data-en="The name of what you pay every time you start: the start-up tax.">El nombre de lo que pagas cada vez que arrancas: <strong>el impuesto por arranque</strong>.</li>
+        <li data-en="A 1-minute test to measure your wait and compare before and after.">La <strong>prueba de 1 minuto</strong> para medir tu espera y comparar el antes y el después.</li>
+      </ul>
+    </header>
+
+    <figure class="hero-dibujo">
+      <img id="hero-dibujo" src="../assets/miniaturas/arranque.webp?v=1" data-src-en="../assets/miniaturas/arranque-en.webp?v=1" data-alt-es="Dibujo antes y después: un muñeco espera con café junto a una barra de carga; después, levanta los brazos y puede ponerse a trabajar. De aproximadamente un minuto a cuatro segundos." data-alt-en="Before and after drawing: a stick figure waits with coffee beside a loading bar; afterwards, it raises its arms and can get to work. From about a minute to four seconds." alt="Dibujo antes y después: un muñeco espera con café junto a una barra de carga; después, levanta los brazos y puede ponerse a trabajar. De aproximadamente un minuto a cuatro segundos." width="1600" height="900" fetchpriority="high" decoding="async">
+      <figcaption data-en="The case in one drawing. Below: what I changed and what you can take from it.">El caso, en un dibujo. Debajo: qué cambié y qué puedes llevarte.</figcaption>
+    </figure>
+
+    <article class="story" aria-label="Caso de arranque" data-label-es="Caso de arranque" data-label-en="Start-up case">
+      <section id="sec-1">
+        <p class="chapter" data-en="01 / The tax">01 / El impuesto</p>
+        <h2 data-en="The start-up tax: what you pay before you begin.">El impuesto por arranque: lo que pagas antes de empezar.</h2>
+        <p class="opening" data-en="You open the environment. You wait. And you do not call it waiting: you call it starting.">Abres el entorno. Esperas. Y no lo llamas esperar: lo llamas empezar.</p>
+        <p data-en="That gap has a name: <strong>the start-up tax</strong>. The time between wanting to begin and being able to begin. You pay it every time, and it appears on no invoice.">Ese hueco tiene nombre: <strong>el impuesto por arranque</strong>. El tiempo entre querer empezar y poder hacerlo. Lo pagas cada vez, y no aparece en ninguna factura.</p>
+        <p data-en="During my internship at a technology company, from February to June 2026, I worked on that start-up. I am not naming the company. The point here is the change: reorganising the Docker configuration so the environment could use its cache.">Durante mis prácticas en una empresa tecnológica, de febrero a junio de 2026, trabajé en ese arranque. No doy el nombre de la empresa. Lo que importa aquí es el cambio: reorganizar la configuración de Docker para que el entorno aprovechara su caché.</p>
+        <p data-en="One minute looks small. But every person pays it, every time they open the environment, several times a day. That is when it stops being small.">Un minuto parece poco. Pero lo paga cada persona, cada vez que abre el entorno, varias veces al día. Ahí deja de ser poco.</p>
+        <figure class="sketch wait-sketch">
+          <svg class="editorial-sketch" viewBox="0 0 640 360" role="img" aria-labelledby="wait-title wait-desc">
+<title id="wait-title" data-en="Ready to work, but still waiting">Listo para trabajar, pero esperando</title>
+<desc id="wait-desc" data-en="A person waits at a loading screen. A clock and the approximate one-minute wait make the time before work visible.">Una persona espera ante una pantalla de carga. Un reloj y el dato aproximado de un minuto hacen visible el tiempo previo al trabajo.</desc>
+<style>
+.editorial-sketch .line,.editorial-sketch .card,.editorial-sketch .soft{stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.editorial-sketch .card{fill:var(--paper,#faf7f0);fill-opacity:.35}
+.editorial-sketch .soft{opacity:.45;stroke-width:2.3}
+.editorial-sketch .wash{fill:var(--story-yellow,#ffd84d);opacity:.24;stroke:none}
+.editorial-sketch .mark{stroke:var(--story-yellow,#ffd84d);stroke-width:13;stroke-linecap:round;fill:none;opacity:.8}
+.editorial-sketch .label{fill:currentColor;font-family:inherit;font-weight:500;letter-spacing:-.5px}
+.editorial-sketch .number{fill:currentColor;font-family:Georgia,serif;font-size:62px;font-style:italic}
+</style>
+<text x="320" y="35" text-anchor="middle" class="label" style="font-size:28px" data-en="Ready to start ≠ able to start">Querer empezar ≠ poder empezar</text><ellipse class="wash" cx="302" cy="287" rx="245" ry="21"/><path class="card" d="M258 98 L485 96 L483 242 L255 240 Z"/><path class="line" d="M257 124 L483 122 M365 243 v37 m-36 0 h74 M70 283 Q310 289 550 282"/><path class="card" d="M283 166 L460 164 L458 186 L280 184 Z"/><path class="mark" d="M289 175 l33 -1"/><path class="line" d="M160 151 C129 151 128 105 157 103 C186 100 189 148 160 151 Z M157 154 l-8 62 64 5 17 63 M151 176 l42 24 48 -4 M149 216 l-29 66 M125 192 l-5 43 53 1 m-32 0 -1 47 M147 121 h1 m18 -1 h1 M149 137 q8 -5 15 -1 M507 242 v-29 h22 v29 Z m22 -25 q25 4 0 19 M517 198 q-9 -9 0 -18"/><path class="line" d="M516 85 a29 29 0 1 1 0 58 a29 29 0 1 1 0 -58 M516 94 v20 l13 8"/><text x="369" y="320" text-anchor="middle" class="label" style="font-size:28px" data-en="≈ 1 minute waiting">≈ 1 minuto de espera</text>
+</svg>
+          <figcaption data-en="The wait comes before the work. That does not make it inevitable.">La espera va antes del trabajo. No por eso tiene que ser inevitable.</figcaption>
+        </figure>
+        <p data-en="I do not have a figure for what the team saved in total, and I am not going to invent one. The tax is a way to spot friction, not an invoice.">No tengo la cifra de lo que ahorró el equipo en total, y no la voy a inventar. El impuesto sirve para detectar fricción, no para facturar.</p>
+      </section>
+
+      <section id="sec-2">
+        <p class="chapter" data-en="02 / The change">02 / El cambio</p>
+        <h2 data-en="From a minute to 4 seconds without switching tools.">De un minuto a 4 segundos sin cambiar de herramienta.</h2>
+        <p class="lead-line" data-en="No other tool was needed. The one I had needed to reuse previous work."><em>No hacía falta otra herramienta. Hacía falta que la que ya había reutilizara el trabajo anterior.</em></p>
+        <p data-en="Docker has a cache to reuse previous work. In this case, I reorganised the configuration to take advantage of it. The improvement did not come from switching tools, but from changing how the existing tool was configured.">Docker tiene una caché para reutilizar trabajo anterior. En este caso, reorganicé la configuración para aprovecharla. La mejora no vino de cambiar de herramienta, sino de cambiar cómo estaba configurada la que ya había.</p>
+        <figure class="sketch cache-sketch">
+          <svg class="editorial-sketch" viewBox="0 0 640 360" role="img" aria-labelledby="cache-title cache-desc">
+<title id="cache-title" data-en="Reuse instead of starting over">Reutilizar en lugar de empezar de nuevo</title>
+<desc id="cache-desc" data-en="Stored previous work moves from boxes to a screen along an arrow. Cache means reuse instead of repetition. A conceptual drawing, not the actual configuration.">Trabajo anterior guardado en cajas pasa a una pantalla mediante una flecha. La caché permite reutilizar en vez de repetir. Dibujo conceptual, no configuración real.</desc>
+<style>
+.editorial-sketch .line,.editorial-sketch .card,.editorial-sketch .soft{stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.editorial-sketch .card{fill:var(--paper,#faf7f0);fill-opacity:.35}
+.editorial-sketch .soft{opacity:.45;stroke-width:2.3}
+.editorial-sketch .wash{fill:var(--story-yellow,#ffd84d);opacity:.24;stroke:none}
+.editorial-sketch .mark{stroke:var(--story-yellow,#ffd84d);stroke-width:13;stroke-linecap:round;fill:none;opacity:.8}
+.editorial-sketch .label{fill:currentColor;font-family:inherit;font-weight:500;letter-spacing:-.5px}
+.editorial-sketch .number{fill:currentColor;font-family:Georgia,serif;font-size:62px;font-style:italic}
+</style>
+<text x="156" y="36" text-anchor="middle" class="label" style="font-size:28px" data-en="Previous work">Trabajo anterior</text><text x="485" y="36" text-anchor="middle" class="label" style="font-size:28px" data-en="Next start-up">Siguiente arranque</text><ellipse class="wash" cx="166" cy="274" rx="117" ry="17"/><path class="card" d="M61 81 L258 79 L256 276 L58 274 Z"/><path class="line" d="M60 172 l196 -2 M80 278 v14 m154 -14 v14"/><path class="card" d="M80 103 L141 101 L139 159 L77 157 Z"/><path class="soft" d="M99 103 v15 h20 v-16"/><path class="card" d="M161 102 L222 100 L220 158 L158 156 Z"/><path class="soft" d="M180 102 v15 h20 v-16"/><path class="card" d="M81 194 L142 192 L140 250 L78 248 Z"/><path class="soft" d="M100 194 v15 h20 v-16"/><path class="card" d="M161 193 L222 191 L220 249 L158 247 Z"/><path class="soft" d="M180 193 v15 h20 v-16"/><path class="line" d="M279 179 q25 -12 48 0 m-12 -13 13 13 -17 8"/><path class="card" d="M361 103 L584 101 L582 254 L358 252 Z"/><path class="line" d="M359 129 l222 -1 M470 256 v26 m-38 0 h76"/><path class="mark" d="M403 194 l22 22 50 -58"/><path class="line" d="M403 194 l22 22 50 -58"/><text x="166" y="330" text-anchor="middle" class="label" style="font-size:28px" data-en="Keep">Conservar</text><text x="472" y="330" text-anchor="middle" class="label" style="font-size:28px" data-en="Reuse">Reutilizar</text>
+</svg>
+          <figcaption data-en="Keep what can be reused. A conceptual drawing of the cache, not the actual configuration.">Conservar lo que se puede reutilizar. Dibujo conceptual de la caché, no de la configuración real.</figcaption>
+        </figure>
+        <p data-en="The start-up of the development environment went <strong>from approximately 1 minute to 4 seconds</strong>. That is the before and after of this case.">El arranque del entorno de desarrollo pasó <strong>de aproximadamente 1 minuto a 4 segundos</strong>. Ese es el antes y el después de este caso.</p>
+        <p class="evidence-note" data-en="I do not have a figure for the total time saved by the team. Nor am I showing the configuration here. This is an account of the change and its result, not a technical guide to reproduce it or a promise for other environments.">No tengo una cifra del tiempo total que ahorró el equipo. Tampoco enseño aquí la configuración. Esto es un relato del cambio y su resultado, no una guía técnica para reproducirlo ni una promesa para otros entornos.</p>
+      </section>
+
+      <section id="sec-3">
+        <p class="chapter" data-en="03 / The test">03 / La prueba</p>
+        <h2 data-en="The 1-minute test to measure your wait.">La prueba de 1 minuto para medir tu espera.</h2>
+        <p class="lead-line" data-en="I am not telling you that your problem is Docker. I am telling you how to look at it."><em>No te digo que tu problema sea Docker. Te digo cómo mirarlo.</em></p>
+        <p data-en="<strong>1. Name the wait.</strong> What exactly are you waiting for before you can work? The environment, the build, the deploy, the tests. Pick one, not all of them."><strong>1. Ponle nombre a la espera.</strong> ¿A qué esperas exactamente antes de poder trabajar? Al entorno, al build, al deploy, a los tests. Elige una, no todas.</p>
+        <p data-en="<strong>2. Time it twice.</strong> Same start, same end, two days in a row. Without a number you cannot tell whether the change worked."><strong>2. Cronométrarla dos veces.</strong> Mismo inicio, mismo final, dos días seguidos. Sin número no puedes saber si el cambio funcionó.</p>
+        <p data-en="<strong>3. Change one thing and measure again.</strong> If you use Docker, check whether your configuration takes advantage of the cache. It is a place to investigate, not a diagnosis made from outside."><strong>3. Cambia una cosa y vuelve a medir.</strong> Si usas Docker, comprueba si tu configuración aprovecha la caché. Es un lugar donde investigar, no un diagnóstico hecho desde fuera.</p>
+        <p data-en="You do not need to rewrite Docker or switch frameworks. You need to measure a wait nobody looks at. Watching a loading bar is not professional development.">No necesitas reescribir Docker ni cambiar de framework. Necesitas medir una espera que nadie mira. Mirar una barra de carga no cuenta como formación continua.</p>
+        <div class="wait-tool" id="wait-tool" aria-labelledby="wait-tool-title">
+          <style>
+.wait-tool{margin:32px 0;padding:26px 24px;border:1px solid var(--rule);border-radius:12px;background:var(--paper-card,transparent)}
+.story .wait-tool h3{font-size:28px;font-weight:500;line-height:1.2;margin:0 0 12px;letter-spacing:-.02em}
+.story .wait-tool p{font-size:17px;line-height:1.5;margin:0 0 18px}
+.wait-tool-fields{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px}
+.wait-tool label{display:block;font-size:17px;line-height:1.35}
+.wait-tool input{display:block;width:100%;min-height:48px;margin-top:8px;padding:10px 12px;border:1px solid var(--ink-muted);border-radius:5px;background:var(--paper);color:var(--ink);font:inherit;font-variant-numeric:tabular-nums}
+.wait-tool input::placeholder{color:var(--ink-muted);opacity:1}.wait-tool input[aria-invalid="true"]{border:2px solid var(--ink)}
+.wait-tool small{display:block;font-size:14px;line-height:1.4;color:var(--ink-muted);margin-top:6px}
+.wait-tool-result{margin:24px 0 18px;padding-block:18px;border-block:1px solid var(--rule)}
+.story .wait-tool .wait-tool-total{font-size:30px;line-height:1.2;margin-bottom:10px;letter-spacing:-.03em}
+.story .wait-tool .wait-tool-result p:last-child{margin-bottom:0}
+.wait-tool button{min-height:48px;padding:10px 18px;border:1px solid var(--ink-muted);border-radius:5px;font:inherit;font-size:17px;color:var(--ink);background:transparent;cursor:pointer}
+.wait-tool button:disabled{opacity:.5;cursor:not-allowed}.wait-tool button:first-child{background:var(--story-yellow);border-color:transparent;color:#231e17}
+.wait-tool-actions{display:flex;flex-wrap:wrap;gap:10px}.wait-tool summary{min-height:44px;cursor:pointer;padding-block:10px;font-size:17px}.wait-tool details{margin-top:16px}.wait-tool details p{color:var(--ink-muted)}
+.wait-tool textarea{display:block;width:100%;min-height:180px;background:var(--paper);color:var(--ink);font:inherit;font-size:16px;padding:12px;border:1px solid var(--ink-muted);border-radius:5px}
+.wait-tool [hidden]{display:none!important}.wait-tool :is(input,textarea,button,summary):focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.story .wait-tool .wait-tool-status{font-size:15px;margin:12px 0 0;min-height:1.5em}
+@media(max-width:480px){.wait-tool{padding:22px 16px}.wait-tool-fields{grid-template-columns:1fr}.story .wait-tool h3{font-size:26px}}
+          </style>
+          <h3 id="wait-tool-title" data-en="How much waiting is on your calendar?">¿Cuánta espera hay en tu calendario?</h3>
+          <p data-en="Your coffee does not need another loading screen. Enter your measurements: this estimates waiting time, not guaranteed savings.">Tu café no necesita otra pantalla de carga. Pon tus mediciones: esto estima espera, no promete ahorro.</p>
+          <div class="wait-tool-fields">
+            <label for="wait-before"><span data-en="Current wait · seconds">Espera actual · segundos</span><input id="wait-before" type="text" inputmode="decimal" maxlength="12" placeholder="60" aria-describedby="wait-before-help"><small id="wait-before-help" data-en="0–3,600. Time it; do not guess. The placeholder is not a measurement.">0–3600. Cronométrala, no la adivines. El ejemplo no es una medición.</small></label>
+            <label for="wait-starts"><span data-en="Start-ups per working day">Arranques por día de trabajo</span><input id="wait-starts" type="text" inputmode="numeric" maxlength="4" value="4" aria-describedby="wait-starts-help"><small id="wait-starts-help" data-en="1–1,000. The initial 4 is an example; use your frequency.">1–1000. El 4 inicial es un ejemplo; usa tu frecuencia.</small></label>
+            <label for="wait-days"><span data-en="Working days per month">Días de trabajo al mes</span><input id="wait-days" type="text" inputmode="numeric" maxlength="2" value="20" aria-describedby="wait-days-help"><small id="wait-days-help" data-en="1–31. The initial 20 is an example, not your calendar.">1–31. El 20 inicial es un ejemplo, no tu calendario.</small></label>
+            <label for="wait-after"><span data-en="Measured after a change · seconds">Medido tras un cambio · segundos</span><input id="wait-after" type="text" inputmode="decimal" maxlength="12" placeholder="4" aria-describedby="wait-after-help"><small id="wait-after-help" data-en="Optional · 0–3,600. Leave blank if you have not measured it yet.">Opcional · 0–3600. Déjalo vacío si aún no lo has medido.</small></label>
+          </div>
+          <div class="wait-tool-result" aria-live="polite" aria-atomic="true">
+            <p class="wait-tool-total" id="wait-total">Pon tu tiempo de espera.</p>
+            <p id="wait-breakdown">Con una medición basta para empezar.</p>
+            <p id="wait-difference"></p>
+          </div>
+          <div class="wait-tool-actions"><button id="wait-copy" type="button" disabled data-en="Copy my measurement sheet">Copiar mi ficha de medición</button><button id="wait-example" type="button" data-en="Try this case: 60 → 4 s">Probar este caso: 60 → 4 s</button></div>
+          <p class="wait-tool-status" id="wait-status" role="status"></p>
+          <div id="wait-manual" hidden><label for="wait-sheet" data-en="Select and copy this text:">Selecciona y copia este texto:</label><textarea id="wait-sheet" readonly></textarea></div>
+          <details><summary data-en="Assumptions, formula and limits">Supuestos, fórmula y límites</summary><p data-en="Monthly wait = seconds per start-up × start-ups per day × working days ÷ 60, in minutes. The comparison uses the same frequency before and after. Decimals accept a comma or a point; start-ups and days must be whole numbers.">Espera mensual = segundos por arranque × arranques al día × días de trabajo ÷ 60, en minutos. La comparación mantiene la misma frecuencia antes y después. Los decimales admiten coma o punto; arranques y días deben ser enteros.</p><p data-en="This assumes each wait is sequential and prevents you from working. Overlapping start-ups or doing something else during the wait reduce its real cost. Less waiting is not automatically more productive time. No team total, money or annual extrapolation is calculated. Values stay in this page: no submission or saving.">Se supone que cada espera es consecutiva y te impide trabajar. Arranques simultáneos o hacer otra cosa mientras esperas reducen su coste real. Menos espera no equivale automáticamente a más tiempo productivo. No se calcula un total del equipo, dinero ni extrapolación anual. Los valores se quedan en esta página: no se envían ni se guardan.</p></details>
+          <noscript><p>Necesitas JavaScript para calcular. También puedes multiplicar segundos × arranques diarios × días y dividir entre 60. / JavaScript is needed to calculate. Or multiply seconds × daily start-ups × days and divide by 60.</p></noscript>
+          <script>
+          (()=>{
+            const root=document.getElementById('wait-tool');
+            const el=id=>document.getElementById('wait-'+id);
+            const fields=['before','starts','days','after'];
+            let sheet='',revision=0;
+            const t=(es,en)=>document.documentElement.lang==='en'?en:es;
+            const number=n=>new Intl.NumberFormat(document.documentElement.lang==='en'?'en-GB':'es-ES',{maximumFractionDigits:2}).format(n);
+            const duration=s=>s<60?number(s)+' s':number(s/60)+' min';
+            function read(id,max,integer=false,optional=false){
+              const node=el(id),raw=node.value.trim();
+              if(optional&&!raw){node.removeAttribute('aria-invalid');return null}
+              const valid=raw.length<=12&&/^\d+(?:[.,]\d{1,2})?$/.test(raw);
+              const n=valid?Number(raw.replace(',','.')):NaN;
+              const ok=Number.isFinite(n)&&n>=(integer?1:0)&&n<=max&&(!integer||Number.isInteger(n));
+              if(!raw)node.removeAttribute('aria-invalid');else node.setAttribute('aria-invalid',String(!ok));return ok?n:undefined;
+            }
+            function update(){
+              revision++;sheet='';el('copy').disabled=true;el('status').textContent='';el('manual').hidden=true;
+              const before=read('before',3600),starts=read('starts',1000,true),days=read('days',31,true),after=read('after',3600,false,true);
+              if(before===undefined||starts===undefined||days===undefined||after===undefined){
+                el('total').textContent=el('before').value.trim()?t('Primero, una medición válida.','First, a valid measurement.'):t('Pon tu tiempo de espera.','Enter your waiting time.');
+                el('breakdown').textContent=t('Revisa los campos marcados: segundos entre 0 y 3600; arranques entre 1 y 1000 y días entre 1 y 31, ambos enteros. Hasta 2 decimales en segundos.','Check the marked fields: seconds from 0 to 3,600; whole start-ups from 1 to 1,000 and days from 1 to 31. Up to 2 decimal places for seconds.');
+                el('difference').textContent='';return;
+              }
+              const daily=before*starts,monthly=daily*days;
+              el('total').textContent=t(duration(monthly)+' de espera al mes.',duration(monthly)+' waiting per month.');
+              el('breakdown').textContent=t(number(before)+' s × '+number(starts)+' arranques/día = '+duration(daily)+' al día. Con '+number(days)+' días de trabajo.',number(before)+' s × '+number(starts)+' start-ups/day = '+duration(daily)+' per day. With '+number(days)+' working days.');
+              let comparison=t('Sin medición posterior no hay comparación. La bola de cristal está fuera de servicio.','No after-measurement, no comparison. The crystal ball is out of service.');
+              if(after!==null){
+                const delta=(before-after)*starts*days;
+                comparison=delta===0?t('Misma espera. Esta vez la barra de carga ha empatado.','Same wait. The loading bar has managed a draw.'):delta>0?t(duration(delta)+' menos de espera al mes. No es una promesa de productividad.',duration(delta)+' less waiting per month. Not a productivity promise.'):t(duration(-delta)+' más de espera al mes. El cambio necesita otra revisión.',duration(-delta)+' more waiting per month. The change needs another review.');
+              }
+              el('difference').textContent=comparison;
+              sheet=[t('Mi ficha de espera','My waiting-time sheet'),t('Antes: ','Before: ')+number(before)+' s',t('Después: ','After: ')+(after===null?t('pendiente de medir','not measured yet'):number(after)+' s'),t('Arranques/día: ','Start-ups/day: ')+number(starts),t('Días de trabajo/mes: ','Working days/month: ')+number(days),el('total').textContent,comparison,t('Supuesto: esperas consecutivas que impiden trabajar. Estimación individual; menos espera no garantiza productividad.','Assumption: sequential waits that prevent work. Individual estimate; less waiting does not guarantee productivity.'),t('Qué cambié: ______\nFecha y condiciones de medición: ______','What I changed: ______\nMeasurement date and conditions: ______')].join('\n');
+              el('copy').disabled=false;
+            }
+            fields.forEach(id=>el(id).addEventListener('input',update));
+            el('example').addEventListener('click',()=>{['60','4','20','4'].forEach((v,i)=>el(fields[i]).value=v);update();el('status').textContent=t('Ejemplo cargado: usa los tiempos aproximados del artículo. Frecuencia de 4 arranques y 20 días inventada para probar, no medida en el equipo.','Example loaded: approximate article timings. The frequency of 4 start-ups and 20 days is made up for this demo, not measured for the team.')});
+            el('copy').addEventListener('click',async()=>{
+              if(!sheet)return;const text=sheet,version=revision;
+              try{if(!navigator.clipboard?.writeText)throw Error('clipboard unavailable');await navigator.clipboard.writeText(text);if(version===revision)el('status').textContent=t('Ficha copiada. Ahora sí: una reunión con números.','Sheet copied. Finally: a meeting with numbers.')}
+              catch(e){if(version!==revision)return;el('manual').hidden=false;el('sheet').value=text;el('sheet').focus();el('sheet').select();el('status').textContent=t('No se pudo copiar automáticamente. Selecciona y copia la ficha de abajo.','Automatic copying was unavailable. Select and copy the sheet below.')}
+            });
+            new MutationObserver(update).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+            update();
+          })();
+          </script>
+        </div>
+        <p class="closing-line" data-en="The useful lesson is not to promise four seconds. It is to stop treating the wait as part of the job.">Lo útil no es prometer cuatro segundos. Es dejar de tratar la espera como parte del trabajo.</p>
+      </section>
+
+      <aside id="sec-4" class="closing-offer" aria-labelledby="offer-title">
+        <p class="chapter" data-en="04 / If you want to go further">04 / Si quieres seguir</p>
+        <details><summary style="min-height:44px;cursor:pointer" data-en="If you also want a website review">Si además quieres revisar tu web</summary>
+        <h2 id="offer-title" data-en="Homepage review in 48 hours.">Revisión de portada en 48 h.</h2>
+        <p data-en="This case was a development environment. What I offer is the same kind of look at your website: you send me the address and I tell you the first thing I would fix, why, and what the visitor was supposed to notice. Free, one a day, and I read it myself.">Este caso era un entorno de desarrollo. Lo que ofrezco es la misma mirada sobre tu web: me mandas la dirección y te digo la primera cosa que arreglaría, por qué, y qué debería notar el visitante. Gratis, una al día, y la leo yo.</p>
+        <p data-en="<strong>48-hour guarantee:</strong> if I do not answer within 48 hours, I review your site with you on a 20-minute call."><strong>Garantía de las 48 horas:</strong> si no te contesto en 48 h, te reviso la web contigo en una llamada de 20 minutos.</p>
+        <p data-en="And an A or B: do you want me to tell you what I would remove, or what I would add? Say it in the email and I start there. Does that sound fair?">Y una elección A o B: ¿prefieres que te diga qué quitaría o qué añadiría? Dímelo en el correo y empiezo por ahí. ¿Te parece justo?</p>
+        <a class="offer-link" href="marketing-portada.html#cierre" data-en="Send my website for review →">Enviar mi web para revisión →</a>
+        <p class="offer-detail" data-en="The form on the blog home opens your email with the message ready to send. If you would rather do it alone, the 3 steps above are the short version.">El formulario de la portada abre tu correo con el mensaje preparado para enviar. Si prefieres hacerlo solo, los 3 pasos de arriba son la versión corta.</p>
+        </details>
+      </aside>
+      <nav class="read-next" aria-label="Seguir leyendo" data-label-es="Seguir leyendo" data-label-en="Keep reading">
+        <span data-en="Keep reading">Sigue leyendo</span>
+        <a href="marketing-automatizar.html" data-en="What should you automate first? →">¿Qué deberías automatizar primero? →</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="border-t border-rule bg-paper-card">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-muted">
+      <div class="font-serif text-sm text-ink"><span data-en="Behind what we choose">Detrás de lo que elegimos</span> · <span class="font-medium">Álvaro Pastor Periago<span class="text-accent">.</span></span></div>
+      <div class="flex items-center gap-5 font-mono">
+        <a href="https://x.com/alpas17_" target="_blank" rel="noopener" class="hover:text-ink transition-colors">@alpas17_</a>
+        <span>·</span>
+        <a href="marketing-portada.html" class="hover:text-ink transition-colors" data-en="← Back to the blog">← Volver al blog</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (()=>{
+    let lang=new URLSearchParams(location.search).get('lang');
+    try{if(!['es','en'].includes(lang))lang=localStorage.getItem('marketing-language')}catch(e){}
+    if(!['es','en'].includes(lang))lang='es';
+    const l=(es,en)=>lang==='en'?en:es;
+    const $=id=>document.getElementById(id);
+    const nodes=[...document.querySelectorAll('[data-en]')].map(node=>({node,es:node.innerHTML,en:node.dataset.en}));
+    const links=[...document.querySelectorAll('a[href]')].filter(a=>!a.getAttribute('href').startsWith('#')&&!/^[a-z]+:/i.test(a.getAttribute('href'))).map(node=>({node,href:node.getAttribute('href')}));
+    const secciones=["sec-1", "sec-2", "sec-3", "sec-4"];
+    const navLinks=[...document.querySelectorAll('.nav-link')];
+    function scroll(){
+      const alto=document.documentElement.scrollHeight-innerHeight;
+      $('reading-progress').style.width=(alto>0?Math.min(100,Math.max(0,scrollY/alto*100)):0)+'%';
+      let activa=secciones[0];
+      secciones.forEach(id=>{const el=$(id);if(el&&el.getBoundingClientRect().top<=180)activa=id});
+      navLinks.forEach(a=>{const on=a.dataset.nav===activa;a.classList.toggle('text-ink',on);a.classList.toggle('font-semibold',on)});
+    }
+    addEventListener('scroll',scroll,{passive:true});
+    function tema(){const r=document.documentElement,p=r.dataset.pref||'light';$('tema').textContent='◐ '+l({light:'claro',dark:'oscuro',auto:'auto'}[p]||p,p);$('tema').setAttribute('aria-label',l('Cambiar tema','Change theme'))}
+    function traducir(){
+      document.documentElement.lang=lang;
+      nodes.forEach(x=>x.node.innerHTML=x[lang]);
+      document.querySelectorAll('[data-label-es]').forEach(node=>node.setAttribute('aria-label',lang==='en'?node.dataset.labelEn:node.dataset.labelEs));
+      const hd=$('hero-dibujo');if(hd){hd.src=lang==='en'?hd.dataset.srcEn:hd.dataset.srcEn.replace('-en.webp','.webp');hd.alt=lang==='en'?hd.dataset.altEn:hd.dataset.altEs}
+      $('idioma').textContent=l('EN','ES');$('idioma').setAttribute('aria-label',l('Switch to English','Cambiar a español'));
+      document.title=l("No tienes un entorno lento: tienes un impuesto por arranque · Álvaro Pastor","You do not have a slow environment: you have a start-up tax · Álvaro Pastor");
+      links.forEach(x=>{const u=new URL(x.href,location.href);u.searchParams.set('lang',lang);x.node.href=u.href});
+      tema();scroll();
+      try{localStorage.setItem('marketing-language',lang)}catch(e){}
+    }
+    $('idioma').addEventListener('click',()=>{lang=l('en','es');traducir();const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u)});
+    $('tema').addEventListener('click',()=>{const r=document.documentElement,t=r.dataset.pref==='dark'?'light':'dark';r.dataset.pref=t;r.dataset.tema=t;try{localStorage.setItem('marketing-theme',t)}catch(e){}tema()});
+    traducir();
+  })();
+  </script>
+</body>
+</html>

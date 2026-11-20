@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <script defer src="https://cloud.umami.is/script.js"
+        data-website-id="c4836925-2cb6-4d6a-89b9-7d0e0b69ae42"></script>
+    <script src="../scripts/analytics-consent.js" defer></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="theme-color" content="#0c0c0d" />
+    <title>Agent History Search · Recupera lo que ya resolviste</title>
+    <meta name="description"
+        content="Busca en tus conversaciones pasadas con Claude Code, Codex, OpenCode, Pi, omp y Pi Pocket. Local, de solo lectura, gratis y de código abierto." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://alvaropastor.dev/herramientas/agent-history-search.html" />
+    <meta property="og:title" content="You remember. Your agent doesn’t." />
+    <meta property="og:description" content="Agent History Search lets your coding agent search your past conversations. Local, read-only, free and open source." />
+    <meta property="og:image" content="https://alvaropastor.dev/img/og-agent-history-search.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Agent History Search: You remember. Your agent doesn’t." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:creator" content="@alpas17_" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/producto.css?v=20261113-real1" />
+    <link rel="canonical" href="https://alvaropastor.dev/herramientas/agent-history-search" />
+    <link rel="alternate" type="text/markdown" href="/herramientas/agent-history-search.md" title="Summary for AI agents" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "Agent History Search", "description": "Recovers useful information from past conversations with coding agents. Local and read-only.", "url": "https://alvaropastor.dev/herramientas/agent-history-search", "codeRepository": "https://github.com/alvaropas17/agent-history-search", "license": "https://opensource.org/licenses/MIT", "programmingLanguage": "Python", "runtimePlatform": "Python 3.10+", "targetProduct": {"@type": "SoftwareApplication", "name": "Agent History Search", "applicationCategory": "DeveloperApplication", "operatingSystem": "Windows 10, Windows 11", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}}, "author": {"@type": "Person", "@id": "https://alvaropastor.dev/#alvaro", "name": "Álvaro Pastor"}}</script>
+<link rel="stylesheet" href="../styles/history-real-case.css?v=1">
+<link rel="stylesheet" href="/styles/product-launch.css?v=1">
+<link rel="stylesheet" href="/styles/product-compact.css?v=4">
+</head>
+
+<body id="top">
+    <nav class="nav" aria-label="Principal">
+        <div class="marco nav-fila">
+            <a class="nav-marca" href="../index.html">Álvaro Pastor</a>
+            <div class="nav-enlaces">
+                <a href="#caso-real" data-t="nav-ejemplos">caso real</a>
+                <a href="#como" data-t="nav-como">cómo funciona</a>
+                <a href="#instalar" data-t="nav-instalar">instalar</a>
+                <a href="#preguntas" data-t="nav-preguntas">preguntas</a>
+            </div>
+            <div class="nav-acciones">
+                <button id="idioma" class="nav-idioma" type="button" lang="en" aria-label="Switch to English">EN</button>
+                <a class="nav-cta" href="https://github.com/alvaropas17/agent-history-search" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="nav">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Empieza aquí: la promesa en una frase -->
+        <header class="hero">
+            <div class="marco">
+                <p class="etiqueta" data-t="hero-label">Empieza aquí</p>
+                <h1><span data-t="hero-1">Ya resolviste esto.</span> <span class="marca" data-t="hero-2">Recupera la respuesta.</span></h1>
+                <p class="hero-sub" data-t="hero-sub">Una decisión, un arreglo, un guion. Agent History Search los busca en tus chats anteriores y devuelve el fragmento con su fuente, para que puedas seguir trabajando.</p>
+                <div class="acciones">
+                    <a class="boton boton-senal" href="#caso-real" data-umami-event="ver-caso-real" data-umami-event-tipo="hero" data-t="hero-cta">Ver cómo pasó</a>
+                    <a class="boton boton-contorno" href="#instalar" data-umami-event="ir-instalar" data-umami-event-tipo="hero" data-t="hero-gh">Instalar gratis</a>
+                </div>
+                <ul class="sellos">
+                    <li data-t="sello-1">Código abierto</li>
+                    <li data-t="sello-2">Local</li>
+                    <li data-t="sello-3">Solo lectura</li>
+                    <li data-t="sello-4">Sin cuentas</li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- Mapa: qué hay en la página y dónde estás -->
+        <nav class="mapa" aria-labelledby="mapa-titulo">
+            <div class="marco">
+                <h2 id="mapa-titulo" class="etiqueta" data-t="map-label">Lo que vas a ver</h2>
+                <ol>
+                    <li class="mapa-aqui"><a href="#caso-real"><span class="mapa-num">I</span><strong data-t="map-1">Cómo llegué aquí</strong><span data-t="map-1p">Un caso real, con su medición.</span></a><em data-t="map-here">Estás aquí</em></li>
+                    <li><a href="#como"><span class="mapa-num">II</span><strong data-t="map-2">Cómo lo hace</strong><span data-t="map-2p">Lo que pides y lo que hace tu agente.</span></a></li>
+                    <li><a href="#preguntas"><span class="mapa-num">III</span><strong data-t="map-3">Qué lee y qué no</strong><span data-t="map-3p">Privacidad, límites y requisitos.</span></a></li>
+                    <li><a href="#instalar"><span class="mapa-num">IV</span><strong data-t="map-4">Instálalo y pruébalo</strong><span data-t="map-4p">Un prompt y tu primera búsqueda.</span></a></li>
+                </ol>
+            </div>
+        </nav>
+
+        <!-- I · Escena real fechada, la prueba y el giro -->
+        <section class="real-case historia" id="caso-real" aria-labelledby="real-title">
+            <div class="marco">
+                <p class="etiqueta" data-t="hist-label">I · Cómo llegué aquí</p>
+                <h2 id="real-title" data-t="proof-title">Ya lo había publicado. <span class="marca">No recordaba cómo.</span></h2>
+                <div class="escena">
+                    <p class="escena-fecha" data-t="hist-date">13 de noviembre de 2026, por la noche.</p>
+                    <p data-t="hist-1">Tenía que volver a publicar la web de marketing. Estaba en Claude Code y me faltaba el comando exacto: el proyecto, la carpeta, la rama.</p>
+                    <p data-t="hist-2">Sabía que lo había resuelto el día anterior. No sabía en qué chat.</p>
+                    <p class="escena-salto" data-t="hist-back">El día anterior…</p>
+                    <p data-t="hist-3">En una sesión de Pi Pocket, el agente había comprobado el proyecto de Cloudflare Pages y había publicado la web. La respuesta seguía guardada en el historial. Solo había que encontrarla.</p>
+                    <p data-t="hist-4">Así que le pedí a Claude que la buscara.</p>
+                </div>
+                <figure class="real-answer evidencia">
+                    <p class="etiqueta" data-t="proof-result">Lo que recuperó</p>
+                    <blockquote data-t="proof-quote"><code>wrangler pages deploy dist-marketing --project-name alvaropastor-marketing --branch main</code></blockquote>
+                    <figcaption class="real-source" data-t="proof-source">Escrito en una sesión de Pocket el 12 de noviembre. Recuperado desde Claude Code el 13. Guardé la medición para poder enseñarla.</figcaption>
+                </figure>
+                <dl class="real-metrics"><div><dt><span class="metric-number" data-t="proof-search-number">226</span> <span>ms</span></dt><dd data-t="proof-search">encontrar el comando</dd></div><div><dt><span class="metric-number" data-t="proof-expand-number">150</span> <span>ms</span></dt><dd data-t="proof-expand">ampliar el resultado</dd></div></dl>
+                <details class="real-evidence"><summary data-t="proof-details">Medición y evidencia</summary><div><p data-t="proof-method">Búsqueda: 226 ms. Ampliación: 150 ms. Calculados entre la llamada y su respuesta emparejada en el registro de Claude Code.</p><p data-t="proof-limit">Caso real en mi equipo, no un promedio ni una garantía. No incluye la reflexión del agente ni el tiempo total de respuesta. Se amplió la referencia elegida con context: 500.</p><a href="/evidence/caso.html?caso=deploy" target="_blank" rel="noopener" data-t="proof-evidence">Ver extracto de evidencia →</a><p class="nota" data-t="proof-private">Sin identificadores de chats, rutas locales ni conversaciones completas.</p></div></details>
+                <article class="second-case"><p class="etiqueta" data-t="proof-second-label">No fue la primera vez · 12 de noviembre</p><p data-t="proof-second-body">La noche anterior, al continuar un vídeo en otra sesión, bastó una frase del borrador para recuperar el guion entero. Búsqueda: 748 ms. Ampliación: 135 ms.</p><a href="/evidence/caso.html?caso=script" target="_blank" rel="noopener" data-t="proof-second-evidence">Ver la medición del segundo caso →</a></article>
+                <p class="historia-giro" data-t="hist-turn">La pregunta natural es <em>cómo</em>. Eso es lo que cuenta el resto de la página.</p>
+            </div>
+        </section>
+
+        <!-- II · Cómo lo hace -->
+        <section class="como" id="como" aria-labelledby="search-method-title">
+            <div class="marco">
+                <p class="etiqueta" data-t="how-label">II · Cómo lo hace</p>
+                <h2 id="search-method-title" data-t="use-title">Tú dices lo que recuerdas. <span class="marca">Tu agente hace el resto.</span></h2>
+                <ol class="usage-steps search-method">
+                    <li><strong data-t="use-1">1. Pídeselo con tus palabras</strong><blockquote data-t="use-prompt">«Recupera el comando con el que publicamos la web de marketing. Creo que usamos wrangler. Muéstrame el comando y su fuente.»</blockquote><p data-t="use-prompt-note">No necesitas escribir los parámetros de la herramienta.</p></li>
+                    <li><strong data-t="use-2">2. El agente hace una búsqueda concreta</strong><pre><code data-t="use-search">{ "action": "search",
+  "query": "wrangler pages deploy",
+  "query_variants": ["Deployment complete",
+    "alvaropastor-marketing"],
+  "limit": 5 }</code></pre><p data-t="use-search-result">Devuelve cinco fragmentos breves, cada uno con su agente, fecha y referencia.</p></li>
+                    <li><strong data-t="use-3">3. Amplía solo el que encaja</strong><pre><code data-t="use-expand">{ "action": "expand",
+  "ref": "&lt;referencia elegida de la búsqueda&gt;",
+  "context": 500 }</code></pre><p data-t="use-answer">Lee lo justo alrededor de ese fragmento y te enseña de dónde sale, para que lo compruebes.</p></li>
+                </ol>
+                <figure class="como-video">
+                    <video id="video" controls playsinline preload="none" poster="/video/agent-history-search.webp" width="1280" height="720">
+                        <source src="/video/agent-history-search.mp4" type="video/mp4" />
+                        <track kind="captions" src="/video/agent-history-search.en.vtt" srclang="en" label="English" />
+                    </video>
+                    <figcaption class="nota"><span data-t="lan-video">Presentación en vídeo, en inglés con subtítulos.</span> Claude Code · Codex · OpenCode · Pi · omp · Pi Pocket</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- III · Qué lee y qué no (objeciones) -->
+        <section class="confianza" id="preguntas" aria-labelledby="confianza-titulo">
+            <div class="marco">
+                <p class="etiqueta" data-t="tru-label">III · Qué lee y qué no</p>
+                <h2 id="confianza-titulo" data-t="tru-titulo">Referencias exactas, no suposiciones.</h2>
+                <div class="reglas">
+                    <div>
+                        <h3 data-t="reg-1">Solo lectura.</h3>
+                        <p data-t="reg-1p">Lee los mensajes sin modificarlos ni borrar tus conversaciones.</p>
+                    </div>
+                    <div>
+                        <h3 data-t="reg-2">Tú eliges qué lee.</h3>
+                        <p data-t="reg-2p">Solo lee el historial de otro agente si lo autorizas y se lo pides. Nunca cambia de fuente por su cuenta, ni tras un error.</p>
+                    </div>
+                    <div>
+                        <h3 data-t="reg-3">Un vacío no es una prueba.</h3>
+                        <p data-t="reg-3p">Declara sus huecos. Que algo no aparezca no significa que no pasara.</p>
+                    </div>
+                </div>
+                <div class="faq">
+                    <details>
+                        <summary data-t="faq-1">¿Mis conversaciones salen de mi ordenador?</summary>
+                        <p data-t="faq-1r">La herramienta no usa la red. Lo que encuentra se lo entrega a tu agente, así que llega a su modelo como cualquier otro texto que le enseñes.</p>
+                    </details>
+                    <details>
+                        <summary data-t="faq-3">¿Funciona en Mac o Linux?</summary>
+                        <p data-t="faq-3r">Todavía no lo sé. Está probado en Windows y no depende de paquetes externos, pero no lo he validado en otros sistemas.</p>
+                    </details>
+                </div>
+                <dl class="ficha">
+                    <div><dt>6</dt><dd data-t="fic-1">agentes compatibles</dd></div>
+                    <div><dt>0</dt><dd data-t="fic-2">paquetes pip, cuentas o claves de API</dd></div>
+                    <div><dt>97</dt><dd data-t="fic-3">pruebas offline en verde</dd></div>
+                    <div><dt>MIT</dt><dd data-t="fic-4">gratis y de código abierto</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <!-- IV · Instálalo y pruébalo -->
+        <section class="instalar" id="instalar" aria-labelledby="instalar-titulo">
+            <div class="marco">
+                <p class="etiqueta" data-t="ins-label">IV · Instálalo y pruébalo</p>
+            </div>
+            <div class="marco instalar-rejilla">
+                <div>
+                    <h2 id="instalar-titulo" data-t="ins-titulo">Tu agente se lo instala solo.</h2>
+                    <ol class="pasos">
+                        <li><span data-t="ins-1">Descarga el repositorio.</span> <a href="https://github.com/alvaropas17/agent-history-search" target="_blank" rel="noopener noreferrer" data-umami-event="ver-github" data-umami-event-tipo="pasos" data-t="ins-1a">Abrir GitHub</a></li>
+                        <li data-t="ins-2">Abre tu agente con acceso a esa carpeta y pégale este prompt.</li>
+                        <li><span data-t="ins-3">Abre una sesión nueva y haz tu primera prueba.</span> <a href="#pruebalo" data-t="ins-3a">Ver la petición</a></li>
+                    </ol>
+                    <p class="nota" data-t="ins-req">Requisitos: Windows 10/11 y Python 3.10 o superior.</p>
+                    <p class="nota"><a href="#guia" data-t="ins-guia">Prefiero la guía paso a paso</a></p>
+                </div>
+                <div class="prompt">
+                    <div class="prompt-barra">
+                        <span data-t="ins-prompt">prompt de instalación</span>
+                        <button class="boton boton-senal boton-peque" id="copiar" type="button" data-t="ins-copiar">Copiar</button>
+                    </div>
+                    <pre id="prompt" tabindex="0" data-t="prompt">Configura Agent History Search en este equipo.
+Repositorio: https://github.com/alvaropas17/agent-history-search
+Carpeta del paquete: [RUTA ABSOLUTA]
+Agente que usaré: [codex / claude / opencode / pi / omp / pocket]
+Historiales que autorizo a leer: [FUENTES Y RUTAS]
+
+Lee el README y la documentación de instalación de la versión descargada.
+Comprueba Python 3.10+, sqlite3, la ayuda del CLI y las pruebas offline.
+Para Codex o Claude Code, configura el MCP incluido history_mcp.py con un
+host fijo y solo los historiales autorizados. Para el resto, configura el
+helper history_search.py y su skill o instrucciones locales.
+Antes de editar configuración, muestra los cambios propuestos y haz una
+copia de seguridad. No sustituyas archivos completos ni toques otros MCP.
+Si faltan rutas o autorizaciones, pregúntame. No cambies de fuente tras
+un error o un resultado vacío. No modifiques historiales ni borres WAL.
+Verifica la conexión real con una lectura mínima autorizada y dime cómo
+comprobarla en una sesión nueva. Si falta alguna prueba, indícalo.</pre>
+                </div>
+            </div>
+            <div class="marco">
+                <aside class="story-trial" id="pruebalo" aria-labelledby="trial-title"><p class="etiqueta" data-t="trial-label">Tu primera prueba</p><h3 id="trial-title" data-t="trial-title">Elige algo que ya hayas resuelto.</h3><p data-t="trial-intro">Abre una sesión nueva y adapta esta petición a una decisión tuya:</p><blockquote id="trial-prompt" data-t="trial-prompt">Busca en mis conversaciones anteriores la decisión sobre [tema]. Recuerdo [una frase o detalle]. Recupera el mensaje y muéstrame su fuente.</blockquote><div class="acciones"><button id="copiar-prueba" class="boton boton-senal" type="button" data-t="trial-copy">Copiar petición</button></div><p id="trial-status" role="status" aria-live="polite"></p><p class="nota" data-t="trial-close">Cuantas más palabras exactas de la conversación incluyas, antes la encuentra. Si recupera lo que recuerdas y puedes localizar el mensaje original, funciona.</p></aside>
+            </div>
+        </section>
+
+        <!-- Guía manual y uso -->
+        <section class="preguntas guia" id="guia" aria-labelledby="guia-titulo">
+            <div class="marco preguntas-rejilla">
+                <h2 id="guia-titulo" data-t="gui-titulo">Paso a paso.</h2>
+                <div class="faq">
+                    <details>
+                        <summary data-t="gui-1">1 · Comprueba Python y el paquete</summary>
+                        <p data-t="gui-1r">En PowerShell, desde la carpeta descargada. Las pruebas no leen tus conversaciones; si fallan, resuelve el error antes de seguir.</p>
+                        <pre>py -3 --version
+py -3 -c "import sqlite3; print(sqlite3.sqlite_version)"
+py -3 -B history_search.py --help
+py -3 -B -m unittest discover -s tests</pre>
+                    </details>
+                    <details>
+                        <summary data-t="gui-2">2 · Elige qué historiales autorizas</summary>
+                        <p data-t="gui-2r">Rutas habituales en Windows; comprueba las de tu instalación. El agente solo lee otra fuente si se lo pides.</p>
+                        <pre>Claude Code  --host claude    $HOME/.claude/projects
+Codex        --host codex     $HOME/.codex/sessions
+Pi           --host pi        $HOME/.pi/agent/sessions
+omp          --host omp       $HOME/.omp/agent/sessions
+OpenCode     --host opencode  $HOME/.local/share/opencode/opencode.db
+Pi Pocket    --host pocket    $HOME/.pi-pocket/pocket.sqlite</pre>
+                    </details>
+                    <details>
+                        <summary data-t="gui-3">3 · Valida la ruta antes de leer</summary>
+                        <p data-t="gui-3r"><code>--plan</code> valida los argumentos, pero no abre el historial ni demuestra que la ruta exista.</p>
+                        <pre>py -3 -B history_search.py list --host claude --store "$HOME/.claude/projects" --plan</pre>
+                    </details>
+                    <details>
+                        <summary data-t="gui-4">4 · Conéctalo a mano</summary>
+                        <p data-t="gui-4r">Claude Code (supone el paquete en C:/Tools/agent-history-search):</p>
+                        <pre>claude mcp add agent-history-search --scope user -- py -3 -B C:/Tools/agent-history-search/history_mcp.py --host claude</pre>
+                        <p data-t="gui-4r2">Codex: añade este bloque a tu config.toml sin sustituir el archivo. Las rutas deben ser absolutas.</p>
+                        <pre>[mcp_servers.agent_history_search]
+command = "py"
+args = ["-3", "-B", "C:/Tools/agent-history-search/history_mcp.py", "--host", "codex", "--store", "codex=C:/Users/YOUR_USER/.codex/sessions"]
+startup_timeout_sec = 30</pre>
+                        <p data-t="gui-4r3">OpenCode, Pi, omp y Pi Pocket usan <code>history_search.py</code> con su skill. Con OpenCode o Pi Pocket abiertos y un archivo WAL, usa la herramienta de snapshot incluida o cierra la aplicación. No borres el WAL.</p>
+                    </details>
+                    <details>
+                        <summary data-t="gui-5">5 · Comprueba la conexión</summary>
+                        <p data-t="gui-5r">En una sesión nueva, pide que liste tu conversación más reciente con su fuente e ID, sin mostrar el contenido, y comprueba que llama a la herramienta del MCP (o al script). Después busca una palabra que sepas que existe. Si configuraste MCP, una prueba con el script no demuestra que MCP funcione.</p>
+                    </details>
+                    <details>
+                        <summary data-t="gui-6">Qué puede hacer tu agente</summary>
+                        <p data-t="gui-6r"><strong>Buscar</strong> una frase literal en conversaciones pasadas. <strong>Listar y leer</strong> sesiones recientes, o una por su ID exacto. <strong>Inspeccionar llamadas</strong> con <code>--tool-calls</code>: comandos, argumentos y resultados, con fallos marcados solo si el historial lo prueba.</p>
+                        <pre>py -3 -B history_search.py search --host claude --store "$HOME\.claude\projects" --query "portfolio-anterior" --limit 1 --context 120
+py -3 -B history_search.py expand --host claude --store "$HOME\.claude\projects" --session &lt;id&gt; --entry &lt;id&gt; --context 400
+py -3 -B history_search.py search --host claude --store "$HOME\.claude\projects" --tool-calls --state failure --since 2026-10-25 --limit 1</pre>
+                    </details>
+                </div>
+                <p class="nota guia-enlaces"><a href="https://github.com/alvaropas17/agent-history-search/blob/main/README.md#set-it-up" data-t="gui-l1">Guía completa</a> · <a href="https://github.com/alvaropas17/agent-history-search/blob/main/docs/ADAPTERS.md" data-t="gui-l2">Guía por agente</a></p>
+            </div>
+        </section>
+
+        <!-- Cierre -->
+        <section class="cierre" aria-labelledby="cierre-titulo">
+            <div class="marco">
+                <h2 id="cierre-titulo" data-t="cie-titulo">La próxima vez, empieza por lo que ya sabes.</h2>
+                <p class="cierre-gracias" data-t="cie-p">Gracias por leer hasta aquí. Si lo pruebas, cuéntame en X qué recuperó tu agente.</p>
+                <div class="acciones">
+                    <a class="boton boton-oscuro" href="#instalar" data-umami-event="ir-instalar" data-umami-event-tipo="cierre" data-t="close-install">Instalar gratis</a>
+                    <a class="boton boton-contorno-oscuro" href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="cierre" data-t="cie-x">Seguir en X</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="pie">
+        <div class="marco pie-rejilla">
+            <div>
+                <p class="pie-autor"><a href="../index.html" data-lang-link data-t="pie-autor">Lo hace Álvaro Pastor.</a></p>
+                <p data-t="pie-bio">Desarrollador web en Murcia. Trabajo a diario con agentes de código y publico en X lo que voy construyendo.</p>
+                <a class="pie-correo" href="mailto:contacto@alvaropastor.dev">contacto@alvaropastor.dev</a>
+            </div>
+            <nav aria-label="Otros trabajos">
+                <p class="nota" data-t="pie-otros">Otros trabajos</p>
+                <ul>
+                    <li><a href="../proyecto/ludoscript.html">LudoScript</a></li>
+                    <li><a href="../proyecto/procesos-ia.html" data-t="pie-procesos">Procesos con IA</a></li>
+                    <li><a href="../proyecto/tickets.html" data-t="pie-tickets">Panel de tickets</a></li>
+                    <li><a href="../proyecto/gala-imparables.html">Gala Imparables</a></li>
+                </ul>
+            </nav>
+            <nav aria-label="Enlaces">
+                <p class="nota" data-t="pie-sigue">Sígueme</p>
+                <ul>
+                    <li><a href="https://x.com/alpas17_" target="_blank" rel="noopener noreferrer" data-umami-event="seguir-x" data-umami-event-tipo="pie">X · @alpas17_</a></li>
+                    <li><a href="https://github.com/alvaropas17" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                    <li><a href="https://es.linkedin.com/in/%C3%A1lvaro-pastor" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="../scripts/producto.js?v=20261113-story6"></script>
+</body>
+
+</html>

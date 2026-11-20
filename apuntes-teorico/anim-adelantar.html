@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adelantar paso a paso · Teórico DGT</title>
+<style>
+:root{
+  --bg:#f4eedd; --card:#fbf7ea; --ink:#2b2a24; --muted:#7a7565; --line:#ddd4bb; --accent:#c4252c; --accent-soft:#f7dcd8;
+  --grass:#e6e3c2; --road:#cfc7b0; --roadEdge:#b9b095; --paint:#faf6e8; --me:#2f6fba; --meDark:#22548f; --truck:#d2553a; --truckDark:#a83f29; --onc:#8a8f98; --oncDark:#686d75;
+  --ok:#2e8b57; --warn:#d99a00;
+  --display:"Overpass","Arial Narrow",Arial,sans-serif; --body:"Inter",system-ui,sans-serif; --mono:ui-monospace,"JetBrains Mono",monospace;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#14171d; --card:#1b1f27; --ink:#ebeee9; --muted:#9aa1ad; --line:#2b313c; --accent:#f06a70; --accent-soft:#3a191c;
+  --grass:#23301f; --road:#3a3f48; --roadEdge:#2d3139; --paint:#d9dde2; --me:#5f9de8; --meDark:#3f78bd; --truck:#e0674a; --truckDark:#b4503a; --onc:#9aa1ad; --oncDark:#767d89;
+  --ok:#4fc27f; --warn:#f0b93a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--body);padding:16px}
+.app{max-width:1120px;margin:0 auto;display:grid;gap:14px}
+.crumb{font:700 .72rem var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font:900 clamp(1.6rem,4vw,2.3rem)/1.05 var(--display);margin:2px 0 4px}
+h1 em{color:var(--accent);font-style:italic}
+.sub{color:var(--muted);margin:0}
+.grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.chip{border:1px solid var(--line);border-radius:10px;padding:7px 9px;background:var(--bg);display:grid;gap:1px}
+.chip small{font:700 .62rem var(--body);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.chip b{font:800 .95rem var(--display);transition:color .2s}
+.chip b.ok{color:var(--ok)} .chip b.no{color:var(--accent)} .chip b.mid{color:var(--warn)}
+.stage{position:relative;border-radius:12px;overflow:hidden;background:var(--bg)}
+svg{display:block;width:100%;height:auto}
+.bar{display:flex;gap:8px;justify-content:flex-end;margin-bottom:8px;flex-wrap:wrap}
+.btn{font:700 .82rem var(--body);padding:7px 12px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.btn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary{background:var(--ok);border-color:var(--ok);color:#fff}
+.btn:disabled{opacity:.4;cursor:default}
+.steps{display:flex;gap:0;margin-top:12px;overflow-x:auto;padding-bottom:4px}
+.st{flex:1;min-width:84px;display:grid;justify-items:center;gap:4px;text-align:center;cursor:pointer;background:none;border:0;color:var(--muted);font:600 .72rem/1.2 var(--body);position:relative}
+.st i{font:800 .8rem var(--mono);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);background:var(--card);font-style:normal;z-index:1}
+.st::before{content:"";position:absolute;top:12px;left:-50%;width:100%;height:2px;background:var(--line)}
+.st:first-child::before{display:none}
+.st.done i{background:var(--ok);border-color:var(--ok);color:#fff} .st.cur i{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.st.cur{color:var(--ink)}
+.tag{display:inline-block;font:800 .68rem var(--body);letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.side h2{font:900 1.35rem/1.15 var(--display);margin:8px 0}
+.side p{margin:0 0 10px}
+.idea{border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:9px 11px;background:var(--bg);font-size:.92rem}
+.idea b{display:block;font:800 .66rem var(--body);letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.nav{display:flex;justify-content:space-between;gap:8px;margin-top:12px}
+.joke{font-style:italic;color:var(--muted);font-size:.9rem;margin-top:10px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="crumb">Tema 2 · Maniobras · Lección 2 de 7</div>
+    <h1>Adelantar sin liarla: <em>6 pasos, 1 raya</em></h1>
+    <p class="sub">Mira cómo se hace bien y, con un botón, qué pasa cuando la línea es continua.</p>
+  </header>
+
+  <div class="grid">
+    <section class="card">
+      <div class="chips" aria-live="polite">
+        <div class="chip"><small>Visibilidad</small><b id="cVis">—</b></div>
+        <div class="chip"><small>Línea</small><b id="cLin">—</b></div>
+        <div class="chip"><small>Intermitente</small><b id="cInt">—</b></div>
+        <div class="chip"><small>Distancia libre</small><b id="cDis">—</b></div>
+      </div>
+      <div class="bar">
+        <button class="btn" id="bLine" aria-pressed="false">Línea continua</button>
+        <button class="btn" id="bRep">↻ Repetir</button>
+        <button class="btn" id="bPause" aria-pressed="false">Pausa</button>
+      </div>
+      <div class="stage"><svg id="sc" viewBox="0 0 760 400" role="img" aria-label="Escena isométrica de un adelantamiento"></svg></div>
+      <div class="steps" id="steps"></div>
+    </section>
+
+    <aside class="card side">
+      <span class="tag" id="tag">Paso 1 / 6</span>
+      <h2 id="tit"></h2>
+      <p id="txt"></p>
+      <div class="idea"><b>Idea clave</b><span id="idea"></span></div>
+      <p class="joke" id="joke"></p>
+      <div class="nav"><button class="btn" id="bBack">← Atrás</button><button class="btn primary" id="bNext">Siguiente →</button></div>
+    </aside>
+  </div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),NS="http://www.w3.org/2000/svg";
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+/* ---- proyección isométrica: u = a lo largo de la carretera, v = a lo ancho ---- */
+const K=17,C=.866*K,S=.5*K,OX=60,OY=372;
+const P=(u,v,z=0)=>[OX+(u+v)*C,OY+(v-u)*S-z*K];
+const pts=a=>a.map(p=>p.join(",")).join(" ");
+const el=(t,at={},par)=>{const e=document.createElementNS(NS,t);for(const k in at)e.setAttribute(k,at[k]);if(par)par.appendChild(e);return e};
+
+const svg=$("#sc");
+const gGround=el("g",{},svg),gDyn=el("g",{},svg),gUI=el("g",{},svg);
+
+/* ---- estado de cada paso (la animación va del anterior al siguiente) ---- */
+const LAN=1.3;
+const KF=[
+ {me:[1,LAN],tr:[13,LAN],on:[48,-LAN],bl:null,cone:0},
+ {me:[5,LAN],tr:[14,LAN],on:[46,-LAN],bl:null,cone:1},
+ {me:[6,LAN],tr:[15,LAN],on:[44,-LAN],bl:"L",cone:1},
+ {me:[10,-LAN],tr:[16,LAN],on:[40,-LAN],bl:"L",cone:1},
+ {me:[22,-LAN],tr:[18,LAN],on:[36,-LAN],bl:null,cone:1},
+ {me:[26,LAN],tr:[19,LAN],on:[30,-LAN],bl:"R",cone:0},
+ {me:[31,LAN],tr:[20,LAN],on:[22,-LAN],bl:null,cone:0},
+];
+
+const TXT=[
+ ["Mira","Antes de tocar el volante: ¿ves lo bastante para <b>terminar</b> el adelantamiento? Curva, cambio de rasante o un camión que tapa… no.","Si no ves hasta el final, no empiezas.","Tu cuñado dirá que «da tiempo». El examen dice que no."],
+ ["Señaliza","Intermitente izquierdo <b>con antelación</b>. Avisa de que vas a desplazarte, pero no te da prioridad: sigue dependiendo de ti.","Señalizar no te da prioridad.","El intermitente es un aviso, no un salvoconducto."],
+ ["Sal","Te desplazas lateralmente al carril contrario con una <b>velocidad notoriamente superior</b>. Con línea discontinua se puede. Con continua, te quedas.","Línea discontinua: sí. Continua: detrás.","Aquí el botón «Línea continua» hace de examinador cruel."],
+ ["Pasa","Rebasas sin molestar al que viene de frente. Mira el hueco que queda: tiene que sobrarte distancia.","Velocidad notoriamente superior, no un «a ver si llego».","Si ya estás rezando, es que no tenías que adelantar."],
+ ["Vuelve","Cuando ves al adelantado en el <b>espejo interior</b> (todo él), intermitente derecho y regresas a tu carril.","Vuelves cuando lo ves entero en el espejo interior.","Entrar a lo bruto «porque cabía» queda feo."],
+ ["Quita el intermitente","Y lo apagas. Un adelantamiento no está terminado hasta que el intermitente deja de parpadear.","Termina apagando el intermitente.","El intermitente encendido media hora es una declaración de principios, no una maniobra."],
+];
+let cont=false, cur=0, tAnim=1, playing=true, last=performance.now();
+const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2, lerp=(a,b,t)=>a+(b-a)*t;
+
+/* ---- terreno ---- */
+function ground(){
+  gGround.innerHTML="";
+  el("polygon",{points:pts([P(-3,-10),P(40,-10),P(40,10),P(-3,10)]),fill:css("--grass")},gGround);
+  el("polygon",{points:pts([P(-3,-3.6),P(40,-3.6),P(40,3.6),P(-3,3.6)]),fill:css("--road")},gGround);
+  [-3.6,3.6].forEach(v=>el("polyline",{points:pts([P(-3,v),P(40,v)]),stroke:css("--roadEdge"),"stroke-width":3,fill:"none"},gGround));
+  [-2.9,2.9].forEach(v=>el("polyline",{points:pts([P(-3,v),P(40,v)]),stroke:css("--paint"),"stroke-width":1.6,fill:"none",opacity:.8},gGround));
+  const line=el("polyline",{points:pts([P(-3,0),P(40,0)]),stroke:css(cont?"--accent":"--paint"),"stroke-width":3,fill:"none","stroke-dasharray":cont?"0":"14 12"},gGround);
+  // árboles tontos
+  [[2,7],[12,8],[24,7],[36,8],[6,-7],[18,-8],[30,-7],[38,-8]].forEach(([u,v])=>{
+    const [x,y]=P(u,v);el("rect",{x:x-1.5,y:y-6,width:3,height:8,fill:"#8c6b4a"},gGround);el("ellipse",{cx:x,cy:y-12,rx:9,ry:11,fill:css("--ok"),opacity:.55},gGround)});
+}
+
+/* ---- cajas isométricas ---- */
+function box(g,u,v,l,w,h,top,side,rear,z0=0){
+  const u0=u-l/2,u1=u+l/2,v0=v-w/2,v1=v+w/2;
+  el("polygon",{points:pts([P(u0,v1,z0),P(u1,v1,z0),P(u1,v1,z0+h),P(u0,v1,z0+h)]),fill:side},g);            // cara hacia ti (v+)
+  el("polygon",{points:pts([P(u0,v0,z0),P(u0,v1,z0),P(u0,v1,z0+h),P(u0,v0,z0+h)]),fill:rear},g);            // cara trasera (u-)
+  el("polygon",{points:pts([P(u0,v0,z0+h),P(u1,v0,z0+h),P(u1,v1,z0+h),P(u0,v1,z0+h)]),fill:top},g);          // techo
+}
+function car(g,u,v,main,dark,{len=4,wid=2,tall=1.3,truck=false,bl=null,t=0,glass=true}={}){
+  el("ellipse",{cx:P(u,v)[0],cy:P(u,v)[1]+2,rx:len*7,ry:wid*4,fill:"#000",opacity:.12},g);
+  if(truck){
+    box(g,u-1.6,v,len*.62,wid,tall*1.6,"#f2ece0","#e2dccd","#c9c2b0");       // caja
+    box(g,u+len*.38,v,len*.34,wid,tall*.95,main,dark,dark);                  // cabina
+  }else{
+    box(g,u,v,len,wid,tall*.55,main,dark,dark);
+    box(g,u-.2,v,len*.5,wid*.86,tall*.5,glass?"#bcd3e4":main,glass?"#8fb0c8":dark,"#7d9db5",tall*.55);
+  }
+  if(bl){ // intermitentes
+    const on=Math.sin(t*10)>0, fv=bl==="L"?v-wid/2:v+wid/2, rv=fv;
+    [u+len/2,u-len/2].forEach(uu=>{const [x,y]=P(uu,fv,.5);el("circle",{cx:x,cy:y,r:on?5:3,fill:on?"#ffb300":"#9a7a2a",opacity:on?1:.6},g)});
+  }
+}
+function pill(g,x,y,txt,col){
+  const w=txt.length*6.6+16;el("rect",{x:x-w/2,y:y-11,width:w,height:20,rx:10,fill:css("--card"),stroke:col,"stroke-width":1.4},g);
+  const t=el("text",{x,y:y+3,"text-anchor":"middle","font-size":11,"font-weight":700,fill:css("--ink"),"font-family":"system-ui"},g);t.textContent=txt}
+
+/* ---- dibujo por frame ---- */
+function draw(time){
+  gDyn.innerHTML="";gUI.innerHTML="";
+  const a=KF[cur],b=KF[cur+1],k=ease(Math.min(1,tAnim));
+  let me=[lerp(a.me[0],b.me[0],k),lerp(a.me[1],b.me[1],k)],tr=[lerp(a.tr[0],b.tr[0],k),lerp(a.tr[1],b.tr[1],k)],on=[lerp(a.on[0],b.on[0],k),lerp(a.on[1],b.on[1],k)];
+  // línea continua: en el paso 3 el coche se queda detrás
+  const blocked=cont&&cur>=2&&cur<=4;
+  if(blocked){me=[lerp(a.me[0],Math.min(b.me[0],tr[0]-5.5),k),LAN]; if(cur>=3)me=[Math.min(me[0],tr[0]-5.5),LAN]}
+  const bl=blocked&&cur>=2?"L":b.bl;
+  // cono de visión hasta el coche que viene
+  const coneOn=b.cone&&cur<=4;
+  if(coneOn){const reach=Math.min(on[0]-3,me[0]+30);
+    el("polygon",{points:pts([P(me[0]+2,me[1]-.1,.4),P(reach,-LAN-1.1,.2),P(reach,-LAN+1.1,.2),P(me[0]+2,me[1]+.1,.4)]),fill:blocked?css("--accent"):css("--ok"),opacity:.16},gDyn)}
+  const objs=[
+   {u:tr[0],v:tr[1],f:g=>car(g,tr[0],tr[1],css("--truck"),css("--truckDark"),{len:6,wid:2.2,truck:true})},
+   {u:on[0],v:on[1],f:g=>car(g,on[0],on[1],css("--onc"),css("--oncDark"),{len:4})},
+   {u:me[0],v:me[1],f:g=>car(g,me[0],me[1],css("--me"),css("--meDark"),{len:4,bl:bl,t:time})},
+  ].sort((p,q)=>(p.v-p.u)-(q.v-q.u));
+  objs.forEach(o=>o.f(el("g",{},gDyn)));
+  // etiquetas
+  const lp=(o,dy)=>{const [x,y]=P(o[0],o[1],3.4);return [x,y-dy]};
+  let p1=lp(me,0);pill(gUI,p1[0],p1[1],"tú",css("--me"));
+  p1=lp(tr,6);pill(gUI,p1[0],p1[1],"camión lento",css("--truck"));
+  p1=lp(on,0);pill(gUI,p1[0],p1[1],"viene de frente",css("--onc"));
+  if(blocked&&cur>=2){const [x,y]=P(me[0]+4,-LAN,4);pill(gUI,x,y,"✕ línea continua",css("--accent"))}
+  // chips
+  const dist=Math.max(0,Math.round((on[0]-me[0])*5));
+  const setC=(id,txt,cl)=>{const e=$(id);e.textContent=txt;e.className=cl};
+  setC("#cVis",cur===0&&k<.4?"…":(cur<5?"Libre":"—"),cur<5?"ok":"");
+  setC("#cLin",cont?"Continua ✕":"Discontinua ✓",cont?"no":"ok");
+  setC("#cInt",bl==="L"?"Izquierdo":bl==="R"?"Derecho":"Apagado",bl?"mid":"");
+  setC("#cDis",cur<=4?dist+" m":"—",cur<=4?(dist>60?"ok":"mid"):"");
+}
+
+/* ---- UI ---- */
+const stepsEl=$("#steps");
+TXT.forEach((t,i)=>{const b=document.createElement("button");b.className="st";b.innerHTML=`<i>${i+1}</i><span>${t[0]}</span>`;b.onclick=()=>go(i);stepsEl.appendChild(b)});
+function go(i){cur=Math.max(0,Math.min(5,i));tAnim=0;const t=TXT[cur];
+  $("#tag").textContent=`Paso ${cur+1} / 6`;$("#tit").textContent=t[0];$("#txt").innerHTML=t[1];$("#idea").textContent=t[2];$("#joke").textContent=t[3];
+  [...stepsEl.children].forEach((b,j)=>{b.classList.toggle("cur",j===cur);b.classList.toggle("done",j<cur)});
+  $("#bBack").disabled=cur===0;$("#bNext").textContent=cur===5?"Volver a empezar":"Siguiente →"}
+$("#bNext").onclick=()=>go(cur===5?0:cur+1);$("#bBack").onclick=()=>go(cur-1);$("#bRep").onclick=()=>go(cur);
+$("#bPause").onclick=e=>{playing=!playing;e.target.setAttribute("aria-pressed",!playing);e.target.textContent=playing?"Pausa":"Seguir"};
+$("#bLine").onclick=e=>{cont=!cont;e.target.setAttribute("aria-pressed",cont);ground();go(cur===0?2:cur)};
+document.addEventListener("keydown",e=>{if(e.key==="ArrowRight")$("#bNext").click();if(e.key==="ArrowLeft")$("#bBack").click()});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",ground);
+
+let T=0;
+(function loop(now){requestAnimationFrame(loop);const dt=Math.min(.05,(now-last)/1000);last=now;
+  if(playing){T+=dt;tAnim=Math.min(1,tAnim+dt/2.6)}
+  draw(T)})(performance.now());
+ground();go(0);
+</script>
+</body>
+</html>

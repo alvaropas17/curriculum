@@ -8,16 +8,18 @@ export async function onRequest(context) {
   try {
     const { email, empresa } = await request.json();
 
-    if (!email || !email.includes('@')) {
+    if (typeof email !== 'string' || !email.includes('@')) {
       return new Response(JSON.stringify({ error: 'Email inválido' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    let html = `<p><strong>Email:</strong> ${email}</p>`;
-    if (empresa && empresa.trim()) {
-      html += `<p><strong>Empresa:</strong> ${empresa.trim()}</p>`;
+    // Lo que escribe el visitante va escapado: el correo llega como HTML.
+    const escapar = (texto) => texto.replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
+    let html = `<p><strong>Email:</strong> ${escapar(email)}</p>`;
+    if (typeof empresa === 'string' && empresa.trim()) {
+      html += `<p><strong>Empresa:</strong> ${escapar(empresa.trim())}</p>`;
     }
 
     const res = await fetch('https://api.resend.com/emails', {

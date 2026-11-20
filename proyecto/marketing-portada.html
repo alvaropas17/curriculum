@@ -22,12 +22,16 @@
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Detrás de lo que elegimos · Álvaro Pastor" />
   <meta property="og:description" content="Compramos con el estómago. Anuncios reales, 169 encuestas y pruebas de cinco segundos para ver por qué tus clientes eligen lo que eligen." />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image" content="https://marketing.alvaropastor.dev/assets/og/blog.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Compramos con el estómago." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:creator" content="@alpas17_" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400..700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&display=swap"
     rel="stylesheet" />
   <style>
     :root {
@@ -37,10 +41,10 @@
       --luz: #8f5f00; --luz-fondo: #ffd84d; --sobre-luz: #1a1600; --dgt: #d23a3a;
       --g-social: #a67800; --g-relax: #168aa0; --g-aventura: #bd6208; --g-deporte: #d23a3a;
       --colon: #3566c9; --mastercard: #c96a0a; --teka: #12805a;
-      --display: "Bricolage Grotesque", "Arial Black", sans-serif;
-      --serif: "Instrument Serif", Georgia, serif;
-      --sans: "Instrument Sans", "Segoe UI", sans-serif;
-      --mono: "IBM Plex Mono", Consolas, monospace;
+      --display: "Newsreader", Georgia, serif;
+      --serif: var(--display);
+      --sans: "Newsreader", Georgia, serif;
+      --mono: "Newsreader", Georgia, serif;
       --sombra: 0 1px 2px rgba(27, 24, 20, .04), 0 12px 32px -12px rgba(27, 24, 20, .12);
       color-scheme: light;
     }
@@ -56,21 +60,28 @@
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; overflow-x: clip; }
-    body { margin: 0; background: var(--fondo); color: var(--texto); font: 18px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+    body { margin: 0; background: var(--fondo); color: var(--texto); font: 400 20px/1.7 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
     a { color: inherit; text-decoration: none; }
-    h1, h2, h3 { font-family: var(--display); margin: 0; letter-spacing: -0.03em; line-height: 1.04; text-wrap: balance; }
+    h1, h2, h3 { font-family: var(--display); margin: 0; letter-spacing: -0.02em; line-height: 1.04; text-wrap: balance; }
     p { margin: 0; text-wrap: pretty; }
-    em, .serif { font-family: var(--serif); font-style: italic; font-weight: 400; letter-spacing: -0.005em; }
-    .mono { font: 500 .7rem/1.5 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--texto-3); }
+    /* Una sola letra: la palabra que importa se marca en rojo, no con otra tipografía. */
+    em, .serif { font-style: normal; color: var(--dgt); }
+    strong, b { font-weight: 600; }
+    /* Una sola línea pequeña de contexto, en la misma familia que el texto. */
+    .mono { font: 500 .9rem/1.5 var(--mono); letter-spacing: .01em; color: var(--texto-3); }
+    .oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     .ancho { width: min(70rem, 100% - 40px); margin-inline: auto; }
     :focus-visible { outline: 2px solid var(--luz); outline-offset: 3px; }
     .rojo { color: var(--dgt); }
 
     .boton { display: inline-flex; align-items: center; gap: .5rem; min-height: 46px; padding: 0 1.3rem; border-radius: 99px; background: var(--luz-fondo); color: var(--sobre-luz); font: 600 .95rem var(--sans); border: 0; cursor: pointer; transition: transform .25s cubic-bezier(.3, 1.5, .5, 1); }
     .boton:hover { transform: translateX(3px); }
+    .boton.boton-sec { background: none; color: var(--texto); border: 1.5px solid var(--linea); }
     .fantasma { display: inline-flex; align-items: center; min-height: 46px; padding: 0 1.2rem; border: 1px solid var(--linea); border-radius: 99px; font: 600 .95rem var(--sans); color: var(--texto); background: transparent; cursor: pointer; transition: border-color .2s, color .2s; }
-    .fantasma:hover { border-color: var(--luz); color: var(--luz); }
-    .leer { color: var(--luz); font-weight: 600; display: inline-flex; gap: .4rem; align-items: center; }
+    .fantasma:hover { border-color: var(--texto); }
+    /* Amarillo solo para actuar, rojo solo para la emoción: los enlaces de lectura van en tinta. */
+    .leer { color: var(--texto); font-weight: 600; display: inline-flex; gap: .4rem; align-items: center; text-underline-offset: 4px; }
+    .leer:hover, a.tarjeta:hover .leer { text-decoration: underline; }
 
     .sube { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .9s cubic-bezier(.2, .7, .2, 1); }
     .sube.visto { opacity: 1; transform: none; }
@@ -79,56 +90,63 @@
     /* barra */
     .barra { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--fondo) 82%, transparent); backdrop-filter: saturate(1.4) blur(12px); border-bottom: 1px solid var(--linea-2); }
     .barra .ancho { display: flex; align-items: center; gap: 1.6rem; min-height: 60px; }
-    .marca { font: 700 1rem var(--display); letter-spacing: -0.02em; margin-right: auto; }
+    .marca { font: 500 1rem var(--display); letter-spacing: -0.02em; margin-right: auto; }
     .marca span { color: var(--dgt); }
     .barra nav { display: flex; gap: 1.4rem; font-size: .92rem; color: var(--texto-2); }
     .barra nav a:hover { color: var(--texto); }
-    .tema { font: 500 .7rem var(--mono); color: var(--texto-2); background: transparent; border: 1px solid var(--linea); border-radius: 99px; padding: 0 .85rem; min-height: 34px; cursor: pointer; }
-    .tema:hover { color: var(--luz); border-color: var(--luz); }
+    .tema { font: 600 .78rem var(--sans); color: var(--texto-2); background: transparent; border: 1px solid var(--linea); border-radius: 99px; min-width: 38px; padding: 0 .7rem; min-height: 38px; cursor: pointer; }
+    .tema:hover { color: var(--texto); border-color: var(--texto); }
+    #tema { font-size: 1rem; padding: 0; }
 
-    /* cabecera del blog */
-    .cabecera { text-align: center; padding: clamp(3.5rem, 8vw, 6rem) 0 clamp(2.5rem, 5vw, 3.5rem); }
-    .cabecera h1 { font-size: clamp(3rem, 8.5vw, 6.4rem); font-weight: 700; letter-spacing: -0.045em; margin: 1rem 0 1.2rem; }
-    .cabecera .sub { font-size: clamp(1.1rem, 2vw, 1.3rem); color: var(--texto-2); }
-    .temas { display: flex; justify-content: center; flex-wrap: wrap; gap: .5rem; margin-top: 1.8rem; }
-    .temas button { font: inherit; font-size: .85rem; color: var(--texto-2); background: transparent; border: 1px solid var(--linea); border-radius: 99px; padding: .4rem .95rem; min-height: 44px; cursor: pointer; transition: color .2s, border-color .2s; }
-    .temas button:hover { color: var(--texto); border-color: var(--texto-3); }
-    .temas button[aria-pressed="true"] { background: var(--texto); color: var(--fondo); border-color: var(--texto); }
+    /* cabecera del blog: la idea a la izquierda y la demo a la derecha */
+    .cabecera { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; padding: clamp(3rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 4.5rem); }
+    .cabecera h1 { font-size: clamp(3rem, 6.4vw, 5.6rem); font-weight: 400; letter-spacing: -0.025em; margin: 0 0 1.2rem; }
+    .cabecera .sub { font-size: clamp(1.1rem, 1.8vw, 1.3rem); color: var(--texto-2); max-width: 30rem; }
+    .cabecera .boton { margin-top: 1.8rem; }
+    .cabecera .lienzo { border-radius: 24px; aspect-ratio: 1 / 1; min-height: 0; border: 1px solid var(--linea-2); }
+    .cierre { margin: 4rem 0 2rem; padding: clamp(1.8rem, 5vw, 3rem); background: var(--papel); border: 1px solid var(--linea-2); border-radius: 24px; display: grid; gap: 1rem; justify-items: start; }
+    .cierre h2 { font-size: clamp(1.7rem, 4.5vw, 2.6rem); font-weight: 400; letter-spacing: -0.02em; max-width: 22ch; }
+    .cierre p { color: var(--texto-2); max-width: 40rem; }
+    .pega { display: flex; gap: .6rem; width: 100%; max-width: 36rem; margin-top: .4rem; }
+    .pega input { flex: 1; min-width: 0; min-height: 50px; padding: 0 1.2rem; border-radius: 99px; border: 1.5px solid var(--linea); background: var(--fondo); color: var(--texto); font: 500 1rem var(--sans); }
+    .pega input::placeholder { color: var(--texto-3); }
+    .pega input:focus { outline: none; border-color: var(--texto); }
+    .pega input[aria-invalid="true"] { border-color: var(--dgt); }
+    .pega .boton { min-height: 50px; flex: none; }
+    .cierre .pega-estado { font-size: .9rem; min-height: 1.4em; }
+    .cierre .pega-estado:empty { display: none; }
+    .cierre .pega-alt { font-size: .9rem; color: var(--texto-3); }
+    .pega-alt a { color: var(--texto); text-decoration: underline; text-underline-offset: 3px; }
     [hidden] { display: none !important; }
-    .filtro-estado { color: var(--texto-2); font-size: .85rem; margin-bottom: 1rem; scroll-margin-top: 80px; }
-    @media (min-width: 561px) {
-      .extracto, .tarjeta .texto > p { text-align: justify; hyphens: auto; }
-    }
+    #entradas, #cierre { scroll-margin-top: 80px; }
 
     .seccion-cab { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--linea); padding-top: 1rem; margin: clamp(3rem, 7vw, 4.5rem) 0 1.6rem; }
     .seccion-cab h2 { font: 600 1.05rem var(--sans); letter-spacing: 0; }
 
     /* destacado */
     .destacado { display: grid; grid-template-columns: 1fr 1fr; background: var(--papel); border: 1px solid var(--linea-2); border-radius: 24px; overflow: hidden; box-shadow: var(--sombra); }
-    .lienzo { position: relative; background: var(--fondo-2); min-height: 28rem; cursor: crosshair; touch-action: manipulation; user-select: none; -webkit-tap-highlight-color: transparent; }
+    .lienzo { position: relative; background: var(--fondo-2); min-height: 20rem; cursor: crosshair; touch-action: manipulation; user-select: none; -webkit-tap-highlight-color: transparent; }
     .lienzo svg { position: absolute; inset: 0; width: 100%; height: 100%; }
     .lienzo:focus-visible { outline-offset: -4px; }
     #nucleo { transform-box: fill-box; transform-origin: center; transition: transform .45s cubic-bezier(.3, 1.6, .5, 1); }
-    .sello { position: absolute; left: 1.2rem; bottom: 1rem; }
+    .sello { position: absolute; left: 1.2rem; right: 1.2rem; bottom: 1rem; }
     .lienzo.activo .sello { color: var(--texto-2); }
-    .cuerpo { padding: clamp(1.8rem, 4vw, 3.2rem); display: flex; flex-direction: column; justify-content: center; }
-    .meta { display: flex; flex-wrap: wrap; gap: .3rem .9rem; }
-    .meta .cat { color: var(--dgt); }
-    .destacado h3 { font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 700; margin: 1rem 0; }
+    .cuerpo { padding: clamp(1.5rem, 3vw, 2.4rem); display: flex; flex-direction: column; justify-content: center; }
+    .meta { display: flex; flex-wrap: wrap; gap: .3rem .5rem; }
+    .meta > * + *::before { content: "·"; margin-right: .5rem; }
+    .destacado h3 { font-size: clamp(1.7rem, 3vw, 2.3rem); font-weight: 400; margin: .6rem 0 .9rem; }
     .destacado h3 a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }
-    .destacado .extracto { color: var(--texto-2); font-size: 1.08rem; }
-    .datos { display: grid; grid-template-columns: repeat(3, 1fr); margin: 1.6rem 0; border-block: 1px solid var(--linea-2); }
-    .datos div { padding: .9rem .2rem; }
-    .datos div + div { border-left: 1px solid var(--linea-2); padding-left: 1rem; }
-    .datos b { display: block; font: 700 clamp(1.6rem, 3vw, 2.1rem)/1 var(--display); letter-spacing: -0.04em; }
-    .datos b.rojo { color: var(--dgt); }
-    .datos span { font-size: .8rem; color: var(--texto-3); line-height: 1.3; display: block; margin-top: .3rem; }
+    .destacado .extracto { color: var(--texto-2); margin-bottom: 1.4rem; max-width: 34rem; }
+    /* Portada del artículo: un dato, como la imagen de una entrada, sin desvelar qué anuncio ganó. */
+    .portada-cifra { display: grid; place-content: center; text-align: center; gap: .5rem; min-height: 20rem; padding: 2rem; background: radial-gradient(circle at 50% 46%, color-mix(in srgb, var(--dgt) 16%, transparent), transparent 62%), var(--fondo-2); }
+    .portada-cifra b { font: 500 clamp(4.5rem, 10vw, 7.5rem)/.9 var(--display); letter-spacing: -0.02em; color: var(--dgt); }
+    .portada-cifra span { font: 500 clamp(1.2rem, 2.2vw, 1.5rem)/1.2 var(--sans); color: var(--texto); }
     .cuerpo .boton { align-self: flex-start; }
     .acciones-estudio { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; }
 
     /* apuesta */
     .apuesta { background: var(--papel); border: 1px solid var(--linea-2); border-radius: 24px; padding: clamp(1.6rem, 4vw, 3rem); text-align: center; box-shadow: var(--sombra); }
-    .apuesta h3 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 700; margin: .7rem 0 .6rem; }
+    .apuesta h3 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 400; margin: .7rem 0 .6rem; }
     .apuesta .sub { color: var(--texto-2); }
     .opciones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 1.8rem auto 0; }
     .opcion { border-radius: 16px; background: var(--fondo); border: 1px solid var(--linea); text-align: left; display: flex; flex-direction: column; overflow: hidden; transition: border-color .2s, opacity .3s, box-shadow .2s; }
@@ -144,7 +162,7 @@
     .opcion .video iframe { width: 100%; height: 100%; border: 0; display: block; }
     .ficha-op { padding: .9rem 1rem .4rem; display: flex; flex-direction: column; gap: .2rem; border-top: 3px solid var(--c); }
     .ficha-op span { font-size: .76rem; color: var(--texto-3); }
-    .ficha-op b { font: 700 1.35rem/1.1 var(--display); letter-spacing: -0.03em; }
+    .ficha-op b { font: 500 1.35rem/1.1 var(--display); letter-spacing: -0.02em; }
     .votar { all: unset; box-sizing: border-box; cursor: pointer; margin: .6rem 1rem 1rem; min-height: 40px; border-radius: 99px; text-align: center; font: 600 .85rem var(--sans); border: 1px solid var(--linea); color: var(--texto); transition: background .2s, border-color .2s, color .2s; }
     .votar:hover { background: var(--luz-fondo); border-color: var(--luz-fondo); color: var(--sobre-luz); }
     .votar:focus-visible { outline: 2px solid var(--luz); outline-offset: 2px; }
@@ -159,7 +177,7 @@
     @keyframes cruzar { to { width: 100%; } }
     .resultado { max-width: 40rem; margin: 2rem auto 0; animation: aparecer .7s ease; }
     @keyframes aparecer { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-    .veredicto { font: 400 clamp(1.8rem, 4vw, 2.5rem)/1.1 var(--serif); font-style: italic; margin-bottom: 1.4rem; }
+    .veredicto { font: 500 clamp(1.6rem, 3.5vw, 2.2rem)/1.15 var(--display); letter-spacing: -0.02em; margin-bottom: 1.4rem; }
     .barras { display: grid; gap: .6rem; text-align: left; }
     .barra-ap { display: grid; grid-template-columns: 6.5rem 1fr 2.6rem; gap: .9rem; align-items: center; font-size: .92rem; color: var(--texto-2); }
     .barra-ap .pista { height: 8px; border-radius: 99px; background: var(--fondo-3); overflow: hidden; }
@@ -168,7 +186,7 @@
     .barra-ap.gana .pista i { background: var(--dgt); }
     .barra-ap.tuya span::after { content: " · tú"; color: var(--luz); }
     html[lang="en"] .barra-ap.tuya span::after { content: " · you"; }
-    .barra-ap b { font: 700 1rem var(--display); text-align: right; }
+    .barra-ap b { font: 500 1rem var(--display); text-align: right; }
     .nota { margin-top: .8rem; text-align: left; font-size: .6rem; }
     .por-que { margin-top: 1.4rem; color: var(--texto-2); }
     .acciones { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .7rem 1rem; margin-top: 1.4rem; }
@@ -181,30 +199,29 @@
     .tarjeta .vista i { position: absolute; width: 30%; aspect-ratio: 1; border-radius: 50%; border: 2px solid var(--c); background: color-mix(in srgb, var(--c) 20%, transparent); transition: transform .8s cubic-bezier(.3, 1.4, .5, 1); }
     a.tarjeta:hover .vista i { transform: scale(1.1); }
     .tarjeta .texto { padding: 1.5rem 1.6rem 1.7rem; display: flex; flex-direction: column; gap: .7rem; flex: 1; }
-    .tarjeta h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 700; }
+    .tarjeta h3 { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 400; }
     .tarjeta p { color: var(--texto-2); }
     .tarjeta .leer { margin-top: auto; }
+
     .tarjeta.pronto .vista { display: grid; place-items: center; background: radial-gradient(circle at 50% 55%, color-mix(in srgb, var(--dgt) 22%, transparent), transparent 60%), var(--fondo-2); }
-    .tarjeta.pronto .vista b { font: 400 clamp(3rem, 7vw, 4.6rem)/1 var(--serif); font-style: italic; color: var(--dgt); }
-    .tarjeta.pronto .meta .cat { color: var(--luz); }
+    .tarjeta.pronto .vista b { font: 500 clamp(2.6rem, 6vw, 4rem)/1 var(--display); letter-spacing: -0.02em; color: var(--dgt); }
     .tarjeta.pronto h3 em { color: var(--dgt); }
     .prueba summary { list-style: none; cursor: pointer; display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; }
     .prueba summary::-webkit-details-marker { display: none; }
     .prueba summary .fantasma { min-height: 40px; font-size: .85rem; }
     .prueba[open] summary .fantasma { display: none; }
     .prueba .respuesta { margin-top: .7rem; animation: aparecer .5s ease; }
-    .prueba .grande { font: 400 1.7rem/1.1 var(--serif); font-style: italic; color: var(--luz); }
-
-    #proximo { display: grid; grid-template-columns: 1fr 1fr; margin-top: 1.5rem; scroll-margin-top: 80px; }
-    #proximo .vista { aspect-ratio: auto; min-height: 16rem; }
+    .prueba .grande { font: 500 1.6rem/1.1 var(--display); color: var(--dgt); }
+    #entrada-portada { display: grid; grid-template-columns: 1fr 1fr; margin-top: 1.5rem; scroll-margin-top: 80px; }
+    #entrada-portada .vista { aspect-ratio: auto; min-height: 16rem; }
     @media (max-width: 860px) {
-      #proximo { grid-template-columns: 1fr; }
-      #proximo .vista { min-height: 12rem; }
+      #entrada-portada { grid-template-columns: 1fr; }
+      #entrada-portada .vista { min-height: 12rem; }
     }
 
     /* autor */
     .autor { display: flex; gap: 1.2rem; align-items: center; margin: clamp(3.5rem, 8vw, 5rem) 0 0; padding: 1.6rem; border-radius: 22px; background: var(--fondo-2); }
-    .autor .inicial { flex: none; width: 56px; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--texto); color: var(--fondo); font: 700 1.2rem var(--display); }
+    .autor .inicial { flex: none; width: 56px; aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; background: var(--texto); color: var(--fondo); font: 500 1.2rem var(--display); }
     .autor p { color: var(--texto-2); font-size: .98rem; }
     .autor b { color: var(--texto); }
     .autor .boton { margin-left: auto; flex: none; }
@@ -217,7 +234,10 @@
 
     @media (max-width: 860px) {
       .destacado, .rejilla { grid-template-columns: 1fr; }
-      .lienzo { min-height: 18rem; }
+      .cabecera { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+      .cabecera .sub { margin-inline: auto; }
+      .cabecera .lienzo { aspect-ratio: 4 / 3; }
+      .portada-cifra { min-height: 15rem; }
       .opciones { grid-template-columns: repeat(2, 1fr); }
       .opciones { grid-auto-flow: dense; }
       .opcion.reproduciendo { grid-column: 1 / -1; }
@@ -235,10 +255,10 @@
       .ficha-op b { font-size: 1.15rem; }
       .ficha-op { padding: .7rem .7rem .3rem; }
       .votar { margin: .5rem .7rem .8rem; font-size: .8rem; }
-      .datos span { font-size: .72rem; }
       .tarjeta .texto { padding: 1.3rem; }
-      .temas { gap: .4rem; margin-top: 1.4rem; }
-      .temas button { font-size: .78rem; padding: .25rem .8rem; min-height: 44px; }
+      .destacado h3, .destacado .extracto, .tarjeta h3, .tarjeta p { text-wrap: wrap; max-width: none; }
+      .pega { flex-direction: column; }
+      .pega .boton { justify-content: center; }
     }
   </style>
 </head>
@@ -250,31 +270,21 @@
       <nav aria-label="Principal">
         <a href="#entradas">Artículos</a>
         <a href="#apuesta">Pruébate</a>
-        <a href="#proximo">Próximamente</a>
-        <a href="marketing-webs.html">Apps</a>
+        <a href="#cierre">Revisa tu web</a>
       </nav>
       <button class="tema" id="idioma" type="button" lang="en" aria-label="Switch to English">EN</button>
-      <button class="tema" id="tema" type="button" aria-label="Cambiar tema">◐ tema</button>
+      <button class="tema" id="tema" type="button" aria-label="Cambiar tema">◐</button>
     </div>
   </header>
 
   <main class="ancho">
+    <!-- La demo es el producto: va arriba, junto a la idea, y se ve sin hacer scroll. -->
     <section class="cabecera">
-      <p class="mono">Detrás de lo que elegimos · marketing y decisiones</p>
-      <h1>Compramos con el <em>estómago.</em></h1>
-      <p class="sub">Aquí tienes la prueba: anuncios reales, 169 encuestas y pruebas de cinco segundos para ver por qué tus clientes eligen lo que eligen.</p>
-      <div class="temas" role="group" aria-label="Filtrar publicaciones por tema">
-        <button type="button" data-filtro="todo" aria-pressed="true">Todo</button>
-        <button type="button" data-filtro="emocional" aria-pressed="false">Marketing emocional</button>
-        <button type="button" data-filtro="consumidor" aria-pressed="false">Consumidor</button>
-        <button type="button" data-filtro="conversion" aria-pressed="false">Transformación web</button>
-        <button type="button" data-filtro="marca" aria-pressed="false">Psicología de marca</button>
+      <div>
+        <h1>Compramos con el <em>estómago.</em></h1>
+        <p class="sub">Tus clientes también. Te lo demuestro con anuncios reales y 169 respuestas.</p>
+        <a class="boton" id="primera-apuesta" href="#apuesta">Haz tu primera apuesta <span aria-hidden="true">↓</span></a>
       </div>
-    </section>
-
-    <!-- destacado -->
-    <p class="filtro-estado" id="entradas" role="status" aria-live="polite" aria-atomic="true">3 publicaciones y 1 avance</p>
-    <article class="destacado sube" id="entrada-tfg" data-publicacion="emocional">
       <div class="lienzo" id="juguete" role="button" tabindex="0" aria-label="Toca para sentir. Cuanto más rápido, más intenso y más se recuerda.">
         <svg viewBox="0 0 600 460" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
           <defs>
@@ -294,39 +304,34 @@
         </svg>
         <span class="mono sello" id="sello" aria-live="polite">Tócalo. Más rápido, más se queda.</span>
       </div>
+    </section>
+
+    <!-- destacado -->
+    <div id="entradas">
+    <article class="destacado" id="entrada-tfg" data-publicacion="emocional">
+      <a class="portada-cifra" href="marketing-emocional.html" tabindex="-1" aria-hidden="true"><b>81 %</b><span>sintió miedo al verlo</span></a>
       <div class="cuerpo">
-        <div class="meta mono"><span class="cat">Trabajo Fin de Grado</span><time datetime="2024-06">Junio 2024</time><span>5 min + juegos</span></div>
+        <div class="meta mono"><span class="cat">Trabajo Fin de Grado</span><time datetime="2024-06">junio 2024</time></div>
         <h3><a href="marketing-emocional.html">Enseñé 4 anuncios a 169 personas. Ganó el que <em class="rojo">no vendía nada.</em></a></h3>
-        <p class="extracto">Se los envié a 311 personas y 169 me contaron qué sintieron. El que más miedo dio fue el que mejor se recordó.</p>
-        <div class="datos">
-          <div><b class="rojo">8,6</b><span>atención del anuncio de la DGT</span></div>
-          <div><b>81 %</b><span>sintió miedo al verlo</span></div>
-          <div><b>169</b><span>encuestas respondidas</span></div>
-        </div>
+        <p class="extracto">El que ganó no intentaba convencer: daba miedo. 169 personas me contaron qué sintieron con cada anuncio. Te enseño los datos y 3 reglas para que el tuyo se recuerde.</p>
         <div class="acciones-estudio">
-          <a class="boton" href="marketing-emocional.html">Ver qué respondieron <span aria-hidden="true">→</span></a>
-          <button class="boton" id="abrir-prueba" type="button" aria-expanded="false" aria-controls="juego-prueba">Pruébate</button>
+          <a class="boton" href="marketing-emocional.html">Leer el estudio <span aria-hidden="true">→</span></a>
+          <button class="boton boton-sec" id="abrir-prueba" type="button" aria-expanded="false" aria-controls="juego-prueba">¿Aciertas cuál ganó?</button>
         </div>
       </div>
     </article>
 
-    <!-- Avance editorial, visible también al filtrar las publicaciones. -->
-    <article class="tarjeta pronto sube" id="proximo" data-publicacion="marca" data-avance="true">
-      <div class="vista" aria-hidden="true"><b>¿clínex?</b></div>
+    <!-- Artículo de la portada, justo debajo del destacado. -->
+    <a class="tarjeta sube" id="entrada-portada" href="marketing-portada-caso.html" data-publicacion="conversion">
+      <div class="vista" style="background:#fff"><img id="img-portada" src="../assets/portada-caso/portada-tarjeta.webp?v=3" alt="Dibujo antes y después: la portada vieja con cifras y un visitante que pregunta qué gana; la nueva con el ejemplo real rodeado y un visitante que dice que lo quiere" width="1440" height="900" loading="lazy" style="display:block;width:100%;height:100%;object-fit:contain;object-position:center"></div>
       <div class="texto">
-        <div class="meta mono"><span class="cat">Próximamente</span><span>Psicología de marca</span></div>
-        <h3>Cómo hacer que tu marca sea la palabra que <em>usa todo el mundo.</em></h3>
-        <p>Hay marcas que no buscas: ya viven en tu cabeza. Lo que tienen en común no es el dinero.</p>
-        <details class="prueba">
-          <summary><span>Piensa en un pañuelo de papel. ¿Cómo lo llamas?</span><span class="fantasma">Ya lo he pensado</span></summary>
-          <div class="respuesta">
-            <p class="grande">«Clínex».</p>
-            <p>Es una marca, no un objeto. Y no la elegiste tú.</p>
-          </div>
-        </details>
-        <a class="leer" href="https://x.com/alpas17_" rel="noopener">Avísame cuando salga →</a>
+        <div class="meta mono"><span class="cat">Transformación web</span><time datetime="2026-11-14">noviembre 2026</time></div>
+        <h3>Dame 4 minutos y te enseño por qué tu portada no vende.</h3>
+        <p>Casi todas las portadas enseñan lo que te impresiona a ti, no lo que gana quien entra. El antes y después real de la mía, y la prueba de 5 segundos para la tuya.</p>
+        <span class="leer">Ver el antes y después →</span>
       </div>
-    </article>
+    </a>
+    </div>
 
     <!-- apuesta -->
     <div class="seccion-cab" id="apuesta" hidden><h2>Pruébate</h2><span class="mono">5 segundos</span></div>
@@ -364,7 +369,7 @@
         <p class="nota mono">Atención media, de 0 a 10</p>
         <p class="por-que">Ganó un anuncio sin nada que vender. <strong>Ganó el miedo.</strong></p>
         <div class="acciones">
-          <a class="boton" id="retar" href="#" target="_blank" rel="noopener">Reta a alguien por WhatsApp</a>
+          <a class="boton" id="retar" href="#" target="_blank" rel="noopener">Reta a un amigo a ganarte</a>
           <button class="fantasma" id="copiar" type="button">Copiar enlace</button>
           <a class="leer" href="marketing-emocional.html">Por qué pasa →</a>
         </div>
@@ -372,8 +377,62 @@
     </section>
 
     <!-- últimas entradas -->
-    <div class="seccion-cab" id="rejilla-cab"><h2>Más entradas</h2><span class="mono" id="rejilla-cuenta">2 publicadas</span></div>
+    <div class="seccion-cab" id="rejilla-cab"><h2>Más entradas</h2></div>
     <div class="rejilla">
+      <a class="tarjeta pronto sube" href="marketing-arranque.html" data-publicacion="arranque">
+        <div class="vista" style="background:#fff"><img class="img-mini" data-mini="arranque" src="../assets/miniaturas/arranque.webp?v=1" alt="Dibujo antes y después: un muñeco con café y una telaraña esperando una barra casi vacía de «1 min»; después, la barra llena y «4 seg» para ponerse a trabajar" width="1600" height="900" loading="lazy" style="display:block;width:100%;height:100%;object-fit:contain;object-position:center"></div>
+        <div class="texto">
+          <div class="meta mono"><span class="cat">Caso real · Prácticas</span><time datetime="2026-11">noviembre 2026</time></div>
+          <h3>No tienes un entorno lento. Tienes un impuesto por arranque.</h3>
+          <p>Lo pagas cada mañana, varias veces al día, y no aparece en ninguna factura. La prueba de 1 minuto para medir el tuyo.</p>
+          <span class="leer">Medir mi espera →</span>
+        </div>
+      </a>
+      <a class="tarjeta pronto sube" href="marketing-plantillas.html" data-publicacion="plantillas">
+        <div class="vista" style="background:#fff"><img class="img-mini" data-mini="plantillas" src="../assets/miniaturas/plantillas.webp?v=1" alt="Dibujo: el mismo email se ve bien en Gmail y roto en Outlook, con el logo descuadrado; después, siete sobres iguales también en Outlook" width="1600" height="900" loading="lazy" style="display:block;width:100%;height:100%;object-fit:contain;object-position:center"></div>
+        <div class="texto">
+          <div class="meta mono"><span class="cat">Caso real · Prácticas</span><time datetime="2026-11">noviembre 2026</time></div>
+          <h3>Tu email no está roto. Nunca lo probaste en Outlook.</h3>
+          <p>Se ve bien en tu pantalla y roto en la suya. Los 4 criterios para que tu email automático llegue entero.</p>
+          <span class="leer">Arreglar mi email →</span>
+        </div>
+      </a>
+      <a class="tarjeta pronto sube" href="marketing-prompts.html" data-publicacion="prompts">
+        <div class="vista" style="background:#fff"><img class="img-mini" data-mini="prompts" src="../assets/miniaturas/prompts.webp?v=1" alt="Dibujo: un muñeco rascándose la cabeza porque el modelo da dos respuestas distintas a la misma pregunta; al lado, las dos palancas: prompt y contexto" width="1600" height="900" loading="lazy" style="display:block;width:100%;height:100%;object-fit:contain;object-position:center"></div>
+        <div class="texto">
+          <div class="meta mono"><span class="cat">Caso real · Prácticas</span><time datetime="2026-11">noviembre 2026</time></div>
+          <h3>Tu modelo no es impredecible. Le falta contexto.</h3>
+          <p>Dos respuestas a la misma pregunta no son un misterio: es lo que le das. 3 preguntas para revisar el tuyo.</p>
+          <span class="leer">Revisar mi modelo →</span>
+        </div>
+      </a>
+      <a class="tarjeta pronto sube" href="marketing-automatizar.html" data-publicacion="automatizar">
+        <div class="vista" style="background:#fff"><img class="img-mini" data-mini="automatizar" src="../assets/miniaturas/automatizar.webp?v=1" alt="Dibujo: un muñeco repitiendo una tarea a mano, con una flecha circular roja; después, un terminal de Bash que la hace solo mientras él toma café" width="1600" height="900" loading="lazy" style="display:block;width:100%;height:100%;object-fit:contain;object-position:center"></div>
+        <div class="texto">
+          <div class="meta mono"><span class="cat">Caso real · Prácticas</span><time datetime="2026-11">noviembre 2026</time></div>
+          <h3>Cada tarea a mano la pagas entera. Otra vez.</h3>
+          <p>Un script se paga una vez; la mano se paga cada vez. 3 preguntas para decidir por dónde empezar.</p>
+          <span class="leer">Elegir por dónde empezar →</span>
+        </div>
+      </a>
+      <a class="tarjeta pronto sube" href="marketing-tickets.html" data-publicacion="tickets">
+        <div class="vista" style="background:#fff"><img class="img-mini" data-mini="tickets" src="../assets/miniaturas/tickets.webp?v=1" alt="Dibujo: un panel con todos los tickets en «URGENTE» y un muñeco que no sabe cuál primero; después, un panel con prioridad, contexto y acción y el primero rodeado en rojo" width="1600" height="900" loading="lazy" style="display:block;width:100%;height:100%;object-fit:contain;object-position:center"></div>
+        <div class="texto">
+          <div class="meta mono"><span class="cat">Caso real · Prácticas</span><time datetime="2026-11">noviembre 2026</time></div>
+          <h3>Si abres un ticket para saber si es urgente, el panel está mal.</h3>
+          <p>Abrir el ticket para saber si corre prisa es el problema. Las 3 reglas que lo resuelven: prioridad, contexto y acción.</p>
+          <span class="leer">Ver las 3 reglas →</span>
+        </div>
+      </a>
+      <a class="tarjeta pronto sube" href="marketing-lineas.html" data-publicacion="lineas">
+        <div class="vista" style="background:#fff"><img class="img-mini" data-mini="lineas" src="../assets/miniaturas/lineas.webp?v=1" alt="Dibujo antes y después: un texto vago de IA («innovadora, eficiente, escalable») y un muñeco que pregunta qué cambió; después, tres filas (prueba, criterio y revisado) con la primera rodeada en rojo" width="1600" height="900" loading="lazy" style="display:block;width:100%;height:100%;object-fit:contain;object-position:center"></div>
+        <div class="texto">
+          <div class="meta mono"><span class="cat">Experimento · Con IA</span><time datetime="2026-11">noviembre 2026</time></div>
+          <h3>Le di 1.216 líneas de código a una IA y le pedí una historia. Esto es lo que hizo mal.</h3>
+          <p>Una IA con una tarea vaga rellena los huecos con suposiciones. Las 3 piezas que le faltaban y una prueba de 3 preguntas.</p>
+          <span class="leer">Ver la prueba →</span>
+        </div>
+      </a>
       <a class="tarjeta sube" href="ocio-conglomerados.html" data-publicacion="consumidor">
         <div class="vista" aria-hidden="true">
           <i style="--c:var(--g-social);left:14%;top:12%"></i>
@@ -382,24 +441,27 @@
           <i style="--c:var(--g-deporte);right:26%;bottom:10%"></i>
         </div>
         <div class="texto">
-          <div class="meta mono"><span class="cat">Consumidor</span><time datetime="2024-04">Abril 2024</time><span>2 min + test</span></div>
+          <div class="meta mono"><span class="cat">Consumidor</span><time datetime="2024-04">abril 2024</time></div>
           <h3>Dime qué haces el fin de semana y te digo qué tipo de consumidor eres.</h3>
           <p>Salir con amigos o desconectar sin nadie alrededor. Cuatro grupos de hábitos y un test para ver dónde caes.</p>
           <span class="leer">Hacer el test →</span>
         </div>
       </a>
 
-      <a class="tarjeta sube" id="entrada-portada" href="marketing-portada-caso.html" data-publicacion="conversion">
-        <div class="vista" style="background:#fff;aspect-ratio:16/9"><img src="../assets/portada-caso/portada-tarjeta.webp?v=2" alt="Dibujo antes y después: la portada vieja con cifras y un visitante que pregunta qué gana; la nueva con el ejemplo real rodeado y un visitante que dice que lo quiere" width="1440" height="900" loading="lazy" style="display:block;width:100%;height:100%;object-fit:contain;object-position:center"></div>
-        <div class="texto">
-          <div class="meta mono"><span class="cat">Transformación web</span><time datetime="2026-11-14">Noviembre 2026</time><span>4 min + antes y después</span></div>
-          <h3>Dame 4 minutos y te enseño por qué tu portada no vende.</h3>
-          <p>Casi todas las portadas enseñan cifras de escaparate: lo que te impresiona a ti, no lo que gana quien entra. El antes y después real de la mía y una prueba de cinco segundos para la tuya.</p>
-          <span class="leer">Ver la transformación →</span>
-        </div>
-      </a>
-
     </div>
+
+    <!-- cierre: la oferta concreta, una sola acción -->
+    <section class="cierre sube" id="cierre" aria-labelledby="cierre-h">
+      <h2 id="cierre-h">¿Qué entiende alguien que llega a tu portada en <em>cinco segundos?</em></h2>
+      <p id="cierre-texto">Pega tu web y te hago la prueba de 5 segundos: qué entiende quien llega y qué quitaría yo primero. Gratis y en un mensaje. Lo leo yo, no una plantilla. ¿Te parece justo?</p>
+      <form class="pega" id="pega" novalidate>
+        <label class="oculto" for="pega-web" id="pega-etiqueta">Tu web o el enlace a tu anuncio</label>
+        <input id="pega-web" name="web" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="tuweb.com o el enlace a tu anuncio" aria-describedby="pega-estado" />
+        <button class="boton" id="pega-enviar" type="submit">Quiero mi prueba <span aria-hidden="true">→</span></button>
+      </form>
+      <p class="pega-estado" id="pega-estado" role="status"></p>
+      <p class="pega-alt" id="pega-alt">¿Prefieres X? <a href="https://x.com/alpas17_" rel="noopener">Escríbeme a @alpas17_</a></p>
+    </section>
 
   </main>
 
@@ -431,44 +493,23 @@
       const ESTATICOS = [
         ['.barra nav a[href="#entradas"]', 'Articles'],
         ['.barra nav a[href="#apuesta"]', 'Test yourself'],
-        ['.barra nav a[href="#proximo"]', 'Coming soon'],
-        ['.barra nav a:nth-child(4)', 'Apps'],
-        ['.cabecera > .mono', 'Behind what we choose · marketing and decisions'],
+        ['.barra nav a[href="#cierre"]', 'Check your site'],
         ['.cabecera h1', 'We buy with our <em>gut.</em>'],
-        ['.cabecera .sub', 'Here is the evidence: real ads, 169 surveys and five-second tests to see why your customers choose what they choose.'],
-        ['[data-filtro="todo"]', 'All'],
-        ['[data-filtro="emocional"]', 'Emotional marketing'],
-        ['[data-filtro="consumidor"]', 'Consumer behaviour'],
-        ['[data-filtro="marca"]', 'Brand psychology'],
-        ['[data-filtro="conversion"]', 'Website transformation'],
+        ['.cabecera .sub', 'Your customers do too. I’ll prove it with real ads and 169 answers.'],
+        ['#primera-apuesta', 'Make your first bet <span aria-hidden="true">↓</span>'],
         ['#entrada-portada .cat', 'Website transformation'],
         ['#entrada-portada time', 'November 2026'],
-        ['#entrada-portada .meta span:last-child', '4 min + before and after'],
-        ['#entrada-portada h3', 'Give me 4 minutes and I’ll show you why your homepage isn’t selling.'],
-        ['#entrada-portada .texto > p', 'Almost every homepage shows showcase numbers: what impresses you, not what the visitor gains. The real before and after of mine, and a five-second test for yours.'],
-        ['#entrada-portada .leer', 'See the transformation →'],
+        ['#entrada-portada h3', 'Give me 4 minutes and I’ll show you why your website isn’t selling.'],
+        ['#entrada-portada .texto > p', 'Almost every website shows what impresses you, not what the visitor gains. The real before and after of mine, and the five-second test for yours.'],
+        ['#entrada-portada .leer', 'See the before and after →'],
         ['#entrada-tfg .meta .cat', 'Undergraduate dissertation'],
         ['#entrada-tfg time', 'June 2024'],
-        ['#entrada-tfg .meta span:last-child', '5 min + games'],
         ['#entrada-tfg h3 a', 'I showed 4 ads to 169 people. The winner <em class="rojo">sold nothing.</em>'],
-        ['#entrada-tfg .extracto', 'I sent them to 311 people and 169 told me how they felt. The most frightening one was also the best remembered.'],
-        ['.datos div:nth-child(1) b', '8.6'],
-        ['.datos div:nth-child(1) span', 'attention score for the DGT road safety ad'],
-        ['.datos div:nth-child(2) b', '81%'],
-        ['.datos div:nth-child(2) span', 'felt afraid while watching it'],
-        ['.datos div:nth-child(3) span', 'completed surveys'],
-        ['.acciones-estudio a', 'See what they answered <span aria-hidden="true">→</span>'],
-        ['#abrir-prueba', 'Test yourself'],
-        ['#proximo .vista b', 'Kleenex?'],
-        ['#proximo .meta .cat', 'Coming soon'],
-        ['#proximo .meta span:last-child', 'Brand psychology'],
-        ['#proximo h3', 'How to make your brand the word <em>everyone uses.</em>'],
-        ['#proximo .texto > p', 'Some brands need no introduction: they already live in your head. What they have in common is not money.'],
-        ['#proximo summary > span:first-child', 'Think of a paper tissue. What do you call it?'],
-        ['#proximo summary .fantasma', 'I have an answer'],
-        ['#proximo .grande', '“Kleenex.”'],
-        ['#proximo .respuesta p:last-child', 'It is a brand, not an object. And you did not choose it.'],
-        ['#proximo .leer', 'Let me know when it is out →'],
+        ['#entrada-tfg .extracto', 'The winner didn’t try to persuade: it scared people. 169 people told me how each ad made them feel. I show you the data and 3 rules to make yours memorable.'],
+        ['.portada-cifra b', '81%'],
+        ['.portada-cifra span', 'felt afraid watching it'],
+        ['.acciones-estudio a', 'Read the study <span aria-hidden="true">→</span>'],
+        ['#abrir-prueba', 'Can you guess the winner?'],
         ['#apuesta h2', 'Test yourself'],
         ['#apuesta .mono', '5 seconds'],
         ['.apuesta > .mono', 'Watch, then make your pick'],
@@ -482,28 +523,62 @@
         ['#cruce .mono', 'Comparing your pick with 169 surveys'],
         ['#resultado .nota', 'Average attention score, from 0 to 10'],
         ['#resultado .por-que', 'An ad with nothing to sell won. <strong>Fear won.</strong>'],
-        ['#retar', 'Challenge someone on WhatsApp'],
+        ['#retar', 'Challenge a friend to beat you'],
         ['#copiar', 'Copy link'],
         ['#resultado .leer', 'Why it happens →'],
         ['#rejilla-cab h2', 'More articles'],
+        ['.rejilla [data-publicacion="arranque"] .cat', 'Real case · Internship'],
+        ['.rejilla [data-publicacion="arranque"] time', 'November 2026'],
+        ['.rejilla [data-publicacion="arranque"] h3', 'You do not have a slow environment. You have a start-up tax.'],
+        ['.rejilla [data-publicacion="arranque"] .texto > p', 'You pay it every morning, several times a day, and it never appears on any invoice. The 1-minute test to measure yours.'],
+        ['.rejilla [data-publicacion="arranque"] .leer', 'Measure my wait →'],
+        ['.rejilla [data-publicacion="plantillas"] .cat', 'Real case · Internship'],
+        ['.rejilla [data-publicacion="plantillas"] time', 'November 2026'],
+        ['.rejilla [data-publicacion="plantillas"] h3', 'Your email is not broken. You never tested it in Outlook.'],
+        ['.rejilla [data-publicacion="plantillas"] .texto > p', 'It looks fine on your screen and broken on theirs. The 4 criteria so your automatic email arrives whole.'],
+        ['.rejilla [data-publicacion="plantillas"] .leer', 'Fix my email →'],
+        ['.rejilla [data-publicacion="prompts"] .cat', 'Real case · Internship'],
+        ['.rejilla [data-publicacion="prompts"] time', 'November 2026'],
+        ['.rejilla [data-publicacion="prompts"] h3', 'Your model is not unpredictable. It lacks context.'],
+        ['.rejilla [data-publicacion="prompts"] .texto > p', 'Two answers to one question are not a mystery: it is what you give it. 3 questions to review yours.'],
+        ['.rejilla [data-publicacion="prompts"] .leer', 'Review my model →'],
+        ['.rejilla [data-publicacion="automatizar"] .cat', 'Real case · Internship'],
+        ['.rejilla [data-publicacion="automatizar"] time', 'November 2026'],
+        ['.rejilla [data-publicacion="automatizar"] h3', 'Every task done by hand costs you in full. Again.'],
+        ['.rejilla [data-publicacion="automatizar"] .texto > p', 'A script is paid for once; the hand is paid for every time. 3 questions to decide where to start.'],
+        ['.rejilla [data-publicacion="automatizar"] .leer', 'Choose where to start →'],
+        ['.rejilla [data-publicacion="tickets"] .cat', 'Real case · Internship'],
+        ['.rejilla [data-publicacion="tickets"] time', 'November 2026'],
+        ['.rejilla [data-publicacion="tickets"] h3', 'If you open a ticket to find out it is urgent, the panel is wrong.'],
+        ['.rejilla [data-publicacion="tickets"] .texto > p', 'Opening the ticket to find out if it is urgent is the problem. The 3 rules that fix it: priority, context and action.'],
+        ['.rejilla [data-publicacion="tickets"] .leer', 'See the 3 rules →'],
+        ['.rejilla [data-publicacion="lineas"] .cat', 'Experiment · With AI'],
+        ['.rejilla [data-publicacion="lineas"] time', 'November 2026'],
+        ['.rejilla [data-publicacion="lineas"] h3', 'I gave an AI 1,216 lines of code and asked for one story. Here is what it got wrong.'],
+        ['.rejilla [data-publicacion="lineas"] .texto > p', 'An AI with a vague task fills the gaps with assumptions. The 3 pieces it was missing and a 3-question test.'],
+        ['.rejilla [data-publicacion="lineas"] .leer', 'See the test →'],
         ['.rejilla [data-publicacion="consumidor"] .cat', 'Consumer behaviour'],
         ['.rejilla [data-publicacion="consumidor"] time', 'April 2024'],
-        ['.rejilla [data-publicacion="consumidor"] .meta span:last-child', '2 min + quiz'],
         ['.rejilla [data-publicacion="consumidor"] h3', 'Tell me what you do at the weekend and I’ll tell you what kind of consumer you are.'],
         ['.rejilla [data-publicacion="consumidor"] .texto > p', 'Going out with friends or unwinding alone. Four groups of habits and a quiz to see where you fit.'],
         ['.rejilla [data-publicacion="consumidor"] .leer', 'Take the quiz →'],
-        ['footer .ancho > span', 'Behind what we choose · Álvaro Pastor Periago'],
+        ['#cierre-h', 'What does a first-time visitor understand from your website in <em>five seconds?</em>'],
+        ['#cierre-texto', 'Paste your site and I’ll run the five-second test for you: what a visitor understands and what I’d cut first. Free, in one message. I read it myself, not a template. Fair?'],
+        ['#pega-etiqueta', 'Your website or a link to your ad'],
+        ['#pega-enviar', 'I want my test <span aria-hidden="true">→</span>'],
+        ['#pega-alt', 'Prefer X? <a href="https://x.com/alpas17_" rel="noopener">Message me at @alpas17_</a>'],
+        ['footer .ancho > span','Behind what we choose · Álvaro Pastor Periago'],
         ['footer nav a:first-child', 'The study'],
         ['footer nav a:nth-child(2)', 'Leisure tribes'],
         ['footer nav a:nth-child(3)', 'Apps']
-      ].map(([selector, en]) => {
+      ].filter(([selector]) => $(selector)).map(([selector, en]) => {
         const node = $(selector);
         return { node, es: node.innerHTML, en };
       });
       const ATRIBUTOS = [
         ['.barra nav', 'Main navigation'],
-        ['.temas', 'Filter publications by topic'],
         ['#juguete', 'Tap to feel. Faster taps make a stronger impression and leave more memories.'],
+        ['#tema', 'Change theme'],
         ['#opciones', 'Watch the ads and vote for one'],
         ['footer nav', 'Footer navigation']
       ].map(([selector, en]) => {
@@ -517,44 +592,32 @@
 
       const io = new IntersectionObserver(function (es) {
         es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("visto"); io.unobserve(e.target); } });
-      }, { threshold: 0.15 });
+      }, { threshold: 0.05 });
+
+      /* cierre: pegar la web y abrir el correo con el mensaje ya escrito */
+      const pega = $("#pega"), pegaWeb = $("#pega-web"), pegaEstado = $("#pega-estado");
+      pega.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const web = pegaWeb.value.trim();
+        if (!/^\S+\.\S{2,}$/.test(web)) {
+          pegaWeb.setAttribute("aria-invalid", "true");
+          pegaEstado.textContent = l("Pega la dirección de tu web o de tu anuncio, por ejemplo tuweb.com.", "Paste the address of your site or your ad, for example yoursite.com.");
+          pegaWeb.focus();
+          return;
+        }
+        pegaWeb.removeAttribute("aria-invalid");
+        const asunto = l("La prueba de 5 segundos", "The five-second test");
+        const cuerpo = l("Hola, Álvaro. Esta es mi web: ", "Hi Álvaro, here is my site: ") + web + "\n\n";
+        location.href = "mailto:contacto@alvaropastor.dev?subject=" + encodeURIComponent(asunto) + "&body=" + encodeURIComponent(cuerpo);
+        pegaEstado.textContent = l("Se abre tu correo con el mensaje escrito. ¿No se abre? Escríbeme a contacto@alvaropastor.dev.", "Your email opens with the message ready. Nothing opened? Write to contacto@alvaropastor.dev.");
+      });
+      pegaWeb.addEventListener("input", function () { pegaWeb.removeAttribute("aria-invalid"); pegaEstado.textContent = ""; });
       document.querySelectorAll(".sube").forEach(function (n) { io.observe(n); });
 
-      /* Los temas filtran las entradas sin cambiar la página ni abrir artículos. */
-      const filtros = document.querySelectorAll("[data-filtro]");
-      const publicaciones = document.querySelectorAll("[data-publicacion]");
-      function filtrar(tema) {
-        filtros.forEach(function (boton) {
-          boton.setAttribute("aria-pressed", String(boton.dataset.filtro === tema));
-        });
-        let publicadas = 0, avances = 0, tarjetas = 0, tarjetasPublicadas = 0;
-        publicaciones.forEach(function (entrada) {
-          const visible = entrada.dataset.avance === "true" || tema === "todo" || entrada.dataset.publicacion === tema;
-          entrada.hidden = !visible;
-          if (!visible) return;
-          entrada.classList.add("visto");
-          if (entrada.dataset.avance) avances++;
-          else publicadas++;
-          if (entrada.closest(".rejilla")) {
-            tarjetas++;
-            if (!entrada.dataset.avance) tarjetasPublicadas++;
-          }
-        });
-        const pruebaVisible = (tema === "todo" || tema === "emocional") && $("#abrir-prueba").getAttribute("aria-expanded") === "true";
-        $("#apuesta").hidden = !pruebaVisible;
-        $(".apuesta").hidden = !pruebaVisible;
-        if (!pruebaVisible) cerrarVideos(null);
-        $("#rejilla-cab").hidden = tarjetas === 0;
-        $(".rejilla").hidden = tarjetas === 0;
-        $("#rejilla-cuenta").textContent = tarjetasPublicadas + l(tarjetasPublicadas === 1 ? " publicada" : " publicadas", " published");
-        $("#entradas").textContent = publicadas + l(publicadas === 1 ? " publicación" : " publicaciones", publicadas === 1 ? " publication" : " publications") + (avances ? l(" y 1 avance", " and 1 preview") : "");
-      }
-      filtros.forEach(function (boton) {
-        boton.addEventListener("click", function () { filtrar(boton.dataset.filtro); });
-      });
       function abrirPrueba() {
         $("#abrir-prueba").setAttribute("aria-expanded", "true");
-        filtrar("emocional");
+        $("#apuesta").hidden = false;
+        $(".apuesta").hidden = false;
         $(".apuesta").classList.add("visto");
       }
       $("#abrir-prueba").addEventListener("click", function () {
@@ -569,9 +632,12 @@
         }
       });
       document.querySelector('.barra a[href="#apuesta"]').addEventListener("click", abrirPrueba);
+      $("#primera-apuesta").addEventListener("click", function (e) {
+        e.preventDefault();
+        abrirPrueba();
+        $("#apuesta").scrollIntoView({ behavior: reducido ? "instant" : "smooth", block: "start" });
+      });
       if (location.hash === "#apuesta") abrirPrueba();
-      document.querySelector('.barra a[href="#proximo"]').addEventListener("click", function () { filtrar("marca"); });
-      document.querySelector('.barra a[href="#entradas"]').addEventListener("click", function () { filtrar("todo"); });
 
       /* apuesta (atención media del TFG, 0-10) */
       const ANUNCIOS = [{ n: "Colon", v: 6.47 }, { n: "DGT", v: 8.63 }, { n: "Mastercard", v: 6.82 }, { n: "Teka", v: 7.69 }];
@@ -681,11 +747,23 @@
       function mostrarTema() {
         const nombres = idioma === "en" ? { auto: "auto", light: "light", dark: "dark" } : { auto: "automático", light: "claro", dark: "oscuro" };
         const nombre = nombres[raiz.dataset.pref] || nombres.light;
-        botonTema.textContent = "◐ " + nombre;
+        botonTema.textContent = "◐";
         botonTema.setAttribute("aria-label", l("Tema " + nombre + ". Cambiar tema", "Theme: " + nombre + ". Change theme"));
+        botonTema.title = l("Tema " + nombre, "Theme: " + nombre);
       }
       function aplicarIdioma() {
         document.documentElement.lang = idioma;
+        const MINI_ALT = {"arranque": ["Dibujo antes y después: un muñeco con café y una telaraña esperando una barra casi vacía de «1 min»; después, la barra llena y «4 seg» para ponerse a trabajar", "Before and after drawing: a stick figure with coffee and a cobweb waiting on an almost empty loading bar of about 1 min; after, a full bar and 4 sec to get back to work"], "plantillas": ["Dibujo: el mismo email se ve bien en Gmail y roto en Outlook, con el logo descuadrado; después, siete sobres iguales también en Outlook", "Drawing: the same email looks fine in Gmail and broken in Outlook, with the logo misplaced; after, seven identical envelopes, Outlook included"], "prompts": ["Dibujo: un muñeco rascándose la cabeza porque el modelo da dos respuestas distintas a la misma pregunta; al lado, las dos palancas: prompt y contexto", "Drawing: a stick figure scratching their head because the model gives two different answers to the same question; beside it, the two levers: prompt and context"], "automatizar": ["Dibujo: un muñeco repitiendo una tarea a mano, con una flecha circular roja; después, un terminal de Bash que la hace solo mientras él toma café", "Drawing: a stick figure repeating a task by hand, with a red circular arrow; after, a Bash terminal doing it on its own while they have coffee"], "tickets": ["Dibujo: un panel con todos los tickets en «URGENTE» y un muñeco que no sabe cuál primero; después, un panel con prioridad, contexto y acción y el primero rodeado en rojo", "Drawing: a panel with every ticket marked URGENT and a stick figure who doesn't know which comes first; after, a panel with priority, context and action and the first one circled in red"], "lineas": ["Dibujo antes y después: un texto vago de IA («innovadora, eficiente, escalable») y un muñeco que pregunta qué cambió; después, tres filas (prueba, criterio y revisado) con la primera rodeada en rojo", "Before and after drawing: a vague AI text (innovative, efficient, scalable) and a stick figure asking what changed; after, three rows (evidence, criteria and checked) with the first one circled in red"]};
+        document.querySelectorAll(".img-mini").forEach((im) => {
+          const k = im.dataset.mini;
+          im.src = im.getAttribute("src").replace(/\/miniaturas\/([a-z]+)(-en)?\.webp/, (m, n) => "/miniaturas/" + n + l("", "-en") + ".webp");
+          im.alt = l(MINI_ALT[k][0], MINI_ALT[k][1]);
+        });
+        const imgPortada = $("#img-portada");
+        if (imgPortada) {
+          imgPortada.src = imgPortada.getAttribute("src").replace(/portada-tarjeta(-en)?.webp/, l("portada-tarjeta.webp", "portada-tarjeta-en.webp"));
+          imgPortada.alt = l("Dibujo antes y después: la portada vieja con cifras y un visitante que pregunta qué gana; la nueva con el ejemplo real rodeado y un visitante que dice que lo quiere", "Before and after drawing: the old website full of numbers and a visitor asking what is in it for them; the new one with the real example circled and a visitor saying they want it");
+        }
         ESTATICOS.forEach(({ node, es, en }) => { node.innerHTML = l(es, en); });
         ATRIBUTOS.forEach(({ node, es, en }) => { node.setAttribute("aria-label", l(es, en)); });
         document.title = l("Detrás de lo que elegimos · Álvaro Pastor", "Behind what we choose · Álvaro Pastor");
@@ -709,8 +787,6 @@
           node.href = url.href;
         });
         sello.textContent = l("Tócalo. Más rápido, más se queda.", "Tap it. Faster taps leave a stronger memory.");
-        const activo = document.querySelector('[data-filtro][aria-pressed="true"]');
-        filtrar(activo ? activo.dataset.filtro : "todo");
         if (votoActual !== null && !$("#resultado").hidden) desvelar(votoActual, false);
         mostrarTema();
         try { localStorage.setItem("marketing-language", idioma); } catch (e) { }

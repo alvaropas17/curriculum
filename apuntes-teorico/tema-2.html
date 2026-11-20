@@ -1,0 +1,620 @@
+<title>Tema 2 · Las maniobras</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,600;0,800;0,900;1,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+/* Layout: scrollytelling. Escena 3D fija a la izquierda (arriba en móvil) y capítulos a la derecha con la misma plantilla:
+   promesa → regla en una frase → detalle trampa (sí/no) → datos → reto. Paleta de señalización vial española. */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#151d29; --muted:#566275; --line:#d5dbe4;
+  --blue:#1d5fae; --blue-soft:#e2ecf8; --red:#c4252c; --red-soft:#fbe4e5;
+  --amber:#b97f00; --amber-soft:#fff2cc; --green:#1d8649; --green-soft:#dcf2e4;
+  --sky:#cfe0f0; --asph:#4c5462; --shoulder:#6b7381; --grass3d:#8fb77d; --paint:#ffffff;
+  --display:"Overpass","Arial Narrow",Arial,sans-serif; --body:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e131a; --surface:#161d27; --ink:#e8edf4; --muted:#9ba7b8; --line:#283240;
+  --blue:#5f9de8; --blue-soft:#15263c; --red:#f06a70; --red-soft:#3a191c; --amber:#f0b93a; --amber-soft:#33270a; --green:#4fc27f; --green-soft:#132e1e;
+  --sky:#141c28; --asph:#2f3540; --shoulder:#3d4450; --grass3d:#2f4a2c; --paint:#dfe6ee; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e131a; --surface:#161d27; --ink:#e8edf4; --muted:#9ba7b8; --line:#283240;
+  --blue:#5f9de8; --blue-soft:#15263c; --red:#f06a70; --red-soft:#3a191c; --amber:#f0b93a; --amber-soft:#33270a; --green:#4fc27f; --green-soft:#132e1e;
+  --sky:#141c28; --asph:#2f3540; --shoulder:#3d4450; --grass3d:#2f4a2c; --paint:#dfe6ee; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.3rem,5.5vw,3.9rem);font-weight:900;letter-spacing:-.015em}
+h1 em,h2 em{font-style:italic;color:var(--red)}
+h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:900}
+h3{font-size:1.05rem;font-weight:800}
+p{margin:0}
+.eyebrow{font:700 .74rem/1.3 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--red)}
+.lead{font-size:1.12rem;color:var(--muted);max-width:60ch}
+.lead strong{color:var(--ink)}
+
+/* ---- scrolly ---- */
+.scrolly{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,580px);gap:48px;max-width:1280px;margin:0 auto}
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);height:calc(100vh - 32px);border-radius:20px;overflow:hidden;background:var(--sky);align-self:start;margin-block:16px}
+.stage canvas{width:100%;height:100%;display:block}
+.hud{position:absolute;left:14px;right:14px;bottom:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;pointer-events:none}
+.hud .tag{font:800 .78rem/1 var(--display);letter-spacing:.06em;text-transform:uppercase;background:var(--blue);color:#fff;padding:8px 10px;border-radius:8px}
+.hud .say{font:600 .92rem/1.35 var(--body);background:var(--surface);color:var(--ink);padding:9px 12px;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.15);max-width:100%}
+.stage .fallback{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted)}
+.steps{display:grid;min-width:0}
+.step{padding-block:14vh;display:grid;gap:22px;min-width:0;scroll-margin-top:20px}
+.step.hero{min-height:92vh;align-content:center;padding-block:10vh}
+@media (max-width:899px){
+  .scrolly{grid-template-columns:1fr;gap:0}
+  .stage{height:40vh;top:env(safe-area-inset-top,0px);margin-block:8px;z-index:3;border-radius:14px}
+  .step{padding-block:9vh;scroll-margin-top:calc(40vh + 16px)}
+  .step.hero{min-height:auto;padding-block:5vh 8vh}
+  .hud .say{font-size:.82rem}
+}
+
+/* ---- componentes ---- */
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;text-decoration:none;font:800 1rem var(--display);padding:14px 20px;border-radius:12px;justify-self:start}
+.gift{display:flex;flex-wrap:wrap;gap:8px}
+.gift span{font:700 .82rem var(--body);background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:6px 12px}
+.toc{display:grid;gap:6px;counter-reset:c}
+.toc a{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.toc a b{font:900 1rem var(--mono);color:var(--blue)}
+.toc a span.e{font:700 .72rem var(--mono);color:var(--red)}
+.chap-n{display:inline-flex;align-items:center;gap:10px}
+.chap-n i{font-style:normal;display:inline-grid;place-items:center;width:2em;height:2em;border-radius:6px;background:var(--blue);color:#fff;font:900 .9rem var(--display)}
+.rule{border:2px solid var(--blue);border-radius:16px;padding:16px 18px;background:var(--surface);display:grid;gap:6px}
+.rule p{font-size:1.15rem;font-weight:600;line-height:1.45}
+.lbl{font:800 .7rem/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.trap{display:grid;gap:10px}
+.trap .lbl{color:var(--red)}
+.tp{display:grid;grid-template-columns:1fr 1fr;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.tp>div{padding:12px 14px;display:grid;gap:4px;align-content:start;font-size:.93rem}
+.tp .y{background:var(--green-soft)} .tp .n{background:var(--red-soft)}
+.tp .r{font:900 1.05rem/1.1 var(--display)}
+.tp .y .r{color:var(--green)} .tp .n .r{color:var(--red)}
+.tp .d{background:var(--amber-soft);padding:0 4px;border-radius:4px;font-weight:700}
+@media (max-width:480px){.tp{grid-template-columns:1fr}}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:4px;align-content:start;font-size:.93rem}
+.fact .k{font:900 1.5rem/1 var(--mono);color:var(--blue)}
+.fact .h{font:800 1rem var(--display)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:420px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 .72rem/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.y{color:var(--green);font-weight:800} td.n{color:var(--red);font-weight:800}
+.flow{display:grid;gap:8px;counter-reset:f}
+.flow>div{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.flow>div::before{counter-increment:f;content:counter(f);font:900 1.3rem/1 var(--mono);color:#fff;background:var(--blue);border-radius:8px;width:1.8em;height:1.8em;display:grid;place-items:center}
+.flow small{color:var(--muted);display:block}
+.arms{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.arms figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px;display:grid;gap:6px;font-size:.85rem}
+.arms svg{width:100%;height:auto}
+.arms b{font:800 .95rem var(--display)}
+details.more{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+details.more summary{cursor:pointer;font-weight:700}
+details.more[open] summary{margin-bottom:8px}
+ul.list{margin:0;padding-left:1.1em;display:grid;gap:6px}
+.verify{font:600 .76rem/1.4 var(--body);padding:4px 8px;border-radius:6px;background:var(--amber-soft);color:var(--amber);display:inline-block}
+
+/* simulador */
+.sim{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:12px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:600 .84rem var(--body);padding:8px 12px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.out{border-radius:12px;padding:12px 14px;display:grid;gap:4px}
+.out .big{font:900 1.35rem/1.1 var(--display)}
+.out.ok{background:var(--green-soft)} .out.ok .big{color:var(--green)}
+.out.no{background:var(--red-soft)} .out.no .big{color:var(--red)}
+.out.mid{background:var(--amber-soft)} .out.mid .big{color:var(--amber)}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+
+/* quiz */
+.quiz{background:var(--surface);border:2px solid var(--ink);border-radius:16px;padding:16px;display:grid;gap:12px}
+.quiz .head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.quiz .head strong{font:900 1rem var(--display);text-transform:uppercase;letter-spacing:.05em}
+.pips{display:flex;gap:4px;flex-wrap:wrap}
+.pips i{width:10px;height:10px;border-radius:3px;background:var(--line)}
+.pips i.ok{background:var(--green)} .pips i.ko{background:var(--red)} .pips i.cur{outline:2px solid var(--blue);outline-offset:1px}
+.quiz .q{font-size:1.08rem;font-weight:500}
+.quiz .q .diff{background:var(--amber-soft);padding:0 4px;border-radius:4px;font-weight:700}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font:600 .95rem var(--body);padding:11px 16px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opt.right{background:var(--green);border-color:var(--green);color:#fff} .opt.wrong{background:var(--red);border-color:var(--red);color:#fff}
+.opt:disabled{cursor:default}
+.fb{border-radius:10px;padding:10px 12px;font-size:.93rem} .fb.ok{background:var(--green-soft)} .fb.ko{background:var(--red-soft)}
+.qrow{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center}
+.btn{font:700 .86rem var(--body);padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.end{display:grid;gap:10px;text-align:center;padding:8px}
+.end .big{font:900 2.6rem var(--display)}
+.cap{font-size:.84rem;color:var(--muted)}
+
+/* examen */
+.exam{max-width:820px;margin:0 auto;padding-block:12vh 16vh;display:grid;gap:22px}
+.ab{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.ab>div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:6px}
+.ab .k{font:900 1.6rem var(--display);color:var(--blue)}
+@media (prefers-reduced-motion:no-preference){.fb,.out{animation:in .25s ease}@keyframes in{from{opacity:.4;transform:translateY(-4px)}}}
+</style>
+
+<div class="scrolly">
+  <div class="stage" id="stage" aria-label="Escena 3D que ilustra cada capítulo">
+    <canvas id="gl"></canvas>
+    <div class="hud" aria-live="polite"><span class="tag" id="hudTag">Tema 2</span><span class="say" id="hudSay">Baja para empezar</span></div>
+    <div class="fallback" id="fallback" hidden>La escena 3D no ha podido cargarse en este navegador. Todo el contenido está en el texto.</div>
+  </div>
+
+  <div class="steps">
+    <!-- HERO -->
+    <article class="step hero" data-mode="intro" data-tag="Tema 2" data-say="La DGT no te pregunta la norma. Te cambia un detalle.">
+      <span class="eyebrow">Tema 2 · Las maniobras · 7 escenas · 1 simulador · 30 preguntas</span>
+      <h1>El examen no te pregunta la norma. Te pregunta <em>el detalle</em>.</h1>
+      <p class="lead">Fallas adelantamientos un <strong>31 %</strong> y parada y estacionamiento un <strong>33 %</strong>, y casi nunca por no saber la regla: es por <strong>el detalle trampa</strong>, esa palabra del enunciado (continua, dos ruedas, en poblado, 2 minutos) que le da la vuelta a la respuesta. Aquí cada capítulo te enseña la regla en una frase y, al lado, el detalle que la cambia.</p>
+      <a class="cta" href="#adelantar">Empieza por tu punto débil: adelantar ↓</a>
+      <div class="gift"><span>Regla en una frase</span><span>Detalle trampa: sí / no</span><span>Escena 3D</span><span>Reto de cada capítulo</span></div>
+      <nav class="toc" aria-label="Capítulos">
+        <a href="#senalizar"><b>1</b><span>Mira, avisa, actúa: el orden que nunca cambia</span><span class="e"></span></a>
+        <a href="#adelantar"><b>2</b><span>Cómo saber si puedes adelantar con 3 preguntas</span><span class="e">31 %</span></a>
+        <a href="#ciclistas"><b>3</b><span>1,5 metros o un carril entero</span><span class="e">44 %</span></a>
+        <a href="#parar"><b>4</b><span>La regla de los 2 minutos</span><span class="e">33 %</span></a>
+        <a href="#averia"><b>5</b><span>Te quedas tirado: qué haces y qué ya no vale</span><span class="e"></span></a>
+        <a href="#pendiente"><b>6</b><span>La marcha en una cuesta, sin memorizar</span><span class="e"></span></a>
+        <a href="#girar"><b>7</b><span>Girar a la izquierda: dónde te pones</span><span class="e"></span></a>
+        <a href="#examen"><b>✓</b><span>Examen de 30 preguntas</span><span class="e"></span></a>
+      </nav>
+      <p class="cap">Los porcentajes rojos son tu error en los tests 1–10. <span class="verify">El PDF no trae incorporación, cambio de sentido ni marcha atrás.</span></p>
+    </article>
+
+    <!-- 1 SEÑALIZAR -->
+    <article class="step" id="senalizar" data-mode="senal" data-tag="1 · Señalizar" data-say="Primero miras. Luego avisas. Después mueves.">
+      <span class="chap-n"><i>1</i><span class="eyebrow">Normas generales</span></span>
+      <h2>Mira, avisa, actúa: el orden que <em>nunca</em> cambia</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Observar → señalizar → realizar. Y avisar no te da derecho a pasar: señalizar no te da prioridad.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Intermitente y brazo dicen <span class="d">lo mismo</span></span><span class="r">Valen los dos</span></div><div class="n"><span>Intermitente y brazo <span class="d">se contradicen</span></span><span class="r">Manda el brazo</span></div></div>
+        <div class="tp"><div class="y"><span>Avisar de que adelantas con <span class="d">ráfagas</span></span><span class="r">Dentro y fuera de poblado</span></div><div class="n"><span>Avisar de que adelantas con <span class="d">claxon</span> en poblado</span><span class="r">Prohibido (solo fuera)</span></div></div>
+        <div class="tp"><div class="y"><span>Ráfagas para <span class="d">evitar un accidente</span></span><span class="r">Sí</span></div><div class="n"><span>Ráfagas para <span class="d">avisar de un control</span> o saludar</span><span class="r">Prohibido</span></div></div>
+      </div>
+      <div class="arms" id="arms"></div>
+      <div class="facts">
+        <div class="fact"><span class="h">Espejos obligatorios en un turismo</span><span>Exterior <b>izquierdo</b> + <b>interior</b>. El derecho, solo si el interior no deja ver (remolque, cortinillas).</span></div>
+        <div class="fact"><span class="k">3 de 4</span><span>lados de la luneta trasera que debes ver por el interior, sin mover la cabeza.</span></div>
+        <div class="fact"><span class="h">Convexo</span><span>Más ángulo, pero los coches parecen <b>más lejos</b>. Plano: imagen real. Panorámico: no sustituye a los exteriores.</span></div>
+        <div class="fact"><span class="k">100 km/h</span><span>Motos que no pasan de 100: espejo izquierdo. Si pasan de 100: los dos.</span></div>
+      </div>
+      <details class="more"><summary>Más: ángulo muerto, láminas y claxon</summary><ul class="list">
+        <li>El ángulo muerto existe aunque los espejos estén bien: gira la cabeza.</li>
+        <li>Láminas o cortinillas: solo en las ventanillas traseras y solo si llevas los dos espejos exteriores.</li>
+        <li>Claxon y ráfagas, dentro y fuera de poblado: para evitar un accidente, en un servicio de urgencia y en vías estrechas con muchas curvas.</li>
+        <li>El claxon con notas musicales está prohibido; los tonos especiales son solo para prioritarios.</li>
+      </ul></details>
+      <div class="quiz" data-deck="senal"></div>
+    </article>
+
+    <!-- 2 ADELANTAR -->
+    <article class="step" id="adelantar" data-mode="adelantar" data-tag="2 · Adelantar" data-say="Señalizas el desplazamiento, adelantas rápido y vuelves cuando lo ves en el espejo.">
+      <span class="chap-n"><i>2</i><span class="eyebrow">Adelantamiento · <b>tu error: 31 %</b></span></span>
+      <h2>Cómo saber si puedes adelantar con <em>3 preguntas</em></h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Se adelanta por la izquierda, con visibilidad para acabar y sitio para volver. Los lugares prohibidos tienen cada uno su excepción.</p></div>
+      <div class="flow">
+        <div><span><b>¿Veo lo suficiente para terminar?</b><small>Curva, cambio de rasante, niebla o un camión que tapa: no. Salvo que tengas dos carriles en tu sentido y no invadas el contrario.</small></span></div>
+        <div><span><b>¿Estoy en un sitio prohibido?</b><small>Intersección · paso a nivel · paso de peatones · túnel con un carril por sentido · línea continua · el de delante ya está adelantando.</small></span></div>
+        <div><span><b>¿Tiene excepción ese sitio?</b><small>Mira la tabla: cada prohibición se levanta con un detalle concreto.</small></span></div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>Sitio prohibido</th><th>El detalle que lo permite</th></tr></thead>
+        <tbody>
+          <tr><td>Intersección</td><td>Prioridad <b>señalizada</b> · vehículo de <b>dos ruedas</b> · <b>glorieta</b> · por la derecha al que gira a la izquierda</td></tr>
+          <tr><td>Paso a nivel</td><td>Vehículos de <b>dos ruedas</b>, avisando antes</td></tr>
+          <tr><td>Paso de peatones</td><td>Ir <b>tan despacio</b> que puedas parar</td></tr>
+          <tr><td>Túnel</td><td>Tener <b>más de un carril</b> en tu sentido</td></tr>
+          <tr><td>Línea continua</td><td>Rebasar a ciclistas, peatones o animales <b>lentos</b>, o a un vehículo <b>averiado</b>. Nunca al que está parado por el tráfico</td></tr>
+        </tbody>
+      </table></div>
+      <div class="sim">
+        <h3>Simulador: monta la situación</h3>
+        <div><span class="eyebrow">Dónde</span><div class="seg" id="sLugar"><button data-v="recta" aria-pressed="true">Recta</button><button data-v="curva">Curva sin visibilidad</button><button data-v="peatones">Paso de peatones</button><button data-v="nivel">Paso a nivel</button><button data-v="cruce">Intersección</button><button data-v="glorieta">Glorieta</button><button data-v="tunel">Túnel de 1 carril</button></div></div>
+        <div><span class="eyebrow">A quién</span><div class="seg" id="sQuien"><button data-v="coche" aria-pressed="true">Turismo</button><button data-v="dos">Moto o bici</button><button data-v="adelantando">Uno que ya adelanta</button><button data-v="averiado">Coche averiado</button><button data-v="cola">Coche en la cola de un semáforo</button></div></div>
+        <div><span class="eyebrow">Línea central</span><div class="seg" id="sLinea"><button data-v="disc" aria-pressed="true">Discontinua</button><button data-v="cont">Continua</button><button data-v="dos">Dos carriles en mi sentido</button></div></div>
+        <div><span class="eyebrow">Detalle</span><div class="seg" id="sExtra"><button data-v="no" aria-pressed="true">Ninguno</button><button data-v="lento">Voy tan despacio que puedo parar</button><button data-v="prio">Prioridad señalizada</button><button data-v="izq">El de delante gira a la izquierda</button></div></div>
+        <div class="out" id="sOut"></div>
+      </div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Línea continua, coche <span class="d">averiado</span> en tu carril</span><span class="r">Lo rebasas</span></div><div class="n"><span>Línea continua, coche <span class="d">parado en la cola</span> de un semáforo</span><span class="r">Te quedas detrás</span></div></div>
+        <div class="tp"><div class="y"><span>Por la derecha, en <span class="d">ciudad</span> con 2 carriles marcados por sentido</span><span class="r">Permitido</span></div><div class="n"><span>Por la derecha, en <span class="d">carretera</span>, a uno que va recto</span><span class="r">Prohibido</span></div></div>
+        <div class="tp"><div class="y"><span>Doble sentido con <span class="d">3 carriles</span></span><span class="r">Por el central, si está libre</span></div><div class="n"><span>Te están adelantando y <span class="d">aceleras</span></span><span class="r">Prohibido</span></div></div>
+      </div>
+      <details class="more"><summary>Más: el que es adelantado y lo que no cuenta como adelantar</summary><ul class="list">
+        <li>Si te adelantan: te pegas a la derecha (a la izquierda si vas a girar o parar a ese lado) y no aceleras. Si surge peligro, frenas para dejarle volver.</li>
+        <li>Un pesado que no puede apartarse pero deja adelantar avisa con el <b>brazo de atrás hacia delante</b> o el <b>intermitente derecho</b>.</li>
+        <li>Si el de delante ya ha señalizado que se desplaza a tu lado, <b>él tiene preferencia</b>.</li>
+        <li>No es adelantar: tráfico denso en todos los carriles, ir más rápido por un carril de aceleración, deceleración o bus, o ciclistas en grupo entre ellos.</li>
+      </ul></details>
+      <div class="quiz" data-deck="adel"></div>
+    </article>
+
+    <!-- 3 CICLISTAS -->
+    <article class="step" id="ciclistas" data-mode="ciclista" data-tag="3 · Ciclistas" data-say="Al menos 1,5 m: invade parte del carril contrario si hace falta.">
+      <span class="chap-n"><i>3</i><span class="eyebrow">Separación lateral · <b>bicis y arcén: 44 %</b></span></span>
+      <h2>1,5 metros o <em>un carril entero</em>: cuándo es cada uno</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>A un ciclo o ciclomotor, dentro o fuera de poblado, le dejas al menos 1,5 m; si tienes más de un carril en tu sentido, te cambias de carril entero.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Vía con <span class="d">1 carril</span> por sentido</span><span class="r">≥ 1,5 m, invadiendo lo necesario</span></div><div class="n"><span>Vía con <span class="d">2 carriles</span> por sentido</span><span class="r">Cambio de carril completo</span></div></div>
+        <div class="tp"><div class="y"><span>Tú vas en <span class="d">moto</span> y adelantas a un coche <span class="d">fuera</span> de poblado</span><span class="r">También 1,5 m</span></div><div class="n"><span>Coche a coche <span class="d">en ciudad</span></span><span class="r">Sin cifra: proporcional</span></div></div>
+        <div class="tp"><div class="y"><span>Ciclista lento delante y <span class="d">línea continua</span>, sin nadie de frente</span><span class="r">Puedes invadir</span></div><div class="n"><span>Molestas a un ciclista que viene <span class="d">de frente por su arcén</span></span><span class="r">Prohibido</span></div></div>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="k">1,5 m</span><span>Fuera de poblado también a peatones, animales, carros, vehículos inmovilizados y grúas trabajando.</span></div>
+        <div class="fact"><span class="h">Ciclistas en grupo</span><span>Cuentan como un solo vehículo, y entre ellos no se considera adelantamiento.</span></div>
+      </div>
+      <div class="quiz" data-deck="cicl"></div>
+    </article>
+
+    <!-- 4 PARAR -->
+    <article class="step" id="parar" data-mode="parar" data-tag="4 · Parar" data-say="">
+      <span class="chap-n"><i>4</i><span class="eyebrow">Inmovilizaciones · <b>tu error: 33 %</b></span></span>
+      <h2>La regla de los <em>2 minutos</em> que separa parar de estacionar</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Parada = menos de 2 minutos y sin abandonar el coche. Todo lo demás voluntario es estacionamiento. Y si te paras por el tráfico o por una norma, ni una ni otra: es detención.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>1 minuto, <span class="d">sin bajarte</span>, para que suba alguien</span><span class="r">Parada</span></div><div class="n"><span>1 minuto, pero <span class="d">bajas a por el pan</span></span><span class="r">Estacionamiento</span></div></div>
+        <div class="tp"><div class="y"><span>Atasco: llevas <span class="d">3 minutos</span> sin moverte</span><span class="r">Detención (no cuenta el tiempo)</span></div><div class="n"><span>Esperas <span class="d">5 minutos</span> dentro a que salga alguien</span><span class="r">Estacionamiento</span></div></div>
+        <div class="tp"><div class="y"><span>Línea amarilla <span class="d">discontinua</span> o <span class="d">zigzag</span></span><span class="r">Parar sí, estacionar no</span></div><div class="n"><span>Línea amarilla <span class="d">continua</span></span><span class="r">Ni parar ni estacionar</span></div></div>
+        <div class="tp"><div class="y"><span>Carretera, arcén <span class="d">no transitable</span> aunque esté asfaltado</span><span class="r">Puedes parar en él</span></div><div class="n"><span>Carretera, arcén <span class="d">transitable</span></span><span class="r">No: fuera de él</span></div></div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th></th><th>En ciudad</th><th>En carretera</th></tr></thead>
+        <tbody>
+          <tr><td><b>Dónde</b></td><td>Calzada o arcén, dejando <b>3 m</b> libres</td><td>Fuera de la calzada y del arcén transitable, en el lado <b>derecho</b></td></tr>
+          <tr><td><b>Cómo</b></td><td colspan="2">En línea, paralelo al bordillo. En batería u oblicuo si la vía lo permite. Sin ocupar dos plazas</td></tr>
+          <tr><td><b>Señal</b></td><td colspan="2">Empieza en la vertical de la señal y acaba en la <b>próxima intersección</b></td></tr>
+        </tbody>
+      </table></div>
+      <details class="more"><summary>Dónde no puedes ni parar ni estacionar</summary><ul class="list">
+        <li>Curvas y cambios de rasante sin visibilidad, y cerca de ellos.</li>
+        <li>Pasos de peatones, aceras, carril bici y carril bus.</li>
+        <li>Pasos a nivel y raíles del tranvía.</li>
+        <li>Autopistas y autovías, salvo en zonas habilitadas.</li>
+        <li>Donde tapes señales y en plazas para personas con discapacidad.</li>
+        <li>Solo estacionar, prohibido además en: zona azul sin ticket o pasado el tiempo, zonas de juego (S-28) y de coexistencia (S-47).</li>
+        <li>Peligroso, y la grúa se lo lleva: doble fila, tapar un vado, impedir que otro salga.</li>
+      </ul></details>
+      <div class="quiz" data-deck="inmo"></div>
+    </article>
+
+    <!-- 5 AVERÍA -->
+    <article class="step" id="averia" data-mode="averia" data-tag="5 · Avería" data-say="Emergencia y V-16 en el techo. Salen por el lado contrario al tráfico.">
+      <span class="chap-n"><i>5</i><span class="eyebrow">Detención por emergencia</span></span>
+      <h2>Te quedas tirado: qué haces y qué <em>dejó de valer</em> en 2026</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Si el coche anda, sigues hasta la primera salida. Si no anda: emergencia, V-16 en el techo y fuera por el lado contrario al tráfico, a un sitio seguro.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Hay un sitio <span class="d">seguro fuera</span> de la plataforma</span><span class="r">Salís todos</span></div><div class="n"><span><span class="d">No</span> hay sitio seguro</span><span class="r">Dentro, con cinturón</span></div></div>
+        <div class="tp"><div class="y"><span>Sin triángulos en <span class="d">autopista o autovía</span></span><span class="r">No te sancionan</span></div><div class="n"><span>Triángulos <span class="d">desde el 1-1-2026</span></span><span class="r">Ya no valen: V-16</span></div></div>
+        <div class="tp"><div class="y"><span>Túnel: <span class="d">incendio</span></span><span class="r">Llave puesta, puertas abiertas, huye contra el fuego</span></div><div class="n"><span>Túnel: <span class="d">atasco</span> de más de 2 min</span><span class="r">Motor parado, posición encendida</span></div></div>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="h">V-16</span><span>Amarilla, en lo más alto, visible en 360°, conectada a la DGT. Batería para 18 meses y comunicaciones 12 años.</span></div>
+        <div class="fact"><span class="h">Chaleco</span><span>Obligatorio para el conductor si pisa la calzada o el arcén de una vía interurbana. Recomendado uno por plaza.</span></div>
+        <div class="fact"><span class="h">Luces</span><span>Emergencia de día y de noche. De noche, además, las de posición.</span></div>
+        <div class="fact"><span class="h">Paso a nivel</span><span>Saca a los ocupantes y el coche cuanto antes; si no puedes, avisa a los maquinistas.</span></div>
+      </div>
+      <div class="quiz" data-deck="emerg"></div>
+    </article>
+
+    <!-- 6 PENDIENTE -->
+    <article class="step" id="pendiente" data-mode="pendiente" data-tag="6 · Pendiente" data-say="">
+      <span class="chap-n"><i>6</i><span class="eyebrow">Dejarlo bien inmovilizado</span></span>
+      <h2>La marcha que pones en una cuesta, <em>sin memorizar</em></h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Pon la marcha que empuja en contra de hacia donde se iría el coche. Cuesta arriba se iría hacia atrás: 1.ª. Cuesta abajo se iría hacia delante: marcha atrás. Automático: siempre P.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Pesado (<span class="d">más de 3,5 t</span>, autobús o conjunto) <span class="d">cuesta arriba</span></span><span class="r">Ruedas hacia el centro de la calzada</span></div><div class="n"><span>El mismo, <span class="d">cuesta abajo</span></span><span class="r">Ruedas hacia el bordillo</span></div></div>
+        <div class="tp"><div class="y"><span>Calzos <span class="d">adecuados</span></span><span class="r">Sí, y se quitan antes de salir</span></div><div class="n"><span>Calzar con <span class="d">piedras</span></span><span class="r">Prohibido</span></div></div>
+        <div class="tp"><div class="y"><span>Calzar un <span class="d">camión de 12 t</span></span><span class="r">Obligatorio</span></div><div class="n"><span>Calzar un <span class="d">turismo</span></span><span class="r">No es obligatorio</span></div></div>
+      </div>
+      <p class="cap">Siempre: motor parado, freno de mano y, si te alejas, que nadie pueda usarlo. Las ruedas se giran para que, si el vehículo se mueve, choque contra el bordillo y no salga a la calzada.</p>
+      <div class="quiz" data-deck="pend"></div>
+    </article>
+
+    <!-- 7 GIRAR -->
+    <article class="step" id="girar" data-mode="giro" data-tag="7 · Girar" data-say="Doble sentido: te pegas al centro sin invadir. El centro del cruce, a tu izquierda.">
+      <span class="chap-n"><i>7</i><span class="eyebrow">Cambio de dirección</span></span>
+      <h2>Girar a la izquierda: dónde te pones <em>según la calle</em></h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>A la derecha, pegado al borde derecho. A la izquierda, pegado al lado izquierdo de tu sentido: el borde si es sentido único, el centro si es doble sentido.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Calle de <span class="d">sentido único</span></span><span class="r">Borde izquierdo</span></div><div class="n"><span>Calle de <span class="d">doble sentido</span></span><span class="r">Junto al centro, sin invadir</span></div></div>
+        <div class="tp"><div class="y"><span>Coche girando a la izquierda en <span class="d">carretera</span></span><span class="r">Junto al centro o carril de espera</span></div><div class="n"><span><span class="d">Bici o ciclomotor</span> en carretera, sin carril especial</span><span class="r">Desde el arcén derecho</span></div></div>
+        <div class="tp"><div class="y"><span>Carril de deceleración: entras <span class="d">pronto</span></span><span class="r">Y frenas dentro</span></div><div class="n"><span>Frenar <span class="d">antes</span> de entrar</span><span class="r">Mal: estorbas a los de detrás</span></div></div>
+      </div>
+      <details class="more"><summary>Señales que no prohíben girar</summary><p>Sentido único, paso obligatorio por un lado de un obstáculo y sentido giratorio obligatorio <b>no</b> prohíben girar. La señal de itinerario con rodeo prohíbe el giro directo, pero permite el indirecto.</p></details>
+      <div class="quiz" data-deck="giro"></div>
+    </article>
+  </div>
+</div>
+
+<section class="exam" id="examen">
+  <span class="eyebrow">Al final te prometí la prueba</span>
+  <h2>30 preguntas. Si fallas más de <em>3</em>, no estás listo para este tema.</h2>
+  <p class="lead">El examen real permite 3 fallos de 30. Este mezcla preguntas de todos los capítulos y guarda las que falles en este navegador.</p>
+  <div class="quiz" data-deck="all"></div>
+  <div class="ab">
+    <div><span class="k">A</span><b>Has fallado 3 o menos</b><span>Pasa al Tema 3 (señalización): ahí está tu concepto con más peso, señales y marcas.</span></div>
+    <div><span class="k">B</span><b>Has fallado más de 3</b><span>Pulsa «Solo falladas» y, antes de repetir, vuelve al capítulo de cada fallo y mira su tabla de detalles trampa.</span></div>
+  </div>
+</section>
+
+<script>
+/* ================= DATOS ================= */
+const Q={
+senal:[
+["s1","Intermitente izquierdo encendido y el brazo indica giro a la <span class=diff>derecha</span>. ¿Qué vale?",["El intermitente","El brazo","Ninguna"],1,"Si se contradicen, manda el brazo."],
+["s2","¿Puedes usar el claxon para avisar de que adelantas <span class=diff>dentro de poblado</span>?",["Sí","No"],1,"Para avisar de un adelantamiento, el claxon solo vale fuera de poblado. Dentro, las ráfagas."],
+["s3","¿Y las <span class=diff>ráfagas</span> para avisar de que adelantas dentro de poblado?",["Sí","No"],0,"Las ráfagas valen dentro y fuera de poblado."],
+["s4","¿Es obligatorio el espejo exterior derecho en un turismo?",["Siempre","Solo si el interior no deja ver","Nunca"],1,"Solo cuando el interior no da la visión mínima (remolque, cortinillas…)."],
+["s5","Un espejo <span class=diff>convexo</span> hace que los vehículos parezcan…",["Más cerca","Más lejos","Igual"],1,"Más lejos y más pequeños."],
+["s6","Moto que alcanza <span class=diff>120 km/h</span>: ¿qué espejos?",["Solo el izquierdo","Izquierdo y derecho"],1,"Más de 100 km/h: los dos."],
+["s7","¿Señalizar una maniobra te da prioridad para hacerla?",["Sí","No"],1,"No: solo avisa."]],
+adel:[
+["a1","Curva sin visibilidad, línea discontinua: adelantas a un turismo invadiendo el sentido contrario.",["Permitido","Prohibido"],1,"Sin visibilidad, prohibido si invades el otro sentido."],
+["a2","Misma curva, pero tienes <span class=diff>dos carriles en tu sentido</span> y no invades el contrario.",["Permitido","Prohibido"],0,"Con los sentidos delimitados y sin invadir el contrario, puedes."],
+["a3","Paso a nivel: adelantas a un <span class=diff>turismo</span>.",["Permitido","Prohibido"],1,"Prohibido."],
+["a4","Paso a nivel: adelantas a una <span class=diff>moto</span>, avisando antes.",["Permitido","Prohibido"],0,"Excepción: vehículos de dos ruedas, con aviso."],
+["a6","Línea continua: rebasas a un coche <span class=diff>parado en la cola de un semáforo</span>.",["Permitido","Prohibido"],1,"Si está parado por el tráfico, te quedas detrás."],
+["a7","Línea continua: rebasas a un coche <span class=diff>averiado</span> que ocupa tu carril.",["Permitido","Prohibido"],0,"Sí, tras asegurarte de que no hay peligro."],
+["a8","Intersección sin señales: adelantas a un turismo por la izquierda.",["Permitido","Prohibido"],1,"Prohibido en intersecciones, salvo sus excepciones."],
+["a9","Intersección donde tienes <span class=diff>prioridad señalizada</span>: adelantas a un turismo.",["Permitido","Prohibido"],0,"Excepción: prioridad señalizada."],
+["a10","Ciudad, 2 carriles marcados por sentido: adelantas por la <span class=diff>derecha</span>.",["Permitido","Prohibido"],0,"Sí, con precaución."],
+["a11","Carretera de un carril por sentido: adelantas por la derecha a uno que va recto despacio.",["Permitido","Prohibido"],1,"Por la derecha, solo al que va a girar o parar a la izquierda (u otros casos de la lista)."],
+["a12","Te están adelantando. ¿Puedes acelerar para que acabe antes?",["Sí","No"],1,"Prohibido aumentar la velocidad."],
+["a13","Vas a adelantar y el de delante pone el intermitente izquierdo para adelantar a otro.",["Paso yo, que voy más rápido","Pasa él primero"],1,"El que ya ha señalizado tiene preferencia."],
+["a14","Doble sentido con 3 carriles: ¿por qué carril adelantas?",["El izquierdo","El central, si está libre","Cualquiera"],1,"Por el central, y solo si no lo ocupan los que vienen de frente."],
+["a15","Túnel con <span class=diff>dos</span> carriles en tu sentido: ¿puedes adelantar?",["Sí","No"],0,"La prohibición es para túneles con un solo carril en tu sentido."],
+["a16","Paso de peatones: adelantas <span class=diff>tan despacio</span> que puedes parar si sale alguien.",["Permitido","Prohibido"],0,"Es la excepción de los pasos de peatones."]],
+cicl:[
+["c1","Ciclista en una carretera de <span class=diff>un carril</span> por sentido: separación mínima al adelantarlo.",["1 m","1,5 m","2 m"],1,"Al menos 1,5 m, ocupando parte o todo el carril contrario."],
+["c2","Misma bici, pero hay <span class=diff>dos carriles</span> en tu sentido.",["Basta con 1,5 m","Cambio completo de carril"],1,"Con más de un carril por sentido, cambias de carril del todo."],
+["c3","Línea continua, ciclista lento delante y nadie de frente: ¿puedes invadir el otro carril?",["Sí","No"],0,"Excepción para usuarios lentos y frágiles, si no hay riesgo."],
+["c4","Vas en moto y adelantas a un coche fuera de poblado: ¿separación mínima?",["La que yo vea","1,5 m"],1,"Dos ruedas adelantando fuera de poblado: 1,5 m."],
+["c5","Un ciclista viene de frente por su arcén. ¿Puedes adelantar si le haces apartarse?",["Sí, va por el arcén","No"],1,"Prohibido poner en peligro o entorpecer a ciclistas de frente, aunque vayan por el arcén."]],
+inmo:[
+["i1","Te paras 1 minuto para que suba un amigo, sin bajarte.",["Detención","Parada","Estacionamiento"],1,"Voluntaria, menos de 2 minutos, sin abandonar el coche."],
+["i2","Te paras 1 minuto y <span class=diff>bajas a comprar el pan</span> dejando el coche solo.",["Detención","Parada","Estacionamiento"],2,"Has abandonado el coche: estacionamiento."],
+["i3","Te paras en un semáforo en rojo.",["Detención","Parada","Estacionamiento"],0,"Por cumplir una norma: detención."],
+["i4","Carretera: ¿puedes parar en el <span class=diff>arcén transitable</span>?",["Sí","No"],1,"Fuera de la calzada y de la parte transitable del arcén."],
+["i5","Carretera con arcén <span class=diff>no transitable</span> pero asfaltado: ¿puedes parar en él?",["Sí","No"],0,"Si no es transitable, sí."],
+["i6","Ciudad: ¿cuánto espacio libre dejas al parar en la calzada?",["2 m","3 m","3,5 m"],1,"Al menos 3 m."],
+["i7","Línea amarilla <span class=diff>discontinua</span> en el bordillo: ¿puedes parar?",["Sí","No"],0,"Prohíbe estacionar, no parar."],
+["i8","Línea amarilla <span class=diff>continua</span> en el bordillo: ¿puedes parar?",["Sí","No"],1,"Prohíbe parar y estacionar."],
+["i9","¿Dónde acaba la prohibición de una señal de estacionamiento prohibido?",["A los 100 m","En la próxima intersección","Al final de la calle"],1,"Salvo indicación, en la próxima intersección."],
+["i11","Autovía: ¿puedes parar en el arcén para mirar el mapa?",["Sí","No"],1,"En autopista y autovía, solo en zonas habilitadas."]],
+emerg:[
+["e1","Avería en autovía. ¿Te sancionan por no colocar los triángulos?",["Sí","No"],1,"En autopista y autovía no es sancionable, por el riesgo de atropello."],
+["e2","Incendio en un túnel: ¿qué haces con la llave?",["Me la llevo","La dejo puesta"],1,"Puesta, y las puertas abiertas, para que los servicios de emergencia puedan moverlo."],
+["e3","Atasco en un túnel: ¿cuándo apagas el motor?",["Siempre","Si vas a estar más de 2 minutos","Nunca"],1,"Más de 2 minutos parado."],
+["e4","Coche que no puede seguir y hay un sitio seguro fuera: ¿por qué lado salen los ocupantes?",["El que da al tráfico","El contrario al tráfico"],1,"Por el lado contrario al tráfico."],
+["e5","No hay sitio seguro fuera de la plataforma. ¿Qué hacen los ocupantes?",["Esperan en el arcén","Se quedan dentro con el cinturón"],1,"Dentro, con el cinturón abrochado."],
+["e6","¿Dónde va la luz V-16?",["En el suelo, a 50 m","En lo más alto del vehículo"],1,"En la parte más alta posible, visible en 360°."],
+["e7","La avería te deja seguir. ¿Qué haces?",["Paro en el arcén","Sigo hasta la primera salida por el arcén derecho"],1,"Si puede continuar, abandona los carriles y busca la primera salida."]],
+pend:[
+["p1","Cuesta arriba, cambio manual: ¿qué marcha dejas?",["1.ª","Marcha atrás","Punto muerto"],0,"La 1.ª: si el coche intentara irse hacia atrás, la marcha lo frena."],
+["p2","Cuesta <span class=diff>abajo</span>, cambio manual.",["1.ª","Marcha atrás"],1,"Marcha atrás: se opone a que se vaya hacia delante."],
+["p3","Cuesta abajo, cambio <span class=diff>automático</span>.",["Marcha atrás","P"],1,"Con automático, siempre P."],
+["p4","Camión de 12 t aparcado cuesta arriba junto al bordillo: ¿hacia dónde giras las ruedas?",["Hacia el bordillo","Hacia el centro de la calzada"],1,"Cuesta arriba, hacia el centro; cuesta abajo, hacia fuera."],
+["p5","¿Puedes calzar un autobús con una piedra?",["Sí","No"],1,"Calzos adecuados, nunca piedras."],
+["p6","¿Es obligatorio calzar un turismo en pendiente?",["Sí","No"],1,"Solo conjuntos, autobuses y vehículos de más de 3,5 t."]],
+giro:[
+["g1","Vas en bici por una carretera y quieres girar a la izquierda, sin carril especial.",["Me pego al centro","Me pongo en el arcén derecho y giro desde ahí"],1,"En vías interurbanas, ciclos y ciclomotores de 2 ruedas giran desde el arcén derecho."],
+["g2","Giro a la izquierda en una calle de <span class=diff>sentido único</span>: ¿dónde te colocas?",["En el centro","En el borde izquierdo"],1,"En sentido único, pegado a la izquierda."],
+["g3","Giro a la izquierda en <span class=diff>doble sentido</span>: ¿dónde te colocas?",["En el borde izquierdo","Junto al centro, sin invadir"],1,"Junto al centro de la calzada."],
+["g4","Carril de deceleración: ¿cuándo frenas?",["Antes de entrar","Ya dentro del carril"],1,"Entras lo antes posible y frenas dentro."],
+["g5","¿Qué va primero?",["Señalizar y luego mirar","Mirar y luego señalizar"],1,"Observar, señalizar, realizar."],
+["g6","Señal de itinerario con rodeo indicado: ¿puedes girar directamente?",["Sí","No, solo por el rodeo"],1,"Prohibido el giro directo; permitido el indirecto."]]
+};
+Q.all=[].concat(Q.senal,Q.adel,Q.cicl,Q.inmo,Q.emerg,Q.pend,Q.giro);
+
+/* ================= QUIZ ================= */
+const KEY="tema2-v2";let ST={fails:{}};try{Object.assign(ST,JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const TITLES={senal:"Reto 1 · Señalizar",adel:"Reto 2 · ¿Se puede adelantar?",cicl:"Reto 3 · Ciclistas",inmo:"Reto 4 · Parar o estacionar",emerg:"Reto 5 · Avería",pend:"Reto 6 · Pendiente",giro:"Reto 7 · Girar",all:"Examen · 30 preguntas"};
+document.querySelectorAll(".quiz").forEach(box=>{
+  const deck=box.dataset.deck;let list,idx,res;
+  const head=()=>`<div class="head"><strong>${TITLES[deck]}</strong><div class="pips">${list.map((_,i)=>`<i class="${res[i]===true?"ok":res[i]===false?"ko":""}${i===idx?" cur":""}"></i>`).join("")}</div></div>`;
+  function start(only){let pool=Q[deck];if(only)pool=pool.filter(q=>ST.fails[q[0]]);
+    list=deck==="all"?shuffle(pool).slice(0,30):shuffle(pool);idx=0;res=[];
+    if(!list.length){box.innerHTML=`<div class="head"><strong>${TITLES[deck]}</strong></div><p>No te queda ninguna fallada aquí.</p><div><button class="btn primary">Empezar de nuevo</button></div>`;box.querySelector("button").onclick=()=>start(false);return}
+    render()}
+  function render(){
+    if(idx>=list.length){const ok=res.filter(Boolean).length,ko=list.length-ok;
+      box.innerHTML=head()+`<div class="end"><span class="big">${ok} / ${list.length}</span><p>${deck==="all"?(ko<=3?"Aprobado: 3 fallos o menos. Camino A.":"Más de 3 fallos. Camino B: repasa las falladas."):(ko===0?"Sin fallos.":`${ko} fallo${ko>1?"s":""}. Vuelve a mirar el detalle trampa de este capítulo.`)}</p>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn primary" data-x="a">Repetir</button><button class="btn" data-x="f">Solo falladas</button></div></div>`;
+      box.querySelector('[data-x="a"]').onclick=()=>start(false);box.querySelector('[data-x="f"]').onclick=()=>start(true);return}
+    const [id,q,opts,ans,why]=list[idx];
+    box.innerHTML=head()+`<p class="q">${q}</p><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join("")}</div><div class="fb" hidden></div>
+    <div class="qrow"><span class="cap">${idx+1} de ${list.length}${ST.fails[id]?" · la fallaste antes":""}</span><button class="btn primary" data-x="n" hidden>Siguiente</button></div>`;
+    box.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,ok=i===ans;res[idx]=ok;
+      box.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(+x.dataset.i===ans)x.classList.add("right")});if(!ok)b.classList.add("wrong");
+      if(ok)delete ST.fails[id];else ST.fails[id]=1;save();
+      const fb=box.querySelector(".fb");fb.hidden=false;fb.className="fb "+(ok?"ok":"ko");fb.innerHTML=`<b>${ok?"Correcto.":"No."}</b> ${why}`;
+      box.querySelectorAll(".pips i")[idx].className=ok?"ok cur":"ko cur";
+      const n=box.querySelector('[data-x="n"]');n.hidden=false;n.focus({preventScroll:true});n.onclick=()=>{idx++;render()}})}
+  start(false)});
+
+/* ================= BRAZOS ================= */
+const ARMS=[["Izquierda","Brazo horizontal, palma hacia abajo.","izq"],["Derecha","Brazo doblado hacia arriba, palma hacia delante.","der"],["Marcha atrás","Brazo horizontal, palma hacia atrás.","atras"],["Frenar o parar","Brazo arriba y abajo, movimientos cortos y rápidos.","frenar"],["Te dejo adelantar","Pesado: brazo de atrás hacia delante, o intermitente derecho.","dejar"]];
+function armSvg(k){const s='stroke="var(--ink)" stroke-width="7" stroke-linecap="round" fill="none"';let a="";
+  if(k==="izq")a=`<path d="M58 52 H8" ${s}/><rect x="0" y="54" width="16" height="6" rx="2" fill="var(--ink)"/>`;
+  if(k==="der")a=`<path d="M58 52 H30 V18" ${s}/><rect x="22" y="2" width="16" height="12" rx="3" fill="var(--ink)"/>`;
+  if(k==="atras")a=`<path d="M58 52 H8" ${s}/><rect x="0" y="42" width="6" height="20" rx="2" fill="var(--ink)"/>`;
+  if(k==="frenar")a=`<path d="M58 52 H10" ${s}/><path d="M18 26 v14 M14 30 l4 -5 l4 5 M18 78 v-14 M14 74 l4 5 l4 -5" stroke="var(--red)" stroke-width="3" fill="none"/>`;
+  if(k==="dejar")a=`<path d="M58 52 H10" ${s}/><path d="M6 32 h24 M10 28 l-5 4 l5 4 M26 28 l5 4 l-5 4" stroke="var(--red)" stroke-width="3" fill="none"/>`;
+  return `<svg viewBox="0 0 160 96" aria-hidden="true"><rect x="56" y="30" width="96" height="58" rx="10" fill="var(--blue)"/><rect x="66" y="38" width="36" height="26" rx="4" fill="var(--bg)"/><circle cx="80" cy="46" r="8" fill="var(--ink)"/>${a}<text x="152" y="94" text-anchor="end" style="font:600 9px var(--body);fill:var(--muted)">vista desde detrás</text></svg>`}
+document.getElementById("arms").innerHTML=ARMS.map(([t,d,k])=>`<figure>${armSvg(k)}<b>${t}</b><span>${d}</span></figure>`).join("");
+
+/* ================= SIMULADOR ADELANTAR ================= */
+const pressSeg=(seg,cb)=>seg.querySelectorAll("button").forEach(b=>b.onclick=()=>{seg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));cb()});
+const val=seg=>seg.querySelector('[aria-pressed="true"]').dataset.v;
+const sL=document.getElementById("sLugar"),sQ=document.getElementById("sQuien"),sLi=document.getElementById("sLinea"),sE=document.getElementById("sExtra"),sOut=document.getElementById("sOut");
+function evalAdel(){const L=val(sL),W=val(sQ),Li=val(sLi),E=val(sE);let r,why;const two=W==="dos";
+  if(W==="cola"){r="no";why="Parado por el tráfico (semáforo, cola): no se rebasa, te quedas detrás."}
+  else if(W==="averiado"){r="ok";why="Un vehículo averiado u obstáculo se puede rebasar, incluso con línea continua, tras comprobar que no hay peligro."}
+  else if(W==="adelantando"&&Li!=="dos"){r="no";why="Prohibido adelantar al que ya está adelantando si tienes que invadir el sentido contrario."}
+  else if(L==="curva"&&Li!=="dos"){r="no";why="Sin visibilidad, prohibido. Cambia la línea a «Dos carriles en mi sentido» y verás la excepción."}
+  else if(L==="nivel"){r=two?"ok":"no";why=two?"En pasos a nivel se puede adelantar a vehículos de dos ruedas, avisando antes.":"Prohibido en pasos a nivel. Solo se libra el de dos ruedas: pruébalo."}
+  else if(L==="peatones"){r=E==="lento"?"ok":"no";why=E==="lento"?"Excepción: a una velocidad tan baja que puedas parar si aparece alguien.":"Prohibido, salvo que vayas tan despacio que puedas parar: elige ese detalle."}
+  else if(L==="tunel"){r="no";why="Prohibido en túneles con un solo carril por sentido, sea la línea que sea."}
+  else if(L==="glorieta"){r="ok";why="En glorietas sí se puede adelantar: es una de las excepciones de las intersecciones."}
+  else if(L==="cruce"){if(E==="prio"){r="ok";why="Con prioridad señalizada, se puede."}else if(two){r="ok";why="A vehículos de dos ruedas se les puede adelantar en intersecciones."}else if(E==="izq"){r="ok";why="Por la derecha, al que señaliza que gira a la izquierda."}else{r="no";why="Prohibido en intersecciones salvo: prioridad señalizada, dos ruedas, por la derecha cuando toca o en glorieta."}}
+  else if(Li==="cont"){if(two){r="mid";why="Puedes invadir el otro sentido para rebasar a una bici o ciclomotor <b>si va lo bastante lento</b>. Una moto rápida no entra en la excepción."}else if(E==="izq"){r="ok";why="Lo rebasas por la derecha sin tocar la continua."}else{r="no";why="No puedes cruzar la línea continua para adelantar a un turismo."}}
+  else{r="ok";why=(E==="izq"?"Sí, y por la derecha.":"Sí: señaliza, comprueba el sitio para volver y adelanta con velocidad notoriamente superior.")+(two?" A una bici o ciclomotor, al menos 1,5 m.":"")}
+  sOut.className="out "+r;sOut.innerHTML=`<span class="big">${r==="ok"?"Sí, puedes":r==="no"?"No puedes":"Depende"}</span><span>${why}</span>`}
+[sL,sQ,sLi,sE].forEach(s=>pressSeg(s,evalAdel));evalAdel();
+
+/* ================= ESCENA 3D ================= */
+const hudTag=document.getElementById("hudTag"),hudSay=document.getElementById("hudSay");
+let lastSay="";const say=t=>{if(t!==lastSay){hudSay.textContent=t;lastSay=t}};
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let setMode=()=>{};
+(function(){
+  const stage=document.getElementById("stage"),canvas=document.getElementById("gl");
+  if(!window.THREE){document.getElementById("fallback").hidden=false;return}
+  let renderer;try{renderer=new THREE.WebGLRenderer({canvas,antialias:true})}catch(e){document.getElementById("fallback").hidden=false;return}
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const tok=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim()||"#888";
+  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(42,1,.1,240);
+  scene.add(new THREE.HemisphereLight(0xffffff,0x556677,.85));
+  const sun=new THREE.DirectionalLight(0xffffff,.75);sun.position.set(12,24,10);scene.add(sun);
+  const world=new THREE.Group();scene.add(world);
+  const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.7,metalness:.05},o));
+  const box=(w,h,d,m)=>new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);
+
+  /* carretera */
+  function roadCanvas(){const c=document.createElement("canvas");c.width=128;c.height=256;const g=c.getContext("2d");
+    g.fillStyle=tok("--asph");g.fillRect(0,0,128,256);g.fillStyle=tok("--paint");g.fillRect(3,0,4,256);g.fillRect(121,0,4,256);g.fillRect(62,0,4,128);return c}
+  const roadTex=new THREE.CanvasTexture(roadCanvas());roadTex.wrapS=roadTex.wrapT=THREE.RepeatWrapping;roadTex.repeat.set(1,18);
+  const road=new THREE.Mesh(new THREE.PlaneGeometry(7.5,160),new THREE.MeshStandardMaterial({map:roadTex,roughness:.9}));road.rotation.x=-Math.PI/2;road.position.z=-50;world.add(road);
+  const crossTex=new THREE.CanvasTexture(roadCanvas());crossTex.wrapS=crossTex.wrapT=THREE.RepeatWrapping;crossTex.repeat.set(1,9);
+  const cross=new THREE.Mesh(new THREE.PlaneGeometry(7.5,80),new THREE.MeshStandardMaterial({map:crossTex,roughness:.9}));cross.rotation.x=-Math.PI/2;cross.rotation.z=Math.PI/2;cross.position.set(0,.01,-14);world.add(cross);
+  const shM=M(tok("--shoulder")),grM=M(tok("--grass3d"));
+  const shR=new THREE.Mesh(new THREE.PlaneGeometry(2.6,160),shM);shR.rotation.x=-Math.PI/2;shR.position.set(5.05,-.005,-50);world.add(shR);
+  const shL=shR.clone();shL.position.x=-5.05;world.add(shL);
+  const grass=new THREE.Mesh(new THREE.PlaneGeometry(300,300),grM);grass.rotation.x=-Math.PI/2;grass.position.y=-.03;world.add(grass);
+  const rail=box(.12,.35,160,M(0xb9c1cc,{metalness:.6,roughness:.35}));rail.position.set(6.7,.55,-50);world.add(rail);
+  for(let z=25;z>-125;z-=4){const p=box(.1,.6,.1,M(0x8a919c));p.position.set(6.7,.3,z);world.add(p)}
+  const yel=M(0xf2c200,{emissive:0x3a2c00});
+  const yCont=box(.14,.02,60,yel);yCont.position.set(3.62,.012,-10);world.add(yCont);
+  const yDash=new THREE.Group();for(let z=18;z>-40;z-=2.2){const s=box(.14,.02,1.1,yel);s.position.set(3.62,.012,z);yDash.add(s)}world.add(yDash);
+
+  /* vehículos */
+  function blinker(){return box(.22,.14,.08,M(0x5a3a10,{emissive:0xff9a1a,emissiveIntensity:0}))}
+  function wheel(r,w){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,w,18),M(0x1b1f25,{roughness:.9}));m.rotation.z=Math.PI/2;return m}
+  function addLights(g,hw,y,zf,zr){const L=[],R=[];[[-hw,zf,L],[hw,zf,R],[-hw,zr,L],[hw,zr,R]].forEach(([x,z,arr])=>{const b=blinker();b.position.set(x,y,z);g.add(b);arr.push(b)});g.userData.L=L;g.userData.R=R}
+  function makeCar(color){const g=new THREE.Group();const paint=M(color,{roughness:.35,metalness:.3});
+    const body=box(1.8,.62,4.2,paint);body.position.y=.56;g.add(body);
+    const cab=box(1.6,.55,2.2,M(0x26303c,{roughness:.2,metalness:.4}));cab.position.set(0,1.13,.25);g.add(cab);
+    const roof=box(1.5,.08,2,paint);roof.position.set(0,1.44,.25);g.add(roof);
+    const fr=[];[[-.86,-1.35,1],[.86,-1.35,1],[-.86,1.35,0],[.86,1.35,0]].forEach(([x,z,f])=>{const w=wheel(.34,.26);if(f){const p=new THREE.Group();p.position.set(x,.34,z);p.add(w);g.add(p);fr.push(p)}else{w.position.set(x,.34,z);g.add(w)}});
+    g.userData.front=fr;addLights(g,.74,.66,-2.12,2.12);
+    const hl=box(.4,.14,.05,M(0xffffff,{emissive:0xfff3c0,emissiveIntensity:.6}));[-.5,.5].forEach(x=>{const h=hl.clone();h.position.set(x,.68,-2.12);g.add(h)});
+    const tl=box(.4,.14,.05,M(0x8a0d12,{emissive:0xff2020,emissiveIntensity:.4}));[-.5,.5].forEach(x=>{const t=tl.clone();t.position.set(x,.72,2.12);g.add(t)});return g}
+  function makeTruck(){const g=new THREE.Group();const cabM=M(0xd9dde3,{roughness:.4});
+    const cab=box(2.4,2.3,2.2,cabM);cab.position.set(0,1.55,-3.3);g.add(cab);
+    const ws=box(2.1,.9,.05,M(0x26303c,{roughness:.2}));ws.position.set(0,2.05,-4.41);g.add(ws);
+    const cargo=box(2.5,2.9,6.6,M(0xc4252c,{roughness:.6}));cargo.position.set(0,1.95,1.2);g.add(cargo);
+    const fr=[];[[-1.1,-3.3,1],[1.1,-3.3,1],[-1.1,2.6,0],[1.1,2.6,0],[-1.1,1.2,0],[1.1,1.2,0]].forEach(([x,z,f])=>{const w=wheel(.52,.4);if(f){const p=new THREE.Group();p.position.set(x,.52,z);p.add(w);g.add(p);fr.push(p)}else{w.position.set(x,.52,z);g.add(w)}});
+    g.userData.front=fr;addLights(g,1.05,.95,-4.42,4.52);return g}
+  function makeCyclist(){const g=new THREE.Group();const tm=M(0x1b1f25);
+    [-.55,.55].forEach(z=>{const t=new THREE.Mesh(new THREE.TorusGeometry(.34,.045,8,20),tm);t.rotation.y=Math.PI/2;t.position.set(0,.36,z);g.add(t)});
+    const fr=box(.05,.05,1.05,M(0xf2c200));fr.position.y=.62;g.add(fr);
+    const body=box(.38,.62,.32,M(0x1f8a4c));body.position.set(0,1.18,.05);body.rotation.x=-.45;g.add(body);
+    const head=new THREE.Mesh(new THREE.SphereGeometry(.14,14,10),M(0xf2c200));head.position.set(0,1.62,-.18);g.add(head);return g}
+  function makePerson(){const g=new THREE.Group();const b=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,1.1,12),M(0xc8f000,{emissive:0x334000}));b.position.y=.8;g.add(b);
+    const h=new THREE.Mesh(new THREE.SphereGeometry(.15,12,10),M(0xe0a37a));h.position.y=1.5;g.add(h);return g}
+
+  const me=makeCar(0x1d5fae),other=makeCar(0x9aa3ad),truck=makeTruck(),cyc=makeCyclist(),person=makePerson();
+  [me,other,truck,cyc,person].forEach(o=>world.add(o));
+  const v16=new THREE.Mesh(new THREE.CylinderGeometry(.09,.11,.14,14),M(0xffa000,{emissive:0xffa000,emissiveIntensity:0}));v16.position.set(.3,1.55,.6);me.add(v16);
+  const v16L=new THREE.PointLight(0xffa000,0,9);v16L.position.set(.3,1.9,.6);me.add(v16L);
+  const gap=box(1,.05,.3,M(0x1d8649,{emissive:0x1d8649,emissiveIntensity:.8}));world.add(gap);
+
+  function themeColors(){scene.background=new THREE.Color(tok("--sky"));scene.fog=new THREE.Fog(scene.background,40,120);
+    shM.color.set(tok("--shoulder"));grM.color.set(tok("--grass3d"));
+    roadTex.image=roadCanvas();roadTex.needsUpdate=true;crossTex.image=roadCanvas();crossTex.needsUpdate=true}
+  themeColors();
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change",themeColors);
+  new MutationObserver(themeColors).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+  /* utilidades */
+  const R=1.75,lerp=(a,b,t)=>a+(b-a)*t,ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2,cl=t=>Math.max(0,Math.min(1,t));
+  function blink(car,side,t){const on=Math.sin(t*9.4)>0;["L","R"].forEach(s=>car.userData[s].forEach(b=>b.material.emissiveIntensity=(side===s||side==="B")&&on?2.2:0))}
+  function steer(car,a){car.userData.front.forEach(p=>p.rotation.y=a)}
+  function reset(){[me,other,truck,cyc,person,gap,yCont,yDash,cross].forEach(o=>o.visible=false);
+    [me,other,truck].forEach(c=>{c.rotation.set(0,0,0);blink(c,null,0);steer(c,0)});v16.visible=false;v16.material.emissiveIntensity=0;v16L.intensity=0;world.rotation.x=0;speed=1}
+  let speed=1,tilt=0;
+
+  const MODES={
+   intro:{cam:[9,7,13],look:[0,0,-6],set(){me.visible=truck.visible=other.visible=true;me.position.set(R,0,2);truck.position.set(R,0,-14);other.position.set(-R,0,-50);other.rotation.y=Math.PI},
+     upd(t,dt){other.position.z+=dt*24;if(other.position.z>30)other.position.z=-90}},
+   senal:{cam:[R+.3,2.7,9.5],look:[R,.8,-8],set(){me.visible=truck.visible=true;me.position.set(R,0,0);truck.position.set(R,0,-16)},
+     upd(t){const p=(t%9)/3|0;say(["1. Observar: espejos y ángulo muerto","2. Señalizar con antelación","3. Realizar, sin forzar a nadie"][p]);blink(me,p>0?"L":null,t);me.position.x=p===2?lerp(R,R-.6,cl((t%3)/3)):R;me.rotation.y=p===2?.06:0}},
+   adelantar:{cam:[6,9.5,15],look:[0,0,-7],set(){me.visible=truck.visible=true;truck.position.set(R,0,-6)},
+     upd(t){const p=t%8;let x=R,z=4,ry=0,side=null,s;
+       if(p<1.6){const k=ease(p/1.6);x=lerp(R,-R,k);z=lerp(4,1.5,k);ry=.13;side="L";s="Señalizas el desplazamiento lateral"}
+       else if(p<5.4){x=-R;z=lerp(1.5,-17,(p-1.6)/3.8);s="Velocidad notoriamente superior"}
+       else if(p<7){const k=ease((p-5.4)/1.6);x=lerp(-R,R,k);z=-17-(p-5.4)*.6;ry=-.13;side="R";s="Vuelves cuando lo ves en el espejo interior"}
+       else{x=R;z=-18;s="Y quitas el intermitente"}
+       me.position.set(x,0,z);me.rotation.y=ry;blink(me,side,t);say(s)}},
+   ciclista:{cam:[8,10,9],look:[1,0,-6],set(){me.visible=cyc.visible=true;cyc.position.set(3,0,-6)},
+     upd(t){const p=t%7;let x=R,z=6;
+       if(p<1.5){x=lerp(R,.3,ease(p/1.5));z=lerp(7,3,p/1.5)}else if(p<4.6){x=.3;z=lerp(3,-15,(p-1.5)/3.1)}else if(p<6){x=lerp(.3,R,ease((p-4.6)/1.4));z=lerp(-15,-18,(p-4.6)/1.4)}else{x=R;z=-18}
+       me.position.set(x,0,z);blink(me,p<1.5?"L":p>4.6&&p<6?"R":null,t);
+       const near=z<-2.5&&z>-9.5;gap.visible=near;if(near){const a=x+.9,b=2.8;gap.scale.x=b-a;gap.position.set((a+b)/2,1,-6)}
+       say(near?"≥ 1,5 m: invades parte del carril contrario":"Un carril por sentido: 1,5 m. Dos carriles: cambio completo")}},
+   parar:{cam:[-1.5,6,11],look:[2.6,0,-3],set(){me.visible=true;me.position.set(R,0,0)},
+     upd(t){const p=t%9,cyc2=Math.floor(t/9)%2;speed=p<3?1-p/3:0;me.position.x=lerp(R,2.62,ease(cl(p/3)));me.rotation.y=p<3?-.05*Math.sin(p/3*Math.PI):0;
+       blink(me,p<3?"R":null,t);yCont.visible=cyc2===0;yDash.visible=cyc2===1;
+       say(cyc2===0?"Línea amarilla continua: ni parar ni estacionar":"Línea amarilla discontinua: parar sí, estacionar no")}},
+   averia:{cam:[-3,4.5,12],look:[4.6,.6,-2],set(){me.visible=other.visible=person.visible=v16.visible=true;speed=0;me.position.set(4.95,0,0);other.position.set(R,0,25)},
+     upd(t,dt){blink(me,"B",t);const pulse=Math.sin(t*7)>0;v16.material.emissiveIntensity=pulse?3:.2;v16L.intensity=pulse?2.2:0;
+       other.position.z-=dt*22;if(other.position.z<-90)other.position.z=30;
+       const k=cl((t%7)/3);person.position.set(lerp(5.95,8,ease(k)),0,lerp(.4,2,k));say(k<1?"Salen por el lado contrario al tráfico":"Fuera de la plataforma, tras el guardarraíl")}},
+   pendiente:{cam:[-7,4.5,9],look:[2.4,1,-3],set(){truck.visible=true;speed=0;truck.position.set(2.35,0,-3);yCont.visible=false},
+     upd(t){const up=Math.floor(t/5)%2===0;tilt=lerp(tilt,up?.14:-.14,.05);world.rotation.x=tilt;steer(truck,lerp(truck.userData.front[0].rotation.y,up?.5:-.5,.06));
+       say(up?"Cuesta arriba · manual: 1.ª · automático: P · ruedas hacia el centro":"Cuesta abajo · manual: marcha atrás · automático: P · ruedas hacia el bordillo")}},
+   giro:{cam:[9,13,7],look:[-1,0,-12],set(){me.visible=cross.visible=true;speed=0;other.visible=true;other.position.set(-R,0,-30);other.rotation.y=Math.PI},
+     upd(t){const p=t%7;let x,z,ry=0;
+       if(p<2){const k=ease(p/2);x=lerp(R,.6,k);z=lerp(6,-8,p/2);ry=.08*Math.sin(k*Math.PI);blink(me,"L",t)}
+       else if(p<5){const s=(p-2)/3,a=1-s;const P0=[.6,-8],P1=[.6,-15.75],P2=[-10,-15.75];
+         x=a*a*P0[0]+2*a*s*P1[0]+s*s*P2[0];z=a*a*P0[1]+2*a*s*P1[1]+s*s*P2[1];
+         const dx=2*a*(P1[0]-P0[0])+2*s*(P2[0]-P1[0]),dz=2*a*(P1[1]-P0[1])+2*s*(P2[1]-P1[1]);ry=Math.atan2(-dx,-dz);blink(me,s<.6?"L":null,t)}
+       else{x=lerp(-10,-18,(p-5)/2);z=-15.75;ry=Math.PI/2;blink(me,null,t)}
+       me.position.set(x,0,z);me.rotation.y=ry;other.position.z=lerp(-30,-17.5,cl(p/2));
+       say(p<2?"Doble sentido: te pegas al centro, sin invadir":"El centro del cruce queda a tu izquierda")}}
+  };
+  let mode="intro",mt=0;const camPos=new THREE.Vector3(9,7,13),camLook=new THREE.Vector3(0,0,-6);
+  setMode=(m,tag,s)=>{if(!MODES[m])return;hudTag.textContent=tag||"";if(s)say(s);if(m===mode)return;mode=m;mt=0;reset();MODES[m].set();if(RM){camPos.set(...MODES[m].cam);camLook.set(...MODES[m].look)}};
+  reset();MODES.intro.set();
+
+  function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.fov=w<500?55:42;camera.updateProjectionMatrix()}
+  new ResizeObserver(resize).observe(stage);resize();
+  let visible=true;new IntersectionObserver(e=>visible=e[0].isIntersecting).observe(stage);
+  const clock=new THREE.Clock();
+  (function loop(){requestAnimationFrame(loop);const dt=Math.min(clock.getDelta(),.05)*(RM?.4:1);if(!visible)return;mt+=dt;
+    MODES[mode].upd(mt,dt);roadTex.offset.y+=speed*dt*1.6;
+    if(mode!=="pendiente"){tilt=lerp(tilt,0,.1);world.rotation.x=tilt}
+    const tp=new THREE.Vector3(...MODES[mode].cam),tl=new THREE.Vector3(...MODES[mode].look),k=1-Math.exp(-dt*2.2);
+    camPos.lerp(tp,k);camLook.lerp(tl,k);camera.position.copy(camPos);camera.lookAt(camLook);renderer.render(scene,camera)})();
+})();
+
+/* ================= CAPÍTULOS → ESCENA ================= */
+const steps=[...document.querySelectorAll(".step")];
+let curStep=null,ticking=false;
+function pickStep(){ticking=false;const narrow=innerWidth<900,line=narrow?innerHeight*.62:innerHeight*.5;
+  let found=steps[0];for(const s of steps){const r=s.getBoundingClientRect();if(r.top<=line&&r.bottom>line){found=s;break}if(r.top<=line)found=s}
+  if(found!==curStep){curStep=found;const d=found.dataset;setMode(d.mode,d.tag,d.say||"")}}
+addEventListener("scroll",()=>{if(!ticking){ticking=true;requestAnimationFrame(pickStep)}},{passive:true});
+addEventListener("resize",pickStep);pickStep();
+</script>

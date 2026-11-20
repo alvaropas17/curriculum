@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Tu modelo no es impredecible. Le falta contexto · Álvaro Pastor</title>
+  <meta name="description" content="La misma pregunta y dos respuestas distintas casi nunca son culpa del modelo: es lo que le das. Las 2 palancas que toqué y 3 preguntas para revisar el tuyo.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="author" content="Álvaro Pastor Periago">
+  <link rel="canonical" href="https://marketing.alvaropastor.dev/prompts/">
+  <meta property="og:type" content="article"><meta property="og:site_name" content="Álvaro Pastor Periago."><meta property="og:locale" content="es_ES">
+  <meta property="og:title" content="Tu modelo no es impredecible. Le falta contexto"><meta property="og:description" content="La misma pregunta y dos respuestas distintas casi nunca son culpa del modelo: es lo que le das. Las 2 palancas que toqué y 3 preguntas para revisar el tuyo.">
+  <meta property="og:image" content="https://marketing.alvaropastor.dev/assets/og/prompts.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Dibujo: un muñeco rascándose la cabeza porque el modelo da dos respuestas distintas a la misma pregunta; al lado, las dos palancas: prompt y contexto">
+  <meta property="article:published_time" content="2026-11-16"><meta property="article:author" content="Álvaro Pastor Periago">
+  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content="@alpas17_"><meta name="twitter:title" content="Tu modelo no es impredecible. Le falta contexto"><meta name="twitter:description" content="La misma pregunta y dos respuestas distintas casi nunca son culpa del modelo: es lo que le das. Las 2 palancas que toqué y 3 preguntas para revisar el tuyo."><meta name="twitter:image" content="https://marketing.alvaropastor.dev/assets/og/prompts.jpg">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","@id":"https://marketing.alvaropastor.dev/prompts/#articulo","headline":"Tu modelo no es impredecible. Le falta contexto","description":"La misma pregunta y dos respuestas distintas casi nunca son culpa del modelo: es lo que le das. Las 2 palancas que toqué y 3 preguntas para revisar el tuyo.","inLanguage":"es","datePublished":"2026-11-16","dateModified":"2026-11-16","image":"https://marketing.alvaropastor.dev/assets/og/prompts.jpg","mainEntityOfPage":"https://marketing.alvaropastor.dev/prompts/","author":{"@type":"Person","name":"Álvaro Pastor Periago","url":"https://x.com/alpas17_"},"publisher":{"@type":"Person","name":"Álvaro Pastor Periago"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Blog de marketing","item":"https://marketing.alvaropastor.dev/"},{"@type":"ListItem","position":2,"name":"Tu modelo no es impredecible. Le falta contexto","item":"https://marketing.alvaropastor.dev/prompts/"}]}]}</script>
+  <script>try{var t=localStorage.getItem('marketing-theme')||'light';document.documentElement.dataset.pref=t;document.documentElement.dataset.tema=t==='auto'?(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'):t}catch(e){}</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500;1,6..72,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/portada-caso.css">
+  <style>
+/* Estilos exclusivos de este artículo; la tipografía Newsreader actual se conserva. */
+:root{--story-red:#b72c25;--story-yellow:#ffd84d;--story-mark:#fff0aa}
+:root[data-tema="dark"]{--story-red:#f28a7d;--story-mark:#55451d}
+.arranque-main{max-width:960px;margin:auto;padding:64px 24px 80px}
+.article-heading{max-width:740px;margin:0 auto 32px}
+.eyebrow,.chapter{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-muted)}
+.eyebrow{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px}
+.article-heading h1{font-size:clamp(32px,3.6vw,50px);line-height:1.08;letter-spacing:-.03em;font-weight:500;max-width:720px;text-wrap:balance}
+.standfirst{font-size:23px;line-height:1.45;color:var(--ink-muted);max-width:650px;margin-top:24px;text-wrap:pretty}
+.hero-gains{list-style:none;margin:20px 0 24px;padding:0;font-size:18px;line-height:1.45;max-width:600px}
+.hero-gains li{position:relative;padding-left:26px;margin-bottom:8px;text-wrap:pretty}
+.hero-gains li::before{content:"✓";position:absolute;left:0;color:var(--story-red);font-weight:700}
+.hero-dibujo{max-width:800px;margin:0 auto 60px}
+.hero-dibujo img{width:100%;height:auto;border:1px solid var(--rule);border-radius:3px}
+.hero-dibujo figcaption,.sketch figcaption{font-size:14px;line-height:1.5;color:var(--ink-muted);margin-top:12px}
+.story{max-width:650px;margin:auto;font-size:20px;line-height:1.7}
+.story section{scroll-margin-top:108px;margin-bottom:56px}
+.story .chapter{margin:0 0 14px;line-height:1.4}
+.story h2{font-size:clamp(29px,3.2vw,39px);line-height:1.14;letter-spacing:-.025em;font-weight:500;margin-bottom:24px;text-wrap:balance}
+.story p{margin-bottom:22px;text-wrap:pretty}
+.story strong{font-weight:600;color:var(--ink);background:linear-gradient(transparent 62%,var(--story-mark) 62%,var(--story-mark) 92%,transparent 92%)}
+.story .opening::first-letter{font-size:3.7em;float:left;line-height:.8;margin:9px 9px 0 0}
+.sketch{margin:30px 0 32px;padding:16px 12px 0;border-block:1px solid var(--rule)}
+.sketch svg{width:100%;height:auto;color:var(--ink)}
+.ink-line{fill:none;stroke:currentColor;stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.red-stroke{fill:none;stroke:var(--story-red);stroke-width:9;stroke-linecap:round}
+.yellow-stroke{fill:none;stroke:var(--story-yellow);stroke-width:18;stroke-linecap:round;opacity:.7}
+.sketch-label{fill:currentColor;font-family:"Newsreader",Georgia,serif;font-size:22px;font-style:italic}
+.sketch figcaption{margin-bottom:16px}
+.story .evidence-note{font-size:17px;color:var(--ink-muted);padding-left:20px;border-left:2px solid var(--rule)}
+.story .lead-line{font-size:23px;line-height:1.45;margin-bottom:24px}
+.story .closing-line{font-size:26px;line-height:1.4;font-style:italic;margin-top:32px}
+.closing-offer{scroll-margin-top:108px;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);padding:32px 0 24px;margin-top:56px}
+.closing-offer p{font-size:18px;line-height:1.6}
+.offer-link{display:inline-flex;align-items:center;min-height:48px;padding:12px 22px;border-radius:5px;background:var(--story-yellow);color:#231e17;font-size:18px;font-weight:600;line-height:1.3;text-decoration:none;transition:transform .15s}
+.offer-link:hover{transform:translateX(3px)}
+.story .offer-detail{margin:16px 0 0;font-size:15px;color:var(--ink-muted)}
+.read-next{display:flex;justify-content:space-between;gap:16px;margin-top:28px;font-size:16px;line-height:1.5;color:var(--ink-muted)}
+.read-next a{text-decoration:underline;text-underline-offset:4px;color:var(--ink)}
+body>header button{min-height:44px;min-width:44px}
+body>header .nav-link{display:flex;align-items:center;min-height:44px}
+body>header nav{gap:18px}
+body>header .bg-accent{background:var(--story-red)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--story-red);outline-offset:5px}
+::selection{background:var(--story-yellow);color:#231e17}
+@media(max-width:767px){.arranque-main{padding:36px 20px 56px}.article-heading{margin-bottom:24px}.article-heading h1{font-size:34px;line-height:1.1}.standfirst{font-size:21px;margin-top:20px}.hero-gains{font-size:17px;margin:16px 0 20px}.hero-dibujo{margin-bottom:40px}.hero-dibujo figcaption{font-size:13px}.story{font-size:19px;line-height:1.65}.story section{margin-bottom:42px}.story h2{font-size:31px}.sketch{padding:12px 0 0;margin-block:24px}.sketch-label{font-size:24px}.story .closing-line{font-size:24px}.closing-offer{margin-top:40px}.read-next{display:block}.read-next span{display:block;margin-bottom:8px}body>header>div:nth-child(2){gap:8px;padding-inline:16px}body>header>div:nth-child(2)>a:first-child{font-size:16px;flex-shrink:1;line-height:1.1;max-width:160px}body>header button{padding-inline:10px;font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body class="bg-paper text-ink font-sans antialiased selection:bg-accent selection:text-white">
+
+  <header class="sticky top-0 z-40 bg-paper/90 backdrop-blur-md border-b border-rule">
+    <div class="w-full h-[2px]"><div id="reading-progress" class="h-full bg-accent w-0 transition-all duration-75"></div></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center gap-3 sm:gap-4">
+      <a href="marketing-portada.html" class="font-serif text-lg sm:text-xl font-medium tracking-tight text-ink hover:opacity-80 transition-opacity shrink-0 mr-auto">Álvaro Pastor Periago<span class="text-accent font-semibold">.</span></a>
+      <nav aria-label="Secciones" class="hidden md:flex items-center gap-6 text-xs font-medium text-ink-muted">
+        <a href="#sec-1" data-nav="sec-1" class="nav-link hover:text-ink transition-colors py-1" data-en="Why">El porqué</a>
+        <a href="#sec-2" data-nav="sec-2" class="nav-link hover:text-ink transition-colors py-1" data-en="The error">El error</a>
+        <a href="#sec-3" data-nav="sec-3" class="nav-link hover:text-ink transition-colors py-1" data-en="The 2 levers">Las 2 palancas</a>
+        <a href="#sec-4" data-nav="sec-4" class="nav-link hover:text-ink transition-colors py-1" data-en="The test">La prueba</a>
+        </nav>
+      <a href="marketing-portada.html" class="hidden sm:inline-flex items-center text-xs font-medium text-ink-muted hover:text-ink px-3 py-1.5 rounded-lg border border-rule bg-paper-card hover:border-ink-light transition-colors" data-en="← Back to the blog">← Volver al blog</a>
+      <button id="idioma" type="button" aria-label="Switch to English" class="font-mono text-[11px] text-ink-muted border border-rule rounded-full px-3 min-h-[34px] hover:text-accent hover:border-accent transition-colors cursor-pointer">EN</button>
+      <button id="tema" type="button" aria-label="Cambiar tema" class="font-mono text-[11px] text-ink-muted border border-rule rounded-full px-3 min-h-[34px] hover:text-accent hover:border-accent transition-colors cursor-pointer">◐ claro</button>
+    </div>
+  </header>
+
+  <main class="arranque-main">
+    <header class="article-heading">
+      <p class="eyebrow"><span data-en="Real case · My internship">Caso real · Mis prácticas</span> <span aria-hidden="true">/</span> <time datetime="2026-11-16" data-en="16 Nov 2026">16 nov 2026</time></p>
+      <h1 data-en="Your model is not unpredictable. It lacks context">Tu modelo no es impredecible. Le falta contexto</h1>
+      <p class="standfirst" data-en="Same question, two answers: it is almost always what you give it, not the model. Here are the 2 levers I touched and 3 questions to review yours.">La misma pregunta, dos respuestas: casi siempre es lo que le das, no el modelo. Aquí tienes las 2 palancas que toqué y 3 preguntas para revisar el tuyo.</p>
+      <ul class="hero-gains">
+        <li data-en="The <strong>2 levers</strong> that really move an answer: the prompt and the context.">Las <strong>2 palancas</strong> que de verdad mueven una respuesta: el prompt y el contexto.</li>
+        <li data-en="The <strong>3 questions</strong> to review your model today, without changing tools or versions.">Las <strong>3 preguntas</strong> para revisar tu modelo hoy, sin cambiar de herramienta ni de versión.</li>
+      </ul>
+    </header>
+
+    <figure class="hero-dibujo">
+      <img id="hero-dibujo" src="../assets/miniaturas/prompts.webp?v=1" data-src-en="../assets/miniaturas/prompts-en.webp?v=1" data-alt-es="Dibujo: un muñeco rascándose la cabeza porque el modelo da dos respuestas distintas a la misma pregunta; al lado, las dos palancas: prompt y contexto" data-alt-en="Drawing: a stick figure scratching their head because the model gives two different answers to the same question; beside it, the two levers: prompt and context" alt="Dibujo: un muñeco rascándose la cabeza porque el modelo da dos respuestas distintas a la misma pregunta; al lado, las dos palancas: prompt y contexto" width="1600" height="900" fetchpriority="high" decoding="async">
+      <figcaption data-en="The case in one drawing. Below: why I started looking at it and what you can copy today.">El caso, en un dibujo. Debajo: por qué empecé a mirarlo y qué puedes copiar hoy.</figcaption>
+    </figure>
+
+        <article class="story" aria-label="Caso de prompts" data-label-es="Caso de prompts" data-label-en="Prompts case">
+      <section id="sec-1">
+        <p class="chapter" data-en="01 / Why">01 / Por qué hago esto</p>
+        <h2 data-en="I started looking at the answers because the team stopped trusting them.">Empecé a mirar las respuestas porque el equipo dejó de fiarse de ellas.</h2>
+        <p class="opening" data-en="I do this because a model that answers differently every time is not argued with: it is abandoned. And when a team stops trusting it, it does not go back to the tool: it goes back to the spreadsheet.">Hago esto porque un modelo que contesta distinto cada vez no se discute: se abandona. Y cuando un equipo deja de fiarse, no vuelve a la herramienta: vuelve al Excel.</p>
+        <p data-en="During my 2026 internship at a technology company (I am not naming it) I worked with a model that gave different answers to the same question. It was not the model: it was what we were handing it.">Durante mis prácticas de 2026 en una empresa tecnológica (no la nombro) trabajé con un modelo que daba respuestas distintas a la misma pregunta. No era el modelo: era lo que le estábamos dando.</p>
+        <p data-en="Nobody had written down what role it played, what data it could use or what format the answer had to have. Each person asked in their own way, so each person got their own answer.">Nadie había dejado por escrito qué papel tenía, con qué datos contaba ni en qué formato quería la respuesta. Cada persona preguntaba a su manera, así que cada persona recibía su propia respuesta.</p>
+      </section>
+
+      <section id="sec-2">
+        <p class="chapter" data-en="02 / The error">02 / El error</p>
+        <h2 data-en="The model does not guess. It fills the gaps you leave.">El modelo no adivina. Rellena los huecos que tú dejas.</h2>
+        <p class="lead-line" data-en="If two people ask the same thing and get different answers, it is almost never the model."><em>Si dos personas preguntan lo mismo y reciben cosas distintas, casi nunca es el modelo.</em></p>
+        <p data-en="That is the error with a name: <strong>the context gap</strong>. The model does not know what you are building, who the answer is for or what has to come out. So it completes it with what is most common, not with what is true for you.">Ese es el error con nombre: <strong>el hueco de contexto</strong>. El modelo no sabe qué estás construyendo, para quién es la respuesta ni qué tiene que salir. Así que lo completa con lo más habitual, no con lo que es cierto para ti.</p>
+        <p data-en="Lowering the temperature makes it repeat itself more. It does not make it right.">Bajar la temperatura hace que se repita más. No hace que acierte.</p>
+        <figure class="sketch">
+          <svg class="editorial-sketch" viewBox="0 0 640 360" role="img" aria-labelledby="prompt-title prompt-desc">
+<title id="prompt-title" data-en="One question, two answers and two levers">Una pregunta, dos respuestas y las dos palancas</title>
+<desc id="prompt-desc" data-en="The same question branches into two answers. Below, two controls identify the levers: prompt and context.">La misma pregunta se divide en dos respuestas. Debajo, dos mandos identifican las palancas: prompt y contexto.</desc>
+<style>
+.editorial-sketch .line,.editorial-sketch .card,.editorial-sketch .soft{stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round;fill:none}
+.editorial-sketch .card{fill:var(--paper,#faf7f0);fill-opacity:.35}
+.editorial-sketch .soft{opacity:.45;stroke-width:2.3}
+.editorial-sketch .wash{fill:var(--story-yellow,#ffd84d);opacity:.24;stroke:none}
+.editorial-sketch .mark{stroke:var(--story-yellow,#ffd84d);stroke-width:13;stroke-linecap:round;fill:none;opacity:.8}
+.editorial-sketch .label{fill:currentColor;font-family:inherit;font-weight:500;letter-spacing:-.5px}
+.editorial-sketch .number{fill:currentColor;font-family:Georgia,serif;font-size:62px;font-style:italic}
+</style>
+<path class="card" d="M43 34 L286 32 L284 105 L40 103 Z"/><text x="163" y="78" text-anchor="middle" class="label" style="font-size:27px" data-en="Why does it change?">¿Por qué cambia?</text><path class="line" d="M288 68 h45 M333 68 v-18 h39 M333 68 v57 h39"/><path class="card" d="M385 24 L595 22 L593 80 L382 78 Z"/><text x="488" y="61" text-anchor="middle" class="label" style="font-size:27px" data-en="Yes, sure.">Sí, claro.</text><path class="card" d="M385 100 L595 98 L593 156 L382 154 Z"/><text x="488" y="137" text-anchor="middle" class="label" style="font-size:27px" data-en="Depends.">Depende.</text><path class="soft" d="M44 192 Q320 188 594 192"/><ellipse class="wash" cx="320" cy="274" rx="236" ry="22"/><path class="line" d="M119 281 h145 M191 280 l-27 -49 M378 281 h145 M450 280 l29 -49"/><circle class="card" cx="160" cy="224" r="15"/><circle class="card" cx="483" cy="224" r="15"/><text x="192" y="330" text-anchor="middle" class="label" style="font-size:28px" data-en="Prompt">Prompt</text><text x="450" y="330" text-anchor="middle" class="label" style="font-size:28px" data-en="Context">Contexto</text>
+</svg>
+          <figcaption data-en="The same question, two answers. The fix is on the right: what you ask and what you give.">La misma pregunta, dos respuestas. El arreglo está a la derecha: qué pides y qué das.</figcaption>
+        </figure>
+      </section>
+
+      <section id="sec-3">
+        <p class="chapter" data-en="03 / The change">03 / El cambio</p>
+        <h2 data-en="The two levers I touched: what you ask and what you give.">Las dos palancas que toqué: qué le pides y qué le das.</h2>
+        <p class="lead-line" data-en="I did not change the tool. I changed the three lines above the question."><em>No cambié de herramienta. Cambié las tres líneas que van antes de la pregunta.</em></p>
+        <p data-en="<strong>1. Prompt: role, task and format.</strong> Who it answers as, what it has to do, and what shape the answer must have. If the format is not stated, you do not get a document: you get prose."><strong>1. Prompt: papel, tarea y formato.</strong> Como quién responde, qué tiene que hacer y qué forma tiene la respuesta. Si el formato no se dice, no sale un documento: sale prosa.</p>
+        <p data-en="<strong>2. Context: the data it needs.</strong> The part of the business that matters, the examples that set the tone, the limits it cannot cross. Without this, the model invents the context it is missing."><strong>2. Contexto: los datos que necesita.</strong> La parte del negocio que importa, los ejemplos que marcan el tono, los límites que no puede pasar. Sin esto, el modelo se inventa el contexto que le falta.</p>
+        <p data-en="Everything else is tuning: temperature, version, model size. It helps, but it does not fix a question that was never well posed.">Lo demás es afinado: temperatura, versión, tamaño del modelo. Ayuda, pero no arregla una pregunta que nunca estuvo bien planteada.</p>
+      </section>
+
+      <section id="sec-4">
+        <p class="chapter" data-en="04 / The test">04 / La prueba</p>
+        <h2 data-en="3 questions to review yours.">3 preguntas para revisar el tuyo.</h2>
+        <p data-en="<strong>1. What exactly are you asking it?</strong> Write it as if a new colleague were going to read it, with no prior knowledge of the project."><strong>1. ¿Qué le pides exactamente?</strong> Escríbelo como si fuera a leerlo un compañero nuevo, sin conocimiento previo del proyecto.</p>
+        <p data-en="<strong>2. What context does it receive?</strong> Data, examples, limits. If the answer is generic, this is the line that is missing."><strong>2. ¿Qué contexto recibe?</strong> Datos, ejemplos, límites. Si la respuesta es genérica, esta es la línea que falta.</p>
+        <p data-en="<strong>3. What would you do with two different answers?</strong> If there is no answer, you do not have a system: you have a conversation."><strong>3. ¿Qué harías con dos respuestas distintas?</strong> Si no hay respuesta, no tienes un sistema: tienes una conversación.</p>
+        <p class="closing-line" data-en="The useful lesson is not to make the model deterministic. It is to stop asking it to guess what only you know.">Lo útil no es volver determinista al modelo. Es dejar de pedirle que adivine lo que solo sabes tú.</p>
+      </section>
+
+      <section id="sec-5">
+        <p class="chapter" data-en="05 / What I cannot show">05 / Lo que no puedo enseñar</p>
+        <h2 data-en="I do not show the prompts, or a figure of improvement.">No enseño los prompts ni una cifra de mejora.</h2>
+        <p data-en="I cannot publish the prompts we used or the data behind them. And I do not have a percentage for how much the answers improved, because nobody measured it: I am not going to invent one.">No puedo publicar los prompts que usamos ni los datos que había detrás. Y no tengo un porcentaje de cuánto mejoraron las respuestas, porque nadie lo midió: no lo voy a inventar.</p>
+        <p class="evidence-note" data-en="What I can show is the order: role, task, format and context, and the three questions to check whether yours is missing one of them.">Lo que sí puedo enseñarte es el orden: papel, tarea, formato y contexto, y las tres preguntas para comprobar si al tuyo le falta uno.</p>
+      </section>
+      <aside class="closing-offer" aria-labelledby="offer-title">
+        <p class="chapter" data-en="A next step · Your website">Un siguiente paso · Tu web</p>
+        <h2 id="offer-title" data-en="Homepage review in 48 hours.">Revisión de portada en 48 h.</h2>
+        <p data-en="A broken email in Outlook and a website nobody understands share the same flaw: it looks right to you, not to whoever receives it. Send me the address and I tell you the first thing I would fix, why, and what the visitor should notice. Free, one a day, and I read it myself.">Un email roto en Outlook y una web que no se entiende tienen el mismo fallo: lo ves bien tú, no quien lo recibe. Mándame la dirección y te digo la primera cosa que arreglaría, por qué, y qué debería notar el visitante. Gratis, una al día, y la leo yo.</p>
+        <p data-en="<strong>48-hour guarantee:</strong> if I do not answer within 48 hours, I review your site with you on a 20-minute call."><strong>Garantía de las 48 horas:</strong> si no te contesto en 48 h, te reviso la web contigo en una llamada de 20 minutos.</p>
+        <p data-en="And an A or B: do you want me to tell you what I would remove, or what I would add? Say it in the email and I start there. Does that sound fair?">Y una elección A o B: ¿prefieres que te diga qué quitaría o qué añadiría? Dímelo en el correo y empiezo por ahí. ¿Te parece justo?</p>
+        <a class="offer-link" href="marketing-portada.html#cierre" data-en="Send my website for review →">Enviar mi web para revisión →</a>
+        <p class="offer-detail" data-en="The form on the blog home opens your email with the message ready to send. If you would rather do it alone, the 3 steps above are the short version.">El formulario de la portada abre tu correo con el mensaje preparado para enviar. Si prefieres hacerlo solo, los 3 pasos de arriba son la versión corta.</p>
+      </aside>
+      <nav class="read-next" aria-label="Seguir leyendo" data-label-es="Seguir leyendo" data-label-en="Keep reading">
+        <span data-en="Keep reading">Sigue leyendo</span>
+        <a href="marketing-automatizar.html" data-en="What should you automate first? →">¿Qué deberías automatizar primero? →</a>
+      </nav>
+    </article>
+  </main>
+
+  <footer class="border-t border-rule bg-paper-card">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-ink-muted">
+      <div class="font-serif text-sm text-ink"><span data-en="Behind what we choose">Detrás de lo que elegimos</span> · <span class="font-medium">Álvaro Pastor Periago<span class="text-accent">.</span></span></div>
+      <div class="flex items-center gap-5 font-mono">
+        <a href="https://x.com/alpas17_" target="_blank" rel="noopener" class="hover:text-ink transition-colors">@alpas17_</a>
+        <span>·</span>
+        <a href="marketing-portada.html" class="hover:text-ink transition-colors" data-en="← Back to the blog">← Volver al blog</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (()=>{
+    let lang=new URLSearchParams(location.search).get('lang');
+    try{if(!['es','en'].includes(lang))lang=localStorage.getItem('marketing-language')}catch(e){}
+    if(!['es','en'].includes(lang))lang='es';
+    const l=(es,en)=>lang==='en'?en:es;
+    const $=id=>document.getElementById(id);
+    const nodes=[...document.querySelectorAll('[data-en]')].map(node=>({node,es:node.innerHTML,en:node.dataset.en}));
+    const links=[...document.querySelectorAll('a[href]')].filter(a=>!a.getAttribute('href').startsWith('#')&&!/^[a-z]+:/i.test(a.getAttribute('href'))).map(node=>({node,href:node.getAttribute('href')}));
+    const secciones=["sec-1", "sec-2", "sec-3", "sec-4"];
+    const navLinks=[...document.querySelectorAll('.nav-link')];
+    function scroll(){
+      const alto=document.documentElement.scrollHeight-innerHeight;
+      $('reading-progress').style.width=(alto>0?Math.min(100,Math.max(0,scrollY/alto*100)):0)+'%';
+      let activa=secciones[0];
+      secciones.forEach(id=>{const el=$(id);if(el&&el.getBoundingClientRect().top<=180)activa=id});
+      navLinks.forEach(a=>{const on=a.dataset.nav===activa;a.classList.toggle('text-ink',on);a.classList.toggle('font-semibold',on)});
+    }
+    addEventListener('scroll',scroll,{passive:true});
+    function tema(){const r=document.documentElement,p=r.dataset.pref||'light';$('tema').textContent='◐ '+l({light:'claro',dark:'oscuro',auto:'auto'}[p]||p,p);$('tema').setAttribute('aria-label',l('Cambiar tema','Change theme'))}
+    function traducir(){
+      document.documentElement.lang=lang;
+      nodes.forEach(x=>x.node.innerHTML=x[lang]);
+      document.querySelectorAll('[data-label-es]').forEach(node=>node.setAttribute('aria-label',lang==='en'?node.dataset.labelEn:node.dataset.labelEs));
+      const hd=$('hero-dibujo');if(hd){hd.src=lang==='en'?hd.dataset.srcEn:hd.dataset.srcEn.replace('-en.webp','.webp');hd.alt=lang==='en'?hd.dataset.altEn:hd.dataset.altEs}
+      $('idioma').textContent=l('EN','ES');$('idioma').setAttribute('aria-label',l('Switch to English','Cambiar a español'));
+      document.title=l("Tu modelo no es impredecible. Le falta contexto · Álvaro Pastor","Your model is not unpredictable. It lacks context · Álvaro Pastor");
+      links.forEach(x=>{const u=new URL(x.href,location.href);u.searchParams.set('lang',lang);x.node.href=u.href});
+      tema();scroll();
+      try{localStorage.setItem('marketing-language',lang)}catch(e){}
+    }
+    $('idioma').addEventListener('click',()=>{lang=l('en','es');traducir();const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u)});
+    $('tema').addEventListener('click',()=>{const r=document.documentElement,t=r.dataset.pref==='dark'?'light':'dark';r.dataset.pref=t;r.dataset.tema=t;try{localStorage.setItem('marketing-theme',t)}catch(e){}tema()});
+    traducir();
+  })();
+  </script>
+</body>
+</html>

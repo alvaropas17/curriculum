@@ -1,0 +1,1292 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Teórico DGT · Apuntes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:ital,wght@0,600;0,800;0,900;1,900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<style>
+/* Layout: cabecera con los dos temas; debajo, scrollytelling con una escena 3D procedural fija (izquierda en escritorio, arriba en móvil)
+   y los capítulos del tema activo con la misma plantilla: promesa → regla en una frase → detalle trampa → datos → reto. */
+:root{
+  --bg:#f3f5f8; --surface:#ffffff; --ink:#151d29; --muted:#566275; --line:#d5dbe4;
+  --blue:#1d5fae; --blue-soft:#e2ecf8; --red:#c4252c; --red-soft:#fbe4e5;
+  --amber:#b97f00; --amber-soft:#fff2cc; --green:#1d8649; --green-soft:#dcf2e4;
+  --t1:#1d5fae; --t2:#c4252c; --t3:#7a3fb5;
+  --skytop:#5d93cf; --sky:#d8e6f2; --asph:#50565f; --shoulder:#73777d; --grass3d:#7fa86c; --paint:#f4f4f0;
+  --display:"Overpass","Arial Narrow",Arial,sans-serif; --body:"Inter",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e131a; --surface:#161d27; --ink:#e8edf4; --muted:#9ba7b8; --line:#283240;
+  --blue:#5f9de8; --blue-soft:#15263c; --red:#f06a70; --red-soft:#3a191c; --amber:#f0b93a; --amber-soft:#33270a; --green:#4fc27f; --green-soft:#132e1e;
+  --t1:#5f9de8; --t2:#f06a70; --t3:#b58af0;
+  --skytop:#0b1220; --sky:#2a3346; --asph:#2c3138; --shoulder:#3b4047; --grass3d:#2c4228; --paint:#cfd5dc; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e131a; --surface:#161d27; --ink:#e8edf4; --muted:#9ba7b8; --line:#283240;
+  --blue:#5f9de8; --blue-soft:#15263c; --red:#f06a70; --red-soft:#3a191c; --amber:#f0b93a; --amber-soft:#33270a; --green:#4fc27f; --green-soft:#132e1e;
+  --t1:#5f9de8; --t2:#f06a70; --t3:#b58af0;
+  --skytop:#0b1220; --sky:#2a3346; --asph:#2c3138; --shoulder:#3b4047; --grass3d:#2c4228; --paint:#cfd5dc; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+h1,h2,h3{font-family:var(--display);line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.2rem,5.2vw,3.7rem);font-weight:900;letter-spacing:-.015em}
+h1 em,h2 em{font-style:italic;color:var(--accent,var(--red))}
+h2{font-size:clamp(1.55rem,3.4vw,2.2rem);font-weight:900}
+h3{font-size:1.05rem;font-weight:800}
+p{margin:0}
+.eyebrow{font:700 .74rem/1.3 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.eyebrow b{color:var(--red)}
+.lead{font-size:1.1rem;color:var(--muted);max-width:60ch}
+.lead strong{color:var(--ink)}
+
+/* cabecera y temas */
+.top{max-width:1280px;margin:0 auto;padding-block:28px 8px;display:grid;gap:16px}
+.brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;justify-content:space-between}
+.brand strong{font:900 1.15rem var(--display)}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tab{display:grid;gap:2px;text-align:left;padding:14px 16px;border-radius:14px;border:2px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font:inherit}
+.tab .n{font:900 .8rem var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.tab .t{font:900 clamp(1.05rem,2.6vw,1.4rem)/1.1 var(--display)}
+.tab .s{font-size:.82rem;color:var(--muted)}
+.tab[aria-selected="true"]{border-color:var(--accent);box-shadow:inset 0 -4px 0 var(--accent)}
+.tab[data-t="1"]{--accent:var(--t1)} .tab[data-t="2"]{--accent:var(--t2)} .tab[data-t="3"]{--accent:var(--t3)}
+.switch{position:fixed;z-index:20;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));display:flex;gap:4px;padding:4px;border-radius:99px;background:var(--surface);border:1px solid var(--line);box-shadow:0 6px 24px rgba(0,0,0,.18)}
+.switch button{white-space:nowrap;font:800 .82rem var(--display);letter-spacing:.04em;border:0;border-radius:99px;padding:9px 13px;background:transparent;color:var(--muted);cursor:pointer}
+.switch button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.switch button[data-t="1"]{--accent:var(--t1)} .switch button[data-t="2"]{--accent:var(--t2)} .switch button[data-t="3"]{--accent:var(--t3)}
+
+/* scrolly */
+.scrolly{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,580px);gap:48px;max-width:1280px;margin:0 auto}
+.stage{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);height:calc(100vh - 32px);border-radius:20px;overflow:hidden;background:var(--sky);align-self:start;margin-block:16px}
+.stage canvas{width:100%;height:100%;display:block}
+.hud{position:absolute;left:14px;right:14px;bottom:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:flex-end;pointer-events:none}
+.hud .tag{font:800 .78rem/1 var(--display);letter-spacing:.06em;text-transform:uppercase;background:var(--accent);color:#fff;padding:8px 10px;border-radius:8px}
+.hud .say{font:600 .92rem/1.35 var(--body);background:var(--surface);color:var(--ink);padding:9px 12px;border-radius:10px;box-shadow:0 4px 18px rgba(0,0,0,.18);max-width:100%}
+.stage .fallback{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted)}
+.steps{display:grid;min-width:0;padding-bottom:12vh}
+.tema{display:grid;min-width:0}
+.tema[data-t="1"]{--accent:var(--t1)} .tema[data-t="2"]{--accent:var(--t2)} .tema[data-t="3"]{--accent:var(--t3)}
+.step{padding-block:14vh;display:grid;gap:22px;min-width:0}
+.step.hero{min-height:88vh;align-content:center;padding-block:8vh}
+@media (max-width:899px){
+  .scrolly{grid-template-columns:1fr;gap:0}
+  .stage{height:40vh;top:env(safe-area-inset-top,0px);margin-block:8px;z-index:3;border-radius:14px}
+  .step{padding-block:9vh}
+  .step.hero{min-height:auto;padding-block:5vh 8vh}
+  .hud .say{font-size:.8rem}
+  .tab .s{display:none}
+}
+
+/* componentes */
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;border:0;cursor:pointer;font:800 1rem var(--display);padding:14px 20px;border-radius:12px;justify-self:start}
+.toc{display:grid;gap:6px}
+.toc button{display:grid;grid-template-columns:2em 1fr auto;gap:12px;align-items:center;text-align:left;font:inherit;cursor:pointer;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+.toc b{font:900 1rem var(--mono);color:var(--accent)}
+.toc .e{font:700 .72rem var(--mono);color:var(--red)}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.filters div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:.9rem;display:grid;gap:2px}
+.filters b{font:900 1rem var(--display)}
+.chap-n{display:inline-flex;align-items:center;gap:10px}
+.chap-n i{font-style:normal;display:inline-grid;place-items:center;width:2em;height:2em;border-radius:6px;background:var(--accent);color:#fff;font:900 .9rem var(--display)}
+.rule{border:2px solid var(--accent);border-radius:16px;padding:16px 18px;background:var(--surface);display:grid;gap:6px}
+.rule p{font-size:1.13rem;font-weight:600;line-height:1.45}
+.lbl{font:800 .7rem/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.trap{display:grid;gap:10px}
+.trap>.lbl{color:var(--red)}
+.tp{display:grid;grid-template-columns:1fr 1fr;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.tp>div{padding:12px 14px;display:grid;gap:4px;align-content:start;font-size:.93rem}
+.tp .y{background:var(--green-soft)} .tp .n{background:var(--red-soft)}
+.tp .r{font:900 1.03rem/1.15 var(--display)}
+.tp .y .r{color:var(--green)} .tp .n .r{color:var(--red)}
+.tp u,.q u{text-decoration:none;background:var(--amber-soft);padding:0 4px;border-radius:4px;font-weight:700}
+@media (max-width:480px){.tp{grid-template-columns:1fr}}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:grid;gap:4px;align-content:start;font-size:.92rem}
+.fact .k{font:900 1.5rem/1 var(--mono);color:var(--accent)}
+.fact .h{font:800 1rem var(--display)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.92rem;min-width:440px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 .72rem/1.2 var(--body);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.flow{display:grid;gap:8px;counter-reset:f}
+.flow>div{display:grid;grid-template-columns:auto 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.flow>div::before{counter-increment:f;content:counter(f);font:900 1.2rem/1 var(--mono);color:#fff;background:var(--accent);border-radius:8px;width:1.8em;height:1.8em;display:grid;place-items:center}
+.flow small{color:var(--muted);display:block}
+.ladder{display:grid;gap:4px;margin:0;padding:0;list-style:none;counter-reset:l}
+.ladder li{display:grid;grid-template-columns:2em 1fr;gap:8px;align-items:center;font-size:.9rem}
+.ladder li::before{counter-increment:l;content:counter(l);font:800 .9rem var(--mono);color:var(--accent);text-align:right}
+.ladder li span{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:6px;padding:5px 10px}
+.arms{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.arms figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px;display:grid;gap:6px;font-size:.85rem}
+.arms svg{width:100%;height:auto}
+.arms b{font:800 .95rem var(--display)}
+details.more{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px}
+details.more summary{cursor:pointer;font-weight:700}
+details.more[open] summary{margin-bottom:8px}
+ul.list{margin:0;padding-left:1.1em;display:grid;gap:6px}
+.verify{font:600 .76rem/1.4 var(--body);padding:4px 8px;border-radius:6px;background:var(--amber-soft);color:var(--amber);display:inline-block}
+.cap{font-size:.84rem;color:var(--muted)}
+.joke{font-style:italic;color:var(--muted);border-left:4px solid var(--accent);padding:2px 0 2px 12px;max-width:60ch}
+.hook{font:900 clamp(1.05rem,2.4vw,1.25rem)/1.25 var(--display);color:var(--accent)}
+@media (max-width:640px){.tab{padding:10px 10px}.tab .t{font-size:.95rem}.tab .n{font-size:.66rem;letter-spacing:.04em}}
+.sim{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:12px}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{font:600 .84rem var(--body);padding:8px 12px;border-radius:99px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.out{border-radius:12px;padding:12px 14px;display:grid;gap:4px}
+.out .big{font:900 1.35rem/1.1 var(--display)}
+.out.ok{background:var(--green-soft)} .out.ok .big{color:var(--green)}
+.out.no{background:var(--red-soft)} .out.no .big{color:var(--red)}
+.out.mid{background:var(--amber-soft)} .out.mid .big{color:var(--amber)}
+button:focus-visible,summary:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.quiz{background:var(--surface);border:2px solid var(--ink);border-radius:16px;padding:16px;display:grid;gap:12px}
+.quiz .head{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.quiz .head strong{font:900 .95rem var(--display);text-transform:uppercase;letter-spacing:.05em}
+.pips{display:flex;gap:4px;flex-wrap:wrap}
+.pips i{width:10px;height:10px;border-radius:3px;background:var(--line)}
+.pips i.ok{background:var(--green)} .pips i.ko{background:var(--red)} .pips i.cur{outline:2px solid var(--accent);outline-offset:1px}
+.quiz .q{font-size:1.06rem;font-weight:500}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font:600 .95rem var(--body);padding:11px 16px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opt.right{background:var(--green);border-color:var(--green);color:#fff} .opt.wrong{background:var(--red);border-color:var(--red);color:#fff}
+.opt:disabled{cursor:default}
+.fb{border-radius:10px;padding:10px 12px;font-size:.93rem} .fb.ok{background:var(--green-soft)} .fb.ko{background:var(--red-soft)}
+.qrow{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center}
+.btn{font:700 .86rem var(--body);padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.end{display:grid;gap:10px;text-align:center;padding:8px}
+.end .big{font:900 2.6rem var(--display)}
+.ab{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.ab>div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:6px}
+.ab .k{font:900 1.6rem var(--display);color:var(--accent)}
+@media (prefers-reduced-motion:no-preference){.fb,.out{animation:in .25s ease}@keyframes in{from{opacity:.4;transform:translateY(-4px)}}}
+</style>
+
+<header class="top">
+  <div class="brand"><strong>Teórico DGT · Apuntes</strong><span class="eyebrow">Permiso B · Manual AEOL</span></div>
+  <div class="tabs" role="tablist" aria-label="Temas">
+    <button class="tab" role="tab" data-t="1" aria-selected="true"><span class="n">Tema 1 · tu error: 30 %</span><span class="t">El uso de las vías</span><span class="s">Vías, carriles, arcén, distancia, peatones, velocidad, prioridad</span></button>
+    <button class="tab" role="tab" data-t="2" aria-selected="false"><span class="n">Tema 2 · tu error: 24,5 %</span><span class="t">Las maniobras</span><span class="s">Señalizar, adelantar, parar, avería, pendiente, girar</span></button>
+    <button class="tab" role="tab" data-t="3" aria-selected="false"><span class="n">Tema 3 · el que más pesa</span><span class="t">La señalización</span><span class="s">Agentes, peligro, prohibido, obligatorio, indicación, rayas</span></button>
+  </div>
+</header>
+
+<div class="scrolly">
+  <div class="stage" id="stage" aria-label="Escena 3D que ilustra cada capítulo">
+    <canvas id="gl"></canvas>
+    <div class="hud" aria-live="polite"><span class="tag" id="hudTag">Tema 1</span><span class="say" id="hudSay">Baja para empezar</span></div>
+    <div class="fallback" id="fallback" hidden>La escena 3D no ha podido cargarse en este navegador. Todo el contenido está en el texto.</div>
+  </div>
+
+  <div class="steps">
+  <!-- ======================= TEMA 1 ======================= -->
+  <div class="tema" data-t="1" id="tema1">
+    <article class="step hero" data-mode="t1intro" data-tag="Tema 1" data-say="Antes de responder, pasa los 4 filtros.">
+      <span class="eyebrow">Tema 1 · El uso de las vías · 9 escenas · 60 preguntas</span>
+      <h1>Tu tema con más fallos se arregla con <em>4 preguntas</em>.</h1>
+      <p class="lead">Fallas el Tema 1 un <strong>30 %</strong>, más que ningún otro. Casi siempre por <strong>el detalle trampa</strong>: una palabra del enunciado (autovía, 3.500 kg, en poblado, con una bici en la mano) que le da la vuelta a la respuesta. Antes de cada pregunta, pásale estos 4 filtros.</p>
+      <div class="filters">
+        <div><b>1. ¿Dentro o fuera de poblado?</b><span>La travesía cuenta como poblado; la autovía urbana, no.</span></div>
+        <div><b>2. ¿Qué vía?</b><span>Autopista, autovía, vía para automóviles, multicarril o convencional.</span></div>
+        <div><b>3. ¿Qué vehículo?</b><span>¿Más o menos de 3.500 kg? ¿Más de 7 o de 10 m?</span></div>
+        <div><b>4. ¿Hay señal o agente?</b><span>Si lo hay, manda sobre la norma.</span></div>
+      </div>
+      <button class="cta" data-go="t1-carriles">Empieza por tu punto débil: los carriles ↓</button>
+      <nav class="toc" aria-label="Capítulos del Tema 1">
+        <button data-go="t1-vias"><b>1</b><span>Autopista o autovía: la diferencia que te preguntan</span><span class="e"></span></button>
+        <button data-go="t1-carriles"><b>2</b><span>Qué carril te toca: los 3.500 kg lo cambian todo</span><span class="e">30 %</span></button>
+        <button data-go="t1-especiales"><b>3</b><span>Carriles especiales: quién entra y a qué velocidad</span><span class="e"></span></button>
+        <button data-go="t1-arcen"><b>4</b><span>El arcén: quién va, en cuántas filas y cuándo no</span><span class="e">44 %</span></button>
+        <button data-go="t1-distancia"><b>5</b><span>Distancia de seguridad: los 3 números que caen</span><span class="e"></span></button>
+        <button data-go="t1-peatones"><b>6</b><span>Peatones: una bici en la mano cambia el lado</span><span class="e">37,5 %</span></button>
+        <button data-go="t1-velocidad"><b>7</b><span>Velocidad: la tabla y por qué ya no sumas 20</span><span class="e"></span></button>
+        <button data-go="t1-prioridad"><b>8</b><span>Prioridad: la derecha manda, salvo 3 casos</span><span class="e">37,5 %</span></button>
+        <button data-go="t1-estrecho"><b>9</b><span>Estrechamientos: quién recula, en 4 pasos</span><span class="e"></span></button>
+        <button data-go="t1-examen"><b>✓</b><span>Examen del Tema 1</span><span class="e"></span></button>
+      </nav>
+      <p class="cap">En rojo, tu error en los tests 1–10 por concepto.</p>
+    </article>
+
+    <article class="step" id="t1-vias" data-mode="autovia" data-tag="1 · Tipos de vía" data-say="">
+      <span class="chap-n"><i>1</i><span class="eyebrow">Tipos de vía</span></span>
+      <h2>Autopista o autovía: <em>la única diferencia</em> que te preguntan</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Las dos tienen calzadas separadas y ningún cruce a nivel. La autopista no tiene accesos desde las fincas de al lado; la autovía los tiene limitados.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Ciclista de 15 años en el arcén de una <u>autovía</u></span><span class="r">Permitido, salvo señal</span></div><div class="n"><span>El mismo, en una <u>autopista</u></span><span class="r">Prohibido</span></div></div>
+        <div class="tp"><div class="y"><span>Ciclista <u>mayor de 14</u> en autovía</span><span class="r">Solo por el arcén</span></div><div class="n"><span>Ciclista de <u>13</u> años en autovía</span><span class="r">Prohibido</span></div></div>
+        <div class="tp"><div class="y"><span>Autovía que <u>cruza una ciudad</u></span><span class="r">Normas de fuera de poblado</span></div><div class="n"><span><u>Travesía</u> (carretera que cruza un pueblo)</span><span class="r">Cuenta como poblado</span></div></div>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="k">60 km/h</span><span>Lo que tiene que alcanzar en llano un automóvil para entrar en autopista o autovía.</span></div>
+        <div class="fact"><span class="h">Vía para automóviles</span><span>Una sola calzada y sin accesos de las fincas de al lado.</span></div>
+        <div class="fact"><span class="h">Multicarril</span><span>Dos carriles o más por sentido; puede tener cruces a nivel.</span></div>
+      </div>
+      <details class="more"><summary>Quién no puede entrar en autopista ni autovía</summary><p>Ciclos (salvo el arcén de la autovía), ciclomotores, ciclos de motor, vehículos para personas con movilidad reducida, VMP, peatones, animales y vehículos de tracción animal.</p></details>
+      <div class="quiz" data-deck="vias"></div>
+    </article>
+
+    <article class="step" id="t1-carriles" data-mode="carriles" data-tag="2 · Carriles" data-say="">
+      <span class="chap-n"><i>2</i><span class="eyebrow">Uso de carriles · <b>tu error: 30 %</b></span></span>
+      <h2>Qué carril te toca: <em>los 3.500 kg</em> lo cambian todo</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Fuera de poblado, en sentido único con 3 carriles o más, los camiones, furgones y especiales de más de 3.500 kg y los conjuntos de más de 7 m van por la derecha; el central, solo excepcionalmente; el izquierdo, nunca.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Furgón de <u>3.000 kg</u> en autovía de 3 carriles</span><span class="r">Cualquier carril</span></div><div class="n"><span>Furgón de <u>4.000 kg</u></span><span class="r">Derecho; central solo excepcional</span></div></div>
+        <div class="tp"><div class="y"><span>Ciudad, carriles <u>marcados</u></span><span class="r">El que convenga a tu destino</span></div><div class="n"><span>Ciudad, carriles <u>sin marcar</u></span><span class="r">El derecho</span></div></div>
+        <div class="tp"><div class="y"><span>Carril de <u>velocidad mínima</u> (subidas)</span><span class="r">Sí cuenta como carril</span></div><div class="n"><span>Carril <u>bus o VAO</u></span><span class="r">No cuenta</span></div></div>
+        <div class="tp"><div class="y"><span>Doble sentido, 3 carriles: el <u>central</u></span><span class="r">Para adelantar o girar a la izquierda</span></div><div class="n"><span>Doble sentido, 3 carriles: el <u>izquierdo</u></span><span class="r">Nunca</span></div></div>
+      </div>
+      <details class="more"><summary>Isletas, glorietas y calzadas</summary><ul class="list">
+        <li>Isletas que separan <b>dos sentidos</b>: déjalas a la izquierda. En <b>sentido único</b>: por cualquier lado.</li>
+        <li>Glorietas, plazas y cruces: el centro a tu izquierda. Para salir de la glorieta, el carril derecho.</li>
+        <li>Vía con dos calzadas: usa la de la derecha.</li>
+      </ul></details>
+      <div class="quiz" data-deck="carr"></div>
+    </article>
+
+    <article class="step" id="t1-especiales" data-mode="reversible" data-tag="3 · Carriles especiales" data-say="Reversible: luz de cruce de día y de noche, a la velocidad de la vía.">
+      <span class="chap-n"><i>3</i><span class="eyebrow">Carriles especiales</span></span>
+      <h2>Carriles especiales: <em>quién entra</em> y a qué velocidad</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>En el reversible, el adicional y el de sentido contrario llevas la luz de cruce de día y de noche. Lo que cambia es quién puede entrar y a qué velocidad.</p></div>
+      <div class="tbl"><table>
+        <thead><tr><th>Carril</th><th>Quién</th><th>Velocidad</th></tr></thead>
+        <tbody>
+          <tr><td><b>Reversible</b><br><span class="cap">Doble discontinua a cada lado, semáforos cuadrados</span></td><td>Todos</td><td class="num">La de la vía</td></tr>
+          <tr><td><b>Adicional circunstancial</b><br><span class="cap">Usa los dos arcenes: 2 carriles en un sentido y 1 en el otro</span></td><td>Todos, con las líneas entre las ruedas</td><td class="num">máx 80 · mín 60</td></tr>
+          <tr><td><b>Sentido contrario por fluidez</b></td><td>Solo motos y turismos sin remolque</td><td class="num">máx 80 · mín 60</td></tr>
+          <tr><td><b>Sentido contrario por obras</b></td><td>Todos los permitidos en esa vía</td><td class="num">máx 80 · mín 60</td></tr>
+          <tr><td><b>VAO</b></td><td>Motos, turismos y mixtos con la ocupación indicada. Solos: autobuses, taxis, motos, 0 emisiones; ECO, C o B solo si lo dice el panel</td><td class="num">—</td></tr>
+        </tbody>
+      </table></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Furgoneta, sentido contrario por <u>obras</u></span><span class="r">Puede</span></div><div class="n"><span>Furgoneta, sentido contrario por <u>fluidez</u></span><span class="r">No puede</span></div></div>
+        <div class="tp"><div class="y"><span>Turismo <u>0 emisiones</u> solo en el VAO</span><span class="r">Puede</span></div><div class="n"><span>Turismo <u>ECO</u> solo en el VAO</span><span class="r">Solo si lo indica el panel</span></div></div>
+        <div class="tp"><div class="y"><span>Carril bus con línea <u>discontinua</u>: entrar para girar</span><span class="r">Permitido</span></div><div class="n"><span>…para <u>parar o adelantar</u></span><span class="r">Prohibido</span></div></div>
+      </div>
+      <div class="quiz" data-deck="esp"></div>
+    </article>
+
+    <article class="step" id="t1-arcen" data-mode="arcen" data-tag="4 · Arcén" data-say="Bicis: en columna de dos, arrimadas a la derecha.">
+      <span class="chap-n"><i>4</i><span class="eyebrow">El arcén · <b>bicis y arcén: 44 %</b></span></span>
+      <h2>El arcén: quién va, en <em>cuántas filas</em> y cuándo no</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Por el arcén van los lentos: ciclos, ciclomotores, tracción animal, especiales de hasta 3.500 kg, vehículos para movilidad reducida y los que acompañan a ciclistas.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Especial de <u>3.000 kg</u></span><span class="r">Por el arcén</span></div><div class="n"><span>Especial de <u>4.000 kg</u></span><span class="r">Por la calzada</span></div></div>
+        <div class="tp"><div class="y"><span>Dos <u>ciclomotores</u>, arcén amplio</span><span class="r">En paralelo, sí</span></div><div class="n"><span>Dos <u>tractores</u> por el arcén</span><span class="r">Nunca en paralelo</span></div></div>
+        <div class="tp"><div class="y"><span>Dos <u>bicis</u> se adelantan 20 s en paralelo</span><span class="r">Permitido</span></div><div class="n"><span>Dos <u>ciclomotores</u>, 20 s</span><span class="r">Prohibido (más de 15 s o 200 m)</span></div></div>
+        <div class="tp"><div class="y"><span>Coche de ≤ 3.500 kg que por <u>emergencia</u> va muy lento</span><span class="r">Al arcén</span></div><div class="n"><span><u>Tráfico denso</u> y usas el arcén para tu salida</span><span class="r">Prohibido</span></div></div>
+      </div>
+      <p class="cap">Bicis en fila de uno si no hay visibilidad o hay aglomeración. En bajadas largas con curvas pueden ocupar la parte derecha de la calzada.</p>
+      <div class="quiz" data-deck="arcen"></div>
+    </article>
+
+    <article class="step" id="t1-distancia" data-mode="tunel" data-tag="5 · Distancia" data-say="Túnel: 100 m o 4 s. Más de 3.500 kg: 150 m o 6 s.">
+      <span class="chap-n"><i>5</i><span class="eyebrow">Distancia de seguridad</span></span>
+      <h2>Distancia de seguridad: <em>los 3 números</em> que caen</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Si eres grande (más de 3.500 kg o de 10 m) y no vas a adelantar, deja 50 m para que te adelanten. En túnel: 100 m o 4 s; los pesados, 150 m o 6 s.</p></div>
+      <div class="facts">
+        <div class="fact"><span class="k">50 m</span><span>Pesados o de más de 10 m, sin intención de adelantar.</span></div>
+        <div class="fact"><span class="k">100 m · 4 s</span><span>Cualquiera, en túnel.</span></div>
+        <div class="fact"><span class="k">150 m · 6 s</span><span>Más de 3.500 kg en túnel, viendo 3 galones.</span></div>
+        <div class="fact"><span class="k">2 galones</span><span>Lo mínimo entre vehículos donde estén pintados.</span></div>
+      </div>
+      <div class="trap"><span class="lbl">El detalle trampa: cuándo basta con no chocar</span>
+        <div class="tp"><div class="y"><span>Camión en convencional de <u>un carril</u> por sentido</span><span class="r">50 m</span></div><div class="n"><span>El mismo en autovía de <u>2 carriles</u></span><span class="r">Basta con no chocar</span></div></div>
+        <div class="tp"><div class="y"><span>Fuera de poblado, adelantar permitido</span><span class="r">50 m</span></div><div class="n"><span><u>En poblado</u>, o donde está <u>prohibido adelantar</u></span><span class="r">Basta con no chocar</span></div></div>
+        <div class="tp"><div class="y"><span>Circulación <u>saturada</u>: la derecha va más rápido</span><span class="r">No cuenta como adelantar</span></div><div class="n"><span>Saturada: <u>cambiar de carril</u> para avanzar</span><span class="r">Prohibido</span></div></div>
+      </div>
+      <details class="more"><summary>Colores de nieve</summary><ul class="list">
+        <li><b>Verde</b>: normal. <b>Amarillo</b>: empieza a cubrirse; prohibidos camiones y articulados; turismos y autobuses a 60.</li>
+        <li><b>Rojo</b>: cubierta; solo con cadenas, a 30; prohibidos articulados, camiones y autobuses. <b>Negro</b>: intransitable.</li>
+      </ul></details>
+      <div class="quiz" data-deck="dist"></div>
+    </article>
+
+    <article class="step" id="t1-peatones" data-mode="peaton" data-tag="6 · Peatones" data-say="Sin acera: de cara a los coches. Con una bici en la mano: por la derecha.">
+      <span class="chap-n"><i>6</i><span class="eyebrow">Peatones y animales · <b>tu error: 37,5 %</b></span></span>
+      <h2>Peatones: <em>una bici en la mano</em> cambia el lado</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Sin acera y fuera de poblado, el peatón va por la izquierda, de cara a los coches. Si lleva una bici o un ciclomotor a mano, va en silla de ruedas o en grupo, por la derecha.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Peatón <u>solo</u>, carretera sin acera</span><span class="r">Izquierda</span></div><div class="n"><span><u>Con una bici a mano</u></span><span class="r">Derecha</span></div></div>
+        <div class="tp"><div class="y"><span>Giras y un peatón cruza la calle <u>a la que entras</u>, sin paso</span><span class="r">Pasa el peatón</span></div><div class="n"><span>Cruza la calle <u>de la que sales</u>, sin paso</span><span class="r">Tienes prioridad (con cuidado)</span></div></div>
+        <div class="tp"><div class="y"><span>Paso con <u>solo marcas</u>: el peatón tiene preferencia</span><span class="r">Pero entra solo si es seguro</span></div><div class="n"><span>Autoestop en la <u>explanada del peaje</u></span><span class="r">No se recoge</span></div></div>
+      </div>
+      <details class="more"><summary>Cuándo cedes al peatón y a los animales</summary><ul class="list">
+        <li>Pasos de peatones señalizados; al girar con peatones cruzando; al cruzar un arcén por el que van; zonas peatonales por pasos habilitados; viajeros entre el bus y la acera en una parada; filas escolares y comitivas. <span class="verify">Este último, ilegible en el PDF</span></li>
+        <li>Reflectante fuera de poblado de noche: visible a <b>150 m</b>.</li>
+        <li>Animales: conductor mayor de 18; como mucho la mitad derecha. Cedes en cañadas señalizadas, al girar y al cruzar un arcén con animales.</li>
+      </ul></details>
+      <div class="quiz" data-deck="peat"></div>
+    </article>
+
+    <article class="step" id="t1-velocidad" data-mode="velocidad" data-tag="7 · Velocidad" data-say="Camión a 80 en convencional: lo adelantas, pero sin pasar de 90.">
+      <span class="chap-n"><i>7</i><span class="eyebrow">Velocidad</span></span>
+      <h2>Velocidad: la tabla, y por qué <em>ya no sumas 20</em></h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Adelantas sin pasar tu máxima: si el de delante ya va a tu máxima, no lo adelantas. La mínima es la mitad de la máxima de tu vehículo (60 en autopista y autovía).</p></div>
+      <div class="tbl"><table>
+        <thead><tr><th>Vía</th><th>Turismo / moto</th><th>Autobús</th><th>Camión, furgón, conjunto</th></tr></thead>
+        <tbody>
+          <tr><td>Autopista / autovía</td><td class="num">120</td><td class="num">100</td><td class="num">90</td></tr>
+          <tr><td>Convencional</td><td class="num">90</td><td class="num">90</td><td class="num">80</td></tr>
+          <tr><td>Ciudad: calzada y acera al mismo nivel</td><td class="num" colspan="3">20</td></tr>
+          <tr><td>Ciudad: 1 carril por sentido</td><td class="num" colspan="3">30</td></tr>
+          <tr><td>Ciudad: 2 o más carriles, y travesías</td><td class="num" colspan="3">50</td></tr>
+        </tbody>
+      </table></div>
+      <p><span class="verify">La tabla del PDF era una imagen: valores de la norma vigente. Compruébalos con tu manual.</span></p>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Calle con <u>2 carriles normales</u> por sentido</span><span class="r">50</span></div><div class="n"><span><u>1 carril + carril bus</u></span><span class="r">30 (el bus no cuenta)</span></div></div>
+        <div class="tp"><div class="y"><span>Pasas del límite</span><span class="r">Exceso de velocidad</span></div><div class="n"><span>Vas a 80 con límite 90 y <u>niebla densa</u></span><span class="r">Velocidad excesiva</span></div></div>
+        <div class="tp"><div class="y"><span>Mercancías peligrosas fuera de poblado</span><span class="r">−10 km/h</span></div><div class="n"><span>Ciclo con remolque fuera de poblado</span><span class="r">−10 %</span></div></div>
+      </div>
+      <details class="more"><summary>Más: V-4, V-5 y velocidad baja</summary><ul class="list">
+        <li><b>V-4</b>: disco con la máxima de ese vehículo. <b>V-5</b>: vehículo lento, 40 km/h como máximo.</li>
+        <li>Emergencia muy lento en autopista o autovía: sal por la primera salida.</li>
+        <li>Cruce sin prioridad, señalizado y sin visibilidad: 50 como máximo.</li>
+      </ul></details>
+      <div class="quiz" data-deck="vel"></div>
+    </article>
+
+    <article class="step" id="t1-prioridad" data-mode="prioridad" data-tag="8 · Prioridad" data-say="Sin señales: pasa el que viene por tu derecha.">
+      <span class="chap-n"><i>8</i><span class="eyebrow">Prioridad · <b>tu error: 37,5 %</b></span></span>
+      <h2>Prioridad: la derecha manda, <em>salvo 3 casos</em></h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Sin señales ni agente, pasa el que viene por tu derecha, sea el vehículo que sea. Salvo: vía asfaltada frente a camino de tierra, autopista frente al que entra y vía pública frente a salida privada.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Camión <u>por tu derecha</u>, tú en moto</span><span class="r">Pasa el camión</span></div><div class="n"><span>El camión sale de un <u>camino de tierra</u></span><span class="r">Pasas tú</span></div></div>
+        <div class="tp"><div class="y"><span>Ambulancia con luz azul <u>sin sirena</u>, calle vacía</span><span class="r">Prioritaria (excepción)</span></div><div class="n"><span><u>Particular</u> llevando a un herido</span><span class="r">Cumple todas las normas</span></div></div>
+        <div class="tp"><div class="y"><span>Grupo ciclista: el primero <u>ya entró</u></span><span class="r">Pasa todo el grupo</span></div><div class="n"><span>Tienes prioridad pero <u>te quedarías dentro</u> del cruce</span><span class="r">No entras</span></div></div>
+      </div>
+      <details class="more"><summary>Ciclistas, trenes y prioritarios</summary><ul class="list">
+        <li>Cedes al ciclista: cuando cruza un carril bici, un paso o un arcén señalizado; cuando giras y está cerca; cuando el grupo ya ha empezado a cruzar.</li>
+        <li>El tren siempre tiene prioridad.</li>
+        <li>Prioritario: luz azul V-1 y sirena a la vez. Puede saltarse normas, nunca a los agentes. Grúa: luz amarilla V-2.</li>
+      </ul></details>
+      <div class="quiz" data-deck="prio"></div>
+    </article>
+
+    <article class="step" id="t1-estrecho" data-mode="estrecho" data-tag="9 · Estrechamiento" data-say="Sin señal: pasa el que entró primero.">
+      <span class="chap-n"><i>9</i><span class="eyebrow">Estrechamientos</span></span>
+      <h2>Estrechamientos: <em>quién recula</em>, en 4 pasos</h2>
+      <div class="flow">
+        <div><span><b>Si hay señal, manda la señal.</b><small>Si en tu lado hay un ceda el paso, retrocedes tú.</small></span></div>
+        <div><span><b>Sin señal: pasa el que entró primero.</b></span></div>
+        <div><span><b>Si hay duda: el que tiene más difícil maniobrar.</b><small>Mira la lista de abajo.</small></span></div>
+        <div><span><b>Si son del mismo tipo: el que haría más marcha atrás.</b><small>Y si empatan, el más ancho, largo o pesado.</small></span></div>
+      </div>
+      <ol class="ladder">
+        <li><span>Especiales que <b>exceden</b> masas o dimensiones</span></li><li><span>Conjuntos de vehículos</span></li><li><span>Tracción animal</span></li>
+        <li><span>Turismo con remolque de hasta 750 kg y autocaravanas</span></li><li><span>Autobuses</span></li><li><span>Camiones, tractocamiones y furgones</span></li>
+        <li><span>Turismos y derivados</span></li><li><span>Especiales que no exceden y cuadriciclos</span></li><li><span>3 ruedas, motos con sidecar</span></li><li><span>Motos, ciclomotores de 2 ruedas y bicis</span></li>
+      </ol>
+      <p class="cap">Truco: cuanto más cuesta dar marcha atrás, más arriba. <span class="verify">El PDF trae la lista desordenada: compruébala.</span></p>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Pendiente de <u>8 %</u></span><span class="r">Pasa el que sube</span></div><div class="n"><span>Pendiente de <u>5 %</u></span><span class="r">Reglas normales</span></div></div>
+      </div>
+      <div class="quiz" data-deck="estr"></div>
+    </article>
+
+    <article class="step" id="t1-examen" data-mode="t1intro" data-tag="Examen · Tema 1" data-say="30 preguntas. El examen real permite 3 fallos.">
+      <span class="eyebrow">Al principio te prometí la prueba</span>
+      <h2>30 preguntas del Tema 1. Más de <em>3 fallos</em> y no estás listo.</h2>
+      <div class="quiz" data-deck="all1"></div>
+      <div class="ab">
+        <div><span class="k">A</span><b>3 fallos o menos</b><span>Pasa al Tema 2 con el botón de abajo.</span></div>
+        <div><span class="k">B</span><b>Más de 3</b><span>«Solo falladas» y, antes, vuelve al capítulo de cada fallo.</span></div>
+      </div>
+      <button class="cta" data-tema="2">Ir al Tema 2 →</button>
+    </article>
+  </div>
+
+  <!-- ======================= TEMA 2 ======================= -->
+  <div class="tema" data-t="2" id="tema2" hidden>
+    <article class="step hero" data-mode="t2intro" data-tag="Tema 2" data-say="La DGT no te pregunta la norma. Te cambia un detalle.">
+      <span class="eyebrow">Tema 2 · Las maniobras · 7 escenas · 1 simulador · 50 preguntas</span>
+      <h1>El examen no te pregunta la norma. Te pregunta <em>el detalle</em>.</h1>
+      <p class="lead">Fallas adelantamientos un <strong>31 %</strong> y parada y estacionamiento un <strong>33 %</strong>, y casi nunca por no saber la regla: es por <strong>el detalle trampa</strong> (continua, dos ruedas, en poblado, 2 minutos). Cada capítulo te da la regla en una frase y, al lado, el detalle que la cambia.</p>
+      <button class="cta" data-go="t2-adelantar">Empieza por tu punto débil: adelantar ↓</button>
+      <nav class="toc" aria-label="Capítulos del Tema 2">
+        <button data-go="t2-senalizar"><b>1</b><span>Mira, avisa, actúa: el orden que nunca cambia</span><span class="e"></span></button>
+        <button data-go="t2-adelantar"><b>2</b><span>Cómo saber si puedes adelantar con 3 preguntas</span><span class="e">31 %</span></button>
+        <button data-go="t2-ciclistas"><b>3</b><span>1,5 metros o un carril entero</span><span class="e">44 %</span></button>
+        <button data-go="t2-parar"><b>4</b><span>La regla de los 2 minutos</span><span class="e">33 %</span></button>
+        <button data-go="t2-averia"><b>5</b><span>Te quedas tirado: qué haces y qué ya no vale</span><span class="e"></span></button>
+        <button data-go="t2-pendiente"><b>6</b><span>La marcha en una cuesta, sin memorizar</span><span class="e"></span></button>
+        <button data-go="t2-girar"><b>7</b><span>Girar a la izquierda: dónde te pones</span><span class="e"></span></button>
+        <button data-go="t2-examen"><b>✓</b><span>Examen del Tema 2</span><span class="e"></span></button>
+      </nav>
+      <p class="cap"><span class="verify">El PDF no trae incorporación, cambio de sentido ni marcha atrás.</span></p>
+    </article>
+
+    <article class="step" id="t2-senalizar" data-mode="senal" data-tag="1 · Señalizar" data-say="">
+      <span class="chap-n"><i>1</i><span class="eyebrow">Normas generales</span></span>
+      <h2>Mira, avisa, actúa: el orden que <em>nunca</em> cambia</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Observar → señalizar → realizar. Y señalizar no te da prioridad.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Intermitente y brazo dicen <u>lo mismo</u></span><span class="r">Valen los dos</span></div><div class="n"><span>Se <u>contradicen</u></span><span class="r">Manda el brazo</span></div></div>
+        <div class="tp"><div class="y"><span>Avisar de que adelantas con <u>ráfagas</u></span><span class="r">Dentro y fuera de poblado</span></div><div class="n"><span>Con <u>claxon</u> en poblado</span><span class="r">Prohibido (solo fuera)</span></div></div>
+        <div class="tp"><div class="y"><span>Ráfagas para <u>evitar un accidente</u></span><span class="r">Sí</span></div><div class="n"><span>Para <u>avisar de un control</u> o saludar</span><span class="r">Prohibido</span></div></div>
+      </div>
+      <div class="arms" id="arms"></div>
+      <div class="facts">
+        <div class="fact"><span class="h">Espejos de un turismo</span><span>Exterior <b>izquierdo</b> + <b>interior</b>. El derecho, solo si el interior no deja ver.</span></div>
+        <div class="fact"><span class="k">3 de 4</span><span>lados de la luneta que ves por el interior sin mover la cabeza.</span></div>
+        <div class="fact"><span class="h">Convexo</span><span>Más ángulo, pero los coches parecen <b>más lejos</b>.</span></div>
+        <div class="fact"><span class="k">100 km/h</span><span>Motos que pasan de 100: dos espejos. Si no: el izquierdo.</span></div>
+      </div>
+      <div class="quiz" data-deck="senal"></div>
+    </article>
+
+    <article class="step" id="t2-adelantar" data-mode="adelantar" data-tag="2 · Adelantar" data-say="">
+      <span class="chap-n"><i>2</i><span class="eyebrow">Adelantamiento · <b>tu error: 31 %</b></span></span>
+      <h2>Cómo saber si puedes adelantar con <em>3 preguntas</em></h2>
+      <div class="flow">
+        <div><span><b>¿Veo lo suficiente para terminar?</b><small>Curva, cambio de rasante, niebla o un camión que tapa: no. Salvo con dos carriles en tu sentido y sin invadir el contrario.</small></span></div>
+        <div><span><b>¿Estoy en un sitio prohibido?</b><small>Intersección · paso a nivel · paso de peatones · túnel de un carril · línea continua · el de delante ya adelanta.</small></span></div>
+        <div><span><b>¿Tiene excepción ese sitio?</b><small>Cada prohibición se levanta con un detalle concreto:</small></span></div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th>Sitio prohibido</th><th>El detalle que lo permite</th></tr></thead>
+        <tbody>
+          <tr><td>Intersección</td><td>Prioridad <b>señalizada</b> · <b>dos ruedas</b> · <b>glorieta</b> · por la derecha al que gira a la izquierda</td></tr>
+          <tr><td>Paso a nivel</td><td><b>Dos ruedas</b>, avisando antes</td></tr>
+          <tr><td>Paso de peatones</td><td>Ir <b>tan despacio</b> que puedas parar</td></tr>
+          <tr><td>Túnel</td><td><b>Más de un carril</b> en tu sentido</td></tr>
+          <tr><td>Línea continua</td><td>Ciclistas, peatones o animales <b>lentos</b>, o un vehículo <b>averiado</b>. Nunca al parado por el tráfico</td></tr>
+        </tbody>
+      </table></div>
+      <div class="sim">
+        <h3>Simulador: monta la situación</h3>
+        <div><span class="eyebrow">Dónde</span><div class="seg" id="sLugar"><button data-v="recta" aria-pressed="true">Recta</button><button data-v="curva">Curva sin visibilidad</button><button data-v="peatones">Paso de peatones</button><button data-v="nivel">Paso a nivel</button><button data-v="cruce">Intersección</button><button data-v="glorieta">Glorieta</button><button data-v="tunel">Túnel de 1 carril</button></div></div>
+        <div><span class="eyebrow">A quién</span><div class="seg" id="sQuien"><button data-v="coche" aria-pressed="true">Turismo</button><button data-v="dos">Moto o bici</button><button data-v="adelantando">Uno que ya adelanta</button><button data-v="averiado">Coche averiado</button><button data-v="cola">Coche en la cola de un semáforo</button></div></div>
+        <div><span class="eyebrow">Línea central</span><div class="seg" id="sLinea"><button data-v="disc" aria-pressed="true">Discontinua</button><button data-v="cont">Continua</button><button data-v="dos">Dos carriles en mi sentido</button></div></div>
+        <div><span class="eyebrow">Detalle</span><div class="seg" id="sExtra"><button data-v="no" aria-pressed="true">Ninguno</button><button data-v="lento">Voy tan despacio que puedo parar</button><button data-v="prio">Prioridad señalizada</button><button data-v="izq">El de delante gira a la izquierda</button></div></div>
+        <div class="out" id="sOut"></div>
+      </div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Continua, coche <u>averiado</u></span><span class="r">Lo rebasas</span></div><div class="n"><span>Continua, coche <u>en la cola</u> de un semáforo</span><span class="r">Te quedas detrás</span></div></div>
+        <div class="tp"><div class="y"><span>Por la derecha, en <u>ciudad</u> con 2 carriles marcados</span><span class="r">Permitido</span></div><div class="n"><span>Por la derecha, en <u>carretera</u>, a uno que va recto</span><span class="r">Prohibido</span></div></div>
+        <div class="tp"><div class="y"><span>Doble sentido con <u>3 carriles</u></span><span class="r">Por el central, si está libre</span></div><div class="n"><span>Te adelantan y <u>aceleras</u></span><span class="r">Prohibido</span></div></div>
+      </div>
+      <details class="more"><summary>Si te adelantan a ti</summary><ul class="list">
+        <li>Te pegas a la derecha (a la izquierda si vas a girar o parar a ese lado) y no aceleras.</li>
+        <li>Un pesado que deja adelantar avisa con el brazo de atrás hacia delante o el intermitente derecho.</li>
+        <li>Si el de delante ya señalizó que se desplaza a tu lado, él tiene preferencia.</li>
+      </ul></details>
+      <div class="quiz" data-deck="adel"></div>
+    </article>
+
+    <article class="step" id="t2-ciclistas" data-mode="ciclista" data-tag="3 · Ciclistas" data-say="">
+      <span class="chap-n"><i>3</i><span class="eyebrow">Separación lateral · <b>bicis: 44 %</b></span></span>
+      <h2>1,5 metros o <em>un carril entero</em>: cuándo es cada uno</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>A un ciclo o ciclomotor, dentro o fuera de poblado, al menos 1,5 m; si tienes más de un carril en tu sentido, cambias de carril entero.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span><u>1 carril</u> por sentido</span><span class="r">≥ 1,5 m, invadiendo lo necesario</span></div><div class="n"><span><u>2 carriles</u> por sentido</span><span class="r">Cambio de carril completo</span></div></div>
+        <div class="tp"><div class="y"><span>Tú en <u>moto</u> adelantas a un coche <u>fuera</u> de poblado</span><span class="r">También 1,5 m</span></div><div class="n"><span>Coche a coche <u>en ciudad</u></span><span class="r">Sin cifra: proporcional</span></div></div>
+        <div class="tp"><div class="y"><span>Ciclista lento y <u>línea continua</u>, nadie de frente</span><span class="r">Puedes invadir</span></div><div class="n"><span>Molestas a un ciclista que viene <u>de frente por su arcén</u></span><span class="r">Prohibido</span></div></div>
+      </div>
+      <div class="quiz" data-deck="cicl"></div>
+    </article>
+
+    <article class="step" id="t2-parar" data-mode="parar" data-tag="4 · Parar" data-say="">
+      <span class="chap-n"><i>4</i><span class="eyebrow">Inmovilizaciones · <b>tu error: 33 %</b></span></span>
+      <h2>La regla de los <em>2 minutos</em> que separa parar de estacionar</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Parada = menos de 2 minutos y sin abandonar el coche. Lo demás voluntario es estacionamiento. Si te paras por el tráfico o por una norma, es detención.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>1 minuto <u>sin bajarte</u></span><span class="r">Parada</span></div><div class="n"><span>1 minuto, pero <u>bajas a por el pan</u></span><span class="r">Estacionamiento</span></div></div>
+        <div class="tp"><div class="y"><span>Atasco: <u>3 minutos</u> sin moverte</span><span class="r">Detención</span></div><div class="n"><span>Esperas <u>5 minutos</u> dentro</span><span class="r">Estacionamiento</span></div></div>
+        <div class="tp"><div class="y"><span>Línea amarilla <u>discontinua</u> o <u>zigzag</u></span><span class="r">Parar sí, estacionar no</span></div><div class="n"><span>Línea amarilla <u>continua</u></span><span class="r">Ni parar ni estacionar</span></div></div>
+        <div class="tp"><div class="y"><span>Carretera, arcén <u>no transitable</u></span><span class="r">Puedes parar en él</span></div><div class="n"><span>Arcén <u>transitable</u></span><span class="r">No: fuera de él</span></div></div>
+      </div>
+      <div class="tbl"><table>
+        <thead><tr><th></th><th>Ciudad</th><th>Carretera</th></tr></thead>
+        <tbody>
+          <tr><td><b>Dónde</b></td><td>Calzada o arcén, dejando <b>3 m</b></td><td>Fuera de calzada y arcén transitable, lado <b>derecho</b></td></tr>
+          <tr><td><b>Señal</b></td><td colspan="2">Desde la vertical de la señal hasta la <b>próxima intersección</b></td></tr>
+        </tbody>
+      </table></div>
+      <details class="more"><summary>Dónde no puedes ni parar ni estacionar</summary><ul class="list">
+        <li>Curvas y cambios de rasante sin visibilidad · pasos de peatones, aceras, carril bici y bus · pasos a nivel y raíles del tranvía · autopistas y autovías (salvo zonas habilitadas) · donde tapes señales · plazas para personas con discapacidad.</li>
+        <li>Solo estacionar, además: zona azul sin ticket o pasada de tiempo, zonas de juego (S-28) y coexistencia (S-47).</li>
+      </ul></details>
+      <div class="quiz" data-deck="inmo"></div>
+    </article>
+
+    <article class="step" id="t2-averia" data-mode="averia" data-tag="5 · Avería" data-say="">
+      <span class="chap-n"><i>5</i><span class="eyebrow">Detención por emergencia</span></span>
+      <h2>Te quedas tirado: qué haces y qué <em>dejó de valer</em> en 2026</h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Si el coche anda, sigues hasta la primera salida. Si no: emergencia, V-16 en el techo y fuera por el lado contrario al tráfico, a un sitio seguro.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Hay sitio <u>seguro fuera</u></span><span class="r">Salís todos</span></div><div class="n"><span><u>No</u> hay sitio seguro</span><span class="r">Dentro, con cinturón</span></div></div>
+        <div class="tp"><div class="y"><span>Sin triángulos en <u>autopista o autovía</u></span><span class="r">No te sancionan</span></div><div class="n"><span>Triángulos <u>desde el 1-1-2026</u></span><span class="r">Ya no valen: V-16</span></div></div>
+        <div class="tp"><div class="y"><span>Túnel: <u>incendio</u></span><span class="r">Llave puesta, puertas abiertas, contra el fuego</span></div><div class="n"><span>Túnel: <u>atasco</u> de más de 2 min</span><span class="r">Motor parado, posición encendida</span></div></div>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="h">V-16</span><span>Amarilla, en lo más alto, visible en 360°, conectada a la DGT.</span></div>
+        <div class="fact"><span class="h">Chaleco</span><span>Obligatorio para el conductor si pisa la calzada o el arcén en vía interurbana.</span></div>
+        <div class="fact"><span class="h">Luces</span><span>Emergencia de día y de noche; de noche, también las de posición.</span></div>
+      </div>
+      <div class="quiz" data-deck="emerg"></div>
+    </article>
+
+    <article class="step" id="t2-pendiente" data-mode="pendiente" data-tag="6 · Pendiente" data-say="">
+      <span class="chap-n"><i>6</i><span class="eyebrow">Dejarlo bien inmovilizado</span></span>
+      <h2>La marcha que pones en una cuesta, <em>sin memorizar</em></h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Pon la marcha que empuja en contra de hacia donde se iría el coche. Cuesta arriba se iría hacia atrás: 1.ª. Cuesta abajo, hacia delante: marcha atrás. Automático: siempre P.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span>Pesado <u>cuesta arriba</u></span><span class="r">Ruedas hacia el centro de la calzada</span></div><div class="n"><span>Pesado <u>cuesta abajo</u></span><span class="r">Ruedas hacia el bordillo</span></div></div>
+        <div class="tp"><div class="y"><span>Calzar un <u>camión de 12 t</u></span><span class="r">Obligatorio</span></div><div class="n"><span>Calzar un <u>turismo</u></span><span class="r">No es obligatorio</span></div></div>
+        <div class="tp"><div class="y"><span>Calzos <u>adecuados</u></span><span class="r">Sí, y se quitan al salir</span></div><div class="n"><span>Calzar con <u>piedras</u></span><span class="r">Prohibido</span></div></div>
+      </div>
+      <div class="quiz" data-deck="pend"></div>
+    </article>
+
+    <article class="step" id="t2-girar" data-mode="giro" data-tag="7 · Girar" data-say="">
+      <span class="chap-n"><i>7</i><span class="eyebrow">Cambio de dirección</span></span>
+      <h2>Girar a la izquierda: dónde te pones <em>según la calle</em></h2>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>A la derecha, pegado al borde derecho. A la izquierda, pegado al lado izquierdo de tu sentido: el borde si es sentido único, el centro si es doble sentido.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span>
+        <div class="tp"><div class="y"><span><u>Sentido único</u></span><span class="r">Borde izquierdo</span></div><div class="n"><span><u>Doble sentido</u></span><span class="r">Junto al centro, sin invadir</span></div></div>
+        <div class="tp"><div class="y"><span><u>Coche</u> en carretera</span><span class="r">Junto al centro o carril de espera</span></div><div class="n"><span><u>Bici o ciclomotor</u> en carretera</span><span class="r">Desde el arcén derecho</span></div></div>
+        <div class="tp"><div class="y"><span>Carril de deceleración: entras <u>pronto</u></span><span class="r">Y frenas dentro</span></div><div class="n"><span>Frenar <u>antes</u> de entrar</span><span class="r">Mal</span></div></div>
+      </div>
+      <div class="quiz" data-deck="giro"></div>
+    </article>
+
+    <article class="step" id="t2-examen" data-mode="t2intro" data-tag="Examen · Tema 2" data-say="30 preguntas. El examen real permite 3 fallos.">
+      <span class="eyebrow">Al principio te prometí la prueba</span>
+      <h2>30 preguntas del Tema 2. Más de <em>3 fallos</em> y no estás listo.</h2>
+      <div class="quiz" data-deck="all2"></div>
+      <div class="ab">
+        <div><span class="k">A</span><b>3 fallos o menos</b><span>Siguiente: Tema 3 (señalización), el que más pesa.</span></div>
+        <div><span class="k">B</span><b>Más de 3</b><span>«Solo falladas» y vuelve al capítulo de cada fallo.</span></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="cta" data-tema="3">Ir al Tema 3 →</button><button class="cta" data-tema="1" style="background:var(--t1)">← Volver al Tema 1</button></div>
+    </article>
+  </div>
+
+  <!-- ======================= TEMA 3 ======================= -->
+  <div class="tema" data-t="3" id="tema3" hidden>
+    <article class="step hero" data-mode="t3intro" data-tag="Tema 3" data-say="Forma y color antes que texto.">
+      <span class="eyebrow">Tema 3 · La señalización · 9 escenas · 81 preguntas</span>
+      <h1>Dame 20 minutos y te enseño a leer una señal <em>antes de leerla</em>.</h1>
+      <p class="lead">Triángulo avisa. Círculo rojo prohíbe. Círculo azul obliga. Cuadrado informa. Con eso ya sabes qué te piden antes de que se lea el pictograma; lo demás es <strong>el detalle trampa</strong> (el color de las obras, el «sí parar», la raya de al lado). Te lo cuento con algo de guasa, que si no esto es un tostón.</p>
+      <button class="cta" data-go="t3-agentes">Empieza por lo que manda más que un semáforo ↓</button>
+      <nav class="toc" aria-label="Capítulos del Tema 3">
+        <button data-go="t3-agentes"><b>1</b><span>El señor del silbato manda más que el semáforo</span><span class="e"></span></button>
+        <button data-go="t3-balizas"><b>2</b><span>Conos, luces y barreras: lo que te prohíben sin decirte nada</span><span class="e"></span></button>
+        <button data-go="t3-peligro"><b>3</b><span>Los triángulos, por familias, no uno a uno</span><span class="e"></span></button>
+        <button data-go="t3-prioridad"><b>4</b><span>Ceda y stop: quién pasa primero</span><span class="e"></span></button>
+        <button data-go="t3-prohibido"><b>5</b><span>«No parar» frente a «no estacionar»</span><span class="e"></span></button>
+        <button data-go="t3-obligatorio"><b>6</b><span>Círculo azul: obligatorio y sin negociar</span><span class="e"></span></button>
+        <button data-go="t3-indicacion"><b>7</b><span>Cuadrado azul: te regala información</span><span class="e"></span></button>
+        <button data-go="t3-rayas"><b>8</b><span>Continua, discontinua y mixta</span><span class="e"></span></button>
+        <button data-go="t3-amarillas"><b>9</b><span>Amarilla, zigzag, cuadrícula y damero</span><span class="e"></span></button>
+        <button data-go="t3-examen"><b>✓</b><span>Examen del Tema 3</span><span class="e"></span></button>
+      </nav>
+      <p class="cap"><span class="verify">El PDF salta del apartado 3.3 al 3.5: no trae el 3.1 ni el 3.4 (por ejemplo, semáforos).</span></p>
+    </article>
+
+    <article class="step" id="t3-agentes" data-mode="agente" data-tag="1 · Agentes" data-say="">
+      <span class="chap-n"><i>1</i><span class="eyebrow">Señales de los agentes · 3.2</span></span>
+      <h2>El señor del silbato <em>manda más que el semáforo</em></h2>
+      <p class="hook">Dame 1 minuto y te enseño la única señal que se salta a todas las demás.</p>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Las órdenes de un agente prevalecen sobre semáforos, señales y normas, aunque las contradigan. Se obedecen <b>inmediatamente</b>.</p></div>
+      <div class="tbl"><table><thead><tr><th>Lo que hace el agente</th><th>Lo que tienes que hacer</th></tr></thead><tbody><tr><td><b>Brazo levantado verticalmente</b></td><td>Detenerte si te acercas al agente, salvo que no puedas con seguridad suficiente. Ante la línea de detención más cercana; si no hay, antes del agente; en una intersección, antes de entrar.</td></tr><tr><td><b>Brazos extendidos horizontalmente</b></td><td>Detenerte si vienes por las direcciones que corta el brazo, sea cual sea tu sentido. Sigue en vigor aunque baje los brazos.</td></tr><tr><td><b>Brazo moviéndose de arriba abajo</b></td><td>Disminuir la velocidad si te acercas perpendicularmente al brazo.</td></tr><tr><td><b>Balanceo de una luz roja o amarilla</b></td><td>Detenerte, si la luz va dirigida hacia ti.</td></tr><tr><td><b>Silbato: toques cortos y frecuentes</b></td><td>Detención.</td></tr><tr><td><b>Silbato: un toque largo</b></td><td>Reanudar la marcha.</td></tr><tr><td><b>Desde un vehículo: brazo hacia abajo, inclinado y fijo</b></td><td>Detenerte en el lado derecho.</td></tr><tr><td><b>Desde un vehículo: luz roja intermitente hacia delante</b></td><td>El de delante se detiene a la derecha, delante del vehículo policial, se queda dentro y obedece la megafonía.</td></tr></tbody></table></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span><div class="tp"><div class="y"><span>Brazo levantado y estás <u>ya dentro</u> de la intersección</span><span class="r">No tienes que detenerte</span></div><div class="n"><span>Brazo levantado y <u>aún no has entrado</u></span><span class="r">Te detienes antes de entrar</span></div></div><div class="tp"><div class="y"><span>Brazos horizontales y <u>los bajan</u></span><span class="r">Sigue en vigor hasta que cambie de posición</span></div><div class="n"><span>Agente y semáforo se <u>contradicen</u></span><span class="r">Manda el agente</span></div></div></div>
+      <div class="facts"><div class="fact"><span class="h">Banderas</span><span>Amarilla: extremar la atención o peligro cercano. Verde: desde el paso del vehículo que la lleva, la calzada vuelve a estar abierta. La roja detiene, salvo a los escoltados por los agentes.</span></div><div class="fact"><span class="h">Quién más regula</span><span>Personal de obras y de acompañamiento de transportes especiales (con paleta), Policía Militar, y patrullas escolares, que «invitan» a detenerte. Los controles de otras Fuerzas y Cuerpos del Estado regulan solo si no hay agentes de circulación.</span></div><div class="fact"><span class="h">Se les ve desde</span><span><b>150 m</b>: prendas llamativas y elementos retrorreflectantes.</span></div></div>
+      <p class="joke">Sí, manda más que el semáforo. Y no, no vale discutírselo con las luces largas.</p>
+      <div class="quiz" data-deck="age"></div>
+    </article>
+
+    <article class="step" id="t3-balizas" data-mode="baliz" data-tag="2 · Balizamiento" data-say="">
+      <span class="chap-n"><i>2</i><span class="eyebrow">Señales circunstanciales y balizamiento · 3.3</span></span>
+      <h2>Conos, luces y barreras: <em>lo que te prohíben</em> sin decirte nada</h2>
+      <p class="hook">Si esquivas conos como si fueras en un slalom, esto es para ti.</p>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>La señalización circunstancial adapta la circulación a lo que pasa hoy: <b>amarillo</b> si hay obras, <b>naranja</b> si es por cualquier otra causa. Vuelve lo habitual cuando lo diga la propia señal o cuando desaparezca la causa.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span><div class="tp"><div class="y"><span>Luz <u>roja fija</u></span><span class="r">Calzada totalmente cerrada</span></div><div class="n"><span>Luces <u>amarillas</u> (fijas o intermitentes)</span><span class="r">Prohíben cruzar la línea, real o imaginaria, que las une</span></div></div><div class="tp"><div class="y"><span>Captafaro luminoso <u>verde</u></span><span class="r">Se puede franquear</span></div><div class="n"><span>Captafaro luminoso <u>naranja o rojo</u></span><span class="r">No se franquea</span></div></div><div class="tp"><div class="y"><span>Barrera <u>cerrada o en movimiento</u> en un paso a nivel</span><span class="r">Te detienes en fila, uno detrás de otro</span></div><div class="n"><span>Dispositivo delimitador <u>fijo</u></span><span class="r">Prohíbe el paso a la vía o parte que delimita</span></div></div></div>
+      <div class="tbl"><table><thead><tr><th>Elemento</th><th>Para qué</th></tr></thead><tbody><tr><td>Hito de vértice</td><td>Marca dónde se separan dos corrientes de tráfico (forma semicilíndrica con dos triángulos retrorreflectantes)</td></tr><tr><td>Hito de arista</td><td>Balizar los bordes de la carretera, sobre todo de noche o con poca visibilidad</td></tr><tr><td>Panel direccional permanente</td><td>Marca una curva y el sentido de circulación</td></tr><tr><td>Baliza o captafaro horizontal / vertical</td><td>Guiado óptico, sobre todo de noche. El vertical va en sistemas de contención</td></tr><tr><td>Jalones de nieve</td><td>Delimitan la carretera cuando la nieve la tapa</td></tr><tr><td>Guías sonoras</td><td>Hendiduras que producen vibración y sonido si te desvías sin querer</td></tr><tr><td>Manga de viento</td><td>Complementa la P-29: existencia, sentido e intensidad del viento</td></tr><tr><td>Pórtico de control de gálibo</td><td>Avisa o impide el paso a vehículos más altos que la estructura que viene</td></tr></tbody></table></div>
+      <div class="facts"><div class="fact"><span class="h">Barreras de seguridad</span><span>Protegen en márgenes y medianas</span></div><div class="fact"><span class="h">Pretiles</span><span>Puentes, obras de paso y muros</span></div><div class="fact"><span class="h">Para motoristas</span><span>Barreras diseñadas para vehículos de dos ruedas</span></div><div class="fact"><span class="h">Atenuadores</span><span>Al inicio de una bifurcación, para contener lo que impacta</span></div></div>
+      <p class="cap">Los sistemas de contención no evitan el accidente: lo hacen menos grave y más predecible, y no están libres de riesgo para los ocupantes.</p>
+      <p class="joke">El cono no es decoración, aunque parezca que lo han puesto por gusto estético.</p>
+      <div class="quiz" data-deck="bal"></div>
+    </article>
+
+    <article class="step" id="t3-peligro" data-mode="peligro" data-tag="3 · Peligro" data-say="">
+      <span class="chap-n"><i>3</i><span class="eyebrow">Advertencia de peligro · 3.5</span></span>
+      <h2>Dame 3 minutos y te enseño los triángulos <em>por familias</em>, no uno a uno</h2>
+      <p class="hook">Un triángulo es tu amigo agorero: te avisa antes de que pase.</p>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Una señal de peligro avisa de algo difícil de ver a tiempo. Se coloca entre <b>150 y 250 m</b> antes (menos en vías lentas o en poblado) y puede llevar un panel: distancia hasta el peligro o longitud del tramo.</p></div>
+      <div class="tbl"><table><thead><tr><th>Familia</th><th>Señales</th></tr></thead><tbody><tr><td><b>Intersecciones</b></td><td>P-1 intersección con prioridad (tú la tienes) · P-2 prioridad de la derecha · P-3 semáforos · P-4 glorieta</td></tr><tr><td><b>Ferrocarril y puentes</b></td><td>P-5 puente móvil · P-6 tranvía · P-7 paso a nivel con barreras · P-8 sin barreras · P-11 situación de paso a nivel sin barreras · balizas P-9 y P-10 a 200, 150 y 100 m</td></tr><tr><td><b>La calzada</b></td><td>P-13 curva · P-14 curvas · P-15 perfil irregular (resalte, badén) · P-16 pendiente (el % es la inclinación) · P-17 estrechamiento · P-19 deslizante · P-25 doble sentido · P-30 escalón lateral</td></tr><tr><td><b>Personas y animales</b></td><td>P-20 peatones · P-21 niños · P-22 ciclistas · P-23 ganado · P-24 animales en libertad (P-24a, jabalíes)</td></tr><tr><td><b>El entorno</b></td><td>P-12 aeropuerto · P-26 desprendimientos · P-27 muelle · P-28 gravilla · P-29 viento transversal · P-33 visibilidad reducida · P-34 hielo o nieve</td></tr><tr><td><b>El tráfico</b></td><td>P-18 obras · P-31 congestión · P-32 obstrucción · P-35 trenzado · P-50 otros peligros</td></tr></tbody></table></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span><div class="tp"><div class="y"><span>P-33 <u>visibilidad reducida</u></span><span class="r">Niebla, lluvia, nieve, humo</span></div><div class="n"><span>P-34</span><span class="r">Hielo o nieve</span></div></div><div class="tp"><div class="y"><span>P-31 <u>congestión</u></span><span class="r">Tramo habitualmente detenido o dificultado</span></div><div class="n"><span>P-32 <u>obstrucción</u></span><span class="r">Vehículos que bloquean la calzada por avería o accidente</span></div></div><div class="tp"><div class="y"><span>P-26 <u>desprendimiento</u></span><span class="r">Posibles obstáculos en la calzada</span></div><div class="n"><span>P-28 <u>gravilla</u></span><span class="r">Riesgo de que se proyecte al pasar los vehículos</span></div></div></div>
+      <p class="cap"><span class="verify">Las señales nuevas o con pictograma cambiado entran en vigor el 1-7-2025 y no saldrán en el examen teórico, como mínimo, hasta el 1-10-2025.</span></p>
+      <p class="joke">Lo del triángulo y el «bueno, algo habrá» no entra en el examen.</p>
+      <div class="quiz" data-deck="pel"></div>
+    </article>
+
+    <article class="step" id="t3-prioridad" data-mode="prior" data-tag="4 · Prioridad" data-say="">
+      <span class="chap-n"><i>4</i><span class="eyebrow">Reglamentación · prioridad</span></span>
+      <h2>Si frenas en un ceda «por si acaso»: <em>quién pasa primero</em></h2>
+      <p class="hook">Si eres de los que frenan en un ceda «por si acaso», lee esto.</p>
+      <div class="tbl"><table><thead><tr><th>Señal</th><th>Qué te pide</th></tr></thead><tbody><tr><td><b>R-1</b> Ceda el paso</td><td>Ceder el paso en la próxima intersección a los de la vía a la que te acercas</td></tr><tr><td><b>R-2</b> Stop</td><td>Detenerte ante la línea; si no hay, justo antes de la intersección, y ceder el paso</td></tr><tr><td><b>R-3</b> Calzada con prioridad</td><td>Tienes prioridad en las intersecciones sobre la otra calzada</td></tr><tr><td><b>R-4</b> Fin de prioridad</td><td>Se acaba esa prioridad respecto a otra calzada</td></tr><tr><td><b>R-5</b> Prioridad respecto al sentido contrario</td><td>En un paso estrecho tienes prioridad sobre el sentido contrario</td></tr><tr><td>Prohibición de entrada en paso estrecho</td><td>No entras mientras obligues a detenerse al sentido contrario</td></tr></tbody></table></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span><div class="tp"><div class="y"><span>Ceda el paso</span><span class="r">Cedes; te paras <u>solo si hace falta</u></span></div><div class="n"><span>Stop</span><span class="r">Te detienes <u>siempre</u>, venga o no alguien</span></div></div><div class="tp"><div class="y"><span>Stop y desde la línea <u>sí ves</u></span><span class="r">Cedes el paso y sigues</span></div><div class="n"><span>Stop y desde la línea <u>no ves</u></span><span class="r">Te detienes de nuevo donde veas, sin poner a nadie en peligro</span></div></div><div class="tp"><div class="y"><span>Panel «A 150 m hay un stop»</span><span class="r">Te preavisa del stop de la próxima intersección</span></div><div class="n"><span>Panel «A 150 m hay un ceda»</span><span class="r">Te preavisa del ceda</span></div></div></div>
+      <p class="cap">Los triángulos P-1 (a, b, c, d, e) también son señales de prioridad, aunque no cumplan los mismos requisitos que las de reglamentación.</p>
+      <p class="joke">El ceda es un «tú primero». El stop es un «tú primero, y yo me quedo quieto como una estatua».</p>
+      <div class="quiz" data-deck="pri"></div>
+    </article>
+
+    <article class="step" id="t3-prohibido" data-mode="prohibe" data-tag="5 · Prohibido" data-say="">
+      <span class="chap-n"><i>5</i><span class="eyebrow">Reglamentación · prohibición y restricción</span></span>
+      <h2>Dame 4 minutos y no volverás a confundir <em>«no parar» con «no estacionar»</em></h2>
+      <p class="hook">Círculo rojo: prohibido. Lo difícil es saber el qué.</p>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Una señal de reglamentación se aplica desde la sección donde está, salvo que un panel diga otra distancia. Junto al cartel del nombre de un pueblo, vale para todo el poblado, salvo que dentro otra señal diga otra cosa.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span><div class="tp"><div class="y"><span><u>R-307</u></span><span class="r">Ni parar ni estacionar, en el lado de la señal</span></div><div class="n"><span><u>R-308</u></span><span class="r">No estacionar: parar sí</span></div></div><div class="tp"><div class="y"><span>R-308c <u>primera quincena</u></span><span class="r">De las 9 h del día 1 a las 9 h del día 16</span></div><div class="n"><span>R-308d <u>segunda quincena</u></span><span class="r">De las 9 h del día 16 a las 9 h del día 1</span></div></div><div class="tp"><div class="y"><span>R-305</span><span class="r">Todos: no adelantar a vehículos de motor si invades el sentido contrario</span></div><div class="n"><span>R-306</span><span class="r">Camiones de más de 3.500 kg: ni sin invadirlo</span></div></div><div class="tp"><div class="y"><span>R-107 <u>camión vacío</u></span><span class="r">Sigue prohibido si su masa máxima supera la cifra</span></div><div class="n"><span>R-103</span><span class="r">Motos de dos ruedas: sí entran</span></div></div></div>
+      <div class="tbl"><table><thead><tr><th>Grupo</th><th>Qué recuerdas</th></tr></thead><tbody><tr><td><b>Entrada prohibida</b> (R-100 a R-120)</td><td>R-100 circulación prohibida en ambos sentidos · R-101 todos · R-102 vehículos de motor · R-104 motos · R-105 ciclomotores (y vehículos para movilidad reducida) · R-106 mercancías, sea cual sea la masa · R-108 mercancías peligrosas · R-110 más de 1.000 litros de productos contaminantes del agua · R-112 motor con remolque, salvo de un eje · R-116 peatones · R-118 VMP · R-120 por distintivo ambiental</td></tr><tr><td><b>Restricción de paso</b> (R-200 a R-205)</td><td>R-200 prohibido pasar sin detenerse (aduana, policía, peaje) · R-201 masa · R-202 masa por eje · R-203 longitud · R-204 anchura · R-205 altura</td></tr><tr><td><b>Otras</b> (R-300 a R-310)</td><td>R-300 separación mínima · R-301 velocidad máxima · R-302 y R-303 giros (la R-303 incluye el cambio de sentido) · R-304 cambio de sentido · R-309 estacionamiento limitado (debes indicar la hora de comienzo) · R-310 advertencias acústicas prohibidas, salvo para evitar un accidente</td></tr></tbody></table></div>
+      <details class="more"><summary>Hasta dónde llega la R-301</summary><ul class="list"><li>Desde donde está hasta la próxima señal que la cambie o la anule.</li><li>En una vía sin prioridad, deja de valer al salir de una intersección con una vía con prioridad.</li><li>Si va en el mismo panel que un peligro, acaba cuando termina el peligro.</li><li>Si coincide con el máximo de la vía, solo recuerda el límite.</li></ul></details>
+      <p class="joke">La R-307 tiene fama: ni parar ni estacionar. La R-308 tiene la letra pequeña: parar sí.</p>
+      <div class="quiz" data-deck="pro"></div>
+    </article>
+
+    <article class="step" id="t3-obligatorio" data-mode="obliga" data-tag="6 · Obligatorio" data-say="">
+      <span class="chap-n"><i>6</i><span class="eyebrow">Reglamentación · obligación y fin</span></span>
+      <h2>Círculo azul: <em>obligatorio y sin negociar</em></h2>
+      <p class="hook">Azul no sugiere, no recomienda y no «si te apetece».</p>
+      <div class="tbl"><table><thead><tr><th>Señal</th><th>Qué obliga</th></tr></thead><tbody><tr><td><b>R-400</b> sentido obligatorio · <b>R-401</b> paso obligatorio · <b>R-402</b> glorieta · <b>R-403</b> direcciones permitidas</td><td>Seguir la flecha, pasar por el lado marcado o girar en el sentido indicado</td></tr><tr><td><b>R-404 a R-406</b> calzada obligatoria</td><td>Para automóviles, motos o camiones. En la R-406, una cifra de tonelaje limita la obligación a los que superen esa MMA</td></tr><tr><td><b>R-407</b> vía reservada ciclos · <b>R-408 a R-410</b> animales y peatones</td><td>Los de la silueta, obligados; los demás, prohibidos</td></tr><tr><td><b>R-411</b> velocidad mínima</td><td>Hasta otra de mínima distinta, fin de mínima o una máxima igual o inferior</td></tr><tr><td><b>R-412</b> cadenas</td><td>Al menos en una rueda a cada lado del eje motor, o neumáticos de nieve</td></tr><tr><td><b>R-413</b> alumbrado de corto alcance</td><td>Con cualquier visibilidad, hasta su fin (S-24)</td></tr><tr><td><b>R-417</b> cinturón · <b>R-418</b> telepeaje</td><td>Recuerda el cinturón · pagar el peaje de forma dinámica</td></tr><tr><td><b>R-422</b> desmontar y continuar a pie</td><td>Los ciclos siguen a pie (si es solo en ciertos periodos, un panel lo dice)</td></tr></tbody></table></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span><div class="tp"><div class="y"><span>R-500 <u>fin de prohibiciones</u></span><span class="r">Quita las prohibiciones específicas para vehículos en movimiento</span></div><div class="n"><span>R-501 <u>fin de limitación de velocidad</u></span><span class="r">Quita solo la velocidad máxima anterior</span></div></div><div class="tp"><div class="y"><span>R-505, R-507, R-508… <u>fin de calzada o vía obligatoria</u></span><span class="r">Termina solo esa obligación concreta</span></div><div class="n"><span>R-506 <u>fin de velocidad mínima</u></span><span class="r">Termina la mínima, no la máxima</span></div></div></div>
+      <p class="joke">Eso sí: cada obligación trae su señal de fin, como las buenas despedidas.</p>
+      <div class="quiz" data-deck="obl"></div>
+    </article>
+
+    <article class="step" id="t3-indicacion" data-mode="indica" data-tag="7 · Indicación" data-say="">
+      <span class="chap-n"><i>7</i><span class="eyebrow">Indicación · 3.7</span></span>
+      <h2>Cuadrado azul: no te manda nada, <em>te regala información</em></h2>
+      <p class="hook">Dame 4 minutos y entiendes un cartel de salida sin sudar.</p>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Las de indicación facilitan datos útiles: la mayoría son rectangulares o cuadradas. No prohíben ni obligan: <b>describen</b>.</p></div>
+      <div class="tbl"><table><thead><tr><th>Familia</th><th>Lo que te llevas</th></tr></thead><tbody><tr><td><b>Generales</b></td><td>S-1 autopista, S-1a autovía · S-2 su fin · S-11 sentido único · S-16 frenado de emergencia · S-17 estacionamiento · S-19 bus · S-22 cambio de sentido al mismo nivel · S-23 hospital (cuida el ruido) · S-25 a distinto nivel · S-26 salida a 300, 200 y 100 m · S-27 auxilio</td></tr><tr><td><b>Zonas de peatón</b></td><td>S-28 estancia y juego: <b>10 km/h</b>, prioridad peatones, juegos permitidos (siempre con R-301) · S-29 fin · S-30 zona peatonal · S-48 fin de coexistencia (en ella, juegos y deportes no se autorizan)</td></tr><tr><td><b>Carriles</b></td><td>S-50 velocidad mínima: solo a esa velocidad o más · S-51a tipos de vehículos · S-51b VAO · S-52 final de carril · S-53 de uno a dos carriles</td></tr><tr><td><b>Orientación</b></td><td>Preseñalización a <b>1.000 m</b> y <b>500 m</b> en autopista · confirmación del <b>color de la vía por la que circulas</b> · salidas seguidas: A y B · carteles laterales, banderolas y sobre la calzada</td></tr><tr><td><b>Paneles</b></td><td>S-800 distancia al peligro · S-810 longitud del tramo · S-820/821/830 hasta dónde se extiende una prohibición · S-840 stop próximo · S-870 solo el ramal de salida · S-880 un vehículo (con «EXCEPTO»: a todos menos a él) · S-890 nieve, lluvia o niebla · S-892 vigilancia automática</td></tr><tr><td><b>Otras</b></td><td>S-900 incendio · S-910 extintor · S-920 entrada a España · S-960 teléfono de emergencia · S-980 y S-990 salida de emergencia · S-991 controles de velocidad, semáforo en rojo, stop o separación</td></tr></tbody></table></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span><div class="tp"><div class="y"><span>Carril con <u>línea discontinua</u> reservado a bus o VAO</span><span class="r">El resto solo para maniobras que no sean parar, estacionar, cambiar de sentido ni adelantar</span></div><div class="n"><span>Carril con <u>velocidad mínima</u> (S-50)</span><span class="r">Solo a esa velocidad o más; si se puede, por el derecho</span></div></div></div>
+      <p class="joke">Indica, no obliga: es el cartel de «te echo una mano, de nada».</p>
+      <div class="quiz" data-deck="ind"></div>
+    </article>
+
+    <article class="step" id="t3-rayas" data-mode="marcas" data-tag="8 · Rayas" data-say="">
+      <span class="chap-n"><i>8</i><span class="eyebrow">Marcas viales · 3.8</span></span>
+      <h2>Las rayas del suelo no son decoración: <em>continua, discontinua y mixta</em></h2>
+      <p class="hook">Dame 3 minutos y dejas de cruzar rayas «porque total, no pasaba nadie».</p>
+      <div class="rule"><span class="lbl">La regla en una frase</span><p>Las marcas viales son blancas, salvo que se diga otra cosa. En obras, las nuevas van en <b>amarillo</b>. Las figuras de colores en calles para calmar el tráfico no son marcas viales ni cambian la interpretación de las demás.</p></div>
+      <div class="trap"><span class="lbl">El detalle trampa</span><div class="tp"><div class="y"><span>Longitudinal <u>discontinua</u></span><span class="r">Puedes atravesarla para giros o cambios de carril, respetando la prioridad</span></div><div class="n"><span>Longitudinal <u>continua</u></span><span class="r">Nadie la atraviesa ni circula por su izquierda si separa sentidos</span></div></div><div class="tp"><div class="y"><span>Continua <u>de borde</u> de calzada</span><span class="r">Puede cruzarse puntualmente, por emergencia</span></div><div class="n"><span>Dos <u>continuas</u> paralelas</span><span class="r">Igual que una sola continua</span></div></div><div class="tp"><div class="y"><span><u>Continua + discontinua</u></span><span class="r">Solo cuenta la del lado por el que circulas</span></div><div class="n"><span>Adelantas y <u>ya empezaste</u> desde el carril junto a la discontinua</span><span class="r">Puedes cruzar la continua para terminar o desistir</span></div></div><div class="tp"><div class="y"><span>Transversal <u>continua</u></span><span class="r">Línea de detención: stop, semáforo, agente, paso a nivel, puente móvil, paso de peatones</span></div><div class="n"><span>Transversal <u>discontinua</u></span><span class="r">Ceda: no franquearla si debes ceder el paso</span></div></div></div>
+      <div class="tbl"><table><thead><tr><th>Marca</th><th>Significa</th></tr></thead><tbody><tr><td>Bandas paralelas al eje</td><td>Paso de peatones: los conductores les dejan paso. Sobreelevado: un triángulo en cada franja</td></tr><tr><td>Dos transversales discontinuas paralelas</td><td>Paso para ciclistas</td></tr><tr><td>Tres triángulos sobre un resalte</td><td>Reductor de velocidad (lomo de asno)</td></tr><tr><td>Flecha de frente</td><td>No impide cambiar de carril si mantienes la dirección y las marcas lo permiten</td></tr><tr><td>Flecha de fin de carril</td><td>El carril acaba: cambia de carril cuanto antes</td></tr><tr><td>Miniglorieta</td><td>Isleta central de 4 m o menos</td></tr><tr><td>Cebreado</td><td>No entres con tu vehículo, salvo si debes ir por el arcén</td></tr><tr><td>Galones entre vehículos</td><td>Referencia para guardar distancia de seguridad</td></tr></tbody></table></div>
+      <div class="facts"><div class="fact"><span class="h">6 m / 3 m</span><span>Sin aparcar antes de un paso de peatones: 6 m si la acera se alinea con el límite exterior de la banda de aparcamiento; 3 m si lo hace con el interior.</span></div><div class="fact"><span class="h">Avanza-bici</span><span>Dos marcas transversales a 4 m: con rojo, solo ciclos, VMP, motos y ciclomotores.</span></div></div>
+      <p class="joke">La línea continua no es una discontinua con ganas de crecer.</p>
+      <div class="quiz" data-deck="mar1"></div>
+    </article>
+
+    <article class="step" id="t3-amarillas" data-mode="marcas2" data-tag="9 · Amarillas" data-say="">
+      <span class="chap-n"><i>9</i><span class="eyebrow">Marcas amarillas y otras</span></span>
+      <h2>Amarilla, zigzag, cuadrícula y damero: <em>las rayas con peor carácter</em></h2>
+      <p class="hook">Si eres de los que paran «un segundito» en el amarillo, lee esto.</p>
+      <div class="trap"><span class="lbl">El detalle trampa</span><div class="tp"><div class="y"><span>Amarilla longitudinal <u>discontinua</u></span><span class="r">Prohíbe estacionar, en todo su largo</span></div><div class="n"><span>Amarilla longitudinal <u>continua</u></span><span class="r">Prohíbe parar y estacionar</span></div></div><div class="tp"><div class="y"><span><u>Zigzag</u> amarillo</span><span class="r">Zona de uso especial (parada de bus, carga y descarga): no se estaciona</span></div><div class="n"><span><u>Cuadrícula</u> amarilla</span><span class="r">No entres en el cruce si puedes quedar parado y obstruir, aunque tengas verde</span></div></div><div class="tp"><div class="y"><span>Plazas <u>azules o verdes</u></span><span class="r">Limitaciones temporales o de duración</span></div><div class="n"><span><u>Damero</u> blanco y rojo</span><span class="r">Lecho de frenado de emergencia: no parar, no estacionar, no usar la superficie</span></div></div></div>
+      <p class="cap">Algunas de estas prohibiciones pueden ser temporales: entonces lo especifica una señal vertical al principio del tramo.</p>
+      <p class="joke">La cuadrícula amarilla es amiga tuya: te recuerda que no hace falta entrar a un cruce si luego no puedes salir.</p>
+      <div class="quiz" data-deck="mar2"></div>
+    </article>
+
+    <article class="step" id="t3-examen" data-mode="t3intro" data-tag="Examen · Tema 3" data-say="30 preguntas. El examen real permite 3 fallos.">
+      <span class="eyebrow">Al principio te prometí la prueba</span>
+      <h2>30 preguntas del Tema 3. Más de <em>3 fallos</em> y no estás listo.</h2>
+      <div class="quiz" data-deck="all3"></div>
+      <div class="ab">
+        <div><span class="k">A</span><b>3 fallos o menos</b><span>Tienes el Tema 3. Repásalo la víspera del examen.</span></div>
+        <div><span class="k">B</span><b>Más de 3</b><span>«Solo falladas» y vuelve al capítulo de cada fallo.</span></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="cta" data-tema="1" style="background:var(--t1)">← Volver al Tema 1</button><button class="cta" data-tema="2" style="background:var(--t2)">Tema 2</button></div>
+    </article>
+  </div>
+  </div>
+</div>
+
+<nav class="switch" aria-label="Cambiar de tema"><button data-t="1" aria-pressed="true">Tema 1</button><button data-t="2" aria-pressed="false">Tema 2</button><button data-t="3" aria-pressed="false">Tema 3</button></nav>
+
+<script>
+/* ================= PREGUNTAS ================= */
+const Q={
+vias:[["v1","Ciclista de <u>15</u> años en el arcén de una <u>autovía</u>.",["Permitido","Prohibido"],0,"Mayor de 14, por el arcén de autovía, salvo señal que lo prohíba."],
+["v2","El mismo ciclista en el arcén de una <u>autopista</u>.",["Permitido","Prohibido"],1,"Por autopista, nunca."],
+["v3","Ciclista de <u>13</u> años en el arcén de una autovía.",["Permitido","Prohibido"],1,"Tiene que ser mayor de 14."],
+["v4","¿Qué distingue a una autopista de una autovía?",["Los cruces a nivel","El acceso de las fincas de al lado","Tener peaje"],1,"Autopista: sin acceso. Autovía: acceso limitado. Ninguna tiene cruces a nivel."],
+["v5","Autovía que cruza una ciudad: ¿qué normas de carril sigues?",["Las de ciudad","Las de fuera de poblado"],1,"Autopistas y autovías urbanas siguen las normas de fuera de poblado."],
+["v6","Un vehículo que no alcanza 60 km/h en llano, ¿puede ir por autopista?",["Sí","No"],1,"Hace falta alcanzar 60 km/h en llano."]],
+carr:[["k1","Furgón de <u>3.000 kg</u>, autovía de 3 carriles: ¿puede usar el izquierdo?",["Sí","No"],0,"La limitación es para más de 3.500 kg."],
+["k2","Furgón de <u>4.000 kg</u>, misma autovía: ¿el izquierdo?",["Sí","No"],1,"Derecho y, excepcionalmente, el central. Nunca el izquierdo."],
+["k3","Turismo con remolque, conjunto de <u>8 m</u>, autovía de 3 carriles: ¿el izquierdo?",["Sí","No"],1,"Los conjuntos de más de 7 m van como los pesados."],
+["k4","Ciudad, 3 carriles <u>marcados</u> en tu sentido: ¿cuál usas?",["El derecho","El que convenga a mi destino"],1,"Con carriles marcados, el que convenga a tu destino."],
+["k5","Ciudad, carriles <u>sin marcar</u>.",["El derecho","El que convenga"],0,"Sin marcas, el derecho."],
+["k6","2 carriles normales y un carril bus: ¿cuántos carriles cuentan?",["2","3"],0,"Los reservados no cuentan."],
+["k7","Doble sentido con 3 carriles: ¿para qué es el central?",["Para circular normal","Solo para adelantar o girar a la izquierda"],1,"Solo para eso. El izquierdo, nunca."]],
+esp:[["q1","Velocidad máxima en un carril <u>reversible</u>.",["80","La de la vía","60"],1,"No tiene límite propio."],
+["q2","Velocidad en un carril <u>adicional circunstancial</u>.",["Máx 80, mín 60","La de la vía"],0,"80 como máximo y 60 como mínimo."],
+["q3","Furgoneta en un carril en sentido contrario habilitado por <u>fluidez</u>.",["Puede","No puede"],1,"Por fluidez, solo motos y turismos sin remolque."],
+["q4","La misma furgoneta, carril habilitado por <u>obras</u>.",["Puede","No puede"],0,"Por obras, todos los permitidos en la vía."],
+["q5","Turismo <u>ECO</u> con solo el conductor en el VAO.",["Siempre","Solo si lo indica el panel","Nunca"],1,"ECO, C o B, solo si lo indica el panel."],
+["q6","Turismo <u>0 emisiones</u> con solo el conductor en el VAO.",["Sí","No"],0,"Sí."],
+["q7","Luz en un carril reversible, de día.",["Ninguna obligatoria","Cruce"],1,"Cruce, de día y de noche."]],
+arcen:[["r1","Dos ciclomotores por un arcén amplio: ¿en paralelo?",["Sí","No"],0,"En columna de dos, si el arcén es transitable y suficiente."],
+["r2","Dos tractores agrícolas por el arcén: ¿en paralelo?",["Sí","No"],1,"Solo bicis y ciclomotores pueden ir de dos en dos."],
+["r3","Vehículo especial de <u>3.000 kg</u>: ¿por dónde va?",["Arcén","Calzada"],0,"Hasta 3.500 kg, por el arcén."],
+["r4","Especial de <u>4.000 kg</u>.",["Arcén","Calzada"],1,"Más de 3.500 kg, por la calzada."],
+["r5","Un ciclomotor adelanta a otro en el arcén durante 20 s.",["Permitido","Prohibido"],1,"Más de 15 s o 200 m en paralelo: prohibido."],
+["r6","Dos <u>bicis</u>, lo mismo.",["Permitido","Prohibido"],0,"Las bicis están exentas."],
+["r7","Con tráfico denso, usas el arcén para llegar antes a tu salida.",["Permitido","Prohibido"],1,"Prohibido."]],
+dist:[["d1","Camión de 12 t, convencional de 1 carril por sentido, sin intención de adelantar: distancia.",["La de frenar","50 m","100 m"],1,"Al menos 50 m."],
+["d2","El mismo camión en autovía de 2 carriles.",["50 m","Basta con no chocar"],1,"Con más de un carril por sentido, basta con no chocar."],
+["d3","Túnel, turismo.",["50 m o 2 s","100 m o 4 s","150 m o 6 s"],1,"100 m o 4 s."],
+["d4","Túnel, camión de más de 3.500 kg.",["50 m o 2 s","100 m o 4 s","150 m o 6 s"],2,"150 m o 6 s, viendo 3 galones."],
+["d5","Galones: ¿cuántos como mínimo entre vehículos?",["1","2","3"],1,"2 galones."],
+["d6","Circulación saturada: los de la derecha van más rápido. ¿Están adelantando?",["Sí","No"],1,"No se considera adelantamiento."]],
+peat:[["w1","Peatón fuera de poblado sin acera ni arcén: ¿qué lado?",["Izquierda","Derecha"],0,"Izquierda, de cara a los coches."],
+["w2","Peatón <u>llevando una bici a mano</u>, mismo sitio.",["Izquierda","Derecha"],1,"Derecha."],
+["w3","Giras para entrar en otra calle y la cruza un peatón sin paso.",["Paso yo","Pasa él"],1,"Al girar, cedes al peatón aunque no haya paso."],
+["w4","Un peatón cruza sin paso la calle <u>de la que sales</u>.",["Tengo prioridad, con precaución","Pasa él"],0,"Ahí rige la norma general."],
+["w5","Autoestop en la explanada del peaje de una autopista.",["Puedo recogerlo","No"],1,"Ni en las explanadas del peaje."],
+["w6","Reflectante de noche fuera de poblado: visible a…",["50 m","100 m","150 m"],2,"150 m."]],
+vel:[["x1","Convencional: velocidad mínima de un turismo.",["45","60","30"],0,"La mitad de 90."],
+["x2","Convencional: mínima de un camión.",["40","45"],0,"La mitad de 80."],
+["x3","Calle con 1 carril por sentido y un carril bus: límite.",["30","50"],0,"El bus no cuenta: queda 1 carril."],
+["x4","Calle con 2 carriles normales por sentido.",["30","50"],1,"50."],
+["x5","Turismo a 90 en convencional: ¿puedes adelantarlo con tu turismo?",["Sí, hasta 110","No"],1,"Ya no existe el margen de +20."],
+["x6","Mercancías peligrosas fuera de poblado.",["−10 km/h","−10 %"],0,"10 km/h menos."],
+["x7","Vas a 80 con límite 90 y niebla densa. ¿Cómo se llama si es demasiado?",["Exceso de velocidad","Velocidad excesiva"],1,"Excesiva: por encima de lo que permiten las circunstancias."]],
+prio:[["y1","Cruce sin señales: un camión viene por tu derecha y tú vas en moto.",["Paso yo","Pasa el camión"],1,"Pasa el de la derecha, sea lo que sea."],
+["y2","El camión sale de un camino de tierra.",["Paso yo","Pasa el camión"],0,"La vía asfaltada tiene prioridad."],
+["y3","Ambulancia con luz azul sin sirena, calle vacía.",["Prioritaria","No prioritaria"],0,"Excepcionalmente, si la sirena no hace falta."],
+["y4","Particular llevando a un herido con las luces de emergencia.",["Es prioritario","Cumple todas las normas"],1,"No es prioritario."],
+["y5","Tienes verde, pero te quedarías parado dentro del cruce.",["Entro","No entro"],1,"No entras aunque tengas prioridad."],
+["y6","Grupo ciclista: el primero ya ha entrado en la glorieta.",["Paso yo","Pasa todo el grupo"],1,"El grupo cuenta como un solo vehículo."]],
+estr:[["z1","Estrechamiento sin señal, no se sabe quién entró antes: turismo o autobús.",["Turismo","Autobús"],1,"Autobús (5) antes que turismo (7)."],
+["z2","Turismo o bicicleta.",["Turismo","Bicicleta"],0,"Turismo (7) antes que bici (10)."],
+["z3","Pendiente del 8 %: ¿quién pasa?",["El que sube","El que baja"],0,"El que sube, salvo que tenga un apartadero más cerca."],
+["z4","Pendiente del 5 %.",["El que sube","Reglas normales"],1,"No es gran pendiente (7 % o más)."],
+["z5","Puente estrecho: en tu lado hay un ceda el paso.",["Pasas tú","Retrocedes tú"],1,"Retrocede el del lado del ceda el paso."],
+["z6","Dos turismos iguales.",["El más grande","El que haría más marcha atrás"],1,"Pasa el que tendría que retroceder más."]],
+senal:[["s1","Intermitente izquierdo y el brazo indica <u>derecha</u>. ¿Qué vale?",["El intermitente","El brazo"],1,"Si se contradicen, manda el brazo."],
+["s2","¿Claxon para avisar de que adelantas <u>dentro de poblado</u>?",["Sí","No"],1,"Solo fuera de poblado."],
+["s3","¿<u>Ráfagas</u> para avisar de que adelantas dentro de poblado?",["Sí","No"],0,"Dentro y fuera."],
+["s4","¿Es obligatorio el espejo exterior derecho en un turismo?",["Siempre","Solo si el interior no deja ver","Nunca"],1,"Solo si el interior no da la visión mínima."],
+["s5","Un espejo <u>convexo</u> hace que los vehículos parezcan…",["Más cerca","Más lejos"],1,"Más lejos y más pequeños."],
+["s6","Moto que alcanza 120 km/h: ¿qué espejos?",["Solo el izquierdo","Los dos"],1,"Más de 100 km/h: los dos."],
+["s7","¿Señalizar te da prioridad?",["Sí","No"],1,"No: solo avisa."]],
+adel:[["a1","Curva sin visibilidad: adelantas invadiendo el sentido contrario.",["Permitido","Prohibido"],1,"Prohibido."],
+["a2","Misma curva con <u>dos carriles en tu sentido</u>, sin invadir el contrario.",["Permitido","Prohibido"],0,"Permitido."],
+["a3","Paso a nivel: adelantas a un <u>turismo</u>.",["Permitido","Prohibido"],1,"Prohibido."],
+["a4","Paso a nivel: adelantas a una <u>moto</u>, avisando.",["Permitido","Prohibido"],0,"Excepción de dos ruedas."],
+["a6","Continua: rebasas a un coche <u>en la cola de un semáforo</u>.",["Permitido","Prohibido"],1,"Te quedas detrás."],
+["a7","Continua: rebasas a un coche <u>averiado</u>.",["Permitido","Prohibido"],0,"Sí, sin peligro."],
+["a8","Intersección sin señales: adelantas a un turismo.",["Permitido","Prohibido"],1,"Prohibido."],
+["a9","Intersección con <u>prioridad señalizada</u>.",["Permitido","Prohibido"],0,"Permitido."],
+["a10","Ciudad, 2 carriles marcados: adelantas por la <u>derecha</u>.",["Permitido","Prohibido"],0,"Permitido."],
+["a12","Te adelantan: ¿puedes acelerar?",["Sí","No"],1,"Prohibido."],
+["a13","El de delante ha puesto el intermitente para adelantar a otro.",["Paso yo","Pasa él"],1,"El que señalizó primero tiene preferencia."],
+["a14","Doble sentido con 3 carriles: ¿por dónde adelantas?",["Izquierdo","Central, si está libre"],1,"Por el central."],
+["a15","Túnel con <u>dos</u> carriles en tu sentido.",["Puedo adelantar","No"],0,"La prohibición es para un solo carril."],
+["a16","Paso de peatones, <u>tan despacio</u> que puedes parar.",["Permitido","Prohibido"],0,"Es la excepción."]],
+cicl:[["c1","Ciclista, carretera de <u>un carril</u> por sentido: separación mínima.",["1 m","1,5 m","2 m"],1,"Al menos 1,5 m."],
+["c2","Igual, con <u>dos carriles</u> en tu sentido.",["Basta 1,5 m","Cambio completo de carril"],1,"Cambio completo."],
+["c3","Continua, ciclista lento, nadie de frente: ¿invades?",["Sí","No"],0,"Excepción para usuarios lentos y frágiles."],
+["c4","En moto adelantas a un coche fuera de poblado: separación.",["La que vea","1,5 m"],1,"1,5 m."],
+["c5","Ciclista de frente por su arcén: ¿adelantas si le haces apartarse?",["Sí","No"],1,"Prohibido."]],
+inmo:[["i1","1 minuto para que suba un amigo, sin bajarte.",["Detención","Parada","Estacionamiento"],1,"Parada."],
+["i2","1 minuto, pero bajas a por el pan.",["Detención","Parada","Estacionamiento"],2,"Estacionamiento: abandonas el coche."],
+["i3","Semáforo en rojo.",["Detención","Parada","Estacionamiento"],0,"Detención."],
+["i4","Carretera: ¿paras en el arcén <u>transitable</u>?",["Sí","No"],1,"Fuera de él."],
+["i5","Arcén <u>no transitable</u> pero asfaltado.",["Sí","No"],0,"Sí."],
+["i6","Ciudad: espacio libre al parar en la calzada.",["2 m","3 m","3,5 m"],1,"3 m."],
+["i7","Línea amarilla <u>discontinua</u>: ¿puedes parar?",["Sí","No"],0,"Prohíbe estacionar, no parar."],
+["i8","Línea amarilla <u>continua</u>: ¿puedes parar?",["Sí","No"],1,"Ni parar ni estacionar."],
+["i9","¿Dónde acaba una señal de estacionamiento prohibido?",["A 100 m","En la próxima intersección"],1,"En la próxima intersección."],
+["i11","Autovía: ¿paras en el arcén a mirar el mapa?",["Sí","No"],1,"Solo en zonas habilitadas."]],
+emerg:[["e1","Avería en autovía sin triángulos: ¿te sancionan?",["Sí","No"],1,"No es sancionable ahí."],
+["e2","Incendio en un túnel: ¿la llave?",["Me la llevo","La dejo puesta"],1,"Puesta y puertas abiertas."],
+["e3","Atasco en un túnel: ¿cuándo apagas el motor?",["Siempre","Más de 2 minutos parado"],1,"Más de 2 minutos."],
+["e4","Coche que no anda y sitio seguro fuera: ¿por qué lado salís?",["El del tráfico","El contrario"],1,"El contrario al tráfico."],
+["e5","No hay sitio seguro.",["Esperar en el arcén","Dentro con cinturón"],1,"Dentro, con cinturón."],
+["e6","¿Dónde va la V-16?",["En el suelo a 50 m","En lo más alto"],1,"En lo más alto, 360°."],
+["e7","La avería te deja seguir.",["Paro en el arcén","Primera salida por el arcén derecho"],1,"Sigues hasta la primera salida."]],
+pend:[["p1","Cuesta arriba, manual.",["1.ª","Marcha atrás","Punto muerto"],0,"1.ª."],
+["p2","Cuesta <u>abajo</u>, manual.",["1.ª","Marcha atrás"],1,"Marcha atrás."],
+["p3","Cuesta abajo, <u>automático</u>.",["Marcha atrás","P"],1,"Siempre P."],
+["p4","Camión cuesta arriba junto al bordillo: ruedas…",["Hacia el bordillo","Hacia el centro de la calzada"],1,"Hacia el centro."],
+["p5","¿Calzar un autobús con una piedra?",["Sí","No"],1,"Calzos adecuados, nunca piedras."],
+["p6","¿Es obligatorio calzar un turismo?",["Sí","No"],1,"Solo conjuntos, autobuses y más de 3,5 t."]],
+giro:[["g1","En bici por carretera, giro a la izquierda sin carril especial.",["Me pego al centro","Desde el arcén derecho"],1,"Desde el arcén derecho."],
+["g2","Izquierda en calle de <u>sentido único</u>.",["Centro","Borde izquierdo"],1,"Borde izquierdo."],
+["g3","Izquierda en <u>doble sentido</u>.",["Borde izquierdo","Junto al centro"],1,"Junto al centro, sin invadir."],
+["g4","Carril de deceleración: ¿cuándo frenas?",["Antes de entrar","Ya dentro"],1,"Dentro."],
+["g5","¿Qué va primero?",["Señalizar","Mirar"],1,"Observar, señalizar, realizar."]],
+age:[["a1","Agente con el <u>brazo levantado verticalmente</u>.",["Solo se detienen los que vienen de frente", "Me detengo si me acerco al agente"],1,"Obliga a detenerse a todos los usuarios que se acerquen al agente."],
+["a2","El agente te dice una cosa y el <u>semáforo</u> otra.",["Obedezco al semáforo", "Obedezco al agente"],1,"Las órdenes de los agentes prevalecen sobre las demás señales y normas, aunque las contradigan."],
+["a3","Brazo levantado y tú ya estás <u>dentro de la intersección</u>.",["No estoy obligado a detenerme", "Me detengo en medio del cruce"],0,"Los conductores que ya están dentro no tienen que detenerse."],
+["a4","El agente baja los brazos que tenía extendidos horizontalmente. ¿Sigue la señal?",["Sí, hasta que cambie de posición o haga otra señal", "No, ya puedo pasar"],0,"Permanece en vigor hasta que el agente cambie de posición o haga otra señal."],
+["a5","Silbato: una serie de <u>toques cortos y frecuentes</u>.",["Ordena reanudar la marcha", "Ordena detener los vehículos"],1,"Toques cortos y frecuentes: detención. Un toque largo: reanudar la marcha."],
+["a6","Un agente desde su vehículo usa <u>luz roja intermitente hacia delante</u>. El conductor de delante…",["Se detiene a la derecha, delante del vehículo policial, y sigue dentro", "Sigue despacio hasta la siguiente salida"],0,"Se detiene en el lado derecho y obedece las instrucciones por megafonía."],
+["a7","Bandera <u>amarilla</u>.",["Extremar la atención o peligro próximo", "La calzada queda de nuevo abierta"],0,"Amarilla: atención o peligro. La que indica calzada de nuevo abierta es la verde."],
+["a8","Quien regula el tráfico con prendas llamativas, ¿desde qué distancia debe distinguirse?",["150 metros como mínimo", "50 metros"],0,"Colores llamativos y elementos retrorreflectantes, a 150 m como mínimo."],
+["a9","Una patrulla escolar con su paleta.",["Puede «invitar» a detener la marcha", "No tiene ninguna autoridad"],0,"Las patrullas escolares pueden invitar a los usuarios a detenerse."]],
+bal:[["b1","Señales de un tramo con <u>obras</u>.",["Fondo naranja", "Fondo amarillo"],1,"Obras o conservación: amarillo."],
+["b2","Señalización circunstancial por una causa que <u>no son obras</u>.",["Naranja", "Amarillo"],0,"Mismo criterio, pero en naranja."],
+["b3","Luz roja fija en un dispositivo delimitador.",["Calzada totalmente cerrada al tránsito", "Peligro más adelante"],0,"Roja fija: cerrada al tránsito."],
+["b4","Luces amarillas, fijas o intermitentes, entre dos conos o balizas.",["Prohíben cruzar la línea real o imaginaria que las une", "Solo advierten de obras"],0,"Prohíben el paso a través de esa línea."],
+["b5","Captafaro horizontal luminoso (verde, naranja o rojo): ¿cuál se puede franquear?",["Solo el verde", "Solo el rojo", "Cualquiera"],0,"El único franqueable es el verde."],
+["b6","Llegas a un paso a nivel y la barrera <u>está en movimiento</u>.",["Paso rápido antes de que baje", "Me detengo, uno detrás de otro, hasta tener paso libre"],1,"Cerrada o en movimiento: detenerse en fila hasta tener paso libre."],
+["b7","Barreras de seguridad: ¿evitan el accidente por salida de vía?",["No: reducen sus consecuencias", "Sí, lo evitan"],0,"Lo hacen más predecible y menos grave, pero no lo evitan ni están exentas de riesgo."],
+["b8","La manga de viento complementa a la señal…",["P-29, viento transversal", "P-31, congestión"],0,"Informa de existencia, sentido e intensidad del viento."],
+["b9","¿Para qué sirve un hito de arista?",["Balizar los bordes de la carretera, sobre todo de noche", "Separar dos corrientes de tráfico"],0,"Separar corrientes es el hito de vértice."]],
+pel:[["p1","Triángulo P-1: <u>intersección con prioridad</u>.",["Debo ceder el paso", "Los de la otra vía deben ceder: tengo prioridad"],1,"Avisa de una vía cuyos usuarios deben ceder el paso."],
+["p2","P-2: intersección con <u>prioridad de paso a la derecha</u>.",["Tengo prioridad siempre", "Rige la regla general de prioridad"],1,"Avisa de que en esa intersección rige la regla general."],
+["p3","¿A qué distancia del peligro se colocan normalmente las señales de peligro?",["Entre 500 y 600 m", "Entre 150 y 250 m"],1,"Menos en vías lentas o en poblado."],
+["p4","Balizas de aproximación a un paso a nivel: ¿a qué distancias?",["200, 150 y 100 m", "500, 300 y 100 m"],0,"Y van siempre con la señal del paso a nivel (o puente móvil, o muelle)."],
+["p5","P-16 con un «10 %».",["La inclinación de la pendiente", "La velocidad máxima"],0,"La cifra indica el porcentaje de inclinación."],
+["p6","Un panel complementario bajo un triángulo puede indicar…",["El nombre del pueblo", "Distancia hasta el peligro o longitud del tramo"],1,"Distancia al peligro o longitud en la que existe."],
+["p7","P-33.",["Presencia de hielo o nieve", "Visibilidad reducida: niebla, lluvia, nieve, humo"],1,"Hielo o nieve es la P-34."],
+["p8","P-31.",["Congestión frecuente", "Obstrucción en la calzada"],0,"Obstrucción por avería o accidente es la P-32."],
+["p9","P-35, trenzado.",["Curvas seguidas", "Tramo entre una confluencia y una bifurcación donde se cruzan trayectorias"],1,"Aumenta el riesgo de colisión por los cambios de carril."],
+["p10","P-26.",["Desprendimientos frecuentes", "Proyección de gravilla"],0,"La gravilla es la P-28."]],
+pri:[["r1","R-2 STOP: ¿dónde te detienes?",["Un poco después de la línea, para ver mejor", "Ante la línea de detención; si no hay, justo antes de la intersección"],1,"Y cedes el paso a los de la vía a la que te aproximas."],
+["r2","Has parado en el stop, pero desde ahí no ves nada.",["Me detengo de nuevo donde tenga visibilidad, sin poner a nadie en peligro", "Avanzo sin parar otra vez"],0,"Excepcionalmente, otra detención donde haya visibilidad."],
+["r3","R-1, ceda el paso.",["Cedo, y me detengo solo si es preciso", "Me detengo siempre"],0,"La detención obligatoria es la del stop."],
+["r4","R-3.",["Fin de prioridad", "Calzada con prioridad"],1,"El fin de prioridad es la R-4."],
+["r5","Señal de prioridad respecto al sentido contrario en un paso estrecho.",["Tengo prioridad sobre los del sentido contrario", "Debo esperar a que pasen"],0,"Es la R-5. Su contraria prohíbe entrar si obligas a detenerse a los del otro sentido."],
+["r6","Panel «A 150 m hay un stop» bajo un ceda.",["Preseñala el stop de la próxima intersección", "Anula el ceda"],0,"Es el S-840."]],
+pro:[["h1","R-307 frente a R-308.",["R-307: ni parar ni estacionar. R-308: no estacionar, sí parar", "Son lo mismo"],0,"La R-308 no prohíbe la parada."],
+["h2","R-308c, estacionamiento prohibido la <u>primera quincena</u>.",["Desde las 9 h del día 1 hasta las 9 h del día 16", "Del día 1 al 15 a las 24 h"],0,"La segunda quincena va de las 9 h del día 16 a las 9 h del día 1."],
+["h3","R-306, adelantamiento prohibido para camiones.",["Todos los vehículos", "Camiones de más de 3.500 kg: ni siquiera sin invadir el carril contrario"],1,"La R-305 es para todos, cuando se invade la zona del sentido contrario."],
+["h4","R-107 en un camión que va <u>vacío</u>.",["No le afecta si va vacío", "Le prohíbe el acceso si su masa máxima supera la señal"],1,"Prohíbe el acceso aunque circulen vacíos."],
+["h5","R-303, giro a la izquierda prohibido. ¿Incluye el cambio de sentido?",["No", "Sí"],1,"Incluye también el cambio de sentido de la marcha."],
+["h6","R-103: entrada prohibida a vehículos de motor excepto motos de dos ruedas.",["Las motos de dos ruedas pueden entrar", "Nadie puede entrar"],0,"No prohíbe el acceso a motos de dos ruedas ni a los de tres asimilados."],
+["h7","R-301 en una vía <u>sin prioridad</u>.",["Vale hasta el final del día", "Deja de tener vigencia al salir de una intersección con una vía con prioridad"],1,"Como norma, obliga hasta la próxima señal que la cambie."],
+["h8","Prohibición junto al cartel con el nombre del pueblo.",["Solo hasta la primera calle", "Se aplica a todo el poblado, salvo otra señal dentro"],1,"Excepto si dentro se indica otra reglamentación."],
+["h9","R-310.",["Obliga a tocar el claxon", "Prohíbe las señales acústicas, salvo para evitar un accidente"],1,"Recuerda la prohibición general."],
+["h10","R-110.",["Cualquier cantidad de líquidos", "Más de 1.000 litros de productos contaminantes del agua"],1,"Prohíbe el acceso a esos vehículos."]],
+obl:[["o1","R-411, velocidad mínima: ¿hasta dónde obliga?",["Hasta que sea de noche", "Hasta otra de mínima distinta, fin de mínima o una máxima igual o inferior"],1,"Desde donde está situada."],
+["o2","R-412, cadenas para nieve: ¿dónde deben actuar?",["En al menos una rueda a cada lado del eje motor", "En las cuatro ruedas"],0,"También valen neumáticos especiales de nieve."],
+["o3","R-413, alumbrado de corto alcance.",["Solo de noche", "Obligatorio con cualquier visibilidad, hasta la señal de fin"],1,"Con independencia de visibilidad e iluminación de la vía."],
+["o4","R-406 con «12 t» sobre la silueta.",["Obliga a todos los camiones", "Solo obliga si la MMA supera esa cifra"],1,"Sin cifra, obliga a todos los camiones y furgones."],
+["o5","R-407, vía reservada para ciclos.",["Obliga a los ciclos y prohíbe usarla a los demás", "Es una recomendación"],0,"Reservada y obligatoria."],
+["o6","R-422.",["Los ciclos desmontan y continúan a pie", "Prohíbe la bici en esa vía"],0,"Si es solo en ciertos periodos, lo indica un panel."],
+["o7","R-500, fin de prohibiciones.",["Dejan de aplicarse las prohibiciones específicas para vehículos en movimiento de señales anteriores", "Termina cualquier señal"],0,"Cada fin concreto (R-501, R-502…) anula solo su señal."],
+["o8","R-402.",["Prohibido el giro en la glorieta", "Sentido giratorio obligatorio en una glorieta"],1,"Las flechas marcan el sentido del movimiento giratorio."]],
+ind:[["i1","S-28, zona de estancia y juego.",["30 km/h", "10 km/h y prioridad para los peatones"],1,"Siempre va con la R-301 limitada a 10 km/h."],
+["i2","En una zona de coexistencia (S-47), ¿están autorizados los juegos y deportes?",["No", "Sí"],0,"En la de estancia y juego sí; en la de coexistencia, no."],
+["i3","S-26 a, b y c.",["La salida está a unos 300, 200 y 100 m", "La salida está a 1.000, 500 y 200 m"],0,"En autopista, autovía o vía para automóviles."],
+["i4","Carril con velocidad mínima (S-50).",["Solo vehículos a esa velocidad o más; si se puede, por el derecho", "Cualquiera puede usarlo"],0,"El fin lo marca la R-506 o la S-52 correspondiente."],
+["i5","Carril reservado con línea discontinua: ¿puede entrar otro vehículo?",["Solo para alguna maniobra permitida; nunca para parar, estacionar, cambiar de sentido ni adelantar", "Siempre"],0,"Y dejando preferencia a los autorizados."],
+["i6","Panel S-880 con la palabra «EXCEPTO».",["La señal de arriba afecta a todos menos al vehículo del panel", "La señal solo afecta al vehículo del panel"],0,"Sin «EXCEPTO», afecta solo a lo que aparece."],
+["i7","Cartel de confirmación de itinerario: ¿de qué color?",["El de la vía por la que circulas", "El de la vía hacia la que sales"],0,"Siempre del color de la vía por la que se circula."],
+["i8","Preseñalización de salida en autopista o autovía.",["Se coloca a 1.000 m y a 500 m", "Solo a 100 m"],0,"Lleva distancia, pictograma y número de salida."],
+["i9","Dos salidas consecutivas en el mismo enlace.",["Se llaman 1 y 2", "Se añaden A y B: A la primera según el kilometraje creciente"],1,"La A es la primera al circular en sentido de kilometraje creciente."]],
+mar1:[["m1","Marca longitudinal <u>continua</u>.",["Se puede pisar con cuidado", "Nadie debe atravesarla ni circular por su izquierda si separa sentidos"],1,"Dos continuas paralelas significan lo mismo que una."],
+["m2","Línea continua de <u>borde de calzada</u>.",["Puede atravesarse puntualmente por emergencia, desde el arcén", "Jamás se pisa"],0,"Se excluye de la prohibición: está en el arcén."],
+["m3","Continua <u>adosada</u> a discontinua.",["Solo cuenta la línea del lado por el que circulas", "Cuentan las dos"],0,"Quien está junto a la discontinua puede cruzar."],
+["m4","Ya empezaste a adelantar desde el carril pegado a la discontinua y hay continua.",["Puedes cruzarla para volver a tu carril o desistir", "Sigues por el carril contrario hasta que se acabe"],0,"Para terminar o desistir del adelantamiento."],
+["m5","Marca transversal <u>continua</u>.",["Línea de detención", "Ceda el paso"],0,"Se aplica ante stop, semáforo, agente, paso a nivel, puente móvil o paso de peatones."],
+["m6","Marca transversal <u>discontinua</u>.",["Parada obligatoria", "Ceda: no franquearla si debes ceder el paso"],1,"Salvo circunstancias anormales que reduzcan la visibilidad."],
+["m7","Dos líneas transversales discontinuas y paralelas, sin bandas.",["Paso de peatones", "Paso para ciclistas"],1,"Los vehículos deben dejarles paso."],
+["m8","Aparcar antes de un paso de peatones, con la acera alineada con el límite <u>exterior</u> de la banda de aparcamiento.",["No puedes aparcar en los 3 m anteriores", "No puedes aparcar en al menos los 6 m anteriores"],1,"3 m si la acera está alineada con el límite interior."],
+["m9","Tres triángulos sobre la parte ascendente de un resalte.",["Reductor de velocidad tipo lomo de asno", "Paso de peatones sobreelevado"],0,"El sobreelevado añade un triángulo en cada franja."],
+["m10","Flecha de frente en un carril: ¿puedes cambiar de carril?",["Sí, si mantienes la dirección y las marcas lo permiten", "No, nunca"],0,"Las flechas con dirección de frente no lo impiden."]],
+mar2:[["y1","Línea amarilla longitudinal <u>discontinua</u>.",["Prohíbe parar y estacionar", "Prohíbe estacionar"],1,"La continua prohíbe parar y estacionar."],
+["y2","Línea amarilla longitudinal <u>continua</u>.",["Prohíbe parar y estacionar", "Solo estacionar"],0,"A lo largo de todo el lado donde está."],
+["y3","Marca amarilla en <u>zigzag</u>.",["Zona reservada a un uso especial, como parada de autobús: no estacionar", "Zona libre de estacionamiento"],0,"Se usa en paradas de bus y carga y descarga."],
+["y4","Cuadrícula amarilla en un cruce.",["Hay que parar dentro", "No entras si puedes quedar detenido y obstruir, aunque tengas verde"],1,"Recuerda la prohibición de penetrar en la intersección."],
+["y5","Plazas de estacionamiento delimitadas en azul o verde.",["Prohibido estacionar", "Limitaciones temporales o duración limitada"],1,"En ciertos periodos del día."],
+["y6","Damero blanco y rojo.",["Inicio de un lecho de frenado: prohíbe parar y estacionar", "Zona de obras"],0,"Zona de frenado de emergencia."],
+["y7","Franjas oblicuas paralelas dentro de una línea continua (cebreado).",["Prohíbe entrar, salvo a los obligados a ir por el arcén", "Zona de adelantamiento"],0,"Ningún conductor debe entrar con su vehículo."],
+["y8","Marcas viales <u>nuevas</u> en un tramo con obras.",["Amarillas", "Rojas"],0,"Si las anteriores siguen aplicándose, pueden mantenerse en blanco."],
+["y9","Avanza-bici: ¿qué separa las dos marcas transversales?",["4 m", "10 m"],0,"Con el semáforo en rojo, solo ciclos, VMP, motos y ciclomotores."],
+["y10","Líneas y figuras de colores en una vía urbana para fomentar movilidad activa.",["No son marcas viales ni interfieren en la interpretación de las demás", "Tienen valor de marca vial"],0,"Solo calman el tráfico."]]
+};
+Q.all1=[].concat(Q.vias,Q.carr,Q.esp,Q.arcen,Q.dist,Q.peat,Q.vel,Q.prio,Q.estr);
+Q.all2=[].concat(Q.senal,Q.adel,Q.cicl,Q.inmo,Q.emerg,Q.pend,Q.giro);
+Q.all3=[].concat(Q.age,Q.bal,Q.pel,Q.pri,Q.pro,Q.obl,Q.ind,Q.mar1,Q.mar2);
+const TITLES={vias:"Reto · Tipos de vía",carr:"Reto · Carriles",esp:"Reto · Carriles especiales",arcen:"Reto · Arcén",dist:"Reto · Distancia",peat:"Reto · Peatones",vel:"Reto · Velocidad",prio:"Reto · Prioridad",estr:"Reto · Estrechamientos",
+senal:"Reto · Señalizar",adel:"Reto · ¿Se puede adelantar?",cicl:"Reto · Ciclistas",inmo:"Reto · Parar o estacionar",emerg:"Reto · Avería",pend:"Reto · Pendiente",giro:"Reto · Girar",age:"Reto · Agentes",bal:"Reto · Balizamiento",pel:"Reto · Peligro",pri:"Reto · Prioridad",pro:"Reto · Prohibido",obl:"Reto · Obligatorio",ind:"Reto · Indicación",mar1:"Reto · Rayas",mar2:"Reto · Amarillas y más",all1:"Examen · Tema 1",all2:"Examen · Tema 2",all3:"Examen · Tema 3"};
+
+/* ================= QUIZ ================= */
+const KEY="teorico-v1";let ST={fails:{}};try{Object.assign(ST,JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ST))}catch(e){}};
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+document.querySelectorAll(".quiz").forEach(box=>{
+  const deck=box.dataset.deck,isExam=deck.startsWith("all");let list,idx,res;
+  const head=()=>`<div class="head"><strong>${TITLES[deck]}</strong><div class="pips">${list.map((_,i)=>`<i class="${res[i]===true?"ok":res[i]===false?"ko":""}${i===idx?" cur":""}"></i>`).join("")}</div></div>`;
+  function start(only){let pool=Q[deck];if(only)pool=pool.filter(q=>ST.fails[q[0]]);
+    list=isExam?shuffle(pool).slice(0,30):shuffle(pool);idx=0;res=[];
+    if(!list.length){box.innerHTML=`<div class="head"><strong>${TITLES[deck]}</strong></div><p>No te queda ninguna fallada aquí.</p><div><button class="btn primary">Empezar de nuevo</button></div>`;box.querySelector("button").onclick=()=>start(false);return}
+    render()}
+  function render(){
+    if(idx>=list.length){const ok=res.filter(Boolean).length,ko=list.length-ok;
+      box.innerHTML=head()+`<div class="end"><span class="big">${ok} / ${list.length}</span><p>${isExam?(ko<=3?"Aprobado: 3 fallos o menos. Camino A.":"Más de 3 fallos. Camino B."):(ko===0?"Sin fallos.":`${ko} fallo${ko>1?"s":""}: vuelve a mirar el detalle trampa.`)}</p>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn primary" data-x="a">Repetir</button><button class="btn" data-x="f">Solo falladas</button></div></div>`;
+      box.querySelector('[data-x="a"]').onclick=()=>start(false);box.querySelector('[data-x="f"]').onclick=()=>start(true);return}
+    const [id,q,opts,ans,why]=list[idx];
+    box.innerHTML=head()+`<p class="q">${q}</p><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join("")}</div><div class="fb" hidden></div>
+    <div class="qrow"><span class="cap">${idx+1} de ${list.length}${ST.fails[id]?" · la fallaste antes":""}</span><button class="btn primary" data-x="n" hidden>Siguiente</button></div>`;
+    box.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,ok=i===ans;res[idx]=ok;
+      box.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(+x.dataset.i===ans)x.classList.add("right")});if(!ok)b.classList.add("wrong");
+      if(ok)delete ST.fails[id];else ST.fails[id]=1;save();
+      const fb=box.querySelector(".fb");fb.hidden=false;fb.className="fb "+(ok?"ok":"ko");fb.innerHTML=`<b>${ok?"Correcto.":"No."}</b> ${why}`;
+      box.querySelectorAll(".pips i")[idx].className=ok?"ok cur":"ko cur";
+      const n=box.querySelector('[data-x="n"]');n.hidden=false;n.focus({preventScroll:true});n.onclick=()=>{idx++;render()}})}
+  start(false)});
+
+/* ================= BRAZOS ================= */
+const ARMS=[["Izquierda","Brazo horizontal, palma hacia abajo.","izq"],["Derecha","Brazo doblado hacia arriba, palma hacia delante.","der"],["Marcha atrás","Brazo horizontal, palma hacia atrás.","atras"],["Frenar o parar","Brazo arriba y abajo, movimientos cortos.","frenar"],["Te dejo adelantar","Pesado: brazo de atrás hacia delante, o intermitente derecho.","dejar"]];
+function armSvg(k){const s='stroke="var(--ink)" stroke-width="7" stroke-linecap="round" fill="none"';let a="";
+  if(k==="izq")a=`<path d="M58 52 H8" ${s}/><rect x="0" y="54" width="16" height="6" rx="2" fill="var(--ink)"/>`;
+  if(k==="der")a=`<path d="M58 52 H30 V18" ${s}/><rect x="22" y="2" width="16" height="12" rx="3" fill="var(--ink)"/>`;
+  if(k==="atras")a=`<path d="M58 52 H8" ${s}/><rect x="0" y="42" width="6" height="20" rx="2" fill="var(--ink)"/>`;
+  if(k==="frenar")a=`<path d="M58 52 H10" ${s}/><path d="M18 26 v14 M14 30 l4 -5 l4 5 M18 78 v-14 M14 74 l4 5 l4 -5" stroke="var(--red)" stroke-width="3" fill="none"/>`;
+  if(k==="dejar")a=`<path d="M58 52 H10" ${s}/><path d="M6 32 h24 M10 28 l-5 4 l5 4 M26 28 l5 4 l-5 4" stroke="var(--red)" stroke-width="3" fill="none"/>`;
+  return `<svg viewBox="0 0 160 96" aria-hidden="true"><rect x="56" y="30" width="96" height="58" rx="10" fill="var(--blue)"/><rect x="66" y="38" width="36" height="26" rx="4" fill="var(--bg)"/><circle cx="80" cy="46" r="8" fill="var(--ink)"/>${a}<text x="152" y="94" text-anchor="end" style="font:600 9px var(--body);fill:var(--muted)">vista desde detrás</text></svg>`}
+document.getElementById("arms").innerHTML=ARMS.map(([t,d,k])=>`<figure>${armSvg(k)}<b>${t}</b><span>${d}</span></figure>`).join("");
+
+/* ================= SIMULADOR ADELANTAR ================= */
+const val=seg=>seg.querySelector('[aria-pressed="true"]').dataset.v;
+const sL=document.getElementById("sLugar"),sQ=document.getElementById("sQuien"),sLi=document.getElementById("sLinea"),sE=document.getElementById("sExtra"),sOut=document.getElementById("sOut");
+function evalAdel(){const L=val(sL),W=val(sQ),Li=val(sLi),E=val(sE);let r,why;const two=W==="dos";
+  if(W==="cola"){r="no";why="Parado por el tráfico (semáforo, cola): no se rebasa, te quedas detrás."}
+  else if(W==="averiado"){r="ok";why="Un vehículo averiado u obstáculo se puede rebasar, incluso con continua, si no hay peligro."}
+  else if(W==="adelantando"&&Li!=="dos"){r="no";why="Prohibido adelantar al que ya adelanta si tienes que invadir el sentido contrario."}
+  else if(L==="curva"&&Li!=="dos"){r="no";why="Sin visibilidad, prohibido. Elige «Dos carriles en mi sentido» y verás la excepción."}
+  else if(L==="nivel"){r=two?"ok":"no";why=two?"A vehículos de dos ruedas sí, avisando antes.":"Prohibido. Solo se libra el de dos ruedas."}
+  else if(L==="peatones"){r=E==="lento"?"ok":"no";why=E==="lento"?"Excepción: tan despacio que puedas parar.":"Prohibido, salvo que vayas tan despacio que puedas parar."}
+  else if(L==="tunel"){r="no";why="Prohibido en túneles de un carril por sentido, sea la línea que sea."}
+  else if(L==="glorieta"){r="ok";why="En glorietas sí: es una excepción de las intersecciones."}
+  else if(L==="cruce"){if(E==="prio"){r="ok";why="Con prioridad señalizada, sí."}else if(two){r="ok";why="A dos ruedas, sí."}else if(E==="izq"){r="ok";why="Por la derecha, al que gira a la izquierda."}else{r="no";why="Prohibido salvo prioridad señalizada, dos ruedas, por la derecha cuando toca o en glorieta."}}
+  else if(Li==="cont"){if(two){r="mid";why="Puedes invadir para rebasar a una bici o ciclomotor <b>si va lo bastante lento</b>. Una moto rápida no entra en la excepción."}else if(E==="izq"){r="ok";why="Lo rebasas por la derecha sin tocar la continua."}else{r="no";why="No puedes cruzar la continua para adelantar a un turismo."}}
+  else{r="ok";why=(E==="izq"?"Sí, y por la derecha.":"Sí: señaliza, comprueba el sitio para volver y adelanta con velocidad notoriamente superior.")+(two?" A una bici o ciclomotor, al menos 1,5 m.":"")}
+  sOut.className="out "+r;sOut.innerHTML=`<span class="big">${r==="ok"?"Sí, puedes":r==="no"?"No puedes":"Depende"}</span><span>${why}</span>`}
+[sL,sQ,sLi,sE].forEach(seg=>seg.querySelectorAll("button").forEach(b=>b.onclick=()=>{seg.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x===b));evalAdel()}));evalAdel();
+
+/* ================= ESCENA 3D PROCEDURAL ================= */
+const hudTag=document.getElementById("hudTag"),hudSay=document.getElementById("hudSay");
+let lastSay="";const say=t=>{if(t&&t!==lastSay){hudSay.textContent=t;lastSay=t}};
+const RM=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let setMode=()=>{};
+(function(){
+  const stage=document.getElementById("stage"),canvas=document.getElementById("gl");
+  if(!window.THREE){document.getElementById("fallback").hidden=false;return}
+  let renderer;try{renderer=new THREE.WebGLRenderer({canvas,antialias:true})}catch(e){document.getElementById("fallback").hidden=false;return}
+  const small=Math.min(innerWidth,innerHeight)<600;
+  renderer.setPixelRatio(Math.min(devicePixelRatio,small?1.5:2));
+  renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+  renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  const tok=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim()||"#888";
+  const isDark=()=>{const t=document.documentElement.dataset.theme;return t?t==="dark":matchMedia("(prefers-color-scheme: dark)").matches};
+  const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(42,1,.1,600);
+  const hemi=new THREE.HemisphereLight(0xdfeeff,0x4a5040,.6);scene.add(hemi);
+  const sun=new THREE.DirectionalLight(0xfff1dc,1.25);sun.position.set(18,30,12);sun.castShadow=true;
+  sun.shadow.mapSize.set(small?1024:2048,small?1024:2048);Object.assign(sun.shadow.camera,{left:-32,right:32,top:32,bottom:-32,near:1,far:90});sun.shadow.bias=-.0004;
+  sun.target.position.set(0,0,-8);scene.add(sun,sun.target);
+  const world=new THREE.Group();scene.add(world);
+  const M=(c,o={})=>new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.7,metalness:.05},o));
+  const box=(w,h,d,m)=>new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);
+  const shadows=o=>o.traverse(c=>{if(c.isMesh){c.castShadow=true;c.receiveShadow=true}});
+
+  /* ---- cielo procedural ---- */
+  const skyMat=new THREE.ShaderMaterial({side:THREE.BackSide,depthWrite:false,uniforms:{top:{value:new THREE.Color()},hor:{value:new THREE.Color()}},
+    vertexShader:"varying vec3 p;void main(){p=normalize(position);gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}",
+    fragmentShader:"uniform vec3 top;uniform vec3 hor;varying vec3 p;void main(){float h=clamp(p.y*1.6,0.,1.);gl_FragColor=vec4(mix(hor,top,pow(h,.7)),1.);}"});
+  const sky=new THREE.Mesh(new THREE.SphereGeometry(500,24,12),skyMat);scene.add(sky);
+
+  /* ---- texturas procedurales: asfalto con grano, pintura gastada ---- */
+  const rnd=(s=>()=>(s=(s*16807)%2147483647)/2147483647)(7);
+  function asphalt(wm,lines){const cw=Math.round(wm*48),ch=512,c=document.createElement("canvas");c.width=cw;c.height=ch;const g=c.getContext("2d");
+    g.fillStyle=tok("--asph");g.fillRect(0,0,cw,ch);
+    for(let i=0;i<cw*ch/9;i++){const v=rnd();g.fillStyle=v<.5?`rgba(0,0,0,${.05+v*.12})`:`rgba(255,255,255,${(v-.5)*.09})`;g.fillRect(rnd()*cw,rnd()*ch,1+rnd()*2,1+rnd()*2)}
+    const px=m=>(m/wm)*cw;
+    lines.forEach(L=>{if(L.wear){g.fillStyle="rgba(0,0,0,.09)";[-.55,.55].forEach(o=>g.fillRect(px(L.x+o-.25),0,px(.5)-px(0),ch))}});
+    g.fillStyle=tok("--paint");
+    lines.forEach(L=>{if(L.wear)return;const x=px(L.x)-px(.075)+px(0),w=Math.max(2,px(.15)-px(0));
+      if(L.t==="s")g.fillRect(x,0,w,ch);else if(L.t==="d")g.fillRect(x,0,w,ch/2);else if(L.t==="dd"){g.fillRect(x-w*1.6,0,w,ch/2);g.fillRect(x+w*1.6,0,w,ch/2)}else if(L.t==="ss"){g.fillRect(x-w*1.6,0,w,ch);g.fillRect(x+w*1.6,0,w,ch)}});
+    g.globalCompositeOperation="destination-out";
+    for(let i=0;i<cw*ch/40;i++){g.fillStyle=`rgba(0,0,0,${rnd()*.35})`;g.fillRect(rnd()*cw,rnd()*ch,1,1)}
+    g.globalCompositeOperation="destination-over";g.fillStyle=tok("--asph");g.fillRect(0,0,cw,ch);
+    const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.encoding=THREE.sRGBEncoding;t.anisotropy=renderer.capabilities.getMaxAnisotropy();return t}
+  function noiseTex(col,n,rep){const c=document.createElement("canvas");c.width=c.height=256;const g=c.getContext("2d");g.fillStyle=col;g.fillRect(0,0,256,256);
+    for(let i=0;i<n;i++){const v=rnd();g.fillStyle=v<.5?`rgba(0,0,0,${v*.18})`:`rgba(255,255,230,${(v-.5)*.14})`;g.fillRect(rnd()*256,rnd()*256,1+rnd()*3,1+rnd()*3)}
+    const t=new THREE.CanvasTexture(c);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(rep,rep);t.encoding=THREE.sRGBEncoding;return t}
+
+  /* ---- trazados de carretera ---- */
+  const LEN=220,Z0=-70,TILE=9,texList=[];
+  function roadMesh(wm,lines,x){const t=asphalt(wm,lines);t.repeat.set(1,LEN/TILE);texList.push({t,wm,lines});
+    const m=new THREE.Mesh(new THREE.PlaneGeometry(wm,LEN),M(0xffffff,{map:t,roughness:.92}));m.rotation.x=-Math.PI/2;m.position.set(x,0,Z0);m.receiveShadow=true;return m}
+  let shTex,grTex;const shMat=M(0xffffff,{roughness:.95}),grMat=M(0xffffff,{roughness:1});
+  function strip(x0,x1,mat,y=-.004){const m=new THREE.Mesh(new THREE.PlaneGeometry(x1-x0,LEN),mat);m.rotation.x=-Math.PI/2;m.position.set((x0+x1)/2,y,Z0);m.receiveShadow=true;return m}
+  const railMat=M(0xbfc6cf,{metalness:.7,roughness:.3}),postMat=M(0x7d848e,{metalness:.4});
+  function rail(x){const g=new THREE.Group();const r=box(.08,.32,LEN,railMat);r.position.set(x,.6,Z0);g.add(r);
+    const posts=new THREE.InstancedMesh(new THREE.BoxGeometry(.1,.7,.1),postMat,Math.floor(LEN/4));const d=new THREE.Object3D();
+    for(let i=0;i<posts.count;i++){d.position.set(x,.35,Z0+LEN/2-i*4);d.updateMatrix();posts.setMatrixAt(i,d.matrix)}g.add(posts);shadows(g);return g}
+  const LAY={};
+  {const g=new THREE.Group();g.add(roadMesh(7.5,[{x:-3.6,t:"s"},{x:0,t:"d"},{x:3.6,t:"s"},{x:-1.75,wear:1},{x:1.75,wear:1}],0),strip(3.75,6.35,shMat),strip(-6.35,-3.75,shMat),rail(6.75));LAY.L2=g}
+  {const g=new THREE.Group();g.add(roadMesh(7.5,[{x:-3.6,t:"s"},{x:0,t:"s"},{x:3.6,t:"s"},{x:-1.75,wear:1},{x:1.75,wear:1}],0),strip(3.75,6.35,shMat),strip(-6.35,-3.75,shMat),rail(6.75));LAY.L2s=g}
+  {const g=new THREE.Group();g.add(roadMesh(10.5,[{x:-5.1,t:"s"},{x:-1.75,t:"dd"},{x:1.75,t:"dd"},{x:5.1,t:"s"},{x:-3.5,wear:1},{x:0,wear:1},{x:3.5,wear:1}],0),strip(5.25,7.85,shMat),strip(-7.85,-5.25,shMat),rail(8.25));LAY.REV=g}
+  {const g=new THREE.Group();g.add(roadMesh(10.5,[{x:-5.1,t:"s"},{x:-1.75,t:"d"},{x:1.75,t:"d"},{x:5.1,t:"s"},{x:-3.5,wear:1},{x:0,wear:1},{x:3.5,wear:1}],0),strip(5.25,7.85,shMat),strip(-6.25,-5.25,shMat),rail(8.25),rail(-6.6));LAY.L3=g}
+  {const g=new THREE.Group();g.add(roadMesh(7.5,[{x:-3.6,t:"s"},{x:0,t:"d"},{x:3.6,t:"s"},{x:-1.75,wear:1},{x:1.75,wear:1}],0),strip(3.75,6.35,shMat),strip(-4.75,-3.75,shMat),rail(6.75),rail(-6.6),rail(-7.2),
+     roadMesh(7.5,[{x:-3.6,t:"s"},{x:0,t:"d"},{x:3.6,t:"s"}],-12.4),strip(-16.15,-17.5,shMat),strip(-9.65,-8.65,shMat));LAY.DIV=g}
+  Object.values(LAY).forEach(g=>{g.visible=false;world.add(g)});
+  const cross=roadMesh(7.5,[{x:-3.6,t:"s"},{x:0,t:"d"},{x:3.6,t:"s"}],0);cross.rotation.z=Math.PI/2;cross.position.set(0,.006,-14);cross.visible=false;world.add(cross);
+  const stopLine=box(3.6,.012,.4,M(0xffffff));stopLine.position.set(1.8,.012,-10.2);stopLine.visible=false;world.add(stopLine);
+  const grass=new THREE.Mesh(new THREE.PlaneGeometry(700,700),grMat);grass.rotation.x=-Math.PI/2;grass.position.y=-.03;grass.receiveShadow=true;world.add(grass);
+
+  /* ---- árboles instanciados ---- */
+  const TN=small?160:320,trunks=new THREE.InstancedMesh(new THREE.CylinderGeometry(.12,.18,1.6,6),M(0x5b4331,{roughness:1}),TN),
+    crowns=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1.2,0),M(0x3f6b34,{roughness:1,flatShading:true}),TN);
+  {const d=new THREE.Object3D();const col=new THREE.Color();for(let i=0;i<TN;i++){const side=rnd()<.5?-1:1;const x=side*(side>0?13+rnd()*45:21+rnd()*40),z=-170+rnd()*210,s=.7+rnd()*1.1;
+    d.position.set(x,.8*s,z);d.rotation.set(0,rnd()*6,0);d.scale.set(s,s,s);d.updateMatrix();trunks.setMatrixAt(i,d.matrix);
+    d.position.set(x,(1.6+.9)*s,z);d.scale.set(s*(.9+rnd()*.5),s*(1.1+rnd()*.6),s*(.9+rnd()*.5));d.updateMatrix();crowns.setMatrixAt(i,d.matrix);
+    crowns.setColorAt(i,col.setHSL(.27+rnd()*.08,.35+rnd()*.15,.24+rnd()*.12))}}
+  trunks.castShadow=crowns.castShadow=true;world.add(trunks,crowns);
+
+  /* ---- vehículos ---- */
+  const glassM=M(0x1d2733,{roughness:.08,metalness:.6}),tyreM=M(0x15181c,{roughness:.95}),rimM=M(0xb4bac2,{metalness:.8,roughness:.3});
+  function wheel(r,w){const g=new THREE.Group();const t=new THREE.Mesh(new THREE.CylinderGeometry(r,r,w,20),tyreM);t.rotation.z=Math.PI/2;g.add(t);
+    const rim=new THREE.Mesh(new THREE.CylinderGeometry(r*.58,r*.58,w+.02,14),rimM);rim.rotation.z=Math.PI/2;g.add(rim);return g}
+  const blinkM=()=>M(0x6a4310,{emissive:0xff9a1a,emissiveIntensity:0});
+  function lights(g,hw,y,zf,zr){const L=[],R=[];[[-hw,zf,L],[hw,zf,R],[-hw,zr,L],[hw,zr,R]].forEach(([x,z,a])=>{const b=box(.2,.12,.07,blinkM());b.position.set(x,y,z);g.add(b);a.push(b)});g.userData.L=L;g.userData.R=R}
+  function extrude(shape,depth,mat,bevel=.06){const geo=new THREE.ExtrudeGeometry(shape,{depth,bevelEnabled:true,bevelThickness:bevel,bevelSize:bevel,bevelSegments:3,curveSegments:10});geo.translate(0,0,-depth/2);geo.rotateY(-Math.PI/2);return new THREE.Mesh(geo,mat)}
+  function makeCar(color){const g=new THREE.Group();const paint=M(color,{roughness:.32,metalness:.45});
+    const s=new THREE.Shape();s.moveTo(-2.05,.32);s.lineTo(-2.1,.62);s.quadraticCurveTo(-2.05,.84,-1.6,.88);s.lineTo(-.75,.97);s.lineTo(1.6,.99);s.quadraticCurveTo(2.08,.97,2.1,.7);s.lineTo(2.06,.32);s.lineTo(-2.05,.32);
+    g.add(extrude(s,1.66,paint));
+    const w=new THREE.Shape();w.moveTo(-.8,.95);w.lineTo(-.12,1.42);w.lineTo(1.12,1.42);w.lineTo(1.6,.97);w.lineTo(-.8,.95);g.add(extrude(w,1.5,glassM,.05));
+    const roof=new THREE.Shape();roof.moveTo(-.1,1.4);roof.lineTo(1.1,1.4);roof.lineTo(1.08,1.47);roof.lineTo(-.08,1.47);g.add(extrude(roof,1.48,paint,.03));
+    const fr=[];[[-.84,-1.32,1],[.84,-1.32,1],[-.84,1.36,0],[.84,1.36,0]].forEach(([x,z,f])=>{const wh=wheel(.33,.24);if(f){const p=new THREE.Group();p.position.set(x,.33,z);p.add(wh);g.add(p);fr.push(p)}else{wh.position.set(x,.33,z);g.add(wh)}});
+    g.userData.front=fr;lights(g,.72,.62,-2.12,2.12);
+    [-.55,.55].forEach(x=>{const h=box(.42,.13,.05,M(0xffffff,{emissive:0xfff3c0,emissiveIntensity:.5}));h.position.set(x,.68,-2.13);g.add(h);
+      const t=box(.42,.13,.05,M(0x7a0c10,{emissive:0xff1a1a,emissiveIntensity:.35}));t.position.set(x,.74,2.13);g.add(t)});
+    shadows(g);return g}
+  function makeTruck(cargoCol=0xc4252c,bus=false){const g=new THREE.Group();
+    if(bus){const b=box(2.5,2.9,11,M(cargoCol,{roughness:.4,metalness:.2}));b.position.y=1.8;g.add(b);const win=box(2.52,.9,9.6,glassM);win.position.set(0,2.45,.4);g.add(win);const ws=box(2.2,1.3,.06,glassM);ws.position.set(0,2.2,-5.52);g.add(ws)}
+    else{const cab=box(2.45,2.4,2.3,M(0xe3e6ea,{roughness:.35,metalness:.3}));cab.position.set(0,1.6,-3.35);g.add(cab);
+      const ws=box(2.15,.95,.05,glassM);ws.position.set(0,2.15,-4.51);g.add(ws);
+      const cargo=box(2.5,2.95,6.7,M(cargoCol,{roughness:.55}));cargo.position.set(0,2,1.2);g.add(cargo)}
+    const fr=[],zs=bus?[[-3.9,1],[3.4,0]]:[[-3.35,1],[2.7,0],[1.3,0]];
+    zs.forEach(([z,f])=>[-1.1,1.1].forEach(x=>{const wh=wheel(.52,.4);if(f){const p=new THREE.Group();p.position.set(x,.52,z);p.add(wh);g.add(p);fr.push(p)}else{wh.position.set(x,.52,z);g.add(wh)}}));
+    g.userData.front=fr;lights(g,1.05,.95,bus?-5.52:-4.52,bus?5.52:4.57);shadows(g);return g}
+  function makeCyclist(shirt){const g=new THREE.Group();const tm=M(0x15181c);
+    [-.55,.55].forEach(z=>{const t=new THREE.Mesh(new THREE.TorusGeometry(.34,.045,8,22),tm);t.rotation.y=Math.PI/2;t.position.set(0,.36,z);g.add(t)});
+    const fr=box(.05,.05,1.05,M(0xd9dde3,{metalness:.6}));fr.position.y=.62;g.add(fr);
+    const body=box(.38,.62,.32,M(shirt));body.position.set(0,1.18,.05);body.rotation.x=-.45;g.add(body);
+    const head=new THREE.Mesh(new THREE.SphereGeometry(.14,14,10),M(0xe0a37a));head.position.set(0,1.62,-.18);g.add(head);
+    const helm=new THREE.Mesh(new THREE.SphereGeometry(.16,14,8,0,Math.PI*2,0,Math.PI/2),M(0xf2f2f2));helm.position.set(0,1.66,-.18);g.add(helm);shadows(g);return g}
+  function makePerson(col){const g=new THREE.Group();const b=new THREE.Mesh(new THREE.CylinderGeometry(.2,.18,.75,12),M(col,{emissive:col===0xc8f000?0x223000:0}));b.position.y=1.08;g.add(b);
+    [-.09,.09].forEach(x=>{const l=new THREE.Mesh(new THREE.CylinderGeometry(.07,.07,.72,8),M(0x2b3442));l.position.set(x,.36,0);g.add(l);g.userData[x<0?"l1":"l2"]=l});
+    const h=new THREE.Mesh(new THREE.SphereGeometry(.15,12,10),M(0xe0a37a));h.position.y=1.62;g.add(h);shadows(g);return g}
+  function makeSign(text){const g=new THREE.Group();const post=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,2.2,8),M(0x9aa1aa,{metalness:.6}));post.position.y=1.1;g.add(post);
+    const c=document.createElement("canvas");c.width=c.height=128;const x=c.getContext("2d");x.fillStyle="#fff";x.beginPath();x.arc(64,64,62,0,7);x.fill();x.strokeStyle="#c4252c";x.lineWidth=16;x.beginPath();x.arc(64,64,54,0,7);x.stroke();
+    x.fillStyle="#111";x.font="bold 54px Arial";x.textAlign="center";x.textBaseline="middle";x.fillText(text,64,68);
+    const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;const d=new THREE.Mesh(new THREE.CircleGeometry(.45,32),new THREE.MeshStandardMaterial({map:t,roughness:.5}));d.position.set(0,2.3,.04);g.add(d);
+    const back=new THREE.Mesh(new THREE.CircleGeometry(.45,32),M(0x9aa1aa));back.rotation.y=Math.PI;back.position.set(0,2.3,.03);g.add(back);shadows(g);return g}
+  function panelTex(kind){const c=document.createElement("canvas");c.width=c.height=64;const x=c.getContext("2d");x.fillStyle="#111";x.fillRect(0,0,64,64);
+    x.lineWidth=8;x.lineCap="round";if(kind==="x"){x.strokeStyle="#ff3030";x.beginPath();x.moveTo(16,16);x.lineTo(48,48);x.moveTo(48,16);x.lineTo(16,48);x.stroke()}
+    else{x.strokeStyle="#33ff66";x.beginPath();x.moveTo(32,50);x.lineTo(32,14);x.moveTo(18,28);x.lineTo(32,14);x.lineTo(46,28);x.stroke()}
+    const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;return new THREE.MeshBasicMaterial({map:t})}
+
+  const me=makeCar(0x1d5fae),other=makeCar(0xa8afb8),other2=makeCar(0x7b2430),truck=makeTruck(),bus=makeTruck(0xf2c200,true),
+    cyc=makeCyclist(0x1f8a4c),cyc2=makeCyclist(0xc4252c),person=makePerson(0xc8f000),walker=makePerson(0x3a6ea5),walker2=makePerson(0xd8862a),sign=makeSign("90");
+  const ACT=[me,other,other2,truck,bus,cyc,cyc2,person,walker,walker2,sign];ACT.forEach(o=>world.add(o));
+
+  /* ---- Tema 3: placa de señal con textura dibujada ---- */
+  const plate=(()=>{const g=new THREE.Group();const post=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,2.6,8),M(0x9aa1aa,{metalness:.6}));post.position.y=1.3;g.add(post);
+    const c=document.createElement("canvas");c.width=c.height=256;const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;
+    const d=new THREE.Mesh(new THREE.PlaneGeometry(1.5,1.5),new THREE.MeshStandardMaterial({map:t,roughness:.5,transparent:true,side:THREE.DoubleSide}));d.position.set(0,2.75,.06);g.add(d);
+    const x=c.getContext("2d");
+    g.userData.draw=(kind,label)=>{x.clearRect(0,0,256,256);x.lineJoin="round";x.textAlign="center";x.textBaseline="middle";
+      const txt=(col,sz,dy=0)=>{x.fillStyle=col;x.font="bold "+sz+"px Arial";x.fillText(label||"",128,128+dy)};
+      if(kind==="warn"){x.fillStyle="#fff";x.strokeStyle="#c4252c";x.lineWidth=22;x.beginPath();x.moveTo(128,16);x.lineTo(242,222);x.lineTo(14,222);x.closePath();x.fill();x.stroke();txt("#111",96,34)}
+      else if(kind==="yield"){x.fillStyle="#fff";x.strokeStyle="#c4252c";x.lineWidth=22;x.beginPath();x.moveTo(14,34);x.lineTo(242,34);x.lineTo(128,240);x.closePath();x.fill();x.stroke()}
+      else if(kind==="stop"){x.fillStyle="#c4252c";x.beginPath();for(let i=0;i<8;i++){const a=Math.PI/8+i*Math.PI/4;x.lineTo(128+120*Math.cos(a),128+120*Math.sin(a))}x.closePath();x.fill();txt("#fff",64)}
+      else if(kind==="ban"){x.fillStyle="#c4252c";x.beginPath();x.arc(128,128,120,0,7);x.fill();x.fillStyle="#fff";x.beginPath();x.arc(128,128,88,0,7);x.fill();txt("#111",82)}
+      else if(kind==="noentry"){x.fillStyle="#c4252c";x.beginPath();x.arc(128,128,120,0,7);x.fill();x.fillStyle="#fff";x.fillRect(48,106,160,44)}
+      else if(kind==="park"){x.fillStyle="#c4252c";x.beginPath();x.arc(128,128,120,0,7);x.fill();x.fillStyle="#1d5fae";x.beginPath();x.arc(128,128,96,0,7);x.fill();x.strokeStyle="#c4252c";x.lineWidth=20;x.lineCap="round";x.beginPath();x.moveTo(70,70);x.lineTo(186,186);x.moveTo(186,70);x.lineTo(70,186);x.stroke()}
+      else if(kind==="obl"){x.fillStyle="#1d5fae";x.beginPath();x.arc(128,128,120,0,7);x.fill();x.strokeStyle="#fff";x.lineWidth=8;x.beginPath();x.arc(128,128,104,0,7);x.stroke();txt("#fff",110)}
+      else{x.fillStyle="#1d5fae";x.fillRect(16,16,224,224);x.strokeStyle="#fff";x.lineWidth=8;x.strokeRect(28,28,200,200);txt("#fff",120)}
+      t.needsUpdate=true};
+    g.userData.draw("warn","!");return g})();
+  world.add(plate);ACT.push(plate);
+  const PL=(k,l)=>{if(plate.userData.key!==k+"|"+l){plate.userData.key=k+"|"+l;plate.userData.draw(k,l)}};
+  const v16=new THREE.Mesh(new THREE.CylinderGeometry(.09,.11,.14,14),M(0xffa000,{emissive:0xffa000,emissiveIntensity:0}));v16.position.set(.3,1.56,.5);me.add(v16);
+  const v16L=new THREE.PointLight(0xffa000,0,10);v16L.position.set(.3,2,.5);me.add(v16L);
+  const gap=box(1,.04,.3,M(0x1d8649,{emissive:0x1d8649,emissiveIntensity:.9}));world.add(gap);
+  const yel=M(0xf2c200,{emissive:0x2a2000});
+  const yCont=box(.14,.015,60,yel);yCont.position.set(3.55,.012,-10);world.add(yCont);
+  const yDash=new THREE.Group();for(let z=18;z>-40;z-=2.2){const s=box(.14,.015,1.1,yel);s.position.set(3.55,.012,z);yDash.add(s)}world.add(yDash);
+  /* túnel */
+  const tunnel=new THREE.Group();{const cm=M(0x8d9097,{roughness:.9}),dark=M(0x30343a,{roughness:1});
+    const wl=box(.6,6,130,cm),wr=wl.clone();wl.position.set(-6.7,3,-90);wr.position.set(6.7,3,-90);const ce=box(14,.6,130,dark);ce.position.set(0,6.2,-90);
+    const portal=box(15.2,2.2,.8,cm);portal.position.set(0,7.3,-25.2);tunnel.add(wl,wr,ce,portal);
+    const lamps=new THREE.InstancedMesh(new THREE.BoxGeometry(.5,.08,1.6),M(0xfff4cc,{emissive:0xfff0c0,emissiveIntensity:1.4}),16);const d=new THREE.Object3D();
+    for(let i=0;i<16;i++){d.position.set(i%2?-2.6:2.6,5.85,-28-i*8);d.updateMatrix();lamps.setMatrixAt(i,d.matrix)}tunnel.add(lamps);shadows(tunnel)}
+  tunnel.visible=false;world.add(tunnel);
+  const chevC=document.createElement("canvas");chevC.width=128;chevC.height=64;{const x=chevC.getContext("2d");x.fillStyle="#fff";x.beginPath();x.moveTo(0,64);x.lineTo(64,10);x.lineTo(128,64);x.lineTo(108,64);x.lineTo(64,30);x.lineTo(20,64);x.fill()}
+  const chevT=new THREE.CanvasTexture(chevC);const chevM=new THREE.MeshStandardMaterial({map:chevT,transparent:true,roughness:.6});
+  const chevs=new THREE.Group();for(let i=0;i<10;i++){const c=new THREE.Mesh(new THREE.PlaneGeometry(2.2,1.1),chevM);c.rotation.x=-Math.PI/2;c.position.set(1.75,.013,10-i*9);chevs.add(c)}world.add(chevs);
+  /* pórtico de carriles */
+  const gantry=new THREE.Group();{const pm=M(0x9aa1aa,{metalness:.6});const p1=box(.3,6.5,.3,pm),p2=p1.clone();p1.position.set(-6,3.25,0);p2.position.set(6,3.25,0);const beam=box(12.6,.5,.4,pm);beam.position.y=6.3;gantry.add(p1,p2,beam);
+    gantry.userData.panels=[-3.5,0,3.5].map(x=>{const p=new THREE.Mesh(new THREE.PlaneGeometry(1.1,1.1),panelTex("a"));p.position.set(x,5.6,.22);gantry.add(p);return p});shadows(gantry)}
+  gantry.position.z=-22;gantry.visible=false;world.add(gantry);
+  const pX=panelTex("x"),pA=panelTex("a");
+  /* bloques de estrechamiento */
+  const blocks=new THREE.Group();{const bm=M(0xd8d8d2,{roughness:.9}),rm=M(0xc4252c);for(let i=0;i<7;i++)[-2.35,2.35].forEach(x=>{const b=box(.6,.9,2,i%2?bm:rm);b.position.set(x,.45,-14-i*2.1);blocks.add(b)});shadows(blocks)}
+  blocks.visible=false;world.add(blocks);
+  /* overlays de carril */
+  const lane=c=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(3.3,60),new THREE.MeshBasicMaterial({color:c,transparent:true,opacity:.28,depthWrite:false}));m.rotation.x=-Math.PI/2;m.position.y=.02;m.position.z=-20;return m};
+  const laneOv=[lane(0xc4252c),lane(0xf0b000),lane(0x1d8649)];laneOv[0].position.x=-3.5;laneOv[1].position.x=0;laneOv[2].position.x=3.5;laneOv.forEach(m=>{m.visible=false;world.add(m)});
+
+  function themeColors(){const dk=isDark();
+    skyMat.uniforms.top.value.set(tok("--skytop"));skyMat.uniforms.hor.value.set(tok("--sky"));scene.fog=new THREE.Fog(new THREE.Color(tok("--sky")),45,dk?120:170);
+    sun.intensity=dk?.35:1.25;hemi.intensity=dk?.3:.6;
+    shTex=noiseTex(tok("--shoulder"),9000,30);shMat.map=shTex;shMat.needsUpdate=true;grTex=noiseTex(tok("--grass3d"),14000,120);grMat.map=grTex;grMat.needsUpdate=true;
+    texList.forEach(o=>{const n=asphalt(o.wm,o.lines);o.t.image=n.image;o.t.needsUpdate=true});
+    [me,other,other2,truck,bus].forEach(v=>v.traverse(c=>{if(c.material&&c.material.emissive&&c.material.color.r>.9&&c.material.emissive.r>.9&&c.material.emissive.g>.9)c.material.emissiveIntensity=dk?2.2:.5}))}
+  themeColors();
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change",themeColors);
+  new MutationObserver(themeColors).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+  /* ---- utilidades ---- */
+  const R=1.75,lerp=(a,b,t)=>a+(b-a)*t,ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2,cl=t=>Math.max(0,Math.min(1,t));
+  function blink(car,side,t){const on=Math.sin(t*9.4)>0;["L","R"].forEach(s=>car.userData[s].forEach(b=>b.material.emissiveIntensity=(side===s||side==="B")&&on?2.6:0))}
+  function steer(car,a){car.userData.front.forEach(p=>p.rotation.y=a)}
+  function walk(p,t){const s=Math.sin(t*6)*.35;p.userData.l1.rotation.x=s;p.userData.l2.rotation.x=-s}
+  let speed=1,tilt=0,lay="L2";
+  function reset(){ACT.concat([gap,yCont,yDash,cross,stopLine,tunnel,chevs,gantry,blocks,v16],laneOv).forEach(o=>o.visible=false);
+    [me,other,other2,truck,bus].forEach(c=>{c.rotation.set(0,0,0);blink(c,null,0);steer(c,0)});v16.material.emissiveIntensity=0;v16L.intensity=0;speed=1}
+  function useLay(n){lay=n;Object.entries(LAY).forEach(([k,g])=>g.visible=k===n)}
+  const show=(...o)=>o.forEach(x=>x.visible=true);
+
+  const MODES={
+   /* ---------- Tema 1 ---------- */
+   t1intro:{lay:"DIV",cam:[14,11,18],look:[-3,0,-12],set(){show(me,truck,other);me.position.set(R,0,4);truck.position.set(-R,0,-10);other.position.set(-12.4-R,0,-60);other.rotation.y=Math.PI},
+     upd(t,dt){other.position.z+=dt*26;if(other.position.z>35)other.position.z=-120;me.position.x=lerp(me.position.x,R,.05)}},
+   autovia:{lay:"DIV",cam:[12,7,14],look:[0,0,-10],set(){show(me,cyc,other,other2);cyc.position.set(4.9,0,-8);me.position.set(R,0,6);other.position.set(-12.4-R,0,-40);other.rotation.y=Math.PI;other2.position.set(-R,0,-20)},
+     upd(t,dt){other.position.z+=dt*26;if(other.position.z>35)other.position.z=-120;const p=t%8;me.position.z=lerp(6,-20,p/8);other2.position.z=lerp(-20,-34,p/8);
+       say(Math.floor(t/5)%2?"Autopista: sin accesos y sin ciclistas":"Autovía: ciclista mayor de 14 por el arcén")}},
+   carriles:{lay:"L3",cam:[3,13,16],look:[0,0,-12],set(){show(me,truck,other);laneOv.forEach(m=>m.visible=true);truck.position.set(3.5,0,-10);me.position.set(-3.5,0,4);other.position.set(0,0,-24)},
+     upd(t){const p=t%7;me.position.z=lerp(6,-26,p/7);say("Más de 3.500 kg: derecho · central solo excepcional · izquierdo nunca")}},
+   reversible:{lay:"REV",cam:[-2,6,14],look:[0,1.5,-14],set(){show(me,other,gantry);gantry.userData.panels[0].material=pX;gantry.userData.panels[1].material=pA;gantry.userData.panels[2].material=pA;me.position.set(0,0,2);other.position.set(-3.5,0,-60);other.rotation.y=Math.PI;
+       me.traverse(c=>{if(c.material&&c.material.emissive&&c.material.emissive.g>.9&&c.material.emissive.r>.9)c.material.emissiveIntensity=2.4})},
+     upd(t,dt){other.position.z+=dt*22;if(other.position.z>30)other.position.z=-110}},
+   arcen:{lay:"L2",cam:[10,6,12],look:[3,0,-8],set(){show(cyc,cyc2,me);cyc.position.set(4.45,0,-6);cyc2.position.set(5.45,0,-6.3);me.position.set(R,0,8)},
+     upd(t){const p=t%7;me.position.x=p<1.5?lerp(R,.4,ease(p/1.5)):p<5?.4:lerp(.4,R,ease(cl((p-5)/1.5)));me.position.z=lerp(8,-22,p/7);blink(me,p<1.5?"L":p>5&&p<6.5?"R":null,t)}},
+   tunel:{lay:"L2",cam:[R+.6,3.2,12],look:[R,1.2,-30],set(){show(me,truck,tunnel,chevs);me.position.set(R,0,0);truck.position.set(R,0,-26)},
+     upd(t){say(Math.floor(t/5)%2?"Más de 3.500 kg: 150 m o 6 s, viendo 3 galones":"Túnel: 100 m o 4 s. Galones: al menos 2")}},
+   peaton:{lay:"L2",cam:[0,4,14],look:[0,.8,-10],set(){show(walker,walker2,me,cyc);walker.position.set(-3.45,0,-4);walker2.position.set(3.45,0,-8);cyc.position.set(3.95,0,-8);cyc.rotation.y=0;me.position.set(R,0,30)},
+     upd(t,dt){walker.position.z-=dt*1.1;walker2.position.z-=dt*1.1;cyc.position.z=walker2.position.z+.1;if(walker.position.z<-40){walker.position.z=-4;walker2.position.z=-8}walk(walker,t);walk(walker2,t);
+       const p=t%9;me.position.z=lerp(30,-40,p/9);me.position.x=Math.abs(me.position.z-walker2.position.z)<8?.7:R}},
+   velocidad:{lay:"L2",cam:[7,6,14],look:[0,1,-12],set(){show(me,truck,sign);sign.position.set(4.6,0,-14);truck.position.set(R,0,-8)},
+     upd(t){const p=t%8;let x=R,z=4;if(p<1.6){x=lerp(R,-R,ease(p/1.6));z=lerp(4,1,p/1.6);blink(me,"L",t)}else if(p<5.4){x=-R;z=lerp(1,-20,(p-1.6)/3.8);blink(me,null,t)}else if(p<7){x=lerp(-R,R,ease((p-5.4)/1.6));z=-20-(p-5.4);blink(me,"R",t)}else{x=R;z=-22}
+       me.position.set(x,0,z);sign.position.z=-14+((t*6)%40);say(p<1.6?"Camión a 80: lo puedes adelantar":p<5.4?"…pero sin pasar de 90: ya no hay +20":"Mínima en convencional: la mitad de tu máxima")}},
+   prioridad:{lay:"L2",cam:[12,10,6],look:[-1,0,-13],set(){show(me,other,cross);me.position.set(R,0,6);other.position.set(30,0,-15.75);other.rotation.y=Math.PI/2},
+     upd(t){const p=t%9;me.position.z=p<2.2?lerp(6,-7.6,ease(p/2.2)):p<5?-7.6:lerp(-7.6,-40,ease(cl((p-5)/3)));other.position.x=lerp(30,-40,cl((p-.6)/5));
+       say(p<5?"Sin señales: pasa el que viene por tu derecha":"Salvo: camino de tierra, autopista o salida privada")}},
+   estrecho:{lay:"L2",cam:[10,8,10],look:[0,0,-18],set(){show(me,bus,blocks);me.position.set(R,0,4);bus.rotation.y=Math.PI;bus.position.set(-R,0,-50)},
+     upd(t){const p=t%10;const bz=lerp(-50,25,p/10);bus.position.z=bz;bus.position.x=bz>-30&&bz<-2?lerp(bus.position.x,0,.08):lerp(bus.position.x,-R,.08);
+       const go=bz>-2;me.position.z=go?lerp(me.position.z,-40,.012):lerp(me.position.z,-8,.04);me.position.x=go&&me.position.z<-11&&me.position.z>-30?lerp(me.position.x,0,.08):lerp(me.position.x,R,.08);
+       if(p<.05){me.position.set(R,0,4)}say(go?"Luego pasas tú":"El autobús entró primero: pasa él")}},
+   /* ---------- Tema 2 ---------- */
+   t2intro:{lay:"L2",cam:[9,7,14],look:[0,0,-6],set(){show(me,truck,other);me.position.set(R,0,2);truck.position.set(R,0,-14);other.position.set(-R,0,-60);other.rotation.y=Math.PI},
+     upd(t,dt){other.position.z+=dt*24;if(other.position.z>30)other.position.z=-110}},
+   senal:{lay:"L2",cam:[R+.3,2.7,9.5],look:[R,.8,-8],set(){show(me,truck);me.position.set(R,0,0);truck.position.set(R,0,-16)},
+     upd(t){const p=(t%9)/3|0;say(["1. Observar: espejos y ángulo muerto","2. Señalizar con antelación","3. Realizar, sin forzar a nadie"][p]);blink(me,p>0?"L":null,t);me.position.x=p===2?lerp(R,R-.6,cl((t%3)/3)):R;me.rotation.y=p===2?.06:0}},
+   adelantar:{lay:"L2",cam:[6,9.5,15],look:[0,0,-7],set(){show(me,truck);truck.position.set(R,0,-6)},
+     upd(t){const p=t%8;let x=R,z=4,ry=0,side=null,s;
+       if(p<1.6){const k=ease(p/1.6);x=lerp(R,-R,k);z=lerp(4,1.5,k);ry=.13;side="L";s="Señalizas el desplazamiento lateral"}
+       else if(p<5.4){x=-R;z=lerp(1.5,-17,(p-1.6)/3.8);s="Velocidad notoriamente superior"}
+       else if(p<7){const k=ease((p-5.4)/1.6);x=lerp(-R,R,k);z=-17-(p-5.4)*.6;ry=-.13;side="R";s="Vuelves cuando lo ves en el espejo interior"}
+       else{x=R;z=-18;s="Y quitas el intermitente"}
+       me.position.set(x,0,z);me.rotation.y=ry;blink(me,side,t);say(s)}},
+   ciclista:{lay:"L2s",cam:[8,10,9],look:[1,0,-6],set(){show(me,cyc);cyc.position.set(3,0,-6)},
+     upd(t){const p=t%7;let x=R,z=6;
+       if(p<1.5){x=lerp(R,.3,ease(p/1.5));z=lerp(7,3,p/1.5)}else if(p<4.6){x=.3;z=lerp(3,-15,(p-1.5)/3.1)}else if(p<6){x=lerp(.3,R,ease((p-4.6)/1.4));z=lerp(-15,-18,(p-4.6)/1.4)}else{x=R;z=-18}
+       me.position.set(x,0,z);blink(me,p<1.5?"L":p>4.6&&p<6?"R":null,t);
+       const near=z<-2.5&&z>-9.5;gap.visible=near;if(near){const a=x+.9,b=2.8;gap.scale.x=b-a;gap.position.set((a+b)/2,1,-6)}
+       say(near?"≥ 1,5 m: puedes cruzar la continua si es seguro":"Un carril por sentido: 1,5 m. Dos carriles: cambio completo")}},
+   parar:{lay:"L2",cam:[-1.5,6,11],look:[2.6,0,-3],set(){show(me);me.position.set(R,0,0)},
+     upd(t){const p=t%9,c2=Math.floor(t/9)%2;speed=p<3?1-p/3:0;me.position.x=lerp(R,2.62,ease(cl(p/3)));
+       blink(me,p<3?"R":null,t);yCont.visible=c2===0;yDash.visible=c2===1;
+       say(c2===0?"Línea amarilla continua: ni parar ni estacionar":"Línea amarilla discontinua: parar sí, estacionar no")}},
+   averia:{lay:"L2",cam:[-3,4.5,12],look:[4.6,.6,-2],set(){show(me,other,person,v16);speed=0;me.position.set(4.95,0,0);other.position.set(R,0,25)},
+     upd(t,dt){blink(me,"B",t);const pulse=Math.sin(t*7)>0;v16.material.emissiveIntensity=pulse?3:.2;v16L.intensity=pulse?2.4:0;
+       other.position.z-=dt*22;if(other.position.z<-110)other.position.z=30;
+       const k=cl((t%7)/3);person.position.set(lerp(5.95,8.2,ease(k)),0,lerp(.4,2,k));if(k<1)walk(person,t);say(k<1?"Salen por el lado contrario al tráfico":"Fuera de la plataforma, tras el guardarraíl")}},
+   pendiente:{lay:"L2",cam:[-7,4.5,9],look:[2.4,1,-3],set(){show(truck);speed=0;truck.position.set(2.35,0,-3)},
+     upd(t){const up=Math.floor(t/5)%2===0;tilt=lerp(tilt,up?.13:-.13,.05);world.rotation.x=tilt;steer(truck,lerp(truck.userData.front[0].rotation.y,up?.5:-.5,.06));
+       say(up?"Cuesta arriba · manual: 1.ª · automático: P · ruedas al centro":"Cuesta abajo · manual: marcha atrás · automático: P · ruedas al bordillo")}},
+   giro:{lay:"L2",cam:[9,13,7],look:[-1,0,-12],set(){show(me,cross,other);speed=0;other.position.set(-R,0,-30);other.rotation.y=Math.PI},
+     upd(t){const p=t%7;let x,z,ry=0;
+       if(p<2){const k=ease(p/2);x=lerp(R,.6,k);z=lerp(6,-8,p/2);ry=.08*Math.sin(k*Math.PI);blink(me,"L",t)}
+       else if(p<5){const s=(p-2)/3,a=1-s,P0=[.6,-8],P1=[.6,-15.75],P2=[-10,-15.75];x=a*a*P0[0]+2*a*s*P1[0]+s*s*P2[0];z=a*a*P0[1]+2*a*s*P1[1]+s*s*P2[1];
+         const dx=2*a*(P1[0]-P0[0])+2*s*(P2[0]-P1[0]),dz=2*a*(P1[1]-P0[1])+2*s*(P2[1]-P1[1]);ry=Math.atan2(-dx,-dz);blink(me,s<.6?"L":null,t)}
+       else{x=lerp(-10,-18,(p-5)/2);z=-15.75;ry=Math.PI/2;blink(me,null,t)}
+       me.position.set(x,0,z);me.rotation.y=ry;other.position.z=lerp(-30,-17.5,cl(p/2));
+       say(p<2?"Doble sentido: te pegas al centro, sin invadir":"El centro del cruce queda a tu izquierda")}},
+
+   /* ---------- Tema 3 ---------- */
+   t3intro:{lay:"L2",cam:[9,6,15],look:[3,1.8,-12],set(){show(me,plate);plate.position.set(4.9,0,-12);me.position.set(R,0,30)},
+     upd(t){const L=[["warn","!","Triángulo: avisa de un peligro"],["ban","50","Círculo rojo: prohíbe"],["obl","→","Círculo azul: obliga"],["ind","P","Cuadrado azul: informa"]],k=Math.floor(t/2.6)%4;PL(L[k][0],L[k][1]);say(L[k][2]);me.position.z=lerp(30,-40,(t%10)/10)}},
+   agente:{lay:"L2",cam:[4.5,3.6,12],look:[.5,1.1,-6],set(){show(me,person);person.position.set(.1,0,-8);person.rotation.y=0;me.position.set(R,0,30)},
+     upd(t){const p=t%10;me.position.z=p<3?lerp(30,-2,ease(p/3)):p<7?-2:lerp(-2,-40,ease(cl((p-7)/3)));blink(me,null,t);
+       say(p<3?"Te acercas a un agente":p<7?"Brazo levantado o toques cortos: te detienes antes del agente":"Un toque largo: reanudas la marcha")}},
+   baliz:{lay:"L2",cam:[10,8,10],look:[0,0,-18],set(){show(me,blocks,chevs);me.position.set(R,0,22)},
+     upd(t){const z=lerp(22,-46,(t%9)/9);me.position.z=z;me.position.x=lerp(me.position.x,z<-4&&z>-30?0:R,.08);
+       say(Math.floor(t/4.5)%2?"Amarillo: obras · Naranja: cualquier otra causa":"Cono o luz amarilla: no cruces la línea que los une")}},
+   peligro:{lay:"L2",cam:[8,5,14],look:[3,1.5,-12],set(){show(me,plate,walker);PL("warn","!");plate.position.set(4.9,0,-10);walker.position.set(-6,0,-34)},
+     upd(t,dt){const p=t%10;me.position.set(R,0,lerp(32,-8,p/10));walker.position.x=lerp(-6,6,cl((p-3)/6));walk(walker,t);say("A 150–250 m del peligro: miras, levantas el pie y piensas")}},
+   prior:{lay:"L2",cam:[12,10,6],look:[-1,0,-13],set(){show(me,other,cross,plate);me.position.set(R,0,6);other.position.set(30,0,-15.75);other.rotation.y=Math.PI/2;plate.position.set(4.9,0,-3)},
+     upd(t){const p=t%9,q=Math.floor(t/9)%2;PL(q?"yield":"stop",q?"":"");me.position.z=p<2.2?lerp(6,-7.6,ease(p/2.2)):p<5?-7.6:lerp(-7.6,-40,ease(cl((p-5)/3)));other.position.x=lerp(30,-40,cl((p-.6)/5));
+       say(q?"Ceda: cedes; paras solo si hace falta":"Stop: paras siempre, aunque no venga nadie")}},
+   prohibe:{lay:"L2",cam:[9,6,15],look:[3,1.8,-12],set(){show(me,plate);plate.position.set(4.9,0,-12);me.position.set(R,0,30)},
+     upd(t){const L=[["ban","50","R-301: velocidad máxima"],["noentry","","R-101: entrada prohibida"],["park","","R-307: ni parar ni estacionar"]],k=Math.floor(t/3)%3;PL(L[k][0],L[k][1]);say(L[k][2]);me.position.z=lerp(30,-40,(t%9)/9)}},
+   obliga:{lay:"L2",cam:[9,6,15],look:[3,1.8,-12],set(){show(me,plate);plate.position.set(4.9,0,-12);me.position.set(R,0,30)},
+     upd(t){const L=[["obl","→","R-400: sentido obligatorio"],["obl","50","R-411: velocidad mínima"],["obl","↑","Azul obliga, sin negociar"]],k=Math.floor(t/3)%3;PL(L[k][0],L[k][1]);say(L[k][2]);me.position.z=lerp(30,-40,(t%9)/9)}},
+   indica:{lay:"L2",cam:[9,6,15],look:[3,1.8,-12],set(){show(me,plate);plate.position.set(4.9,0,-12);me.position.set(R,0,30)},
+     upd(t){const L=[["ind","P","S-17: estacionamiento"],["ind","H","S-23: hospital"],["ind","i","Indica, no obliga"]],k=Math.floor(t/3)%3;PL(L[k][0],L[k][1]);say(L[k][2]);me.position.z=lerp(30,-40,(t%9)/9)}},
+   marcas:{lay:"L2",cam:[12,10,6],look:[-1,0,-13],set(){show(me,cross,stopLine);me.position.set(R,0,6)},
+     upd(t){const p=t%8;me.position.z=p<2.4?lerp(6,-7.6,ease(p/2.4)):p<5?-7.6:lerp(-7.6,-40,ease(cl((p-5)/3)));blink(me,null,t);
+       say(p<5?"Línea continua transversal: te detienes ante ella":"Y cuando puedes, sigues")}}
+  };
+  MODES.marcas2=MODES.parar;
+  let mode="t1intro",mt=0;const camPos=new THREE.Vector3(14,11,18),camLook=new THREE.Vector3(-3,0,-12);
+  setMode=(m,tag,s)=>{if(!MODES[m])return;hudTag.textContent=tag||"";if(s)say(s);if(m===mode)return;mode=m;mt=0;reset();useLay(MODES[m].lay);MODES[m].set();if(RM){camPos.set(...MODES[m].cam);camLook.set(...MODES[m].look)}};
+  reset();useLay("DIV");MODES.t1intro.set();
+
+  function resize(){const w=stage.clientWidth,h=stage.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.fov=w<500?56:42;camera.updateProjectionMatrix()}
+  new ResizeObserver(resize).observe(stage);resize();
+  let visible=true;new IntersectionObserver(e=>visible=e[0].isIntersecting).observe(stage);
+  const clock=new THREE.Clock(),tp=new THREE.Vector3(),tl=new THREE.Vector3();
+  (function loop(){requestAnimationFrame(loop);const dt=Math.min(clock.getDelta(),.05)*(RM?.4:1);if(!visible)return;mt+=dt;
+    MODES[mode].upd(mt,dt);const off=(texList[0].t.offset.y+speed*dt*1.4)%1;texList.forEach(o=>o.t.offset.y=off);
+    if(mode!=="pendiente"){tilt=lerp(tilt,0,.1);world.rotation.x=tilt}
+    tp.set(...MODES[mode].cam);tl.set(...MODES[mode].look);const k=1-Math.exp(-dt*2.2);camPos.lerp(tp,k);camLook.lerp(tl,k);
+    camera.position.copy(camPos);camera.lookAt(camLook);renderer.render(scene,camera)})();
+})();
+
+/* ================= TEMAS Y CAPÍTULOS ================= */
+let tema="1";
+const temaEls={1:document.getElementById("tema1"),2:document.getElementById("tema2"),3:document.getElementById("tema3")};
+function setTema(t,scroll){tema=t;Object.entries(temaEls).forEach(([k,el])=>el.hidden=k!==t);
+  document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.dataset.t===t));
+  document.querySelectorAll(".switch button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===t));
+  document.querySelector(".hud .tag").style.setProperty("--accent",`var(--t${t})`);
+  if(location.hash!=="#tema-"+t)history.replaceState(null,"","#tema-"+t);
+  curStep=null;if(scroll)document.querySelector(".top").scrollIntoView({behavior:RM?"auto":"smooth"});pickStep()}
+document.querySelectorAll(".tab,.switch button,[data-tema]").forEach(b=>b.addEventListener("click",()=>setTema(b.dataset.t||b.dataset.tema,true)));
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{const el=document.getElementById(b.dataset.go);if(el)el.scrollIntoView({behavior:RM?"auto":"smooth"})}));
+let curStep=null,ticking=false;
+function pickStep(){ticking=false;const steps=[...temaEls[tema].querySelectorAll(".step")];const line=innerWidth<900?innerHeight*.62:innerHeight*.5;
+  let found=steps[0];for(const s of steps){const r=s.getBoundingClientRect();if(r.top<=line)found=s;else break}
+  if(found!==curStep){curStep=found;const d=found.dataset;setMode(d.mode,d.tag,d.say||"")}}
+addEventListener("scroll",()=>{if(!ticking){ticking=true;requestAnimationFrame(pickStep)}},{passive:true});
+addEventListener("resize",pickStep);
+addEventListener("hashchange",()=>{const m=location.hash.match(/^#tema-([123])$/);if(m&&m[1]!==tema)setTema(m[1],false)});
+{const m=location.hash.match(/^#tema-([123])$/);setTema(m?m[1]:"1",false)}
+</script>

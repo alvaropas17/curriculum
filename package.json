@@ -8,6 +8,7 @@
   "scripts": {
     "build:css": "tailwindcss -i ./styles/input.css -o ./styles/output.css --minify",
     "watch:css": "tailwindcss -i ./styles/input.css -o ./styles/output.css --watch",
+    "build:portada": "tailwindcss -i ./styles/portada-caso.input.css -o ./styles/portada-caso.css --minify",
     "build:marketing": "node scripts/build-marketing.mjs"
   }
 }

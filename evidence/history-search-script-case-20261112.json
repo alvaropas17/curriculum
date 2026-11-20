@@ -1,0 +1,34 @@
+{
+  "case_date": "2026-11-12",
+  "type": "recorded real use; not a benchmark",
+  "tool": "Agent History Search via Claude Code MCP",
+  "search_arguments": {
+    "action": "search",
+    "query": "Last week that cost me",
+    "limit": 5
+  },
+  "measurements": [
+    {
+      "action": "search",
+      "call_at": "2026-11-12T22:27:16.813Z",
+      "result_at": "2026-11-12T22:27:17.561Z",
+      "elapsed_ms": 748
+    },
+    {
+      "action": "expand",
+      "call_at": "2026-11-12T22:27:19.352Z",
+      "result_at": "2026-11-12T22:27:19.487Z",
+      "elapsed_ms": 135
+    }
+  ],
+  "search_result_count": 1,
+  "expansion_requested_context": 2500,
+  "expanded_message_characters": 2038,
+  "recovered_quote_en": "I thought my agent had no memory. Wrong. The history was on my disk all along. It just couldn't read it.",
+  "method": "Timestamp differences between calls and responses paired by tool_use_id in the private log.",
+  "limits": [
+    "One observed case, not a speed guarantee.",
+    "Excludes agent thinking and total response time.",
+    "Chat IDs, internal refs, paths and unrelated text omitted."
+  ]
+}
